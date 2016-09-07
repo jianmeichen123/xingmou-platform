@@ -24,7 +24,7 @@ import com.gi.xm.platform.query.DmCompanyQuery;
 import com.gi.xm.platform.facede.DmCompanyFacede;
 import com.gi.xm.platform.facede.convertor.DmCompanyConvertor;
 import com.gi.xm.platform.facede.convertor.MessageConvertor;
-
+import org.springframework.cache.annotation.Cacheable;
 
 
 @Service
@@ -58,7 +58,7 @@ public class DmCompanyFacedeImpl implements DmCompanyFacede {
 		return messageInfo;	
 	}
 
-
+	@Cacheable(value = "dmCompany",keyGenerator = "wiselyKeyGenerator")
 	public MessageInfo<DmCompanyInfo> getDmCompany( Long id ){
 		Message<DmCompany> message  = dmCompanyBiz.getDmCompany( id );
 		MessageInfo<DmCompanyInfo> messageInfo = MessageConvertor.toMessageInfo(message);

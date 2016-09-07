@@ -31,6 +31,10 @@
             <groupId>com.gi</groupId>
             <artifactId>xingmou-biz</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.gi</groupId>
+            <artifactId>xingmou-redis</artifactId>
+        </dependency>
 <!--        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
@@ -39,10 +43,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jetty</artifactId>
         </dependency>
-<!--        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator </artifactId>
-        </dependency>-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <!--        <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-actuator </artifactId>
+                </dependency>-->
         <!--dubbox rst-->
     </dependencies>
 

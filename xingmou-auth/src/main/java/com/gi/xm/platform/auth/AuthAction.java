@@ -4,6 +4,7 @@ import com.galaxyinternet.model.user.User;
 import com.galaxyinternet.service.UserService;
 import com.gi.xm.platform.MessageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.cache.RedisCache;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,8 +12,8 @@ import org.springframework.stereotype.Service;
  */
 public class AuthAction {
 
-    @Autowired
     UserService userService;
+
 
     public MessageInfo<String> auth(String name,String password){
         User user = userService.queryUserByRealName(name);

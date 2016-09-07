@@ -1,4 +1,4 @@
-package com.gi.xm.platform.newsmange;
+package com.gi.xm.platform.newsmange.main;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,11 +13,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 
 @SpringBootApplication
-@ComponentScan(basePackages={"com.gi.xm"})
-public class Application extends WebMvcConfigurerAdapter {
+@ComponentScan(basePackages={"com.gi.xm.platform"})
+public class NewsManageApp extends WebMvcConfigurerAdapter {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(NewsManageApp.class, args);
     }
 
 }

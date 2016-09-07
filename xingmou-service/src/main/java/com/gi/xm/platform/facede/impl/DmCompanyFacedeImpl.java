@@ -4,7 +4,6 @@ package com.gi.xm.platform.facede.impl;
 import java.util.List;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.alibaba.dubbo.rpc.protocol.rest.support.ContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gi.xm.platform.biz.DmCompanyBiz;
@@ -26,16 +25,9 @@ import com.gi.xm.platform.facede.DmCompanyFacede;
 import com.gi.xm.platform.facede.convertor.DmCompanyConvertor;
 import com.gi.xm.platform.facede.convertor.MessageConvertor;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 
 
 @Service
-@Path("dmCompany")
-@Produces({ContentType.APPLICATION_JSON_UTF_8})
 public class DmCompanyFacedeImpl implements DmCompanyFacede {
 
 	@Autowired
@@ -67,10 +59,7 @@ public class DmCompanyFacedeImpl implements DmCompanyFacede {
 	}
 
 
-    @GET
-    @Path("{id : \\d+}")
-    @Produces({MediaType.APPLICATION_JSON})
-	public MessageInfo<DmCompanyInfo> getDmCompany(@PathParam("id") Long id ){
+	public MessageInfo<DmCompanyInfo> getDmCompany( Long id ){
 		Message<DmCompany> message  = dmCompanyBiz.getDmCompany( id );
 		MessageInfo<DmCompanyInfo> messageInfo = MessageConvertor.toMessageInfo(message);
 		DmCompanyInfo dmCompanyInfo = DmCompanyConvertor.toDmCompanyInfo(message.getData());

@@ -7,7 +7,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.gi.xm.platform.dal" level="DEBUG"/>
+    <logger name="com.gi.xm.platform.dao" level="DEBUG"/>
 
     <root level="INFO">
         <appender-ref ref="STDOUT" />

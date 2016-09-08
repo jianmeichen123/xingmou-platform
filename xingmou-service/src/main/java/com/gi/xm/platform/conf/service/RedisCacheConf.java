@@ -44,8 +44,7 @@ public class RedisCacheConf {
     }
 
     @Bean
-    public CacheManager cacheManager(
-            @SuppressWarnings("rawtypes") RedisTemplate redisTemplate) {
+    public CacheManager cacheManager(RedisTemplate redisTemplate) {
         return new RedisCacheManager(redisTemplate);
     }
 

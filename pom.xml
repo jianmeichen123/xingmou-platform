@@ -24,6 +24,7 @@
         <module>xingmou-common</module>
         <module>xingmou-redis</module>
         <module>xingmou-auth</module>
+        <module>xingmou-confg-server</module>
     </modules>
     <packaging>pom</packaging>
 

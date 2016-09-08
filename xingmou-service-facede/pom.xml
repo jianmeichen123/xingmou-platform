@@ -12,6 +12,12 @@
     <artifactId>xingmou-service-facede</artifactId>
 
     <dependencies>
+        <!--自身包-->
+        <dependency>
+            <groupId>com.gi</groupId>
+            <artifactId>xingmou-api-common</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.zookeeper</groupId>
             <artifactId>zookeeper</artifactId>

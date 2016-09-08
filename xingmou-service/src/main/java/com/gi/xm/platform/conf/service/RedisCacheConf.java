@@ -45,7 +45,9 @@ public class RedisCacheConf {
 
     @Bean
     public CacheManager cacheManager(RedisTemplate redisTemplate) {
-        return new RedisCacheManager(redisTemplate);
+        RedisCacheManager redisCacheManager = new RedisCacheManager(redisTemplate);
+        redisCacheManager.setDefaultExpiration(60*60*2);
+        return redisCacheManager;
     }
 
     @Bean

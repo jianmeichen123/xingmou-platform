@@ -58,7 +58,7 @@ public class DmCompanyFacedeImpl implements DmCompanyFacede {
 		return messageInfo;	
 	}
 
-	@Cacheable(value = "dmCompany",keyGenerator = "wiselyKeyGenerator")
+	@Cacheable(value = "dmCompany",keyGenerator = "wiselyKeyGenerator" )
 	public MessageInfo<DmCompanyInfo> getDmCompany( Long id ){
 		Message<DmCompany> message  = dmCompanyBiz.getDmCompany( id );
 		MessageInfo<DmCompanyInfo> messageInfo = MessageConvertor.toMessageInfo(message);

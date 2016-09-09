@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Date;
 import com.alibaba.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import import org.springframework.cache.annotation.Cacheable;
 
 import ${name.getFullBizClassName($table)};
 
@@ -91,6 +92,7 @@ public class $name.getServiceImplClassName($table) implements $name.getServiceCl
 		return messageInfo;	
 	}
 	#end
+	@Cacheable(value = "$messageVar",keyGenerator = "wiselyKeyGenerator")
 	public MessageInfo<$messageClass> get$modelClass( $primaryKeyParameter ){
 		
 		Message<$modelClass> message  = ${bizVar}.get$modelClass( $primaryKeyVarName );
@@ -100,6 +102,7 @@ public class $name.getServiceImplClassName($table) implements $name.getServiceCl
 		return messageInfo;
 	}
 
+    @Cacheable(value = "$messageVar",keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<List<$messageClass>> getAll$modelClass(){
 	
 		Message<List<$modelClass>> message  = ${bizVar}.getAll$modelClass();
@@ -130,7 +133,9 @@ public class $name.getServiceImplClassName($table) implements $name.getServiceCl
 		return messageInfo;	
 	}	
 	#else
-	
+
+
+
 	public MessageInfo<List<$messageClass>> ${sql.getIndexBizName($index)}(${code.getParameters($index.memberColumns)}){
 	
 		Message<List<$modelClass>> message  = ${bizVar}.${sql.getIndexBizName($index)}(${code.getParameterValues($index.memberColumns)});

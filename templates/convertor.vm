@@ -10,6 +10,7 @@ package ${mybatisgen.p.get("basePackage")}.service.convertor;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.Date;
 import org.springframework.cglib.beans.BeanCopier;
 
 import $name.getFullViewClassName($table);

@@ -2,6 +2,8 @@ package ${mybatisgen.p.get("basePackage")}.query;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Date;
+
 public class ${table.modelName}Query extends Query {
 	
 	/**   

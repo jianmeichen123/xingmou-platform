@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.xm.platform.dao.ProjectPersonStudyDAO">
+	<resultMap id="BaseResultMap" type="com.gi.xm.platform.pojo.ProjectPersonStudy">
+					<id column="id" property="id" jdbcType="BIGINT" />
+								<result column="person_id" property="personId" jdbcType="BIGINT" />
+								<result column="school_name" property="schoolName" jdbcType="VARCHAR" />
+								<result column="start_date" property="startDate" jdbcType="VARCHAR" />
+								<result column="end_date" property="endDate" jdbcType="VARCHAR" />
+								<result column="major_name" property="majorName" jdbcType="VARCHAR" />
+								<result column="education_name" property="educationName" jdbcType="VARCHAR" />
+								<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+						</resultMap>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		DELETE FROM dm_project_person_study
+		WHERE id = #{id,jdbcType=BIGINT} 
+	</delete>
+	
+	<insert id="insert" parameterType="com.gi.xm.platform.pojo.ProjectPersonStudy" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO dm_project_person_study (
+			person_id,
+			school_name,
+			start_date,
+			end_date,
+			major_name,
+			education_name,
+			add_time,
+			update_time
+		)
+		VALUES
+		(
+			#{personId,jdbcType=BIGINT},
+			#{schoolName,jdbcType=VARCHAR},
+			#{startDate,jdbcType=VARCHAR},
+			#{endDate,jdbcType=VARCHAR},
+			#{majorName,jdbcType=VARCHAR},
+			#{educationName,jdbcType=VARCHAR},
+			#{addTime,jdbcType=TIMESTAMP},
+			 UNIX_TIMESTAMP()
+		)
+	</insert>
+
+	<update id="updateByPrimaryKey" parameterType="com.gi.xm.platform.pojo.ProjectPersonStudy">
+		UPDATE dm_project_person_study
+		SET
+			<if test="schoolName!=null">school_name = #{schoolName,jdbcType=VARCHAR},</if>
+			<if test="startDate!=null">start_date = #{startDate,jdbcType=VARCHAR},</if>
+			<if test="endDate!=null">end_date = #{endDate,jdbcType=VARCHAR},</if>
+			<if test="majorName!=null">major_name = #{majorName,jdbcType=VARCHAR},</if>
+			<if test="educationName!=null">education_name = #{educationName,jdbcType=VARCHAR},</if>
+			<if test="personId!=null">person_id = #{personId,jdbcType=BIGINT},</if>
+			<if test="addTime!=null">add_time = #{addTime,jdbcType=TIMESTAMP},</if>
+	    WHERE id = #{id,jdbcType=BIGINT} 
+	</update>
+	
+		
+		
+	<sql id="selectFields">
+	id,person_id,school_name,start_date,end_date,major_name,education_name,add_time,update_time
+	</sql>
+	
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_project_person_study
+	</select>
+	
+	<select id="queryProjectPersonStudy" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.ProjectPersonStudyQuery">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_project_person_study
+		<include refid="queryWhereAndOrder" />
+	</select>
+	
+	<sql id="queryWhereAndOrder">
+		<where>
+					<if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>
+								<if test="personId!=null">AND person_id = #{personId,jdbcType=BIGINT}</if>
+								<if test="schoolName!=null and schoolName!=''">AND school_name = #{schoolName,jdbcType=VARCHAR}</if>
+								<if test="startDate!=null and startDate!=''">AND start_date = #{startDate,jdbcType=VARCHAR}</if>
+								<if test="endDate!=null and endDate!=''">AND end_date = #{endDate,jdbcType=VARCHAR}</if>
+								<if test="majorName!=null and majorName!=''">AND major_name = #{majorName,jdbcType=VARCHAR}</if>
+								<if test="educationName!=null and educationName!=''">AND education_name = #{educationName,jdbcType=VARCHAR}</if>
+								<if test="addTime!=null">AND add_time = #{addTime,jdbcType=TIMESTAMP}</if>
+								<if test="updateTime!=null">AND update_time = #{updateTime,jdbcType=TIMESTAMP}</if>
+							
+		</where>
+		<choose>
+			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
+			<otherwise>order by id desc</otherwise>
+		</choose>
+	</sql>
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_project_person_study
+		WHERE id = #{id,jdbcType=BIGINT} 
+	</select>
+
+	<select id="selectByPrimaryKeyForUpdate" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_project_person_study
+		WHERE id = #{id,jdbcType=BIGINT} 
+		FOR UPDATE
+	</select>
+		
+</mapper>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.xm.platform.dao.InvestfirmsDAO">
+	<resultMap id="BaseResultMap" type="com.gi.xm.platform.pojo.Investfirms">
+					<id column="id" property="id" jdbcType="BIGINT" />
+								<result column="source_id" property="sourceId" jdbcType="BIGINT" />
+								<result column="name" property="name" jdbcType="VARCHAR" />
+								<result column="icon" property="icon" jdbcType="VARCHAR" />
+								<result column="icon_big" property="iconBig" jdbcType="VARCHAR" />
+								<result column="description" property="description" jdbcType="LONGVARCHAR" />
+								<result column="link" property="link" jdbcType="VARCHAR" />
+								<result column="email" property="email" jdbcType="VARCHAR" />
+								<result column="phone" property="phone" jdbcType="VARCHAR" />
+								<result column="wechat" property="wechat" jdbcType="VARCHAR" />
+								<result column="address" property="address" jdbcType="VARCHAR" />
+								<result column="address_detail" property="addressDetail" jdbcType="VARCHAR" />
+								<result column="round_names" property="roundNames" jdbcType="VARCHAR" />
+								<result column="area_names" property="areaNames" jdbcType="VARCHAR" />
+								<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+						</resultMap>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		DELETE FROM dm_investfirms
+		WHERE id = #{id,jdbcType=BIGINT} 
+	</delete>
+	
+	<insert id="insert" parameterType="com.gi.xm.platform.pojo.Investfirms" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO dm_investfirms (
+			source_id,
+			name,
+			icon,
+			icon_big,
+			description,
+			link,
+			email,
+			phone,
+			wechat,
+			address,
+			address_detail,
+			round_names,
+			area_names,
+			add_time,
+			update_time
+		)
+		VALUES
+		(
+			#{sourceId,jdbcType=BIGINT},
+			#{name,jdbcType=VARCHAR},
+			#{icon,jdbcType=VARCHAR},
+			#{iconBig,jdbcType=VARCHAR},
+			#{description,jdbcType=LONGVARCHAR},
+			#{link,jdbcType=VARCHAR},
+			#{email,jdbcType=VARCHAR},
+			#{phone,jdbcType=VARCHAR},
+			#{wechat,jdbcType=VARCHAR},
+			#{address,jdbcType=VARCHAR},
+			#{addressDetail,jdbcType=VARCHAR},
+			#{roundNames,jdbcType=VARCHAR},
+			#{areaNames,jdbcType=VARCHAR},
+			#{addTime,jdbcType=TIMESTAMP},
+			 UNIX_TIMESTAMP()
+		)
+	</insert>
+
+	<update id="updateByPrimaryKey" parameterType="com.gi.xm.platform.pojo.Investfirms">
+		UPDATE dm_investfirms
+		SET
+			<if test="name!=null">name = #{name,jdbcType=VARCHAR},</if>
+			<if test="icon!=null">icon = #{icon,jdbcType=VARCHAR},</if>
+			<if test="iconBig!=null">icon_big = #{iconBig,jdbcType=VARCHAR},</if>
+			<if test="description!=null">description = #{description,jdbcType=LONGVARCHAR},</if>
+			<if test="link!=null">link = #{link,jdbcType=VARCHAR},</if>
+			<if test="email!=null">email = #{email,jdbcType=VARCHAR},</if>
+			<if test="phone!=null">phone = #{phone,jdbcType=VARCHAR},</if>
+			<if test="wechat!=null">wechat = #{wechat,jdbcType=VARCHAR},</if>
+			<if test="address!=null">address = #{address,jdbcType=VARCHAR},</if>
+			<if test="addressDetail!=null">address_detail = #{addressDetail,jdbcType=VARCHAR},</if>
+			<if test="roundNames!=null">round_names = #{roundNames,jdbcType=VARCHAR},</if>
+			<if test="areaNames!=null">area_names = #{areaNames,jdbcType=VARCHAR},</if>
+			<if test="sourceId!=null">source_id = #{sourceId,jdbcType=BIGINT},</if>
+			<if test="addTime!=null">add_time = #{addTime,jdbcType=TIMESTAMP},</if>
+	    WHERE id = #{id,jdbcType=BIGINT} 
+	</update>
+	
+		
+		
+	<sql id="selectFields">
+	id,source_id,name,icon,icon_big,description,link,email,phone,wechat,address,address_detail,round_names,area_names,add_time,update_time
+	</sql>
+	
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_investfirms
+	</select>
+	
+	<select id="queryInvestfirms" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.InvestfirmsQuery">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_investfirms
+		<include refid="queryWhereAndOrder" />
+	</select>
+	
+	<sql id="queryWhereAndOrder">
+		<where>
+					<if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>
+								<if test="sourceId!=null">AND source_id = #{sourceId,jdbcType=BIGINT}</if>
+								<if test="name!=null and name!=''">AND name = #{name,jdbcType=VARCHAR}</if>
+								<if test="icon!=null and icon!=''">AND icon = #{icon,jdbcType=VARCHAR}</if>
+								<if test="iconBig!=null and iconBig!=''">AND icon_big = #{iconBig,jdbcType=VARCHAR}</if>
+								<if test="description!=null and description!=''">AND description = #{description,jdbcType=LONGVARCHAR}</if>
+								<if test="link!=null and link!=''">AND link = #{link,jdbcType=VARCHAR}</if>
+								<if test="email!=null and email!=''">AND email = #{email,jdbcType=VARCHAR}</if>
+								<if test="phone!=null and phone!=''">AND phone = #{phone,jdbcType=VARCHAR}</if>
+								<if test="wechat!=null and wechat!=''">AND wechat = #{wechat,jdbcType=VARCHAR}</if>
+								<if test="address!=null and address!=''">AND address = #{address,jdbcType=VARCHAR}</if>
+								<if test="addressDetail!=null and addressDetail!=''">AND address_detail = #{addressDetail,jdbcType=VARCHAR}</if>
+								<if test="roundNames!=null and roundNames!=''">AND round_names = #{roundNames,jdbcType=VARCHAR}</if>
+								<if test="areaNames!=null and areaNames!=''">AND area_names = #{areaNames,jdbcType=VARCHAR}</if>
+								<if test="addTime!=null">AND add_time = #{addTime,jdbcType=TIMESTAMP}</if>
+								<if test="updateTime!=null">AND update_time = #{updateTime,jdbcType=TIMESTAMP}</if>
+							
+		</where>
+		<choose>
+			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
+			<otherwise>order by id desc</otherwise>
+		</choose>
+	</sql>
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_investfirms
+		WHERE id = #{id,jdbcType=BIGINT} 
+	</select>
+
+	<select id="selectByPrimaryKeyForUpdate" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_investfirms
+		WHERE id = #{id,jdbcType=BIGINT} 
+		FOR UPDATE
+	</select>
+			
+	<select id="selectBySourceId" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_investfirms
+		WHERE  source_id = #{sourceId,jdbcType=BIGINT}
+	</select>
+		
+</mapper>

@@ -1,5 +1,6 @@
 package ${mybatisgen.p.get("basePackage")}.message;
 
+import java.util.Date;
 import java.math.BigDecimal;
 import java.io.Serializable;
 import java.sql.Timestamp;

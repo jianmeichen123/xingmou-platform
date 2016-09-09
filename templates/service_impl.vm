@@ -15,7 +15,7 @@
 package ${mybatisgen.p.get("basePackage")}.facede.impl;
 
 import java.util.List;
-
+import java.util.Date;
 import com.alibaba.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 

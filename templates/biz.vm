@@ -42,7 +42,7 @@ public class $bizClass  {
 	$mapperClass $mapperVarName;
 
 
-	
+
 	#if($table.hasDeleteColumn())
 	public Message<Integer> delete$modelClass($primaryKeyParameter,String operatorId){
 		Message<Integer> message = new Message<Integer>();
@@ -54,14 +54,14 @@ public class $bizClass  {
 			LOGGER.error("delete","删除${table.getDisplayName()}失败", e);
 			message.setMessageStatus(MessageStatus.SYS_ERROR);
 		}
-		return message;		
+		return message;
 	}
-	#else	
-	
+	#else
+
 	public Message<Integer> delete$modelClass($primaryKeyParameter){
 		Message<Integer> message = new Message<Integer>();
 		try {
-		
+
 			int result = ${mapperVarName}.deleteByPrimaryKey($primaryKeyVarName);
 			message.setData(result);
 
@@ -69,10 +69,10 @@ public class $bizClass  {
 			LOGGER.error("delete","删除失败", e);
 			message.setMessageStatus(MessageStatus.SYS_ERROR);
 		}
-		return message;		
+		return message;
 	}
 	#end
-	
+
 
     public Message<${table.primaryColumn.javaType}> create$modelClass($modelClass $modelVar){
 		Message<${table.primaryColumn.javaType}> message = new Message<${table.primaryColumn.javaType}>();
@@ -96,18 +96,18 @@ public class $bizClass  {
 			LOGGER.error("create$modelClass","创建${table.getDisplayName()}失败", e);
 			message.setMessageStatus(MessageStatus.SYS_ERROR);
 		}
-		return message;	
+		return message;
 	}
 	public Message<Integer> update$modelClass($modelClass $modelVar){
 		Message<Integer> message = new Message<Integer>();
 		try {
-			
+
 			$modelClass ${modelVar}Last = ${mapperVarName}.selectByPrimaryKeyForUpdate( ${modelVar}.${table.primaryColumn.getter}() );
 			if( ${modelVar}Last == null){
 				message.setMessageStatus(MessageStatus.DATA_NOT_EXISTS, "TODO：这里请写清楚");
 				return message;
 			}
-			
+
 			#if($table.hasUniqueIndex())
 			$modelClass same = null;
 			#end
@@ -122,7 +122,7 @@ public class $bizClass  {
 			#end
 			int result = ${mapperVarName}.updateByPrimaryKey( $modelVar );
 			message.setData(result);
-			
+
 		} catch (Exception e) {
 			LOGGER.error("update$modelClass","更新${table.getDisplayName()}失败", e);
 			message.setMessageStatus(MessageStatus.SYS_ERROR);
@@ -134,18 +134,18 @@ public class $bizClass  {
 	public Message<Integer> changeStatus($table.primaryColumn.javaType $table.primaryColumn.propertyName,$table.statusColumn.javaType $table.statusColumn.propertyName,String operatorId){
 		Message<Integer> message = new Message<Integer>();
 		try {
-			
+
 			$modelClass ${modelVar}Last = ${mapperVarName}.selectByPrimaryKeyForUpdate($table.primaryColumn.propertyName );
 			if( ${modelVar}Last == null){
 				message.setMessageStatus(MessageStatus.DATA_NOT_EXISTS, "TODO：这里请写清楚");
 				return message;
 			}
-			
+
 			//TODO：其他判断
-			
+
 			int result = ${mapperVarName}.changeStatus($table.primaryColumn.propertyName,status,operatorId);
 			message.setData(result);
-			
+
 		} catch (Exception e) {
 			LOGGER.error("changeStatus","更新${table.getDisplayName()}状态失败", e);
 			message.setMessageStatus(MessageStatus.SYS_ERROR);
@@ -167,7 +167,7 @@ public class $bizClass  {
 	}
 
     public Message<List<$modelClass>> getAll$modelClass(){
-	
+
 		Message<List<$modelClass>> message = new Message<List<$modelClass>>();
 		try {
 			List<$modelClass> ${modelVar}List = ${mapperVarName}.selectAll();
@@ -176,9 +176,9 @@ public class $bizClass  {
 			LOGGER.error("getAll$modelClass","查询全部${table.getDisplayName()}失败", e);
 			message.setMessageStatus(MessageStatus.SYS_ERROR);
 		}
-		return message;	
+		return message;
 	}
-	
+
 	public Message<QueryResult<${modelClass}>> query${modelClass}(${modelQueryClass} ${modelQueryVar}) {
 		Message<QueryResult<${modelClass}>> message = new Message<QueryResult<${modelClass}>>();
 		try {
@@ -196,10 +196,10 @@ public class $bizClass  {
 		}
 		return message;
 	}
-   
+
 	#foreach($index in $table.indexes)
 	#if($index.isUnique())
-	
+
 	public Message<$modelClass> ${sql.getIndexBizName($index)}(${code.getParameters($index.memberColumns)}){
 		Message<$modelClass> message = new Message<$modelClass>();
 		try {
@@ -209,12 +209,12 @@ public class $bizClass  {
 			LOGGER.error("${sql.getIndexBizName($index)}","查询${table.getDisplayName()}失败", e);
 			message.setMessageStatus(MessageStatus.SYS_ERROR);
 		}
-		return message;	
-	}	
+		return message;
+	}
 	#else
-	
+
 	public Message<List<$modelClass>> ${sql.getIndexBizName($index)}(${code.getParameters($index.memberColumns)}){
-	
+
 		Message<List<$modelClass>> message = new Message<List<$modelClass>>();
 		try {
 			List<$modelClass> ${modelVar}List = ${mapperVarName}.${sql.getIndexSelectName($index)}(${code.getParameterValues($index.memberColumns)});

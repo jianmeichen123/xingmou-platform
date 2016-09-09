@@ -3,7 +3,7 @@ package ${mybatisgen.p.get("basePackage")}.view;
 import java.math.BigDecimal;
 import java.io.Serializable;
 import java.sql.Timestamp;
-
+import java.util.Date;
 
 public class ${name.getMessageClassName($table)} implements Serializable {
 

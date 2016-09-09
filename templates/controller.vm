@@ -1,7 +1,7 @@
+#set($messageClass=$name.getMessageClassName($table))
 #set($modelClass=$name.getModelClassName($table))
-#set($modelVar=$name.getModelVarName($table))
+#set($messageVarName=$name.getMessageVarName($table))
 #set($bizClass=$name.getBizClassName($table))
-#set($bizVar=$name.getBizVarName($table))
 #set($primaryKeyVarName=$code.getVarName($table.primaryKey.memberColumns[0].propertyName))
 #set($primaryKeyParameter=$code.getParameters($table.primaryKey.memberColumns))
 #set($messageQueryClass=$name.getMessageQueryClassName($table))
@@ -9,13 +9,13 @@
 #set($modelQueryClass=$name.getModelQueryClassName($table))
 #set($modelQueryVar=$name.getModelQueryVarName($table))
 #set($serviceVar=$name.getServiceVarName($table))
-package ${config.getProperty("basePackage")}.admin.controller;
+package ${mybatisgen.p.get("basePackage")}.controller;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
+import com.alibaba.dubbo.config.annotation.Reference;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,18 +23,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import ${name.getFullBizClassName($table)};
-import ${name.getFullModelClassName($table)};
-import ${name.getFullModelQueryClassName($table)};
-import ${config.getProperty("basePackage")}.model.Message;
-import ${config.getProperty("basePackage")}.model.QueryResult;
+import ${mybatisgen.p.get("basePackage")}.view.common.MessageInfo;
+import ${mybatisgen.p.get("basePackage")}.view.common.QueryResultInfo;
+import ${name.getFullViewClassName($table)};
+import ${name.getFullViewQueryClassName($table)};
+import ${name.getFullServiceClassName($table)};
 
 @Controller
 @RequestMapping("${modelVar}")
 public class ${modelClass}Controller {
 
-	@Resource
-	private $bizClass $bizVar;
+    @Reference
+	private ${name.getServiceClassName($table)} $serviceVar;
 
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public ModelAndView index() {
@@ -44,39 +44,61 @@ public class ${modelClass}Controller {
 
 	@RequestMapping("query")
 	@ResponseBody
-	public QueryResult<${modelClass}> query(${modelQueryClass} ${modelQueryVar}) {
-		Message<QueryResult<${modelClass}>> resultMessage = ${bizVar}.query${modelClass}(${modelQueryVar});
-		return resultMessage.getData();
+	public MessageInfo<QueryResultInfo<${messageClass}>>  query${modelClass} ($messageQueryClass $messageQueryVar) {
+		MessageInfo<QueryResultInfo<${messageClass}>> resultMessageInfo = ${serviceVar}.query${modelClass}($messageQueryVar);
+		return resultMessageInfo;
 	}
 
-	@RequestMapping("get")
-	@ResponseBody
-	public ${modelClass} get(int id) {
-		return ${bizVar}.get${modelClass}(id).getData();
+    @RequestMapping("create")
+    @ResponseBody
+    public MessageInfo<${table.primaryColumn.javaType}> create$modelClass($messageClass $messageVar){
+        MessageInfo<${table.primaryColumn.javaType}> messageInfo =  ${serviceVar}.create$modelClass($messageVar);
+        return messageInfo;
+    }
+
+    @RequestMapping("update")
+    @ResponseBody
+	public MessageInfo<Integer> update$modelClass($messageClass $messageVar){
+		MessageInfo<Integer> messageInfo =  ${serviceVar}.update$modelClass($messageVar);
+		return messageInfo;
 	}
 
-	@RequestMapping("getAll")
-	@ResponseBody
-	public List<${modelClass}> getAll() {
-		return ${bizVar}.getAll${modelClass}().getData();
-	}
-	
-	@RequestMapping(value = "save", method = RequestMethod.POST)
-	@ResponseBody
-	public Message<Integer> save(${modelClass} ${modelVar}) {
-		if (${modelVar}.getId() == null) {
-			${modelVar}.setCreateUserid("dolphin");
-			return ${bizVar}.create${modelClass}(${modelVar});
-		}
-		else {
-			${modelVar}.setUpdateUserid("dolphin");
-			return ${bizVar}.update${modelClass}(${modelVar});
-		}
+    @RequestMapping("get")
+    @ResponseBody
+	public MessageInfo<$messageClass> get$modelClass( $primaryKeyParameter ){
+		MessageInfo<$messageClass> messageInfo =  ${serviceVar}.get$modelClass($primaryKeyVarName);
+		return messageInfo;
 	}
 
-	@RequestMapping("delete")
-	@ResponseBody
-	public Message<Integer> delete(Integer id) {
-		return ${bizVar}.delete${modelClass}(id);
+    @RequestMapping("getAll")
+    @ResponseBody
+    public MessageInfo<List<$messageClass>> getAll$modelClass(){
+		MessageInfo<List<$messageClass>>  messageInfo = ${serviceVar}.getAll$modelClass();
+		return messageInfo;
 	}
+
+
+	#foreach($index in $table.indexes)
+	#if($index.isUnique())
+
+	MessageInfo<$messageClass> ${sql.getIndexBizName($index)}(${code.getParameters($index.memberColumns)});
+
+    @RequestMapping("${sql.getIndexBizName($index)}")
+    @ResponseBody
+	public MessageInfo<$messageClass> ${sql.getIndexBizName($index)}(${code.getParameters($index.memberColumns)}){
+
+		MessageInfo<$messageClass> messageInfo = ${serviceVar}.${sql.getIndexBizName($index)}(${code.getParameterValues($index.memberColumns)});
+		return messageInfo;
+	}
+	#else
+
+    @RequestMapping("${sql.getIndexBizName($index)}")
+    @ResponseBody
+	public MessageInfo<List<$messageClass>> ${sql.getIndexBizName($index)}(${code.getParameters($index.memberColumns)}){
+		MessageInfo<List<$messageClass>> messageInfo = ${serviceVar}.${sql.getIndexBizName($index)}(${code.getParameterValues($index.memberColumns)});
+		return messageInfo;
+	}
+	#end
+	#end
+
 }

@@ -23,9 +23,9 @@
         <module>xingmou-ictclas</module>
         <module>xingmou-common</module>
         <module>xingmou-redis</module>
-        <module>xingmou-auth</module>
         <module>xingmou-confg-server</module>
         <module>xingmou-api-common</module>
+        <module>xingmou-restful</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -226,27 +226,6 @@
             </plugin>
 
 
-            <plugin>
-                <groupId>com.v4java</groupId>
-                <artifactId>maven-mybatis-gen-plugin</artifactId>
-                <version>1.1</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>gen</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <basePackage>com.gi.xm.platform</basePackage>
-                    <url>jdbc:mysql://10.9.130.142:3306/edw</url>
-                    <username>xmuser</username>
-                    <password>qcDKywE7Ka52</password>
-                    <output_root_dir>/home/vincent/tmp/</output_root_dir>
-                    <templates_dir>/home/vincent/workspace_idea/v4java/test-maven/src/main/resources/templates/</templates_dir>
-                </configuration>
-            </plugin>
-                <!--  mvn com.v4java:maven-mybatis-gen-plugin:gen -s ~/etc/settings-ali.xml -->
         </plugins>
     </build>
 

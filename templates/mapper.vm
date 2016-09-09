@@ -6,6 +6,7 @@ package ${mybatisgen.p.get("basePackage")}.dao;
 #set($modelQueryClass=$name.getModelQueryClassName($table))
 #set($modelQueryVar=$name.getModelQueryVarName($table))
 
+import java.util.Date;
 import java.math.BigDecimal;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;

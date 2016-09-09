@@ -73,6 +73,44 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.4.9</version>
+                <configuration>
+                    <imageName>${project.artifactId}</imageName>
+                    <dockerDirectory>src/main/docker</dockerDirectory>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.v4java</groupId>
+                <artifactId>maven-mybatis-gen-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>gen</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <basePackage>com.gi.xm.platform</basePackage>
+                    <prefix>dw_v_,dw_,dm_</prefix>
+                    <url>jdbc:mysql://10.9.130.142:3306/edw2</url>
+                    <username>xmuser</username>
+                    <password>qcDKywE7Ka52</password>
+                    <output_root_dir>/home/vincent/tmp/</output_root_dir>
+                    <templates_dir>/home/vincent/workspace_idea/company/xm-platform/xingmou-platform/templates/</templates_dir>
+                </configuration>
+            </plugin>
+            <!--  mvn com.v4java:maven-mybatis-gen-plugin:gen -s ~/etc/settings-ali.xml -->
         </plugins>
     </build>
 

@@ -12,7 +12,7 @@ package ${mybatisgen.p.get("basePackage")}.facede;
 #set($modelQueryVar=$name.getModelQueryVarName($table))
 
 import java.util.List;
-
+import java.util.Date;
 import ${mybatisgen.p.get("basePackage")}.view.common.MessageInfo;
 import ${mybatisgen.p.get("basePackage")}.view.common.QueryResultInfo;
 import ${name.getFullViewClassName($table)};

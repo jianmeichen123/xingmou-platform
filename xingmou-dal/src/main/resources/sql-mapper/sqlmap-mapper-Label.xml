@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.xm.platform.dao.LabelDAO">
+	<resultMap id="BaseResultMap" type="com.gi.xm.platform.pojo.Label">
+					<id column="id" property="id" jdbcType="BIGINT" />
+								<result column="title" property="title" jdbcType="VARCHAR" />
+								<result column="type" property="type" jdbcType="INTEGER" />
+								<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+						</resultMap>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		DELETE FROM dm_label
+		WHERE id = #{id,jdbcType=BIGINT} 
+	</delete>
+	
+	<insert id="insert" parameterType="com.gi.xm.platform.pojo.Label" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO dm_label (
+			title,
+			type,
+			add_time,
+			update_time
+		)
+		VALUES
+		(
+			#{title,jdbcType=VARCHAR},
+			#{type,jdbcType=INTEGER},
+			#{addTime,jdbcType=TIMESTAMP},
+			 UNIX_TIMESTAMP()
+		)
+	</insert>
+
+	<update id="updateByPrimaryKey" parameterType="com.gi.xm.platform.pojo.Label">
+		UPDATE dm_label
+		SET
+			<if test="title!=null">title = #{title,jdbcType=VARCHAR},</if>
+			<if test="type!=null">type = #{type,jdbcType=INTEGER},</if>
+			<if test="addTime!=null">add_time = #{addTime,jdbcType=TIMESTAMP},</if>
+	    WHERE id = #{id,jdbcType=BIGINT} 
+	</update>
+	
+		
+		
+	<sql id="selectFields">
+	id,title,type,add_time,update_time
+	</sql>
+	
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_label
+	</select>
+	
+	<select id="queryLabel" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.LabelQuery">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_label
+		<include refid="queryWhereAndOrder" />
+	</select>
+	
+	<sql id="queryWhereAndOrder">
+		<where>
+					<if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>
+								<if test="title!=null and title!=''">AND title = #{title,jdbcType=VARCHAR}</if>
+								<if test="type!=null">AND type = #{type,jdbcType=INTEGER}</if>
+								<if test="addTime!=null">AND add_time = #{addTime,jdbcType=TIMESTAMP}</if>
+								<if test="updateTime!=null">AND update_time = #{updateTime,jdbcType=TIMESTAMP}</if>
+							
+		</where>
+		<choose>
+			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
+			<otherwise>order by id desc</otherwise>
+		</choose>
+	</sql>
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_label
+		WHERE id = #{id,jdbcType=BIGINT} 
+	</select>
+
+	<select id="selectByPrimaryKeyForUpdate" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_label
+		WHERE id = #{id,jdbcType=BIGINT} 
+		FOR UPDATE
+	</select>
+		
+</mapper>

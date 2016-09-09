@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.xm.platform.dao.InvestEventsDAO">
+	<resultMap id="BaseResultMap" type="com.gi.xm.platform.pojo.InvestEvents">
+					<id column="id" property="id" jdbcType="BIGINT" />
+								<result column="title" property="title" jdbcType="VARCHAR" />
+								<result column="project_id" property="projectId" jdbcType="BIGINT" />
+								<result column="invest_money" property="investMoney" jdbcType="VARCHAR" />
+								<result column="money" property="money" jdbcType="VARCHAR" />
+								<result column="money_num" property="moneyNum" jdbcType="DECIMAL" />
+								<result column="currency_id" property="currencyId" jdbcType="BIGINT" />
+								<result column="currency_title" property="currencyTitle" jdbcType="VARCHAR" />
+								<result column="currency_code" property="currencyCode" jdbcType="VARCHAR" />
+								<result column="invest_date" property="investDate" jdbcType="DATE" />
+								<result column="round_id" property="roundId" jdbcType="BIGINT" />
+								<result column="round_name" property="roundName" jdbcType="VARCHAR" />
+								<result column="district_id" property="districtId" jdbcType="BIGINT" />
+								<result column="district_name" property="districtName" jdbcType="VARCHAR" />
+								<result column="district_sub_id" property="districtSubId" jdbcType="BIGINT" />
+								<result column="district_sub_name" property="districtSubName" jdbcType="VARCHAR" />
+								<result column="industry_id" property="industryId" jdbcType="BIGINT" />
+								<result column="industry_name" property="industryName" jdbcType="VARCHAR" />
+								<result column="industry_sub_id" property="industrySubId" jdbcType="BIGINT" />
+								<result column="industry_sub_name" property="industrySubName" jdbcType="VARCHAR" />
+								<result column="invest_per" property="investPer" jdbcType="VARCHAR" />
+								<result column="investfirm_names" property="investfirmNames" jdbcType="VARCHAR" />
+								<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+						</resultMap>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		DELETE FROM dm_invest_events
+		WHERE id = #{id,jdbcType=BIGINT} 
+	</delete>
+	
+	<insert id="insert" parameterType="com.gi.xm.platform.pojo.InvestEvents" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO dm_invest_events (
+			title,
+			project_id,
+			invest_money,
+			money,
+			money_num,
+			currency_id,
+			currency_title,
+			currency_code,
+			invest_date,
+			round_id,
+			round_name,
+			district_id,
+			district_name,
+			district_sub_id,
+			district_sub_name,
+			industry_id,
+			industry_name,
+			industry_sub_id,
+			industry_sub_name,
+			invest_per,
+			investfirm_names,
+			add_time,
+			update_time
+		)
+		VALUES
+		(
+			#{title,jdbcType=VARCHAR},
+			#{projectId,jdbcType=BIGINT},
+			#{investMoney,jdbcType=VARCHAR},
+			#{money,jdbcType=VARCHAR},
+			#{moneyNum,jdbcType=DECIMAL},
+			#{currencyId,jdbcType=BIGINT},
+			#{currencyTitle,jdbcType=VARCHAR},
+			#{currencyCode,jdbcType=VARCHAR},
+			#{investDate,jdbcType=DATE},
+			#{roundId,jdbcType=BIGINT},
+			#{roundName,jdbcType=VARCHAR},
+			#{districtId,jdbcType=BIGINT},
+			#{districtName,jdbcType=VARCHAR},
+			#{districtSubId,jdbcType=BIGINT},
+			#{districtSubName,jdbcType=VARCHAR},
+			#{industryId,jdbcType=BIGINT},
+			#{industryName,jdbcType=VARCHAR},
+			#{industrySubId,jdbcType=BIGINT},
+			#{industrySubName,jdbcType=VARCHAR},
+			#{investPer,jdbcType=VARCHAR},
+			#{investfirmNames,jdbcType=VARCHAR},
+			#{addTime,jdbcType=TIMESTAMP},
+			 UNIX_TIMESTAMP()
+		)
+	</insert>
+
+	<update id="updateByPrimaryKey" parameterType="com.gi.xm.platform.pojo.InvestEvents">
+		UPDATE dm_invest_events
+		SET
+			<if test="title!=null">title = #{title,jdbcType=VARCHAR},</if>
+			<if test="investMoney!=null">invest_money = #{investMoney,jdbcType=VARCHAR},</if>
+			<if test="money!=null">money = #{money,jdbcType=VARCHAR},</if>
+			<if test="currencyTitle!=null">currency_title = #{currencyTitle,jdbcType=VARCHAR},</if>
+			<if test="currencyCode!=null">currency_code = #{currencyCode,jdbcType=VARCHAR},</if>
+			<if test="roundName!=null">round_name = #{roundName,jdbcType=VARCHAR},</if>
+			<if test="districtName!=null">district_name = #{districtName,jdbcType=VARCHAR},</if>
+			<if test="districtSubName!=null">district_sub_name = #{districtSubName,jdbcType=VARCHAR},</if>
+			<if test="industryName!=null">industry_name = #{industryName,jdbcType=VARCHAR},</if>
+			<if test="industrySubName!=null">industry_sub_name = #{industrySubName,jdbcType=VARCHAR},</if>
+			<if test="investPer!=null">invest_per = #{investPer,jdbcType=VARCHAR},</if>
+			<if test="investfirmNames!=null">investfirm_names = #{investfirmNames,jdbcType=VARCHAR},</if>
+			<if test="projectId!=null">project_id = #{projectId,jdbcType=BIGINT},</if>
+			<if test="moneyNum!=null">money_num = #{moneyNum,jdbcType=DECIMAL},</if>
+			<if test="currencyId!=null">currency_id = #{currencyId,jdbcType=BIGINT},</if>
+			<if test="investDate!=null">invest_date = #{investDate,jdbcType=DATE},</if>
+			<if test="roundId!=null">round_id = #{roundId,jdbcType=BIGINT},</if>
+			<if test="districtId!=null">district_id = #{districtId,jdbcType=BIGINT},</if>
+			<if test="districtSubId!=null">district_sub_id = #{districtSubId,jdbcType=BIGINT},</if>
+			<if test="industryId!=null">industry_id = #{industryId,jdbcType=BIGINT},</if>
+			<if test="industrySubId!=null">industry_sub_id = #{industrySubId,jdbcType=BIGINT},</if>
+			<if test="addTime!=null">add_time = #{addTime,jdbcType=TIMESTAMP},</if>
+	    WHERE id = #{id,jdbcType=BIGINT} 
+	</update>
+	
+		
+		
+	<sql id="selectFields">
+	id,title,project_id,invest_money,money,money_num,currency_id,currency_title,currency_code,invest_date,round_id,round_name,district_id,district_name,district_sub_id,district_sub_name,industry_id,industry_name,industry_sub_id,industry_sub_name,invest_per,investfirm_names,add_time,update_time
+	</sql>
+	
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_invest_events
+	</select>
+	
+	<select id="queryInvestEvents" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.InvestEventsQuery">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_invest_events
+		<include refid="queryWhereAndOrder" />
+	</select>
+	
+	<sql id="queryWhereAndOrder">
+		<where>
+					<if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>
+								<if test="title!=null and title!=''">AND title = #{title,jdbcType=VARCHAR}</if>
+								<if test="projectId!=null">AND project_id = #{projectId,jdbcType=BIGINT}</if>
+								<if test="investMoney!=null and investMoney!=''">AND invest_money = #{investMoney,jdbcType=VARCHAR}</if>
+								<if test="money!=null and money!=''">AND money = #{money,jdbcType=VARCHAR}</if>
+								<if test="moneyNum!=null">AND money_num = #{moneyNum,jdbcType=DECIMAL}</if>
+								<if test="currencyId!=null">AND currency_id = #{currencyId,jdbcType=BIGINT}</if>
+								<if test="currencyTitle!=null and currencyTitle!=''">AND currency_title = #{currencyTitle,jdbcType=VARCHAR}</if>
+								<if test="currencyCode!=null and currencyCode!=''">AND currency_code = #{currencyCode,jdbcType=VARCHAR}</if>
+								<if test="investDate!=null">AND invest_date = #{investDate,jdbcType=DATE}</if>
+								<if test="roundId!=null">AND round_id = #{roundId,jdbcType=BIGINT}</if>
+								<if test="roundName!=null and roundName!=''">AND round_name = #{roundName,jdbcType=VARCHAR}</if>
+								<if test="districtId!=null">AND district_id = #{districtId,jdbcType=BIGINT}</if>
+								<if test="districtName!=null and districtName!=''">AND district_name = #{districtName,jdbcType=VARCHAR}</if>
+								<if test="districtSubId!=null">AND district_sub_id = #{districtSubId,jdbcType=BIGINT}</if>
+								<if test="districtSubName!=null and districtSubName!=''">AND district_sub_name = #{districtSubName,jdbcType=VARCHAR}</if>
+								<if test="industryId!=null">AND industry_id = #{industryId,jdbcType=BIGINT}</if>
+								<if test="industryName!=null and industryName!=''">AND industry_name = #{industryName,jdbcType=VARCHAR}</if>
+								<if test="industrySubId!=null">AND industry_sub_id = #{industrySubId,jdbcType=BIGINT}</if>
+								<if test="industrySubName!=null and industrySubName!=''">AND industry_sub_name = #{industrySubName,jdbcType=VARCHAR}</if>
+								<if test="investPer!=null and investPer!=''">AND invest_per = #{investPer,jdbcType=VARCHAR}</if>
+								<if test="investfirmNames!=null and investfirmNames!=''">AND investfirm_names = #{investfirmNames,jdbcType=VARCHAR}</if>
+								<if test="addTime!=null">AND add_time = #{addTime,jdbcType=TIMESTAMP}</if>
+								<if test="updateTime!=null">AND update_time = #{updateTime,jdbcType=TIMESTAMP}</if>
+							
+		</where>
+		<choose>
+			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
+			<otherwise>order by id desc</otherwise>
+		</choose>
+	</sql>
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_invest_events
+		WHERE id = #{id,jdbcType=BIGINT} 
+	</select>
+
+	<select id="selectByPrimaryKeyForUpdate" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_invest_events
+		WHERE id = #{id,jdbcType=BIGINT} 
+		FOR UPDATE
+	</select>
+		
+</mapper>

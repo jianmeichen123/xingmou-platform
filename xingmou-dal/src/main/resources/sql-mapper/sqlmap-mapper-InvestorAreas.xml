@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.xm.platform.dao.InvestorAreasDAO">
+	<resultMap id="BaseResultMap" type="com.gi.xm.platform.pojo.InvestorAreas">
+					<id column="id" property="id" jdbcType="BIGINT" />
+								<result column="investor_id" property="investorId" jdbcType="BIGINT" />
+								<result column="area_id" property="areaId" jdbcType="INTEGER" />
+								<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+						</resultMap>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		DELETE FROM dm_investor_areas
+		WHERE id = #{id,jdbcType=BIGINT} 
+	</delete>
+	
+	<insert id="insert" parameterType="com.gi.xm.platform.pojo.InvestorAreas" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO dm_investor_areas (
+			investor_id,
+			area_id,
+			add_time,
+			update_time
+		)
+		VALUES
+		(
+			#{investorId,jdbcType=BIGINT},
+			#{areaId,jdbcType=INTEGER},
+			#{addTime,jdbcType=TIMESTAMP},
+			 UNIX_TIMESTAMP()
+		)
+	</insert>
+
+	<update id="updateByPrimaryKey" parameterType="com.gi.xm.platform.pojo.InvestorAreas">
+		UPDATE dm_investor_areas
+		SET
+			<if test="investorId!=null">investor_id = #{investorId,jdbcType=BIGINT},</if>
+			<if test="areaId!=null">area_id = #{areaId,jdbcType=INTEGER},</if>
+			<if test="addTime!=null">add_time = #{addTime,jdbcType=TIMESTAMP},</if>
+	    WHERE id = #{id,jdbcType=BIGINT} 
+	</update>
+	
+		
+		
+	<sql id="selectFields">
+	id,investor_id,area_id,add_time,update_time
+	</sql>
+	
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_investor_areas
+	</select>
+	
+	<select id="queryInvestorAreas" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.InvestorAreasQuery">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_investor_areas
+		<include refid="queryWhereAndOrder" />
+	</select>
+	
+	<sql id="queryWhereAndOrder">
+		<where>
+					<if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>
+								<if test="investorId!=null">AND investor_id = #{investorId,jdbcType=BIGINT}</if>
+								<if test="areaId!=null">AND area_id = #{areaId,jdbcType=INTEGER}</if>
+								<if test="addTime!=null">AND add_time = #{addTime,jdbcType=TIMESTAMP}</if>
+								<if test="updateTime!=null">AND update_time = #{updateTime,jdbcType=TIMESTAMP}</if>
+							
+		</where>
+		<choose>
+			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
+			<otherwise>order by id desc</otherwise>
+		</choose>
+	</sql>
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_investor_areas
+		WHERE id = #{id,jdbcType=BIGINT} 
+	</select>
+
+	<select id="selectByPrimaryKeyForUpdate" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_investor_areas
+		WHERE id = #{id,jdbcType=BIGINT} 
+		FOR UPDATE
+	</select>
+		
+</mapper>

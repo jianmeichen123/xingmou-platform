@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.xm.platform.dao.InvestorCompanyDAO">
+	<resultMap id="BaseResultMap" type="com.gi.xm.platform.pojo.InvestorCompany">
+					<id column="id" property="id" jdbcType="BIGINT" />
+								<result column="investor_id" property="investorId" jdbcType="BIGINT" />
+								<result column="inverstfirm_id" property="inverstfirmId" jdbcType="BIGINT" />
+								<result column="inverstfirm_name" property="inverstfirmName" jdbcType="VARCHAR" />
+								<result column="inverstfirm_postion_id" property="inverstfirmPostionId" jdbcType="BIGINT" />
+								<result column="inverstfirm_postion_name" property="inverstfirmPostionName" jdbcType="VARCHAR" />
+								<result column="source_inverstfirm_id" property="sourceInverstfirmId" jdbcType="BIGINT" />
+								<result column="sortnum" property="sortnum" jdbcType="INTEGER" />
+								<result column="status" property="status" jdbcType="INTEGER" />
+								<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+						</resultMap>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		DELETE FROM dm_investor_company
+		WHERE id = #{id,jdbcType=BIGINT} 
+	</delete>
+	
+	<insert id="insert" parameterType="com.gi.xm.platform.pojo.InvestorCompany" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO dm_investor_company (
+			investor_id,
+			inverstfirm_id,
+			inverstfirm_name,
+			inverstfirm_postion_id,
+			inverstfirm_postion_name,
+			source_inverstfirm_id,
+			sortnum,
+			status,
+			add_time,
+			update_time
+		)
+		VALUES
+		(
+			#{investorId,jdbcType=BIGINT},
+			#{inverstfirmId,jdbcType=BIGINT},
+			#{inverstfirmName,jdbcType=VARCHAR},
+			#{inverstfirmPostionId,jdbcType=BIGINT},
+			#{inverstfirmPostionName,jdbcType=VARCHAR},
+			#{sourceInverstfirmId,jdbcType=BIGINT},
+			#{sortnum,jdbcType=INTEGER},
+			#{status,jdbcType=INTEGER},
+			#{addTime,jdbcType=TIMESTAMP},
+			 UNIX_TIMESTAMP()
+		)
+	</insert>
+
+	<update id="updateByPrimaryKey" parameterType="com.gi.xm.platform.pojo.InvestorCompany">
+		UPDATE dm_investor_company
+		SET
+			<if test="inverstfirmName!=null">inverstfirm_name = #{inverstfirmName,jdbcType=VARCHAR},</if>
+			<if test="inverstfirmPostionName!=null">inverstfirm_postion_name = #{inverstfirmPostionName,jdbcType=VARCHAR},</if>
+			<if test="investorId!=null">investor_id = #{investorId,jdbcType=BIGINT},</if>
+			<if test="inverstfirmId!=null">inverstfirm_id = #{inverstfirmId,jdbcType=BIGINT},</if>
+			<if test="inverstfirmPostionId!=null">inverstfirm_postion_id = #{inverstfirmPostionId,jdbcType=BIGINT},</if>
+			<if test="sourceInverstfirmId!=null">source_inverstfirm_id = #{sourceInverstfirmId,jdbcType=BIGINT},</if>
+			<if test="sortnum!=null">sortnum = #{sortnum,jdbcType=INTEGER},</if>
+			<if test="addTime!=null">add_time = #{addTime,jdbcType=TIMESTAMP},</if>
+	    WHERE id = #{id,jdbcType=BIGINT} 
+	</update>
+	
+			
+	<update id="changeStatus">
+		UPDATE dm_investor_company
+		SET
+    		update_time = UNIX_TIMESTAMP(),
+    		update_userid=#{updateUserid,jdbcType=VARCHAR},
+            status=#{status,jdbcType=INTEGER}
+	    WHERE id = #{id,jdbcType=BIGINT} 
+	</update>
+		
+		
+	<sql id="selectFields">
+	id,investor_id,inverstfirm_id,inverstfirm_name,inverstfirm_postion_id,inverstfirm_postion_name,source_inverstfirm_id,sortnum,status,add_time,update_time
+	</sql>
+	
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_investor_company
+	</select>
+	
+	<select id="queryInvestorCompany" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.InvestorCompanyQuery">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_investor_company
+		<include refid="queryWhereAndOrder" />
+	</select>
+	
+	<sql id="queryWhereAndOrder">
+		<where>
+					<if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>
+								<if test="investorId!=null">AND investor_id = #{investorId,jdbcType=BIGINT}</if>
+								<if test="inverstfirmId!=null">AND inverstfirm_id = #{inverstfirmId,jdbcType=BIGINT}</if>
+								<if test="inverstfirmName!=null and inverstfirmName!=''">AND inverstfirm_name = #{inverstfirmName,jdbcType=VARCHAR}</if>
+								<if test="inverstfirmPostionId!=null">AND inverstfirm_postion_id = #{inverstfirmPostionId,jdbcType=BIGINT}</if>
+								<if test="inverstfirmPostionName!=null and inverstfirmPostionName!=''">AND inverstfirm_postion_name = #{inverstfirmPostionName,jdbcType=VARCHAR}</if>
+								<if test="sourceInverstfirmId!=null">AND source_inverstfirm_id = #{sourceInverstfirmId,jdbcType=BIGINT}</if>
+								<if test="sortnum!=null">AND sortnum = #{sortnum,jdbcType=INTEGER}</if>
+								<if test="status!=null">AND status = #{status,jdbcType=INTEGER}</if>
+								<if test="addTime!=null">AND add_time = #{addTime,jdbcType=TIMESTAMP}</if>
+								<if test="updateTime!=null">AND update_time = #{updateTime,jdbcType=TIMESTAMP}</if>
+							
+		</where>
+		<choose>
+			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
+			<otherwise>order by id desc</otherwise>
+		</choose>
+	</sql>
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_investor_company
+		WHERE id = #{id,jdbcType=BIGINT} 
+	</select>
+
+	<select id="selectByPrimaryKeyForUpdate" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_investor_company
+		WHERE id = #{id,jdbcType=BIGINT} 
+		FOR UPDATE
+	</select>
+		
+</mapper>

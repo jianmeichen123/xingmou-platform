@@ -30,6 +30,8 @@ public class ErrorController {
     static  private MessageInfo<String> messageInfoerror = new MessageInfo<>(10001, "系统繁忙,请稍后重试");
 
     static  private MessageInfo<String> messageInfo404 = new MessageInfo<>(10002, "该api不存在");
+
+    static  private MessageInfo<String> messageInfo400 = new MessageInfo<>(10003, "请求参数错误");
     /**
      * 初始化ExceptionController
      * @param errorAttributes
@@ -41,6 +43,17 @@ public class ErrorController {
     }
 
 
+
+    /**
+     * 定义404的JSON数据
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "400")
+    @ResponseBody
+    public MessageInfo<String> error400() {
+        return messageInfo400;
+    }
 
     /**
      * 定义404的JSON数据

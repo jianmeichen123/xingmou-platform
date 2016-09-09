@@ -7,16 +7,13 @@ import java.util.Map;
 import com.alibaba.dubbo.config.annotation.Reference;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.gi.xm.platform.view.common.MessageInfo;
 import com.gi.xm.platform.view.common.QueryResultInfo;
 import com.gi.xm.platform.view.AreaInfo;
 import com.gi.xm.platform.view.AreaQueryInfo;
 import com.gi.xm.platform.facede.AreaFacede;
-import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("area")
@@ -47,9 +44,9 @@ public class AreaController {
 		return messageInfo;
 	}
 
-    @RequestMapping("get")
+    @RequestMapping("get/{id}")
     @ResponseBody
-	public MessageInfo<AreaInfo> getArea( Long id ){
+	public MessageInfo<AreaInfo> getArea(@PathVariable("id") Long id ){
 		MessageInfo<AreaInfo> messageInfo =  areaFacede.getArea(id);
 		return messageInfo;
 	}

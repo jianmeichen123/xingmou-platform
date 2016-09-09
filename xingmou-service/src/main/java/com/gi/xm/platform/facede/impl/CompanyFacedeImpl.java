@@ -24,6 +24,7 @@ import com.gi.xm.platform.query.CompanyQuery;
 import com.gi.xm.platform.facede.CompanyFacede;
 import com.gi.xm.platform.facede.convertor.CompanyConvertor;
 import com.gi.xm.platform.facede.convertor.MessageConvertor;
+import org.springframework.cache.annotation.Cacheable;
 
 @Service
 public class CompanyFacedeImpl implements CompanyFacede {
@@ -64,6 +65,7 @@ public class CompanyFacedeImpl implements CompanyFacede {
 		return messageInfo;
 	}
 
+	@Cacheable()
     public MessageInfo<List<CompanyInfo>> getAllCompany(){
 	
 		Message<List<Company>> message  = companyBiz.getAllCompany();

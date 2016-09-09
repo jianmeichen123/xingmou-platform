@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.gi.xm.platform.view.common.MessageInfo;
 import com.gi.xm.platform.view.common.QueryResultInfo;
@@ -24,12 +23,6 @@ public class InvestEventsInvestfirmController {
 
     @Reference
 	private InvestEventsInvestfirmFacede investEventsInvestfirmFacede;
-
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public ModelAndView index() {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		return new ModelAndView("investEventsInvestfirm/index", modelMap);
-	}
 
 	@RequestMapping("query")
 	@ResponseBody

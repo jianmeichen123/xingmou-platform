@@ -98,9 +98,22 @@ public class DataYearController {
 			
     @RequestMapping("getListByYear")
     @ResponseBody
-	public MessageInfo<List<DataYearInfo>> getListByYear(Integer year){
-		MessageInfo<List<DataYearInfo>> messageInfo = dataYearFacede.getListByYear(year);
+	public MessageInfo<List<DataYearInfo>> getListByYear(Integer[] years){
+		MessageInfo<List<DataYearInfo>> messageInfo = dataYearFacede.getListByYear(years);
 		return messageInfo;
 	}
-		
+
+	@RequestMapping("getListByYearIndustryId")
+	@ResponseBody
+	public MessageInfo<List<DataYearInfo>> getListByYearIndustryId(Integer[] years, Integer industryId){
+		MessageInfo<List<DataYearInfo>> messageInfo = dataYearFacede.getListByYearIndustryId(years, industryId);
+		return messageInfo;
+	}
+
+	@RequestMapping("getListByYearIndustrySubId")
+	@ResponseBody
+	public MessageInfo<List<DataYearInfo>> getListByYearIndustrySubId(Integer[] years, Integer industrySubId){
+		MessageInfo<List<DataYearInfo>> messageInfo = dataYearFacede.getListByYearIndustrySubId(years, industrySubId);
+		return messageInfo;
+	}
 }

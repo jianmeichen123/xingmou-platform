@@ -34,7 +34,10 @@ public interface DataYearDAO {
 				
 	List<DataYear> selectByRoundId(@Param("roundId") Integer roundId);
 				
-	List<DataYear> selectByYear(@Param("year") Integer year);
-		
+	List<DataYear> selectByYear(@Param("years") Integer[] years);
 
+
+	List<DataYear> selectByYearIndustryId(@Param("years") Integer[] years, @Param("industryId") Integer industryId);
+
+	List<DataYear> selectByYearIndustrySubId(@Param("years") Integer[] years, @Param("industrySubId") Integer industrySubId);
 }

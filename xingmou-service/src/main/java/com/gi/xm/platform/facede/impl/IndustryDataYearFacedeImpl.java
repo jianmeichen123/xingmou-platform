@@ -88,6 +88,28 @@ public class IndustryDataYearFacedeImpl implements IndustryDataYearFacede {
 		
 
 
+	public MessageInfo<List<IndustryDataYearInfo>> getListByIndustryIdYaar(Integer industryId, Integer[] yaars){
+	
+		Message<List<IndustryDataYear>> message  = industryDataYearBiz.getListByIndustryIdYaar(industryId, yaars);
+		MessageInfo<List<IndustryDataYearInfo>> messageInfo = MessageConvertor.toMessageInfo(message);
+		List<IndustryDataYearInfo> industryDataYearInfoList = IndustryDataYearConvertor.toIndustryDataYearInfoList(message.getData());
+		messageInfo.setData(industryDataYearInfoList);
+		return messageInfo;	
+	}
+			
+
+
+	public MessageInfo<List<IndustryDataYearInfo>> getListByYaarIndustrySubId(Integer[] yaars, Integer industrySubId){
+	
+		Message<List<IndustryDataYear>> message  = industryDataYearBiz.getListByYaarIndustrySubId(yaars, industrySubId);
+		MessageInfo<List<IndustryDataYearInfo>> messageInfo = MessageConvertor.toMessageInfo(message);
+		List<IndustryDataYearInfo> industryDataYearInfoList = IndustryDataYearConvertor.toIndustryDataYearInfoList(message.getData());
+		messageInfo.setData(industryDataYearInfoList);
+		return messageInfo;	
+	}
+			
+
+
 	public MessageInfo<List<IndustryDataYearInfo>> getListByIndustryId(Integer industryId){
 	
 		Message<List<IndustryDataYear>> message  = industryDataYearBiz.getListByIndustryId(industryId);
@@ -99,9 +121,9 @@ public class IndustryDataYearFacedeImpl implements IndustryDataYearFacede {
 			
 
 
-	public MessageInfo<List<IndustryDataYearInfo>> getListByYaar(Integer yaar){
+	public MessageInfo<List<IndustryDataYearInfo>> getListByYaar(Integer[] yaars){
 	
-		Message<List<IndustryDataYear>> message  = industryDataYearBiz.getListByYaar(yaar);
+		Message<List<IndustryDataYear>> message  = industryDataYearBiz.getListByYaar(yaars);
 		MessageInfo<List<IndustryDataYearInfo>> messageInfo = MessageConvertor.toMessageInfo(message);
 		List<IndustryDataYearInfo> industryDataYearInfoList = IndustryDataYearConvertor.toIndustryDataYearInfoList(message.getData());
 		messageInfo.setData(industryDataYearInfoList);

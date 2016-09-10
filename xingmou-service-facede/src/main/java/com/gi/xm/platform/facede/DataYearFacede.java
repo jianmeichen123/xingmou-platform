@@ -30,7 +30,10 @@ public interface DataYearFacede {
 			
 	MessageInfo<List<DataYearInfo>> getListByRoundId(Integer roundId);
 			
-	MessageInfo<List<DataYearInfo>> getListByYear(Integer year);
-		
+	MessageInfo<List<DataYearInfo>> getListByYear(Integer[] years);
+
+	MessageInfo<List<DataYearInfo>> getListByYearIndustryId(Integer[] years, Integer industryId);
+
+	MessageInfo<List<DataYearInfo>> getListByYearIndustrySubId(Integer[] years, Integer industrySubId);
 
 }

@@ -195,7 +195,31 @@
 		SELECT
 		<include refid="selectFields" />
 		FROM dm_data_year
-		WHERE  year = #{year,jdbcType=INTEGER}
+		WHERE  year in
+        <foreach item="item" index="index" collection="years" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+	<select id="selectByYearIndustryId" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_data_year
+		WHERE  year in
+        <foreach item="item" index="index" collection="years" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        AND industry_id = #{industryId,jdbcType=INTEGER}
 	</select>
-		
+
+	<select id="selectByYearIndustrySubId" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_data_year
+		WHERE  year in
+        <foreach item="item" index="index" collection="years" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+		AND industry_sub_id = #{industrySubId,jdbcType=INTEGER}
+	</select>
 </mapper>

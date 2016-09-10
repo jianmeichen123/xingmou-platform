@@ -22,13 +22,18 @@ public interface IndustryDataYearDAO {
     List<IndustryDataYear> selectAll();
 
 	List<IndustryDataYear> queryIndustryDataYear(IndustryDataYearQuery industryDataYearQuery);
-			
+
     int updateByPrimaryKey(IndustryDataYear industryDataYear);
-	
-				
+
+
 	List<IndustryDataYear> selectByIndustryId(@Param("industryId") Integer industryId);
-				
-	List<IndustryDataYear> selectByYaar(@Param("yaar") Integer yaar);
-		
+
+
+	List<IndustryDataYear> selectByIndustryIdYaar(@Param("industryId") Integer industryId, @Param("yaars") Integer[] yaars);
+
+	List<IndustryDataYear> selectByYaarIndustrySubId(@Param("yaars") Integer yaars[], @Param("industrySubId") Integer industrySubId);
+
+	List<IndustryDataYear> selectByYaar(@Param("yaars") Integer[] yaars);
+
 
 }

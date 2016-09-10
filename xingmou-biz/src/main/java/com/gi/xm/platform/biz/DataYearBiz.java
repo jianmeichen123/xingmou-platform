@@ -177,11 +177,11 @@ public class DataYearBiz  {
 		return message;
 	}
 			
-	public Message<List<DataYear>> getListByYear(Integer year){
+	public Message<List<DataYear>> getListByYear(Integer[] years){
 
 		Message<List<DataYear>> message = new Message<List<DataYear>>();
 		try {
-			List<DataYear> dataYearList = dataYearDAO.selectByYear(year);
+			List<DataYear> dataYearList = dataYearDAO.selectByYear(years);
 			message.setData(dataYearList);
 		} catch (Exception e) {
 			LOGGER.error("getListByYear","查询DataYear失败", e);
@@ -189,6 +189,32 @@ public class DataYearBiz  {
 		}
 		return message;
 	}
-		
+
+
+	public Message<List<DataYear>> getListByYearIndustryId(Integer[] years, Integer industryId){
+
+		Message<List<DataYear>> message = new Message<List<DataYear>>();
+		try {
+			List<DataYear> dataYearList = dataYearDAO.selectByYearIndustryId(years, industryId);
+			message.setData(dataYearList);
+		} catch (Exception e) {
+			LOGGER.error("getListByYearIndustryId","查询DataYear失败", e);
+			message.setMessageStatus(MessageStatus.SYS_ERROR);
+		}
+		return message;
+	}
+
+	public Message<List<DataYear>> getListByYearIndustrySubId(Integer[] years, Integer industrySubId){
+
+		Message<List<DataYear>> message = new Message<List<DataYear>>();
+		try {
+			List<DataYear> dataYearList = dataYearDAO.selectByYearIndustrySubId(years, industrySubId);
+			message.setData(dataYearList);
+		} catch (Exception e) {
+			LOGGER.error("getListByYearIndustrySubId","查询DataYear失败", e);
+			message.setMessageStatus(MessageStatus.SYS_ERROR);
+		}
+		return message;
+	}
 
 }

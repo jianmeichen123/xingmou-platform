@@ -132,13 +132,32 @@ public class DataYearFacedeImpl implements DataYearFacede {
 			
 
 
-	public MessageInfo<List<DataYearInfo>> getListByYear(Integer year){
+	public MessageInfo<List<DataYearInfo>> getListByYear(Integer[] years){
 	
-		Message<List<DataYear>> message  = dataYearBiz.getListByYear(year);
+		Message<List<DataYear>> message  = dataYearBiz.getListByYear(years);
 		MessageInfo<List<DataYearInfo>> messageInfo = MessageConvertor.toMessageInfo(message);
 		List<DataYearInfo> dataYearInfoList = DataYearConvertor.toDataYearInfoList(message.getData());
 		messageInfo.setData(dataYearInfoList);
 		return messageInfo;	
 	}
-		
+
+	public MessageInfo<List<DataYearInfo>> getListByYearIndustryId(Integer[] years, Integer industryId){
+
+		Message<List<DataYear>> message  = dataYearBiz.getListByYearIndustryId(years, industryId);
+		MessageInfo<List<DataYearInfo>> messageInfo = MessageConvertor.toMessageInfo(message);
+		List<DataYearInfo> dataYearInfoList = DataYearConvertor.toDataYearInfoList(message.getData());
+		messageInfo.setData(dataYearInfoList);
+		return messageInfo;
+	}
+
+
+
+	public MessageInfo<List<DataYearInfo>> getListByYearIndustrySubId(Integer[] years, Integer industrySubId){
+
+		Message<List<DataYear>> message  = dataYearBiz.getListByYearIndustrySubId(years, industrySubId);
+		MessageInfo<List<DataYearInfo>> messageInfo = MessageConvertor.toMessageInfo(message);
+		List<DataYearInfo> dataYearInfoList = DataYearConvertor.toDataYearInfoList(message.getData());
+		messageInfo.setData(dataYearInfoList);
+		return messageInfo;
+	}
 }

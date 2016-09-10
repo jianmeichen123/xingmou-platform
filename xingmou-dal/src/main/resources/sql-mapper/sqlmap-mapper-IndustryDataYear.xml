@@ -173,6 +173,28 @@
 		FOR UPDATE
 	</select>
 			
+	<select id="selectByIndustryIdYaar" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_industry_data_year
+		WHERE  industry_id = #{industryId,jdbcType=INTEGER}
+		AND yaar in
+        <foreach item="item" index="index" collection="yaars" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+			
+	<select id="selectByYaarIndustrySubId" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_industry_data_year
+		WHERE  yaar in
+        <foreach item="item" index="index" collection="yaars" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        AND industry_sub_id = #{industrySubId,jdbcType=INTEGER}
+	</select>
+			
 	<select id="selectByIndustryId" resultMap="BaseResultMap">
 		SELECT
 		<include refid="selectFields" />
@@ -184,7 +206,10 @@
 		SELECT
 		<include refid="selectFields" />
 		FROM dm_industry_data_year
-		WHERE  yaar = #{yaar,jdbcType=INTEGER}
+		WHERE  yaar in
+		<foreach item="item" index="index" collection="yaars" open="(" separator="," close=")">
+			#{item}
+		</foreach>
 	</select>
 		
 </mapper>

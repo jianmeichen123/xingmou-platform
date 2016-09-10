@@ -24,7 +24,8 @@ public interface DistrictDAO {
 	List<District> queryDistrict(DistrictQuery districtQuery);
 			
     int updateByPrimaryKey(District district);
-	
+
+	List<District> selectByTypeLevel(@Param("type") Integer type, @Param("level") Integer level);
 				
 	List<District> selectByUpidDisplayorder(@Param("upid") Integer upid, @Param("displayorder") Integer displayorder);
 		

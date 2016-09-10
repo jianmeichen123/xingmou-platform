@@ -68,6 +68,13 @@ public class DistrictController {
 
 
 		
+    @RequestMapping("getListByTypeLevel")
+    @ResponseBody
+	public MessageInfo<List<DistrictInfo>> getListByTypeLevel(Integer type, Integer level){
+		MessageInfo<List<DistrictInfo>> messageInfo = districtFacede.getListByTypeLevel(type, level);
+		return messageInfo;
+	}
+			
     @RequestMapping("getListByUpidDisplayorder")
     @ResponseBody
 	public MessageInfo<List<DistrictInfo>> getListByUpidDisplayorder(Integer upid, Integer displayorder){

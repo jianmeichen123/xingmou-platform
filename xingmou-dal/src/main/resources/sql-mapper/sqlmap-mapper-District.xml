@@ -94,6 +94,14 @@
 		FOR UPDATE
 	</select>
 			
+	<select id="selectByTypeLevel" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dw_v_district
+		WHERE  type = #{type,jdbcType=INTEGER}
+		AND level = #{level,jdbcType=TINYINT} 
+	</select>
+			
 	<select id="selectByUpidDisplayorder" resultMap="BaseResultMap">
 		SELECT
 		<include refid="selectFields" />

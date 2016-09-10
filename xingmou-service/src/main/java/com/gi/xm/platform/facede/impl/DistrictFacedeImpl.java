@@ -88,6 +88,17 @@ public class DistrictFacedeImpl implements DistrictFacede {
 		
 
 
+	public MessageInfo<List<DistrictInfo>> getListByTypeLevel(Integer type, Integer level){
+	
+		Message<List<District>> message  = districtBiz.getListByTypeLevel(type, level);
+		MessageInfo<List<DistrictInfo>> messageInfo = MessageConvertor.toMessageInfo(message);
+		List<DistrictInfo> districtInfoList = DistrictConvertor.toDistrictInfoList(message.getData());
+		messageInfo.setData(districtInfoList);
+		return messageInfo;	
+	}
+			
+
+
 	public MessageInfo<List<DistrictInfo>> getListByUpidDisplayorder(Integer upid, Integer displayorder){
 	
 		Message<List<District>> message  = districtBiz.getListByUpidDisplayorder(upid, displayorder);

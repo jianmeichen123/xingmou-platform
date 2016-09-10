@@ -51,7 +51,7 @@ public class DistrictBiz  {
     public Message<Integer> createDistrict(District district){
 		Message<Integer> message = new Message<Integer>();
 		try {
-						        							districtDAO.insert( district );
+						        				        							districtDAO.insert( district );
 			message.setData(district.getId());
 
 		} catch (Exception e) {
@@ -70,7 +70,7 @@ public class DistrictBiz  {
 				return message;
 			}
 
-						        							int result = districtDAO.updateByPrimaryKey( district );
+						        				        							int result = districtDAO.updateByPrimaryKey( district );
 			message.setData(result);
 
 		} catch (Exception e) {
@@ -125,6 +125,19 @@ public class DistrictBiz  {
 	}
 
 		
+	public Message<List<District>> getListByTypeLevel(Integer type, Integer level){
+
+		Message<List<District>> message = new Message<List<District>>();
+		try {
+			List<District> districtList = districtDAO.selectByTypeLevel(type, level);
+			message.setData(districtList);
+		} catch (Exception e) {
+			LOGGER.error("getListByTypeLevel","查询District失败", e);
+			message.setMessageStatus(MessageStatus.SYS_ERROR);
+		}
+		return message;
+	}
+			
 	public Message<List<District>> getListByUpidDisplayorder(Integer upid, Integer displayorder){
 
 		Message<List<District>> message = new Message<List<District>>();

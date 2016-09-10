@@ -9,7 +9,8 @@ import com.gi.xm.platform.view.DistrictInfo;
 import com.gi.xm.platform.view.DistrictQueryInfo;
 
 public interface DistrictFacede {
-		MessageInfo<Integer> deleteDistrict(Integer id);
+
+	MessageInfo<Integer> deleteDistrict(Integer id);
 		
     MessageInfo<Integer> createDistrict(DistrictInfo districtInfo);
 		
@@ -18,10 +19,17 @@ public interface DistrictFacede {
 	MessageInfo<DistrictInfo> getDistrict(Integer id);
 		
     MessageInfo<List<DistrictInfo>> getAllDistrict();
-			
+
     MessageInfo<QueryResultInfo<DistrictInfo>> queryDistrict(DistrictQueryInfo districtQueryInfo);
-	
-		
+
+    /**
+     *
+     * @param type 海外or国内
+     * @param level 地区等级
+     * @return
+     */
+	MessageInfo<List<DistrictInfo>> getListByTypeLevel(Integer type, Integer level);
+			
 	MessageInfo<List<DistrictInfo>> getListByUpidDisplayorder(Integer upid, Integer displayorder);
 		
 

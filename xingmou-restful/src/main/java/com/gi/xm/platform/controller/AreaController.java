@@ -7,7 +7,10 @@ import java.util.Map;
 import com.alibaba.dubbo.config.annotation.Reference;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.gi.xm.platform.view.common.MessageInfo;
 import com.gi.xm.platform.view.common.QueryResultInfo;
@@ -15,13 +18,18 @@ import com.gi.xm.platform.view.AreaInfo;
 import com.gi.xm.platform.view.AreaQueryInfo;
 import com.gi.xm.platform.facede.AreaFacede;
 
-@RestController
+@Controller
 @RequestMapping("area")
 public class AreaController {
 
     @Reference
 	private AreaFacede areaFacede;
 
+	@RequestMapping(value = "index", method = RequestMethod.GET)
+	public ModelAndView index() {
+		Map<String, Object> modelMap = new HashMap<String, Object>();
+		return new ModelAndView("area/index", modelMap);
+	}
 
 	@RequestMapping("query")
 	@ResponseBody
@@ -44,9 +52,9 @@ public class AreaController {
 		return messageInfo;
 	}
 
-    @RequestMapping("get/{id}")
+    @RequestMapping("get")
     @ResponseBody
-	public MessageInfo<AreaInfo> getArea(@PathVariable("id") Long id ){
+	public MessageInfo<AreaInfo> getArea( Long id ){
 		MessageInfo<AreaInfo> messageInfo =  areaFacede.getArea(id);
 		return messageInfo;
 	}

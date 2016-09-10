@@ -1,14 +1,14 @@
+/*
 package com.gi.xm.platform.newsmange.conf;
 
-import com.alibaba.dubbo.config.ApplicationConfig;
-import com.alibaba.dubbo.config.RegistryConfig;
-import com.alibaba.dubbo.config.spring.AnnotationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+*/
 /**
  * Created by vincent on 16-8-25.
- */
+ *//*
+
 @Configuration
 public class DubboConfig {
     public static final String APPLICATION_NAME = "xm-news-mange";
@@ -38,3 +38,4 @@ public class DubboConfig {
         return annotationBean;
     }
 }
+*/

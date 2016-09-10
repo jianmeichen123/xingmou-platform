@@ -11,6 +11,7 @@ public class ProjectPerson extends Pojo {
         public static final String PROJECT_ID = "项目id";
         public static final String NAME = "姓名";
         public static final String ICON = "头像";
+        public static final String IS_CORE_MEMBER = "1核心成员 0非核心成员";
         public static final String ADD_TIME = "addTime";
         public static final String UPDATE_TIME = "updateTime";
     
@@ -34,6 +35,11 @@ public class ProjectPerson extends Pojo {
 	 * @Fields icon : 头像
 	 */
 	private String icon;
+	
+	/**
+	 * @Fields isCoreMember : 1核心成员 0非核心成员
+	 */
+	private Integer isCoreMember;
 	
 	/**
 	 * @Fields addTime : 
@@ -76,6 +82,14 @@ public class ProjectPerson extends Pojo {
 
 	public void setIcon(String icon){
 		this.icon = icon;
+	}
+    
+	public Integer getIsCoreMember(){
+		return isCoreMember;
+	}
+
+	public void setIsCoreMember(Integer isCoreMember){
+		this.isCoreMember = isCoreMember;
 	}
     
 	public Timestamp getAddTime(){

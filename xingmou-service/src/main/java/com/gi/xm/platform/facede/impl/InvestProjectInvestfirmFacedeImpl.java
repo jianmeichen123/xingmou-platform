@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Date;
 import com.alibaba.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 
 import com.gi.xm.platform.biz.InvestProjectInvestfirmBiz;
 
@@ -55,7 +56,8 @@ public class InvestProjectInvestfirmFacedeImpl implements InvestProjectInvestfir
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-		public MessageInfo<InvestProjectInvestfirmInfo> getInvestProjectInvestfirm( Long id ){
+		@Cacheable(value = "investProjectInvestfirmInfo",keyGenerator = "wiselyKeyGenerator")
+	public MessageInfo<InvestProjectInvestfirmInfo> getInvestProjectInvestfirm( Long id ){
 		
 		Message<InvestProjectInvestfirm> message  = investProjectInvestfirmBiz.getInvestProjectInvestfirm( id );
 		MessageInfo<InvestProjectInvestfirmInfo> messageInfo = MessageConvertor.toMessageInfo(message);
@@ -64,6 +66,7 @@ public class InvestProjectInvestfirmFacedeImpl implements InvestProjectInvestfir
 		return messageInfo;
 	}
 
+    @Cacheable(value = "investProjectInvestfirmInfo",keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<List<InvestProjectInvestfirmInfo>> getAllInvestProjectInvestfirm(){
 	
 		Message<List<InvestProjectInvestfirm>> message  = investProjectInvestfirmBiz.getAllInvestProjectInvestfirm();
@@ -82,7 +85,9 @@ public class InvestProjectInvestfirmFacedeImpl implements InvestProjectInvestfir
 		return messageInfo;
 	}
    
-			
+		
+
+
 	public MessageInfo<List<InvestProjectInvestfirmInfo>> getListByInvestId(Long investId){
 	
 		Message<List<InvestProjectInvestfirm>> message  = investProjectInvestfirmBiz.getListByInvestId(investId);
@@ -91,7 +96,9 @@ public class InvestProjectInvestfirmFacedeImpl implements InvestProjectInvestfir
 		messageInfo.setData(investProjectInvestfirmInfoList);
 		return messageInfo;	
 	}
-				
+			
+
+
 	public MessageInfo<List<InvestProjectInvestfirmInfo>> getListByInvestfirmId(Long investfirmId){
 	
 		Message<List<InvestProjectInvestfirm>> message  = investProjectInvestfirmBiz.getListByInvestfirmId(investfirmId);
@@ -100,7 +107,9 @@ public class InvestProjectInvestfirmFacedeImpl implements InvestProjectInvestfir
 		messageInfo.setData(investProjectInvestfirmInfoList);
 		return messageInfo;	
 	}
-				
+			
+
+
 	public MessageInfo<List<InvestProjectInvestfirmInfo>> getListByProjectId(Long projectId){
 	
 		Message<List<InvestProjectInvestfirm>> message  = investProjectInvestfirmBiz.getListByProjectId(projectId);

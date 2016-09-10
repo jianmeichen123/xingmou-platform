@@ -37,6 +37,9 @@ public class Project extends Pojo {
         public static final String OPERATION_SCORE = "运营能力得分";
         public static final String SCORE = "综合得分";
         public static final String TIME_SPAN = "最近一次融资距上次融资时间间隔（月）";
+        public static final String INVEST_INFO = "融资详情	";
+        public static final String INVEST_NUM = "该项目的融资总笔数";
+        public static final String INVEST_MONEY = "该项目的融资总金额";
         public static final String LOAD_TIME = "加载时间";
         public static final String UPDATE_TIME = "最后更新时间";
     
@@ -190,6 +193,21 @@ public class Project extends Pojo {
 	 * @Fields timeSpan : 最近一次融资距上次融资时间间隔（月）
 	 */
 	private Integer timeSpan;
+	
+	/**
+	 * @Fields investInfo : 融资详情	
+	 */
+	private String investInfo;
+	
+	/**
+	 * @Fields investNum : 该项目的融资总笔数
+	 */
+	private Integer investNum;
+	
+	/**
+	 * @Fields investMoney : 该项目的融资总金额
+	 */
+	private Long investMoney;
 	
 	/**
 	 * @Fields loadTime : 加载时间
@@ -440,6 +458,30 @@ public class Project extends Pojo {
 
 	public void setTimeSpan(Integer timeSpan){
 		this.timeSpan = timeSpan;
+	}
+    
+	public String getInvestInfo(){
+		return investInfo;
+	}
+
+	public void setInvestInfo(String investInfo){
+		this.investInfo = investInfo;
+	}
+    
+	public Integer getInvestNum(){
+		return investNum;
+	}
+
+	public void setInvestNum(Integer investNum){
+		this.investNum = investNum;
+	}
+    
+	public Long getInvestMoney(){
+		return investMoney;
+	}
+
+	public void setInvestMoney(Long investMoney){
+		this.investMoney = investMoney;
 	}
     
 	public Timestamp getLoadTime(){

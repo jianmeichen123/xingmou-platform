@@ -34,6 +34,11 @@ public class ProjectPersonInfo implements Serializable {
 	private String icon;
 			
 	/**
+	 * @Fields isCoreMember : 1核心成员 0非核心成员
+	 */
+	private Integer isCoreMember;
+			
+	/**
 	 * @Fields addTime : 
 	 */
 	private Timestamp addTime;
@@ -74,6 +79,14 @@ public class ProjectPersonInfo implements Serializable {
 	
 	public void setIcon(String icon){
 		this.icon = icon;
+	}
+    
+	public Integer getIsCoreMember(){
+		return isCoreMember;
+	}
+	
+	public void setIsCoreMember(Integer isCoreMember){
+		this.isCoreMember = isCoreMember;
 	}
     
 	public Timestamp getAddTime(){

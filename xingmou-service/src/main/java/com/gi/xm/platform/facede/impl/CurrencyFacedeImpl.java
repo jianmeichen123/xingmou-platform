@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Date;
 import com.alibaba.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 
 import com.gi.xm.platform.biz.CurrencyBiz;
 
@@ -55,7 +56,8 @@ public class CurrencyFacedeImpl implements CurrencyFacede {
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-		public MessageInfo<CurrencyInfo> getCurrency( Long id ){
+		@Cacheable(value = "currencyInfo",keyGenerator = "wiselyKeyGenerator")
+	public MessageInfo<CurrencyInfo> getCurrency( Long id ){
 		
 		Message<Currency> message  = currencyBiz.getCurrency( id );
 		MessageInfo<CurrencyInfo> messageInfo = MessageConvertor.toMessageInfo(message);
@@ -64,6 +66,7 @@ public class CurrencyFacedeImpl implements CurrencyFacede {
 		return messageInfo;
 	}
 
+    @Cacheable(value = "currencyInfo",keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<List<CurrencyInfo>> getAllCurrency(){
 	
 		Message<List<Currency>> message  = currencyBiz.getAllCurrency();

@@ -9,8 +9,7 @@ import com.gi.xm.platform.view.CompanyInfo;
 import com.gi.xm.platform.view.CompanyQueryInfo;
 
 public interface CompanyFacede {
-
-    MessageInfo<Integer> deleteCompany(Long id);
+		MessageInfo<Integer> deleteCompany(Long id);
 		
     MessageInfo<Long> createCompany(CompanyInfo companyInfo);
 		

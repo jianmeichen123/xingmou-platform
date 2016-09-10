@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Date;
 import com.alibaba.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 
 import com.gi.xm.platform.biz.AreaBiz;
 
@@ -55,7 +56,8 @@ public class AreaFacedeImpl implements AreaFacede {
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-		public MessageInfo<AreaInfo> getArea( Long id ){
+		@Cacheable(value = "areaInfo",keyGenerator = "wiselyKeyGenerator")
+	public MessageInfo<AreaInfo> getArea( Long id ){
 		
 		Message<Area> message  = areaBiz.getArea( id );
 		MessageInfo<AreaInfo> messageInfo = MessageConvertor.toMessageInfo(message);
@@ -64,6 +66,7 @@ public class AreaFacedeImpl implements AreaFacede {
 		return messageInfo;
 	}
 
+    @Cacheable(value = "areaInfo",keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<List<AreaInfo>> getAllArea(){
 	
 		Message<List<Area>> message  = areaBiz.getAllArea();

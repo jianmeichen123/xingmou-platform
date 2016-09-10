@@ -32,6 +32,9 @@
 								<result column="operation_score" property="operationScore" jdbcType="INTEGER" />
 								<result column="score" property="score" jdbcType="INTEGER" />
 								<result column="time_span" property="timeSpan" jdbcType="INTEGER" />
+								<result column="invest_info" property="investInfo" jdbcType="VARCHAR" />
+								<result column="invest_num" property="investNum" jdbcType="INTEGER" />
+								<result column="invest_money" property="investMoney" jdbcType="BIGINT" />
 								<result column="load_time" property="loadTime" jdbcType="TIMESTAMP" />
 								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
 						</resultMap>
@@ -72,6 +75,9 @@
 			operation_score,
 			score,
 			time_span,
+			invest_info,
+			invest_num,
+			invest_money,
 			load_time,
 			update_time
 		)
@@ -106,6 +112,9 @@
 			#{operationScore,jdbcType=INTEGER},
 			#{score,jdbcType=INTEGER},
 			#{timeSpan,jdbcType=INTEGER},
+			#{investInfo,jdbcType=VARCHAR},
+			#{investNum,jdbcType=INTEGER},
+			#{investMoney,jdbcType=BIGINT},
 			#{loadTime,jdbcType=TIMESTAMP},
 			 UNIX_TIMESTAMP()
 		)
@@ -130,6 +139,7 @@
 			<if test="createDate!=null">create_date = #{createDate,jdbcType=VARCHAR},</if>
 			<if test="businessModel!=null">business_model = #{businessModel,jdbcType=VARCHAR},</if>
 			<if test="industryPainPoints!=null">industry_pain_points = #{industryPainPoints,jdbcType=VARCHAR},</if>
+			<if test="investInfo!=null">invest_info = #{investInfo,jdbcType=VARCHAR},</if>
 			<if test="companyId!=null">company_id = #{companyId,jdbcType=BIGINT},</if>
 			<if test="industryId!=null">industry_id = #{industryId,jdbcType=BIGINT},</if>
 			<if test="industrySubId!=null">industry_sub_id = #{industrySubId,jdbcType=BIGINT},</if>
@@ -142,6 +152,8 @@
 			<if test="operationScore!=null">operation_score = #{operationScore,jdbcType=INTEGER},</if>
 			<if test="score!=null">score = #{score,jdbcType=INTEGER},</if>
 			<if test="timeSpan!=null">time_span = #{timeSpan,jdbcType=INTEGER},</if>
+			<if test="investNum!=null">invest_num = #{investNum,jdbcType=INTEGER},</if>
+			<if test="investMoney!=null">invest_money = #{investMoney,jdbcType=BIGINT},</if>
 			<if test="loadTime!=null">load_time = #{loadTime,jdbcType=TIMESTAMP},</if>
 	    WHERE id = #{id,jdbcType=BIGINT} 
 	</update>
@@ -158,7 +170,7 @@
 		
 		
 	<sql id="selectFields">
-	id,title,pic,pic_big,picshow,weblink,ceo_name,company_id,company_name,industry_id,industry_sub_id,industry_name,industry_sub_name,district_id,district_name,district_sub_id,district_sub_name,newest_event_id,newest_event_date,newest_event_round,newest_event_money,source_id,create_date,status,business_model,industry_pain_points,team_score,operation_score,score,time_span,load_time,update_time
+	id,title,pic,pic_big,picshow,weblink,ceo_name,company_id,company_name,industry_id,industry_sub_id,industry_name,industry_sub_name,district_id,district_name,district_sub_id,district_sub_name,newest_event_id,newest_event_date,newest_event_round,newest_event_money,source_id,create_date,status,business_model,industry_pain_points,team_score,operation_score,score,time_span,invest_info,invest_num,invest_money,load_time,update_time
 	</sql>
 	
 	<select id="selectAll" resultMap="BaseResultMap">
@@ -206,6 +218,9 @@
 								<if test="operationScore!=null">AND operation_score = #{operationScore,jdbcType=INTEGER}</if>
 								<if test="score!=null">AND score = #{score,jdbcType=INTEGER}</if>
 								<if test="timeSpan!=null">AND time_span = #{timeSpan,jdbcType=INTEGER}</if>
+								<if test="investInfo!=null and investInfo!=''">AND invest_info = #{investInfo,jdbcType=VARCHAR}</if>
+								<if test="investNum!=null">AND invest_num = #{investNum,jdbcType=INTEGER}</if>
+								<if test="investMoney!=null">AND invest_money = #{investMoney,jdbcType=BIGINT}</if>
 								<if test="loadTime!=null">AND load_time = #{loadTime,jdbcType=TIMESTAMP}</if>
 								<if test="updateTime!=null">AND update_time = #{updateTime,jdbcType=TIMESTAMP}</if>
 							

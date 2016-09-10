@@ -5,6 +5,7 @@
 					<id column="id" property="id" jdbcType="BIGINT" />
 								<result column="title" property="title" jdbcType="VARCHAR" />
 								<result column="type" property="type" jdbcType="INTEGER" />
+								<result column="relation_id" property="relationId" jdbcType="BIGINT" />
 								<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
 								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
 						</resultMap>
@@ -18,6 +19,7 @@
 		INSERT INTO dm_label (
 			title,
 			type,
+			relation_id,
 			add_time,
 			update_time
 		)
@@ -25,6 +27,7 @@
 		(
 			#{title,jdbcType=VARCHAR},
 			#{type,jdbcType=INTEGER},
+			#{relationId,jdbcType=BIGINT},
 			#{addTime,jdbcType=TIMESTAMP},
 			 UNIX_TIMESTAMP()
 		)
@@ -35,6 +38,7 @@
 		SET
 			<if test="title!=null">title = #{title,jdbcType=VARCHAR},</if>
 			<if test="type!=null">type = #{type,jdbcType=INTEGER},</if>
+			<if test="relationId!=null">relation_id = #{relationId,jdbcType=BIGINT},</if>
 			<if test="addTime!=null">add_time = #{addTime,jdbcType=TIMESTAMP},</if>
 	    WHERE id = #{id,jdbcType=BIGINT} 
 	</update>
@@ -42,7 +46,7 @@
 		
 		
 	<sql id="selectFields">
-	id,title,type,add_time,update_time
+	id,title,type,relation_id,add_time,update_time
 	</sql>
 	
 	<select id="selectAll" resultMap="BaseResultMap">
@@ -63,6 +67,7 @@
 					<if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>
 								<if test="title!=null and title!=''">AND title = #{title,jdbcType=VARCHAR}</if>
 								<if test="type!=null">AND type = #{type,jdbcType=INTEGER}</if>
+								<if test="relationId!=null">AND relation_id = #{relationId,jdbcType=BIGINT}</if>
 								<if test="addTime!=null">AND add_time = #{addTime,jdbcType=TIMESTAMP}</if>
 								<if test="updateTime!=null">AND update_time = #{updateTime,jdbcType=TIMESTAMP}</if>
 							

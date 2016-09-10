@@ -74,6 +74,12 @@ public class ProjectQueryInfo extends QueryInfo {
 	
 	private Integer timeSpan;
 	
+	private String investInfo;
+	
+	private Integer investNum;
+	
+	private Long investMoney;
+	
 	private Timestamp loadTime;
 	
 	private Timestamp updateTime;
@@ -317,6 +323,30 @@ public class ProjectQueryInfo extends QueryInfo {
 	
 	public void setTimeSpan(Integer timeSpan){
 		this.timeSpan = timeSpan;
+	}
+    
+	public String getInvestInfo(){
+		return investInfo;
+	}
+	
+	public void setInvestInfo(String investInfo){
+		this.investInfo = investInfo;
+	}
+    
+	public Integer getInvestNum(){
+		return investNum;
+	}
+	
+	public void setInvestNum(Integer investNum){
+		this.investNum = investNum;
+	}
+    
+	public Long getInvestMoney(){
+		return investMoney;
+	}
+	
+	public void setInvestMoney(Long investMoney){
+		this.investMoney = investMoney;
 	}
     
 	public Timestamp getLoadTime(){

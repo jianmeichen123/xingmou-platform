@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Date;
 import com.alibaba.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 
 import com.gi.xm.platform.biz.FilesBiz;
 
@@ -55,7 +56,8 @@ public class FilesFacedeImpl implements FilesFacede {
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-		public MessageInfo<FilesInfo> getFiles( Long id ){
+		@Cacheable(value = "filesInfo",keyGenerator = "wiselyKeyGenerator")
+	public MessageInfo<FilesInfo> getFiles( Long id ){
 		
 		Message<Files> message  = filesBiz.getFiles( id );
 		MessageInfo<FilesInfo> messageInfo = MessageConvertor.toMessageInfo(message);
@@ -64,6 +66,7 @@ public class FilesFacedeImpl implements FilesFacede {
 		return messageInfo;
 	}
 
+    @Cacheable(value = "filesInfo",keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<List<FilesInfo>> getAllFiles(){
 	
 		Message<List<Files>> message  = filesBiz.getAllFiles();
@@ -82,7 +85,9 @@ public class FilesFacedeImpl implements FilesFacede {
 		return messageInfo;
 	}
    
-			
+		
+
+
 	public MessageInfo<List<FilesInfo>> getListBySourceId(Long sourceId){
 	
 		Message<List<Files>> message  = filesBiz.getListBySourceId(sourceId);

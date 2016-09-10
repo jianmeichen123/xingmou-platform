@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Date;
 import com.alibaba.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 
 import com.gi.xm.platform.biz.RoundBiz;
 
@@ -55,7 +56,8 @@ public class RoundFacedeImpl implements RoundFacede {
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-		public MessageInfo<RoundInfo> getRound( Integer id ){
+		@Cacheable(value = "roundInfo",keyGenerator = "wiselyKeyGenerator")
+	public MessageInfo<RoundInfo> getRound( Integer id ){
 		
 		Message<Round> message  = roundBiz.getRound( id );
 		MessageInfo<RoundInfo> messageInfo = MessageConvertor.toMessageInfo(message);
@@ -64,6 +66,7 @@ public class RoundFacedeImpl implements RoundFacede {
 		return messageInfo;
 	}
 
+    @Cacheable(value = "roundInfo",keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<List<RoundInfo>> getAllRound(){
 	
 		Message<List<Round>> message  = roundBiz.getAllRound();

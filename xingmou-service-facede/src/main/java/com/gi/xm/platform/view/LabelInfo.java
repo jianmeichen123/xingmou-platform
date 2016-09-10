@@ -29,6 +29,11 @@ public class LabelInfo implements Serializable {
 	private Integer type;
 			
 	/**
+	 * @Fields relationId : 关联id，根据type区分
+	 */
+	private Long relationId;
+			
+	/**
 	 * @Fields addTime : 
 	 */
 	private Timestamp addTime;
@@ -61,6 +66,14 @@ public class LabelInfo implements Serializable {
 	
 	public void setType(Integer type){
 		this.type = type;
+	}
+    
+	public Long getRelationId(){
+		return relationId;
+	}
+	
+	public void setRelationId(Long relationId){
+		this.relationId = relationId;
 	}
     
 	public Timestamp getAddTime(){

@@ -22,6 +22,8 @@ public class ProjectPersonQueryInfo extends QueryInfo {
 	
 	private String icon;
 	
+	private Integer isCoreMember;
+	
 	private Timestamp addTime;
 	
 	private Timestamp updateTime;
@@ -57,6 +59,14 @@ public class ProjectPersonQueryInfo extends QueryInfo {
 	
 	public void setIcon(String icon){
 		this.icon = icon;
+	}
+    
+	public Integer getIsCoreMember(){
+		return isCoreMember;
+	}
+	
+	public void setIsCoreMember(Integer isCoreMember){
+		this.isCoreMember = isCoreMember;
 	}
     
 	public Timestamp getAddTime(){

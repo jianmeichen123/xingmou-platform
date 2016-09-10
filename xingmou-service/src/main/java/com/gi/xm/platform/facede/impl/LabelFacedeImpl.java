@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Date;
 import com.alibaba.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 
 import com.gi.xm.platform.biz.LabelBiz;
 
@@ -55,7 +56,8 @@ public class LabelFacedeImpl implements LabelFacede {
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-		public MessageInfo<LabelInfo> getLabel( Long id ){
+		@Cacheable(value = "labelInfo",keyGenerator = "wiselyKeyGenerator")
+	public MessageInfo<LabelInfo> getLabel( Long id ){
 		
 		Message<Label> message  = labelBiz.getLabel( id );
 		MessageInfo<LabelInfo> messageInfo = MessageConvertor.toMessageInfo(message);
@@ -64,6 +66,7 @@ public class LabelFacedeImpl implements LabelFacede {
 		return messageInfo;
 	}
 
+    @Cacheable(value = "labelInfo",keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<List<LabelInfo>> getAllLabel(){
 	
 		Message<List<Label>> message  = labelBiz.getAllLabel();

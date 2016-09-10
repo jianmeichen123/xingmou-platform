@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Date;
 import com.alibaba.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 
 import com.gi.xm.platform.biz.PostionBiz;
 
@@ -55,7 +56,8 @@ public class PostionFacedeImpl implements PostionFacede {
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-		public MessageInfo<PostionInfo> getPostion( Long id ){
+		@Cacheable(value = "postionInfo",keyGenerator = "wiselyKeyGenerator")
+	public MessageInfo<PostionInfo> getPostion( Long id ){
 		
 		Message<Postion> message  = postionBiz.getPostion( id );
 		MessageInfo<PostionInfo> messageInfo = MessageConvertor.toMessageInfo(message);
@@ -64,6 +66,7 @@ public class PostionFacedeImpl implements PostionFacede {
 		return messageInfo;
 	}
 
+    @Cacheable(value = "postionInfo",keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<List<PostionInfo>> getAllPostion(){
 	
 		Message<List<Postion>> message  = postionBiz.getAllPostion();

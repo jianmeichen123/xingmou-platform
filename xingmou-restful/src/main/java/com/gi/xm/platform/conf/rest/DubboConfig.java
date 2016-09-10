@@ -3,6 +3,7 @@ package com.gi.xm.platform.conf.rest;
 import com.alibaba.dubbo.config.ApplicationConfig;
 import com.alibaba.dubbo.config.RegistryConfig;
 import com.alibaba.dubbo.config.spring.AnnotationBean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,9 +14,12 @@ import org.springframework.context.annotation.Configuration;
 public class DubboConfig {
     public static final String APPLICATION_NAME = "xm-service-rest";
 
+
+    @Value("${dubbo.registry.address}")
     public static final String REGISTRY_ADDRESS = "zookeeper://10.9.21.172:2181";
 
-    public static final String ANNOTATION_PACKAGE = "com.gi.xm";
+
+    public static final String ANNOTATION_PACKAGE = "com.gi.xm.platform.controller";
 
     @Bean
     public ApplicationConfig applicationConfig() {

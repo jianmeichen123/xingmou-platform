@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Date;
 import com.alibaba.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 
 import com.gi.xm.platform.biz.UserBiz;
 
@@ -65,7 +66,8 @@ public class UserFacedeImpl implements UserFacede {
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-		public MessageInfo<UserInfo> getUser( Long id ){
+		@Cacheable(value = "userInfo",keyGenerator = "wiselyKeyGenerator")
+	public MessageInfo<UserInfo> getUser( Long id ){
 		
 		Message<User> message  = userBiz.getUser( id );
 		MessageInfo<UserInfo> messageInfo = MessageConvertor.toMessageInfo(message);
@@ -74,6 +76,7 @@ public class UserFacedeImpl implements UserFacede {
 		return messageInfo;
 	}
 
+    @Cacheable(value = "userInfo",keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<List<UserInfo>> getAllUser(){
 	
 		Message<List<User>> message  = userBiz.getAllUser();

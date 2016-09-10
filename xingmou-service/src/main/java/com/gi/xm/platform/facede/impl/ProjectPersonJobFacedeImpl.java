@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Date;
 import com.alibaba.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 
 import com.gi.xm.platform.biz.ProjectPersonJobBiz;
 
@@ -55,7 +56,8 @@ public class ProjectPersonJobFacedeImpl implements ProjectPersonJobFacede {
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-		public MessageInfo<ProjectPersonJobInfo> getProjectPersonJob( Long id ){
+		@Cacheable(value = "projectPersonJobInfo",keyGenerator = "wiselyKeyGenerator")
+	public MessageInfo<ProjectPersonJobInfo> getProjectPersonJob( Long id ){
 		
 		Message<ProjectPersonJob> message  = projectPersonJobBiz.getProjectPersonJob( id );
 		MessageInfo<ProjectPersonJobInfo> messageInfo = MessageConvertor.toMessageInfo(message);
@@ -64,6 +66,7 @@ public class ProjectPersonJobFacedeImpl implements ProjectPersonJobFacede {
 		return messageInfo;
 	}
 
+    @Cacheable(value = "projectPersonJobInfo",keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<List<ProjectPersonJobInfo>> getAllProjectPersonJob(){
 	
 		Message<List<ProjectPersonJob>> message  = projectPersonJobBiz.getAllProjectPersonJob();

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Date;
 import com.alibaba.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 
 import com.gi.xm.platform.biz.IndustryDataYearBiz;
 
@@ -55,7 +56,8 @@ public class IndustryDataYearFacedeImpl implements IndustryDataYearFacede {
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-		public MessageInfo<IndustryDataYearInfo> getIndustryDataYear( Long id ){
+		@Cacheable(value = "industryDataYearInfo",keyGenerator = "wiselyKeyGenerator")
+	public MessageInfo<IndustryDataYearInfo> getIndustryDataYear( Long id ){
 		
 		Message<IndustryDataYear> message  = industryDataYearBiz.getIndustryDataYear( id );
 		MessageInfo<IndustryDataYearInfo> messageInfo = MessageConvertor.toMessageInfo(message);
@@ -64,6 +66,7 @@ public class IndustryDataYearFacedeImpl implements IndustryDataYearFacede {
 		return messageInfo;
 	}
 
+    @Cacheable(value = "industryDataYearInfo",keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<List<IndustryDataYearInfo>> getAllIndustryDataYear(){
 	
 		Message<List<IndustryDataYear>> message  = industryDataYearBiz.getAllIndustryDataYear();
@@ -82,7 +85,9 @@ public class IndustryDataYearFacedeImpl implements IndustryDataYearFacede {
 		return messageInfo;
 	}
    
-			
+		
+
+
 	public MessageInfo<List<IndustryDataYearInfo>> getListByIndustryId(Integer industryId){
 	
 		Message<List<IndustryDataYear>> message  = industryDataYearBiz.getListByIndustryId(industryId);
@@ -91,7 +96,9 @@ public class IndustryDataYearFacedeImpl implements IndustryDataYearFacede {
 		messageInfo.setData(industryDataYearInfoList);
 		return messageInfo;	
 	}
-				
+			
+
+
 	public MessageInfo<List<IndustryDataYearInfo>> getListByYaar(Integer yaar){
 	
 		Message<List<IndustryDataYear>> message  = industryDataYearBiz.getListByYaar(yaar);

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Date;
 import com.alibaba.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 
 import com.gi.xm.platform.biz.ProjectBiz;
 
@@ -65,7 +66,8 @@ public class ProjectFacedeImpl implements ProjectFacede {
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-		public MessageInfo<ProjectInfo> getProject( Long id ){
+		@Cacheable(value = "projectInfo",keyGenerator = "wiselyKeyGenerator")
+	public MessageInfo<ProjectInfo> getProject( Long id ){
 		
 		Message<Project> message  = projectBiz.getProject( id );
 		MessageInfo<ProjectInfo> messageInfo = MessageConvertor.toMessageInfo(message);
@@ -74,6 +76,7 @@ public class ProjectFacedeImpl implements ProjectFacede {
 		return messageInfo;
 	}
 
+    @Cacheable(value = "projectInfo",keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<List<ProjectInfo>> getAllProject(){
 	
 		Message<List<Project>> message  = projectBiz.getAllProject();
@@ -92,7 +95,9 @@ public class ProjectFacedeImpl implements ProjectFacede {
 		return messageInfo;
 	}
    
-			
+		
+
+
 	public MessageInfo<List<ProjectInfo>> getListBySourceId(Long sourceId){
 	
 		Message<List<Project>> message  = projectBiz.getListBySourceId(sourceId);

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Date;
 import com.alibaba.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 
 import com.gi.xm.platform.biz.DataYearBiz;
 
@@ -55,7 +56,8 @@ public class DataYearFacedeImpl implements DataYearFacede {
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-		public MessageInfo<DataYearInfo> getDataYear( Long id ){
+		@Cacheable(value = "dataYearInfo",keyGenerator = "wiselyKeyGenerator")
+	public MessageInfo<DataYearInfo> getDataYear( Long id ){
 		
 		Message<DataYear> message  = dataYearBiz.getDataYear( id );
 		MessageInfo<DataYearInfo> messageInfo = MessageConvertor.toMessageInfo(message);
@@ -64,6 +66,7 @@ public class DataYearFacedeImpl implements DataYearFacede {
 		return messageInfo;
 	}
 
+    @Cacheable(value = "dataYearInfo",keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<List<DataYearInfo>> getAllDataYear(){
 	
 		Message<List<DataYear>> message  = dataYearBiz.getAllDataYear();
@@ -82,7 +85,9 @@ public class DataYearFacedeImpl implements DataYearFacede {
 		return messageInfo;
 	}
    
-			
+		
+
+
 	public MessageInfo<List<DataYearInfo>> getListByDistrictId(Integer districtId){
 	
 		Message<List<DataYear>> message  = dataYearBiz.getListByDistrictId(districtId);
@@ -91,7 +96,9 @@ public class DataYearFacedeImpl implements DataYearFacede {
 		messageInfo.setData(dataYearInfoList);
 		return messageInfo;	
 	}
-				
+			
+
+
 	public MessageInfo<List<DataYearInfo>> getListByIndustryId(Integer industryId){
 	
 		Message<List<DataYear>> message  = dataYearBiz.getListByIndustryId(industryId);
@@ -100,7 +107,9 @@ public class DataYearFacedeImpl implements DataYearFacede {
 		messageInfo.setData(dataYearInfoList);
 		return messageInfo;	
 	}
-				
+			
+
+
 	public MessageInfo<List<DataYearInfo>> getListByMoneyLevelId(Integer moneyLevelId){
 	
 		Message<List<DataYear>> message  = dataYearBiz.getListByMoneyLevelId(moneyLevelId);
@@ -109,7 +118,9 @@ public class DataYearFacedeImpl implements DataYearFacede {
 		messageInfo.setData(dataYearInfoList);
 		return messageInfo;	
 	}
-				
+			
+
+
 	public MessageInfo<List<DataYearInfo>> getListByRoundId(Integer roundId){
 	
 		Message<List<DataYear>> message  = dataYearBiz.getListByRoundId(roundId);
@@ -118,7 +129,9 @@ public class DataYearFacedeImpl implements DataYearFacede {
 		messageInfo.setData(dataYearInfoList);
 		return messageInfo;	
 	}
-				
+			
+
+
 	public MessageInfo<List<DataYearInfo>> getListByYear(Integer year){
 	
 		Message<List<DataYear>> message  = dataYearBiz.getListByYear(year);

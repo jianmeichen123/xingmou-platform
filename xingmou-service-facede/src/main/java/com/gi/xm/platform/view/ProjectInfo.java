@@ -164,6 +164,21 @@ public class ProjectInfo implements Serializable {
 	private Integer timeSpan;
 			
 	/**
+	 * @Fields investInfo : 融资详情	
+	 */
+	private String investInfo;
+			
+	/**
+	 * @Fields investNum : 该项目的融资总笔数
+	 */
+	private Integer investNum;
+			
+	/**
+	 * @Fields investMoney : 该项目的融资总金额
+	 */
+	private Long investMoney;
+			
+	/**
 	 * @Fields loadTime : 加载时间
 	 */
 	private Timestamp loadTime;
@@ -412,6 +427,30 @@ public class ProjectInfo implements Serializable {
 	
 	public void setTimeSpan(Integer timeSpan){
 		this.timeSpan = timeSpan;
+	}
+    
+	public String getInvestInfo(){
+		return investInfo;
+	}
+	
+	public void setInvestInfo(String investInfo){
+		this.investInfo = investInfo;
+	}
+    
+	public Integer getInvestNum(){
+		return investNum;
+	}
+	
+	public void setInvestNum(Integer investNum){
+		this.investNum = investNum;
+	}
+    
+	public Long getInvestMoney(){
+		return investMoney;
+	}
+	
+	public void setInvestMoney(Long investMoney){
+		this.investMoney = investMoney;
 	}
     
 	public Timestamp getLoadTime(){

@@ -44,6 +44,8 @@ public class CompanyQueryInfo extends QueryInfo {
 	
 	private String address;
 	
+	private String description;
+	
 	private Timestamp addTime;
 	
 	private Timestamp updateTime;
@@ -167,6 +169,14 @@ public class CompanyQueryInfo extends QueryInfo {
 	
 	public void setAddress(String address){
 		this.address = address;
+	}
+    
+	public String getDescription(){
+		return description;
+	}
+	
+	public void setDescription(String description){
+		this.description = description;
 	}
     
 	public Timestamp getAddTime(){

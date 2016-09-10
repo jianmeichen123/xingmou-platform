@@ -89,6 +89,11 @@ public class CompanyInfo implements Serializable {
 	private String address;
 			
 	/**
+	 * @Fields description : 公司详情
+	 */
+	private String description;
+			
+	/**
 	 * @Fields addTime : 
 	 */
 	private Timestamp addTime;
@@ -217,6 +222,14 @@ public class CompanyInfo implements Serializable {
 	
 	public void setAddress(String address){
 		this.address = address;
+	}
+    
+	public String getDescription(){
+		return description;
+	}
+	
+	public void setDescription(String description){
+		this.description = description;
 	}
     
 	public Timestamp getAddTime(){

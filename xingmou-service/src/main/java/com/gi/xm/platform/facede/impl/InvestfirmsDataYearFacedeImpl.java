@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Date;
 import com.alibaba.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 
 import com.gi.xm.platform.biz.InvestfirmsDataYearBiz;
 
@@ -55,7 +56,8 @@ public class InvestfirmsDataYearFacedeImpl implements InvestfirmsDataYearFacede 
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-		public MessageInfo<InvestfirmsDataYearInfo> getInvestfirmsDataYear( Long id ){
+		@Cacheable(value = "investfirmsDataYearInfo",keyGenerator = "wiselyKeyGenerator")
+	public MessageInfo<InvestfirmsDataYearInfo> getInvestfirmsDataYear( Long id ){
 		
 		Message<InvestfirmsDataYear> message  = investfirmsDataYearBiz.getInvestfirmsDataYear( id );
 		MessageInfo<InvestfirmsDataYearInfo> messageInfo = MessageConvertor.toMessageInfo(message);
@@ -64,6 +66,7 @@ public class InvestfirmsDataYearFacedeImpl implements InvestfirmsDataYearFacede 
 		return messageInfo;
 	}
 
+    @Cacheable(value = "investfirmsDataYearInfo",keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<List<InvestfirmsDataYearInfo>> getAllInvestfirmsDataYear(){
 	
 		Message<List<InvestfirmsDataYear>> message  = investfirmsDataYearBiz.getAllInvestfirmsDataYear();
@@ -82,7 +85,9 @@ public class InvestfirmsDataYearFacedeImpl implements InvestfirmsDataYearFacede 
 		return messageInfo;
 	}
    
-			
+		
+
+
 	public MessageInfo<List<InvestfirmsDataYearInfo>> getListByInvestfirmId(Long investfirmId){
 	
 		Message<List<InvestfirmsDataYear>> message  = investfirmsDataYearBiz.getListByInvestfirmId(investfirmId);
@@ -91,7 +96,9 @@ public class InvestfirmsDataYearFacedeImpl implements InvestfirmsDataYearFacede 
 		messageInfo.setData(investfirmsDataYearInfoList);
 		return messageInfo;	
 	}
-				
+			
+
+
 	public MessageInfo<List<InvestfirmsDataYearInfo>> getListByYear(Integer year){
 	
 		Message<List<InvestfirmsDataYear>> message  = investfirmsDataYearBiz.getListByYear(year);

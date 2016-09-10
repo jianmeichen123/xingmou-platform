@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Date;
 import com.alibaba.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 
 import com.gi.xm.platform.biz.DistrictBiz;
 
@@ -55,7 +56,8 @@ public class DistrictFacedeImpl implements DistrictFacede {
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-		public MessageInfo<DistrictInfo> getDistrict( Integer id ){
+		@Cacheable(value = "districtInfo",keyGenerator = "wiselyKeyGenerator")
+	public MessageInfo<DistrictInfo> getDistrict( Integer id ){
 		
 		Message<District> message  = districtBiz.getDistrict( id );
 		MessageInfo<DistrictInfo> messageInfo = MessageConvertor.toMessageInfo(message);
@@ -64,6 +66,7 @@ public class DistrictFacedeImpl implements DistrictFacede {
 		return messageInfo;
 	}
 
+    @Cacheable(value = "districtInfo",keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<List<DistrictInfo>> getAllDistrict(){
 	
 		Message<List<District>> message  = districtBiz.getAllDistrict();
@@ -82,7 +85,9 @@ public class DistrictFacedeImpl implements DistrictFacede {
 		return messageInfo;
 	}
    
-			
+		
+
+
 	public MessageInfo<List<DistrictInfo>> getListByUpidDisplayorder(Integer upid, Integer displayorder){
 	
 		Message<List<District>> message  = districtBiz.getListByUpidDisplayorder(upid, displayorder);

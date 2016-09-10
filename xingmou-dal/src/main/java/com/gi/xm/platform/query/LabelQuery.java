@@ -18,6 +18,8 @@ public class LabelQuery extends Query {
 			
 	private Integer type;
 			
+	private Long relationId;
+			
 	private Timestamp addTime;
 			
 	private Timestamp updateTime;
@@ -42,6 +44,13 @@ public class LabelQuery extends Query {
 	}
 	public void setType(Integer type){
 		this.type = type;
+	}
+    
+	public Long getRelationId(){
+		return relationId;
+	}
+	public void setRelationId(Long relationId){
+		this.relationId = relationId;
 	}
     
 	public Timestamp getAddTime(){

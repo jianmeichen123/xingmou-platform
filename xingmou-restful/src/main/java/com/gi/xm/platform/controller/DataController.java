@@ -1,16 +1,22 @@
 package com.gi.xm.platform.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.gi.xm.platform.facede.DataFacede;
-import com.gi.xm.platform.view.DataInfo;
-import com.gi.xm.platform.view.DataQueryInfo;
-import com.gi.xm.platform.view.common.MessageInfo;
-import com.gi.xm.platform.view.common.QueryResultInfo;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import com.gi.xm.platform.view.common.MessageInfo;
+import com.gi.xm.platform.view.common.QueryResultInfo;
+import com.gi.xm.platform.view.DataInfo;
+import com.gi.xm.platform.view.DataQueryInfo;
+import com.gi.xm.platform.facede.DataFacede;
 
 @Controller
 @RequestMapping("data")
@@ -18,6 +24,12 @@ public class DataController {
 
     @Reference
 	private DataFacede dataFacede;
+
+	@RequestMapping(value = "index", method = RequestMethod.GET)
+	public ModelAndView index() {
+		Map<String, Object> modelMap = new HashMap<String, Object>();
+		return new ModelAndView("data/index", modelMap);
+	}
 
 	@RequestMapping("query")
 	@ResponseBody

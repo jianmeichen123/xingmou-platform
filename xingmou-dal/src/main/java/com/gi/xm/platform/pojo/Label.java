@@ -10,6 +10,7 @@ public class Label extends Pojo {
         public static final String ID = "id";
         public static final String TITLE = "标签名称";
         public static final String TYPE = "1.项目标签 2.创业者标签";
+        public static final String RELATION_ID = "关联id，根据type区分";
         public static final String ADD_TIME = "addTime";
         public static final String UPDATE_TIME = "updateTime";
     
@@ -28,6 +29,11 @@ public class Label extends Pojo {
 	 * @Fields type : 1.项目标签 2.创业者标签
 	 */
 	private Integer type;
+	
+	/**
+	 * @Fields relationId : 关联id，根据type区分
+	 */
+	private Long relationId;
 	
 	/**
 	 * @Fields addTime : 
@@ -62,6 +68,14 @@ public class Label extends Pojo {
 
 	public void setType(Integer type){
 		this.type = type;
+	}
+    
+	public Long getRelationId(){
+		return relationId;
+	}
+
+	public void setRelationId(Long relationId){
+		this.relationId = relationId;
 	}
     
 	public Timestamp getAddTime(){

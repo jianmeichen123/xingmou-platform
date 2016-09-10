@@ -22,6 +22,7 @@ public class Company extends Pojo {
         public static final String PHONE = "phone";
         public static final String EMAIL = "email";
         public static final String ADDRESS = "address";
+        public static final String DESCRIPTION = "公司详情";
         public static final String ADD_TIME = "addTime";
         public static final String UPDATE_TIME = "updateTime";
     
@@ -100,6 +101,11 @@ public class Company extends Pojo {
 	 * @Fields address : 
 	 */
 	private String address;
+	
+	/**
+	 * @Fields description : 公司详情
+	 */
+	private String description;
 	
 	/**
 	 * @Fields addTime : 
@@ -230,6 +236,14 @@ public class Company extends Pojo {
 
 	public void setAddress(String address){
 		this.address = address;
+	}
+    
+	public String getDescription(){
+		return description;
+	}
+
+	public void setDescription(String description){
+		this.description = description;
 	}
     
 	public Timestamp getAddTime(){

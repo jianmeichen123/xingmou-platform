@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Date;
 import com.alibaba.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 
 import com.gi.xm.platform.biz.DataBiz;
 
@@ -55,7 +56,8 @@ public class DataFacedeImpl implements DataFacede {
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-		public MessageInfo<DataInfo> getData( Integer id ){
+		@Cacheable(value = "dataInfo",keyGenerator = "wiselyKeyGenerator")
+	public MessageInfo<DataInfo> getData( Integer id ){
 		
 		Message<Data> message  = dataBiz.getData( id );
 		MessageInfo<DataInfo> messageInfo = MessageConvertor.toMessageInfo(message);
@@ -64,6 +66,7 @@ public class DataFacedeImpl implements DataFacede {
 		return messageInfo;
 	}
 
+    @Cacheable(value = "dataInfo",keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<List<DataInfo>> getAllData(){
 	
 		Message<List<Data>> message  = dataBiz.getAllData();

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Date;
 import com.alibaba.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 
 import com.gi.xm.platform.biz.MoneyLevelBiz;
 
@@ -55,7 +56,8 @@ public class MoneyLevelFacedeImpl implements MoneyLevelFacede {
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-		public MessageInfo<MoneyLevelInfo> getMoneyLevel( Integer id ){
+		@Cacheable(value = "moneyLevelInfo",keyGenerator = "wiselyKeyGenerator")
+	public MessageInfo<MoneyLevelInfo> getMoneyLevel( Integer id ){
 		
 		Message<MoneyLevel> message  = moneyLevelBiz.getMoneyLevel( id );
 		MessageInfo<MoneyLevelInfo> messageInfo = MessageConvertor.toMessageInfo(message);
@@ -64,6 +66,7 @@ public class MoneyLevelFacedeImpl implements MoneyLevelFacede {
 		return messageInfo;
 	}
 
+    @Cacheable(value = "moneyLevelInfo",keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<List<MoneyLevelInfo>> getAllMoneyLevel(){
 	
 		Message<List<MoneyLevel>> message  = moneyLevelBiz.getAllMoneyLevel();

@@ -32,55 +32,7 @@ public class CompanyBiz  {
 
 
 
-	
-	public Message<Integer> deleteCompany(Long id){
-		Message<Integer> message = new Message<Integer>();
-		try {
-
-			int result = companyDAO.deleteByPrimaryKey(id);
-			message.setData(result);
-
-		} catch (Exception e) {
-			LOGGER.error("delete","删除失败", e);
-			message.setMessageStatus(MessageStatus.SYS_ERROR);
-		}
-		return message;
-	}
-	
-
-    public Message<Long> createCompany(Company company){
-		Message<Long> message = new Message<Long>();
-		try {
-									companyDAO.insert( company );
-			message.setData(company.getId());
-
-		} catch (Exception e) {
-			LOGGER.error("createCompany","创建Company失败", e);
-			message.setMessageStatus(MessageStatus.SYS_ERROR);
-		}
-		return message;
-	}
-	public Message<Integer> updateCompany(Company company){
-		Message<Integer> message = new Message<Integer>();
-		try {
-
-			Company companyLast = companyDAO.selectByPrimaryKeyForUpdate( company.getId() );
-			if( companyLast == null){
-				message.setMessageStatus(MessageStatus.DATA_NOT_EXISTS, "TODO：这里请写清楚");
-				return message;
-			}
-
-									int result = companyDAO.updateByPrimaryKey( company );
-			message.setData(result);
-
-		} catch (Exception e) {
-			LOGGER.error("updateCompany","更新Company失败", e);
-			message.setMessageStatus(MessageStatus.SYS_ERROR);
-		}
-		return message;
-	}
-
-		public Message<Company> getCompany( Long id ){
+	public Message<Company> getCompany( Long id ){
 		Message<Company> message = new Message<Company>();
 		try {
 			Company company = companyDAO.selectByPrimaryKey( id );
@@ -93,18 +45,7 @@ public class CompanyBiz  {
 		return message;
 	}
 
-    public Message<List<Company>> getAllCompany(){
-
-		Message<List<Company>> message = new Message<List<Company>>();
-		try {
-			List<Company> companyList = companyDAO.selectAll();
-			message.setData( companyList);
-		} catch (Exception e) {
-			LOGGER.error("getAllCompany","查询全部Company失败", e);
-			message.setMessageStatus(MessageStatus.SYS_ERROR);
-		}
-		return message;
-	}
+  
 
 	public Message<QueryResult<Company>> queryCompany(CompanyQuery companyQuery) {
 		Message<QueryResult<Company>> message = new Message<QueryResult<Company>>();

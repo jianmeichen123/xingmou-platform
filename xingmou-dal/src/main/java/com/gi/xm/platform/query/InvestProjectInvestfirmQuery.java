@@ -30,7 +30,8 @@ public class InvestProjectInvestfirmQuery extends Query {
 			
 	private Timestamp updateTime;
 		
-    
+    private Long year;
+
 	public Long getId(){
 		return id;
 	}
@@ -93,4 +94,13 @@ public class InvestProjectInvestfirmQuery extends Query {
 	public void setUpdateTime(Timestamp updateTime){
 		this.updateTime = updateTime;
 	}
+
+
+    public Long getYear() {
+        return year;
     }
+
+    public void setYear(Long year) {
+        this.year = year;
+    }
+}

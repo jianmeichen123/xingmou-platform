@@ -2,16 +2,17 @@ package com.gi.xm.platform.view;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by vincent on 16-9-10.
  */
-public class InvestRelationInfo implements Serializable {
+public class ProjectEventRelationInfo implements Serializable {
 
     private String projectName;
     private Long projectId;
-    private List<InvestfirmsInfo> investfirmsInfos;
-    private List<Long> eventId;
+    private Set<Long> investfirmId;
+    private Integer total = 1;
 
     public String getProjectName() {
         return projectName;
@@ -29,19 +30,19 @@ public class InvestRelationInfo implements Serializable {
         this.projectId = projectId;
     }
 
-    public List<InvestfirmsInfo> getInvestfirmsInfos() {
-        return investfirmsInfos;
+    public Integer getTotal() {
+        return total;
     }
 
-    public void setInvestfirmsInfos(List<InvestfirmsInfo> investfirmsInfos) {
-        this.investfirmsInfos = investfirmsInfos;
+    public void setTotal(Integer total) {
+        this.total = total;
     }
 
-    public List<Long> getEventId() {
-        return eventId;
+    public Set<Long> getInvestfirmId() {
+        return investfirmId;
     }
 
-    public void setEventId(List<Long> eventId) {
-        this.eventId = eventId;
+    public void setInvestfirmId(Set<Long> investfirmId) {
+        this.investfirmId = investfirmId;
     }
 }

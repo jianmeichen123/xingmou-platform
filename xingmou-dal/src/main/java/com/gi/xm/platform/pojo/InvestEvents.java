@@ -31,8 +31,7 @@ public class InvestEvents extends Pojo {
         public static final String INVESTFIRM_NAMES = "冗余：投资机构名称";
         public static final String ADD_TIME = "addTime";
         public static final String UPDATE_TIME = "updateTime";
-        public static final String YEAR = "year";
-    
+
 	
 	/**
 	 * @Fields id : 
@@ -154,11 +153,7 @@ public class InvestEvents extends Pojo {
 	 */
 	private Timestamp updateTime;
 	
-	/**
-	 * @Fields year : 
-	 */
-	private Integer year;
-	
+
     
 	public Long getId(){
 		return id;
@@ -352,11 +347,4 @@ public class InvestEvents extends Pojo {
 		this.updateTime = updateTime;
 	}
     
-	public Integer getYear(){
-		return year;
-	}
-
-	public void setYear(Integer year){
-		this.year = year;
-	}
     }

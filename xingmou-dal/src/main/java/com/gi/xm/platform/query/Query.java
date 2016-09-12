@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 public class Query implements Serializable{
 
-
+    private boolean doOrder = true ;
     private int pageIndex = 1;
     private int pageSize = 10;
     private String order;
@@ -52,5 +52,13 @@ public class Query implements Serializable{
 
     public void setReturnFields(String returnFields) {
         this.returnFields = returnFields;
+    }
+
+    public boolean isDoOrder() {
+        return doOrder;
+    }
+
+    public void setDoOrder(boolean doOrder) {
+        this.doOrder = doOrder;
     }
 }

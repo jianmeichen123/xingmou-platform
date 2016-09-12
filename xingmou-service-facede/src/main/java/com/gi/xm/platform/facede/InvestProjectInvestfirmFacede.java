@@ -3,6 +3,8 @@ package com.gi.xm.platform.facede;
 
 import java.util.List;
 import java.util.Date;
+
+import com.gi.xm.platform.view.RelationInfo;
 import com.gi.xm.platform.view.common.MessageInfo;
 import com.gi.xm.platform.view.common.QueryResultInfo;
 import com.gi.xm.platform.view.InvestProjectInvestfirmInfo;
@@ -27,6 +29,6 @@ public interface InvestProjectInvestfirmFacede {
 	MessageInfo<List<InvestProjectInvestfirmInfo>> getListByInvestfirmId(Long investfirmId);
 			
 	MessageInfo<List<InvestProjectInvestfirmInfo>> getListByProjectId(Long projectId);
-		
 
+	MessageInfo<RelationInfo> getRelationInfo(Long year) ;
 }

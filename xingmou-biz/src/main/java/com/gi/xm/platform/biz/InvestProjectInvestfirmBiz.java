@@ -124,7 +124,21 @@ public class InvestProjectInvestfirmBiz  {
 		return message;
 	}
 
-		
+
+	public Message<List<InvestProjectInvestfirm>> query(InvestProjectInvestfirmQuery investProjectInvestfirmQuery) {
+		Message<List<InvestProjectInvestfirm>> message = new Message<List<InvestProjectInvestfirm>>();
+		try {
+            investProjectInvestfirmQuery.setDoOrder(false);
+			List<InvestProjectInvestfirm> investProjectInvestfirmList = investProjectInvestfirmDAO.queryInvestProjectInvestfirm(investProjectInvestfirmQuery);
+			message.setData(investProjectInvestfirmList);
+		} catch (Exception e) {
+			LOGGER.error("queryInvestProjectInvestfirm", "查询InvestProjectInvestfirm失败", e);
+			message.setMessageStatus(MessageStatus.SYS_ERROR);
+		}
+		return message;
+	}
+
+
 	public Message<List<InvestProjectInvestfirm>> getListByInvestId(Long investId){
 
 		Message<List<InvestProjectInvestfirm>> message = new Message<List<InvestProjectInvestfirm>>();

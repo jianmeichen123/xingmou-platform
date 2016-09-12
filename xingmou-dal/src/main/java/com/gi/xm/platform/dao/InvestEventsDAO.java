@@ -25,8 +25,4 @@ public interface InvestEventsDAO {
 			
     int updateByPrimaryKey(InvestEvents investEvents);
 	
-				
-	List<InvestEvents> selectByYear(@Param("years") Integer[] years);
-		
-
 }

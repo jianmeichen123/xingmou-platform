@@ -57,8 +57,9 @@ public class InvestProjectInvestfirmInfo implements Serializable {
 	 * @Fields updateTime : 
 	 */
 	private Timestamp updateTime;
-		
-    
+
+	private Integer year;
+
 	public Long getId(){
 		return id;
 	}
@@ -130,4 +131,12 @@ public class InvestProjectInvestfirmInfo implements Serializable {
 	public void setUpdateTime(Timestamp updateTime){
 		this.updateTime = updateTime;
 	}
-    }
+
+	public Integer getYear() {
+		return year;
+	}
+
+	public void setYear(Integer year) {
+		this.year = year;
+	}
+}

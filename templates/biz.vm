@@ -197,6 +197,18 @@ public class $bizClass  {
 		return message;
 	}
 
+    	public Message<List<${modelClass}>> query(${modelQueryClass} ${modelQueryVar}) {
+    		Message<List<${modelClass}>> message = new Message<List<${modelClass}>>();
+    		try {
+    			List<${modelClass}> ${modelVar}List = ${mapperVarName}.query${modelClass}(${modelQueryVar});
+    			message.setData(${modelVar}List);
+    		} catch (Exception e) {
+    			LOGGER.error("query${modelClass}", "多条件查询${table.getDisplayName()}失败", e);
+    			message.setMessageStatus(MessageStatus.SYS_ERROR);
+    		}
+    		return message;
+    	}
+
 	#foreach($index in $table.indexes)
 	#if($index.isUnique())
 

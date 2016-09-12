@@ -26,7 +26,6 @@
 								<result column="investfirm_names" property="investfirmNames" jdbcType="VARCHAR" />
 								<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
 								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-								<result column="year" property="year" jdbcType="INTEGER" />
 						</resultMap>
 
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
@@ -58,8 +57,7 @@
 			invest_per,
 			investfirm_names,
 			add_time,
-			update_time,
-			year
+			update_time
 		)
 		VALUES
 		(
@@ -85,8 +83,7 @@
 			#{investPer,jdbcType=VARCHAR},
 			#{investfirmNames,jdbcType=VARCHAR},
 			#{addTime,jdbcType=TIMESTAMP},
-			 UNIX_TIMESTAMP(),
-			#{year,jdbcType=INTEGER}
+			 UNIX_TIMESTAMP()
 		)
 	</insert>
 
@@ -115,14 +112,13 @@
 			<if test="industryId!=null">industry_id = #{industryId,jdbcType=BIGINT},</if>
 			<if test="industrySubId!=null">industry_sub_id = #{industrySubId,jdbcType=BIGINT},</if>
 			<if test="addTime!=null">add_time = #{addTime,jdbcType=TIMESTAMP},</if>
-			<if test="year!=null">year = #{year,jdbcType=INTEGER},</if>
-	    WHERE id = #{id,jdbcType=BIGINT} 
+	    WHERE id = #{id,jdbcType=BIGINT}
 	</update>
 	
 		
 		
 	<sql id="selectFields">
-	id,title,project_id,invest_money,money,money_num,currency_id,currency_title,currency_code,invest_date,round_id,round_name,district_id,district_name,district_sub_id,district_sub_name,industry_id,industry_name,industry_sub_id,industry_sub_name,invest_per,investfirm_names,add_time,update_time,year
+	id,title,project_id,invest_money,money,money_num,currency_id,currency_title,currency_code,invest_date,round_id,round_name,district_id,district_name,district_sub_id,district_sub_name,industry_id,industry_name,industry_sub_id,industry_sub_name,invest_per,investfirm_names,add_time,update_time
 	</sql>
 	
 	<select id="selectAll" resultMap="BaseResultMap">
@@ -164,8 +160,7 @@
 								<if test="investfirmNames!=null and investfirmNames!=''">AND investfirm_names = #{investfirmNames,jdbcType=VARCHAR}</if>
 								<if test="addTime!=null">AND add_time = #{addTime,jdbcType=TIMESTAMP}</if>
 								<if test="updateTime!=null">AND update_time = #{updateTime,jdbcType=TIMESTAMP}</if>
-								<if test="year!=null">AND year = #{year,jdbcType=INTEGER}</if>
-							
+
 		</where>
 		<choose>
 			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
@@ -188,14 +183,5 @@
 		FOR UPDATE
 	</select>
 			
-	<select id="selectByYear" resultMap="BaseResultMap">
-		SELECT
-		<include refid="selectFields" />
-		FROM dm_invest_events
-		WHERE  year in
-		<foreach item="item" index="index" collection="years" open="(" separator="," close=")">
-			#{item}
-		</foreach>
-	</select>
-		
+
 </mapper>

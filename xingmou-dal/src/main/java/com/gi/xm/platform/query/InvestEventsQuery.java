@@ -60,8 +60,7 @@ public class InvestEventsQuery extends Query {
 			
 	private Timestamp updateTime;
 			
-	private Integer year;
-		
+
     
 	public Long getId(){
 		return id;
@@ -231,10 +230,4 @@ public class InvestEventsQuery extends Query {
 		this.updateTime = updateTime;
 	}
     
-	public Integer getYear(){
-		return year;
-	}
-	public void setYear(Integer year){
-		this.year = year;
-	}
     }

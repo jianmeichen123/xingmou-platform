@@ -22,7 +22,7 @@ public interface InvestEventsFacede {
     MessageInfo<QueryResultInfo<InvestEventsInfo>> queryInvestEvents(InvestEventsQueryInfo investEventsQueryInfo);
 	
 		
-	MessageInfo<List<InvestEventsInfo>> getRelationByYear(Integer[] years);
+	//MessageInfo<List<InvestEventsInfo>> getRelationByYear(Integer[] years);
 		
 
 }

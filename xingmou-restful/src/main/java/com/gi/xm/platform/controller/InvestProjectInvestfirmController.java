@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 
+import com.gi.xm.platform.view.RelationInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -91,5 +92,10 @@ public class InvestProjectInvestfirmController {
 		MessageInfo<List<InvestProjectInvestfirmInfo>> messageInfo = investProjectInvestfirmFacede.getListByProjectId(projectId);
 		return messageInfo;
 	}
-		
+	@RequestMapping("getRelationInfo")
+	@ResponseBody
+	public MessageInfo<RelationInfo> getRelationInfo(Long year) {
+		MessageInfo<RelationInfo> messageInfo = investProjectInvestfirmFacede.getRelationInfo(year);
+		return messageInfo;
+	}
 }

@@ -7,6 +7,7 @@ import java.util.Map;
 import com.alibaba.dubbo.config.annotation.Reference;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,13 +34,14 @@ public class InvestProjectInvestfirmController {
 
 	@RequestMapping("query")
 	@ResponseBody
-	public MessageInfo<QueryResultInfo<InvestProjectInvestfirmInfo>>  queryInvestProjectInvestfirm (InvestProjectInvestfirmQueryInfo investProjectInvestfirmQueryInfo) {
+	public MessageInfo<QueryResultInfo<InvestProjectInvestfirmInfo>>  queryInvestProjectInvestfirm (@RequestBody InvestProjectInvestfirmQueryInfo investProjectInvestfirmQueryInfo) {
 		MessageInfo<QueryResultInfo<InvestProjectInvestfirmInfo>> resultMessageInfo = investProjectInvestfirmFacede.queryInvestProjectInvestfirm(investProjectInvestfirmQueryInfo);
 		return resultMessageInfo;
 	}
 
     @RequestMapping("create")
     @ResponseBody
+	@Deprecated
     public MessageInfo<Long> createInvestProjectInvestfirm(InvestProjectInvestfirmInfo investProjectInvestfirmInfo){
         MessageInfo<Long> messageInfo =  investProjectInvestfirmFacede.createInvestProjectInvestfirm(investProjectInvestfirmInfo);
         return messageInfo;
@@ -47,6 +49,7 @@ public class InvestProjectInvestfirmController {
 
     @RequestMapping("update")
     @ResponseBody
+	@Deprecated
 	public MessageInfo<Integer> updateInvestProjectInvestfirm(InvestProjectInvestfirmInfo investProjectInvestfirmInfo){
 		MessageInfo<Integer> messageInfo =  investProjectInvestfirmFacede.updateInvestProjectInvestfirm(investProjectInvestfirmInfo);
 		return messageInfo;

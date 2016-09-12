@@ -7,6 +7,7 @@ import java.util.Map;
 import com.alibaba.dubbo.config.annotation.Reference;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,13 +34,14 @@ public class InvestfirmsDataYearController {
 
 	@RequestMapping("query")
 	@ResponseBody
-	public MessageInfo<QueryResultInfo<InvestfirmsDataYearInfo>>  queryInvestfirmsDataYear (InvestfirmsDataYearQueryInfo investfirmsDataYearQueryInfo) {
+	public MessageInfo<QueryResultInfo<InvestfirmsDataYearInfo>>  queryInvestfirmsDataYear (@RequestBody InvestfirmsDataYearQueryInfo investfirmsDataYearQueryInfo) {
 		MessageInfo<QueryResultInfo<InvestfirmsDataYearInfo>> resultMessageInfo = investfirmsDataYearFacede.queryInvestfirmsDataYear(investfirmsDataYearQueryInfo);
 		return resultMessageInfo;
 	}
 
     @RequestMapping("create")
     @ResponseBody
+	@Deprecated
     public MessageInfo<Long> createInvestfirmsDataYear(InvestfirmsDataYearInfo investfirmsDataYearInfo){
         MessageInfo<Long> messageInfo =  investfirmsDataYearFacede.createInvestfirmsDataYear(investfirmsDataYearInfo);
         return messageInfo;
@@ -47,6 +49,7 @@ public class InvestfirmsDataYearController {
 
     @RequestMapping("update")
     @ResponseBody
+	@Deprecated
 	public MessageInfo<Integer> updateInvestfirmsDataYear(InvestfirmsDataYearInfo investfirmsDataYearInfo){
 		MessageInfo<Integer> messageInfo =  investfirmsDataYearFacede.updateInvestfirmsDataYear(investfirmsDataYearInfo);
 		return messageInfo;

@@ -7,6 +7,7 @@ import java.util.Map;
 import com.alibaba.dubbo.config.annotation.Reference;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,7 +34,7 @@ public class AreaController {
 
 	@RequestMapping("query")
 	@ResponseBody
-	public MessageInfo<QueryResultInfo<AreaInfo>>  queryArea (AreaQueryInfo areaQueryInfo) {
+	public MessageInfo<QueryResultInfo<AreaInfo>>  queryArea (@RequestBody AreaQueryInfo areaQueryInfo) {
 		MessageInfo<QueryResultInfo<AreaInfo>> resultMessageInfo = areaFacede.queryArea(areaQueryInfo);
 		return resultMessageInfo;
 	}

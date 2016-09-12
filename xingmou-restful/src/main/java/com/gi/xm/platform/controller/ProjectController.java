@@ -7,6 +7,7 @@ import java.util.Map;
 import com.alibaba.dubbo.config.annotation.Reference;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,7 +23,7 @@ import com.gi.xm.platform.facede.ProjectFacede;
 @RequestMapping("project")
 public class ProjectController {
 
-	@Reference(check = false)
+    @Reference
 	private ProjectFacede projectFacede;
 
 	@RequestMapping(value = "index", method = RequestMethod.GET)
@@ -38,23 +39,14 @@ public class ProjectController {
 		return resultMessageInfo;
 	}
 
-    @RequestMapping("create")
+	/**
+	 * 根据id查项目
+	 * @param id
+	 * @return
+	 */
+    @RequestMapping("get/{id}")
     @ResponseBody
-    public MessageInfo<Long> createProject(ProjectInfo projectInfo){
-        MessageInfo<Long> messageInfo =  projectFacede.createProject(projectInfo);
-        return messageInfo;
-    }
-
-    @RequestMapping("update")
-    @ResponseBody
-	public MessageInfo<Integer> updateProject(ProjectInfo projectInfo){
-		MessageInfo<Integer> messageInfo =  projectFacede.updateProject(projectInfo);
-		return messageInfo;
-	}
-
-    @RequestMapping("get")
-    @ResponseBody
-	public MessageInfo<ProjectInfo> getProject( Long id ){
+	public MessageInfo<ProjectInfo> getProject( @PathVariable Long id ){
 		MessageInfo<ProjectInfo> messageInfo =  projectFacede.getProject(id);
 		return messageInfo;
 	}

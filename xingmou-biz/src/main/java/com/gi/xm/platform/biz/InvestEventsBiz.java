@@ -110,7 +110,8 @@ public class InvestEventsBiz  {
 		Message<QueryResult<InvestEvents>> message = new Message<QueryResult<InvestEvents>>();
 		try {
 			QueryResult<InvestEvents> queryResult = new QueryResult<InvestEvents>();
-			PageHelper.startPage(investEventsQuery.getPageIndex(), investEventsQuery.getPageSize());
+			//在service层写分页，通用不分页的查询
+			//PageHelper.startPage(investEventsQuery.getPageIndex(), investEventsQuery.getPageSize());
 			List<InvestEvents> investEventsList = investEventsDAO.queryInvestEvents(investEventsQuery);
 			PageInfo<InvestEvents> pageInfo = new PageInfo<InvestEvents>(investEventsList);
 			queryResult.setPages(pageInfo.getPages());

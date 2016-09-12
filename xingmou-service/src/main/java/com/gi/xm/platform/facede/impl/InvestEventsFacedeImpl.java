@@ -63,7 +63,8 @@ public class InvestEventsFacedeImpl implements InvestEventsFacede {
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-		@Cacheable(value = "investEventsInfo",keyGenerator = "wiselyKeyGenerator")
+	
+	@Cacheable(value = "investEventsInfo",keyGenerator = "wiselyKeyGenerator")
 	public MessageInfo<InvestEventsInfo> getInvestEvents( Long id ){
 		
 		Message<InvestEvents> message  = investEventsBiz.getInvestEvents( id );

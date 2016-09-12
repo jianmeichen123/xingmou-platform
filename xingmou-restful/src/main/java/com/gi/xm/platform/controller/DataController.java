@@ -22,7 +22,7 @@ import com.gi.xm.platform.facede.DataFacede;
 @RequestMapping("data")
 public class DataController {
 
-    @Reference
+	@Reference(check = false)
 	private DataFacede dataFacede;
 
 	@RequestMapping(value = "index", method = RequestMethod.GET)

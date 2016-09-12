@@ -22,7 +22,7 @@ import com.gi.xm.platform.facede.AreaFacede;
 @RequestMapping("area")
 public class AreaController {
 
-    @Reference
+    @Reference(check = false)
 	private AreaFacede areaFacede;
 
 	@RequestMapping(value = "index", method = RequestMethod.GET)

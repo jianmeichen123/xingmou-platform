@@ -2,7 +2,7 @@
 local _CONF = {}
 --返回redis配置文件
 function _CONF.redis()
-    local  redis_config = {host='10.9.210.22',pass='16379',port=16379} --redis配置项
+    local  redis_config = {host='192.168.1.111',pass='xhhl-redis',port=6379,db=0} --redis配置项
     return redis_config
 end
 

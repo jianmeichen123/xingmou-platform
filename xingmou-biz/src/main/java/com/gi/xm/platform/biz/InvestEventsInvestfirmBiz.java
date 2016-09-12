@@ -51,7 +51,7 @@ public class InvestEventsInvestfirmBiz  {
     public Message<Long> createInvestEventsInvestfirm(InvestEventsInvestfirm investEventsInvestfirm){
 		Message<Long> message = new Message<Long>();
 		try {
-									investEventsInvestfirmDAO.insert( investEventsInvestfirm );
+						        							investEventsInvestfirmDAO.insert( investEventsInvestfirm );
 			message.setData(investEventsInvestfirm.getId());
 
 		} catch (Exception e) {
@@ -70,7 +70,7 @@ public class InvestEventsInvestfirmBiz  {
 				return message;
 			}
 
-									int result = investEventsInvestfirmDAO.updateByPrimaryKey( investEventsInvestfirm );
+						        							int result = investEventsInvestfirmDAO.updateByPrimaryKey( investEventsInvestfirm );
 			message.setData(result);
 
 		} catch (Exception e) {
@@ -124,6 +124,19 @@ public class InvestEventsInvestfirmBiz  {
 		return message;
 	}
 
-	
+		
+	public Message<List<InvestEventsInvestfirm>> getListByEventId(Long[] eventIds){
+
+		Message<List<InvestEventsInvestfirm>> message = new Message<List<InvestEventsInvestfirm>>();
+		try {
+			List<InvestEventsInvestfirm> investEventsInvestfirmList = investEventsInvestfirmDAO.selectByEventId(eventIds);
+			message.setData(investEventsInvestfirmList);
+		} catch (Exception e) {
+			LOGGER.error("getListByEventId","查询InvestEventsInvestfirm失败", e);
+			message.setMessageStatus(MessageStatus.SYS_ERROR);
+		}
+		return message;
+	}
+		
 
 }

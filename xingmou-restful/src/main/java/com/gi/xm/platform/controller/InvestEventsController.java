@@ -22,7 +22,7 @@ import com.gi.xm.platform.facede.InvestEventsFacede;
 @RequestMapping("investEvents")
 public class InvestEventsController {
 
-    @Reference
+	@Reference(check = false)
 	private InvestEventsFacede investEventsFacede;
 
 	@RequestMapping(value = "index", method = RequestMethod.GET)

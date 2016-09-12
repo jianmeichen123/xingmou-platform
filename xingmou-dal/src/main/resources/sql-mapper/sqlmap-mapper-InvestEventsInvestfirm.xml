@@ -92,5 +92,15 @@
 		WHERE id = #{id,jdbcType=BIGINT} 
 		FOR UPDATE
 	</select>
+			
+	<select id="selectByEventId" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_invest_events_investfirm
+		WHERE  event_id
+		<foreach item="item" index="index" collection="eventIds" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
 		
 </mapper>

@@ -22,7 +22,7 @@ import com.gi.xm.platform.facede.MoneyLevelFacede;
 @RequestMapping("moneyLevel")
 public class MoneyLevelController {
 
-    @Reference
+	@Reference(check = false)
 	private MoneyLevelFacede moneyLevelFacede;
 
 	@RequestMapping(value = "index", method = RequestMethod.GET)

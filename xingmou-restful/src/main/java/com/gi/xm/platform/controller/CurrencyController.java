@@ -22,7 +22,7 @@ import com.gi.xm.platform.facede.CurrencyFacede;
 @RequestMapping("currency")
 public class CurrencyController {
 
-    @Reference
+	@Reference(check = false)
 	private CurrencyFacede currencyFacede;
 
 	@RequestMapping(value = "index", method = RequestMethod.GET)

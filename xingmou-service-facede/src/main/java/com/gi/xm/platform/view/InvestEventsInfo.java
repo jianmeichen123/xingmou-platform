@@ -132,6 +132,11 @@ public class InvestEventsInfo implements Serializable {
 	 * @Fields updateTime : 
 	 */
 	private Timestamp updateTime;
+			
+	/**
+	 * @Fields year : 
+	 */
+	private Integer year;
 		
     
 	public Long getId(){
@@ -324,5 +329,13 @@ public class InvestEventsInfo implements Serializable {
 	
 	public void setUpdateTime(Timestamp updateTime){
 		this.updateTime = updateTime;
+	}
+    
+	public Integer getYear(){
+		return year;
+	}
+	
+	public void setYear(Integer year){
+		this.year = year;
 	}
     }

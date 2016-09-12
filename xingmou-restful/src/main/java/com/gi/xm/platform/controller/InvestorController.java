@@ -22,7 +22,7 @@ import com.gi.xm.platform.facede.InvestorFacede;
 @RequestMapping("investor")
 public class InvestorController {
 
-    @Reference
+	@Reference(check = false)
 	private InvestorFacede investorFacede;
 
 	@RequestMapping(value = "index", method = RequestMethod.GET)

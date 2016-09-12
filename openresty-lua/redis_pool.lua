@@ -22,7 +22,7 @@ function redis_pool:get_connect()
         return false,"redis failed to get reused times"
     end
     --选择redis数据库
-    ok, err = red:select(0)
+    ok, err = red:select(conf.redis()['db'])
     if not ok then
         return false,"redis connect failed "
     end
@@ -45,9 +45,9 @@ function redis_pool:get_key(str)
     if not res then
         return false,err
     end
-    local keys = client:get(str)
+    local val ,err = client:get(str)
     --self:close()
-    return true,"获取key成功",keys
+    return true,"获取key成功",val
 end
 
 --设置key的值

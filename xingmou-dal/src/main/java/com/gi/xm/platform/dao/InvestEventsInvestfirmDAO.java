@@ -25,6 +25,8 @@ public interface InvestEventsInvestfirmDAO {
 			
     int updateByPrimaryKey(InvestEventsInvestfirm investEventsInvestfirm);
 	
+				
+	List<InvestEventsInvestfirm> selectByEventId(@Param("eventIds") Long[] eventIds);
 		
 
 }

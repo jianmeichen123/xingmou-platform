@@ -22,7 +22,7 @@ import com.gi.xm.platform.facede.ProjectPersonFacede;
 @RequestMapping("projectPerson")
 public class ProjectPersonController {
 
-    @Reference
+	@Reference(check = false)
 	private ProjectPersonFacede projectPersonFacede;
 
 	@RequestMapping(value = "index", method = RequestMethod.GET)

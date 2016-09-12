@@ -22,7 +22,7 @@ import com.gi.xm.platform.facede.PostionFacede;
 @RequestMapping("postion")
 public class PostionController {
 
-    @Reference
+	@Reference(check = false)
 	private PostionFacede postionFacede;
 
 	@RequestMapping(value = "index", method = RequestMethod.GET)

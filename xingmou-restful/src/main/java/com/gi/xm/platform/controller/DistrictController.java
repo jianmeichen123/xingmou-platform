@@ -22,7 +22,7 @@ import com.gi.xm.platform.facede.DistrictFacede;
 @RequestMapping("district")
 public class DistrictController {
 
-    @Reference
+	@Reference(check = false)
 	private DistrictFacede districtFacede;
 
 	@RequestMapping(value = "index", method = RequestMethod.GET)

@@ -22,7 +22,7 @@ import com.gi.xm.platform.facede.LabelFacede;
 @RequestMapping("label")
 public class LabelController {
 
-    @Reference
+	@Reference(check = false)
 	private LabelFacede labelFacede;
 
 	@RequestMapping(value = "index", method = RequestMethod.GET)

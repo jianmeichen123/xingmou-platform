@@ -22,7 +22,7 @@ import com.gi.xm.platform.facede.RoundFacede;
 @RequestMapping("round")
 public class RoundController {
 
-    @Reference
+	@Reference(check = false)
 	private RoundFacede roundFacede;
 
 	@RequestMapping(value = "index", method = RequestMethod.GET)

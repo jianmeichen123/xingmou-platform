@@ -22,7 +22,7 @@ import com.gi.xm.platform.facede.DataYearFacede;
 @RequestMapping("dataYear")
 public class DataYearController {
 
-    @Reference
+	@Reference(check = false)
 	private DataYearFacede dataYearFacede;
 
 	@RequestMapping(value = "index", method = RequestMethod.GET)

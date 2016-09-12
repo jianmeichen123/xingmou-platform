@@ -22,7 +22,7 @@ import com.gi.xm.platform.facede.UserFacede;
 @RequestMapping("user")
 public class UserController {
 
-    @Reference
+	@Reference(check = false)
 	private UserFacede userFacede;
 
 	@RequestMapping(value = "index", method = RequestMethod.GET)

@@ -22,7 +22,7 @@ import com.gi.xm.platform.facede.FilesFacede;
 @RequestMapping("files")
 public class FilesController {
 
-    @Reference
+	@Reference(check = false)
 	private FilesFacede filesFacede;
 
 	@RequestMapping(value = "index", method = RequestMethod.GET)

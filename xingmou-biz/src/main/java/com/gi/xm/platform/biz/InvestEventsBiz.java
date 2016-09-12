@@ -51,7 +51,7 @@ public class InvestEventsBiz  {
     public Message<Long> createInvestEvents(InvestEvents investEvents){
 		Message<Long> message = new Message<Long>();
 		try {
-									investEventsDAO.insert( investEvents );
+						        							investEventsDAO.insert( investEvents );
 			message.setData(investEvents.getId());
 
 		} catch (Exception e) {
@@ -70,7 +70,7 @@ public class InvestEventsBiz  {
 				return message;
 			}
 
-									int result = investEventsDAO.updateByPrimaryKey( investEvents );
+						        							int result = investEventsDAO.updateByPrimaryKey( investEvents );
 			message.setData(result);
 
 		} catch (Exception e) {
@@ -124,6 +124,19 @@ public class InvestEventsBiz  {
 		return message;
 	}
 
-	
+		
+	public Message<List<InvestEvents>> getListByYear(Integer[] years){
+
+		Message<List<InvestEvents>> message = new Message<List<InvestEvents>>();
+		try {
+			List<InvestEvents> investEventsList = investEventsDAO.selectByYear(years);
+			message.setData(investEventsList);
+		} catch (Exception e) {
+			LOGGER.error("getListByYear","查询InvestEvents失败", e);
+			message.setMessageStatus(MessageStatus.SYS_ERROR);
+		}
+		return message;
+	}
+		
 
 }

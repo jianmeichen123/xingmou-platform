@@ -22,7 +22,7 @@ import com.gi.xm.platform.facede.IndustryFacede;
 @RequestMapping("industry")
 public class IndustryController {
 
-    @Reference
+	@Reference(check = false)
 	private IndustryFacede industryFacede;
 
 	@RequestMapping(value = "index", method = RequestMethod.GET)

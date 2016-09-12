@@ -17,7 +17,7 @@ public class DubboConfig {
 
 
     @Value("${dubbo.registry.address}")
-    public static final String REGISTRY_ADDRESS = "zookeeper://192.168.1.111:2181";
+    public static final String REGISTRY_ADDRESS = "zookeeper://127.0.0.1:2181";
 
 
     public static final String ANNOTATION_PACKAGE = "com.gi.xm.platform.controller";

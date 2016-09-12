@@ -1,6 +1,7 @@
 package com.gi.xm.platform.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -15,7 +16,7 @@ import com.gi.xm.platform.view.common.QueryResultInfo;
 @RequestMapping("company")
 public class CompanyController {
 
-	@Reference(check = false)
+    @Reference
 	private CompanyFacede companyFacede;
 
 	@RequestMapping("query")
@@ -25,9 +26,9 @@ public class CompanyController {
 		return resultMessageInfo;
 	}
 
-    @RequestMapping("get")
+    @RequestMapping("get/{id}")
     @ResponseBody
-	public MessageInfo<CompanyInfo> getCompany( Long id ){
+	public MessageInfo<CompanyInfo> getCompany( @PathVariable Long id ){
 		MessageInfo<CompanyInfo> messageInfo =  companyFacede.getCompany(id);
 		return messageInfo;
 	}

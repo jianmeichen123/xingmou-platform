@@ -4,7 +4,6 @@ package com.gi.xm.platform.facede.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.gi.xm.platform.biz.LabelBiz;
@@ -22,9 +21,9 @@ public class LabelFacedeImpl implements LabelFacede {
 	@Autowired
 	private LabelBiz labelBiz;
    
-	@Cacheable(value = "labelInfo",keyGenerator = "wiselyKeyGenerator")
+	//@Cacheable(value = "labelInfo",keyGenerator = "wiselyKeyGenerator")
 	public MessageInfo<List<LabelInfo>> getListByTypeRelationId(Integer type, Long relationId){
-	
+		
 		Message<List<Label>> message  = labelBiz.getListByTypeRelationId(type, relationId);
 		MessageInfo<List<LabelInfo>> messageInfo = MessageConvertor.toMessageInfo(message);
 		List<LabelInfo> labelInfoList = LabelConvertor.toLabelInfoList(message.getData());

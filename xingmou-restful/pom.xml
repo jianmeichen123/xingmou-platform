@@ -42,7 +42,7 @@
         </dependency>
          <dependency>
             <groupId>com.gi</groupId>
-            <artifactId>xingmou-common</artifactId>
+            <artifactId>xingmou-api-common</artifactId>
         </dependency>
     </dependencies>
 </project>

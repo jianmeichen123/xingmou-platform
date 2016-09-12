@@ -92,5 +92,13 @@
 		WHERE id = #{id,jdbcType=BIGINT} 
 		FOR UPDATE
 	</select>
+			
+	<select id="selectByTypeRelationId" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_label
+		WHERE  type = #{type,jdbcType=INTEGER}
+		AND relation_id = #{relationId,jdbcType=BIGINT} 
+	</select>
 		
 </mapper>

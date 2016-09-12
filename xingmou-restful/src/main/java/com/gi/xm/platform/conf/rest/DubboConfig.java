@@ -1,6 +1,8 @@
 package com.gi.xm.platform.conf.rest;
 
 import com.alibaba.dubbo.config.ApplicationConfig;
+import com.alibaba.dubbo.config.ConsumerConfig;
+import com.alibaba.dubbo.config.ReferenceConfig;
 import com.alibaba.dubbo.config.RegistryConfig;
 import com.alibaba.dubbo.config.spring.AnnotationBean;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,7 +36,19 @@ public class DubboConfig {
         RegistryConfig registryConfig = new RegistryConfig();
         registryConfig.setAddress(REGISTRY_ADDRESS);
         registryConfig.setCheck(false);
+
+
         return registryConfig;
+    }
+
+    @Bean
+    public ConsumerConfig consumerConfig() {
+        ConsumerConfig consumerConfig = new ConsumerConfig();
+
+        consumerConfig.setCheck(false);
+
+
+        return consumerConfig;
     }
 
     @Bean

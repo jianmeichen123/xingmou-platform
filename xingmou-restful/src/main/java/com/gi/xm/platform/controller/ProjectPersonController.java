@@ -18,6 +18,11 @@ import com.gi.xm.platform.view.ProjectPersonInfo;
 import com.gi.xm.platform.view.ProjectPersonQueryInfo;
 import com.gi.xm.platform.facede.ProjectPersonFacede;
 
+/**
+ * 团队成员
+ * @author zhangchunyuan
+ *
+ */
 @Controller
 @RequestMapping("projectPerson")
 public class ProjectPersonController {

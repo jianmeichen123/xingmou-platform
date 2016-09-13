@@ -118,10 +118,10 @@ public class DataYearController {
 		return messageInfo;
 	}
 
-	@RequestMapping("analysis/{year}/{industryId}/{industrySubId}")
+	@RequestMapping("analysis/{years}/{industryId}/{industrySubId}")
 	@ResponseBody
 	public MessageInfo<List<DataYearInfo>> analysis(
-			@PathVariable("year") Integer[] years, @PathVariable("industryId") Integer industryId, @PathVariable("industrySubId") Integer industrySubId){
+			@PathVariable("years") Integer[] years, @PathVariable("industryId") Integer industryId, @PathVariable("industrySubId") Integer industrySubId){
 		if (years != null  && industrySubId != null){
 			MessageInfo<List<DataYearInfo>> messageInfo = dataYearFacede.getListByYearIndustrySubId(years, industrySubId);
 			return messageInfo;

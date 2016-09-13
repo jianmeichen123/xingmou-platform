@@ -68,4 +68,17 @@ public class ProjectController {
         MessageInfo<ProjectSearchTitleInfo> messageInfo = projectFacede.getProjectSearchTitleInfo();
         return messageInfo;
     }
+
+
+	@RequestMapping("search")
+	@ResponseBody
+	public MessageInfo<QueryResultInfo<ProjectInfo>>  searchProject (ProjectQueryInfo projectQueryInfo) {
+        projectQueryInfo.setDistrictIds(new Long[]{1l,9l,13l,19l});
+        projectQueryInfo.setIndustrySubIds(new Long[]{39l,40l,38l,71l,159l});
+        projectQueryInfo.setCreateDateStart("2000-01-01 00:00:00");
+        projectQueryInfo.setCreateDateEnd("2017-01-01 00:00:00");
+        projectQueryInfo.setTitle("饿");
+		MessageInfo<QueryResultInfo<ProjectInfo>> resultMessageInfo = projectFacede.searchProject(projectQueryInfo);
+		return resultMessageInfo;
+	}
 }

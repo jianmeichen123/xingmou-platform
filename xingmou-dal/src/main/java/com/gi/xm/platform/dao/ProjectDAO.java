@@ -32,6 +32,6 @@ public interface ProjectDAO {
 			@Param("updateUserid") String updateUserid);
 				
 	List<Project> selectBySourceId(@Param("sourceId") Long sourceId);
-		
 
+	List<Project> searchProject(ProjectQuery projectQuery);
 }

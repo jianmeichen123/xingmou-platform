@@ -194,9 +194,6 @@
 		<where>
 					<if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>
 								<if test="title!=null and title!=''">AND title = #{title,jdbcType=VARCHAR}</if>
-								<if test="pic!=null and pic!=''">AND pic = #{pic,jdbcType=VARCHAR}</if>
-								<if test="picBig!=null and picBig!=''">AND pic_big = #{picBig,jdbcType=VARCHAR}</if>
-								<if test="picshow!=null and picshow!=''">AND picshow = #{picshow,jdbcType=VARCHAR}</if>
 								<if test="weblink!=null and weblink!=''">AND weblink = #{weblink,jdbcType=VARCHAR}</if>
 								<if test="ceoName!=null and ceoName!=''">AND ceo_name = #{ceoName,jdbcType=VARCHAR}</if>
 								<if test="companyId!=null">AND company_id = #{companyId,jdbcType=BIGINT}</if>
@@ -235,8 +232,65 @@
 			<otherwise>order by id desc</otherwise>
 		</choose>
 	</sql>
-	
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+
+
+    <select id="searchProject" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.ProjectQuery">
+        SELECT
+        <include refid="selectFields" />
+        FROM dm_project
+        <include refid="searchQueryWhereAndOrder" />
+    </select>
+
+    <sql id="searchQueryWhereAndOrder">
+        <where>
+            <if test="title!=null and title!=''">
+                AND title like CONCAT('%',#{title,jdbcType=VARCHAR},'%' )
+            </if>
+            <if test="industryId!=null">
+                AND industry_id in
+                <foreach item="item" index="index" collection="industryIds" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="industrySubIds!=null">
+                AND industry_sub_id in
+                <foreach item="item" index="index" collection="industrySubIds" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="districtIds!=null">
+                AND district_id in
+                <foreach item="item" index="index" collection="districtIds" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="districtSubId!=null">
+                AND district_sub_id in
+                <foreach item="item" index="index" collection="districtSubIds" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="newestEventRoundId!=null">
+                AND newest_event_round_id in
+                <foreach item="item" index="index" collection="newestEventRoundIds" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="createDateStart!=null and createDateStart!=''">
+                AND create_date >= #{createDateStart,jdbcType=VARCHAR}
+            </if>
+            <if test="createDateEnd!=null and createDateEnd!=''">
+                AND  #{createDateEnd,jdbcType=VARCHAR} >= create_date
+            </if>
+        </where>
+        <choose>
+            <when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
+            <otherwise>order by create_date desc</otherwise>
+        </choose>
+    </sql>
+
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
 		SELECT
 		<include refid="selectFields" />
 		FROM dm_project

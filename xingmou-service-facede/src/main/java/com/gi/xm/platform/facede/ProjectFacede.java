@@ -28,5 +28,8 @@ public interface ProjectFacede {
 		
 	MessageInfo<List<ProjectInfo>> getListBySourceId(Long sourceId);
 
-	public MessageInfo<ProjectSearchTitleInfo> getProjectSearchTitleInfo();
+	MessageInfo<ProjectSearchTitleInfo> getProjectSearchTitleInfo();
+
+
+	MessageInfo<QueryResultInfo<ProjectInfo>> searchProject(ProjectQueryInfo projectQueryInfo);
 }

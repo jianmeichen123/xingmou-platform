@@ -16,6 +16,9 @@ import com.gi.xm.platform.view.IndustryDataYearInfo;
 import com.gi.xm.platform.view.IndustryDataYearQueryInfo;
 import com.gi.xm.platform.facede.IndustryDataYearFacede;
 
+/**
+ * 年度、行业指标分析
+ */
 @Controller
 @RequestMapping("industryDataYear")
 public class IndustryDataYearController {

@@ -49,6 +49,10 @@ public class InvestfirmsDataYearQuery extends Query {
 	private Integer roundGNum;
 			
 	private Long roundGMoney;
+
+	private Integer roundNum;
+
+	private Long roundMoney;
 			
 	private Timestamp addTime;
 			
@@ -187,7 +191,23 @@ public class InvestfirmsDataYearQuery extends Query {
 	public void setRoundGMoney(Long roundGMoney){
 		this.roundGMoney = roundGMoney;
 	}
-    
+
+	public Long getRoundMoney() {
+		return roundMoney;
+	}
+
+	public void setRoundMoney(Long roundMoney) {
+		this.roundMoney = roundMoney;
+	}
+
+	public Integer getRoundNum() {
+		return roundNum;
+	}
+
+	public void setRoundNum(Integer roundNum) {
+		this.roundNum = roundNum;
+	}
+
 	public Timestamp getAddTime(){
 		return addTime;
 	}

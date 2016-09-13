@@ -26,6 +26,9 @@ public class InvestfirmsDataYear extends Pojo {
         public static final String ROUND_F_MONEY = "IOP及以后融资总额";
         public static final String ROUND_G_NUM = "其他融资笔数";
         public static final String ROUND_G_MONEY = "其他融资总额";
+	    public static final String ROUND_NUM = "融资笔数";
+	    public static final String ROUND_MONEY = "融资总额";
+
         public static final String ADD_TIME = "addTime";
         public static final String UPDATE_TIME = "updateTime";
     
@@ -124,6 +127,16 @@ public class InvestfirmsDataYear extends Pojo {
 	 * @Fields roundGMoney : 其他融资总额
 	 */
 	private Long roundGMoney;
+
+	/**
+	 * @Fields roundGNum : 其他融资笔数
+	 */
+	private Integer roundNum;
+
+	/**
+	 * @Fields roundGMoney : 其他融资总额
+	 */
+	private Long roundMoney;
 	
 	/**
 	 * @Fields addTime : 
@@ -295,7 +308,23 @@ public class InvestfirmsDataYear extends Pojo {
 	public void setAddTime(Timestamp addTime){
 		this.addTime = addTime;
 	}
-    
+
+	public Long getRoundMoney() {
+		return roundMoney;
+	}
+
+	public void setRoundMoney(Long roundMoney) {
+		this.roundMoney = roundMoney;
+	}
+
+	public Integer getRoundNum() {
+		return roundNum;
+	}
+
+	public void setRoundNum(Integer roundNum) {
+		this.roundNum = roundNum;
+	}
+
 	public Timestamp getUpdateTime(){
 		return updateTime;
 	}

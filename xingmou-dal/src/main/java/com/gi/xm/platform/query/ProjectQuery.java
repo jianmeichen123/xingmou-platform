@@ -52,6 +52,8 @@ public class ProjectQuery extends Query {
 			
 	private String newestEventRound;
 			
+	private Integer newestEventRoundId;
+			
 	private Long newestEventMoney;
 			
 	private Long sourceId;
@@ -221,6 +223,13 @@ public class ProjectQuery extends Query {
 	}
 	public void setNewestEventRound(String newestEventRound){
 		this.newestEventRound = newestEventRound;
+	}
+    
+	public Integer getNewestEventRoundId(){
+		return newestEventRoundId;
+	}
+	public void setNewestEventRoundId(Integer newestEventRoundId){
+		this.newestEventRoundId = newestEventRoundId;
 	}
     
 	public Long getNewestEventMoney(){

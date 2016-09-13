@@ -30,7 +30,6 @@
             <MaxFileSize>100MB</MaxFileSize>
         </triggeringPolicy>
     </appender>
-    <!-- show parameters for hibernate sql 专为 Hibernate 定制 -->
 
     <logger name="com.gi.xm.platform" level="DEBUG"/>
     <!-- 日志输出级别 -->

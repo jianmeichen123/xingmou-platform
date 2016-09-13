@@ -6,16 +6,15 @@
             http://code.alibabatech.com/schema/dubbo
             http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <dubbo:protocol name="dubbo" port="${dubbo.protocol.dubbo.port}" />
+    <dubbo:protocol name="dubbo"  />
 
     <dubbo:application name="${dubbo.application.name}"  logger="slf4j"/>
 
-    <dubbo:annotation package="${dubbo.scan.basebackage}" />
-
+    <dubbo:annotation package="com.gi.xm.platform" />
 
     <!-- 使用zookeeper注册中心暴露服务地址 -->
     <dubbo:registry address="${dubbo.registry.address}"/>
 
-    <dubbo:provider timeout="6000" retries="0" />
+    <dubbo:consumer timeout="6000" retries="0" check="false"/>
 
 </beans>

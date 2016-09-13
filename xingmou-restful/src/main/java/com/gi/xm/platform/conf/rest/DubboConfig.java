@@ -1,3 +1,4 @@
+/*
 package com.gi.xm.platform.conf.rest;
 
 import com.alibaba.dubbo.config.*;
@@ -6,11 +7,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySources;
+import org.springframework.stereotype.Component;
 
+*/
 /**
  * Created by vincent on 16-8-25.
- */
+ *//*
+
 @Configuration
+@Component
 public class DubboConfig {
     public static final String APPLICATION_NAME = "xm-service-rest";
 
@@ -49,10 +54,8 @@ public class DubboConfig {
     @Bean
     public ProviderConfig providerConfig() {
         ProviderConfig providerConfig = new ProviderConfig();
-
-        providerConfig.setTimeout(120000);
+        providerConfig.setTimeout(6000);
         providerConfig.setRetries(0);
-
         return providerConfig;
     }
     @Bean
@@ -62,3 +65,4 @@ public class DubboConfig {
         return annotationBean;
     }
 }
+*/

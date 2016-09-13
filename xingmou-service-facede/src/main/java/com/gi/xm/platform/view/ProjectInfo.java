@@ -114,6 +114,11 @@ public class ProjectInfo implements Serializable {
 	private String newestEventRound;
 			
 	/**
+	 * @Fields newestEventRoundId : 最近一次投资事件轮次id
+	 */
+	private Integer newestEventRoundId;
+			
+	/**
 	 * @Fields newestEventMoney : 最近一次投资事件融资金额
 	 */
 	private Long newestEventMoney;
@@ -347,6 +352,14 @@ public class ProjectInfo implements Serializable {
 	
 	public void setNewestEventRound(String newestEventRound){
 		this.newestEventRound = newestEventRound;
+	}
+    
+	public Integer getNewestEventRoundId(){
+		return newestEventRoundId;
+	}
+	
+	public void setNewestEventRoundId(Integer newestEventRoundId){
+		this.newestEventRoundId = newestEventRoundId;
 	}
     
 	public Long getNewestEventMoney(){

@@ -104,7 +104,7 @@
                     <basePackage>com.gi.xm.platform</basePackage>
                     <prefix>dw_v_,dw_,dm_</prefix>
                     <url>jdbc:mysql://10.9.130.142:3306/edw2</url>
-                    <tables>dw_v_round</tables>
+                    <tables>dm_project</tables>
                     <username>xmuser</username>
                     <password>qcDKywE7Ka52</password>
                     <output_root_dir>/home/vincent/tmp/</output_root_dir>

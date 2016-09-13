@@ -22,6 +22,7 @@
 								<result column="newest_event_id" property="newestEventId" jdbcType="BIGINT" />
 								<result column="newest_event_date" property="newestEventDate" jdbcType="VARCHAR" />
 								<result column="newest_event_round" property="newestEventRound" jdbcType="VARCHAR" />
+								<result column="newest_event_round_id" property="newestEventRoundId" jdbcType="INTEGER" />
 								<result column="newest_event_money" property="newestEventMoney" jdbcType="BIGINT" />
 								<result column="source_id" property="sourceId" jdbcType="BIGINT" />
 								<result column="create_date" property="createDate" jdbcType="VARCHAR" />
@@ -65,6 +66,7 @@
 			newest_event_id,
 			newest_event_date,
 			newest_event_round,
+			newest_event_round_id,
 			newest_event_money,
 			source_id,
 			create_date,
@@ -102,6 +104,7 @@
 			#{newestEventId,jdbcType=BIGINT},
 			#{newestEventDate,jdbcType=VARCHAR},
 			#{newestEventRound,jdbcType=VARCHAR},
+			#{newestEventRoundId,jdbcType=INTEGER},
 			#{newestEventMoney,jdbcType=BIGINT},
 			#{sourceId,jdbcType=BIGINT},
 			#{createDate,jdbcType=VARCHAR},
@@ -146,6 +149,7 @@
 			<if test="districtId!=null">district_id = #{districtId,jdbcType=BIGINT},</if>
 			<if test="districtSubId!=null">district_sub_id = #{districtSubId,jdbcType=BIGINT},</if>
 			<if test="newestEventId!=null">newest_event_id = #{newestEventId,jdbcType=BIGINT},</if>
+			<if test="newestEventRoundId!=null">newest_event_round_id = #{newestEventRoundId,jdbcType=INTEGER},</if>
 			<if test="newestEventMoney!=null">newest_event_money = #{newestEventMoney,jdbcType=BIGINT},</if>
 			<if test="sourceId!=null">source_id = #{sourceId,jdbcType=BIGINT},</if>
 			<if test="teamScore!=null">team_score = #{teamScore,jdbcType=INTEGER},</if>
@@ -170,7 +174,7 @@
 		
 		
 	<sql id="selectFields">
-	id,title,pic,pic_big,picshow,weblink,ceo_name,company_id,company_name,industry_id,industry_sub_id,industry_name,industry_sub_name,district_id,district_name,district_sub_id,district_sub_name,newest_event_id,newest_event_date,newest_event_round,newest_event_money,source_id,create_date,status,business_model,industry_pain_points,team_score,operation_score,score,time_span,invest_info,invest_num,invest_money,load_time,update_time
+	id,title,pic,pic_big,picshow,weblink,ceo_name,company_id,company_name,industry_id,industry_sub_id,industry_name,industry_sub_name,district_id,district_name,district_sub_id,district_sub_name,newest_event_id,newest_event_date,newest_event_round,newest_event_round_id,newest_event_money,source_id,create_date,status,business_model,industry_pain_points,team_score,operation_score,score,time_span,invest_info,invest_num,invest_money,load_time,update_time
 	</sql>
 	
 	<select id="selectAll" resultMap="BaseResultMap">
@@ -208,6 +212,7 @@
 								<if test="newestEventId!=null">AND newest_event_id = #{newestEventId,jdbcType=BIGINT}</if>
 								<if test="newestEventDate!=null and newestEventDate!=''">AND newest_event_date = #{newestEventDate,jdbcType=VARCHAR}</if>
 								<if test="newestEventRound!=null and newestEventRound!=''">AND newest_event_round = #{newestEventRound,jdbcType=VARCHAR}</if>
+								<if test="newestEventRoundId!=null">AND newest_event_round_id = #{newestEventRoundId,jdbcType=INTEGER}</if>
 								<if test="newestEventMoney!=null">AND newest_event_money = #{newestEventMoney,jdbcType=BIGINT}</if>
 								<if test="sourceId!=null">AND source_id = #{sourceId,jdbcType=BIGINT}</if>
 								<if test="createDate!=null and createDate!=''">AND create_date = #{createDate,jdbcType=VARCHAR}</if>

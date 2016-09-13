@@ -27,6 +27,7 @@ public class Project extends Pojo {
         public static final String NEWEST_EVENT_ID = "最近一次投资事件id";
         public static final String NEWEST_EVENT_DATE = "最近一次投资事件日期";
         public static final String NEWEST_EVENT_ROUND = "最近一次投资事件轮次";
+        public static final String NEWEST_EVENT_ROUND_ID = "最近一次投资事件轮次id";
         public static final String NEWEST_EVENT_MONEY = "最近一次投资事件融资金额";
         public static final String SOURCE_ID = "源id";
         public static final String CREATE_DATE = "项目成立时间";
@@ -143,6 +144,11 @@ public class Project extends Pojo {
 	 * @Fields newestEventRound : 最近一次投资事件轮次
 	 */
 	private String newestEventRound;
+	
+	/**
+	 * @Fields newestEventRoundId : 最近一次投资事件轮次id
+	 */
+	private Integer newestEventRoundId;
 	
 	/**
 	 * @Fields newestEventMoney : 最近一次投资事件融资金额
@@ -378,6 +384,14 @@ public class Project extends Pojo {
 
 	public void setNewestEventRound(String newestEventRound){
 		this.newestEventRound = newestEventRound;
+	}
+    
+	public Integer getNewestEventRoundId(){
+		return newestEventRoundId;
+	}
+
+	public void setNewestEventRoundId(Integer newestEventRoundId){
+		this.newestEventRoundId = newestEventRoundId;
 	}
     
 	public Long getNewestEventMoney(){

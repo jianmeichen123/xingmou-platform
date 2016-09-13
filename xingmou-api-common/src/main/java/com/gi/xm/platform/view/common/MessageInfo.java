@@ -48,4 +48,10 @@ public class MessageInfo<E> implements Serializable {
 	public void setData(E data) {
 		this.data = data;
 	}
+
+	public boolean isSuccess() {
+		return status == 10000;
+	}
+
+
 }

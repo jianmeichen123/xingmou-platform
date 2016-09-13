@@ -117,7 +117,7 @@ public class ProjectFacedeImpl implements ProjectFacede {
 		return messageInfo;	
 	}
 
-    @Cacheable(value = "projectSearchTitleInfo",keyGenerator = "wiselyKeyGenerator")
+    @Cacheable(value = "projectSearchTitleInfo",keyGenerator = "wiselyKeyGenerator" ,unless = "!#result.isSuccess()")
 	public MessageInfo<ProjectSearchTitleInfo> getProjectSearchTitleInfo(){
 
         MessageInfo<ProjectSearchTitleInfo> messageInfo = null;

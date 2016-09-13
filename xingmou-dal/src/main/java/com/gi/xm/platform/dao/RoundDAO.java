@@ -24,7 +24,7 @@ public interface RoundDAO {
 	List<Round> queryRound(RoundQuery roundQuery);
 			
     int updateByPrimaryKey(Round round);
-	
-		
+
+    List<Round> selectByType(@Param("type") Integer type);
 
 }

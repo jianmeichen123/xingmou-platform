@@ -77,7 +77,7 @@ public class Industry extends Pojo {
 	public void setParentId(Integer parentId){
 		this.parentId = parentId;
 	}
-    
+
 	public Timestamp getAddTime(){
 		return addTime;
 	}

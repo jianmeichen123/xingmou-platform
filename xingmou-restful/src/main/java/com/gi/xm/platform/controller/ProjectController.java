@@ -1,17 +1,15 @@
 package com.gi.xm.platform.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 
+import com.gi.xm.platform.view.ProjectSearchTitleInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.gi.xm.platform.view.common.MessageInfo;
 import com.gi.xm.platform.view.common.QueryResultInfo;
@@ -26,11 +24,6 @@ public class ProjectController {
     @Reference
 	private ProjectFacede projectFacede;
 
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public ModelAndView index() {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		return new ModelAndView("project/index", modelMap);
-	}
 
 	@RequestMapping("query")
 	@ResponseBody
@@ -66,5 +59,13 @@ public class ProjectController {
 		MessageInfo<List<ProjectInfo>> messageInfo = projectFacede.getListBySourceId(sourceId);
 		return messageInfo;
 	}
-		
+
+
+
+    @RequestMapping("getSearchTitle")
+    @ResponseBody
+    public MessageInfo<ProjectSearchTitleInfo> getSearchTitle() {
+        MessageInfo<ProjectSearchTitleInfo> messageInfo = projectFacede.getProjectSearchTitleInfo();
+        return messageInfo;
+    }
 }

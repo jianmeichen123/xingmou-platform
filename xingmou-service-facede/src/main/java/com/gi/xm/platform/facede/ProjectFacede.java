@@ -3,6 +3,8 @@ package com.gi.xm.platform.facede;
 
 import java.util.List;
 import java.util.Date;
+
+import com.gi.xm.platform.view.ProjectSearchTitleInfo;
 import com.gi.xm.platform.view.common.MessageInfo;
 import com.gi.xm.platform.view.common.QueryResultInfo;
 import com.gi.xm.platform.view.ProjectInfo;
@@ -25,6 +27,6 @@ public interface ProjectFacede {
 	
 		
 	MessageInfo<List<ProjectInfo>> getListBySourceId(Long sourceId);
-		
 
+	public MessageInfo<ProjectSearchTitleInfo> getProjectSearchTitleInfo();
 }

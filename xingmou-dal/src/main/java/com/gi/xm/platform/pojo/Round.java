@@ -46,7 +46,7 @@ public class Round extends Pojo {
 	 * @Fields parentId : 上级分类，暂时只有type＝1有上级
 	 */
 	private Long parentId;
-	
+
 	/**
 	 * @Fields addTime : 
 	 */

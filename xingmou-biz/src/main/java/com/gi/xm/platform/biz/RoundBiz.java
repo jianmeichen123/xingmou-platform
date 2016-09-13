@@ -124,6 +124,17 @@ public class RoundBiz  {
 		return message;
 	}
 
-	
+	public Message<List<Round>> getListByType(Integer type){
+
+		Message<List<Round>> message = new Message<List<Round>>();
+		try {
+			List<Round> roundList = roundDAO.selectByType(type);
+			message.setData(roundList);
+		} catch (Exception e) {
+			LOGGER.error("getListByType","查询Round失败", e);
+			message.setMessageStatus(MessageStatus.SYS_ERROR);
+		}
+		return message;
+	}
 
 }

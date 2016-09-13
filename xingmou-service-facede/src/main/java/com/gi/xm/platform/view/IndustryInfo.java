@@ -33,17 +33,17 @@ public class IndustryInfo implements Serializable {
 	 */
 	private Integer parentId;
 			
-	/**
-	 * @Fields addTime : 
-	 */
+/*	*//**
+	 * @Fields addTime :
+	 *//*
 	private Timestamp addTime;
 			
-	/**
+	*//**
 	 * @Fields updateTime : 
-	 */
+	 *//*
 	private Timestamp updateTime;
 		
-    
+    */
 	public Integer getId(){
 		return id;
 	}
@@ -75,7 +75,8 @@ public class IndustryInfo implements Serializable {
 	public void setParentId(Integer parentId){
 		this.parentId = parentId;
 	}
-    
+/*
+
 	public Timestamp getAddTime(){
 		return addTime;
 	}
@@ -91,4 +92,7 @@ public class IndustryInfo implements Serializable {
 	public void setUpdateTime(Timestamp updateTime){
 		this.updateTime = updateTime;
 	}
-    }
+*/
+
+
+}

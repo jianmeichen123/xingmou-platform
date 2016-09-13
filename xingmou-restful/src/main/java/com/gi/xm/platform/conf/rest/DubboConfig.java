@@ -1,9 +1,6 @@
 package com.gi.xm.platform.conf.rest;
 
-import com.alibaba.dubbo.config.ApplicationConfig;
-import com.alibaba.dubbo.config.ConsumerConfig;
-import com.alibaba.dubbo.config.ReferenceConfig;
-import com.alibaba.dubbo.config.RegistryConfig;
+import com.alibaba.dubbo.config.*;
 import com.alibaba.dubbo.config.spring.AnnotationBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -45,9 +42,19 @@ public class DubboConfig {
     public ConsumerConfig consumerConfig() {
         ConsumerConfig consumerConfig = new ConsumerConfig();
         consumerConfig.setCheck(false);
+
         return consumerConfig;
     }
 
+    @Bean
+    public ProviderConfig providerConfig() {
+        ProviderConfig providerConfig = new ProviderConfig();
+
+        providerConfig.setTimeout(120000);
+        providerConfig.setRetries(0);
+
+        return providerConfig;
+    }
     @Bean
     public AnnotationBean annotationBean() {
         AnnotationBean annotationBean = new AnnotationBean();

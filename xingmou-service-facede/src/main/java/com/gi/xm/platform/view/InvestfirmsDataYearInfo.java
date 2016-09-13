@@ -107,6 +107,16 @@ public class InvestfirmsDataYearInfo implements Serializable {
 	 * @Fields roundGMoney : 其他融资总额
 	 */
 	private Long roundGMoney;
+
+	/**
+	 * @Fields roundGNum : 其他融资笔数
+	 */
+	private Integer roundNum;
+
+	/**
+	 * @Fields roundGMoney : 其他融资总额
+	 */
+	private Long roundMoney;
 			
 	/**
 	 * @Fields addTime : 
@@ -270,7 +280,23 @@ public class InvestfirmsDataYearInfo implements Serializable {
 	public void setRoundGMoney(Long roundGMoney){
 		this.roundGMoney = roundGMoney;
 	}
-    
+
+	public Integer getRoundNum() {
+		return roundNum;
+	}
+
+	public void setRoundNum(Integer roundNum) {
+		this.roundNum = roundNum;
+	}
+
+	public Long getRoundMoney() {
+		return roundMoney;
+	}
+
+	public void setRoundMoney(Long roundMoney) {
+		this.roundMoney = roundMoney;
+	}
+
 	public Timestamp getAddTime(){
 		return addTime;
 	}

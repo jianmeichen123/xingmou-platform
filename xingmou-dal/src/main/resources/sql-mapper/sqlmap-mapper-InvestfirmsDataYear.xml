@@ -21,6 +21,8 @@
 								<result column="round_f_money" property="roundFMoney" jdbcType="BIGINT" />
 								<result column="round_g_num" property="roundGNum" jdbcType="INTEGER" />
 								<result column="round_g_money" property="roundGMoney" jdbcType="BIGINT" />
+		<result column="round_num" property="roundNum" jdbcType="INTEGER" />
+		<result column="round_money" property="roundMoney" jdbcType="BIGINT" />
 								<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
 								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
 						</resultMap>
@@ -106,7 +108,7 @@
 		
 		
 	<sql id="selectFields">
-	id,year,investfirm_id,investfirm_name,industry_names,round_a_num,round_a_money,round_b_num,round_b_money,round_c_num,round_c_money,round_d_num,round_d_money,round_e_num,round_e_money,round_f_num,round_f_money,round_g_num,round_g_money,add_time,update_time
+	id,year,investfirm_id,investfirm_name,industry_names,round_a_num,round_a_money,round_b_num,round_b_money,round_c_num,round_c_money,round_d_num,round_d_money,round_e_num,round_e_money,round_f_num,round_f_money,round_g_num,round_g_money,round_num,round_money,add_time,update_time
 	</sql>
 	
 	<select id="selectAll" resultMap="BaseResultMap">
@@ -149,7 +151,7 @@
 		</where>
 		<choose>
 			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
-			<otherwise>order by id desc</otherwise>
+			<otherwise>order by round_num,round_money desc</otherwise>
 		</choose>
 	</sql>
 	

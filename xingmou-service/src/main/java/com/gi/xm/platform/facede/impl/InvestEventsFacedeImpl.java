@@ -7,7 +7,6 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.gi.xm.platform.biz.InvestEventsInvestfirmBiz;
 import com.gi.xm.platform.facede.InvestEventsInvestfirmFacede;
 import com.gi.xm.platform.pojo.InvestEventsInvestfirm;
-import com.gi.xm.platform.view.InvestRelationInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 
@@ -93,29 +92,4 @@ public class InvestEventsFacedeImpl implements InvestEventsFacede {
 	}
 
 
-	public MessageInfo<List<InvestEventsInfo>> getRelationByYear(Integer[] years){
-	
-		Message<List<InvestEvents>> message  = investEventsBiz.getListByYear(years);
-        MessageInfo<List<InvestEventsInfo>> messageInfo = MessageConvertor.toMessageInfo(message);
-		if (message.getData().isEmpty()){
-            return messageInfo;
-        }
-
-        List<InvestEvents> investEventses = message.getData();
-        Long[] eventIds = new Long[investEventses.size()];
-        int i = 0 ;
-        Set<InvestRelationInfo> iinvestRelationInfos = new HashSet<>();
-        for(InvestEvents investEvents : investEventses){
-            eventIds[i]=investEvents.getId();
-        }
-        Message<List<InvestEventsInvestfirm>> m2 = investEventsInvestfirmBiz.getListByEventId(eventIds);
-        messageInfo = MessageConvertor.toMessageInfo(message);
-        if (message.getData().isEmpty()) {
-            return messageInfo;
-        }
-
-
-		return messageInfo;
-	}
-		
 }

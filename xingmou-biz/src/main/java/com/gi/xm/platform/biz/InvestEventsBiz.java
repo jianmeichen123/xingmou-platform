@@ -124,19 +124,4 @@ public class InvestEventsBiz  {
 		return message;
 	}
 
-		
-	public Message<List<InvestEvents>> getListByYear(Integer[] years){
-
-		Message<List<InvestEvents>> message = new Message<List<InvestEvents>>();
-		try {
-			List<InvestEvents> investEventsList = investEventsDAO.selectByYear(years);
-			message.setData(investEventsList);
-		} catch (Exception e) {
-			LOGGER.error("getListByYear","查询InvestEvents失败", e);
-			message.setMessageStatus(MessageStatus.SYS_ERROR);
-		}
-		return message;
-	}
-		
-
 }

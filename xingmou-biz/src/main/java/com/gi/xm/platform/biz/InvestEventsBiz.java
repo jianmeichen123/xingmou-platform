@@ -117,4 +117,15 @@ public class InvestEventsBiz {
         return message;
     }
 
+    public Message<List<InvestEvents>> query(InvestEventsQuery investEventsQuery) {
+        Message<List<InvestEvents>> message = new Message<List<InvestEvents>>();
+        try {
+            List<InvestEvents> investEventsList = investEventsDAO.queryInvestEvents(investEventsQuery);
+            message.setData(investEventsList);
+        } catch (Exception e) {
+            LOGGER.error("queryInvestEvents", "查询InvestEvents失败", e);
+            message.setMessageStatus(MessageStatus.SYS_ERROR);
+        }
+        return message;
+    }
 }

@@ -66,6 +66,11 @@ public class IndustryController {
 		return messageInfo;
 	}
 
-
+	@RequestMapping("getListByParentId")
+	@ResponseBody
+	public MessageInfo<List<IndustryInfo>> getListByParentId(Integer parentId){
+		MessageInfo<List<IndustryInfo>> messageInfo = industryFacede.getListByParentId(parentId);
+		return messageInfo;
+	}
 	
 }

@@ -24,7 +24,7 @@ public interface IndustryDAO {
 	List<Industry> queryIndustry(IndustryQuery industryQuery);
 			
     int updateByPrimaryKey(Industry industry);
-	
-		
+
+    List<Industry> selectByParentId(@Param("parentId") Integer parentId);
 
 }

@@ -84,6 +84,15 @@ public class IndustryFacedeImpl implements IndustryFacede {
 		messageInfo.setData(queryResultInfo);
 		return messageInfo;
 	}
-   
-	
+
+
+	public MessageInfo<List<IndustryInfo>> getListByParentId(Integer parentId){
+
+		Message<List<Industry>> message  = industryBiz.getListByParentId(parentId);
+		MessageInfo<List<IndustryInfo>> messageInfo = MessageConvertor.toMessageInfo(message);
+		List<IndustryInfo> industryInfoList = IndustryConvertor.toIndustryInfoList(message.getData());
+		messageInfo.setData(industryInfoList);
+		return messageInfo;
+    }
+
 }

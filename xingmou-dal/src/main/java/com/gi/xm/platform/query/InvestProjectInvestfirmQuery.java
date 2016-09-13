@@ -16,6 +16,12 @@ public class InvestProjectInvestfirmQuery extends Query {
 			
 	private Long investId;
 			
+	private Integer industryId;
+			
+	private Integer industrySubId;
+			
+	private Integer year;
+			
 	private String investName;
 			
 	private Long projectId;
@@ -30,8 +36,7 @@ public class InvestProjectInvestfirmQuery extends Query {
 			
 	private Timestamp updateTime;
 		
-    private Long year;
-
+    
 	public Long getId(){
 		return id;
 	}
@@ -44,6 +49,27 @@ public class InvestProjectInvestfirmQuery extends Query {
 	}
 	public void setInvestId(Long investId){
 		this.investId = investId;
+	}
+    
+	public Integer getIndustryId(){
+		return industryId;
+	}
+	public void setIndustryId(Integer industryId){
+		this.industryId = industryId;
+	}
+    
+	public Integer getIndustrySubId(){
+		return industrySubId;
+	}
+	public void setIndustrySubId(Integer industrySubId){
+		this.industrySubId = industrySubId;
+	}
+    
+	public Integer getYear(){
+		return year;
+	}
+	public void setYear(Integer year){
+		this.year = year;
 	}
     
 	public String getInvestName(){
@@ -94,13 +120,4 @@ public class InvestProjectInvestfirmQuery extends Query {
 	public void setUpdateTime(Timestamp updateTime){
 		this.updateTime = updateTime;
 	}
-
-
-    public Long getYear() {
-        return year;
     }
-
-    public void setYear(Long year) {
-        this.year = year;
-    }
-}

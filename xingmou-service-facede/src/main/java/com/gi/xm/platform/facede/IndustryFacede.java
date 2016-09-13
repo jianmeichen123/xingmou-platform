@@ -9,7 +9,8 @@ import com.gi.xm.platform.view.IndustryInfo;
 import com.gi.xm.platform.view.IndustryQueryInfo;
 
 public interface IndustryFacede {
-		MessageInfo<Integer> deleteIndustry(Integer id);
+
+    MessageInfo<Integer> deleteIndustry(Integer id);
 		
     MessageInfo<Integer> createIndustry(IndustryInfo industryInfo);
 		
@@ -20,7 +21,12 @@ public interface IndustryFacede {
     MessageInfo<List<IndustryInfo>> getAllIndustry();
 			
     MessageInfo<QueryResultInfo<IndustryInfo>> queryIndustry(IndustryQueryInfo industryQueryInfo);
-	
-	
+
+    /**
+     * 根据parentId查询行业集合
+     * @param parentId
+     * @return
+     */
+    MessageInfo<List<IndustryInfo>> getListByParentId(Integer parentId);
 
 }

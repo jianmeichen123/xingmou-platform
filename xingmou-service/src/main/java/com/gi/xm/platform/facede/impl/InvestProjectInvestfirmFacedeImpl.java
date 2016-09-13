@@ -110,9 +110,12 @@ public class InvestProjectInvestfirmFacedeImpl implements InvestProjectInvestfir
         return messageInfo;
     }
 
-    public MessageInfo<RelationInfo> getRelationInfo(Long year) {
+
+    public MessageInfo<RelationInfo> getRelationInfo(Integer year, Integer industryId, Integer industrySubId) {
         InvestProjectInvestfirmQuery query = new InvestProjectInvestfirmQuery();
         query.setYear(year);
+        query.setIndustryId(industryId);
+        query.setIndustrySubId(industrySubId);
         Message<List<InvestProjectInvestfirm>> message = investProjectInvestfirmBiz.query(query);
         if (message == null) {
             MessageInfo<RelationInfo> messageInfo = MessageConvertor.toMessageInfo(message);

@@ -3,6 +3,7 @@ package com.gi.xm.platform.conf.service;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
@@ -13,6 +14,7 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 import java.sql.SQLException;
@@ -22,7 +24,12 @@ import java.sql.SQLException;
  */
 @Configuration
 @EnableCaching
+@Component
 public class RedisCacheConf {
+
+
+    @Value("${dubbo.protocol.dubbo.port}")
+    protected volatile  Integer PORT ;
 
     @Bean
     public KeyGenerator wiselyKeyGenerator(){

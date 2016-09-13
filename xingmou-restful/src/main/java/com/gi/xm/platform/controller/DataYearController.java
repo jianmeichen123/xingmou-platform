@@ -6,11 +6,9 @@ import java.util.Map;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 
+import com.gi.xm.platform.view.IndustryDataYearInfo;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gi.xm.platform.view.common.MessageInfo;
@@ -119,4 +117,23 @@ public class DataYearController {
 		MessageInfo<List<DataYearInfo>> messageInfo = dataYearFacede.getListByYearIndustrySubId(years, industrySubId);
 		return messageInfo;
 	}
+
+	@RequestMapping("analysis/{year}/{industryId}/{industrySubId}")
+	@ResponseBody
+	public MessageInfo<List<DataYearInfo>> analysis(
+			@PathVariable("year") Integer[] years, @PathVariable("industryId") Integer industryId, @PathVariable("industrySubId") Integer industrySubId){
+		if (years != null  && industrySubId != null){
+			MessageInfo<List<DataYearInfo>> messageInfo = dataYearFacede.getListByYearIndustrySubId(years, industrySubId);
+			return messageInfo;
+		}else if(years != null  && industryId != null){
+			MessageInfo<List<DataYearInfo>> messageInfo = dataYearFacede.getListByYearIndustryId( years,industryId);
+			return messageInfo;
+		}else if (years != null){
+			MessageInfo<List<DataYearInfo>> messageInfo = dataYearFacede.getListByYear(years);
+			return messageInfo;
+		}else {
+			return null;
+		}
+	}
+
 }

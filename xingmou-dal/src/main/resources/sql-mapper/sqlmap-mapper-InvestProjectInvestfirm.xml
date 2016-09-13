@@ -1,140 +1,147 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gi.xm.platform.dao.InvestProjectInvestfirmDAO">
-    <resultMap id="BaseResultMap" type="com.gi.xm.platform.pojo.InvestProjectInvestfirm">
-        <id column="id" property="id" jdbcType="BIGINT"/>
-        <result column="invest_id" property="investId" jdbcType="BIGINT"/>
-        <result column="invest_name" property="investName" jdbcType="VARCHAR"/>
-        <result column="project_id" property="projectId" jdbcType="BIGINT"/>
-        <result column="project_name" property="projectName" jdbcType="VARCHAR"/>
-        <result column="investfirm_id" property="investfirmId" jdbcType="BIGINT"/>
-        <result column="investfirm_name" property="investfirmName" jdbcType="VARCHAR"/>
-        <result column="add_time" property="addTime" jdbcType="TIMESTAMP"/>
-        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
-        <result column="year" property="year" jdbcType="INTEGER"/>
-    </resultMap>
+	<resultMap id="BaseResultMap" type="com.gi.xm.platform.pojo.InvestProjectInvestfirm">
+					<id column="id" property="id" jdbcType="BIGINT" />
+								<result column="invest_id" property="investId" jdbcType="BIGINT" />
+								<result column="industry_id" property="industryId" jdbcType="INTEGER" />
+								<result column="industry_sub_id" property="industrySubId" jdbcType="INTEGER" />
+								<result column="year" property="year" jdbcType="INTEGER" />
+								<result column="invest_name" property="investName" jdbcType="VARCHAR" />
+								<result column="project_id" property="projectId" jdbcType="BIGINT" />
+								<result column="project_name" property="projectName" jdbcType="VARCHAR" />
+								<result column="investfirm_id" property="investfirmId" jdbcType="BIGINT" />
+								<result column="investfirm_name" property="investfirmName" jdbcType="VARCHAR" />
+								<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+						</resultMap>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        DELETE FROM dm_invest_project_investfirm
-        WHERE id = #{id,jdbcType=BIGINT}
-    </delete>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		DELETE FROM dm_invest_project_investfirm
+		WHERE id = #{id,jdbcType=BIGINT} 
+	</delete>
+	
+	<insert id="insert" parameterType="com.gi.xm.platform.pojo.InvestProjectInvestfirm" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO dm_invest_project_investfirm (
+			invest_id,
+			industry_id,
+			industry_sub_id,
+			year,
+			invest_name,
+			project_id,
+			project_name,
+			investfirm_id,
+			investfirm_name,
+			add_time,
+			update_time
+		)
+		VALUES
+		(
+			#{investId,jdbcType=BIGINT},
+			#{industryId,jdbcType=INTEGER},
+			#{industrySubId,jdbcType=INTEGER},
+			#{year,jdbcType=INTEGER},
+			#{investName,jdbcType=VARCHAR},
+			#{projectId,jdbcType=BIGINT},
+			#{projectName,jdbcType=VARCHAR},
+			#{investfirmId,jdbcType=BIGINT},
+			#{investfirmName,jdbcType=VARCHAR},
+			#{addTime,jdbcType=TIMESTAMP},
+			 UNIX_TIMESTAMP()
+		)
+	</insert>
 
-    <insert id="insert" parameterType="com.gi.xm.platform.pojo.InvestProjectInvestfirm" useGeneratedKeys="true"
-            keyProperty="id">
-        INSERT INTO dm_invest_project_investfirm (
-        invest_id,
-        invest_name,
-        project_id,
-        project_name,
-        investfirm_id,
-        investfirm_name,
-        add_time,
-        year,
-        update_time
-        )
-        VALUES
-        (
-        #{investId,jdbcType=BIGINT},
-        #{investName,jdbcType=VARCHAR},
-        #{projectId,jdbcType=BIGINT},
-        #{projectName,jdbcType=VARCHAR},
-        #{investfirmId,jdbcType=BIGINT},
-        #{investfirmName,jdbcType=VARCHAR},
-        #{addTime,jdbcType=TIMESTAMP},
-        #{year,jdbcType=INTEGER},
-        UNIX_TIMESTAMP()
-        )
-    </insert>
+	<update id="updateByPrimaryKey" parameterType="com.gi.xm.platform.pojo.InvestProjectInvestfirm">
+		UPDATE dm_invest_project_investfirm
+		SET
+			<if test="investName!=null">invest_name = #{investName,jdbcType=VARCHAR},</if>
+			<if test="projectName!=null">project_name = #{projectName,jdbcType=VARCHAR},</if>
+			<if test="investfirmName!=null">investfirm_name = #{investfirmName,jdbcType=VARCHAR},</if>
+			<if test="investId!=null">invest_id = #{investId,jdbcType=BIGINT},</if>
+			<if test="industryId!=null">industry_id = #{industryId,jdbcType=INTEGER},</if>
+			<if test="industrySubId!=null">industry_sub_id = #{industrySubId,jdbcType=INTEGER},</if>
+			<if test="year!=null">year = #{year,jdbcType=INTEGER},</if>
+			<if test="projectId!=null">project_id = #{projectId,jdbcType=BIGINT},</if>
+			<if test="investfirmId!=null">investfirm_id = #{investfirmId,jdbcType=BIGINT},</if>
+			<if test="addTime!=null">add_time = #{addTime,jdbcType=TIMESTAMP},</if>
+	    WHERE id = #{id,jdbcType=BIGINT} 
+	</update>
+	
+		
+		
+	<sql id="selectFields">
+	id,invest_id,industry_id,industry_sub_id,year,invest_name,project_id,project_name,investfirm_id,investfirm_name,add_time,update_time
+	</sql>
+	
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_invest_project_investfirm
+	</select>
+	
+	<select id="queryInvestProjectInvestfirm" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.InvestProjectInvestfirmQuery">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_invest_project_investfirm
+		<include refid="queryWhereAndOrder" />
+	</select>
+	
+	<sql id="queryWhereAndOrder">
+		<where>
+					<if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>
+								<if test="investId!=null">AND invest_id = #{investId,jdbcType=BIGINT}</if>
+								<if test="industryId!=null">AND industry_id = #{industryId,jdbcType=INTEGER}</if>
+								<if test="industrySubId!=null">AND industry_sub_id = #{industrySubId,jdbcType=INTEGER}</if>
+								<if test="year!=null">AND year = #{year,jdbcType=INTEGER}</if>
+								<if test="investName!=null and investName!=''">AND invest_name = #{investName,jdbcType=VARCHAR}</if>
+								<if test="projectId!=null">AND project_id = #{projectId,jdbcType=BIGINT}</if>
+								<if test="projectName!=null and projectName!=''">AND project_name = #{projectName,jdbcType=VARCHAR}</if>
+								<if test="investfirmId!=null">AND investfirm_id = #{investfirmId,jdbcType=BIGINT}</if>
+								<if test="investfirmName!=null and investfirmName!=''">AND investfirm_name = #{investfirmName,jdbcType=VARCHAR}</if>
+								<if test="addTime!=null">AND add_time = #{addTime,jdbcType=TIMESTAMP}</if>
+								<if test="updateTime!=null">AND update_time = #{updateTime,jdbcType=TIMESTAMP}</if>
+							
+		</where>
+		<choose>
+			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
+			<otherwise>order by id desc</otherwise>
+		</choose>
+	</sql>
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_invest_project_investfirm
+		WHERE id = #{id,jdbcType=BIGINT} 
+	</select>
 
-    <update id="updateByPrimaryKey" parameterType="com.gi.xm.platform.pojo.InvestProjectInvestfirm">
-        UPDATE dm_invest_project_investfirm
-        SET
-        <if test="investName!=null">invest_name = #{investName,jdbcType=VARCHAR},</if>
-        <if test="projectName!=null">project_name = #{projectName,jdbcType=VARCHAR},</if>
-        <if test="investfirmName!=null">investfirm_name = #{investfirmName,jdbcType=VARCHAR},</if>
-        <if test="investId!=null">invest_id = #{investId,jdbcType=BIGINT},</if>
-        <if test="projectId!=null">project_id = #{projectId,jdbcType=BIGINT},</if>
-        <if test="investfirmId!=null">investfirm_id = #{investfirmId,jdbcType=BIGINT},</if>
-        <if test="addTime!=null">add_time = #{addTime,jdbcType=TIMESTAMP},</if>
-        WHERE id = #{id,jdbcType=BIGINT}
-    </update>
-
-
-    <sql id="selectFields">
-        id,invest_id,invest_name,project_id,project_name,investfirm_id,investfirm_name,add_time,update_time
-    </sql>
-
-    <select id="selectAll" resultMap="BaseResultMap">
-        SELECT
-        <include refid="selectFields"/>
-        FROM dm_invest_project_investfirm
-    </select>
-
-    <select id="queryInvestProjectInvestfirm" resultMap="BaseResultMap"
-            parameterType="com.gi.xm.platform.query.InvestProjectInvestfirmQuery">
-        SELECT
-        <include refid="selectFields"/>
-        FROM dm_invest_project_investfirm
-        <include refid="queryWhereAndOrder"/>
-    </select>
-
-    <sql id="queryWhereAndOrder">
-        <where>
-            <if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>
-            <if test="investId!=null">AND invest_id = #{investId,jdbcType=BIGINT}</if>
-            <if test="investName!=null and investName!=''">AND invest_name = #{investName,jdbcType=VARCHAR}</if>
-            <if test="projectId!=null">AND project_id = #{projectId,jdbcType=BIGINT}</if>
-            <if test="projectName!=null and projectName!=''">AND project_name = #{projectName,jdbcType=VARCHAR}</if>
-            <if test="investfirmId!=null">AND investfirm_id = #{investfirmId,jdbcType=BIGINT}</if>
-            <if test="investfirmName!=null and investfirmName!=''">AND investfirm_name =
-                #{investfirmName,jdbcType=VARCHAR}
-            </if>
-            <if test="addTime!=null">AND add_time = #{addTime,jdbcType=TIMESTAMP}</if>
-            <if test="updateTime!=null">AND update_time = #{updateTime,jdbcType=TIMESTAMP}</if>
-            <if test="year!=null">year = #{year,jdbcType=INTEGER}</if>
-        </where>
-        <if test="doOrder">
-        <choose>
-            <when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
-            <otherwise>order by id desc</otherwise>
-        </choose>
-        </if>
-    </sql>
-
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
-        SELECT
-        <include refid="selectFields"/>
-        FROM dm_invest_project_investfirm
-        WHERE id = #{id,jdbcType=BIGINT}
-    </select>
-
-    <select id="selectByPrimaryKeyForUpdate" resultMap="BaseResultMap" parameterType="java.lang.Long">
-        SELECT
-        <include refid="selectFields"/>
-        FROM dm_invest_project_investfirm
-        WHERE id = #{id,jdbcType=BIGINT}
-        FOR UPDATE
-    </select>
-
-    <select id="selectByInvestId" resultMap="BaseResultMap">
-        SELECT
-        <include refid="selectFields"/>
-        FROM dm_invest_project_investfirm
-        WHERE invest_id = #{investId,jdbcType=BIGINT}
-    </select>
-
-    <select id="selectByInvestfirmId" resultMap="BaseResultMap">
-        SELECT
-        <include refid="selectFields"/>
-        FROM dm_invest_project_investfirm
-        WHERE investfirm_id = #{investfirmId,jdbcType=BIGINT}
-    </select>
-
-    <select id="selectByProjectId" resultMap="BaseResultMap">
-        SELECT
-        <include refid="selectFields"/>
-        FROM dm_invest_project_investfirm
-        WHERE project_id = #{projectId,jdbcType=BIGINT}
-    </select>
-
+	<select id="selectByPrimaryKeyForUpdate" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_invest_project_investfirm
+		WHERE id = #{id,jdbcType=BIGINT} 
+		FOR UPDATE
+	</select>
+			
+	<select id="selectByInvestId" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_invest_project_investfirm
+		WHERE  invest_id = #{investId,jdbcType=BIGINT}
+	</select>
+			
+	<select id="selectByInvestfirmId" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_invest_project_investfirm
+		WHERE  investfirm_id = #{investfirmId,jdbcType=BIGINT}
+	</select>
+			
+	<select id="selectByProjectId" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_invest_project_investfirm
+		WHERE  project_id = #{projectId,jdbcType=BIGINT}
+	</select>
+		
 </mapper>

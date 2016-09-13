@@ -44,10 +44,7 @@ public class DubboConfig {
     @Bean
     public ConsumerConfig consumerConfig() {
         ConsumerConfig consumerConfig = new ConsumerConfig();
-
         consumerConfig.setCheck(false);
-
-
         return consumerConfig;
     }
 

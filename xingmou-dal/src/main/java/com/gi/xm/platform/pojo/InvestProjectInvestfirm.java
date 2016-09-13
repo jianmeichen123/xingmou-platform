@@ -9,6 +9,9 @@ public class InvestProjectInvestfirm extends Pojo {
 
         public static final String ID = "id";
         public static final String INVEST_ID = "投资事件id";
+        public static final String INDUSTRY_ID = "一级行业分类id";
+        public static final String INDUSTRY_SUB_ID = "二级行业分类id";
+        public static final String YEAR = "year";
         public static final String INVEST_NAME = "投资事件标题(冗余)";
         public static final String PROJECT_ID = "项目id";
         public static final String PROJECT_NAME = "项目名称（冗余）";
@@ -27,6 +30,21 @@ public class InvestProjectInvestfirm extends Pojo {
 	 * @Fields investId : 投资事件id
 	 */
 	private Long investId;
+	
+	/**
+	 * @Fields industryId : 一级行业分类id
+	 */
+	private Integer industryId;
+	
+	/**
+	 * @Fields industrySubId : 二级行业分类id
+	 */
+	private Integer industrySubId;
+	
+	/**
+	 * @Fields year : 
+	 */
+	private Integer year;
 	
 	/**
 	 * @Fields investName : 投资事件标题(冗余)
@@ -78,6 +96,30 @@ public class InvestProjectInvestfirm extends Pojo {
 
 	public void setInvestId(Long investId){
 		this.investId = investId;
+	}
+    
+	public Integer getIndustryId(){
+		return industryId;
+	}
+
+	public void setIndustryId(Integer industryId){
+		this.industryId = industryId;
+	}
+    
+	public Integer getIndustrySubId(){
+		return industrySubId;
+	}
+
+	public void setIndustrySubId(Integer industrySubId){
+		this.industrySubId = industrySubId;
+	}
+    
+	public Integer getYear(){
+		return year;
+	}
+
+	public void setYear(Integer year){
+		this.year = year;
 	}
     
 	public String getInvestName(){

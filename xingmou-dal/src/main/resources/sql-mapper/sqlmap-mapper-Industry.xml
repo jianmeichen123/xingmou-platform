@@ -92,5 +92,12 @@
 		WHERE id = #{id,jdbcType=INTEGER} 
 		FOR UPDATE
 	</select>
-		
+
+	<select id="selectByParentId" resultMap="BaseResultMap">
+		SELECT
+            id,title,code
+		FROM
+            dw_v_industry WHERE parent_id = #{parentId,jdbcType=INTEGER}
+	</select>
+
 </mapper>

@@ -1,56 +1,37 @@
 /*
 package com.gi.xm.platform.conf.service;
 
-import com.alibaba.dubbo.config.ApplicationConfig;
-import com.alibaba.dubbo.config.RegistryConfig;
-import com.alibaba.dubbo.config.spring.AnnotationBean;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
-*/
-/**
- * Created by vincent on 16-8-25.
- *//*
 
-@Configuration
 public class DubboConfig {
 
 
-    @Value("${dubbo.application.name}")
-    public static final String APPLICATION_NAME = "xm-service-rest";
+    protected volatile  String APPLICATION_NAME ;
 
 
-    @Value("${dubbo.registry.address}")
-    public static final String REGISTRY_ADDRESS = "zookeeper://10.9.21.172:2181";
+    protected volatile   String REGISTRY_ADDRESS ;
 
 
-    @Value("${dubbo.scan.basebackage}")
-    public static final String ANNOTATION_PACKAGE = "com.gi.xm.platform";
+    protected volatile  String BASEB_ACKAGE;
 
-    @Value("${dubbo.protocol.dubbo.port}")
-    public static final Integer PORT = 20881;
+    protected volatile  Integer PORT ;
 
-
-    @Bean
-    public ApplicationConfig applicationConfig() {
-        ApplicationConfig applicationConfig = new ApplicationConfig();
-        applicationConfig.setName(APPLICATION_NAME);
-        return applicationConfig;
+    public void setAPPLICATION_NAME(String APPLICATION_NAME) {
+        this.APPLICATION_NAME = APPLICATION_NAME;
     }
 
-    @Bean
-    public RegistryConfig registryConfig() {
-        RegistryConfig registryConfig = new RegistryConfig();
-        registryConfig.setAddress(REGISTRY_ADDRESS);
-        return registryConfig;
+    public void setREGISTRY_ADDRESS(String REGISTRY_ADDRESS) {
+        this.REGISTRY_ADDRESS = REGISTRY_ADDRESS;
     }
 
-    @Bean
-    public AnnotationBean annotationBean() {
-        AnnotationBean annotationBean = new AnnotationBean();
-        annotationBean.setPackage(ANNOTATION_PACKAGE);
-        return annotationBean;
+    public void setBASEB_ACKAGE(String BASEB_ACKAGE) {
+        this.BASEB_ACKAGE = BASEB_ACKAGE;
+    }
+
+    public void setPORT(Integer PORT) {
+        this.PORT = PORT;
     }
 }
 */

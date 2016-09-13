@@ -103,10 +103,10 @@
                 <configuration>
                     <basePackage>com.gi.xm.platform</basePackage>
                     <prefix>dw_v_,dw_,dm_</prefix>
-                    <url>jdbc:mysql://10.9.130.142:3306/edw2</url>
-                    <tables>dm_invest_events_investfirm</tables>
-                    <username>xmuser</username>
-                    <password>qcDKywE7Ka52</password>
+                    <url>jdbc:mysql://127.0.0.1:3306/edw2</url>
+                    <tables>dm_invest_project_investfirm</tables>
+                    <username>xm_user</username>
+                    <password>xm_user</password>
                     <output_root_dir>/home/vincent/tmp/</output_root_dir>
                     <templates_dir>/home/vincent/workspace_idea/company/xm-platform/xingmou-platform/templates/</templates_dir>
                 </configuration>

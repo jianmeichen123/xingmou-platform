@@ -11,7 +11,8 @@ import com.gi.xm.platform.view.InvestProjectInvestfirmInfo;
 import com.gi.xm.platform.view.InvestProjectInvestfirmQueryInfo;
 
 public interface InvestProjectInvestfirmFacede {
-		MessageInfo<Integer> deleteInvestProjectInvestfirm(Long id);
+
+	MessageInfo<Integer> deleteInvestProjectInvestfirm(Long id);
 		
     MessageInfo<Long> createInvestProjectInvestfirm(InvestProjectInvestfirmInfo investProjectInvestfirmInfo);
 		
@@ -23,12 +24,11 @@ public interface InvestProjectInvestfirmFacede {
 			
     MessageInfo<QueryResultInfo<InvestProjectInvestfirmInfo>> queryInvestProjectInvestfirm(InvestProjectInvestfirmQueryInfo investProjectInvestfirmQueryInfo);
 	
-		
 	MessageInfo<List<InvestProjectInvestfirmInfo>> getListByInvestId(Long investId);
 			
 	MessageInfo<List<InvestProjectInvestfirmInfo>> getListByInvestfirmId(Long investfirmId);
 			
 	MessageInfo<List<InvestProjectInvestfirmInfo>> getListByProjectId(Long projectId);
 
-	MessageInfo<RelationInfo> getRelationInfo(Long year) ;
+	MessageInfo<RelationInfo> getRelationInfo(Integer year,Integer industryId,Integer industrySubId) ;
 }

@@ -7,10 +7,7 @@ import java.util.Map;
 import com.alibaba.dubbo.config.annotation.Reference;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gi.xm.platform.view.common.MessageInfo;
@@ -71,20 +68,20 @@ public class IndustryDataYearController {
 
 
 		
-    @RequestMapping("getListByIndustryIdYaar")
+/*    @RequestMapping("getListByIndustryIdYaar")
     @ResponseBody
-	public MessageInfo<List<IndustryDataYearInfo>> getListByIndustryIdYaar(Integer industryId, Integer[] yaars){
-		MessageInfo<List<IndustryDataYearInfo>> messageInfo = industryDataYearFacede.getListByIndustryIdYaar(industryId, yaars);
+	public MessageInfo<List<IndustryDataYearInfo>> getListByIndustryIdYaar(Integer industryId, Integer[] years){
+		MessageInfo<List<IndustryDataYearInfo>> messageInfo = industryDataYearFacede.getListByIndustryIdYaar(industryId, years);
 		return messageInfo;
 	}
 			
     @RequestMapping("getListByYaarIndustrySubId")
     @ResponseBody
-	public MessageInfo<List<IndustryDataYearInfo>> getListByYaarIndustrySubId(Integer[] yaars, Integer industrySubId){
-		MessageInfo<List<IndustryDataYearInfo>> messageInfo = industryDataYearFacede.getListByYaarIndustrySubId(yaars, industrySubId);
+	public MessageInfo<List<IndustryDataYearInfo>> getListByYaarIndustrySubId(Integer[] years, Integer industrySubId){
+		MessageInfo<List<IndustryDataYearInfo>> messageInfo = industryDataYearFacede.getListByYaarIndustrySubId(years, industrySubId);
 		return messageInfo;
 	}
-			
+			*/
     @RequestMapping("getListByIndustryId")
     @ResponseBody
 	public MessageInfo<List<IndustryDataYearInfo>> getListByIndustryId(Integer industryId){
@@ -92,11 +89,29 @@ public class IndustryDataYearController {
 		return messageInfo;
 	}
 			
-    @RequestMapping("getListByYaar")
+/*    @RequestMapping("getListByYaar")
     @ResponseBody
-	public MessageInfo<List<IndustryDataYearInfo>> getListByYaar(Integer[] yaars){
-		MessageInfo<List<IndustryDataYearInfo>> messageInfo = industryDataYearFacede.getListByYaar(yaars);
+	public MessageInfo<List<IndustryDataYearInfo>> getListByYaar(Integer[] years){
+		MessageInfo<List<IndustryDataYearInfo>> messageInfo = industryDataYearFacede.getListByYaar(years);
 		return messageInfo;
-	}
-		
+	}*/
+
+    @RequestMapping("analysis/{year}/{industryId}/{industrySubId}")
+    @ResponseBody
+    public MessageInfo<List<IndustryDataYearInfo>> analysis(
+            @PathVariable("year") Integer[] years,@PathVariable("industryId") Integer industryId,@PathVariable("industrySubId") Integer industrySubId){
+        if (years != null  && industrySubId != null){
+            MessageInfo<List<IndustryDataYearInfo>> messageInfo = industryDataYearFacede.getListByYaarIndustrySubId(years, industrySubId);
+            return messageInfo;
+        }else if(years != null  && industryId != null){
+            MessageInfo<List<IndustryDataYearInfo>> messageInfo = industryDataYearFacede.getListByIndustryIdYaar(industryId, years);
+            return messageInfo;
+        }else if (years != null){
+            MessageInfo<List<IndustryDataYearInfo>> messageInfo = industryDataYearFacede.getListByYaar(years);
+            return messageInfo;
+        }else {
+            return null;
+        }
+    }
+
 }

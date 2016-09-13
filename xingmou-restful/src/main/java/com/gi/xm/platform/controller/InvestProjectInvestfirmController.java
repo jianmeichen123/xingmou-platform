@@ -8,10 +8,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 
 import com.gi.xm.platform.view.RelationInfo;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gi.xm.platform.view.common.MessageInfo;
@@ -92,10 +89,11 @@ public class InvestProjectInvestfirmController {
 		MessageInfo<List<InvestProjectInvestfirmInfo>> messageInfo = investProjectInvestfirmFacede.getListByProjectId(projectId);
 		return messageInfo;
 	}
-	@RequestMapping("getRelationInfo")
+	@RequestMapping("getRelationInfo/{year}/{industryId}/{industrySubId}")
 	@ResponseBody
-	public MessageInfo<RelationInfo> getRelationInfo(Long year) {
-		MessageInfo<RelationInfo> messageInfo = investProjectInvestfirmFacede.getRelationInfo(year);
+	public MessageInfo<RelationInfo> getRelationInfo(
+			@PathVariable("year") Integer year, @PathVariable("industryId") Integer industryId, @PathVariable("industrySubId") Integer industrySubId){
+		MessageInfo<RelationInfo> messageInfo = investProjectInvestfirmFacede.getRelationInfo(year,industryId,industrySubId);
 		return messageInfo;
 	}
 }

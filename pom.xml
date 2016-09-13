@@ -15,7 +15,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>xingmou-assembly</module>
-        <module>xingmou-confg-server</module>
+        <!-- <module>xingmou-confg-server</module> -->
         <module>xingmou-logback</module>
         <module>xingmou-redis</module>
         <module>xingmou-dal</module>

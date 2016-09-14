@@ -12,6 +12,7 @@ public class MessageInfo<E> implements Serializable {
 	private String message;
 	private int status;
 	private E data;
+	private boolean success;
 
 	public MessageInfo()
 	{

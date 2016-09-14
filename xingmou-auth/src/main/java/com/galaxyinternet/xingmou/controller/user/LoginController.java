@@ -26,7 +26,7 @@ import com.galaxyinternet.service.UserService;
 
 
 @Controller
-@RequestMapping("/galaxy/userlogin")
+@RequestMapping("/galaxy/auth")
 public class LoginController extends BaseControllerImpl<User, User> {
 	final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	@Autowired

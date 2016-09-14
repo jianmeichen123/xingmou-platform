@@ -1,11 +1,13 @@
 package com.gi.xm.platform.view;
 
+
 import java.util.List;
 import java.util.Map;
 
 /**
  * Created by vincent on 16-9-13.
  */
+
 public class ProjectSearchTitleInfo extends SearchTitleInfo {
 
     private List<IndustryInfo> industryInfoFather;

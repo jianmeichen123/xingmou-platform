@@ -38,12 +38,12 @@ function _M:check_cookie_arg()
     if ngx.var.http_cookie then
 
         local _uid_ = ngx.var.cookie__uid_
-        local u_l   = ngx.var.cookie_u_l
-        if _uid_ == nil or u_l ==nil or string.len(_uid_) == 0 or string.len(u_l) == o then
+        local s_   = ngx.var.cookie_s_
+        if _uid_ == nil or string.len(_uid_) == 0 or  s_== nil or string.len(s_) ==0 then
             status = false
         else
             t['_uid_'] = _uid_
-            t['u_l'] = u_l
+            t['s_'] = s_
         end
     else
         status =false

@@ -1,5 +1,6 @@
 package com.gi.xm.platform.view;
 
+
 import java.math.BigDecimal;
 import java.io.Serializable;
 import java.sql.Timestamp;

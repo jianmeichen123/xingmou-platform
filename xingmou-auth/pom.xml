@@ -2,7 +2,7 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <artifactId>xingmou-auth</artifactId>
+    <artifactId>galaxy-xingmou-new</artifactId>
     <groupId>com.gi</groupId>
     <version>1.0-SNAPSHOT</version>
     <modelVersion>4.0.0</modelVersion>
@@ -12,18 +12,34 @@
 		<spring.version>4.2.1.RELEASE</spring.version>
 		<platform.version>1.0.2-SNAPSHOT</platform.version>
 	</properties>
-
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<!-- 本地项目地址 -->
+				<!-- <log4j.path>${catalina.base}/logs/</log4j.path> -->
+				<!-- dubbo -->
+				<dubbo.application.name>galaxy-xon</dubbo.application.name>
+				<dubbo.protocol.name>dubbo</dubbo.protocol.name>
+				<dubbo.registry.address>zookeeper://10.9.210.22:12181?client=zkclient</dubbo.registry.address>
+				<dubbo.protocol.port>8083</dubbo.protocol.port>
+			</properties>
+		</profile>
+	</profiles>
     <dependencies>
     	<dependency>
 			<groupId>com.galaxyinternet</groupId>
 			<artifactId>galaxy-platform-api</artifactId>
 			<version>${platform.version}</version>
-			<exclusions>
+			<!-- <exclusions>
 				<exclusion>
 					<artifactId>galaxy-common</artifactId>
 					<groupId>com.galaxyinternet</groupId>
 				</exclusion>
-			</exclusions>
+			</exclusions> -->
 		</dependency>
        <dependency>
 			<groupId>log4j</groupId>
@@ -79,6 +95,23 @@
 		</dependency>
 		<!-- dubbo 服务注册方式 end -->
 	</dependencies>
+	 <build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF8</encoding>
+                </configuration>
+            </plugin>
+
+
+        </plugins>
+    </build>
 </project>
 
 

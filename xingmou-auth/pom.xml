@@ -1,47 +1,87 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <artifactId>xingmou-auth</artifactId>
-    <groupId>com.gi</groupId>
-    <version>1.0-SNAPSHOT</version>
-    <modelVersion>4.0.0</modelVersion>
-
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<groupId>com.gi</groupId>
+	<artifactId>xingmou-auth</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	
+	<packaging>war</packaging>
+	<name />
+	<description />
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>4.2.1.RELEASE</spring.version>
 		<platform.version>1.0.2-SNAPSHOT</platform.version>
 	</properties>
+
+	<repositories>
+		<repository>
+			<id>nexus</id>
+			<name>Team Nexus Repository</name>
+			<url>http://nexus.gi.com/content/groups/public/</url>
+		</repository>
+	</repositories>
+
+	<build>
+		<plugins>
+			<!-- war插件, 设定war名称不带版本号 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<warName>${project.artifactId}</warName>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<showWarnings>true</showWarnings>
+				</configuration>
+			</plugin>
+		</plugins>
+		
+	</build>
+
 	<profiles>
 		<profile>
 			<id>dev</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<activeByDefault>false</activeByDefault>
 			</activation>
 			<properties>
+				<!-- 数据库连接地址和数据库名 -->
+				<jdbc.url>
+					jdbc:mysql://10.9.130.142:3306/edw?createDatabaseIfNotExist=true&amp;amp;useUnicode=true&amp;amp;characterEncoding=utf8
+				</jdbc.url>
+				<jdbc.username>xmuser</jdbc.username>
+				<jdbc.password>qcDKywE7Ka52</jdbc.password>
 				<!-- 本地项目地址 -->
 				<!-- <log4j.path>${catalina.base}/logs/</log4j.path> -->
+				<project.home.page.url>http://xm.dev.galaxyinternet.com/</project.home.page.url>
 				<!-- dubbo -->
-				<dubbo.application.name>galaxy-xon</dubbo.application.name>
+				<dubbo.application.name>galaxy-xm</dubbo.application.name>
 				<dubbo.protocol.name>dubbo</dubbo.protocol.name>
 				<dubbo.registry.address>zookeeper://10.9.210.22:12181?client=zkclient</dubbo.registry.address>
 				<dubbo.protocol.port>8083</dubbo.protocol.port>
 			</properties>
 		</profile>
 	</profiles>
-    <dependencies>
-    	<dependency>
+	
+	<dependencies>
+		<dependency>
 			<groupId>com.galaxyinternet</groupId>
 			<artifactId>galaxy-platform-api</artifactId>
 			<version>${platform.version}</version>
-			<!-- <exclusions>
-				<exclusion>
-					<artifactId>galaxy-common</artifactId>
-					<groupId>com.galaxyinternet</groupId>
-				</exclusion>
-			</exclusions> -->
 		</dependency>
-       <dependency>
+
+		
+		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
@@ -61,7 +101,9 @@
 			<artifactId>commons-logging</artifactId>
 			<version>1.1.1</version>
 		</dependency>
-   <!-- dubbo 服务注册方式 start -->
+		
+
+		<!-- dubbo 服务注册方式 start -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>dubbo</artifactId>
@@ -94,24 +136,7 @@
 			<version>0.1</version>
 		</dependency>
 		<!-- dubbo 服务注册方式 end -->
+
+	
 	</dependencies>
-	 <build>
-        <plugins>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF8</encoding>
-                </configuration>
-            </plugin>
-
-
-        </plugins>
-    </build>
 </project>
-
-

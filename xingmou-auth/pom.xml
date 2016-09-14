@@ -78,6 +78,7 @@
 			<version>0.1</version>
 		</dependency>
 		<!-- dubbo 服务注册方式 end -->
+	</dependencies>
 </project>
 
 

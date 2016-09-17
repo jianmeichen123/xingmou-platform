@@ -38,7 +38,9 @@ public class QueryInfo implements Serializable {
 	}
 
 	public void setOrder(String order) {
-		this.order = order;
+		if ("desc".equalsIgnoreCase(order)||"asc".equalsIgnoreCase(order)){
+			this.order = order;
+		}
 	}
 
 	public String getOrderBy() {

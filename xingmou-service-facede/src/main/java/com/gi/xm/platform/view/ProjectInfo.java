@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.Map;
 
 public class ProjectInfo implements Serializable {
 
@@ -192,8 +193,9 @@ public class ProjectInfo implements Serializable {
 	 * @Fields updateTime : 最后更新时间
 	 */
 	private Timestamp updateTime;
-		
-    
+
+
+
 	public Long getId(){
 		return id;
 	}
@@ -481,4 +483,5 @@ public class ProjectInfo implements Serializable {
 	public void setUpdateTime(Timestamp updateTime){
 		this.updateTime = updateTime;
 	}
-    }
+
+}

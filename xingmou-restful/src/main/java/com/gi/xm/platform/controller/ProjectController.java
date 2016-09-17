@@ -6,10 +6,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 
 import com.gi.xm.platform.view.ProjectSearchTitleInfo;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.gi.xm.platform.view.common.MessageInfo;
 import com.gi.xm.platform.view.common.QueryResultInfo;
@@ -72,12 +69,14 @@ public class ProjectController {
 
 	@RequestMapping("search")
 	@ResponseBody
-	public MessageInfo<QueryResultInfo<ProjectInfo>>  searchProject (ProjectQueryInfo projectQueryInfo) {
-        projectQueryInfo.setDistrictIds(new Long[]{1l,9l,13l,19l});
-        projectQueryInfo.setIndustrySubIds(new Long[]{39l,40l,38l,71l,159l});
-        projectQueryInfo.setCreateDateStart("2000-01-01 00:00:00");
-        projectQueryInfo.setCreateDateEnd("2017-01-01 00:00:00");
-        projectQueryInfo.setTitle("饿");
+	public MessageInfo<QueryResultInfo<ProjectInfo>>  searchProject (@RequestBody ProjectQueryInfo projectQueryInfo) {
+        if ("newestEventDate".equalsIgnoreCase(projectQueryInfo.getOrderBy())){
+            projectQueryInfo.setOrderBy("newest_event_date");
+        }else {
+            projectQueryInfo.setOrderBy(null);
+        }
+        String returnFields = projectQueryInfo.getSearchFields();
+        projectQueryInfo.setReturnFields(returnFields);
 		MessageInfo<QueryResultInfo<ProjectInfo>> resultMessageInfo = projectFacede.searchProject(projectQueryInfo);
 		return resultMessageInfo;
 	}

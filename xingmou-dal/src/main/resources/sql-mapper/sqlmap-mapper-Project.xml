@@ -176,7 +176,11 @@
 	<sql id="selectFields">
 	id,title,pic,pic_big,picshow,weblink,ceo_name,company_id,company_name,industry_id,industry_sub_id,industry_name,industry_sub_name,district_id,district_name,district_sub_id,district_sub_name,newest_event_id,newest_event_date,newest_event_round,newest_event_round_id,newest_event_money,source_id,create_date,status,business_model,industry_pain_points,team_score,operation_score,score,time_span,invest_info,invest_num,invest_money,load_time,update_time
 	</sql>
-	
+
+	<sql id="searchFields">
+		id,title,pic,picshow,weblink,ceo_name,company_id,company_name,industry_id,industry_sub_id,industry_name,industry_sub_name,district_id,district_name,district_sub_id,district_sub_name,newest_event_id,newest_event_date,newest_event_round,newest_event_round_id,newest_event_money,source_id,create_date,status,business_model,industry_pain_points,team_score,operation_score,score,time_span,invest_info,invest_num,invest_money,load_time,update_time
+	</sql>
+
 	<select id="selectAll" resultMap="BaseResultMap">
 		SELECT
 		<include refid="selectFields" />
@@ -236,7 +240,12 @@
 
     <select id="searchProject" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.ProjectQuery">
         SELECT
-        <include refid="selectFields" />
+        <choose>
+            <when test="returnFields != null">
+                ${returnFields}
+            </when>
+            <otherwise>  <include refid="selectFields" /> </otherwise>
+        </choose>
         FROM dm_project
         <include refid="searchQueryWhereAndOrder" />
     </select>
@@ -284,7 +293,7 @@
             </if>
         </where>
         <choose>
-            <when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
+            <when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by #{orderBy} #{order}</when>
             <otherwise>order by create_date desc</otherwise>
         </choose>
     </sql>

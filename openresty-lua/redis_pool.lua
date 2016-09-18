@@ -34,7 +34,7 @@ end
 --关闭连接池
 function redis_pool:close()
     if ngx.ctx[redis_pool] then
-        ngx.ctx[redis_pool]:set_keepalive(60000, 300)
+        ngx.ctx[redis_pool]:set_keepalive(60000, 30)
         ngx.ctx[redis_pool] = nil
     end
 end
@@ -46,19 +46,15 @@ function redis_pool:get_key(str)
         return false,err
     end
     local val ,err = client:get(str)
+    if not val == ngx.null then
+        local uid = val['email']
+        if uid == ngx.null then
+            return false,"用户不存在",val
+        end
+        client:expire(key,7200)
+        client:incr("count:"..val,1)
+    end
     --self:close()
     return true,"获取key成功",val
 end
-
---设置key的值
-function redis_pool:set_key(str,value)
-    local res,err,client = self:get_connect()
-    if not res then
-        return false,err
-    end
-    client:set(str,value)
-    --self:close()
-    return true,"成功设置key"
-end
-
 return redis_pool

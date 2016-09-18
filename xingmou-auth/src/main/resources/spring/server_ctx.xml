@@ -26,7 +26,7 @@
 	<!-- <import resource="classpath*:redis/userRepository-context.xml" /> -->
 
 	<!-- 用于初始化不同项目的请求地址，存入redis中 -->
-	 <bean id="com.galaxyinternet.framework.core.config.ConfigBean" class="com.galaxyinternet.framework.core.config.ConfigBean">
+	<!--  <bean id="com.galaxyinternet.framework.core.config.ConfigBean" class="com.galaxyinternet.framework.core.config.ConfigBean">
 		<constructor-arg index="0" value="endpoint.properties" />
 		<constructor-arg index="1">
 			<list>
@@ -34,5 +34,5 @@
 			</list>
 		</constructor-arg>
 		<constructor-arg index="2" ref="cache" />
-	</bean>
+	</bean> -->
 </beans>

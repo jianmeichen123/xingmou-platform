@@ -55,7 +55,8 @@ public class InvestfirmsDataYearQueryInfo extends QueryInfo {
 	private Timestamp addTime;
 	
 	private Timestamp updateTime;
-		
+	private String searchFields ="id,investfirm_name,round_num,round_money" ;
+
     
 	public Long getId(){
 		return id;
@@ -224,4 +225,13 @@ public class InvestfirmsDataYearQueryInfo extends QueryInfo {
 	public void setUpdateTime(Timestamp updateTime){
 		this.updateTime = updateTime;
 	}
-    }
+
+	public String getSearchFields() {
+		return searchFields;
+	}
+
+	public void setSearchFields(String searchFields) {
+		this.searchFields = searchFields;
+	}
+}
+

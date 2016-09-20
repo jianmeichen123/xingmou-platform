@@ -48,8 +48,8 @@ public class IndustryDataYearController {
             resultMessageInfo =  industryDataYearFacede.queryIndustryDataYear(industryDataYearQueryInfo);
         } else {
             //一级行业
-
-            resultMessageInfo =  industryFirstDataYearFacede.queryIndustryFirstDataYear(industryDataYearQueryInfo);
+            IndustryFirstDataYearQueryInfo  industryFirstDataYearQueryInfo = (IndustryFirstDataYearQueryInfo)industryDataYearQueryInfo;
+            resultMessageInfo =  industryFirstDataYearFacede.queryIndustryFirstDataYear(industryFirstDataYearQueryInfo);
         }
 
 		return resultMessageInfo;

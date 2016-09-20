@@ -2,10 +2,8 @@ package com.gi.xm.platform.facede;
 
 
 import java.util.List;
-import java.util.Date;
 
 import com.gi.xm.platform.view.IndustryDataYearInfo;
-import com.gi.xm.platform.view.IndustryDataYearQueryInfo;
 import com.gi.xm.platform.view.common.MessageInfo;
 import com.gi.xm.platform.view.common.QueryResultInfo;
 import com.gi.xm.platform.view.IndustryFirstDataYearInfo;
@@ -22,15 +20,16 @@ public interface IndustryFirstDataYearFacede {
 		
     MessageInfo<List<IndustryFirstDataYearInfo>> getAllIndustryFirstDataYear();
 			
-    MessageInfo<QueryResultInfo<IndustryDataYearInfo>> queryIndustryFirstDataYear(IndustryDataYearQueryInfo industryFirstDataYearQueryInfo);
-
-
+    MessageInfo<QueryResultInfo<IndustryDataYearInfo>> queryIndustryFirstDataYear(IndustryFirstDataYearQueryInfo industryFirstDataYearQueryInfo);
+	
+		
 	MessageInfo<List<IndustryFirstDataYearInfo>> getListByIndustryIdYaar(Integer industryId, Integer yaar);
 			
-	MessageInfo<List<IndustryFirstDataYearInfo>> getListByYaar(Integer yaar);
-			
-	MessageInfo<List<IndustryFirstDataYearInfo>> getListByIndustryId(Integer industryId);
-			
+	MessageInfo<List<IndustryFirstDataYearInfo>> getListByYaar(Integer[] yaars);
 
+
+	MessageInfo<List<IndustryFirstDataYearInfo>> getListByIndustryId(Integer industryId);
+
+		
 
 }

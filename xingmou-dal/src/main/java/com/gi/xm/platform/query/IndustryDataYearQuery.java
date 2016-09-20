@@ -3,6 +3,7 @@ package com.gi.xm.platform.query;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 public class IndustryDataYearQuery extends Query {
 	
@@ -55,8 +56,16 @@ public class IndustryDataYearQuery extends Query {
 	private Timestamp addTime;
 			
 	private Timestamp updateTime;
-		
-    
+
+	private List<Long> yearList;
+
+	public List<Long> getYearList() {
+		return yearList;
+	}
+
+	public void setYearList(List<Long> yearList) {
+		this.yearList = yearList;
+	}
 	public Long getId(){
 		return id;
 	}

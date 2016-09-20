@@ -7,6 +7,5 @@ import java.sql.Timestamp;
 import com.gi.xm.platform.view.common.QueryInfo;
 
 public class IndustryFirstDataYearQueryInfo extends IndustryDataYearQueryInfo {
-	
 
     }

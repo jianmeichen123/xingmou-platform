@@ -2,10 +2,10 @@
 package com.gi.xm.platform.facede.impl;
 
 import java.util.List;
-import java.util.Date;
+
 import com.alibaba.dubbo.config.annotation.Service;
+import com.gi.xm.platform.pojo.IndustryDataYear;
 import com.gi.xm.platform.view.IndustryDataYearInfo;
-import com.gi.xm.platform.view.IndustryDataYearQueryInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 
@@ -78,16 +78,11 @@ public class IndustryFirstDataYearFacedeImpl implements IndustryFirstDataYearFac
 		return messageInfo;	
 	}
 
-	@Override
-	public MessageInfo<QueryResultInfo<IndustryDataYearInfo>> queryIndustryFirstDataYear(IndustryDataYearQueryInfo industryFirstDataYearQueryInfo) {
-		return null;
-	}
-
-	public MessageInfo<QueryResultInfo<IndustryFirstDataYearInfo>> queryIndustryFirstDataYear(IndustryFirstDataYearQueryInfo industryFirstDataYearQueryInfo) {
+	public MessageInfo<QueryResultInfo<IndustryDataYearInfo>> queryIndustryFirstDataYear(IndustryFirstDataYearQueryInfo industryFirstDataYearQueryInfo) {
 		IndustryFirstDataYearQuery industryFirstDataYearQuery = IndustryFirstDataYearConvertor.toIndustryFirstDataYearQuery(industryFirstDataYearQueryInfo);
 		Message<QueryResult<IndustryFirstDataYear>> message = industryFirstDataYearBiz.queryIndustryFirstDataYear(industryFirstDataYearQuery);
-		MessageInfo<QueryResultInfo<IndustryFirstDataYearInfo>> messageInfo = new MessageInfo<QueryResultInfo<IndustryFirstDataYearInfo>>();
-		QueryResultInfo<IndustryFirstDataYearInfo> queryResultInfo = IndustryFirstDataYearConvertor.toQueryResultInfo(message.getData());
+		MessageInfo<QueryResultInfo<IndustryDataYearInfo>> messageInfo = new MessageInfo<QueryResultInfo<IndustryDataYearInfo>>();
+		QueryResultInfo<IndustryDataYearInfo> queryResultInfo = IndustryFirstDataYearConvertor.toQueryResultInfo1(message.getData());
 		messageInfo.setData(queryResultInfo);
 		return messageInfo;
 	}
@@ -106,6 +101,10 @@ public class IndustryFirstDataYearFacedeImpl implements IndustryFirstDataYearFac
 			
 
 
+
+			
+
+
 	public MessageInfo<List<IndustryFirstDataYearInfo>> getListByIndustryId(Integer industryId){
 	
 		Message<List<IndustryFirstDataYear>> message  = industryFirstDataYearBiz.getListByIndustryId(industryId);
@@ -117,32 +116,13 @@ public class IndustryFirstDataYearFacedeImpl implements IndustryFirstDataYearFac
 			
 
 
-	public MessageInfo<List<IndustryFirstDataYearInfo>> getListByYaar(Integer yaar){
+	public MessageInfo<List<IndustryFirstDataYearInfo>> getListByYaar(Integer[] yaars){
 	
-		Message<List<IndustryFirstDataYear>> message  = industryFirstDataYearBiz.getListByYaar(yaar);
+		Message<List<IndustryFirstDataYear>> message  = industryFirstDataYearBiz.getListByYaar(yaars);
 		MessageInfo<List<IndustryFirstDataYearInfo>> messageInfo = MessageConvertor.toMessageInfo(message);
 		List<IndustryFirstDataYearInfo> industryFirstDataYearInfoList = IndustryFirstDataYearConvertor.toIndustryFirstDataYearInfoList(message.getData());
 		messageInfo.setData(industryFirstDataYearInfoList);
 		return messageInfo;	
 	}
-
-
-	public MessageInfo<List<IndustryFirstDataYearInfo>> getListByIndustryIdYaar(Integer industryId, Integer[] yaars){
-
-		Message<List<IndustryFirstDataYear>> message  = industryFirstDataYearBiz.getListByIndustryIdYaar(industryId, yaars);
-		MessageInfo<List<IndustryFirstDataYearInfo>> messageInfo = MessageConvertor.toMessageInfo(message);
-		List<IndustryFirstDataYearInfo> industryDataYearInfoList = IndustryFirstDataYearConvertor.toIndustryDataYearInfoList(message.getData());
-		messageInfo.setData(industryDataYearInfoList);
-		return messageInfo;
-	}
-
-
-	public MessageInfo<List<IndustryFirstDataYearInfo>> getListByYaar(Integer[] yaars){
-
-		Message<List<IndustryFirstDataYear>> message  = industryFirstDataYearBiz.getListByYaar(yaars);
-		MessageInfo<List<IndustryFirstDataYearInfo>> messageInfo = MessageConvertor.toMessageInfo(message);
-		List<IndustryFirstDataYearInfo> industryDataYearInfoList = IndustryFirstDataYearConvertor.toIndustryDataYearInfoList(message.getData());
-		messageInfo.setData(industryDataYearInfoList);
-		return messageInfo;
-	}
+		
 }

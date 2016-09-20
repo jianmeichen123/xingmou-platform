@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<meta name="renderer" content="webkit"/>
+<title>登录</title>
+
+<link rel="shortcut icon" th:href="@{/img/favicon.gif}" type="image/gif" />
+<link  rel="stylesheet" th:href="@{/css/axure.css}"/>
+<link  rel="stylesheet" th:href="@{/css/introduce.css}"/>
+    <!-- Bootstrap -->
+
+    <!-- jsp文件头和头部 -->
+</head>
+<body style="background:url(/user/img/bj.jpg) no-repeat;background-size:cover;">
+<div class="log_tit"><img th:src="@{/img/saasa_03.png}"/></div>
+<div class="wicket">
+    <div class="log_in">
+
+        <div class="form-group group">
+            <input type="text" name="nickName" class="ico_log_close" id="nickName" placeholder="请输入用户名"/>
+        </div>
+        <div class="form-group group">
+            <input type="password" name="password" class="ico_log_open" id="password" placeholder="请输入密码"/>
+        </div>
+
+        <div class="log_button " onclick="login()">登录</div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" th:src="@{/js/jquery-1.12.3.min.js}" ></script>
+<script type="text/javascript" th:src="@{/js/common.js}" ></script>
+
+<script type="text/javascript" th:src="@{/js/platformUrl.js}" ></script>
+<script type="text/javascript" th:src="@{/js/layer/layer.js}" ></script>
+<script type="text/javascript" th:src="@{/js/jquery.placeholder.js}" ></script>
+
+<script type="text/javascript" th:src="@{/js/axure.js}" ></script>
+<script type="text/javascript" th:src="@{/js/json2.js}" ></script>
+<script type="text/javascript" th:src="@{/js/base64.js}" ></script>
+<script type="text/javascript" th:src="@{/js/login.js}" ></script>
+</html>

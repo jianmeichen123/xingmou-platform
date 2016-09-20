@@ -26,7 +26,7 @@ public interface IndustryFirstDataYearDAO {
     int updateByPrimaryKey(IndustryFirstDataYear industryFirstDataYear);
 	
 				
-	List<IndustryFirstDataYear> selectByIndustryIdYaar(@Param("industryId") Integer industryId, @Param("yaar") Integer yaar);
+	List<IndustryFirstDataYear> selectByIndustryIdYaar(@Param("industryId") Integer industryId, @Param("yaars") Integer[] yaars);
 				
 
 	List<IndustryFirstDataYear> selectByIndustryId(@Param("industryId") Integer industryId);

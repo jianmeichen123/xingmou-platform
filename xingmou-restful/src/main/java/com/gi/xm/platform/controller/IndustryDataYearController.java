@@ -119,11 +119,13 @@ public class IndustryDataYearController {
     @ResponseBody
     public MessageInfo<List<IndustryDataYearInfo>> analysis(
             @PathVariable("year") Integer[] years,@PathVariable("industryId") Integer industryId,@PathVariable("industrySubId") Integer industrySubId){
+
+        //子行业
         if (years != null  && industrySubId != null){
             MessageInfo<List<IndustryDataYearInfo>> messageInfo = industryDataYearFacede.getListByYaarIndustrySubId(years, industrySubId);
             return messageInfo;
         }else if(years != null  && industryId != null){
-            MessageInfo<List<IndustryDataYearInfo>> messageInfo = industryDataYearFacede.getListByIndustryIdYaar(industryId, years);
+            MessageInfo<List<IndustryDataYearInfo>> messageInfo = industryFirstDataYearFacede.getListByIndustryIdYaar(industryId, years);
             return messageInfo;
         }else if (years != null){
             MessageInfo<List<IndustryDataYearInfo>> messageInfo = industryDataYearFacede.getListByYaar(years);

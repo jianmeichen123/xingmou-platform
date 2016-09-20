@@ -90,11 +90,11 @@ public class IndustryFirstDataYearFacedeImpl implements IndustryFirstDataYearFac
 		
 
 
-	public MessageInfo<List<IndustryFirstDataYearInfo>> getListByIndustryIdYaar(Integer industryId, Integer yaar){
+	public MessageInfo<List<IndustryDataYearInfo>> getListByIndustryIdYaar(Integer industryId, Integer[] yaars){
 	
-		Message<List<IndustryFirstDataYear>> message  = industryFirstDataYearBiz.getListByIndustryIdYaar(industryId, yaar);
-		MessageInfo<List<IndustryFirstDataYearInfo>> messageInfo = MessageConvertor.toMessageInfo(message);
-		List<IndustryFirstDataYearInfo> industryFirstDataYearInfoList = IndustryFirstDataYearConvertor.toIndustryFirstDataYearInfoList(message.getData());
+		Message<List<IndustryFirstDataYear>> message  = industryFirstDataYearBiz.getListByIndustryIdYaar(industryId, yaars);
+		MessageInfo<List<IndustryDataYearInfo>> messageInfo = MessageConvertor.toMessageInfo(message);
+		List<IndustryDataYearInfo> industryFirstDataYearInfoList = IndustryFirstDataYearConvertor.toIndustryFirstDataYearInfoList1(message.getData());
 		messageInfo.setData(industryFirstDataYearInfoList);
 		return messageInfo;	
 	}

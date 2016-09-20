@@ -137,11 +137,11 @@ public class IndustryFirstDataYearBiz  {
     	}
 
 		
-	public Message<List<IndustryFirstDataYear>> getListByIndustryIdYaar(Integer industryId, Integer yaar){
+	public Message<List<IndustryFirstDataYear>> getListByIndustryIdYaar(Integer industryId,Integer[] yaars){
 
 		Message<List<IndustryFirstDataYear>> message = new Message<List<IndustryFirstDataYear>>();
 		try {
-			List<IndustryFirstDataYear> industryFirstDataYearList = industryFirstDataYearDAO.selectByIndustryIdYaar(industryId, yaar);
+			List<IndustryFirstDataYear> industryFirstDataYearList = industryFirstDataYearDAO.selectByIndustryIdYaar(industryId, yaars);
 			message.setData(industryFirstDataYearList);
 		} catch (Exception e) {
 			LOGGER.error("getListByIndustryIdYaar","查询IndustryFirstDataYear失败", e);

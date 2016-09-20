@@ -34,9 +34,7 @@ function checkform(){
  
  function logincallback(data){
 	 if(data.result.status=="OK"){
-		 var sessionId = data.header.sessionId;
-		 var userId = data.header.userId;
-		 forwardWithHeader(platformUrl.xmcx,sessionId,userId);
+		 forwardWithHeader(platformUrl.xmcx);
 		return false;
 	 }else{
 		 layer.msg(data.result.message);

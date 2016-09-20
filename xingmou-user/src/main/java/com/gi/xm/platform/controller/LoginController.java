@@ -48,7 +48,15 @@ public class LoginController extends BaseControllerImpl<User, User> {
 	 * 跳转登录
 	 */
 	@RequestMapping(value = "/toLogin")
-	public String toLogin() {
+	public String toLogin(HttpServletResponse response) {
+/*        Cookie cookie = new Cookie("_uid_", null);
+        cookie.setMaxAge(0);
+        cookie.setDomain("xmlocal.gi.com");
+        response.addCookie(cookie);
+        cookie = new Cookie("s_",null);
+        cookie.setMaxAge(0);
+        cookie.setDomain("xmlocal.gi.com");
+        response.addCookie(cookie);*/
 		return "login";
 	}
 
@@ -80,13 +88,17 @@ public class LoginController extends BaseControllerImpl<User, User> {
 			setCacheSessionId("xm", user, sessionId);
 			responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "登录成功！"));
 
+
+
             Cookie cookie = new Cookie("_uid_", sessionId);
             cookie.setMaxAge(60*60*24*2);
             cookie.setDomain("xmlocal.gi.com");
+            cookie.setPath("/");
             response.addCookie(cookie);
             cookie = new Cookie("s_", "xm");
             cookie.setMaxAge(60*60*24*2);
             cookie.setDomain("xmlocal.gi.com");
+            cookie.setPath("/");
             response.addCookie(cookie);
             //logger.info(user.getEmail()+" login_success xm");
 		}
@@ -113,7 +125,11 @@ public class LoginController extends BaseControllerImpl<User, User> {
 	 * @param user
 	 */
 	private void setCacheSessionId(String from, User user, String sessionId) {
-		cache.set("xm:"+from+":"+sessionId, JSON.toJSONString(user)); // 将sessionId存入cache
+		User u = new User();
+        u.setEmail(user.getEmail());
+        u.setRoleId(user.getRoleId());
+        u.setRealName(user.getRealName());
+        cache.setValue("xm:"+from+":"+sessionId, JSON.toJSONString(u)); // 将sessionId存入cache
 	}
 
 	/**

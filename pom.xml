@@ -28,6 +28,7 @@
         <module>xingmou-ictclas</module>
         <module>xingmou-restful</module>
         <module>xingmou-news-manage</module>
+        <module>xingmou-user</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -55,6 +55,32 @@ public class LoginController extends BaseControllerImpl<User, User> {
 		return "login";
 	}
 
+    @RequestMapping(value = "/auth")
+    public String auth(HttpServletResponse response, @CookieValue("_uid_")String uid) {
+        User u = (User) cache.get(uid);
+        if (u == null){
+            return "login";
+        }
+        String key = "xm:fx:"+uid;
+        String user = cache.getValue(key);
+        if(user!=null) {
+            return "redirect:" + xmIndex;
+        }
+        setCacheSessionId("fx", u, uid);
+
+        Cookie cookie = new Cookie("_uid_", uid);
+        cookie.setMaxAge(60*60*24*2);
+        cookie.setDomain("xmdev.gi.com");
+        cookie.setPath("/");
+        response.addCookie(cookie);
+        cookie = new Cookie("s_", "fx");
+        cookie.setMaxAge(60*60*24*2);
+        cookie.setDomain("xmdev.gi.com");
+        cookie.setPath("/");
+        response.addCookie(cookie);
+        return "login";
+    }
+
 	/**
 	 * 用户登录
 	 * 
@@ -98,20 +124,6 @@ public class LoginController extends BaseControllerImpl<User, User> {
             //logger.info(user.getEmail()+" login_success xm");
 		}
 		return responsebody;
-	}
-
-	/**
-	 * @author zcy
-	 * @param user
-	 * @param sessionId
-	 * @return
-	 */
-	private Header getHeader(User user, String sessionId) {
-		Header header = new Header();
-		header.setLoginName(user.getEmail());
-		header.setSessionId(sessionId);
-		header.setUserId(user.getId());
-		return header;
 	}
 
 	/**

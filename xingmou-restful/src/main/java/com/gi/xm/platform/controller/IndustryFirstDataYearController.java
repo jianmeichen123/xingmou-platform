@@ -59,14 +59,7 @@ public class IndustryFirstDataYearController {
 	}
 
 
-		
-    @RequestMapping("getListByIndustryIdYaar")
-    @ResponseBody
-	public MessageInfo<List<IndustryFirstDataYearInfo>> getListByIndustryIdYaar(Integer industryId, Integer yaar){
-		MessageInfo<List<IndustryFirstDataYearInfo>> messageInfo = industryFirstDataYearFacede.getListByIndustryIdYaar(industryId, yaar);
-		return messageInfo;
-	}
-			
+
 
     @RequestMapping("getListByIndustryId")
     @ResponseBody

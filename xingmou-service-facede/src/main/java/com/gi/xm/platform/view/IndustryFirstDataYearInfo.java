@@ -7,5 +7,4 @@ import java.util.Date;
 
 public class IndustryFirstDataYearInfo extends IndustryDataYearInfo {
 
-
     }

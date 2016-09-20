@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 public class IndustryDataYearInfo implements Serializable {
 
@@ -122,8 +123,16 @@ public class IndustryDataYearInfo implements Serializable {
 	 * @Fields updateTime : 
 	 */
 	private Timestamp updateTime;
-		
-    
+	private List<Long> yearList;
+
+	public List<Long> getYearList() {
+		return yearList;
+	}
+
+	public void setYearList(List<Long> yearList) {
+		this.yearList = yearList;
+	}
+
 	public Long getId(){
 		return id;
 	}

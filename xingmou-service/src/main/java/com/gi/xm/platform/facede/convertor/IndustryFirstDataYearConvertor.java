@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.util.Date;
+
+import com.gi.xm.platform.view.IndustryDataYearInfo;
 import org.springframework.cglib.beans.BeanCopier;
 
 import com.gi.xm.platform.view.IndustryFirstDataYearInfo;
@@ -47,6 +49,18 @@ public abstract class IndustryFirstDataYearConvertor {
 		return industryFirstDataYearInfoList;
 	}
 
+	public static List<IndustryDataYearInfo> toIndustryFirstDataYearInfoList1(List<IndustryFirstDataYear> industryFirstDataYearList)
+	{
+		if (industryFirstDataYearList == null || industryFirstDataYearList.isEmpty()) {
+			return null;
+		}
+		List<IndustryDataYearInfo> industryFirstDataYearInfoList = new ArrayList<IndustryDataYearInfo>(industryFirstDataYearList.size());
+		for (IndustryFirstDataYear industryFirstDataYear : industryFirstDataYearList) {
+			industryFirstDataYearInfoList.add(toIndustryFirstDataYearInfo(industryFirstDataYear));
+		}
+		return industryFirstDataYearInfoList;
+	}
+
 	public static List<IndustryFirstDataYear> toIndustryFirstDataYearList(List<IndustryFirstDataYearInfo> industryFirstDataYearInfoList)
 	{
 		if (industryFirstDataYearInfoList == null || industryFirstDataYearInfoList.isEmpty()) {
@@ -79,46 +93,13 @@ public abstract class IndustryFirstDataYearConvertor {
 		return queryResultInfo;
 	}
 
-
-	public static List<IndustryFirstDataYear> toIndustryDataYearList(List<IndustryFirstDataYearInfo> industryDataYearInfoList)
+	public static QueryResultInfo<IndustryDataYearInfo> toQueryResultInfo1(QueryResult<IndustryFirstDataYear> queryResult)
 	{
-		if (industryDataYearInfoList == null || industryDataYearInfoList.isEmpty()) {
-			return null;
-		}
-		List<IndustryFirstDataYear> industryDataYearList = new ArrayList<IndustryFirstDataYear>(industryDataYearInfoList.size());
-		for (IndustryFirstDataYearInfo industryDataYearInfo : industryDataYearInfoList) {
-			industryDataYearList.add(toIndustryDataYear(industryDataYearInfo));
-		}
-		return industryDataYearList;
-	}
-
-	public static IndustryFirstDataYear toIndustryDataYear(IndustryFirstDataYearInfo industryDataYearInfo)
-	{
-		IndustryFirstDataYear industryDataYear = new IndustryFirstDataYear();
-		beanCopierForIndustryFirstDataYear.copy(industryDataYearInfo, industryDataYear, null);
-		return industryDataYear;
-	}
-
-
-	public static List<IndustryFirstDataYearInfo> toIndustryDataYearInfoList(List<IndustryFirstDataYear> industryDataYearList)
-	{
-		if (industryDataYearList == null || industryDataYearList.isEmpty()) {
-			return null;
-		}
-		List<IndustryFirstDataYearInfo> industryDataYearInfoList = new ArrayList<IndustryFirstDataYearInfo>(industryDataYearList.size());
-		for (IndustryFirstDataYear industryDataYear : industryDataYearList) {
-			industryDataYearInfoList.add(toIndustryDataYearInfo(industryDataYear));
-		}
-		return industryDataYearInfoList;
-	}
-
-	public static IndustryFirstDataYearInfo toIndustryDataYearInfo(IndustryFirstDataYear industryDataYear)
-	{
-		if (industryDataYear == null) {
-			return null;
-		}
-		IndustryFirstDataYearInfo industryDataYearInfo = new IndustryFirstDataYearInfo();
-		beanCopierForIndustryFirstDataYearInfo.copy(industryDataYear, industryDataYearInfo, null);
-		return industryDataYearInfo;
+		QueryResultInfo<IndustryDataYearInfo> queryResultInfo = new QueryResultInfo<IndustryDataYearInfo>();
+		queryResultInfo.setPages(queryResult.getPages());
+		queryResult.setRecords(queryResult.getRecords());
+		queryResultInfo.setTotal(queryResult.getTotal());
+		queryResultInfo.setRecords(toIndustryFirstDataYearInfoList1(queryResult.getRecords()));
+		return queryResultInfo;
 	}
 }

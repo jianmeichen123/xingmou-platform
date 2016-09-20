@@ -51,11 +51,11 @@ public class LoginController extends BaseControllerImpl<User, User> {
 	public String toLogin(HttpServletResponse response) {
 /*        Cookie cookie = new Cookie("_uid_", null);
         cookie.setMaxAge(0);
-        cookie.setDomain("xmlocal.gi.com");
+        cookie.setDomain("xmdev.gi.com");
         response.addCookie(cookie);
         cookie = new Cookie("s_",null);
         cookie.setMaxAge(0);
-        cookie.setDomain("xmlocal.gi.com");
+        cookie.setDomain("xmdev.gi.com");
         response.addCookie(cookie);*/
 		return "login";
 	}
@@ -92,12 +92,12 @@ public class LoginController extends BaseControllerImpl<User, User> {
 
             Cookie cookie = new Cookie("_uid_", sessionId);
             cookie.setMaxAge(60*60*24*2);
-            cookie.setDomain("xmlocal.gi.com");
+            cookie.setDomain("xmdev.gi.com");
             cookie.setPath("/");
             response.addCookie(cookie);
             cookie = new Cookie("s_", "xm");
             cookie.setMaxAge(60*60*24*2);
-            cookie.setDomain("xmlocal.gi.com");
+            cookie.setDomain("xmdev.gi.com");
             cookie.setPath("/");
             response.addCookie(cookie);
             //logger.info(user.getEmail()+" login_success xm");

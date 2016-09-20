@@ -30,5 +30,5 @@ public class LabelFacedeImpl implements LabelFacede {
 		messageInfo.setData(labelInfoList);
 		return messageInfo;	
 	}
-		
+	
 }

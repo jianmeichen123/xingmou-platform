@@ -20,7 +20,9 @@ public interface ProjectPersonFacede {
     MessageInfo<List<ProjectPersonInfo>> getAllProjectPerson();
 			
     MessageInfo<QueryResultInfo<ProjectPersonInfo>> queryProjectPerson(ProjectPersonQueryInfo projectPersonQueryInfo);
-	
+
+	MessageInfo<List<ProjectPersonInfo>> queryPersonByProjectId(Integer projectId, Integer type);
+
 	
 
 }

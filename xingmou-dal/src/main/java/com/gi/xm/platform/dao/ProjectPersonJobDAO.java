@@ -24,6 +24,8 @@ public interface ProjectPersonJobDAO {
 	List<ProjectPersonJob> queryProjectPersonJob(ProjectPersonJobQuery projectPersonJobQuery);
 			
     int updateByPrimaryKey(ProjectPersonJob projectPersonJob);
+
+	List<ProjectPersonJob> selectByPersonId(@Param("idList") List<Integer> idList);
 	
 		
 

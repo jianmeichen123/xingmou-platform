@@ -24,6 +24,8 @@ public interface ProjectPersonStudyDAO {
 	List<ProjectPersonStudy> queryProjectPersonStudy(ProjectPersonStudyQuery projectPersonStudyQuery);
 			
     int updateByPrimaryKey(ProjectPersonStudy projectPersonStudy);
+
+	List<ProjectPersonStudy> selectListByPid(@Param("idList") List<Integer> idList);
 	
 		
 

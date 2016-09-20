@@ -124,6 +124,19 @@ public class ProjectPersonBiz  {
 		return message;
 	}
 
+
+	public Message<List<ProjectPerson>> getPersonByProjectId(Integer projectId , Integer type) {
+		Message<List<ProjectPerson>> message = new Message<List<ProjectPerson>>();
+		try {
+			List<ProjectPerson> projectPersonList = projectPersonDAO.getPersonByProjectId(projectId,type);
+			message.setData( projectPersonList);
+		} catch (Exception e) {
+			LOGGER.error("getPersonByProjectId","查询getPersonByProjectId失败", e);
+			message.setMessageStatus(MessageStatus.SYS_ERROR);
+		}
+		return message;
+	}
+
 	
 
 }

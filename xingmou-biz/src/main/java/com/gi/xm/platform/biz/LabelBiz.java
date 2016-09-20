@@ -13,6 +13,7 @@ import com.gi.xm.platform.biz.common.Message;
 import com.gi.xm.platform.biz.common.MessageStatus;
 import com.gi.xm.platform.dao.LabelDAO;
 import com.gi.xm.platform.pojo.Label;
+import com.gi.xm.platform.pojo.ProjectPersonStudy;
 
 @Service("labelBiz")
 public class LabelBiz  {
@@ -36,6 +37,17 @@ public class LabelBiz  {
 		}
 		return message;
 	}
-		
 
+
+	public Message<List<Label>> getListByTypeRelationId(Integer type, List<Integer> idList) {
+		Message<List<Label>> message = new Message<List<Label>>();
+		try {
+			List<Label> labelList = labelDAO.selectByIdList(type, idList);
+			message.setData(labelList);
+		} catch (Exception e) {
+			LOGGER.error("getListByTypeRelationId","查询Label失败", e);
+			message.setMessageStatus(MessageStatus.SYS_ERROR);
+		}
+		return message;
+	}
 }

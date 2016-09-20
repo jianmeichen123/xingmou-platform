@@ -1,9 +1,7 @@
 package com.gi.xm.platform.pojo;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.sql.Timestamp;
-import java.util.Date;
+import java.util.List;
 
 public class ProjectPerson extends Pojo {
 
@@ -14,6 +12,8 @@ public class ProjectPerson extends Pojo {
         public static final String IS_CORE_MEMBER = "1核心成员 0非核心成员";
         public static final String ADD_TIME = "addTime";
         public static final String UPDATE_TIME = "updateTime";
+        
+       
     
 	
 	/**
@@ -31,6 +31,18 @@ public class ProjectPerson extends Pojo {
 	 */
 	private String name;
 	
+	/**
+	 * @Fields name : 职位
+	 */
+	private String postionName;
+	public String getPostionName() {
+		return postionName;
+	}
+
+	public void setPostionName(String postionName) {
+		this.postionName = postionName;
+	}
+
 	/**
 	 * @Fields icon : 头像
 	 */
@@ -51,7 +63,46 @@ public class ProjectPerson extends Pojo {
 	 */
 	private Timestamp updateTime;
 	
-    
+	/**
+	 * 成员工作经历
+	 * @return
+	 */
+	private List<ProjectPersonJob> jobList;
+	/**
+	 * 成员学习经历
+	 * @return
+	 */
+	private List<ProjectPersonStudy> studyList;
+	/**
+	 * 标签列表
+	 * @return
+	 */
+	private List<Label> labelList;
+	
+	public List<ProjectPersonJob> getJobList() {
+		return jobList;
+	}
+
+	public void setJobList(List<ProjectPersonJob> jobList) {
+		this.jobList = jobList;
+	}
+
+	public List<ProjectPersonStudy> getStudyList() {
+		return studyList;
+	}
+
+	public void setStudyList(List<ProjectPersonStudy> studyList) {
+		this.studyList = studyList;
+	}
+
+	public List<Label> getLabelList() {
+		return labelList;
+	}
+
+	public void setLabelList(List<Label> labelList) {
+		this.labelList = labelList;
+	}
+
 	public Integer getId(){
 		return id;
 	}

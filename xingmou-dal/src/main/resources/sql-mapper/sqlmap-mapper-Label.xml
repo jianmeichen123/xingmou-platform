@@ -100,5 +100,19 @@
 		WHERE  type = #{type,jdbcType=INTEGER}
 		AND relation_id = #{relationId,jdbcType=BIGINT} 
 	</select>
-		
+	
+	<select id="selectByIdList" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_label
+		WHERE  type = #{type,jdbcType=INTEGER}
+		<if test="idList != null">
+			AND relation_id IN
+			<foreach collection="idList" index="item" item="item" open="("
+				separator="," close=")">
+				#{item}
+			</foreach>
+		</if>	
+	</select>
+	
 </mapper>

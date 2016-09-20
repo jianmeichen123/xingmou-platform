@@ -76,7 +76,7 @@ public class ProjectFacedeImpl implements ProjectFacede {
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-		@Cacheable(value = "projectInfo",keyGenerator = "wiselyKeyGenerator")
+	//@Cacheable(value = "projectInfo",keyGenerator = "wiselyKeyGenerator")
 	public MessageInfo<ProjectInfo> getProject( Long id ){
 		
 		Message<Project> message  = projectBiz.getProject( id );

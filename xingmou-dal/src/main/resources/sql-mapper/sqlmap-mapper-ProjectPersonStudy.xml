@@ -67,6 +67,19 @@
 		FROM dm_project_person_study
 	</select>
 	
+	<select id="selectListByPid" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_project_person_study
+		<if test="idList != null">
+			WHERE person_id IN
+			<foreach collection="idList" index="item" item="item" open="("
+				separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+	</select>
+	
 	<select id="queryProjectPersonStudy" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.ProjectPersonStudyQuery">
 		SELECT
 		<include refid="selectFields" />

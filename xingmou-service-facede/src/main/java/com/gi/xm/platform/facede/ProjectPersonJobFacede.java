@@ -9,7 +9,7 @@ import com.gi.xm.platform.view.ProjectPersonJobInfo;
 import com.gi.xm.platform.view.ProjectPersonJobQueryInfo;
 
 public interface ProjectPersonJobFacede {
-		MessageInfo<Integer> deleteProjectPersonJob(Long id);
+	MessageInfo<Integer> deleteProjectPersonJob(Long id);
 		
     MessageInfo<Long> createProjectPersonJob(ProjectPersonJobInfo projectPersonJobInfo);
 		

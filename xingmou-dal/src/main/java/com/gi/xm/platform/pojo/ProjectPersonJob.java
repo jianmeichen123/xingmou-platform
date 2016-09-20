@@ -1,9 +1,7 @@
 package com.gi.xm.platform.pojo;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.sql.Timestamp;
-import java.util.Date;
+import java.util.List;
 
 public class ProjectPersonJob extends Pojo {
 
@@ -28,6 +26,8 @@ public class ProjectPersonJob extends Pojo {
 	 */
 	private Long personId;
 	
+	private List<Long> personIds;
+	 
 	/**
 	 * @Fields companyName : 公司名称
 	 */
@@ -134,5 +134,13 @@ public class ProjectPersonJob extends Pojo {
 
 	public void setUpdateTime(Timestamp updateTime){
 		this.updateTime = updateTime;
+	}
+
+	public List<Long> getPersonIds() {
+		return personIds;
+	}
+
+	public void setPersonIds(List<Long> personIds) {
+		this.personIds = personIds;
 	}
     }

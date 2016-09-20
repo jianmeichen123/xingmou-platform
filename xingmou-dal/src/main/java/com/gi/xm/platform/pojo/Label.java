@@ -1,9 +1,7 @@
 package com.gi.xm.platform.pojo;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.sql.Timestamp;
-import java.util.Date;
+import java.util.List;
 
 public class Label extends Pojo {
 
@@ -35,6 +33,17 @@ public class Label extends Pojo {
 	 */
 	private Long relationId;
 	
+	
+	private List<Long> relationIds;
+	
+	public List<Long> getRelationIds() {
+		return relationIds;
+	}
+
+	public void setRelationIds(List<Long> relationIds) {
+		this.relationIds = relationIds;
+	}
+
 	/**
 	 * @Fields addTime : 
 	 */

@@ -24,6 +24,9 @@ public interface ProjectPersonDAO {
 	List<ProjectPerson> queryProjectPerson(ProjectPersonQuery projectPersonQuery);
 			
     int updateByPrimaryKey(ProjectPerson projectPerson);
+
+
+	List<ProjectPerson> getPersonByProjectId(@Param("projectId") Integer projectId, @Param("isCoreMember") Integer type);
 	
 		
 

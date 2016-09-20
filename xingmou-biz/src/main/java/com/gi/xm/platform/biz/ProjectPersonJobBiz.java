@@ -6,20 +6,17 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-
-import com.gi.xm.platform.dao.ProjectPersonJobDAO;
 
 import com.gi.xm.platform.biz.common.Message;
 import com.gi.xm.platform.biz.common.MessageStatus;
 import com.gi.xm.platform.biz.common.QueryResult;
+import com.gi.xm.platform.dao.ProjectPersonJobDAO;
 import com.gi.xm.platform.pojo.ProjectPersonJob;
 import com.gi.xm.platform.query.ProjectPersonJobQuery;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 @Service("projectPersonJobBiz")
 public class ProjectPersonJobBiz  {
@@ -80,7 +77,7 @@ public class ProjectPersonJobBiz  {
 		return message;
 	}
 
-		public Message<ProjectPersonJob> getProjectPersonJob( Long id ){
+	public Message<ProjectPersonJob> getProjectPersonJob( Long id ){
 		Message<ProjectPersonJob> message = new Message<ProjectPersonJob>();
 		try {
 			ProjectPersonJob projectPersonJob = projectPersonJobDAO.selectByPrimaryKey( id );
@@ -92,7 +89,25 @@ public class ProjectPersonJobBiz  {
 		}
 		return message;
 	}
-
+	
+	/**
+	 * 根据personId获取教育经历列表不分页
+	 * @param idList
+	 * @return
+	 */
+	public Message<List<ProjectPersonJob>> getPersonJobByPid(List<Integer> idList){
+	
+			Message<List<ProjectPersonJob>> message = new Message<List<ProjectPersonJob>>();
+			try {
+				List<ProjectPersonJob> projectPersonJobList = projectPersonJobDAO.selectByPersonId(idList);
+				message.setData( projectPersonJobList);
+			} catch (Exception e) {
+				LOGGER.error("getPersonJobByPid","根据personId获取教育经历列表失败", e);
+				message.setMessageStatus(MessageStatus.SYS_ERROR);
+			}
+			return message;
+	}
+	
     public Message<List<ProjectPersonJob>> getAllProjectPersonJob(){
 
 		Message<List<ProjectPersonJob>> message = new Message<List<ProjectPersonJob>>();
@@ -123,6 +138,8 @@ public class ProjectPersonJobBiz  {
 		}
 		return message;
 	}
+	
+	
 
 	
 

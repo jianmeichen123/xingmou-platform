@@ -92,7 +92,22 @@ public class ProjectPersonStudyBiz  {
 		}
 		return message;
 	}
+	/**
+	 * 根据personId获取学习经历列表
+	 * @return
+	 */
+	public Message<List<ProjectPersonStudy>> getStudyListByPid(List<Integer> idList){
 
+			Message<List<ProjectPersonStudy>> message = new Message<List<ProjectPersonStudy>>();
+			try {
+				List<ProjectPersonStudy> projectPersonStudyList = projectPersonStudyDAO.selectListByPid(idList);
+				message.setData( projectPersonStudyList);
+			} catch (Exception e) {
+				LOGGER.error("getStudyListByPid","根据personId获取学习经历列表getStudyListByPid失败", e);
+				message.setMessageStatus(MessageStatus.SYS_ERROR);
+			}
+			return message;
+	}
     public Message<List<ProjectPersonStudy>> getAllProjectPersonStudy(){
 
 		Message<List<ProjectPersonStudy>> message = new Message<List<ProjectPersonStudy>>();

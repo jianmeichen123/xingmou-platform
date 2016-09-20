@@ -70,7 +70,12 @@ public class ProjectPersonController {
 		MessageInfo<List<ProjectPersonInfo>>  messageInfo = projectPersonFacede.getAllProjectPerson();
 		return messageInfo;
 	}
-
-
+    
+    @RequestMapping("queryPersonByProjectId")
+    @ResponseBody
+    public MessageInfo<List<ProjectPersonInfo>> queryPersonByProjectId(Integer projectId,Integer type){
+		MessageInfo<List<ProjectPersonInfo>>  messageInfo = projectPersonFacede.queryPersonByProjectId(projectId,type);
+		return messageInfo;
+	}
 	
 }

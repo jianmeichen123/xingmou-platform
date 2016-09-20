@@ -2,17 +2,19 @@ package com.gi.xm.platform.controller;
 
 import java.util.List;
 
-import com.alibaba.dubbo.config.annotation.Reference;
-
-import com.gi.xm.platform.view.ProjectSearchTitleInfo;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gi.xm.platform.view.common.MessageInfo;
-import com.gi.xm.platform.view.common.QueryResultInfo;
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.gi.xm.platform.facede.ProjectFacede;
 import com.gi.xm.platform.view.ProjectInfo;
 import com.gi.xm.platform.view.ProjectQueryInfo;
-import com.gi.xm.platform.facede.ProjectFacede;
+import com.gi.xm.platform.view.ProjectSearchTitleInfo;
+import com.gi.xm.platform.view.common.MessageInfo;
+import com.gi.xm.platform.view.common.QueryResultInfo;
 
 @Controller
 @RequestMapping("project")
@@ -24,11 +26,11 @@ public class ProjectController {
 
 	@RequestMapping("query")
 	@ResponseBody
-	public MessageInfo<QueryResultInfo<ProjectInfo>>  queryProject (ProjectQueryInfo projectQueryInfo) {
+	public MessageInfo<QueryResultInfo<ProjectInfo>>  queryProject (@RequestBody ProjectQueryInfo projectQueryInfo) {
 		MessageInfo<QueryResultInfo<ProjectInfo>> resultMessageInfo = projectFacede.queryProject(projectQueryInfo);
 		return resultMessageInfo;
 	}
-
+	
 	/**
 	 * 根据id查项目
 	 * @param id

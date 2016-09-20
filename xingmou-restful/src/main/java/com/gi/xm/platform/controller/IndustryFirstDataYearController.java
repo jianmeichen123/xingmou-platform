@@ -30,14 +30,6 @@ public class IndustryFirstDataYearController {
 		Map<String, Object> modelMap = new HashMap<String, Object>();
 		return new ModelAndView("industryFirstDataYear/index", modelMap);
 	}
-
-	@RequestMapping("query")
-	@ResponseBody
-	public MessageInfo<QueryResultInfo<IndustryFirstDataYearInfo>>  queryIndustryFirstDataYear (IndustryFirstDataYearQueryInfo industryFirstDataYearQueryInfo) {
-		MessageInfo<QueryResultInfo<IndustryFirstDataYearInfo>> resultMessageInfo = industryFirstDataYearFacede.queryIndustryFirstDataYear(industryFirstDataYearQueryInfo);
-		return resultMessageInfo;
-	}
-
     @RequestMapping("create")
     @ResponseBody
     public MessageInfo<Long> createIndustryFirstDataYear(IndustryFirstDataYearInfo industryFirstDataYearInfo){

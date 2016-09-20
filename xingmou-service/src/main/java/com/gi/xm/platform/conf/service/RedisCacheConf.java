@@ -3,7 +3,6 @@ package com.gi.xm.platform.conf.service;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gi.xm.platform.conf.FastJson2JsonRedisSerializer;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
@@ -27,9 +26,6 @@ import java.lang.reflect.Method;
 @EnableCaching
 @Component
 public class RedisCacheConf {
-
-    @Resource
-    private RedisSerializer fastJson2JsonRedisSerializer;
 
     @Bean
     public KeyGenerator wiselyKeyGenerator(){

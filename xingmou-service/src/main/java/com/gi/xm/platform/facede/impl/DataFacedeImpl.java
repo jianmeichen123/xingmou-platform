@@ -27,7 +27,7 @@ import com.gi.xm.platform.facede.convertor.DataConvertor;
 import com.gi.xm.platform.facede.convertor.MessageConvertor;
 
 @Service
-public class DataFacedeImpl implements DataFacede {
+public class 	DataFacedeImpl implements DataFacede {
 
 	@Autowired
 	private DataBiz dataBiz;

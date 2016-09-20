@@ -35,6 +35,7 @@ public class InvestfirmsDataYearController {
 	@RequestMapping("query")
 	@ResponseBody
 	public MessageInfo<QueryResultInfo<InvestfirmsDataYearInfo>>  queryInvestfirmsDataYear (@RequestBody InvestfirmsDataYearQueryInfo investfirmsDataYearQueryInfo) {
+
 		MessageInfo<QueryResultInfo<InvestfirmsDataYearInfo>> resultMessageInfo = investfirmsDataYearFacede.queryInvestfirmsDataYear(investfirmsDataYearQueryInfo);
 		return resultMessageInfo;
 	}

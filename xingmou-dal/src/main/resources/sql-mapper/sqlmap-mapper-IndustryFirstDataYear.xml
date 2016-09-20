@@ -190,12 +190,5 @@
 		FROM dm_industry_first_data_year
 		WHERE  industry_id = #{industryId,jdbcType=INTEGER}
 	</select>
-			
-	<select id="selectByYaar" resultMap="BaseResultMap">
-		SELECT
-		<include refid="selectFields" />
-		FROM dm_industry_first_data_year
-		WHERE  yaar = #{yaar,jdbcType=INTEGER}
-	</select>
-		
+
 </mapper>

@@ -1,5 +1,8 @@
 package com.gi.xm.platform.conf.service;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gi.xm.platform.conf.FastJson2JsonRedisSerializer;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
@@ -10,6 +13,7 @@ import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.stereotype.Component;
 
@@ -53,7 +57,6 @@ public class RedisCacheConf {
         redisCacheManager.setDefaultExpiration(60*60*2);
         return redisCacheManager;
     }
-/*
 
     @Bean
     public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory factory) {
@@ -67,19 +70,7 @@ public class RedisCacheConf {
         template.afterPropertiesSet();
         return template;
     }
-*/
 
-    @Bean
-    public RedisSerializer fastJson2JsonRedisSerializer() {
-        FastJson2JsonRedisSerializer f = new FastJson2JsonRedisSerializer<Object>(Object.class);
-        return f;
-    }
 
-    @Bean
-    public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory factory) {
-        StringRedisTemplate template = new StringRedisTemplate(factory);
-        template.setValueSerializer(fastJson2JsonRedisSerializer);
-        template.afterPropertiesSet();
-        return template;
-    }
+
 }

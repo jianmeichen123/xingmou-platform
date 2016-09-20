@@ -146,18 +146,19 @@ public class LoginController extends BaseControllerImpl<User, User> {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/logout", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseData<User> logout(HttpServletRequest request) {
+	public ResponseData<User> logout(HttpServletRequest request,HttpServletResponse response, @CookieValue("_uid_")String uid,@CookieValue("s_")String s) {
 		ResponseData<User> responsebody = new ResponseData<User>();
-		String sessionId = request.getHeader(Constants.SESSION_ID_KEY);
-		if (StringUtils.isBlank(sessionId)) {
-			responsebody.setResult(new Result(Status.ERROR, Constants.IS_SESSIONID_EMPTY, "sessionId为空！"));
-			return responsebody;
-		}
-		boolean flag = removeSessionId(sessionId, request); // 从session和cache中删除sessionId
-		if (!flag) {
-			responsebody.setResult(new Result(Status.ERROR, Constants.INVALID_SESSIONID, "sessionId错误！"));
-			return responsebody;
-		}
+        cache.remove("xm:"+s+":"+uid);
+        Cookie cookie = new Cookie("_uid_", null);
+        cookie.setMaxAge(60*60*24*2);
+        cookie.setDomain("xmdev.gi.com");
+        cookie.setPath("/");
+        response.addCookie(cookie);
+        cookie = new Cookie("s_", null);
+        cookie.setMaxAge(60*60*24*2);
+        cookie.setDomain("xmdev.gi.com");
+        cookie.setPath("/");
+        response.addCookie(cookie);
 		responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "退出登录"));
 		return responsebody;
 	}

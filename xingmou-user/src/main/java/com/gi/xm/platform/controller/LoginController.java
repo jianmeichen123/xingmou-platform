@@ -12,10 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.galaxyinternet.common.controller.BaseControllerImpl;
 import com.galaxyinternet.framework.core.constants.Constants;
@@ -44,19 +41,17 @@ public class LoginController extends BaseControllerImpl<User, User> {
 		return this.userService;
 	}
 
+    private String xmIndex = "http://xmdev.gi.com/html/xmcx.html";
 	/**
 	 * 跳转登录
 	 */
 	@RequestMapping(value = "/toLogin")
-	public String toLogin(HttpServletResponse response) {
-/*        Cookie cookie = new Cookie("_uid_", null);
-        cookie.setMaxAge(0);
-        cookie.setDomain("xmdev.gi.com");
-        response.addCookie(cookie);
-        cookie = new Cookie("s_",null);
-        cookie.setMaxAge(0);
-        cookie.setDomain("xmdev.gi.com");
-        response.addCookie(cookie);*/
+	public String toLogin(HttpServletResponse response, @CookieValue("_uid_")String uid,@CookieValue("s_")String s) {
+		String key = "xm:"+s+":"+uid;
+        String user = cache.getValue(key);
+        if(user!=null){
+            return "redirect:"+xmIndex;
+        }
 		return "login";
 	}
 

@@ -78,4 +78,47 @@ public abstract class IndustryFirstDataYearConvertor {
 		queryResultInfo.setRecords(toIndustryFirstDataYearInfoList(queryResult.getRecords()));
 		return queryResultInfo;
 	}
+
+
+	public static List<IndustryFirstDataYear> toIndustryDataYearList(List<IndustryFirstDataYearInfo> industryDataYearInfoList)
+	{
+		if (industryDataYearInfoList == null || industryDataYearInfoList.isEmpty()) {
+			return null;
+		}
+		List<IndustryFirstDataYear> industryDataYearList = new ArrayList<IndustryFirstDataYear>(industryDataYearInfoList.size());
+		for (IndustryFirstDataYearInfo industryDataYearInfo : industryDataYearInfoList) {
+			industryDataYearList.add(toIndustryDataYear(industryDataYearInfo));
+		}
+		return industryDataYearList;
+	}
+
+	public static IndustryFirstDataYear toIndustryDataYear(IndustryFirstDataYearInfo industryDataYearInfo)
+	{
+		IndustryFirstDataYear industryDataYear = new IndustryFirstDataYear();
+		beanCopierForIndustryFirstDataYear.copy(industryDataYearInfo, industryDataYear, null);
+		return industryDataYear;
+	}
+
+
+	public static List<IndustryFirstDataYearInfo> toIndustryDataYearInfoList(List<IndustryFirstDataYear> industryDataYearList)
+	{
+		if (industryDataYearList == null || industryDataYearList.isEmpty()) {
+			return null;
+		}
+		List<IndustryFirstDataYearInfo> industryDataYearInfoList = new ArrayList<IndustryFirstDataYearInfo>(industryDataYearList.size());
+		for (IndustryFirstDataYear industryDataYear : industryDataYearList) {
+			industryDataYearInfoList.add(toIndustryDataYearInfo(industryDataYear));
+		}
+		return industryDataYearInfoList;
+	}
+
+	public static IndustryFirstDataYearInfo toIndustryDataYearInfo(IndustryFirstDataYear industryDataYear)
+	{
+		if (industryDataYear == null) {
+			return null;
+		}
+		IndustryFirstDataYearInfo industryDataYearInfo = new IndustryFirstDataYearInfo();
+		beanCopierForIndustryFirstDataYearInfo.copy(industryDataYear, industryDataYearInfo, null);
+		return industryDataYearInfo;
+	}
 }

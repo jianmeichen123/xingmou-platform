@@ -31,8 +31,10 @@ public interface IndustryFirstDataYearDAO {
 	List<IndustryFirstDataYear> selectByYaar(@Param("yaar") Integer yaar);
 				
 	List<IndustryFirstDataYear> selectByIndustryId(@Param("industryId") Integer industryId);
-				
 
+	List<IndustryFirstDataYear> selectByIndustryIdYaar(@Param("industryId") Integer industryId, @Param("yaars") Integer[] yaars);
+
+	List<IndustryFirstDataYear> selectByYaar(@Param("yaars") Integer[] yaars);
 		
 
 }

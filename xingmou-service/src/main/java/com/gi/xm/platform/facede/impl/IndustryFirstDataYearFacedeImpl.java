@@ -118,5 +118,24 @@ public class IndustryFirstDataYearFacedeImpl implements IndustryFirstDataYearFac
 		messageInfo.setData(industryFirstDataYearInfoList);
 		return messageInfo;	
 	}
-		
+
+
+	public MessageInfo<List<IndustryFirstDataYearInfo>> getListByIndustryIdYaar(Integer industryId, Integer[] yaars){
+
+		Message<List<IndustryFirstDataYear>> message  = industryFirstDataYearBiz.getListByIndustryIdYaar(industryId, yaars);
+		MessageInfo<List<IndustryFirstDataYearInfo>> messageInfo = MessageConvertor.toMessageInfo(message);
+		List<IndustryFirstDataYearInfo> industryDataYearInfoList = IndustryFirstDataYearConvertor.toIndustryDataYearInfoList(message.getData());
+		messageInfo.setData(industryDataYearInfoList);
+		return messageInfo;
+	}
+
+
+	public MessageInfo<List<IndustryFirstDataYearInfo>> getListByYaar(Integer[] yaars){
+
+		Message<List<IndustryFirstDataYear>> message  = industryFirstDataYearBiz.getListByYaar(yaars);
+		MessageInfo<List<IndustryFirstDataYearInfo>> messageInfo = MessageConvertor.toMessageInfo(message);
+		List<IndustryFirstDataYearInfo> industryDataYearInfoList = IndustryFirstDataYearConvertor.toIndustryDataYearInfoList(message.getData());
+		messageInfo.setData(industryDataYearInfoList);
+		return messageInfo;
+	}
 }

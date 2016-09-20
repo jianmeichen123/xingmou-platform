@@ -57,8 +57,17 @@ public class IndustryDataYearQueryInfo extends QueryInfo {
 	private Timestamp addTime;
 	
 	private Timestamp updateTime;
-		
-    
+
+	private Long[] yearList;
+
+	public Long[] getYearList() {
+		return yearList;
+	}
+
+	public void setYearList(Long[] yearList) {
+		this.yearList = yearList;
+	}
+
 	public Long getId(){
 		return id;
 	}

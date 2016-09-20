@@ -175,8 +175,32 @@ public class IndustryFirstDataYearBiz  {
 		}
 		return message;
 	}
-			
 
-		
 
+	public Message<List<IndustryFirstDataYear>> getListByIndustryIdYaar(Integer industryId, Integer[] yaars){
+
+		Message<List<IndustryFirstDataYear>> message = new Message<List<IndustryFirstDataYear>>();
+		try {
+			List<IndustryFirstDataYear> industryDataYearList = industryFirstDataYearDAO.selectByIndustryIdYaar(industryId, yaars);
+			message.setData(industryDataYearList);
+		} catch (Exception e) {
+			LOGGER.error("getListByIndustryIdYaar","查询IndustryDataYear失败", e);
+			message.setMessageStatus(MessageStatus.SYS_ERROR);
+		}
+		return message;
+	}
+
+
+	public Message<List<IndustryFirstDataYear>> getListByYaar(Integer[] yaars){
+
+		Message<List<IndustryFirstDataYear>> message = new Message<List<IndustryFirstDataYear>>();
+		try {
+			List<IndustryFirstDataYear> industryDataYearList = industryFirstDataYearDAO.selectByYaar(yaars);
+			message.setData(industryDataYearList);
+		} catch (Exception e) {
+			LOGGER.error("getListByYaar","查询IndustryDataYear失败", e);
+			message.setMessageStatus(MessageStatus.SYS_ERROR);
+		}
+		return message;
+	}
 }

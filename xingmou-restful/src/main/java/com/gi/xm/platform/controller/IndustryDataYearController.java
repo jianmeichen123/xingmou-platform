@@ -6,6 +6,9 @@ import java.util.Map;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 
+import com.gi.xm.platform.facede.IndustryFirstDataYearFacede;
+import com.gi.xm.platform.view.IndustryFirstDataYearInfo;
+import com.gi.xm.platform.view.IndustryFirstDataYearQueryInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,6 +28,9 @@ public class IndustryDataYearController {
 
 	@Reference(check = false)
 	private IndustryDataYearFacede industryDataYearFacede;
+    @Reference(check = false)
+    private IndustryFirstDataYearFacede  industryFirstDataYearFacede;
+
 
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public ModelAndView index() {
@@ -35,7 +41,17 @@ public class IndustryDataYearController {
 	@RequestMapping("query")
 	@ResponseBody
 	public MessageInfo<QueryResultInfo<IndustryDataYearInfo>>  queryIndustryDataYear (@RequestBody IndustryDataYearQueryInfo industryDataYearQueryInfo) {
-		MessageInfo<QueryResultInfo<IndustryDataYearInfo>> resultMessageInfo = industryDataYearFacede.queryIndustryDataYear(industryDataYearQueryInfo);
+		MessageInfo<QueryResultInfo<IndustryDataYearInfo>> resultMessageInfo =  new MessageInfo<QueryResultInfo<IndustryDataYearInfo>>();
+
+        //查子行业
+        if (industryDataYearQueryInfo != null && industryDataYearQueryInfo.getIndustrySubId()!=null) {
+            resultMessageInfo =  industryDataYearFacede.queryIndustryDataYear(industryDataYearQueryInfo);
+        } else {
+            //一级行业
+
+            resultMessageInfo =  industryFirstDataYearFacede.queryIndustryFirstDataYear(industryDataYearQueryInfo);
+        }
+
 		return resultMessageInfo;
 	}
 

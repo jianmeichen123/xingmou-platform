@@ -7,9 +7,9 @@ function _CONF.redis()
 end
 
 --返回mysql配置文件
-function _CONF.mysql() 
-    local mysql_config = {host='127.0.0.1',port=3306,database='test',user='root',password='123456'} --mysql的配置项
-    return mysql_config
-end
+--function _CONF.mysql()
+--    local mysql_config = {host='127.0.0.1',port=3306,database='test',user='root',password='123456'} --mysql的配置项
+--    return mysql_config
+--end
 
 return _CONF

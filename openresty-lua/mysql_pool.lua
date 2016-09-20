@@ -1,3 +1,4 @@
+--[[
 
 --连接mysql
 local mysql = require "resty.mysql"
@@ -61,3 +62,4 @@ end
 
 return mysql_pool
 
+]]

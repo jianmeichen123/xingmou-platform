@@ -56,7 +56,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
 	}
 
     @RequestMapping(value = "/auth")
-    public String auth(HttpServletResponse response, @CookieValue("_uid_")String uid) {
+    public String auth(HttpServletResponse response,String uid) {
         User u = (User) cache.get(uid);
         if (u == null){
             return "login";

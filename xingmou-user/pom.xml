@@ -12,6 +12,7 @@
     <artifactId>xingmou-user</artifactId>
 
     <properties>
+        <start-class>com.gi.xm.platform.main.UserApp</start-class>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <fx.version>1.0.2-SNAPSHOT</fx.version>
     </properties>
@@ -178,5 +179,30 @@
             <artifactId>spring-boot-starter-jetty</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.4.9</version>
+                <configuration>
+                    <imageName>${project.artifactId}</imageName>
+                    <dockerDirectory>src/main/docker</dockerDirectory>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

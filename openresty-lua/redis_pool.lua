@@ -1,4 +1,5 @@
 local redis = require("resty.redis")
+local cjson = require("cjson")
 local redis_pool = {}
 --连接redis
 function redis_pool:get_connect()
@@ -34,7 +35,7 @@ end
 --关闭连接池
 function redis_pool:close()
     if ngx.ctx[redis_pool] then
-        ngx.ctx[redis_pool]:set_keepalive(60000, 30)
+        ngx.ctx[redis_pool]:set_keepalive(60000, 300)
         ngx.ctx[redis_pool] = nil
     end
 end
@@ -46,15 +47,20 @@ function redis_pool:get_key(str)
         return false,err
     end
     local val ,err = client:get(str)
-    if not val == ngx.null then
-        local uid = val['email']
-        if uid == ngx.null then
+
+    if  val ~= ngx.null and val ~= nil then
+        --ngx.say(val)
+        local j = cjson.decode(val)
+        local email = j.email
+        if email == ngx.null then
             return false,"用户不存在",val
         end
         client:expire(key,7200)
-        client:incr("count:"..val,1)
+        local ikey = string.format("%s:%s:%s","xm","count",email)
+        local v,e = client:incr(ikey)
+        return true,"获取key成功",val
     end
     --self:close()
-    return true,"获取key成功",val
+    return false,"获取key成功",val
 end
 return redis_pool

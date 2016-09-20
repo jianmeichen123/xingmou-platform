@@ -255,7 +255,7 @@
             <if test="title!=null and title!=''">
                 AND title like CONCAT('%',#{title,jdbcType=VARCHAR},'%' )
             </if>
-            <if test="industryId!=null">
+            <if test="industryIds!=null">
                 AND industry_id in
                 <foreach item="item" index="index" collection="industryIds" open="(" separator="," close=")">
                     #{item}
@@ -273,13 +273,7 @@
                     #{item}
                 </foreach>
             </if>
-            <if test="districtSubId!=null">
-                AND district_sub_id in
-                <foreach item="item" index="index" collection="districtSubIds" open="(" separator="," close=")">
-                    #{item}
-                </foreach>
-            </if>
-            <if test="newestEventRoundId!=null">
+            <if test="newestEventRoundIds!=null">
                 AND newest_event_round_id in
                 <foreach item="item" index="index" collection="newestEventRoundIds" open="(" separator="," close=")">
                     #{item}

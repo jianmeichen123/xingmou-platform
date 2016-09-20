@@ -4,6 +4,8 @@ package com.gi.xm.platform.facede.impl;
 import java.util.List;
 import java.util.Date;
 import com.alibaba.dubbo.config.annotation.Service;
+import com.gi.xm.platform.view.IndustryDataYearInfo;
+import com.gi.xm.platform.view.IndustryDataYearQueryInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 
@@ -74,6 +76,11 @@ public class IndustryFirstDataYearFacedeImpl implements IndustryFirstDataYearFac
 		List<IndustryFirstDataYearInfo> industryFirstDataYearInfoList = IndustryFirstDataYearConvertor.toIndustryFirstDataYearInfoList(message.getData());
 		messageInfo.setData(industryFirstDataYearInfoList);
 		return messageInfo;	
+	}
+
+	@Override
+	public MessageInfo<QueryResultInfo<IndustryDataYearInfo>> queryIndustryFirstDataYear(IndustryDataYearQueryInfo industryFirstDataYearQueryInfo) {
+		return null;
 	}
 
 	public MessageInfo<QueryResultInfo<IndustryFirstDataYearInfo>> queryIndustryFirstDataYear(IndustryFirstDataYearQueryInfo industryFirstDataYearQueryInfo) {

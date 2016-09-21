@@ -144,9 +144,8 @@ public class LoginController extends BaseControllerImpl<User, User> {
 	 * 
 	 * @author zcy
 	 */
-	@ResponseBody
 	@RequestMapping(value = "/logout", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseData<User> logout(HttpServletRequest request,HttpServletResponse response, @CookieValue("_uid_")String uid,@CookieValue("s_")String s) {
+	public String logout(HttpServletRequest request,HttpServletResponse response, @CookieValue("_uid_")String uid,@CookieValue("s_")String s) {
 		ResponseData<User> responsebody = new ResponseData<User>();
         cache.remove("xm:"+s+":"+uid);
         Cookie cookie = new Cookie("_uid_", null);
@@ -160,7 +159,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
         cookie.setPath("/");
         response.addCookie(cookie);
 		responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "退出登录"));
-		return responsebody;
+		return "login";
 	}
 
 	/**

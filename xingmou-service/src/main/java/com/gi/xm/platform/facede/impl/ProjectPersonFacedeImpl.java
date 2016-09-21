@@ -112,7 +112,11 @@ public class ProjectPersonFacedeImpl implements ProjectPersonFacede {
 		if (!message.isSuccess()){
 			messageInfo = MessageConvertor.toMessageInfo(message);
 			return messageInfo;
+		}else if(message.getData() == null ||message.getData().isEmpty()){
+			messageInfo = MessageConvertor.toMessageInfo(message);
+			return messageInfo;
 		}
+		
 		List<ProjectPersonInfo> personInfos = ProjectPersonConvertor.toProjectPersonInfoList(message.getData());
 		
 		List<Integer> idList = new ArrayList<Integer>();
@@ -142,102 +146,49 @@ public class ProjectPersonFacedeImpl implements ProjectPersonFacede {
 		List<LabelInfo> labelInfos = LabelConvertor.toLabelInfoList(labelList.getData());
 		
 		for(ProjectPersonInfo p :personInfos){
-			for(LabelInfo l:labelInfos){
-				if((l.getRelationId().intValue()==p.getId().intValue())&&(l.getType().equals(Contants.LABEL_PERSON))){
-					List<LabelInfo> labels = p.getLabelList();
-					if(labels==null){
-						labels = new ArrayList<>();
-						p.setLabelList(labels);
+			if(labelInfos != null){
+				for(LabelInfo l:labelInfos){
+					if((l.getRelationId().intValue()==p.getId().intValue())&&(l.getType().equals(Contants.LABEL_PERSON))){
+						List<LabelInfo> labels = p.getLabelList();
+						if(labels==null){
+							labels = new ArrayList<>();
+							p.setLabelList(labels);
+						}
+						labels.add(l);
 					}
-					labels.add(l);
 				}
 			}
-			for(ProjectPersonJobInfo job :jobInfos){
-				if(p.getId().intValue()==(job.getPersonId().intValue())){
-					List<ProjectPersonJobInfo> jls = p.getJobList();
-					if(jls==null){
-						jls = new ArrayList<>();
-						p.setJobList(jls);
+			if(jobInfos != null){
+				for(ProjectPersonJobInfo job :jobInfos){
+					if(p.getId().intValue()==(job.getPersonId().intValue())){
+						List<ProjectPersonJobInfo> jls = p.getJobList();
+						if(jls==null){
+							jls = new ArrayList<>();
+							p.setJobList(jls);
+						}
+						jls.add(job);
 					}
-					jls.add(job);
+						
 				}
-					
 			}
-				
-			for(ProjectPersonStudyInfo study : studyInfos){
-				if(p.getId().intValue()==(study.getPersonId().intValue())){
-					List<ProjectPersonStudyInfo> studyls = p.getStudyList();
-					if(studyls==null){
-						studyls = new ArrayList<>();
-						p.setStudyList(studyls);
+			
+			if(studyInfos != null){
+				for(ProjectPersonStudyInfo study : studyInfos){
+					if(p.getId().intValue()==(study.getPersonId().intValue())){
+						List<ProjectPersonStudyInfo> studyls = p.getStudyList();
+						if(studyls==null){
+							studyls = new ArrayList<>();
+							p.setStudyList(studyls);
+						}
+						studyls.add(study);
 					}
-					studyls.add(study);
+						
 				}
-					
 			}
 		}
 		
 		messageInfo.setData(personInfos);
 		return messageInfo;
 	}
-	
-	/*@Override
-	public MessageInfo<List<ProjectPersonInfo>> queryPersonByProjectId(Integer projectId,Integer type) {
-		MessageInfo<List<ProjectPersonInfo>> messageInfo = new MessageInfo<List<ProjectPersonInfo>>();;
-		Message<List<ProjectPerson>> message  = projectPersonBiz.getPersonByProjectId(projectId,type);
-		List<ProjectPerson> personList = message.getData();
-		if(personList != null ){
-			List<Integer> idList = new ArrayList<Integer>();
-			
-			for(ProjectPerson person : personList){		//查询personIdList
-				idList.add(person.getId());
-			}
-			
-			Message<List<ProjectPersonJob>> jobList = jobBiz.getPersonJobByPid(idList);		//in查询jobList
-			Message<List<ProjectPersonStudy>> studyList = studyBiz.getStudyListByPid(idList);	//in查询学习经历
-			Message<List<Label>> labelList = labelBiz.getListByTypeRelationId(Contants.LABEL_PERSON, idList);	//in查询学习经历
-			
-			List<ProjectPersonJob> newJobList = new ArrayList<ProjectPersonJob>();
-			List<ProjectPersonStudy> newStudyList = new ArrayList<ProjectPersonStudy>();
-			List<ProjectPerson> newPersonList = new ArrayList<ProjectPerson>();
-			List<Label> newlabelList = new ArrayList<Label>();
-			for(ProjectPerson person : personList){
-				if(jobList != null && jobList.getData() !=null ){
-					for(ProjectPersonJob job :jobList.getData()){
-						if(person.getId().intValue()==(job.getPersonId().intValue())){
-							newJobList.add(job);
-						}
-							
-					}
-					person.setJobList(newJobList);
-				}
-				
-				if(studyList != null && studyList.getData() !=null ){
-					for(ProjectPersonStudy study :studyList.getData()){
-						if(person.getId().intValue()==(study.getPersonId().intValue())){
-							newStudyList.add(study);
-						}
-							
-					}
-					person.setStudyList(newStudyList);
-				}
-				
-				if(labelList != null && labelList.getData() !=null ){
-					for(Label  label:labelList.getData()){
-						if((person.getId().intValue()==label.getRelationId().intValue())&&(label.getType().equals(Contants.LABEL_PERSON))){
-							newlabelList.add(label);
-						}
-							
-					}
-					person.setLabelList(newlabelList);
-				}
-				newPersonList.add(person);
-			}
-			message.setData(newPersonList);
-			List<ProjectPersonInfo> projectPersonInfoList = ProjectPersonConvertor.toProjectPersonInfoList(message.getData());
-			messageInfo.setData(projectPersonInfoList);
-		}
-		return messageInfo;
-	}*/
 	
 }

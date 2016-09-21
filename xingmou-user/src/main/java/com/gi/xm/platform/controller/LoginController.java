@@ -46,7 +46,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
 	 * 跳转登录
 	 */
 	@RequestMapping(value = "/toLogin")
-	public String toLogin(HttpServletResponse response, @CookieValue("_uid_")String uid,@CookieValue("s_")String s) {
+	public String toLogin(HttpServletResponse response, @CookieValue(name = "_uid_",required = false)String uid,@CookieValue(name = "s_",required = false)String s) {
 		String key = "xm:"+s+":"+uid;
         String user = cache.getValue(key);
         if(user!=null){
@@ -145,7 +145,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
 	 * @author zcy
 	 */
 	@RequestMapping(value = "/logout", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String logout(HttpServletRequest request,HttpServletResponse response, @CookieValue("_uid_")String uid,@CookieValue("s_")String s) {
+	public String logout(HttpServletRequest request,HttpServletResponse response,@CookieValue(name = "_uid_",required = false)String uid,@CookieValue(name = "s_",required = false)String s) {
 		ResponseData<User> responsebody = new ResponseData<User>();
         cache.remove("xm:"+s+":"+uid);
         Cookie cookie = new Cookie("_uid_", null);

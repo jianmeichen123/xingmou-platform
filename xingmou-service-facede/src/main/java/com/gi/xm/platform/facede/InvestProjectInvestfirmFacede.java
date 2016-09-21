@@ -30,5 +30,5 @@ public interface InvestProjectInvestfirmFacede {
 			
 	MessageInfo<List<InvestProjectInvestfirmInfo>> getListByProjectId(Long projectId);
 
-	MessageInfo<RelationInfo> getRelationInfo(Integer year,Integer industryId,Integer industrySubId) ;
+	//MessageInfo<RelationInfo> getRelationInfo(Integer year,Integer industryId,Integer industrySubId) ;
 }

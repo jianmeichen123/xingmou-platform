@@ -111,7 +111,7 @@ public class InvestProjectInvestfirmFacedeImpl implements InvestProjectInvestfir
     }
 
 
-    public MessageInfo<RelationInfo> getRelationInfo(Integer year, Integer industryId, Integer industrySubId) {
+    /*public MessageInfo<RelationInfo> getRelationInfo(Integer year, Integer industryId, Integer industrySubId) {
         InvestProjectInvestfirmQuery query = new InvestProjectInvestfirmQuery();
         query.setYear(year);
         query.setIndustryId(industryId);
@@ -145,7 +145,7 @@ public class InvestProjectInvestfirmFacedeImpl implements InvestProjectInvestfir
         MessageInfo<RelationInfo> m = new MessageInfo<>();
         m.setData(r);
         return m;
-    }
+    }*/
 
     private void makeProjectRelation(List<ProjectEventRelationInfo> l, InvestProjectInvestfirm ip) {
         ProjectEventRelationInfo o = null;

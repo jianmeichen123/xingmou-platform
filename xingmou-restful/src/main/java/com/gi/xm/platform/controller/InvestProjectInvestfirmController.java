@@ -6,15 +6,14 @@ import java.util.Map;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 
-import com.gi.xm.platform.view.RelationInfo;
+import com.gi.xm.platform.facede.InvestEventsFacede;
+import com.gi.xm.platform.view.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gi.xm.platform.view.common.MessageInfo;
 import com.gi.xm.platform.view.common.QueryResultInfo;
-import com.gi.xm.platform.view.InvestProjectInvestfirmInfo;
-import com.gi.xm.platform.view.InvestProjectInvestfirmQueryInfo;
 import com.gi.xm.platform.facede.InvestProjectInvestfirmFacede;
 
 @Controller
@@ -23,6 +22,8 @@ public class InvestProjectInvestfirmController {
 
 	@Reference(check = false)
 	private InvestProjectInvestfirmFacede investProjectInvestfirmFacede;
+	@Reference(check = false)
+	private InvestEventsFacede investEventsFacede;
 
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public ModelAndView index() {
@@ -32,9 +33,26 @@ public class InvestProjectInvestfirmController {
 
 	@RequestMapping("query")
 	@ResponseBody
-	public MessageInfo<QueryResultInfo<InvestProjectInvestfirmInfo>>  queryInvestProjectInvestfirm (@RequestBody InvestProjectInvestfirmQueryInfo investProjectInvestfirmQueryInfo) {
+	public RelationVO  queryInvestProjectInvestfirm (@RequestBody InvestProjectInvestfirmQueryInfo investProjectInvestfirmQueryInfo) {
+
+		RelationVO vo = new RelationVO();
+		InvestEventsQueryInfo info = new InvestEventsQueryInfo();
+		info.setIndustryId(investProjectInvestfirmQueryInfo.getIndustryId());
+		info.setIndustrySubId(investProjectInvestfirmQueryInfo.getIndustrySubId());
+		info.setYear(investProjectInvestfirmQueryInfo.getYear());
+		//项目列表
+		List<InvestEventsInfo>projectList = investEventsFacede.queryProject(info);
 		MessageInfo<QueryResultInfo<InvestProjectInvestfirmInfo>> resultMessageInfo = investProjectInvestfirmFacede.queryInvestProjectInvestfirm(investProjectInvestfirmQueryInfo);
-		return resultMessageInfo;
+		QueryResultInfo<InvestProjectInvestfirmInfo> dddd = resultMessageInfo.getData();
+
+		//投融资关系列表
+		List<InvestProjectInvestfirmInfo> piList = dddd.getRecords();
+		//投资机构列表
+		List<InvestfirmsInfo> investfirmList = null;
+	
+		vo.setInvestfirmList(investfirmList);
+		vo.setPiList(piList);
+		return vo;
 	}
 
     @RequestMapping("create")

@@ -34,7 +34,7 @@ public class InvestProjectInvestfirm extends Pojo {
 	/**
 	 * @Fields industryId : 一级行业分类id
 	 */
-	private Integer industryId;
+	private Long industryId;
 	
 	/**
 	 * @Fields industrySubId : 二级行业分类id
@@ -98,11 +98,11 @@ public class InvestProjectInvestfirm extends Pojo {
 		this.investId = investId;
 	}
     
-	public Integer getIndustryId(){
+	public Long getIndustryId(){
 		return industryId;
 	}
 
-	public void setIndustryId(Integer industryId){
+	public void setIndustryId(Long industryId){
 		this.industryId = industryId;
 	}
     

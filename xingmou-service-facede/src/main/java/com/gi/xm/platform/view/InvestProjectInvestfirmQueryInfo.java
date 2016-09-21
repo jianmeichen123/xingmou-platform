@@ -13,30 +13,98 @@ public class InvestProjectInvestfirmQueryInfo extends QueryInfo {
 	 */ 
 	private static final long serialVersionUID = 1L;
 
-	
+
+	/**
+	 * @Fields id :
+	 */
 	private Long id;
-	
+
+	/**
+	 * @Fields investId : 投资事件id
+	 */
 	private Long investId;
-	
+
+	/**
+	 * @Fields industryId : 一级行业分类id
+	 */
+	private Long industryId;
+
+	/**
+	 * @Fields industrySubId : 二级行业分类id
+	 */
+	private Long industrySubId;
+
+	/**
+	 * @Fields year :
+	 */
+	private Integer year;
+
+	/**
+	 * @Fields investName : 投资事件标题(冗余)
+	 */
 	private String investName;
-	
+
+	/**
+	 * @Fields projectId : 项目id
+	 */
 	private Long projectId;
-	
+
+	/**
+	 * @Fields projectName : 项目名称（冗余）
+	 */
 	private String projectName;
-	
+
+	/**
+	 * @Fields investfirmId : 投资机构id
+	 */
 	private Long investfirmId;
-	
+
+	/**
+	 * @Fields investfirmName : 投资机构名称（冗余）
+	 */
 	private String investfirmName;
-	
+
+	/**
+	 * @Fields addTime :
+	 */
 	private Timestamp addTime;
-	
+
+	/**
+	 * @Fields updateTime :
+	 */
 	private Timestamp updateTime;
-		
-    
 	public Long getId(){
 		return id;
 	}
-	
+
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
+
+	public Long getIndustryId() {
+		return industryId;
+	}
+
+	public void setIndustryId(Long industryId) {
+		this.industryId = industryId;
+	}
+
+	public Long getIndustrySubId() {
+		return industrySubId;
+	}
+
+	public void setIndustrySubId(Long industrySubId) {
+		this.industrySubId = industrySubId;
+	}
+
+	public Integer getYear() {
+		return year;
+	}
+
+	public void setYear(Integer year) {
+		this.year = year;
+	}
+
 	public void setId(Long id){
 		this.id = id;
 	}

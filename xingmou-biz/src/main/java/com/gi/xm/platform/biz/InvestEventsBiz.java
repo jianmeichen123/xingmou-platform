@@ -124,20 +124,18 @@ public class InvestEventsBiz  {
 		return message;
 	}
 
-	public Message<QueryResult<InvestEvents>> queryProject(InvestEventsQuery investEventsQuery) {
-		Message<QueryResult<InvestEvents>> message = new Message<QueryResult<InvestEvents>>();
+	public List<InvestEvents> queryProject(InvestEventsQuery investEventsQuery) {
+		List<InvestEvents> investEventsList = null;
 		try {
-			QueryResult<InvestEvents> queryResult = new QueryResult<InvestEvents>();
 
-			List<InvestEvents> investEventsList = investEventsDAO.queryProject(investEventsQuery);
 
-			queryResult.setRecords(investEventsList);
-			message.setData(queryResult);
+			investEventsList = investEventsDAO.queryProject(investEventsQuery);
+
 		} catch (Exception e) {
 			LOGGER.error("queryProject", "查询queryProject失败", e);
-			message.setMessageStatus(MessageStatus.SYS_ERROR);
+
 		}
-		return message;
+		return investEventsList;
 	}
 
 }

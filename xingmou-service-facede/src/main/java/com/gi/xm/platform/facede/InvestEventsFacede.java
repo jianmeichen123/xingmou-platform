@@ -20,7 +20,7 @@ public interface InvestEventsFacede {
     MessageInfo<List<InvestEventsInfo>> getAllInvestEvents();
 			
     MessageInfo<QueryResultInfo<InvestEventsInfo>> queryInvestEvents(InvestEventsQueryInfo investEventsQueryInfo);
-    MessageInfo<QueryResultInfo<InvestEventsInfo>> queryProject(InvestEventsQueryInfo investEventsQueryInfo);
+    List<InvestEventsInfo>  queryProject(InvestEventsQueryInfo investEventsQueryInfo);
 
 
 

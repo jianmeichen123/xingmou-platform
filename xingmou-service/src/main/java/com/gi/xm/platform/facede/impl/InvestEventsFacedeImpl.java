@@ -90,13 +90,12 @@ public class InvestEventsFacedeImpl implements InvestEventsFacede {
 		messageInfo.setData(queryResultInfo);
 		return messageInfo;
 	}
-	public MessageInfo<QueryResultInfo<InvestEventsInfo>> queryProject(InvestEventsQueryInfo investEventsQueryInfo) {
+	public List<InvestEventsInfo> queryProject(InvestEventsQueryInfo investEventsQueryInfo) {
 		InvestEventsQuery investEventsQuery = InvestEventsConvertor.toInvestEventsQuery(investEventsQueryInfo);
-		Message<QueryResult<InvestEvents>> message = investEventsBiz.queryProject(investEventsQuery);
 		MessageInfo<QueryResultInfo<InvestEventsInfo>> messageInfo = new MessageInfo<QueryResultInfo<InvestEventsInfo>>();
-		QueryResultInfo<InvestEventsInfo> queryResultInfo = InvestEventsConvertor.toQueryResultInfo(message.getData());
-		messageInfo.setData(queryResultInfo);
-		return messageInfo;
+		List<InvestEventsInfo> list = InvestEventsConvertor.toInvestEventsInfoList(investEventsBiz.queryProject(investEventsQuery));
+
+		return list;
 	}
 
 }

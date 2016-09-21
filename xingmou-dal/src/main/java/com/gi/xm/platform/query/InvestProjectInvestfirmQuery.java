@@ -16,9 +16,9 @@ public class InvestProjectInvestfirmQuery extends Query {
 			
 	private Long investId;
 			
-	private Integer industryId;
+	private Long industryId;
 			
-	private Integer industrySubId;
+	private Long industrySubId;
 			
 	private Integer year;
 			
@@ -51,17 +51,17 @@ public class InvestProjectInvestfirmQuery extends Query {
 		this.investId = investId;
 	}
     
-	public Integer getIndustryId(){
+	public Long getIndustryId(){
 		return industryId;
 	}
-	public void setIndustryId(Integer industryId){
+	public void setIndustryId(Long industryId){
 		this.industryId = industryId;
 	}
     
-	public Integer getIndustrySubId(){
+	public Long getIndustrySubId(){
 		return industrySubId;
 	}
-	public void setIndustrySubId(Integer industrySubId){
+	public void setIndustrySubId(Long industrySubId){
 		this.industrySubId = industrySubId;
 	}
     

@@ -24,5 +24,11 @@ public interface InvestEventsDAO {
 	List<InvestEvents> queryInvestEvents(InvestEventsQuery investEventsQuery);
 			
     int updateByPrimaryKey(InvestEvents investEvents);
-	
+
+    /**
+     * 根据投资事件查询项目
+     * @param investEventsQuery
+     * @return
+     */
+    List<InvestEvents>queryProject(InvestEventsQuery investEventsQuery);
 }

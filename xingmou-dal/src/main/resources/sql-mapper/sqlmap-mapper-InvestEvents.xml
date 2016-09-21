@@ -133,7 +133,12 @@
 		FROM dm_invest_events
 		<include refid="queryWhereAndOrder" />
 	</select>
-	
+	<select id="queryProject" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.InvestEventsQuery">
+		SELECT  a.project_id,b.title AS projectName
+
+		FROM dm_invest_events a LEFT  JOIN  dm_project b ON a.project_id = b.id
+		<include refid="queryWhereAndOrder" />
+	</select>
 	<sql id="queryWhereAndOrder">
 		<where>
 					<if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>

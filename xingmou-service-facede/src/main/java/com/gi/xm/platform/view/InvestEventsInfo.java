@@ -137,8 +137,18 @@ public class InvestEventsInfo implements Serializable {
 	 * @Fields year : 
 	 */
 	private Integer year;
-		
-    
+	//新加
+	private String projectName;
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
+
 	public Long getId(){
 		return id;
 	}

@@ -152,7 +152,17 @@ public class InvestEvents extends Pojo {
 	 * @Fields updateTime : 
 	 */
 	private Timestamp updateTime;
-	
+
+	//新加
+	private String projectName;
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
 
     
 	public Long getId(){

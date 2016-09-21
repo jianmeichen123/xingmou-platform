@@ -125,10 +125,10 @@ public class IndustryDataYearController {
             @PathVariable("year") Integer[] years,@PathVariable("industryId") Integer industryId,@PathVariable("industrySubId") Integer industrySubId){
 
         //子行业
-        if (years != null  && industrySubId != null){
+        if (years != null  && industrySubId != 0){
             MessageInfo<List<IndustryDataYearInfo>> messageInfo = industryDataYearFacede.getListByYaarIndustrySubId(years, industrySubId);
             return messageInfo;
-        }else if(years != null  && industryId != null){
+        }else if(years != null  && industryId != 0){
             MessageInfo<List<IndustryDataYearInfo>> messageInfo = industryFirstDataYearFacede.getListByIndustryIdYaar(industryId, years);
             return messageInfo;
         }else if (years != null){

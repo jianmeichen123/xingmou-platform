@@ -145,7 +145,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
 	 * @author zcy
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/logout", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/logout", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseData<User> logout(HttpServletRequest request,HttpServletResponse response, @CookieValue("_uid_")String uid,@CookieValue("s_")String s) {
 		ResponseData<User> responsebody = new ResponseData<User>();
         cache.remove("xm:"+s+":"+uid);

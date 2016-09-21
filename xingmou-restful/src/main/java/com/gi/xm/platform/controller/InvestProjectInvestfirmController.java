@@ -49,7 +49,7 @@ public class InvestProjectInvestfirmController {
 		List<InvestProjectInvestfirmInfo> piList = dddd.getRecords();
 		//投资机构列表
 		List<InvestfirmsInfo> investfirmList = null;
-	
+
 		vo.setInvestfirmList(investfirmList);
 		vo.setPiList(piList);
 		return vo;
@@ -107,11 +107,11 @@ public class InvestProjectInvestfirmController {
 		MessageInfo<List<InvestProjectInvestfirmInfo>> messageInfo = investProjectInvestfirmFacede.getListByProjectId(projectId);
 		return messageInfo;
 	}
-	@RequestMapping("getRelationInfo/{year}/{industryId}/{industrySubId}")
+	/*@RequestMapping("getRelationInfo/{year}/{industryId}/{industrySubId}")
 	@ResponseBody
 	public MessageInfo<RelationInfo> getRelationInfo(
 			@PathVariable("year") Integer year, @PathVariable("industryId") Integer industryId, @PathVariable("industrySubId") Integer industrySubId){
 		MessageInfo<RelationInfo> messageInfo = investProjectInvestfirmFacede.getRelationInfo(year,industryId,industrySubId);
 		return messageInfo;
-	}
+	}*/
 }

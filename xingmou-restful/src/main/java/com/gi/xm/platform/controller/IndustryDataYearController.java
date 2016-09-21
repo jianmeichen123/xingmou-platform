@@ -48,7 +48,11 @@ public class IndustryDataYearController {
             resultMessageInfo =  industryDataYearFacede.queryIndustryDataYear(industryDataYearQueryInfo);
         } else {
             //一级行业
-            IndustryFirstDataYearQueryInfo  industryFirstDataYearQueryInfo = (IndustryFirstDataYearQueryInfo)industryDataYearQueryInfo;
+            IndustryFirstDataYearQueryInfo  industryFirstDataYearQueryInfo = new IndustryFirstDataYearQueryInfo();
+            industryFirstDataYearQueryInfo.setIndustryId(industryDataYearQueryInfo.getIndustryId());
+            industryFirstDataYearQueryInfo.setYearList(industryDataYearQueryInfo.getYearList());
+            industryFirstDataYearQueryInfo.setYaar(industryDataYearQueryInfo.getYaar());
+
             resultMessageInfo =  industryFirstDataYearFacede.queryIndustryFirstDataYear(industryFirstDataYearQueryInfo);
         }
 

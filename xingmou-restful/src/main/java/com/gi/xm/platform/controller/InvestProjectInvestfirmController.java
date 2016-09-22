@@ -49,7 +49,7 @@ public class InvestProjectInvestfirmController {
 		List<InvestProjectInvestfirmInfo> piList = dddd.getRecords();
 		//投资机构列表
 		List<InvestfirmsInfo> investfirmList = null;
-
+		vo.setProjectList(projectList);
 		vo.setInvestfirmList(investfirmList);
 		vo.setPiList(piList);
 		return vo;

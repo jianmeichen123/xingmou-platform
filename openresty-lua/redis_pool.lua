@@ -57,7 +57,7 @@ function redis_pool:get_key(str)
         end
         client:expire(key,172800)
         client:incr(string.format("%s:%s:%s","xm","c",email))
-        client:incr(string.format("%s:%s:%s:%s","xm","c",ngx.now(),email))
+        client:incr(string.format("%s:%s:%s:%s","xm","c",(ngx.now())/5*5,email))
         return true,"获取key成功",val
     end
     --self:close()

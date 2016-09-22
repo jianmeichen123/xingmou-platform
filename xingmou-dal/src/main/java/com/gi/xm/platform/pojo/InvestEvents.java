@@ -152,6 +152,18 @@ public class InvestEvents extends Pojo {
 	 * @Fields updateTime : 
 	 */
 	private Timestamp updateTime;
+	/**
+	 * @Fields yaar : 年份
+	 */
+	private Integer year;
+
+	public Integer getYear() {
+		return year;
+	}
+
+	public void setYear(Integer year) {
+		this.year = year;
+	}
 
 	//新加
 	private String projectName;

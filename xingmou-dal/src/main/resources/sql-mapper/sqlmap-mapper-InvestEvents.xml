@@ -26,6 +26,7 @@
 								<result column="investfirm_names" property="investfirmNames" jdbcType="VARCHAR" />
 								<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
 								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	                        	<result column="year" property="year" jdbcType="INTEGER" />
 						</resultMap>
 
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
@@ -112,6 +113,7 @@
 			<if test="industryId!=null">industry_id = #{industryId,jdbcType=BIGINT},</if>
 			<if test="industrySubId!=null">industry_sub_id = #{industrySubId,jdbcType=BIGINT},</if>
 			<if test="addTime!=null">add_time = #{addTime,jdbcType=TIMESTAMP},</if>
+		<if test="year!=null">AND year = #{year,jdbcType=INTEGER}</if>
 	    WHERE id = #{id,jdbcType=BIGINT}
 	</update>
 	
@@ -137,11 +139,15 @@
 		SELECT  a.project_id,b.title AS projectName
 
 		FROM dm_invest_events a LEFT  JOIN  dm_project b ON a.project_id = b.id
-		<include refid="queryWhereAndOrder" />
+
+        <include refid="queryWhereAndOrder" />
+
+
 	</select>
 	<sql id="queryWhereAndOrder">
 		<where>
 					<if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>
+		        	<if test="year!=null"> AND year = #{year,jdbcType=INTEGER}</if>
 								<if test="title!=null and title!=''">AND title = #{title,jdbcType=VARCHAR}</if>
 								<if test="projectId!=null">AND project_id = #{projectId,jdbcType=BIGINT}</if>
 								<if test="investMoney!=null and investMoney!=''">AND invest_money = #{investMoney,jdbcType=VARCHAR}</if>
@@ -169,7 +175,7 @@
 		</where>
 		<choose>
 			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
-			<otherwise>order by id desc</otherwise>
+			<otherwise>order by  a.id desc</otherwise>
 		</choose>
 	</sql>
 	

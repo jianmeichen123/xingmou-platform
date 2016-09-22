@@ -237,5 +237,16 @@ public class InvestEventsQuery extends Query {
 	public void setUpdateTime(Timestamp updateTime){
 		this.updateTime = updateTime;
 	}
-    
-    }
+	/**
+	 * @Fields year :
+	 */
+	private Integer year;
+
+	public Integer getYear() {
+		return year;
+	}
+
+	public void setYear(Integer year) {
+		this.year = year;
+	}
+}

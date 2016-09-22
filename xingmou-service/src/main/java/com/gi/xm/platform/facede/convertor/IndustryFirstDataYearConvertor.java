@@ -96,7 +96,7 @@ public abstract class IndustryFirstDataYearConvertor {
 	public static QueryResultInfo<IndustryDataYearInfo> toQueryResultInfo1(QueryResult<IndustryFirstDataYear> queryResult)
 	{
 		QueryResultInfo<IndustryDataYearInfo> queryResultInfo = new QueryResultInfo<IndustryDataYearInfo>();
-		queryResultInfo.setPages(queryResult.getPages());
+		//queryResultInfo.setPages(queryResult.getPages());
 		queryResult.setRecords(queryResult.getRecords());
 		queryResultInfo.setTotal(queryResult.getTotal());
 		queryResultInfo.setRecords(toIndustryFirstDataYearInfoList1(queryResult.getRecords()));

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 public class InvestfirmsInfo implements Serializable {
 
@@ -92,9 +93,29 @@ public class InvestfirmsInfo implements Serializable {
 	 * @Fields updateTime : 
 	 */
 	private Timestamp updateTime;
-		
-    
-	public Long getId(){
+
+
+	private List<InvestfirmAreaInfo> investfirmAreaInfoList;
+
+    private List<InvestfirmRoundInfo>  investfirmRoundInfoList;
+
+    public List<InvestfirmAreaInfo> getInvestfirmAreaInfoList() {
+        return investfirmAreaInfoList;
+    }
+
+    public void setInvestfirmAreaInfoList(List<InvestfirmAreaInfo> investfirmAreaInfoList) {
+        this.investfirmAreaInfoList = investfirmAreaInfoList;
+    }
+
+    public List<InvestfirmRoundInfo> getInvestfirmRoundInfoList() {
+        return investfirmRoundInfoList;
+    }
+
+    public void setInvestfirmRoundInfoList(List<InvestfirmRoundInfo> investfirmRoundInfoList) {
+        this.investfirmRoundInfoList = investfirmRoundInfoList;
+    }
+
+    public Long getId(){
 		return id;
 	}
 	

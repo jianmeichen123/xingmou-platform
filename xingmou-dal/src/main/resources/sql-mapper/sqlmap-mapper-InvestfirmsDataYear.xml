@@ -119,8 +119,8 @@
 	
 	<select id="queryInvestfirmsDataYear" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.InvestfirmsDataYearQuery">
 		SELECT
-		<include refid="selectFields" />
-		FROM dm_investfirms_data_year
+          a.*,b.pic as pic
+		FROM dm_investfirms_data_year a LEFT JOIN  dm_files b ON a.investfirm_id=b.source_id AND b.type=1
 		<include refid="queryWhereAndOrder" />
 	</select>
 	

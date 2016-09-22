@@ -4,14 +4,6 @@ package com.gi.xm.platform.facede.impl;
 import java.util.List;
 import java.util.Date;
 import com.alibaba.dubbo.config.annotation.Service;
-import com.gi.xm.platform.biz.InvestfirmAreaBiz;
-import com.gi.xm.platform.biz.InvestfirmRoundBiz;
-import com.gi.xm.platform.facede.convertor.InvestfirmAreaConvertor;
-import com.gi.xm.platform.facede.convertor.InvestfirmRoundConvertor;
-import com.gi.xm.platform.pojo.InvestfirmArea;
-import com.gi.xm.platform.pojo.InvestfirmRound;
-import com.gi.xm.platform.view.InvestfirmAreaInfo;
-import com.gi.xm.platform.view.InvestfirmRoundInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 
@@ -39,13 +31,7 @@ public class InvestfirmsFacedeImpl implements InvestfirmsFacede {
 
 	@Autowired
 	private InvestfirmsBiz investfirmsBiz;
-
-    @Autowired
-    private InvestfirmAreaBiz investfirmAreaBiz;
-
-    @Autowired
-    private InvestfirmRoundBiz investfirmRoundBiz;
-
+				
 	public MessageInfo<Integer> deleteInvestfirms(Long id){
 		
 		Message<Integer> message  = investfirmsBiz.deleteInvestfirms(id);
@@ -70,20 +56,14 @@ public class InvestfirmsFacedeImpl implements InvestfirmsFacede {
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-    @Cacheable(value = "investfirmsInfo",keyGenerator = "wiselyKeyGenerator")
+	//@Cacheable(value = "investfirmsInfo",keyGenerator = "wiselyKeyGenerator")
 	public MessageInfo<InvestfirmsInfo> getInvestfirms( Long id ){
-			Message<Investfirms> message  = investfirmsBiz.getInvestfirms( id );
-			MessageInfo<InvestfirmsInfo> messageInfo = MessageConvertor.toMessageInfo(message);
-			InvestfirmsInfo investfirmsInfo = InvestfirmsConvertor.toInvestfirmsInfo(message.getData());
-			messageInfo.setData(investfirmsInfo);
-
-			Message<List<InvestfirmArea>> m1 = investfirmAreaBiz.getListByInvestfrimId(id.intValue());
-			List<InvestfirmAreaInfo> investfirmAreaInfos = InvestfirmAreaConvertor.toInvestfirmAreaInfoList(m1.getData());
-			Message<List<InvestfirmRound>> m2 = investfirmRoundBiz.getListByInvestfrimId(id.intValue());
-			List<InvestfirmRoundInfo> investfirmRoundInfoList = InvestfirmRoundConvertor.toInvestfirmRoundInfoList(m2.getData());
-			investfirmsInfo.setInvestfirmAreaInfoList(investfirmAreaInfos);
-			investfirmsInfo.setInvestfirmRoundInfoList(investfirmRoundInfoList);
-			return messageInfo;
+		
+		Message<Investfirms> message  = investfirmsBiz.getInvestfirms( id );
+		MessageInfo<InvestfirmsInfo> messageInfo = MessageConvertor.toMessageInfo(message);
+		InvestfirmsInfo investfirmsInfo = InvestfirmsConvertor.toInvestfirmsInfo(message.getData());
+		messageInfo.setData(investfirmsInfo);
+		return messageInfo;
 	}
 
     @Cacheable(value = "investfirmsInfo",keyGenerator = "wiselyKeyGenerator")

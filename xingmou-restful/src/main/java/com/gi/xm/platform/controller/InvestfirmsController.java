@@ -7,7 +7,6 @@ import java.util.Map;
 import com.alibaba.dubbo.config.annotation.Reference;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,11 +25,7 @@ public class InvestfirmsController {
 	@Reference(check = false)
 	private InvestfirmsFacede investfirmsFacede;
 
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public ModelAndView index() {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		return new ModelAndView("investfirms/index", modelMap);
-	}
+	
 
 	@RequestMapping("query")
 	@ResponseBody
@@ -39,34 +34,17 @@ public class InvestfirmsController {
 		return resultMessageInfo;
 	}
 
-    @RequestMapping("create")
-    @ResponseBody
-    public MessageInfo<Long> createInvestfirms(InvestfirmsInfo investfirmsInfo){
-        MessageInfo<Long> messageInfo =  investfirmsFacede.createInvestfirms(investfirmsInfo);
-        return messageInfo;
-    }
+    
 
-    @RequestMapping("update")
-    @ResponseBody
-	public MessageInfo<Integer> updateInvestfirms(InvestfirmsInfo investfirmsInfo){
-		MessageInfo<Integer> messageInfo =  investfirmsFacede.updateInvestfirms(investfirmsInfo);
-		return messageInfo;
-	}
 
-    @RequestMapping("get/{id}")
+    @RequestMapping("get")
     @ResponseBody
-	public MessageInfo<InvestfirmsInfo> getInvestfirms(@PathVariable("id") Long id ){
+	public MessageInfo<InvestfirmsInfo> getInvestfirms( Long id ){
 		MessageInfo<InvestfirmsInfo> messageInfo =  investfirmsFacede.getInvestfirms(id);
 		return messageInfo;
 	}
 
-    @RequestMapping("getAll")
-    @ResponseBody
-    public MessageInfo<List<InvestfirmsInfo>> getAllInvestfirms(){
-		MessageInfo<List<InvestfirmsInfo>>  messageInfo = investfirmsFacede.getAllInvestfirms();
-		return messageInfo;
-	}
-
+    
 
 		
     @RequestMapping("getListBySourceId")

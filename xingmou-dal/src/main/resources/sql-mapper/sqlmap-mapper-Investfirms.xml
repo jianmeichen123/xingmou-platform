@@ -89,6 +89,10 @@
 	id,source_id,name,icon,icon_big,description,link,email,phone,wechat,address,address_detail,round_names,area_names,add_time,update_time
 	</sql>
 	
+	<sql id="selectFields1">
+	t.id,icon,icon_big,description,link,email,phone,wechat,address,address_detail,round_names,area_names
+	</sql>
+	
 	<select id="selectAll" resultMap="BaseResultMap">
 		SELECT
 		<include refid="selectFields" />
@@ -129,10 +133,16 @@
 	</sql>
 	
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
-		SELECT
-		<include refid="selectFields" />
-		FROM dm_investfirms
-		WHERE id = #{id,jdbcType=BIGINT} 
+	SELECT
+		<include refid="selectFields1" />,
+		file.pic_big AS iconBig,
+		file.pic AS icon,
+		(SELECT count(*) from dm_investor t1 where t1.investfirm_id=t.id) as 'investorNum' ,
+        (SELECT count(*) from dm_invest_events_investfirm t2 where t2.investfirm_id=t.id) as 'historyNum'
+        from dm_investfirms t
+		LEFT JOIN dm_files file ON t.source_id = file.source_id
+		AND file.type = 2
+		where t.id=#{id} 
 	</select>
 
 	<select id="selectByPrimaryKeyForUpdate" resultMap="BaseResultMap" parameterType="java.lang.Long">

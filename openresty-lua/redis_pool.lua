@@ -55,15 +55,9 @@ function redis_pool:get_key(str)
         if email == ngx.null then
             return false,"用户不存在",val
         end
-        client:expire(key,172800)
-
-        local k = string.format("%s:%s:%s","xm","c",email)
-        client:incr(k)
-        client:expire(k,604800)
-
-        local k5 = string.format("%s:%s:%s:%s","xm","c",math.floor((ngx.now())/300)*300,email)
-        client:incr(k5)
-        client:expire(k5,86400)
+        client:expire(key,7200)
+        local ikey = string.format("%s:%s:%s","xm","count",email)
+        local v,e = client:incr(ikey)
         return true,"获取key成功",val
     end
     --self:close()

@@ -1,6 +1,7 @@
 package com.gi.xm.platform.view.common;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class QueryResultInfo<E>  implements Serializable  {
@@ -14,6 +15,8 @@ public class QueryResultInfo<E>  implements Serializable  {
 	private List<E> records;
 	private Long total;
 
+	private final List<E> empty = new ArrayList<>();
+
 	public Integer getPages() {
 		return pages;
 	}
@@ -23,6 +26,9 @@ public class QueryResultInfo<E>  implements Serializable  {
 	}
 
 	public List<E> getRecords() {
+		if (records == null){
+			return empty;
+		}
 		return records;
 	}
 

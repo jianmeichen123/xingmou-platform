@@ -80,7 +80,9 @@ public class ProjectController {
 
 			}else if (projectQueryInfo.getOrder().equalsIgnoreCase("investMoney")) {
 				projectQueryInfo.setOrder("invest_money");
-			}
+			}else {
+                projectQueryInfo.setOrder("create_date");
+            }
 			if (projectQueryInfo.getOrderBy()==null){
 				projectQueryInfo.setOrderBy("desc");
 			}

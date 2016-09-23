@@ -81,6 +81,13 @@ public class LoginController extends BaseControllerImpl<User, User> {
         return "login";
     }
 
+	@RequestMapping(value = "/me")
+    @ResponseBody
+	public String  me(HttpServletResponse response, @CookieValue(name = "_uid_")String uid,@CookieValue(name = "s_")String s) {
+		String userJson = cache.getValue("xm:"+s+":"+uid);
+		return userJson;
+	}
+
 	/**
 	 * 用户登录
 	 * 
@@ -178,5 +185,8 @@ public class LoginController extends BaseControllerImpl<User, User> {
 		//cache.remove(sessionId); // 从redis中删除sessionId
 		return true;
 	}
+
+
+
 
 }

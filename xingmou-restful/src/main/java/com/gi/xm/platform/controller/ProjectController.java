@@ -72,6 +72,12 @@ public class ProjectController {
 	@RequestMapping("search")
 	@ResponseBody
 	public MessageInfo<QueryResultInfo<ProjectInfo>>  searchProject (@RequestBody ProjectQueryInfo projectQueryInfo) {
+        if(projectQueryInfo.getCreateDateEnd()!=null){
+
+
+            projectQueryInfo.setCreateDateEnd((Integer.parseInt(projectQueryInfo.getCreateDateEnd()+1)+""));
+        }
+
         if (projectQueryInfo.getOrder() != null){
 			if (projectQueryInfo.getOrderBy().equalsIgnoreCase("createDate")){
 				projectQueryInfo.setOrderBy("create_date");

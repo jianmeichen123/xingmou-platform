@@ -136,6 +136,8 @@
 		FROM dm_invest_events
 		<include refid="queryWhereAndOrder" />
 	</select>
+
+	<!--left join -->
 	<select id="queryProject" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.InvestEventsQuery">
 		SELECT  a.project_id,b.title AS projectName
 
@@ -174,10 +176,8 @@
 								<if test="updateTime!=null">AND update_time = #{updateTime,jdbcType=TIMESTAMP}</if>
 
 		</where>
-		<choose>
-			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
-			<otherwise>order by  id desc</otherwise>
-		</choose>
+
+			<if test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</if>
 	</sql>
 	
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">

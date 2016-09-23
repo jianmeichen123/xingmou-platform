@@ -7,6 +7,7 @@ import com.gi.xm.platform.view.common.MessageInfo;
 import com.gi.xm.platform.view.common.QueryResultInfo;
 import com.gi.xm.platform.view.InvestEventsInfo;
 import com.gi.xm.platform.view.InvestEventsQueryInfo;
+import com.gi.xm.platform.view.InvestfirmsQueryInfo;
 
 public interface InvestEventsFacede {
 		MessageInfo<Integer> deleteInvestEvents(Long id);
@@ -21,6 +22,8 @@ public interface InvestEventsFacede {
 			
     MessageInfo<QueryResultInfo<InvestEventsInfo>> queryInvestEvents(InvestEventsQueryInfo investEventsQueryInfo);
     List<InvestEventsInfo>  queryProject(InvestEventsQueryInfo investEventsQueryInfo);
+
+	MessageInfo<QueryResultInfo<InvestEventsInfo>> getEventByInvestfirmId(InvestfirmsQueryInfo investfirmsQueryInfo);
 
 
 

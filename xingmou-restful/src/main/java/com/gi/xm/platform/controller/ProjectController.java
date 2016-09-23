@@ -73,18 +73,17 @@ public class ProjectController {
 	@ResponseBody
 	public MessageInfo<QueryResultInfo<ProjectInfo>>  searchProject (@RequestBody ProjectQueryInfo projectQueryInfo) {
         if (projectQueryInfo.getOrder() != null){
-			if (projectQueryInfo.getOrder().equalsIgnoreCase("createDate")){
-				projectQueryInfo.setOrder("create_date");
-			}else if (projectQueryInfo.getOrder().equalsIgnoreCase("newestEventRoundId")) {
-				projectQueryInfo.setOrder("newest_event_round_id");
-
-			}else if (projectQueryInfo.getOrder().equalsIgnoreCase("investMoney")) {
-				projectQueryInfo.setOrder("invest_money");
+			if (projectQueryInfo.getOrderBy().equalsIgnoreCase("createDate")){
+				projectQueryInfo.setOrderBy("create_date");
+			}else if (projectQueryInfo.getOrderBy().equalsIgnoreCase("newestEventRoundId")) {
+				projectQueryInfo.setOrderBy("newest_event_round_id");
+			}else if (projectQueryInfo.getOrderBy().equalsIgnoreCase("investMoney")) {
+				projectQueryInfo.setOrderBy("invest_money");
 			}else {
-                projectQueryInfo.setOrder("create_date");
+                projectQueryInfo.setOrderBy("create_date");
             }
-			if (projectQueryInfo.getOrderBy()==null){
-				projectQueryInfo.setOrderBy("desc");
+			if (projectQueryInfo.getOrder()==null){
+				projectQueryInfo.setOrder("desc");
 			}
 		}
 		String returnFields = projectQueryInfo.getSearchFields();

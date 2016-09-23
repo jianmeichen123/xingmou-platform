@@ -6,20 +6,17 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-
-import com.gi.xm.platform.dao.ProjectPersonDAO;
 
 import com.gi.xm.platform.biz.common.Message;
 import com.gi.xm.platform.biz.common.MessageStatus;
 import com.gi.xm.platform.biz.common.QueryResult;
+import com.gi.xm.platform.dao.ProjectPersonDAO;
 import com.gi.xm.platform.pojo.ProjectPerson;
 import com.gi.xm.platform.query.ProjectPersonQuery;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 @Service("projectPersonBiz")
 public class ProjectPersonBiz  {
@@ -136,7 +133,5 @@ public class ProjectPersonBiz  {
 		}
 		return message;
 	}
-
-	
 
 }

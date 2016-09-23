@@ -72,7 +72,20 @@ public class ProjectController {
 	@RequestMapping("search")
 	@ResponseBody
 	public MessageInfo<QueryResultInfo<ProjectInfo>>  searchProject (@RequestBody ProjectQueryInfo projectQueryInfo) {
-        String returnFields = projectQueryInfo.getSearchFields();
+        if (projectQueryInfo.getOrder() != null){
+			if (projectQueryInfo.getOrder().equalsIgnoreCase("createDate")){
+				projectQueryInfo.setOrder("create_date");
+			}else if (projectQueryInfo.getOrder().equalsIgnoreCase("newestEventRoundId")) {
+				projectQueryInfo.setOrder("newest_event_round_id");
+
+			}else if (projectQueryInfo.getOrder().equalsIgnoreCase("investMoney")) {
+				projectQueryInfo.setOrder("invest_money");
+			}
+			if (projectQueryInfo.getOrderBy()==null){
+				projectQueryInfo.setOrderBy("desc");
+			}
+		}
+		String returnFields = projectQueryInfo.getSearchFields();
         projectQueryInfo.setReturnFields(returnFields);
 		MessageInfo<QueryResultInfo<ProjectInfo>> resultMessageInfo = projectFacede.searchProject(projectQueryInfo);
 		return resultMessageInfo;

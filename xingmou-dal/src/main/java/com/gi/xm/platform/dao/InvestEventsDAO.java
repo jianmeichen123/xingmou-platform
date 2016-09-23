@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.gi.xm.platform.pojo.InvestEvents;
 import com.gi.xm.platform.query.InvestEventsQuery;
+import com.gi.xm.platform.query.InvestfirmsQuery;
 
 public interface InvestEventsDAO {
 	
@@ -31,4 +32,8 @@ public interface InvestEventsDAO {
      * @return
      */
     List<InvestEvents>queryProject(InvestEventsQuery investEventsQuery);
+
+
+	List<InvestEvents> queryEventByInfirm(InvestfirmsQuery investfirmsQuery);
+    
 }

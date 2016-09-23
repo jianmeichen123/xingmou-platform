@@ -16,6 +16,7 @@ import com.gi.xm.platform.view.common.MessageInfo;
 import com.gi.xm.platform.view.common.QueryResultInfo;
 import com.gi.xm.platform.view.InvestEventsInfo;
 import com.gi.xm.platform.view.InvestEventsQueryInfo;
+import com.gi.xm.platform.view.InvestfirmsQueryInfo;
 import com.gi.xm.platform.facede.InvestEventsFacede;
 
 @Controller
@@ -66,6 +67,11 @@ public class InvestEventsController {
 		return messageInfo;
 	}
 
-
+    @RequestMapping("getEventByInvestfirmId")
+	@ResponseBody
+	public MessageInfo<QueryResultInfo<InvestEventsInfo>>  getEventByInvestfirmId (InvestfirmsQueryInfo investfirmsQueryInfo) {
+		MessageInfo<QueryResultInfo<InvestEventsInfo>> resultMessageInfo = investEventsFacede.getEventByInvestfirmId(investfirmsQueryInfo);
+		return resultMessageInfo;
+	}
 	
 }

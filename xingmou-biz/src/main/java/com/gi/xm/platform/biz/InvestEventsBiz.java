@@ -20,6 +20,7 @@ import com.gi.xm.platform.biz.common.MessageStatus;
 import com.gi.xm.platform.biz.common.QueryResult;
 import com.gi.xm.platform.pojo.InvestEvents;
 import com.gi.xm.platform.query.InvestEventsQuery;
+import com.gi.xm.platform.query.InvestfirmsQuery;
 
 @Service("investEventsBiz")
 public class InvestEventsBiz  {
@@ -136,6 +137,25 @@ public class InvestEventsBiz  {
 
 		}
 		return investEventsList;
+	}
+
+
+	public Message<QueryResult<InvestEvents>> queryInvestEvents(InvestfirmsQuery investfirmsQuery) {
+		Message<QueryResult<InvestEvents>> message = new Message<QueryResult<InvestEvents>>();
+		try {
+			QueryResult<InvestEvents> queryResult = new QueryResult<InvestEvents>();
+			PageHelper.startPage(investfirmsQuery.getPageIndex(), investfirmsQuery.getPageSize());
+			List<InvestEvents> investEventsList = investEventsDAO.queryEventByInfirm(investfirmsQuery);
+			PageInfo<InvestEvents> pageInfo = new PageInfo<InvestEvents>(investEventsList);
+			queryResult.setPages(pageInfo.getPages());
+			queryResult.setTotal(pageInfo.getTotal());
+			queryResult.setRecords(investEventsList);
+			message.setData(queryResult);
+		} catch (Exception e) {
+			LOGGER.error("queryInvestEvents", "分页查询InvestEvents失败", e);
+			message.setMessageStatus(MessageStatus.SYS_ERROR);
+		}
+		return message;
 	}
 
 }

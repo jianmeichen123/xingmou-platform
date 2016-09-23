@@ -34,6 +34,7 @@
 		WHERE id = #{id,jdbcType=BIGINT} 
 	</delete>
 	
+	
 	<insert id="insert" parameterType="com.gi.xm.platform.pojo.InvestEvents" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO dm_invest_events (
 			title,
@@ -175,7 +176,7 @@
 		</where>
 		<choose>
 			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
-			<otherwise>order by  a.id desc</otherwise>
+			<otherwise>order by  id desc</otherwise>
 		</choose>
 	</sql>
 	
@@ -193,6 +194,20 @@
 		WHERE id = #{id,jdbcType=BIGINT} 
 		FOR UPDATE
 	</select>
-			
+	
+	<select id="queryEventByInfirm" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.InvestfirmsQuery">
+		SELECT 
+			die.`project_id`, die.`title`, die.`invest_money`, die.`invest_date`, die.`round_name`, 
+			die.`investfirm_names`, die.`industry_name`, die.`industry_sub_name`   
+		FROM 
+			dm_invest_events_investfirm  
+				diei  
+			LEFT JOIN 
+				dm_invest_events  die ON diei.`event_id` = die.`id` 
+		WHERE 
+			diei.`investfirm_id` = #{id}
+		
+	</select>
+	
 
 </mapper>

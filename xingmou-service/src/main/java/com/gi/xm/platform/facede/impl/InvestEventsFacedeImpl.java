@@ -1,33 +1,28 @@
 
 package com.gi.xm.platform.facede.impl;
 
-import java.util.*;
+import java.util.List;
 
-import com.alibaba.dubbo.config.annotation.Service;
-import com.gi.xm.platform.biz.InvestEventsInvestfirmBiz;
-import com.gi.xm.platform.facede.InvestEventsInvestfirmFacede;
-import com.gi.xm.platform.pojo.InvestEventsInvestfirm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.gi.xm.platform.biz.InvestEventsBiz;
-
-import com.gi.xm.platform.view.common.MessageInfo;
-import com.gi.xm.platform.view.common.QueryResultInfo;
-
-import com.gi.xm.platform.view.InvestEventsInfo;
-import com.gi.xm.platform.view.InvestEventsQueryInfo;
-
-
+import com.gi.xm.platform.biz.InvestEventsInvestfirmBiz;
 import com.gi.xm.platform.biz.common.Message;
 import com.gi.xm.platform.biz.common.QueryResult;
-import com.gi.xm.platform.pojo.InvestEvents;
-import com.gi.xm.platform.query.InvestEventsQuery;
-
-
 import com.gi.xm.platform.facede.InvestEventsFacede;
 import com.gi.xm.platform.facede.convertor.InvestEventsConvertor;
+import com.gi.xm.platform.facede.convertor.InvestfirmsConvertor;
 import com.gi.xm.platform.facede.convertor.MessageConvertor;
+import com.gi.xm.platform.pojo.InvestEvents;
+import com.gi.xm.platform.query.InvestEventsQuery;
+import com.gi.xm.platform.query.InvestfirmsQuery;
+import com.gi.xm.platform.view.InvestEventsInfo;
+import com.gi.xm.platform.view.InvestEventsQueryInfo;
+import com.gi.xm.platform.view.InvestfirmsQueryInfo;
+import com.gi.xm.platform.view.common.MessageInfo;
+import com.gi.xm.platform.view.common.QueryResultInfo;
 
 @Service
 public class InvestEventsFacedeImpl implements InvestEventsFacede {
@@ -86,6 +81,13 @@ public class InvestEventsFacedeImpl implements InvestEventsFacede {
 		InvestEventsQuery investEventsQuery = InvestEventsConvertor.toInvestEventsQuery(investEventsQueryInfo);
 		Message<QueryResult<InvestEvents>> message = investEventsBiz.queryInvestEvents(investEventsQuery);
 		MessageInfo<QueryResultInfo<InvestEventsInfo>> messageInfo = new MessageInfo<QueryResultInfo<InvestEventsInfo>>();
+		if (!message.isSuccess()){
+			messageInfo = MessageConvertor.toMessageInfo(message);
+			return messageInfo;
+		}else if(message.getData() == null){
+			messageInfo = MessageConvertor.toMessageInfo(message);
+			return messageInfo;
+		}
 		QueryResultInfo<InvestEventsInfo> queryResultInfo = InvestEventsConvertor.toQueryResultInfo(message.getData());
 		messageInfo.setData(queryResultInfo);
 		return messageInfo;
@@ -96,6 +98,24 @@ public class InvestEventsFacedeImpl implements InvestEventsFacede {
 		List<InvestEventsInfo> list = InvestEventsConvertor.toInvestEventsInfoList(investEventsBiz.queryProject(investEventsQuery));
 
 		return list;
+	}
+
+	@Override
+	public MessageInfo<QueryResultInfo<InvestEventsInfo>> getEventByInvestfirmId(
+			InvestfirmsQueryInfo investfirmsQueryInfo) {
+		InvestfirmsQuery investfirmsQuery = InvestfirmsConvertor.toInvestfirmsQuery(investfirmsQueryInfo);
+		Message<QueryResult<InvestEvents>> message = investEventsBiz.queryInvestEvents(investfirmsQuery);
+		MessageInfo<QueryResultInfo<InvestEventsInfo>> messageInfo = new MessageInfo<QueryResultInfo<InvestEventsInfo>>();
+		if (!message.isSuccess()){
+			messageInfo = MessageConvertor.toMessageInfo(message);
+			return messageInfo;
+		}else if(message.getData() == null){
+			messageInfo = MessageConvertor.toMessageInfo(message);
+			return messageInfo;
+		}
+		QueryResultInfo<InvestEventsInfo> queryResultInfo = InvestEventsConvertor.toQueryResultInfo(message.getData());
+		messageInfo.setData(queryResultInfo);
+		return messageInfo;
 	}
 
 }

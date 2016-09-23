@@ -72,11 +72,6 @@ public class ProjectController {
 	@RequestMapping("search")
 	@ResponseBody
 	public MessageInfo<QueryResultInfo<ProjectInfo>>  searchProject (@RequestBody ProjectQueryInfo projectQueryInfo) {
-        if ("newestEventDate".equalsIgnoreCase(projectQueryInfo.getOrderBy())){
-            projectQueryInfo.setOrderBy("newest_event_date");
-        }else {
-            projectQueryInfo.setOrderBy(null);
-        }
         String returnFields = projectQueryInfo.getSearchFields();
         projectQueryInfo.setReturnFields(returnFields);
 		MessageInfo<QueryResultInfo<ProjectInfo>> resultMessageInfo = projectFacede.searchProject(projectQueryInfo);

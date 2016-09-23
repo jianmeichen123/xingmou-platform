@@ -4,20 +4,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.alibaba.dubbo.config.annotation.Reference;
-
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.gi.xm.platform.view.common.MessageInfo;
-import com.gi.xm.platform.view.common.QueryResultInfo;
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.gi.xm.platform.facede.InvestEventsFacede;
 import com.gi.xm.platform.view.InvestEventsInfo;
 import com.gi.xm.platform.view.InvestEventsQueryInfo;
 import com.gi.xm.platform.view.InvestfirmsQueryInfo;
-import com.gi.xm.platform.facede.InvestEventsFacede;
+import com.gi.xm.platform.view.common.MessageInfo;
+import com.gi.xm.platform.view.common.QueryResultInfo;
 
 @Controller
 @RequestMapping("investEvents")
@@ -69,7 +69,7 @@ public class InvestEventsController {
 
     @RequestMapping("getEventByInvestfirmId")
 	@ResponseBody
-	public MessageInfo<QueryResultInfo<InvestEventsInfo>>  getEventByInvestfirmId (InvestfirmsQueryInfo investfirmsQueryInfo) {
+	public MessageInfo<QueryResultInfo<InvestEventsInfo>>  getEventByInvestfirmId (@RequestBody InvestfirmsQueryInfo investfirmsQueryInfo) {
 		MessageInfo<QueryResultInfo<InvestEventsInfo>> resultMessageInfo = investEventsFacede.getEventByInvestfirmId(investfirmsQueryInfo);
 		return resultMessageInfo;
 	}

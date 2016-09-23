@@ -105,7 +105,7 @@ public class ProjectPersonFacedeImpl implements ProjectPersonFacede {
 	}
 	
 	
-	@Override
+	/*@Override
 	public MessageInfo<List<ProjectPersonInfo>> queryPersonByProjectId(Integer projectId,Integer type) {
 		MessageInfo<List<ProjectPersonInfo>> messageInfo = new MessageInfo<List<ProjectPersonInfo>>();;
 		Message<List<ProjectPerson>> message  = projectPersonBiz.getPersonByProjectId(projectId,type);
@@ -118,6 +118,97 @@ public class ProjectPersonFacedeImpl implements ProjectPersonFacede {
 		}
 		
 		List<ProjectPersonInfo> personInfos = ProjectPersonConvertor.toProjectPersonInfoList(message.getData());
+		
+		List<Integer> idList = new ArrayList<Integer>();
+		
+		for(ProjectPersonInfo p : personInfos){		//查询personIdList
+			idList.add(p.getId());
+		}
+		
+		Message<List<ProjectPersonJob>> jobList = jobBiz.getPersonJobByPid(idList);		//in查询jobList
+		if(!jobList.isSuccess()){
+			messageInfo = MessageConvertor.toMessageInfo(jobList);
+			return messageInfo;
+		}
+		Message<List<ProjectPersonStudy>> studyList = studyBiz.getStudyListByPid(idList);	//in查询学习经历
+		if(!studyList.isSuccess()){
+			messageInfo = MessageConvertor.toMessageInfo(studyList);
+			return messageInfo;
+		}
+		Message<List<Label>> labelList = labelBiz.getListByTypeRelationId(Contants.LABEL_PERSON, idList);	//in tab
+		if(!labelList.isSuccess()){
+			messageInfo = MessageConvertor.toMessageInfo(labelList);
+			return messageInfo;
+		}
+		
+		List<ProjectPersonJobInfo> jobInfos = ProjectPersonJobConvertor.toProjectPersonJobInfoList(jobList.getData());
+		List<ProjectPersonStudyInfo> studyInfos = ProjectPersonStudyConvertor.toProjectPersonStudyInfoList(studyList.getData());
+		List<LabelInfo> labelInfos = LabelConvertor.toLabelInfoList(labelList.getData());
+		
+		for(ProjectPersonInfo p :personInfos){
+			if(labelInfos != null){
+				for(LabelInfo l:labelInfos){
+					if((l.getRelationId().intValue()==p.getId().intValue())&&(l.getType().equals(Contants.LABEL_PERSON))){
+						List<LabelInfo> labels = p.getLabelList();
+						if(labels==null){
+							labels = new ArrayList<>();
+							p.setLabelList(labels);
+						}
+						labels.add(l);
+					}
+				}
+			}
+			if(jobInfos != null){
+				for(ProjectPersonJobInfo job :jobInfos){
+					if(p.getId().intValue()==(job.getPersonId().intValue())){
+						List<ProjectPersonJobInfo> jls = p.getJobList();
+						if(jls==null){
+							jls = new ArrayList<>();
+							p.setJobList(jls);
+						}
+						jls.add(job);
+					}
+						
+				}
+			}
+			
+			if(studyInfos != null){
+				for(ProjectPersonStudyInfo study : studyInfos){
+					if(p.getId().intValue()==(study.getPersonId().intValue())){
+						List<ProjectPersonStudyInfo> studyls = p.getStudyList();
+						if(studyls==null){
+							studyls = new ArrayList<>();
+							p.setStudyList(studyls);
+						}
+						studyls.add(study);
+					}
+						
+				}
+			}
+		}
+		
+		messageInfo.setData(personInfos);
+		return messageInfo;
+	}*/
+
+	@Override
+	public MessageInfo<List<ProjectPersonInfo>> queryPersonList(ProjectPersonQueryInfo projectPersonQueryInfo) {
+	
+		MessageInfo<List<ProjectPersonInfo>> messageInfo = new MessageInfo<List<ProjectPersonInfo>>();
+		ProjectPersonQuery projectPersonQuery = ProjectPersonConvertor.toProjectPersonQuery(projectPersonQueryInfo);
+		Message<QueryResult<ProjectPerson>> message = projectPersonBiz.queryProjectPerson(projectPersonQuery);
+		
+		if (!message.isSuccess()){
+			messageInfo = MessageConvertor.toMessageInfo(message);
+			return messageInfo;
+			
+		}else if(message.getData() == null ||message.getData().getRecords().isEmpty()){
+			messageInfo = MessageConvertor.toMessageInfo(message);
+			return messageInfo;
+		}
+	
+		
+		List<ProjectPersonInfo> personInfos = ProjectPersonConvertor.toProjectPersonInfoList(message.getData().getRecords());
 		
 		List<Integer> idList = new ArrayList<Integer>();
 		

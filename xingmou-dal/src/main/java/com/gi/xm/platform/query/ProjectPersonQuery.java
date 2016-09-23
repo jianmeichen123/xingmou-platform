@@ -19,7 +19,15 @@ public class ProjectPersonQuery extends Query {
 	private String name;
 			
 	private String icon;
+	
+	private String postionName;
 			
+	public String getPostionName() {
+		return postionName;
+	}
+	public void setPositionName(String postionName) {
+		this.postionName = postionName;
+	}
 	private Integer isCoreMember;
 			
 	private Timestamp addTime;

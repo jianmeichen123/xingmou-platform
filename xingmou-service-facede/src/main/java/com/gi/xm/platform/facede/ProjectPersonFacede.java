@@ -21,7 +21,9 @@ public interface ProjectPersonFacede {
 			
     MessageInfo<QueryResultInfo<ProjectPersonInfo>> queryProjectPerson(ProjectPersonQueryInfo projectPersonQueryInfo);
 
-	MessageInfo<List<ProjectPersonInfo>> queryPersonByProjectId(Integer projectId, Integer type);
+	/*MessageInfo<List<ProjectPersonInfo>> queryPersonByProjectId(Integer projectId, Integer type);*/
+
+	MessageInfo<List<ProjectPersonInfo>> queryPersonList(ProjectPersonQueryInfo projectPersonQueryInfo);
 
 	
 

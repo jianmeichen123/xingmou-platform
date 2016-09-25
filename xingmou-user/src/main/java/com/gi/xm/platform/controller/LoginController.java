@@ -69,12 +69,12 @@ public class LoginController extends BaseControllerImpl<User, User> {
         setCacheSessionId("fx", u, uid);
 
         Cookie cookie = new Cookie("_uid_", uid);
-        cookie.setMaxAge(60*60*24*2);
+        cookie.setMaxAge(60*60*24*14);
         cookie.setDomain("xmdev.gi.com");
         cookie.setPath("/");
         response.addCookie(cookie);
         cookie = new Cookie("s_", "fx");
-        cookie.setMaxAge(60*60*24*2);
+        cookie.setMaxAge(60*60*24*14);
         cookie.setDomain("xmdev.gi.com");
         cookie.setPath("/");
         response.addCookie(cookie);

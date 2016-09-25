@@ -35,7 +35,18 @@ public class RedisCacheConf {
                 sb.append(method.getName());
                 for (Object obj : params) {
                     sb.append(":");
-                    sb.append(obj.toString());
+                    if(obj instanceof  Integer[]){
+                        Integer [] arr = ( Integer[] ) obj ;
+                        StringBuffer b = new StringBuffer("[");
+                        for (Integer str :arr){
+                            b.append(str);
+                            b.append(",");
+                        }
+                        b.setCharAt(b.length()-1,']');
+                        sb.append(b);
+                    }else {
+                        sb.append(obj.toString());
+                    }
                 }
                 return sb.toString();
             }

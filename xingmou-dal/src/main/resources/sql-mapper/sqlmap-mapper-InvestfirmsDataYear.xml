@@ -23,6 +23,10 @@
 								<result column="round_g_money" property="roundGMoney" jdbcType="BIGINT" />
 		<result column="round_num" property="roundNum" jdbcType="INTEGER" />
 		<result column="round_money" property="roundMoney" jdbcType="BIGINT" />
+		<result column="industry_id" property="industryId" jdbcType="INTEGER" />
+		<result column="industry_name" property="industryName" jdbcType="VARCHAR" />
+		<result column="industry_sub_id" property="industrySubId" jdbcType="INTEGER" />
+		<result column="industry_sub_name" property="industrySubName" jdbcType="VARCHAR" />
 								<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
 								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
 						</resultMap>
@@ -132,6 +136,8 @@
 								<if test="investfirmName!=null and investfirmName!=''">AND investfirm_name = #{investfirmName,jdbcType=VARCHAR}</if>
 								<if test="industryNames!=null and industryNames!=''">AND industry_names = #{industryNames,jdbcType=VARCHAR}</if>
 								<if test="roundANum!=null">AND round_a_num = #{roundANum,jdbcType=INTEGER}</if>
+			<if test="industryId!=null">industry_id = #{industryId,jdbcType=INTEGER},</if>
+			<if test="industrySubId!=null">industry_sub_id = #{industrySubId,jdbcType=INTEGER},</if>
 								<if test="roundAMoney!=null">AND round_a_money = #{roundAMoney,jdbcType=BIGINT}</if>
 								<if test="roundBNum!=null">AND round_b_num = #{roundBNum,jdbcType=INTEGER}</if>
 								<if test="roundBMoney!=null">AND round_b_money = #{roundBMoney,jdbcType=BIGINT}</if>

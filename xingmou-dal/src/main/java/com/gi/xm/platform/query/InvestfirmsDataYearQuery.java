@@ -58,7 +58,56 @@ public class InvestfirmsDataYearQuery extends Query {
 			
 	private Timestamp updateTime;
 	private String pic;
+	/**
+	 * @Fields industryId :
+	 */
+	private Integer industryId;
 
+	/**
+	 * @Fields industryName :
+	 */
+	private String industryName;
+
+	/**
+	 * @Fields industrySubId :
+	 */
+	private Integer industrySubId;
+	/**
+	 * @Fields industrySubName :
+	 */
+	private String industrySubName;
+
+	public String getIndustrySubName() {
+		return industrySubName;
+	}
+
+	public void setIndustrySubName(String industrySubName) {
+		this.industrySubName = industrySubName;
+	}
+
+	public Integer getIndustryId() {
+		return industryId;
+	}
+
+	public void setIndustryId(Integer industryId) {
+		this.industryId = industryId;
+	}
+
+	public String getIndustryName() {
+		return industryName;
+	}
+
+	public void setIndustryName(String industryName) {
+		this.industryName = industryName;
+	}
+
+	public Integer getIndustrySubId() {
+		return industrySubId;
+	}
+
+	public void setIndustrySubId(Integer industrySubId) {
+		this.industrySubId = industrySubId;
+	}
 	public String getPic() {
 		return pic;
 	}

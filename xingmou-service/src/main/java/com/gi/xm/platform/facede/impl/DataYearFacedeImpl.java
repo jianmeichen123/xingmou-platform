@@ -129,9 +129,9 @@ public class DataYearFacedeImpl implements DataYearFacede {
 		messageInfo.setData(dataYearInfoList);
 		return messageInfo;	
 	}
-			
 
 
+	@Cacheable(value = "dataYearInfo",keyGenerator = "wiselyKeyGenerator")
 	public MessageInfo<List<DataYearInfo>> getListByYear(Integer[] years){
 	
 		Message<List<DataYear>> message  = dataYearBiz.getListByYear(years);
@@ -141,6 +141,7 @@ public class DataYearFacedeImpl implements DataYearFacede {
 		return messageInfo;	
 	}
 
+	@Cacheable(value = "dataYearInfo",keyGenerator = "wiselyKeyGenerator")
 	public MessageInfo<List<DataYearInfo>> getListByYearIndustryId(Integer[] years, Integer industryId){
 
 		Message<List<DataYear>> message  = dataYearBiz.getListByYearIndustryId(years, industryId);
@@ -151,7 +152,7 @@ public class DataYearFacedeImpl implements DataYearFacede {
 	}
 
 
-
+	@Cacheable(value = "dataYearInfo",keyGenerator = "wiselyKeyGenerator")
 	public MessageInfo<List<DataYearInfo>> getListByYearIndustrySubId(Integer[] years, Integer industrySubId){
 
 		Message<List<DataYear>> message  = dataYearBiz.getListByYearIndustrySubId(years, industrySubId);

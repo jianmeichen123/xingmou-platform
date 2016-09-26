@@ -84,10 +84,10 @@ public class DataEventYearFacedeImpl implements DataEventYearFacede {
 		messageInfo.setData(queryResultInfo);
 		return messageInfo;
 	}
-   
-		
 
 
+
+	@Cacheable(value = "dataEventYearInfo",keyGenerator = "wiselyKeyGenerator")
 	public MessageInfo<List<DataEventYearInfo>> getListByYearIndustryId(Integer[] years, Integer industryId){
 	
 		Message<List<DataEventYear>> message  = dataEventYearBiz.getListByYearIndustryId(years, industryId);
@@ -96,9 +96,9 @@ public class DataEventYearFacedeImpl implements DataEventYearFacede {
 		messageInfo.setData(dataEventYearInfoList);
 		return messageInfo;	
 	}
-			
 
 
+	@Cacheable(value = "dataEventYearInfo",keyGenerator = "wiselyKeyGenerator")
 	public MessageInfo<List<DataEventYearInfo>> getListByYearIndustrySubId(Integer[] years, Integer industrySubId){
 	
 		Message<List<DataEventYear>> message  = dataEventYearBiz.getListByYearIndustrySubId(years, industrySubId);
@@ -133,7 +133,6 @@ public class DataEventYearFacedeImpl implements DataEventYearFacede {
 
 
 	public MessageInfo<List<DataEventYearInfo>> getListByMoneyLevelId(Integer moneyLevelId){
-	
 		Message<List<DataEventYear>> message  = dataEventYearBiz.getListByMoneyLevelId(moneyLevelId);
 		MessageInfo<List<DataEventYearInfo>> messageInfo = MessageConvertor.toMessageInfo(message);
 		List<DataEventYearInfo> dataEventYearInfoList = DataEventYearConvertor.toDataEventYearInfoList(message.getData());
@@ -151,11 +150,12 @@ public class DataEventYearFacedeImpl implements DataEventYearFacede {
 		messageInfo.setData(dataEventYearInfoList);
 		return messageInfo;	
 	}
-			
 
 
+
+
+	@Cacheable(value = "dataEventYearInfo",keyGenerator = "wiselyKeyGenerator")
 	public MessageInfo<List<DataEventYearInfo>> getListByYear(Integer[] years){
-	
 		Message<List<DataEventYear>> message  = dataEventYearBiz.getListByYear(years);
 		MessageInfo<List<DataEventYearInfo>> messageInfo = MessageConvertor.toMessageInfo(message);
 		List<DataEventYearInfo> dataEventYearInfoList = DataEventYearConvertor.toDataEventYearInfoList(message.getData());

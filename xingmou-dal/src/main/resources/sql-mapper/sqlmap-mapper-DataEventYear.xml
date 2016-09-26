@@ -16,7 +16,6 @@
 								<result column="round_name" property="roundName" jdbcType="VARCHAR" />
 								<result column="money_level_id" property="moneyLevelId" jdbcType="INTEGER" />
 								<result column="money_level_title" property="moneyLevelTitle" jdbcType="VARCHAR" />
-								<result column="invested_project_num" property="investedProjectNum" jdbcType="INTEGER" />
 								<result column="invested_num" property="investedNum" jdbcType="INTEGER" />
 								<result column="invested_money" property="investedMoney" jdbcType="BIGINT" />
 								<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
@@ -43,7 +42,6 @@
 			round_name,
 			money_level_id,
 			money_level_title,
-			invested_project_num,
 			invested_num,
 			invested_money,
 			add_time,
@@ -64,7 +62,6 @@
 			#{roundName,jdbcType=VARCHAR},
 			#{moneyLevelId,jdbcType=INTEGER},
 			#{moneyLevelTitle,jdbcType=VARCHAR},
-			#{investedProjectNum,jdbcType=INTEGER},
 			#{investedNum,jdbcType=INTEGER},
 			#{investedMoney,jdbcType=BIGINT},
 			#{addTime,jdbcType=TIMESTAMP},
@@ -88,7 +85,6 @@
 			<if test="districtSubId!=null">district_sub_id = #{districtSubId,jdbcType=INTEGER},</if>
 			<if test="roundId!=null">round_id = #{roundId,jdbcType=INTEGER},</if>
 			<if test="moneyLevelId!=null">money_level_id = #{moneyLevelId,jdbcType=INTEGER},</if>
-			<if test="investedProjectNum!=null">invested_project_num = #{investedProjectNum,jdbcType=INTEGER},</if>
 			<if test="investedNum!=null">invested_num = #{investedNum,jdbcType=INTEGER},</if>
 			<if test="investedMoney!=null">invested_money = #{investedMoney,jdbcType=BIGINT},</if>
 			<if test="addTime!=null">add_time = #{addTime,jdbcType=TIMESTAMP},</if>
@@ -98,7 +94,7 @@
 		
 		
 	<sql id="selectFields">
-	id,year,industry_id,industry_name,industry_sub_id,industry_sub_name,district_id,district_name,district_sub_id,district_sub_name,round_id,round_name,money_level_id,money_level_title,invested_project_num,invested_num,invested_money,add_time,update_time
+	id,year,industry_id,industry_name,industry_sub_id,industry_sub_name,district_id,district_name,district_sub_id,district_sub_name,round_id,round_name,money_level_id,money_level_title,invested_num,invested_money,add_time,update_time
 	</sql>
 	
 	<select id="selectAll" resultMap="BaseResultMap">
@@ -130,7 +126,6 @@
 								<if test="roundName!=null and roundName!=''">AND round_name = #{roundName,jdbcType=VARCHAR}</if>
 								<if test="moneyLevelId!=null">AND money_level_id = #{moneyLevelId,jdbcType=INTEGER}</if>
 								<if test="moneyLevelTitle!=null and moneyLevelTitle!=''">AND money_level_title = #{moneyLevelTitle,jdbcType=VARCHAR}</if>
-								<if test="investedProjectNum!=null">AND invested_project_num = #{investedProjectNum,jdbcType=INTEGER}</if>
 								<if test="investedNum!=null">AND invested_num = #{investedNum,jdbcType=INTEGER}</if>
 								<if test="investedMoney!=null">AND invested_money = #{investedMoney,jdbcType=BIGINT}</if>
 								<if test="addTime!=null">AND add_time = #{addTime,jdbcType=TIMESTAMP}</if>

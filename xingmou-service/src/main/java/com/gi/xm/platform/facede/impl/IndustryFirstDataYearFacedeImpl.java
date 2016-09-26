@@ -80,6 +80,7 @@ public class IndustryFirstDataYearFacedeImpl implements IndustryFirstDataYearFac
 
 	public MessageInfo<QueryResultInfo<IndustryDataYearInfo>> queryIndustryFirstDataYear(IndustryFirstDataYearQueryInfo industryFirstDataYearQueryInfo) {
 		IndustryFirstDataYearQuery industryFirstDataYearQuery = IndustryFirstDataYearConvertor.toIndustryFirstDataYearQuery(industryFirstDataYearQueryInfo);
+		industryFirstDataYearQuery.setYearList(industryFirstDataYearQueryInfo.getYearList());
 		Message<QueryResult<IndustryFirstDataYear>> message = industryFirstDataYearBiz.queryIndustryFirstDataYear(industryFirstDataYearQuery);
 		MessageInfo<QueryResultInfo<IndustryDataYearInfo>> messageInfo = new MessageInfo<QueryResultInfo<IndustryDataYearInfo>>();
 		QueryResultInfo<IndustryDataYearInfo> queryResultInfo = IndustryFirstDataYearConvertor.toQueryResultInfo1(message.getData());

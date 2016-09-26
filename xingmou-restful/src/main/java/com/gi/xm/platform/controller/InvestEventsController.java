@@ -5,10 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.dubbo.config.annotation.Reference;
@@ -73,5 +70,13 @@ public class InvestEventsController {
 		MessageInfo<QueryResultInfo<InvestEventsInfo>> resultMessageInfo = investEventsFacede.getEventByInvestfirmId(investfirmsQueryInfo);
 		return resultMessageInfo;
 	}
-	
+
+
+
+	@RequestMapping("getListByProjectId/{projectId}")
+	@ResponseBody
+	public MessageInfo<List<InvestEventsInfo>> getListByProjectId(@PathVariable("projectId") Long projectId){
+		MessageInfo<List<InvestEventsInfo>> messageInfo = investEventsFacede.getListByProjectId(projectId);
+		return messageInfo;
+	}
 }

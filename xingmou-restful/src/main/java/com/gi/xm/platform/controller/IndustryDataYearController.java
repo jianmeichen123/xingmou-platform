@@ -52,7 +52,8 @@ public class IndustryDataYearController {
             industryFirstDataYearQueryInfo.setIndustryId(industryDataYearQueryInfo.getIndustryId());
             industryFirstDataYearQueryInfo.setYearList(industryDataYearQueryInfo.getYearList());
             industryFirstDataYearQueryInfo.setYaar(industryDataYearQueryInfo.getYaar());
-
+            industryFirstDataYearQueryInfo.setPageIndex(industryDataYearQueryInfo.getPageIndex());
+            industryFirstDataYearQueryInfo.setPageSize(industryDataYearQueryInfo.getPageSize());
             resultMessageInfo =  industryFirstDataYearFacede.queryIndustryFirstDataYear(industryFirstDataYearQueryInfo);
         }
 

@@ -26,6 +26,6 @@ public interface InvestEventsFacede {
 	MessageInfo<QueryResultInfo<InvestEventsInfo>> getEventByInvestfirmId(InvestfirmsQueryInfo investfirmsQueryInfo);
 
 
-
+    MessageInfo<List<InvestEventsInfo>> getListByProjectId(Long projectId);
 
 }

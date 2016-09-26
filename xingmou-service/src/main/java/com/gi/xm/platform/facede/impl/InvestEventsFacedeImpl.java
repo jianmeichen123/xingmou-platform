@@ -118,4 +118,14 @@ public class InvestEventsFacedeImpl implements InvestEventsFacede {
 		return messageInfo;
 	}
 
+
+	public MessageInfo<List<InvestEventsInfo>> getListByProjectId(Long projectId){
+
+		Message<List<InvestEvents>> message  = investEventsBiz.getListByProjectId(projectId);
+		MessageInfo<List<InvestEventsInfo>> messageInfo = MessageConvertor.toMessageInfo(message);
+		List<InvestEventsInfo> investEventsInfoList = InvestEventsConvertor.toInvestEventsInfoList(message.getData());
+		messageInfo.setData(investEventsInfoList);
+		return messageInfo;
+	}
+
 }

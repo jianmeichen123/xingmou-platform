@@ -35,5 +35,6 @@ public interface InvestEventsDAO {
 
 
 	List<InvestEvents> queryEventByInfirm(InvestfirmsQuery investfirmsQuery);
-    
+
+    List<InvestEvents> selectByProjectId(@Param("projectId") Long projectId);
 }

@@ -208,6 +208,13 @@
 			diei.`investfirm_id` = #{id}
 		
 	</select>
-	
+
+
+	<select id="selectByProjectId" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_invest_events
+		WHERE  project_id = #{projectId,jdbcType=BIGINT}
+	</select>
 
 </mapper>

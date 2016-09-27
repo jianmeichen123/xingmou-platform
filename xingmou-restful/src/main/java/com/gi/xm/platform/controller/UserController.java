@@ -1,3 +1,4 @@
+/*
 package com.gi.xm.platform.controller;
 
 import java.util.HashMap;
@@ -69,3 +70,4 @@ public class UserController {
 
 	
 }
+*/

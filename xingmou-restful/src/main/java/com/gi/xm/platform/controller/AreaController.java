@@ -25,12 +25,7 @@ public class AreaController {
 
     @Reference(check = false)
 	private AreaFacede areaFacede;
-
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public ModelAndView index() {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		return new ModelAndView("area/index", modelMap);
-	}
+/*
 
 	@RequestMapping("query")
 	@ResponseBody
@@ -59,6 +54,7 @@ public class AreaController {
 		MessageInfo<AreaInfo> messageInfo =  areaFacede.getArea(id);
 		return messageInfo;
 	}
+*/
 
     @RequestMapping("getAll")
     @ResponseBody

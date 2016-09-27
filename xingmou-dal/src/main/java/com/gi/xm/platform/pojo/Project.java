@@ -224,8 +224,17 @@ public class Project extends Pojo {
 	 * @Fields updateTime : 最后更新时间
 	 */
 	private Timestamp updateTime;
-	
-    
+
+	private String inverstrirmNames;
+
+	public String getInverstrirmNames() {
+		return inverstrirmNames;
+	}
+
+	public void setInverstrirmNames(String inverstrirmNames) {
+		this.inverstrirmNames = inverstrirmNames;
+	}
+
 	public Long getId(){
 		return id;
 	}

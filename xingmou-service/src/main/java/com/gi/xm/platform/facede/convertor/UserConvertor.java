@@ -1,3 +1,4 @@
+/*
 package com.gi.xm.platform.facede.convertor;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,4 +79,4 @@ public abstract class UserConvertor {
 		queryResultInfo.setRecords(toUserInfoList(queryResult.getRecords()));
 		return queryResultInfo;
 	}
-}
+}*/

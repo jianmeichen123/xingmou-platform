@@ -1,3 +1,4 @@
+/*
 
 package com.gi.xm.platform.facede.impl;
 
@@ -96,4 +97,4 @@ public class UserFacedeImpl implements UserFacede {
 	}
    
 	
-}
+}*/

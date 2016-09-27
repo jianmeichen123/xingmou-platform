@@ -27,11 +27,7 @@ public class DataEventYearController {
     @Reference
 	private DataEventYearFacede dataEventYearFacede;
 
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public ModelAndView index() {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		return new ModelAndView("dataEventYear/index", modelMap);
-	}
+/*
 
 	@RequestMapping("query")
 	@ResponseBody
@@ -68,6 +64,7 @@ public class DataEventYearController {
 		return messageInfo;
 	}
 
+*/
 
 		
    /* @RequestMapping("getListByYearIndustryId")

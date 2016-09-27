@@ -25,11 +25,7 @@ public class DataController {
 	@Reference(check = false)
 	private DataFacede dataFacede;
 
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public ModelAndView index() {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		return new ModelAndView("data/index", modelMap);
-	}
+/*
 
 	@RequestMapping("query")
 	@ResponseBody
@@ -58,6 +54,7 @@ public class DataController {
 		MessageInfo<DataInfo> messageInfo =  dataFacede.getData(id);
 		return messageInfo;
 	}
+*/
 
     @RequestMapping("getAll")
     @ResponseBody

@@ -34,9 +34,11 @@
 								<result column="score" property="score" jdbcType="INTEGER" />
 								<result column="time_span" property="timeSpan" jdbcType="INTEGER" />
 								<result column="invest_info" property="investInfo" jdbcType="VARCHAR" />
+								<result column="inverstrirm_names" property="inverstrirmNames" jdbcType="VARCHAR" />
 								<result column="invest_num" property="investNum" jdbcType="INTEGER" />
 								<result column="invest_money" property="investMoney" jdbcType="BIGINT" />
 								<result column="load_time" property="loadTime" jdbcType="TIMESTAMP" />
+
 								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
 						</resultMap>
 
@@ -78,6 +80,7 @@
 			score,
 			time_span,
 			invest_info,
+			inverstrirm_names,
 			invest_num,
 			invest_money,
 			load_time,
@@ -116,6 +119,7 @@
 			#{score,jdbcType=INTEGER},
 			#{timeSpan,jdbcType=INTEGER},
 			#{investInfo,jdbcType=VARCHAR},
+		    #{inverstrirmNames,jdbcType=VARCHAR},
 			#{investNum,jdbcType=INTEGER},
 			#{investMoney,jdbcType=BIGINT},
 			#{loadTime,jdbcType=TIMESTAMP},
@@ -174,11 +178,11 @@
 		
 		
 	<sql id="selectFields">
-	id,title,pic,pic_big,picshow,weblink,ceo_name,company_id,company_name,industry_id,industry_sub_id,industry_name,industry_sub_name,district_id,district_name,district_sub_id,district_sub_name,newest_event_id,newest_event_date,newest_event_round,newest_event_round_id,newest_event_money,source_id,create_date,status,business_model,industry_pain_points,team_score,operation_score,score,time_span,invest_info,invest_num,invest_money,load_time,update_time
+	id,title,pic,pic_big,picshow,weblink,ceo_name,company_id,company_name,industry_id,industry_sub_id,industry_name,industry_sub_name,district_id,district_name,district_sub_id,district_sub_name,newest_event_id,newest_event_date,newest_event_round,newest_event_round_id,newest_event_money,source_id,create_date,status,business_model,industry_pain_points,team_score,operation_score,score,time_span,invest_info,inverstrirm_names,invest_num,invest_money,load_time,update_time
 	</sql>
 
 	<sql id="searchFields">
-		id,title,pic,picshow,weblink,ceo_name,company_id,company_name,industry_id,industry_sub_id,industry_name,industry_sub_name,district_id,district_name,district_sub_id,district_sub_name,newest_event_id,newest_event_date,newest_event_round,newest_event_round_id,newest_event_money,source_id,create_date,status,business_model,industry_pain_points,team_score,operation_score,score,time_span,invest_info,invest_num,invest_money,load_time,update_time
+		id,title,pic,picshow,weblink,ceo_name,company_id,company_name,industry_id,industry_sub_id,industry_name,industry_sub_name,district_id,district_name,district_sub_id,district_sub_name,newest_event_id,newest_event_date,newest_event_round,newest_event_round_id,newest_event_money,source_id,create_date,status,business_model,industry_pain_points,team_score,operation_score,score,time_span,invest_info,inverstrirm_names,invest_num,invest_money,load_time,update_time
 	</sql>
 
 	<select id="selectAll" resultMap="BaseResultMap">

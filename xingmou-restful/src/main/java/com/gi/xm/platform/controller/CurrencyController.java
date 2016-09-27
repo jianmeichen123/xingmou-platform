@@ -1,3 +1,4 @@
+/*
 package com.gi.xm.platform.controller;
 
 import java.util.HashMap;
@@ -24,12 +25,6 @@ public class CurrencyController {
 
 	@Reference(check = false)
 	private CurrencyFacede currencyFacede;
-
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public ModelAndView index() {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		return new ModelAndView("currency/index", modelMap);
-	}
 
 	@RequestMapping("query")
 	@ResponseBody
@@ -69,3 +64,4 @@ public class CurrencyController {
 
 	
 }
+*/

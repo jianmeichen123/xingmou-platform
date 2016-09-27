@@ -194,7 +194,15 @@ public class ProjectInfo implements Serializable {
 	 */
 	private Timestamp updateTime;
 
+	private  String inverstrirmNames;
 
+	public String getInverstrirmNames() {
+		return inverstrirmNames;
+	}
+
+	public void setInverstrirmNames(String inverstrirmNames) {
+		this.inverstrirmNames = inverstrirmNames;
+	}
 
 	public Long getId(){
 		return id;

@@ -28,33 +28,37 @@ import com.galaxyinternet.service.UserService;
 @Controller
 @RequestMapping("/userlogin")
 public class LoginController extends BaseControllerImpl<User, User> {
-	final Logger logger = LoggerFactory.getLogger(LoginController.class);
+    final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @Autowired
-	private UserService userService;
+    private UserService userService;
 
-	@Autowired
-	com.galaxyinternet.framework.cache.Cache cache;
+    @Autowired
+    com.galaxyinternet.framework.cache.Cache cache;
 
-	@Override
-	protected BaseService<User> getBaseService() {
-		return this.userService;
-	}
+    @Override
+    protected BaseService<User> getBaseService() {
+        return this.userService;
+    }
 
     private String xmIndex = "http://xmdev.gi.com/html/xmcx.html";
-	/**
-	 * 跳转登录
-	 */
-	@RequestMapping(value = "/toLogin")
-	public String toLogin(HttpServletResponse response, @CookieValue(name = "_uid_",required = false)String uid,@CookieValue(name = "s_",required = false)String s) {
-		String key = "xm:"+s+":"+uid;
+
+
+    private  String domain = "xmdev.gi.com";
+
+    /**
+     * 跳转登录
+     */
+    @RequestMapping(value = "/toLogin")
+    public String toLogin(HttpServletResponse response, @CookieValue(name = "_uid_",required = false)String uid,@CookieValue(name = "s_",required = false)String s) {
+        String key = "xm:"+s+":"+uid;
         String user = cache.getValue(key);
         if(user!=null){
-			setCookie(response,uid,s);
+            setCookie(response,uid,s);
             return "redirect:"+xmIndex;
         }
-		return "login";
-	}
+        return "login";
+    }
 
     @RequestMapping(value = "/auth")
     public String auth(HttpServletResponse response,String uid) {
@@ -68,124 +72,124 @@ public class LoginController extends BaseControllerImpl<User, User> {
             return "redirect:" + xmIndex;
         }
         setCacheSessionId("fx", u, uid);
-		setCookie(response,uid,"fx");
+        setCookie(response,uid,"fx");
         return "login";
     }
 
-	/**
-	 *
-	 * @param response
-	 * @param uid
+    /**
+     *
+     * @param response
+     * @param uid
      * @param s 来源
      */
-	public void setCookie(HttpServletResponse response ,String uid,String s){
+    public void setCookie(HttpServletResponse response ,String uid,String s){
 
-		Cookie cookie = new Cookie("_uid_", uid);
-		cookie.setMaxAge(60*60*24*365*5);
-		cookie.setDomain("xmdev.gi.com");
-		cookie.setPath("/");
-		response.addCookie(cookie);
-		cookie = new Cookie("s_", s);
+        Cookie cookie = new Cookie("_uid_", uid);
         cookie.setMaxAge(60*60*24*365*5);
-		cookie.setDomain("xmdev.gi.com");
-		cookie.setPath("/");
-		response.addCookie(cookie);
+        cookie.setDomain(domain);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+        cookie = new Cookie("s_", s);
+        cookie.setMaxAge(60*60*24*365*5);
+        cookie.setDomain(domain);
+        cookie.setPath("/");
+        response.addCookie(cookie);
 
-	}
-	@RequestMapping(value = "/me")
+    }
+    @RequestMapping(value = "/me")
     @ResponseBody
-	public String  me(HttpServletResponse response, @CookieValue(name = "_uid_")String uid,@CookieValue(name = "s_")String s) {
-		String userJson = cache.getValue("xm:"+s+":"+uid);
-		return userJson;
-	}
+    public String  me(HttpServletResponse response, @CookieValue(name = "_uid_")String uid,@CookieValue(name = "s_")String s) {
+        String userJson = cache.getValue("xm:"+s+":"+uid);
+        return userJson;
+    }
 
-	/**
-	 * 用户登录
-	 * 
-	 * @author zcy
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseData<User> login(@RequestBody User user, HttpServletRequest request,HttpServletResponse response) {
-		ResponseData<User> responsebody = new ResponseData<User>();
-		String nickName= user.getNickName();
-		String password = user.getPassword();
+    /**
+     * 用户登录
+     *
+     * @author zcy
+     */
+    @ResponseBody
+    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseData<User> login(@RequestBody User user, HttpServletRequest request,HttpServletResponse response) {
+        ResponseData<User> responsebody = new ResponseData<User>();
+        String nickName= user.getNickName();
+        String password = user.getPassword();
 
-		if (StringUtils.isBlank(nickName) || StringUtils.isBlank(password)) {
-			responsebody.setResult(new Result(Status.ERROR, Constants.IS_UP_EMPTY, "用户名或密码不能为空！"));
-			return responsebody;
-		}
-		user.setNickName(null);
-		user.setEmail(nickName);
-		user = userService.queryUserByUP(user);
+        if (StringUtils.isBlank(nickName) || StringUtils.isBlank(password)) {
+            responsebody.setResult(new Result(Status.ERROR, Constants.IS_UP_EMPTY, "用户名或密码不能为空！"));
+            return responsebody;
+        }
+        user.setNickName(null);
+        user.setEmail(nickName);
+        user = userService.queryUserByUP(user);
 
-		if (user == null) {
-			responsebody.setResult(new Result(Status.ERROR, Constants.IS_UP_WRONG, "用户名或密码错误！"));
-		} else {
+        if (user == null) {
+            responsebody.setResult(new Result(Status.ERROR, Constants.IS_UP_WRONG, "用户名或密码错误！"));
+        } else {
 
-			String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
-			setCacheSessionId("xm", user, sessionId);
-			responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "登录成功！"));
+            String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
+            setCacheSessionId("xm", user, sessionId);
+            responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "登录成功！"));
 
 
             setCookie(response,sessionId,"xm");
             //logger.info(user.getEmail()+" login_success xm");
-		}
-		return responsebody;
-	}
+        }
+        return responsebody;
+    }
 
-	/**
-	 * @author zcy
-	 * @param from
-	 * @param user
-	 */
-	private void setCacheSessionId(String from, User user, String sessionId) {
-		User u = new User();
+    /**
+     * @author zcy
+     * @param from
+     * @param user
+     */
+    private void setCacheSessionId(String from, User user, String sessionId) {
+        User u = new User();
         u.setEmail(user.getEmail());
         u.setRoleId(user.getRoleId());
         u.setRealName(user.getRealName());
         cache.setValue("xm:"+from+":"+sessionId, JSON.toJSONString(u)); // 将sessionId存入cache
-	}
+    }
 
-	/**
-	 * 用户注销
-	 * 
-	 * @author zcy
-	 */
-	@RequestMapping(value = "/logout", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String logout(HttpServletRequest request,HttpServletResponse response,@CookieValue(name = "_uid_",required = false)String uid,@CookieValue(name = "s_",required = false)String s) {
-		ResponseData<User> responsebody = new ResponseData<User>();
+    /**
+     * 用户注销
+     *
+     * @author zcy
+     */
+    @RequestMapping(value = "/logout", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String logout(HttpServletRequest request,HttpServletResponse response,@CookieValue(name = "_uid_",required = false)String uid,@CookieValue(name = "s_",required = false)String s) {
+        ResponseData<User> responsebody = new ResponseData<User>();
         cache.remove("xm:"+s+":"+uid);
         Cookie cookie = new Cookie("_uid_", null);
-        cookie.setMaxAge(60*60*24*2);
-        cookie.setDomain("xmdev.gi.com");
+        cookie.setDomain(domain);
         cookie.setPath("/");
+        cookie.setMaxAge(0);
         response.addCookie(cookie);
         cookie = new Cookie("s_", null);
-        cookie.setMaxAge(60*60*24*2);
-        cookie.setDomain("xmdev.gi.com");
+        cookie.setDomain(domain);
         cookie.setPath("/");
+        cookie.setMaxAge(0);
         response.addCookie(cookie);
-		responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "退出登录"));
-		return "login";
-	}
+        responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "退出登录"));
+        return "login";
+    }
 
-	/**
-	 * 删除session 和 cache中的 sessionId
-	 * 
-	 * @author zcy
-	 */
-	private boolean removeSessionId(String sessionId, HttpServletRequest request) {
-		Object cahceUser = cache.get(sessionId);
-		Object sessionUser = request.getSession().getAttribute(Constants.SESSION_USER_KEY);
+    /**
+     * 删除session 和 cache中的 sessionId
+     *
+     * @author zcy
+     */
+    private boolean removeSessionId(String sessionId, HttpServletRequest request) {
+        Object cahceUser = cache.get(sessionId);
+        Object sessionUser = request.getSession().getAttribute(Constants.SESSION_USER_KEY);
 
-		if (null == cahceUser || null == sessionUser) {
-			return false;
-		}
-		request.getSession().removeAttribute(Constants.SESSION_USER_KEY); // 从本地session删除user
-		//cache.remove(sessionId); // 从redis中删除sessionId
-		return true;
-	}
+        if (null == cahceUser || null == sessionUser) {
+            return false;
+        }
+        request.getSession().removeAttribute(Constants.SESSION_USER_KEY); // 从本地session删除user
+        //cache.remove(sessionId); // 从redis中删除sessionId
+        return true;
+    }
 
 
 

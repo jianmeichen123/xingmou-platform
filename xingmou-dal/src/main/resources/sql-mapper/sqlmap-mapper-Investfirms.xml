@@ -90,7 +90,7 @@
 	</sql>
 	
 	<sql id="selectFields1">
-	t.id,icon,icon_big,name,description,link,email,phone,wechat,address,address_detail,round_names,area_names
+	t.id,name,description,link,email,phone,wechat,address,address_detail,round_names,area_names
 	</sql>
 	
 	<select id="selectAll" resultMap="BaseResultMap">
@@ -135,7 +135,7 @@
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
 	SELECT
 		<include refid="selectFields1" />,
-		file.pic_big AS iconBig,
+		file.pic_big AS icon_big,
 		file.pic AS icon,
 		(SELECT count(*) from dm_investor t1 where t1.investfirm_id=t.id) as 'investorNum' ,
         (SELECT count(*) from dm_invest_events_investfirm t2 where t2.investfirm_id=t.id) as 'historyNum'

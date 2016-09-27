@@ -90,7 +90,7 @@
 	</sql>
 	
 	<sql id="selectFields1">
-	t.id,icon,icon_big,description,link,email,phone,wechat,address,address_detail,round_names,area_names
+	t.id,icon,icon_big,name,description,link,email,phone,wechat,address,address_detail,round_names,area_names
 	</sql>
 	
 	<select id="selectAll" resultMap="BaseResultMap">

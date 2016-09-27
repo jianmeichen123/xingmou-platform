@@ -85,6 +85,8 @@ public class ProjectController {
 				projectQueryInfo.setOrderBy("newest_event_round_id");
 			}else if (projectQueryInfo.getOrderBy().equalsIgnoreCase("investMoney")) {
 				projectQueryInfo.setOrderBy("invest_money");
+			}else if (projectQueryInfo.getOrderBy().equalsIgnoreCase("newestEventMoney")) {
+				projectQueryInfo.setOrderBy("newest_event_money");
 			}else {
                 projectQueryInfo.setOrderBy("create_date");
             }

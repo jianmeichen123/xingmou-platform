@@ -43,10 +43,10 @@ public class LoginController extends BaseControllerImpl<User, User> {
     }
 
     @Value("xmIndex")
-    private String xmIndex = "http://xmdev.gi.com/html/xmcx.html";
+    private String xmIndex = "http://xm.gi.com/html/xmcx.html";
 
     @Value("domain")
-    private  String domain = "xmdev.gi.com";
+    private  String domain = "xm.gi.com";
 
     /**
      * 跳转登录

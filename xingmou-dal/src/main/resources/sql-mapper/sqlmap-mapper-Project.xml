@@ -256,7 +256,11 @@
 
     <sql id="searchQueryWhereAndOrder">
         <where>
-            <if test="title!=null and title!=''">
+
+			<if test="timeSpan!=null and timeSpan == -1 ">
+				time_span is not null
+			</if>
+			<if test="title!=null and title!=''">
                 AND title like CONCAT('%',#{title,jdbcType=VARCHAR},'%' )
             </if>
             <if test="industryIds!=null">

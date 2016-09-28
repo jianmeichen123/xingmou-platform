@@ -38,7 +38,7 @@
 	<dubbo:annotation package="com.gi.xm.platform" />
 
 	<!-- 使用zookeeper注册中心暴露服务地址 -->
-	<dubbo:registry address="zookeeper://10.9.210.22:12181?client=zkclient"/>
+	<dubbo:registry address="{fx.zk.host}"/>
 
 	<dubbo:consumer timeout="6000" retries="0" check="false"/>
 

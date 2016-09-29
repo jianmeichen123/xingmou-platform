@@ -74,7 +74,18 @@ public class LoginController extends BaseControllerImpl<User, User> {
             return "redirect:" + xmIndex;
         }
         setCacheSessionId("fx", u, uid);
-        setCookie(response,uid,"fx");
+
+        Cookie cookie = new Cookie("_uid_", uid);
+        cookie.setMaxAge(60*60*24*365*5);
+        cookie.setDomain(domain);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+        cookie = new Cookie("s_", "fx");
+        cookie.setMaxAge(60*60*24*365*5);
+        cookie.setDomain(domain);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+
         return "login";
     }
 
@@ -134,7 +145,18 @@ public class LoginController extends BaseControllerImpl<User, User> {
             responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "登录成功！"));
 
 
-            setCookie(response,sessionId,"xm");
+            //setCookie(response,sessionId,"xm");
+            Cookie cookie = new Cookie("_uid_", sessionId);
+            cookie.setMaxAge(60*60*24*365*5);
+            cookie.setDomain(domain);
+            cookie.setPath("/");
+            response.addCookie(cookie);
+            cookie = new Cookie("s_", "xm");
+            cookie.setMaxAge(60*60*24*365*5);
+            cookie.setDomain(domain);
+            cookie.setPath("/");
+            response.addCookie(cookie);
+
             //logger.info(user.getEmail()+" login_success xm");
         }
         return responsebody;

@@ -6,7 +6,7 @@
             http://code.alibabatech.com/schema/dubbo
             http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <dubbo:protocol name="dubbo" port="${dubbo.protocol.dubbo.port.report}" />
+    <dubbo:protocol name="dubbo" port="${dubbo.protocol.dubbo.port.base}" />
 
     <dubbo:application name="${SERVER_NAME}"  logger="slf4j"/>
 
@@ -14,7 +14,7 @@
 
 
     <!-- 使用zookeeper注册中心暴露服务地址 -->
-    <dubbo:registry address="${dubbo.registry.address.report}"/>
+    <dubbo:registry address="${dubbo.registry.address.base}"/>
 
     <dubbo:provider timeout="6000" retries="0" />
 

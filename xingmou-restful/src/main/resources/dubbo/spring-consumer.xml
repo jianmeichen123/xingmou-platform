@@ -13,7 +13,7 @@
     <dubbo:annotation package="com.gi.xm.platform" />
 
     <!-- 使用zookeeper注册中心暴露服务地址 -->
-    <dubbo:registry address="${dubbo.registry.address.report}"/>
+    <dubbo:registry address="${dubbo.registry.address.base}"/>
 
     <dubbo:consumer timeout="6000" retries="0" check="false"/>
 

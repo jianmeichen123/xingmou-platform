@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.xm.report.dao.ChartEventIndustrySubMoneylevelYearDAO">
+	<resultMap id="BaseResultMap" type="com.gi.xm.report.pojo.ChartEventIndustrySubMoneylevelYear">
+					<id column="id" property="id" jdbcType="BIGINT" />
+								<result column="year" property="year" jdbcType="INTEGER" />
+								<result column="industry_id" property="industryId" jdbcType="INTEGER" />
+								<result column="industry_name" property="industryName" jdbcType="VARCHAR" />
+								<result column="industry_sub_id" property="industrySubId" jdbcType="INTEGER" />
+								<result column="industry_sub_name" property="industrySubName" jdbcType="VARCHAR" />
+								<result column="money_level_id" property="moneyLevelId" jdbcType="INTEGER" />
+								<result column="money_level_title" property="moneyLevelTitle" jdbcType="VARCHAR" />
+								<result column="money_level_num" property="moneyLevelNum" jdbcType="INTEGER" />
+								<result column="money_level_cent" property="moneyLevelCent" jdbcType="INTEGER" />
+								<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+						</resultMap>
+
+
+	<insert id="insert" parameterType="com.gi.xm.report.pojo.ChartEventIndustrySubMoneylevelYear" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO dm_chart_event_industry_sub_moneylevel_year (
+			year,
+			industry_id,
+			industry_name,
+			industry_sub_id,
+			industry_sub_name,
+			money_level_id,
+			money_level_title,
+			money_level_num,
+			money_level_cent,
+			add_time,
+			update_time
+		)
+		VALUES
+		(
+			#{year,jdbcType=INTEGER},
+			#{industryId,jdbcType=INTEGER},
+			#{industryName,jdbcType=VARCHAR},
+			#{industrySubId,jdbcType=INTEGER},
+			#{industrySubName,jdbcType=VARCHAR},
+			#{moneyLevelId,jdbcType=INTEGER},
+			#{moneyLevelTitle,jdbcType=VARCHAR},
+			#{moneyLevelNum,jdbcType=INTEGER},
+			#{moneyLevelCent,jdbcType=INTEGER},
+			#{addTime,jdbcType=TIMESTAMP},
+			 UNIX_TIMESTAMP()
+		)
+	</insert>
+
+	<sql id="selectFields">
+	id,year,industry_id,industry_name,industry_sub_id,industry_sub_name,money_level_id,money_level_title,money_level_num,money_level_cent
+	</sql>
+	
+			
+	<select id="selectByIndustryId" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_chart_event_industry_sub_moneylevel_year
+		WHERE  industry_id = #{industryId,jdbcType=INTEGER}
+	</select>
+			
+	<select id="selectByMoneyLevelId" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_chart_event_industry_sub_moneylevel_year
+		WHERE  money_level_id = #{moneyLevelId,jdbcType=INTEGER}
+	</select>
+			
+	<select id="selectByYear" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_chart_event_industry_sub_moneylevel_year
+		WHERE  year = #{year,jdbcType=INTEGER}
+	</select>
+		
+</mapper>

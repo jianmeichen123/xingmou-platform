@@ -14,7 +14,7 @@ import org.springframework.http.converter.HttpMessageConverter;
  */
 
 @SpringBootApplication
-@ComponentScan(basePackages={"com.gi.xm.platform"})
+@ComponentScan(basePackages={"com.gi.xm"})
 @ImportResource("classpath*:dubbo/spring-consumer.xml")//启动加在dubbo配置文件
 public class RestApp {
 

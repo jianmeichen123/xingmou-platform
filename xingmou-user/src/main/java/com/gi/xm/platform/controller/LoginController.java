@@ -10,7 +10,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -42,12 +41,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
         return this.userService;
     }
 
-    @Value("xmIndex")
     private String xmIndex = "http://xmdev.gi.com/html/xmcx.html";
-
-    @Value("domain")
-    private  String domain = "xmdev.gi.com";
-
     /**
      * 跳转登录
      */
@@ -74,18 +68,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
             return "redirect:" + xmIndex;
         }
         setCacheSessionId("fx", u, uid);
-
-        Cookie cookie = new Cookie("_uid_", uid);
-        cookie.setMaxAge(60*60*24*365*5);
-        cookie.setDomain(domain);
-        cookie.setPath("/");
-        response.addCookie(cookie);
-        cookie = new Cookie("s_", "fx");
-        cookie.setMaxAge(60*60*24*365*5);
-        cookie.setDomain(domain);
-        cookie.setPath("/");
-        response.addCookie(cookie);
-
+        setCookie(response,uid,"fx");
         return "login";
     }
 
@@ -99,12 +82,12 @@ public class LoginController extends BaseControllerImpl<User, User> {
 
         Cookie cookie = new Cookie("_uid_", uid);
         cookie.setMaxAge(60*60*24*365*5);
-        cookie.setDomain(domain);
+        cookie.setDomain("xmdev.gi.com");
         cookie.setPath("/");
         response.addCookie(cookie);
         cookie = new Cookie("s_", s);
         cookie.setMaxAge(60*60*24*365*5);
-        cookie.setDomain(domain);
+        cookie.setDomain("xmdev.gi.com");
         cookie.setPath("/");
         response.addCookie(cookie);
 
@@ -145,18 +128,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
             responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "登录成功！"));
 
 
-            //setCookie(response,sessionId,"xm");
-            Cookie cookie = new Cookie("_uid_", sessionId);
-            cookie.setMaxAge(60*60*24*365*5);
-            cookie.setDomain(domain);
-            cookie.setPath("/");
-            response.addCookie(cookie);
-            cookie = new Cookie("s_", "xm");
-            cookie.setMaxAge(60*60*24*365*5);
-            cookie.setDomain(domain);
-            cookie.setPath("/");
-            response.addCookie(cookie);
-
+            setCookie(response,sessionId,"xm");
             //logger.info(user.getEmail()+" login_success xm");
         }
         return responsebody;
@@ -185,14 +157,14 @@ public class LoginController extends BaseControllerImpl<User, User> {
         ResponseData<User> responsebody = new ResponseData<User>();
         cache.remove("xm:"+s+":"+uid);
         Cookie cookie = new Cookie("_uid_", null);
-        cookie.setDomain(domain);
+        cookie.setMaxAge(60*60*24*2);
+        cookie.setDomain("xmdev.gi.com");
         cookie.setPath("/");
-        cookie.setMaxAge(0);
         response.addCookie(cookie);
         cookie = new Cookie("s_", null);
-        cookie.setDomain(domain);
+        cookie.setMaxAge(60*60*24*2);
+        cookie.setDomain("xmdev.gi.com");
         cookie.setPath("/");
-        cookie.setMaxAge(0);
         response.addCookie(cookie);
         responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "退出登录"));
         return "login";

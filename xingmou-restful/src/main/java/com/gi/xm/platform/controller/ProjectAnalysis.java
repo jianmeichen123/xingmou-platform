@@ -28,6 +28,8 @@ public class ProjectAnalysis {
     @Autowired
     private ChartEventIndustryDistictYearBiz chartEventIndustryDistictYearBiz;
 
+    @Autowired
+    private ChartEventIndustrySubDistictYearBiz chartEventIndustrySubDistictYearBiz;
 
     @RequestMapping("map/{years}/{industryId}")
     @ResponseBody
@@ -61,7 +63,37 @@ public class ProjectAnalysis {
         return messageInfo;
     }
 
+    @RequestMapping("subMap/{years}/{industryId}")
+    @ResponseBody
+    public MessageInfo subMap(@PathVariable("years") Integer[] years,@PathVariable("industryId") Integer industryId){
+        MessageInfo<ChartPojo>  messageInfo = new MessageInfo<>();
+        MessageInfo<List<ChartEventIndustrySubDistictYear>> mdata = chartEventIndustrySubDistictYearBiz.selectByYearIndustryId(years, industryId);
+        if (!messageInfo.isSuccess()){
+            return mdata;
+        }
+        List<ChartEventIndustrySubDistictYear> cs = mdata.getData();
+        Map<String,Map<String,Integer>> data = new HashMap<>();
+        for(ChartEventIndustrySubDistictYear  c :cs){
+            String industryName = c.getIndustrySubName();
+            if(industryName != null){
+                Map<String,Integer> m = data.get(industryName);
+                if(m == null){
+                    m = new HashMap<>();
+                    data.put(industryName,m);
+                }
+                String districtName = StringUtils.makeDistrictName(c.getDistrictName());
+                if (m.get(districtName)==null){
+                    m.put(districtName,0);
+                }
+                m.put(districtName,m.get(districtName)+c.getInvestedNum());
+            }
+        }
 
+        ChartPojo chartPojo = new ChartPojo();
+        chartPojo.setRaw(data);
+        messageInfo.setData(chartPojo);
+        return messageInfo;
+    }
 
     @Autowired
     private ChartProjectIndustryYearBiz chartProjectIndustryYearBiz;

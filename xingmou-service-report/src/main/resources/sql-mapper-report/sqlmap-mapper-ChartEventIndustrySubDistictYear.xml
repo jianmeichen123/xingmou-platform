@@ -69,11 +69,18 @@
 		WHERE  district_id = #{districtId,jdbcType=INTEGER}
 	</select>
 			
-	<select id="selectByYear" resultMap="BaseResultMap">
+	<select id="selectByYearIndustryId" resultMap="BaseResultMap">
 		SELECT
 		<include refid="selectFields" />
 		FROM dm_chart_event_industry_sub_distict_year
-		WHERE  year = #{year,jdbcType=INTEGER}
+		WHERE  year in
+		<foreach item="item" index="index" collection="years" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		<if test="industryId !=null" >
+			AND
+			industry_id = #{industryId,jdbcType=INTEGER}
+		</if>
 	</select>
 		
 </mapper>

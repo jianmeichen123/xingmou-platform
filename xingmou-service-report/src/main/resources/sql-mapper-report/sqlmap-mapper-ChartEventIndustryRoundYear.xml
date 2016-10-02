@@ -67,7 +67,10 @@
 		SELECT
 		<include refid="selectFields" />
 		FROM dm_chart_event_industry_round_year
-		WHERE  year = #{year,jdbcType=INTEGER}
+		WHERE  year in
+		<foreach item="item" index="index" collection="years" open="(" separator="," close=")">
+			#{item}
+		</foreach>
 	</select>
 		
 </mapper>

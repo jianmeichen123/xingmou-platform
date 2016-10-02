@@ -42,38 +42,12 @@ public class ChartProjectIndustrySubYearBiz  {
 		return messageInfo;
 	}
 
-		
-	public MessageInfo<List<ChartProjectIndustrySubYear>> getListByIndustrySubId(Integer industrySubId){
+
+	public MessageInfo<List<ChartProjectIndustrySubYear>> getListByYear(Integer[] years,Integer industryId){
 
 		MessageInfo<List<ChartProjectIndustrySubYear>> messageInfo = new MessageInfo<List<ChartProjectIndustrySubYear>>();
 		try {
-			List<ChartProjectIndustrySubYear> chartProjectIndustrySubYearList = chartProjectIndustrySubYearDAO.selectByIndustrySubId(industrySubId);
-			messageInfo.setData(chartProjectIndustrySubYearList);
-		} catch (Exception e) {
-			LOGGER.error("getListByIndustrySubId","查询ChartProjectIndustrySubYear失败", e);
-			messageInfo.setStatus(10001);;
-		}
-		return messageInfo;
-	}
-			
-	public MessageInfo<List<ChartProjectIndustrySubYear>> getListByIndustryId(Integer industryId){
-
-		MessageInfo<List<ChartProjectIndustrySubYear>> messageInfo = new MessageInfo<List<ChartProjectIndustrySubYear>>();
-		try {
-			List<ChartProjectIndustrySubYear> chartProjectIndustrySubYearList = chartProjectIndustrySubYearDAO.selectByIndustryId(industryId);
-			messageInfo.setData(chartProjectIndustrySubYearList);
-		} catch (Exception e) {
-			LOGGER.error("getListByIndustryId","查询ChartProjectIndustrySubYear失败", e);
-			messageInfo.setStatus(10001);;
-		}
-		return messageInfo;
-	}
-			
-	public MessageInfo<List<ChartProjectIndustrySubYear>> getListByYear(Integer year){
-
-		MessageInfo<List<ChartProjectIndustrySubYear>> messageInfo = new MessageInfo<List<ChartProjectIndustrySubYear>>();
-		try {
-			List<ChartProjectIndustrySubYear> chartProjectIndustrySubYearList = chartProjectIndustrySubYearDAO.selectByYear(year);
+			List<ChartProjectIndustrySubYear> chartProjectIndustrySubYearList = chartProjectIndustrySubYearDAO.selectByYearIndustryId(years,industryId);
 			messageInfo.setData(chartProjectIndustrySubYearList);
 		} catch (Exception e) {
 			LOGGER.error("getListByYear","查询ChartProjectIndustrySubYear失败", e);

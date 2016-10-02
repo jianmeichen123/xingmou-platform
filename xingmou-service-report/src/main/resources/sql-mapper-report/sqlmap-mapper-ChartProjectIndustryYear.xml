@@ -13,6 +13,7 @@
 								<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
 								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
 						</resultMap>
+<!--
 
 
 	<insert id="insert" parameterType="com.gi.xm.report.pojo.ChartProjectIndustryYear" useGeneratedKeys="true" keyProperty="id">
@@ -40,24 +41,30 @@
 			 UNIX_TIMESTAMP()
 		)
 	</insert>
+-->
 
 	<sql id="selectFields">
 	id,year,industry_id,industry_name,project_num,project_invested_num,project_uninvested_num,project_invested_money
 	</sql>
 	
-			
+<!--
+
 	<select id="selectByIndustryId" resultMap="BaseResultMap">
 		SELECT
 		<include refid="selectFields" />
 		FROM dm_chart_project_industry_year
 		WHERE  industry_id = #{industryId,jdbcType=INTEGER}
 	</select>
-			
-	<select id="selectByYear" resultMap="BaseResultMap">
+-->
+
+	<select id="selectByYearIndustryId" resultMap="BaseResultMap">
 		SELECT
 		<include refid="selectFields" />
 		FROM dm_chart_project_industry_year
-		WHERE  year = #{year,jdbcType=INTEGER}
+		WHERE  year in
+		<foreach item="item" index="index" collection="years" open="(" separator="," close=")">
+			#{item}
+		</foreach>
 	</select>
 		
 </mapper>

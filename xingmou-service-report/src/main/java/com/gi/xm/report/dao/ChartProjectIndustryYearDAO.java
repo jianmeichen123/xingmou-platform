@@ -11,10 +11,6 @@ public interface ChartProjectIndustryYearDAO {
 	
     int insert(ChartProjectIndustryYear chartProjectIndustryYear);
 
-
-			
-	List<ChartProjectIndustryYear> selectByIndustryId(@Param("industryId") Integer industryId);
-				
-	List<ChartProjectIndustryYear> selectByYear(@Param("year") Integer year);
+	List<ChartProjectIndustryYear> selectByYearIndustryId(@Param("years") Integer[] years);
 		
 }

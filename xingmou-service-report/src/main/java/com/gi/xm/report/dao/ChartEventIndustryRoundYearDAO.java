@@ -17,6 +17,6 @@ public interface ChartEventIndustryRoundYearDAO {
 				
 	List<ChartEventIndustryRoundYear> selectByRoundId(@Param("roundId") Integer roundId);
 				
-	List<ChartEventIndustryRoundYear> selectByYear(@Param("year") Integer year);
+	List<ChartEventIndustryRoundYear> selectByYear(@Param("years") Integer[] years);
 		
 }

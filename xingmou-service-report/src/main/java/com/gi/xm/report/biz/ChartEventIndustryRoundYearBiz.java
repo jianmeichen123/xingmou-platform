@@ -69,11 +69,11 @@ public class ChartEventIndustryRoundYearBiz  {
 		return messageInfo;
 	}
 			
-	public MessageInfo<List<ChartEventIndustryRoundYear>> getListByYear(Integer year){
+	public MessageInfo<List<ChartEventIndustryRoundYear>> getListByYear(Integer[] years){
 
 		MessageInfo<List<ChartEventIndustryRoundYear>> messageInfo = new MessageInfo<List<ChartEventIndustryRoundYear>>();
 		try {
-			List<ChartEventIndustryRoundYear> chartEventIndustryRoundYearList = chartEventIndustryRoundYearDAO.selectByYear(year);
+			List<ChartEventIndustryRoundYear> chartEventIndustryRoundYearList = chartEventIndustryRoundYearDAO.selectByYear(years);
 			messageInfo.setData(chartEventIndustryRoundYearList);
 		} catch (Exception e) {
 			LOGGER.error("getListByYear","查询ChartEventIndustryRoundYear失败", e);

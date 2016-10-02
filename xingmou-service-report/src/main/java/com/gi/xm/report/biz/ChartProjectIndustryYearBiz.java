@@ -27,6 +27,7 @@ public class ChartProjectIndustryYearBiz  {
     @Autowired
 	ChartProjectIndustryYearDAO chartProjectIndustryYearDAO;
 
+/*
 
 
     public MessageInfo<Long> createChartProjectIndustryYear(ChartProjectIndustryYear chartProjectIndustryYear){
@@ -41,8 +42,10 @@ public class ChartProjectIndustryYearBiz  {
 		}
 		return messageInfo;
 	}
+*/
 
-		
+/*
+
 	public MessageInfo<List<ChartProjectIndustryYear>> getListByIndustryId(Integer industryId){
 
 		MessageInfo<List<ChartProjectIndustryYear>> messageInfo = new MessageInfo<List<ChartProjectIndustryYear>>();
@@ -55,12 +58,13 @@ public class ChartProjectIndustryYearBiz  {
 		}
 		return messageInfo;
 	}
-			
-	public MessageInfo<List<ChartProjectIndustryYear>> getListByYear(Integer year){
+*/
+
+	public MessageInfo<List<ChartProjectIndustryYear>> selectByYear(Integer[] years){
 
 		MessageInfo<List<ChartProjectIndustryYear>> messageInfo = new MessageInfo<List<ChartProjectIndustryYear>>();
 		try {
-			List<ChartProjectIndustryYear> chartProjectIndustryYearList = chartProjectIndustryYearDAO.selectByYear(year);
+			List<ChartProjectIndustryYear> chartProjectIndustryYearList = chartProjectIndustryYearDAO.selectByYearIndustryId(years);
 			messageInfo.setData(chartProjectIndustryYearList);
 		} catch (Exception e) {
 			LOGGER.error("getListByYear","查询ChartProjectIndustryYear失败", e);

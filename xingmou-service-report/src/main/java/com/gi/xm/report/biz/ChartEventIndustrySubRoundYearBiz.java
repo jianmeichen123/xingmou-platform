@@ -4,6 +4,7 @@ package com.gi.xm.report.biz;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -69,11 +70,11 @@ public class ChartEventIndustrySubRoundYearBiz  {
 		return messageInfo;
 	}
 			
-	public MessageInfo<List<ChartEventIndustrySubRoundYear>> getListByYear(Integer year){
+	public MessageInfo<List<ChartEventIndustrySubRoundYear>> getListByYearIndustryId(Integer[] years,Integer industryId){
 
 		MessageInfo<List<ChartEventIndustrySubRoundYear>> messageInfo = new MessageInfo<List<ChartEventIndustrySubRoundYear>>();
 		try {
-			List<ChartEventIndustrySubRoundYear> chartEventIndustrySubRoundYearList = chartEventIndustrySubRoundYearDAO.selectByYear(year);
+			List<ChartEventIndustrySubRoundYear> chartEventIndustrySubRoundYearList = chartEventIndustrySubRoundYearDAO.selectByYearIndustryId(years,industryId);
 			messageInfo.setData(chartEventIndustrySubRoundYearList);
 		} catch (Exception e) {
 			LOGGER.error("getListByYear","查询ChartEventIndustrySubRoundYear失败", e);

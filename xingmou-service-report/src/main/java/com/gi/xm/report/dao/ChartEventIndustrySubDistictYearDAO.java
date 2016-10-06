@@ -12,11 +12,13 @@ public interface ChartEventIndustrySubDistictYearDAO {
     int insert(ChartEventIndustrySubDistictYear chartEventIndustrySubDistictYear);
 
 
-			
+/*
+
 	List<ChartEventIndustrySubDistictYear> selectByIndustryId(@Param("industryId") Integer industryId);
 				
 	List<ChartEventIndustrySubDistictYear> selectByDistrictId(@Param("districtId") Integer districtId);
-				
-	List<ChartEventIndustrySubDistictYear> selectByYearIndustryId(@Param("years") Integer[] years,@Param("industryId") Integer industryId);
+*/
+
+	List<ChartEventIndustrySubDistictYear> selectByYearIndustrySubId(@Param("years") Integer[] years,@Param("industrySubId") Integer industrySubId);
 		
 }

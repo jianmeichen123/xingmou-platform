@@ -66,11 +66,18 @@
 		WHERE  money_level_id = #{moneyLevelId,jdbcType=INTEGER}
 	</select>
 			
-	<select id="selectByYear" resultMap="BaseResultMap">
+	<select id="selectByYearIndustrySubId" resultMap="BaseResultMap">
 		SELECT
 		<include refid="selectFields" />
 		FROM dm_chart_event_industry_sub_moneylevel_year
-		WHERE  year = #{year,jdbcType=INTEGER}
+		WHERE  year in
+		<foreach item="item" index="index" collection="years" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		<if test="industrySubId !=null" >
+			AND
+			industry_sub_id = #{industrySubId,jdbcType=INTEGER}
+		</if>
 	</select>
 		
 </mapper>

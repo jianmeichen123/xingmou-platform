@@ -42,7 +42,7 @@ public class ChartEventIndustrySubDistictYearBiz  {
 		return messageInfo;
 	}
 
-		
+	/*
 	public MessageInfo<List<ChartEventIndustrySubDistictYear>> getListByIndustryId(Integer industryId){
 
 		MessageInfo<List<ChartEventIndustrySubDistictYear>> messageInfo = new MessageInfo<List<ChartEventIndustrySubDistictYear>>();
@@ -68,12 +68,12 @@ public class ChartEventIndustrySubDistictYearBiz  {
 		}
 		return messageInfo;
 	}
-			
-	public MessageInfo<List<ChartEventIndustrySubDistictYear>> selectByYearIndustryId(Integer[] years,Integer industryId){
+*/
+	public MessageInfo<List<ChartEventIndustrySubDistictYear>> selectByYearIndustrySubId(Integer[] years,Integer industrySubId){
 
 		MessageInfo<List<ChartEventIndustrySubDistictYear>> messageInfo = new MessageInfo<List<ChartEventIndustrySubDistictYear>>();
 		try {
-			List<ChartEventIndustrySubDistictYear> chartEventIndustrySubDistictYearList = chartEventIndustrySubDistictYearDAO.selectByYearIndustryId(years,industryId);
+			List<ChartEventIndustrySubDistictYear> chartEventIndustrySubDistictYearList = chartEventIndustrySubDistictYearDAO.selectByYearIndustrySubId(years,industrySubId);
 			messageInfo.setData(chartEventIndustrySubDistictYearList);
 		} catch (Exception e) {
 			LOGGER.error("getListByYear","查询ChartEventIndustrySubDistictYear失败", e);

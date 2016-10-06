@@ -23,7 +23,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("projectAnalysis")
-public class ProjectAnalysis {
+public class ProjectAnalysisController {
 
     @Autowired
     private ChartEventIndustryDistictYearBiz chartEventIndustryDistictYearBiz;
@@ -35,7 +35,7 @@ public class ProjectAnalysis {
     @ResponseBody
     public MessageInfo map(@PathVariable("years") Integer[] years,@PathVariable("industryId") Integer industryId){
         MessageInfo<ChartPojo>  messageInfo = new MessageInfo<>();
-        MessageInfo<List<ChartEventIndustryDistictYear>> mdata = chartEventIndustryDistictYearBiz.getListByYear(years);
+        MessageInfo<List<ChartEventIndustryDistictYear>> mdata = chartEventIndustryDistictYearBiz.selectByYearIndustryId(years,industryId);
         if (!messageInfo.isSuccess()){
             return mdata;
         }
@@ -67,7 +67,7 @@ public class ProjectAnalysis {
     @ResponseBody
     public MessageInfo subMap(@PathVariable("years") Integer[] years,@PathVariable("industryId") Integer industryId){
         MessageInfo<ChartPojo>  messageInfo = new MessageInfo<>();
-        MessageInfo<List<ChartEventIndustrySubDistictYear>> mdata = chartEventIndustrySubDistictYearBiz.selectByYearIndustryId(years, industryId);
+        MessageInfo<List<ChartEventIndustrySubDistictYear>> mdata = chartEventIndustrySubDistictYearBiz.selectByYearIndustrySubId(years, industryId);
         if (!messageInfo.isSuccess()){
             return mdata;
         }
@@ -139,7 +139,7 @@ public class ProjectAnalysis {
                 if (rounds.get(c.getYear())==null){
                     rounds.put(c.getYear(),new ArrayList<NameValue>());
                 }
-                NameValue nameValue = getNameValue(rounds.get(c.getYear()),c.getRoundName());
+                NameValue nameValue = NameValue.getNameValue(rounds.get(c.getYear()),c.getRoundName());
                 nameValue.setValue(nameValue.getValue()+c.getInvestedNum());
             }
             MessageInfo<ChartPojo> m = new MessageInfo<>();
@@ -178,7 +178,7 @@ public class ProjectAnalysis {
                 if (rounds.get(c.getYear())==null){
                     rounds.put(c.getYear(),new ArrayList<NameValue>());
                 }
-                NameValue nameValue = getNameValue(rounds.get(c.getYear()),c.getRoundName());
+                NameValue nameValue = NameValue.getNameValue(rounds.get(c.getYear()),c.getRoundName());
                 nameValue.setValue(nameValue.getValue()+c.getInvestedNum());
             }
             MessageInfo<ChartPojo> m = new MessageInfo<>();
@@ -217,16 +217,5 @@ public class ProjectAnalysis {
         return data;
     }
 
-    private NameValue getNameValue(List<NameValue> nameValues,String roundName){
-        for (NameValue nameValue : nameValues){
-            if (roundName.equalsIgnoreCase(nameValue.getName())){
-                return nameValue;
-            }
-        }
-        NameValue nameValue = new NameValue();
-        nameValue.setName(roundName);
-        nameValue.setValue(0l);
-        nameValues.add(nameValue);
-        return nameValue;
-    }
+
 }

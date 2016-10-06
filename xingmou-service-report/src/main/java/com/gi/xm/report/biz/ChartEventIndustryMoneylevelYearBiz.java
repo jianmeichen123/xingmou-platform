@@ -41,6 +41,7 @@ public class ChartEventIndustryMoneylevelYearBiz  {
 		}
 		return messageInfo;
 	}
+/*
 
 		
 	public MessageInfo<List<ChartEventIndustryMoneylevelYear>> getListByIndustryId(Integer industryId){
@@ -68,12 +69,13 @@ public class ChartEventIndustryMoneylevelYearBiz  {
 		}
 		return messageInfo;
 	}
-			
-	public MessageInfo<List<ChartEventIndustryMoneylevelYear>> getListByYear(Integer year){
+*/
+
+	public MessageInfo<List<ChartEventIndustryMoneylevelYear>> selectByYearIndustryId(Integer[] years,Integer industryId){
 
 		MessageInfo<List<ChartEventIndustryMoneylevelYear>> messageInfo = new MessageInfo<List<ChartEventIndustryMoneylevelYear>>();
 		try {
-			List<ChartEventIndustryMoneylevelYear> chartEventIndustryMoneylevelYearList = chartEventIndustryMoneylevelYearDAO.selectByYear(year);
+			List<ChartEventIndustryMoneylevelYear> chartEventIndustryMoneylevelYearList = chartEventIndustryMoneylevelYearDAO.selectByYearIndustryId(years, industryId);
 			messageInfo.setData(chartEventIndustryMoneylevelYearList);
 		} catch (Exception e) {
 			LOGGER.error("getListByYear","查询ChartEventIndustryMoneylevelYear失败", e);

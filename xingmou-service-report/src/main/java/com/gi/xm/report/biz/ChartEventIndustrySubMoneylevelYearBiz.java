@@ -32,7 +32,7 @@ public class ChartEventIndustrySubMoneylevelYearBiz  {
     public MessageInfo<Long> createChartEventIndustrySubMoneylevelYear(ChartEventIndustrySubMoneylevelYear chartEventIndustrySubMoneylevelYear){
 		MessageInfo<Long> messageInfo = new MessageInfo<Long>();
 		try {
-						        				        				        							chartEventIndustrySubMoneylevelYearDAO.insert( chartEventIndustrySubMoneylevelYear );
+			chartEventIndustrySubMoneylevelYearDAO.insert( chartEventIndustrySubMoneylevelYear );
 			messageInfo.setData(chartEventIndustrySubMoneylevelYear.getId());
 
 		} catch (Exception e) {
@@ -42,7 +42,8 @@ public class ChartEventIndustrySubMoneylevelYearBiz  {
 		return messageInfo;
 	}
 
-		
+/*
+
 	public MessageInfo<List<ChartEventIndustrySubMoneylevelYear>> getListByIndustryId(Integer industryId){
 
 		MessageInfo<List<ChartEventIndustrySubMoneylevelYear>> messageInfo = new MessageInfo<List<ChartEventIndustrySubMoneylevelYear>>();
@@ -68,12 +69,13 @@ public class ChartEventIndustrySubMoneylevelYearBiz  {
 		}
 		return messageInfo;
 	}
-			
-	public MessageInfo<List<ChartEventIndustrySubMoneylevelYear>> getListByYear(Integer year){
+*/
+
+	public MessageInfo<List<ChartEventIndustrySubMoneylevelYear>> selectByYearIndustrySubId(Integer[] years,Integer industrySubId){
 
 		MessageInfo<List<ChartEventIndustrySubMoneylevelYear>> messageInfo = new MessageInfo<List<ChartEventIndustrySubMoneylevelYear>>();
 		try {
-			List<ChartEventIndustrySubMoneylevelYear> chartEventIndustrySubMoneylevelYearList = chartEventIndustrySubMoneylevelYearDAO.selectByYear(year);
+			List<ChartEventIndustrySubMoneylevelYear> chartEventIndustrySubMoneylevelYearList = chartEventIndustrySubMoneylevelYearDAO.selectByYearIndustrySubId(years, industrySubId);
 			messageInfo.setData(chartEventIndustrySubMoneylevelYearList);
 		} catch (Exception e) {
 			LOGGER.error("getListByYear","查询ChartEventIndustrySubMoneylevelYear失败", e);

@@ -54,7 +54,7 @@
 	id,year,industry_id,industry_name,district_id,district_name,industry_sub_id,industry_sub_name,invested_num,invested_money,invested_num_cent
 	</sql>
 	
-			
+	<!--
 	<select id="selectByIndustryId" resultMap="BaseResultMap">
 		SELECT
 		<include refid="selectFields" />
@@ -68,8 +68,8 @@
 		FROM dm_chart_event_industry_sub_distict_year
 		WHERE  district_id = #{districtId,jdbcType=INTEGER}
 	</select>
-			
-	<select id="selectByYearIndustryId" resultMap="BaseResultMap">
+			-->
+	<select id="selectByYearIndustrySubId" resultMap="BaseResultMap">
 		SELECT
 		<include refid="selectFields" />
 		FROM dm_chart_event_industry_sub_distict_year
@@ -77,9 +77,9 @@
 		<foreach item="item" index="index" collection="years" open="(" separator="," close=")">
 			#{item}
 		</foreach>
-		<if test="industryId !=null" >
+		<if test="industrySubId !=null" >
 			AND
-			industry_id = #{industryId,jdbcType=INTEGER}
+			industry_sub_id = #{industrySubId,jdbcType=INTEGER}
 		</if>
 	</select>
 		

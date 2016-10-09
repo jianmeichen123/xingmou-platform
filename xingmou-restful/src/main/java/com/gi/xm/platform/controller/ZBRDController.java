@@ -185,9 +185,9 @@ public class ZBRDController {
                 vo.getInvestedMaxMoneyList().add(data.getInvestedMaxMoney());
                 vo.getInvestedMedianMoneyList().add(data.getInvestedMedianMoney());
                 vo.getInvestedNumList().add(data.getInvestedNum());
-                vo.getInvestedNumRateList().add(data.getInvestedMoneyRate()/100+"%");
+                vo.getInvestedNumRateList().add(data.getInvestedNumRate()/100+"%");
                 vo.getInvestedPerMoneyList().add(data.getInvestedPerMoney());
-                vo.getMarketMoneyList().add(data.getMarketMoney());
+                vo.getMarketMoneyList().add(data.getInvestedMoney());
                 vo.getMarketMoneyRateList().add(data.getInvestedMoneyRate()/100+"%");
             }
 
@@ -204,9 +204,9 @@ public class ZBRDController {
                 vo.getInvestedMaxMoneyList().add(data.getInvestedMaxMoney());
                 vo.getInvestedMedianMoneyList().add(data.getInvestedMedianMoney());
                 vo.getInvestedNumList().add(data.getInvestedNum());
-                vo.getInvestedNumRateList().add(data.getInvestedMoneyRate()/100+"%");
+                vo.getInvestedNumRateList().add(data.getInvestedNumRate()/100+"%");
                 vo.getInvestedPerMoneyList().add(data.getInvestedPerMoney());
-                vo.getMarketMoneyList().add(data.getMarketMoney());
+                vo.getMarketMoneyList().add(data.getInvestedMoney());
                 vo.getMarketMoneyRateList().add(data.getInvestedMoneyRate()/100+"%");
             }
 
@@ -223,9 +223,9 @@ public class ZBRDController {
                 vo.getInvestedMaxMoneyList().add(data.getInvestedMaxMoney());
                 vo.getInvestedMedianMoneyList().add(data.getInvestedMedianMoney());
                 vo.getInvestedNumList().add(data.getInvestedNum());
-                vo.getInvestedNumRateList().add(data.getInvestedMoneyRate()/100+"%");
+                vo.getInvestedNumRateList().add(data.getInvestedNumRate()/100+"%");
                 vo.getInvestedPerMoneyList().add(data.getInvestedPerMoney());
-                vo.getMarketMoneyList().add(data.getMarketMoney());
+                vo.getMarketMoneyList().add(data.getInvestedMoney());
                 vo.getMarketMoneyRateList().add(data.getInvestedMoneyRate()/100+"%");
             }
         }

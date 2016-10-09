@@ -43,7 +43,7 @@ public class ZBRDController {
     private ChartEventIndustrySubMoneylevelYearBiz chartEventIndustrySubMoneylevelYearBiz;
 
 
-    @RequestMapping("map/{years}/{industryId}")
+        @RequestMapping("map/{years}/{industryId}")
     @ResponseBody
     public MessageInfo map(@PathVariable("years") Integer[] years,@PathVariable("industryId") Integer industryId){
         MessageInfo<ChartPojo>  messageInfo = new MessageInfo<>();
@@ -123,7 +123,7 @@ public class ZBRDController {
         List<ChartEventIndustryMoneylevelYear> cs = mdata.getData();
         Map<String,List<NameValue>> data = new HashMap<>();
         data.put("num",new ArrayList<NameValue>());
-
+        List<String> names = new ArrayList<>();
         for(ChartEventIndustryMoneylevelYear  c :cs){
             String title = c.getMoneyLevelTitle();
             if(title != null){

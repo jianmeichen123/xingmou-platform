@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.xm.report.dao.ChartEventIndustryDistictYearDAO">
+	<resultMap id="BaseResultMap" type="com.gi.xm.report.pojo.ChartEventIndustryDistictYear">
+					<id column="id" property="id" jdbcType="BIGINT" />
+								<result column="year" property="year" jdbcType="INTEGER" />
+								<result column="industry_id" property="industryId" jdbcType="INTEGER" />
+								<result column="industry_name" property="industryName" jdbcType="VARCHAR" />
+								<result column="district_id" property="districtId" jdbcType="INTEGER" />
+								<result column="district_name" property="districtName" jdbcType="VARCHAR" />
+								<result column="invested_num" property="investedNum" jdbcType="INTEGER" />
+								<result column="invested_money" property="investedMoney" jdbcType="BIGINT" />
+								<result column="invested_num_cent" property="investedNumCent" jdbcType="INTEGER" />
+								<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+						</resultMap>
+
+
+	<insert id="insert" parameterType="com.gi.xm.report.pojo.ChartEventIndustryDistictYear" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO dm_chart_event_industry_distict_year (
+			year,
+			industry_id,
+			industry_name,
+			district_id,
+			district_name,
+			invested_num,
+			invested_money,
+			invested_num_cent,
+			add_time,
+			update_time
+		)
+		VALUES
+		(
+			#{year,jdbcType=INTEGER},
+			#{industryId,jdbcType=INTEGER},
+			#{industryName,jdbcType=VARCHAR},
+			#{districtId,jdbcType=INTEGER},
+			#{districtName,jdbcType=VARCHAR},
+			#{investedNum,jdbcType=INTEGER},
+			#{investedMoney,jdbcType=BIGINT},
+			#{investedNumCent,jdbcType=INTEGER},
+			#{addTime,jdbcType=TIMESTAMP},
+			 UNIX_TIMESTAMP()
+		)
+	</insert>
+
+	<sql id="selectFields">
+	id,year,industry_id,industry_name,district_id,district_name,invested_num,invested_money,invested_num_cent
+	</sql>
+	
+<!--
+	<select id="selectByIndustryId" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_chart_event_industry_distict_year
+		WHERE  industry_id = #{industryId,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectByDistrictId" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_chart_event_industry_distict_year
+		WHERE  district_id = #{districtId,jdbcType=INTEGER}
+	</select>
+			-->
+	<select id="selectByYearIndustryId" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_chart_event_industry_distict_year
+		WHERE  year in
+		<foreach item="item" index="index" collection="years" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		<if test="industryId != null and industryId > 0">
+			AND industry_id = #{industryId,jdbcType=INTEGER}
+		</if>
+	</select>
+		
+</mapper>

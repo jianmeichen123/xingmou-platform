@@ -1,28 +1,29 @@
 package com.gi.xm.report.pojo;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChartDataYearVO extends Pojo {
 
 
 	//年份
-	private List<Integer> yearList;
+	private List<Integer> yearList = new ArrayList<>();
 	//融资笔数
-	private List<Integer> investedNumList;
+	private List<Integer> investedNumList = new ArrayList<>();
 	//笔数增长率
-	private List<String> investedNumRateList;
+	private List<String> investedNumRateList= new ArrayList<>();
 	//融资金额
-	private List<Long> marketMoneyList;
+	private List<Long> marketMoneyList= new ArrayList<>();
 	//金额增长率
-	private List<String> marketMoneyRateList;
+	private List<String> marketMoneyRateList= new ArrayList<>();
 	//平均融资金额
-	private List<Long> investedPerMoneyList;
+	private List<Long> investedPerMoneyList= new ArrayList<>();
 	//融资金额中位数
-	private List<Long> investedMedianMoneyList;
+	private List<Long> investedMedianMoneyList= new ArrayList<>();
 
 	//最大单笔融资金额
-	private List<Long> investedMaxMoneyList;
+	private List<Long> investedMaxMoneyList= new ArrayList<>();
 
 	public List<Integer> getYearList() {
 		return yearList;

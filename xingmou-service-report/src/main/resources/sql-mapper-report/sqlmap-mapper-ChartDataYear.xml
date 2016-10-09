@@ -74,7 +74,7 @@
 		SELECT
 		<include refid="selectFields" />
 		FROM dm_chart_data_year
-		WHERE  year in
+		WHERE  yaar in
 		<foreach item="item" index="index" collection="years" open="(" separator="," close=")">
 			#{item}
 		</foreach>

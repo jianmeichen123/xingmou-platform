@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 public class ChartDataYear extends Pojo {
 
@@ -25,8 +26,89 @@ public class ChartDataYear extends Pojo {
         public static final String INVESTED_MAX_MONEY = "最大融资金额（元）";
         public static final String ADD_TIME = "addTime";
         public static final String UPDATE_TIME = "updateTime";
-    
-	
+
+	//年份
+	private List<Integer> yearList;
+	//融资笔数
+	private List<Integer> investedNumList;
+	//笔数增长率
+    private List<String>investedNumRateList;
+	//融资金额
+	private List<Long> marketMoneyList;
+	//金额增长率
+	private List<String>marketMoneyRateList;
+	//平均融资金额
+	private List<Long> investedPerMoneyList;
+	//融资金额中位数
+	private List<Long> investedMedianMoneyList;
+
+	//最大单笔融资金额
+	private List<Long> investedMaxMoneyList;
+
+	public List<Integer> getYearList() {
+		return yearList;
+	}
+
+	public void setYearList(List<Integer> yearList) {
+		this.yearList = yearList;
+	}
+
+	public List<Integer> getInvestedNumList() {
+		return investedNumList;
+	}
+
+	public void setInvestedNumList(List<Integer> investedNumList) {
+		this.investedNumList = investedNumList;
+	}
+
+	public List<String> getInvestedNumRateList() {
+		return investedNumRateList;
+	}
+
+	public void setInvestedNumRateList(List<String> investedNumRateList) {
+		this.investedNumRateList = investedNumRateList;
+	}
+
+	public List<Long> getMarketMoneyList() {
+		return marketMoneyList;
+	}
+
+	public void setMarketMoneyList(List<Long> marketMoneyList) {
+		this.marketMoneyList = marketMoneyList;
+	}
+
+	public List<String> getMarketMoneyRateList() {
+		return marketMoneyRateList;
+	}
+
+	public void setMarketMoneyRateList(List<String> marketMoneyRateList) {
+		this.marketMoneyRateList = marketMoneyRateList;
+	}
+
+	public List<Long> getInvestedPerMoneyList() {
+		return investedPerMoneyList;
+	}
+
+	public void setInvestedPerMoneyList(List<Long> investedPerMoneyList) {
+		this.investedPerMoneyList = investedPerMoneyList;
+	}
+
+	public List<Long> getInvestedMedianMoneyList() {
+		return investedMedianMoneyList;
+	}
+
+	public void setInvestedMedianMoneyList(List<Long> investedMedianMoneyList) {
+		this.investedMedianMoneyList = investedMedianMoneyList;
+	}
+
+	public List<Long> getInvestedMaxMoneyList() {
+		return investedMaxMoneyList;
+	}
+
+	public void setInvestedMaxMoneyList(List<Long> investedMaxMoneyList) {
+		this.investedMaxMoneyList = investedMaxMoneyList;
+	}
+
 	/**
 	 * @Fields id : 
 	 */

@@ -168,16 +168,28 @@ public class ZBRDController {
     @RequestMapping("chartDataYear/{years}/{industryId}/{industrySubId}")
     @ResponseBody
     public MessageInfo chartDataYear(@PathVariable("years") Integer[] years,@PathVariable("industryId") Integer industryId, @PathVariable("industrySubId") Integer industrySubId){
-        MessageInfo<ChartDataYear>  messageInfo = new MessageInfo<>();
+        MessageInfo<ChartDataYearVO>  messageInfo = new MessageInfo<>();
+        ChartDataYearVO vo  = new ChartDataYearVO();
         //年统计
         if (industryId==0&&industrySubId==0) {
 
             MessageInfo<List<ChartDataYear>>  mData = chartDataYearBiz.getListByYaar(years);
-            return mData;
+           // return mData;
           /*  if (!messageInfo.isSuccess()){
                 return mData;
+            }*/
+            List<ChartDataYear> dataYearList =  mData.getData();
+
+            for (ChartDataYear data:dataYearList) {
+                vo.getYearList().add(data.getYaar());
+                vo.getInvestedMaxMoneyList().add(data.getInvestedMaxMoney());
+                vo.getInvestedMedianMoneyList().add(data.getInvestedMedianMoney());
+                vo.getInvestedNumList().add(data.getInvestedNum());
+                vo.getInvestedNumRateList().add(data.getInvestedMoneyRate()/100+"%");
+                vo.getInvestedPerMoneyList().add(data.getInvestedPerMoney());
+                vo.getMarketMoneyList().add(data.getMarketMoney());
+                vo.getMarketMoneyRateList().add(data.getInvestedMoneyRate()/100+"%");
             }
-            List<ChartDataYear> dataYearList =  mData.getData();*/
 
 
 
@@ -185,17 +197,41 @@ public class ZBRDController {
             //子行业
 
             MessageInfo<List<ChartDataIndustryYear>>  mData = chartDataIndustryYearBiz.getListByYaarIndustrySubId(years,industrySubId);
-            return mData;
+            List<ChartDataIndustryYear> dataYearList =  mData.getData();
+           
+            for (ChartDataIndustryYear data:dataYearList) {
+                vo.getYearList().add(data.getYaar());
+                vo.getInvestedMaxMoneyList().add(data.getInvestedMaxMoney());
+                vo.getInvestedMedianMoneyList().add(data.getInvestedMedianMoney());
+                vo.getInvestedNumList().add(data.getInvestedNum());
+                vo.getInvestedNumRateList().add(data.getInvestedMoneyRate()/100+"%");
+                vo.getInvestedPerMoneyList().add(data.getInvestedPerMoney());
+                vo.getMarketMoneyList().add(data.getMarketMoney());
+                vo.getMarketMoneyRateList().add(data.getInvestedMoneyRate()/100+"%");
+            }
+
+            messageInfo.setData(vo);
 
         }else{
             //一级行业
 
             MessageInfo<List<ChartDataIndustryFirstYear>>  mData = chartDataIndustryFirstYearBiz.getListByIndustryIdYaar(years,industryId);
-            return mData;
+            List<ChartDataIndustryFirstYear> dataYearList =  mData.getData();
+
+            for (ChartDataIndustryFirstYear data:dataYearList) {
+                vo.getYearList().add(data.getYaar());
+                vo.getInvestedMaxMoneyList().add(data.getInvestedMaxMoney());
+                vo.getInvestedMedianMoneyList().add(data.getInvestedMedianMoney());
+                vo.getInvestedNumList().add(data.getInvestedNum());
+                vo.getInvestedNumRateList().add(data.getInvestedMoneyRate()/100+"%");
+                vo.getInvestedPerMoneyList().add(data.getInvestedPerMoney());
+                vo.getMarketMoneyList().add(data.getMarketMoney());
+                vo.getMarketMoneyRateList().add(data.getInvestedMoneyRate()/100+"%");
+            }
         }
 
-
-
+        messageInfo.setData(vo);
+        return messageInfo;
 
     }
 }

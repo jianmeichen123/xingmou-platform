@@ -2,16 +2,10 @@ package com.gi.xm.platform.controller;
 
 import com.gi.xm.platform.view.common.MessageInfo;
 import com.gi.xm.platform.view.common.StringUtils;
-import com.gi.xm.report.biz.ChartEventIndustryDistictYearBiz;
-import com.gi.xm.report.biz.ChartEventIndustryMoneylevelYearBiz;
-import com.gi.xm.report.biz.ChartEventIndustrySubDistictYearBiz;
-import com.gi.xm.report.biz.ChartEventIndustrySubMoneylevelYearBiz;
+import com.gi.xm.report.biz.*;
 import com.gi.xm.report.common.ChartPojo;
 import com.gi.xm.report.common.NameValue;
-import com.gi.xm.report.pojo.ChartEventIndustryDistictYear;
-import com.gi.xm.report.pojo.ChartEventIndustryMoneylevelYear;
-import com.gi.xm.report.pojo.ChartEventIndustrySubDistictYear;
-import com.gi.xm.report.pojo.ChartEventIndustrySubMoneylevelYear;
+import com.gi.xm.report.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,8 +35,14 @@ public class ZBRDController {
 
     @Autowired
     private ChartEventIndustrySubMoneylevelYearBiz chartEventIndustrySubMoneylevelYearBiz;
+    @Autowired
+    private ChartDataIndustryFirstYearBiz chartDataIndustryFirstYearBiz;
 
+    @Autowired
+    private ChartDataIndustryYearBiz chartDataIndustryYearBiz;
 
+    @Autowired
+    private ChartDataYearBiz chartDataYearBiz;
         @RequestMapping("map/{years}/{industryId}")
     @ResponseBody
     public MessageInfo map(@PathVariable("years") Integer[] years,@PathVariable("industryId") Integer industryId){
@@ -164,4 +164,38 @@ public class ZBRDController {
         return messageInfo;
     }
 
+
+    @RequestMapping("chartDataYear/{years}/{industryId}/{industrySubId}")
+    @ResponseBody
+    public MessageInfo chartDataYear(@PathVariable("years") Integer[] years,@PathVariable("industryId") Integer industryId, @PathVariable("industrySubId") Integer industrySubId){
+        MessageInfo<ChartDataYear>  messageInfo = new MessageInfo<>();
+        //年统计
+        if (industryId==0&&industrySubId==0) {
+
+            MessageInfo<List<ChartDataYear>>  mData = chartDataYearBiz.getListByYaar(years);
+            return mData;
+          /*  if (!messageInfo.isSuccess()){
+                return mData;
+            }
+            List<ChartDataYear> dataYearList =  mData.getData();*/
+
+
+
+        }else if (industrySubId!=0) {
+            //子行业
+
+            MessageInfo<List<ChartDataIndustryYear>>  mData = chartDataIndustryYearBiz.getListByYaarIndustrySubId(years,industrySubId);
+            return mData;
+
+        }else{
+            //一级行业
+
+            MessageInfo<List<ChartDataIndustryFirstYear>>  mData = chartDataIndustryFirstYearBiz.getListByIndustryIdYaar(years,industryId);
+            return mData;
+        }
+
+
+
+
+    }
 }

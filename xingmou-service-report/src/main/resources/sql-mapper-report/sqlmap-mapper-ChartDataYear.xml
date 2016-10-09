@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.xm.report.dao.ChartDataYearDAO">
+	<resultMap id="BaseResultMap" type="com.gi.xm.report.pojo.ChartDataYear">
+					<id column="id" property="id" jdbcType="BIGINT" />
+								<result column="yaar" property="yaar" jdbcType="INTEGER" />
+								<result column="market_money" property="marketMoney" jdbcType="BIGINT" />
+								<result column="market_money_rate" property="marketMoneyRate" jdbcType="DOUBLE" />
+								<result column="market_user" property="marketUser" jdbcType="BIGINT" />
+								<result column="market_user_rate" property="marketUserRate" jdbcType="INTEGER" />
+								<result column="single_user_value" property="singleUserValue" jdbcType="BIGINT" />
+								<result column="market_money_stock" property="marketMoneyStock" jdbcType="BIGINT" />
+								<result column="project_num" property="projectNum" jdbcType="INTEGER" />
+								<result column="invested_num" property="investedNum" jdbcType="INTEGER" />
+								<result column="invested_num_rate" property="investedNumRate" jdbcType="INTEGER" />
+								<result column="invested_money" property="investedMoney" jdbcType="BIGINT" />
+								<result column="invested_money_rate" property="investedMoneyRate" jdbcType="INTEGER" />
+								<result column="invested_per_money" property="investedPerMoney" jdbcType="BIGINT" />
+								<result column="invested_median_money" property="investedMedianMoney" jdbcType="BIGINT" />
+								<result column="invested_max_money" property="investedMaxMoney" jdbcType="BIGINT" />
+								<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+						</resultMap>
+
+
+	<insert id="insert" parameterType="com.gi.xm.report.pojo.ChartDataYear" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO dm_chart_data_year (
+			yaar,
+			market_money,
+			market_money_rate,
+			market_user,
+			market_user_rate,
+			single_user_value,
+			market_money_stock,
+			project_num,
+			invested_num,
+			invested_num_rate,
+			invested_money,
+			invested_money_rate,
+			invested_per_money,
+			invested_median_money,
+			invested_max_money,
+			add_time,
+			update_time
+		)
+		VALUES
+		(
+			#{yaar,jdbcType=INTEGER},
+			#{marketMoney,jdbcType=BIGINT},
+			#{marketMoneyRate,jdbcType=DOUBLE},
+			#{marketUser,jdbcType=BIGINT},
+			#{marketUserRate,jdbcType=INTEGER},
+			#{singleUserValue,jdbcType=BIGINT},
+			#{marketMoneyStock,jdbcType=BIGINT},
+			#{projectNum,jdbcType=INTEGER},
+			#{investedNum,jdbcType=INTEGER},
+			#{investedNumRate,jdbcType=INTEGER},
+			#{investedMoney,jdbcType=BIGINT},
+			#{investedMoneyRate,jdbcType=INTEGER},
+			#{investedPerMoney,jdbcType=BIGINT},
+			#{investedMedianMoney,jdbcType=BIGINT},
+			#{investedMaxMoney,jdbcType=BIGINT},
+			#{addTime,jdbcType=TIMESTAMP},
+			 UNIX_TIMESTAMP()
+		)
+	</insert>
+
+	<sql id="selectFields">
+	id,yaar,market_money,market_money_rate,market_user,market_user_rate,single_user_value,market_money_stock,project_num,invested_num,invested_num_rate,invested_money,invested_money_rate,invested_per_money,invested_median_money,invested_max_money,add_time,update_time
+	</sql>
+	
+			
+	<select id="selectByYaar" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_chart_data_year
+		WHERE  year in
+		<foreach item="item" index="index" collection="years" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+			
+
+		
+</mapper>

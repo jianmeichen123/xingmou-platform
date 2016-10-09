@@ -155,8 +155,9 @@
                     <basePackage>com.gi.xm.report</basePackage>
                     <prefix>dw_v_,dw_,dm_</prefix>
                     <url>jdbc:mysql://127.0.0.1:3306/edw_chart</url>
-                    <username>xm_user</username>
-                    <password>xm_user</password>
+                    <tables>dm_chart_data_industry_first_year,dm_chart_data_industry_year</tables>
+                    <username>xmuser</username>
+                    <password>qcDKywE7Ka52</password>
                     <output_root_dir>/home/vincent/tmp/</output_root_dir>
                     <templates_dir>/home/vincent/workspace_idea/company/xm-platform/xingmou-platform/templates/single/v1/
                     </templates_dir>

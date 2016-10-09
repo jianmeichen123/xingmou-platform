@@ -14,9 +14,9 @@ public class ChartDataYearVO extends Pojo {
 	//笔数增长率
 	private List<String> investedNumRateList= new ArrayList<>();
 	//融资金额
-	private List<Long> marketMoneyList= new ArrayList<>();
+	private List<Long> investedMoneyList= new ArrayList<>();
 	//金额增长率
-	private List<String> marketMoneyRateList= new ArrayList<>();
+	private List<String> investedMoneyRateList= new ArrayList<>();
 	//平均融资金额
 	private List<Long> investedPerMoneyList= new ArrayList<>();
 	//融资金额中位数
@@ -49,20 +49,20 @@ public class ChartDataYearVO extends Pojo {
 		this.investedNumRateList = investedNumRateList;
 	}
 
-	public List<Long> getMarketMoneyList() {
-		return marketMoneyList;
+	public List<Long> getInvestedMoneyList() {
+		return investedMoneyList;
 	}
 
-	public void setMarketMoneyList(List<Long> marketMoneyList) {
-		this.marketMoneyList = marketMoneyList;
+	public void setInvestedMoneyList(List<Long> investedMoneyList) {
+		this.investedMoneyList = investedMoneyList;
 	}
 
-	public List<String> getMarketMoneyRateList() {
-		return marketMoneyRateList;
+	public List<String> getInvestedMoneyRateList() {
+		return investedMoneyRateList;
 	}
 
-	public void setMarketMoneyRateList(List<String> marketMoneyRateList) {
-		this.marketMoneyRateList = marketMoneyRateList;
+	public void setInvestedMoneyRateList(List<String> investedMoneyRateList) {
+		this.investedMoneyRateList = investedMoneyRateList;
 	}
 
 	public List<Long> getInvestedPerMoneyList() {

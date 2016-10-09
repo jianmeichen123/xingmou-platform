@@ -187,8 +187,8 @@ public class ZBRDController {
                 vo.getInvestedNumList().add(data.getInvestedNum());
                 vo.getInvestedNumRateList().add(data.getInvestedNumRate()/100+"%");
                 vo.getInvestedPerMoneyList().add(data.getInvestedPerMoney());
-                vo.getMarketMoneyList().add(data.getInvestedMoney());
-                vo.getMarketMoneyRateList().add(data.getInvestedMoneyRate()/100+"%");
+                vo.getInvestedMoneyList().add(data.getInvestedMoney());
+                vo.getInvestedMoneyRateList().add(data.getInvestedMoneyRate()/100+"%");
             }
 
 
@@ -206,8 +206,8 @@ public class ZBRDController {
                 vo.getInvestedNumList().add(data.getInvestedNum());
                 vo.getInvestedNumRateList().add(data.getInvestedNumRate()/100+"%");
                 vo.getInvestedPerMoneyList().add(data.getInvestedPerMoney());
-                vo.getMarketMoneyList().add(data.getInvestedMoney());
-                vo.getMarketMoneyRateList().add(data.getInvestedMoneyRate()/100+"%");
+                vo.getInvestedMoneyList().add(data.getInvestedMoney());
+                vo.getInvestedMoneyRateList().add(data.getInvestedMoneyRate()/100+"%");
             }
 
             messageInfo.setData(vo);
@@ -225,8 +225,8 @@ public class ZBRDController {
                 vo.getInvestedNumList().add(data.getInvestedNum());
                 vo.getInvestedNumRateList().add(data.getInvestedNumRate()/100+"%");
                 vo.getInvestedPerMoneyList().add(data.getInvestedPerMoney());
-                vo.getMarketMoneyList().add(data.getInvestedMoney());
-                vo.getMarketMoneyRateList().add(data.getInvestedMoneyRate()/100+"%");
+                vo.getInvestedMoneyList().add(data.getInvestedMoney());
+                vo.getInvestedMoneyRateList().add(data.getInvestedMoneyRate()/100+"%");
             }
         }
 

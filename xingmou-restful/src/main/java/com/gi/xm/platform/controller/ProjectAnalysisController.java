@@ -67,7 +67,7 @@ public class ProjectAnalysisController {
     @ResponseBody
     public MessageInfo subMap(@PathVariable("years") Integer[] years,@PathVariable("industryId") Integer industryId){
         MessageInfo<ChartPojo>  messageInfo = new MessageInfo<>();
-        MessageInfo<List<ChartEventIndustrySubDistictYear>> mdata = chartEventIndustrySubDistictYearBiz.selectByYearIndustrySubId(years, industryId);
+        MessageInfo<List<ChartEventIndustrySubDistictYear>> mdata = chartEventIndustrySubDistictYearBiz.selectByYearIndustryId(years, industryId);
         if (!messageInfo.isSuccess()){
             return mdata;
         }

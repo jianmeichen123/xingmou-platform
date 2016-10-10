@@ -73,12 +73,10 @@ public class ProjectController {
 	@ResponseBody
 	public MessageInfo<QueryResultInfo<ProjectInfo>>  searchProject (@RequestBody ProjectQueryInfo projectQueryInfo) {
         if(projectQueryInfo.getCreateDateEnd()!=null){
-
-
-            projectQueryInfo.setCreateDateEnd((Integer.parseInt(projectQueryInfo.getCreateDateEnd()+1)+""));
+            projectQueryInfo.setCreateDateEnd(((Integer.parseInt(projectQueryInfo.getCreateDateEnd())+1)+""));
         }
 
-        if (projectQueryInfo.getOrder() != null){
+        if (projectQueryInfo.getOrder() != null&&projectQueryInfo.getOrderBy() != null){
 			if (projectQueryInfo.getOrderBy().equalsIgnoreCase("createDate")){
 				projectQueryInfo.setOrderBy("create_date");
 			}else if (projectQueryInfo.getOrderBy().equalsIgnoreCase("newestEventRoundId")) {
@@ -90,9 +88,9 @@ public class ProjectController {
 			}else {
                 projectQueryInfo.setOrderBy("create_date");
             }
-			if (projectQueryInfo.getOrder()==null){
-				projectQueryInfo.setOrder("desc");
-			}
+		}else {
+			projectQueryInfo.setOrder("desc");
+			projectQueryInfo.setOrderBy("info_integrity");
 		}
 		String returnFields = projectQueryInfo.getSearchFields();
         projectQueryInfo.setReturnFields(returnFields);

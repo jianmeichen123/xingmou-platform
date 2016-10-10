@@ -20,5 +20,6 @@ public interface ChartEventIndustrySubDistictYearDAO {
 */
 
 	List<ChartEventIndustrySubDistictYear> selectByYearIndustrySubId(@Param("years") Integer[] years,@Param("industrySubId") Integer industrySubId);
-		
+
+    List<ChartEventIndustrySubDistictYear> selectByYearIndustryId(@Param("years") Integer[] years,@Param("industryId")  Integer industryId);
 }

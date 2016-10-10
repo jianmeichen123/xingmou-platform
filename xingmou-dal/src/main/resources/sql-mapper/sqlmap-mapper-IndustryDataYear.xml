@@ -116,13 +116,13 @@
 	<select id="selectAll" resultMap="BaseResultMap">
 		SELECT
 		<include refid="selectFields" />
-		FROM dm_industry_data_year
+		FROM dm_chart_data_industry_year
 	</select>
 	
 	<select id="queryIndustryDataYear" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.IndustryDataYearQuery">
 		SELECT
 		<include refid="selectFields" />
-		FROM dm_industry_data_year
+		FROM dm_chart_data_industry_year
 		<include refid="queryWhereAndOrder" />
 	</select>
 	
@@ -166,14 +166,14 @@
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
 		SELECT
 		<include refid="selectFields" />
-		FROM dm_industry_data_year
+		FROM dm_chart_data_industry_year
 		WHERE id = #{id,jdbcType=BIGINT} 
 	</select>
 
 	<select id="selectByPrimaryKeyForUpdate" resultMap="BaseResultMap" parameterType="java.lang.Long">
 		SELECT
 		<include refid="selectFields" />
-		FROM dm_industry_data_year
+		FROM dm_chart_data_industry_year
 		WHERE id = #{id,jdbcType=BIGINT} 
 		FOR UPDATE
 	</select>
@@ -181,7 +181,7 @@
 	<select id="selectByIndustryIdYaar" resultMap="BaseResultMap">
 		SELECT
 		<include refid="selectFields" />
-		FROM dm_industry_data_year
+		FROM dm_chart_data_industry_year
 		WHERE  industry_id = #{industryId,jdbcType=INTEGER}
 		AND yaar in
         <foreach item="item" index="index" collection="yaars" open="(" separator="," close=")">
@@ -192,7 +192,7 @@
 	<select id="selectByYaarIndustrySubId" resultMap="BaseResultMap">
 		SELECT
 		<include refid="selectFields" />
-		FROM dm_industry_data_year
+		FROM dm_chart_data_industry_year
 		WHERE  yaar in
         <foreach item="item" index="index" collection="yaars" open="(" separator="," close=")">
             #{item}
@@ -203,14 +203,14 @@
 	<select id="selectByIndustryId" resultMap="BaseResultMap">
 		SELECT
 		<include refid="selectFields" />
-		FROM dm_industry_data_year
+		FROM dm_chart_data_industry_year
 		WHERE  industry_id = #{industryId,jdbcType=INTEGER}
 	</select>
 			
 	<select id="selectByYaar" resultMap="BaseResultMap">
 		SELECT
 		<include refid="selectFields" />
-		FROM dm_industry_data_year
+		FROM dm_chart_data_industry_year
 		WHERE  yaar in
 		<foreach item="item" index="index" collection="yaars" open="(" separator="," close=")">
 			#{item}

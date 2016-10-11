@@ -46,7 +46,7 @@ public class IndustryDataYearController {
         //查子行业
         if (industryDataYearQueryInfo != null && industryDataYearQueryInfo.getIndustrySubId()!=null) {
             resultMessageInfo =  industryDataYearFacede.queryIndustryDataYear(industryDataYearQueryInfo);
-        } else {
+        } else if(industryDataYearQueryInfo != null && industryDataYearQueryInfo.getIndustryId()!=null){
             //一级行业
             IndustryFirstDataYearQueryInfo  industryFirstDataYearQueryInfo = new IndustryFirstDataYearQueryInfo();
             industryFirstDataYearQueryInfo.setIndustryId(industryDataYearQueryInfo.getIndustryId());
@@ -55,6 +55,15 @@ public class IndustryDataYearController {
             industryFirstDataYearQueryInfo.setPageIndex(industryDataYearQueryInfo.getPageIndex());
             industryFirstDataYearQueryInfo.setPageSize(industryDataYearQueryInfo.getPageSize());
             resultMessageInfo =  industryFirstDataYearFacede.queryIndustryFirstDataYear(industryFirstDataYearQueryInfo);
+        } else {
+            //全部行业
+            IndustryFirstDataYearQueryInfo  industryFirstDataYearQueryInfo = new IndustryFirstDataYearQueryInfo();
+          //  industryFirstDataYearQueryInfo.setIndustryId(industryDataYearQueryInfo.getIndustryId());
+            industryFirstDataYearQueryInfo.setYearList(industryDataYearQueryInfo.getYearList());
+            industryFirstDataYearQueryInfo.setYaar(industryDataYearQueryInfo.getYaar());
+            industryFirstDataYearQueryInfo.setPageIndex(industryDataYearQueryInfo.getPageIndex());
+            industryFirstDataYearQueryInfo.setPageSize(industryDataYearQueryInfo.getPageSize());
+            resultMessageInfo =  industryFirstDataYearFacede.queryIndustryDataYear(industryFirstDataYearQueryInfo);
         }
 
 		return resultMessageInfo;

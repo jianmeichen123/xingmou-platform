@@ -97,9 +97,13 @@ public abstract class IndustryFirstDataYearConvertor {
 	{
 		QueryResultInfo<IndustryDataYearInfo> queryResultInfo = new QueryResultInfo<IndustryDataYearInfo>();
 		//queryResultInfo.setPages(queryResult.getPages());
-		queryResult.setRecords(queryResult.getRecords());
-		queryResultInfo.setTotal(queryResult.getTotal());
-		queryResultInfo.setRecords(toIndustryFirstDataYearInfoList1(queryResult.getRecords()));
+
+		if (queryResult != null) {
+			queryResult.setRecords(queryResult.getRecords());
+			queryResultInfo.setTotal(queryResult.getTotal());
+			queryResultInfo.setRecords(toIndustryFirstDataYearInfoList1(queryResult.getRecords()));
+		}
+
 		return queryResultInfo;
 	}
 }

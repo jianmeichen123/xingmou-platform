@@ -41,7 +41,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
         return this.userService;
     }
 
-    private String xmIndex = "http://xmdev.gi.com/html/xmcx.html";
+    private String xmIndex = "http://xmqa.gi.com/html/xmcx.html";
     /**
      * 跳转登录
      */
@@ -82,12 +82,12 @@ public class LoginController extends BaseControllerImpl<User, User> {
 
         Cookie cookie = new Cookie("_uid_", uid);
         cookie.setMaxAge(60*60*24*365*5);
-        cookie.setDomain("xmdev.gi.com");
+        cookie.setDomain("xmqa.gi.com");
         cookie.setPath("/");
         response.addCookie(cookie);
         cookie = new Cookie("s_", s);
         cookie.setMaxAge(60*60*24*365*5);
-        cookie.setDomain("xmdev.gi.com");
+        cookie.setDomain("xmqa.gi.com");
         cookie.setPath("/");
         response.addCookie(cookie);
 
@@ -158,12 +158,12 @@ public class LoginController extends BaseControllerImpl<User, User> {
         cache.remove("xm:"+s+":"+uid);
         Cookie cookie = new Cookie("_uid_", null);
         cookie.setMaxAge(60*60*24*2);
-        cookie.setDomain("xmdev.gi.com");
+        cookie.setDomain("xmqa.gi.com");
         cookie.setPath("/");
         response.addCookie(cookie);
         cookie = new Cookie("s_", null);
         cookie.setMaxAge(60*60*24*2);
-        cookie.setDomain("xmdev.gi.com");
+        cookie.setDomain("xmqa.gi.com");
         cookie.setPath("/");
         response.addCookie(cookie);
         responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "退出登录"));

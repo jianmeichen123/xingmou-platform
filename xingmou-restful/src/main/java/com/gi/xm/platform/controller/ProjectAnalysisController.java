@@ -108,9 +108,118 @@ public class ProjectAnalysisController {
     @Autowired
     private ChartEventIndustrySubRoundYearBiz chartEventIndustrySubRoundYearBiz;
 
-    @RequestMapping("bar/{years}/{industryNames}/{industryId}")
+    @RequestMapping("bar/{years}/{industryId}")
     @ResponseBody
-    public MessageInfo bar(@PathVariable("years") Integer[] years,@PathVariable("industryNames") String[] industryNames,@PathVariable("industryId") Integer industryId) {
+    public MessageInfo bar(@PathVariable("years") Integer[] years,@PathVariable("industryId") Integer industryId) {
+
+            MessageInfo<List<ChartProjectIndustryYear>> messageInfo = chartProjectIndustryYearBiz.selectByYear(years);
+            if (!messageInfo.isSuccess()) {
+                return messageInfo;
+            }
+            MessageInfo<List<ChartEventIndustryRoundYear>> messageInfoRound = chartEventIndustryRoundYearBiz.getListByYear(years);
+            if (!messageInfoRound.isSuccess()) {
+                return messageInfoRound;
+            }
+            Map<Integer,List<Long>> projectNums = new HashMap<>();
+            Map<Integer,List<Long>> projectInvestedNums = new HashMap<>();
+            Map<Integer,List<Long>> projectunInvestedNums = new HashMap<>();
+            Map<Integer,List<String>> names = new HashMap<>();
+            for (ChartProjectIndustryYear c : messageInfo.getData()) {
+                if (projectNums.get(c.getYear()) == null){
+                    projectNums.put(c.getYear(),new ArrayList<Long>());
+                    projectInvestedNums.put(c.getYear(),new ArrayList<Long>());
+                    projectunInvestedNums.put(c.getYear(),new ArrayList<Long>());
+                    names.put(c.getYear(),new ArrayList<String>());
+
+                }
+                addNames(names.get(c.getYear()),c.getIndustryName());
+
+//                int index = sort(projectNums.get(c.getYear()),c.getProjectNum().longValue());
+                long v = c.getProjectNum().longValue() - c.getProjectInvestedNum().longValue();
+/*
+
+                changSort(index,projectNums.get(c.getYear()),c.getProjectNum().longValue());
+                changSort(index,projectInvestedNums.get(c.getYear()),c.getProjectInvestedNum().longValue());
+                changSort(index,projectunInvestedNums.get(c.getYear()),v);
+                changSort(index,names.get(c.getYear()),c.getIndustryName());
+*/
+
+                projectNums.get(c.getYear()).add(c.getProjectNum().longValue());
+                projectInvestedNums.get(c.getYear()).add(c.getProjectInvestedNum().longValue());
+                projectunInvestedNums.get(c.getYear()).add(v);
+            }
+            //sort
+
+
+            Map<String, Map<Integer, List<Long>>> data = new HashMap<>();
+            data.put("projectNums",projectNums);
+            data.put("projectInvestedNums",projectInvestedNums);
+            data.put("projectunInvestedNums",projectunInvestedNums);
+            Map<Integer,List<NameValue>> rounds = new HashMap<>();
+            for(ChartEventIndustryRoundYear c:messageInfoRound.getData()){
+                if (rounds.get(c.getYear())==null){
+                    rounds.put(c.getYear(),new ArrayList<NameValue>());
+                }
+                NameValue nameValue = NameValue.getNameValue(rounds.get(c.getYear()),c.getRoundName());
+                nameValue.setValue(nameValue.getValue()+c.getInvestedNum());
+            }
+            MessageInfo<ChartPojo> m = new MessageInfo<>();
+            ChartPojo c = new ChartPojo();
+            c.setRaw(data);
+            Map<String,Object> cal = new HashMap<>();
+            cal.put("rounds",rounds);
+            cal.put("name",names);
+            c.setCal(cal);
+            m.setData(c);
+            return m;
+    }
+
+    private int sort (List<Long> list ,Long v){
+        int index = 0;
+        for (Long l :list){
+            if (v > l){
+                return index;
+            }
+            index++;
+        }
+        return -1;
+    }
+
+    private void changSort(int index,List<Long> list,Long v){
+        if (index == -1){
+            list.add(v);
+        }else  if( index ==0){
+            list.add(v);
+        }else {
+            int size = list.size();
+            list.add(index,v);
+        }
+    }
+
+
+    private void changSort(int index,List<String> list,String v){
+        if (index == -1){
+            list.add(v);
+        }else  if( index ==0){
+            list.add(v);
+        }else {
+            int size = list.size();
+            list.add(index,v);
+        }
+    }
+
+    private void addNames(List<String> names,String name){
+        for(String n :names){
+            if(n.equalsIgnoreCase(name)){
+                return;
+            }
+        }
+        names.add(name);
+    }
+
+     /* @RequestMapping("subBar/{years}/{industryNames}/{industryId}")
+    @ResponseBody
+    public MessageInfo subBar(@PathVariable("years") Integer[] years,@PathVariable("industryNames") String[] industryNames,@PathVariable("industryId") Integer industryId) {
 
         if (industryNames != null && industryId == 0) {
             MessageInfo<List<ChartProjectIndustryYear>> messageInfo = chartProjectIndustryYearBiz.selectByYear(years);
@@ -194,22 +303,41 @@ public class ProjectAnalysisController {
         }
     }
 
+*/
 
-    private Map<String,Map<Integer,List<Long>>> initBarMap(Integer[] years, String[] industryNames){
+    private Map<String,Map<Integer,List<Long>>> initBarYear(Integer year,String industryName,Map<String, Map<Integer, List<Long>>> data){
         Map<Integer,List<Long>> projectNums = new HashMap<>();
         Map<Integer,List<Long>> projectInvestedNums = new HashMap<>();
         Map<Integer,List<Long>> projectunInvestedNums = new HashMap<>();
-        for(Integer year:years){
-            projectNums.put(year,new ArrayList<Long>());
-            projectInvestedNums.put(year,new ArrayList<Long>());
-            projectunInvestedNums.put(year,new ArrayList<Long>());
-            for(String industryName :industryNames){
-                projectNums.get(year).add(0l);
-                projectInvestedNums.get(year).add(0l);
-                projectunInvestedNums.get(year).add(0l);
-            }
-        }
-        Map<String,Map<Integer,List<Long>>> data =new HashMap<>();
+
+        projectNums.put(year,new ArrayList<Long>());
+        projectInvestedNums.put(year,new ArrayList<Long>());
+        projectunInvestedNums.put(year,new ArrayList<Long>());
+
+        projectNums.get(year).add(0l);
+        projectInvestedNums.get(year).add(0l);
+        projectunInvestedNums.get(year).add(0l);
+
+        data.put("projectNums",projectNums);
+        data.put("projectInvestedNums",projectInvestedNums);
+        data.put("projectunInvestedNums",projectunInvestedNums);
+
+        return data;
+    }
+
+    private Map<String,Map<Integer,List<Long>>> initBarMapIndustryName(Integer year,String industryName,Map<String, Map<Integer, List<Long>>> data){
+        Map<Integer,List<Long>> projectNums = new HashMap<>();
+        Map<Integer,List<Long>> projectInvestedNums = new HashMap<>();
+        Map<Integer,List<Long>> projectunInvestedNums = new HashMap<>();
+
+        projectNums.put(year,new ArrayList<Long>());
+        projectInvestedNums.put(year,new ArrayList<Long>());
+        projectunInvestedNums.put(year,new ArrayList<Long>());
+
+        projectNums.get(year).add(0l);
+        projectInvestedNums.get(year).add(0l);
+        projectunInvestedNums.get(year).add(0l);
+
         data.put("projectNums",projectNums);
         data.put("projectInvestedNums",projectInvestedNums);
         data.put("projectunInvestedNums",projectunInvestedNums);

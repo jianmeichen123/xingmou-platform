@@ -65,6 +65,7 @@
 		<foreach item="item" index="index" collection="years" open="(" separator="," close=")">
 			#{item}
 		</foreach>
+		ORDER BY project_num desc
 	</select>
 		
 </mapper>

@@ -127,7 +127,7 @@
 				                   	#{item}
 			                    	</foreach>
 								</if>
-								<if test="industryId!=null">AND industry_id = #{industryId,jdbcType=INTEGER}</if>
+								<if test="industryId!=null and industryId > 0">AND industry_id = #{industryId,jdbcType=INTEGER}</if>
 								<if test="industryName!=null and industryName!=''">AND industry_name = #{industryName,jdbcType=VARCHAR}</if>
 								<if test="marketMoney!=null">AND market_money = #{marketMoney,jdbcType=DECIMAL}</if>
 								<if test="marketMoneyRate!=null">AND market_money_rate = #{marketMoneyRate,jdbcType=DOUBLE}</if>
@@ -172,11 +172,15 @@
 		SELECT
 		<include refid="selectFields" />
 		FROM dm_chart_data_industry_first_year
-		WHERE  industry_id = #{industryId,jdbcType=INTEGER}
-		AND yaar in
+		WHERE
+		 yaar in
 		<foreach item="item" index="index" collection="yaars" open="(" separator="," close=")">
 			#{item}
 		</foreach>
+
+		<if test="industryId != null and industryId > 0">
+			AND industry_id = #{industryId,jdbcType=INTEGER}
+		</if>
 	</select>
 			
 	<select id="selectByYaar" resultMap="BaseResultMap">
@@ -187,6 +191,8 @@
 		<foreach item="item" index="index" collection="yaars" open="(" separator="," close=")">
 			#{item}
 		</foreach>
+
+
 	</select>
 			
 	<select id="selectByIndustryId" resultMap="BaseResultMap">
@@ -194,6 +200,7 @@
 		<include refid="selectFields" />
 		FROM dm_chart_data_industry_first_year
 		WHERE  industry_id = #{industryId,jdbcType=INTEGER}
+
 	</select>
 
 </mapper>

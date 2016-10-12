@@ -20,8 +20,10 @@ public interface InvestfirmsDataYearFacede {
     MessageInfo<List<InvestfirmsDataYearInfo>> getAllInvestfirmsDataYear();
 			
     MessageInfo<QueryResultInfo<InvestfirmsDataYearInfo>> queryInvestfirmsDataYear(InvestfirmsDataYearQueryInfo investfirmsDataYearQueryInfo);
-	
-		
+	MessageInfo<QueryResultInfo<InvestfirmsDataYearInfo>> queryInvestfirmsDataYearByIndustry(InvestfirmsDataYearQueryInfo investfirmsDataYearQueryInfo);
+	MessageInfo<QueryResultInfo<InvestfirmsDataYearInfo>> queryInvestfirmsDataYearBySub(InvestfirmsDataYearQueryInfo investfirmsDataYearQueryInfo);
+
+
 	MessageInfo<List<InvestfirmsDataYearInfo>> getListByInvestfirmId(Long investfirmId);
 			
 	MessageInfo<List<InvestfirmsDataYearInfo>> getListByYear(Integer year);

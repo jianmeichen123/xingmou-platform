@@ -84,8 +84,25 @@ public class InvestfirmsDataYearFacedeImpl implements InvestfirmsDataYearFacede 
 		messageInfo.setData(queryResultInfo);
 		return messageInfo;
 	}
-   
-		
+
+
+	public MessageInfo<QueryResultInfo<InvestfirmsDataYearInfo>> queryInvestfirmsDataYearByIndustry(InvestfirmsDataYearQueryInfo investfirmsDataYearQueryInfo) {
+		InvestfirmsDataYearQuery investfirmsDataYearQuery = InvestfirmsDataYearConvertor.toInvestfirmsDataYearQuery(investfirmsDataYearQueryInfo);
+		Message<QueryResult<InvestfirmsDataYear>> message = investfirmsDataYearBiz.queryInvestfirmsDataYearByIndustry(investfirmsDataYearQuery);
+		MessageInfo<QueryResultInfo<InvestfirmsDataYearInfo>> messageInfo = new MessageInfo<QueryResultInfo<InvestfirmsDataYearInfo>>();
+		QueryResultInfo<InvestfirmsDataYearInfo> queryResultInfo = InvestfirmsDataYearConvertor.toQueryResultInfo(message.getData());
+		messageInfo.setData(queryResultInfo);
+		return messageInfo;
+	}
+
+	public MessageInfo<QueryResultInfo<InvestfirmsDataYearInfo>> queryInvestfirmsDataYearBySub(InvestfirmsDataYearQueryInfo investfirmsDataYearQueryInfo) {
+		InvestfirmsDataYearQuery investfirmsDataYearQuery = InvestfirmsDataYearConvertor.toInvestfirmsDataYearQuery(investfirmsDataYearQueryInfo);
+		Message<QueryResult<InvestfirmsDataYear>> message = investfirmsDataYearBiz.queryInvestfirmsDataYearBySub(investfirmsDataYearQuery);
+		MessageInfo<QueryResultInfo<InvestfirmsDataYearInfo>> messageInfo = new MessageInfo<QueryResultInfo<InvestfirmsDataYearInfo>>();
+		QueryResultInfo<InvestfirmsDataYearInfo> queryResultInfo = InvestfirmsDataYearConvertor.toQueryResultInfo(message.getData());
+		messageInfo.setData(queryResultInfo);
+		return messageInfo;
+	}
 
 
 	public MessageInfo<List<InvestfirmsDataYearInfo>> getListByInvestfirmId(Long investfirmId){

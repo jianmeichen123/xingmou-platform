@@ -43,7 +43,8 @@ public class ZBRDController {
 
     @Autowired
     private ChartDataYearBiz chartDataYearBiz;
-        @RequestMapping("map/{years}/{industryId}")
+
+    @RequestMapping("map/{years}/{industryId}")
     @ResponseBody
     public MessageInfo map(@PathVariable("years") Integer[] years,@PathVariable("industryId") Integer industryId){
         MessageInfo<ChartPojo>  messageInfo = new MessageInfo<>();
@@ -55,8 +56,9 @@ public class ZBRDController {
         Map<String,List<NameValue>> data = new HashMap<>();
         data.put("investedNum",new ArrayList<NameValue>());
         data.put("investedMoney",new ArrayList<NameValue>());
-        data.put("investedNumCent",new ArrayList<NameValue>());
 
+
+        Long total = 0l;
         for(ChartEventIndustryDistictYear  c :cs){
             String districtName = c.getDistrictName();
             if(districtName != null){
@@ -65,10 +67,18 @@ public class ZBRDController {
                 nameValue.setValue(nameValue.getValue()+c.getInvestedNum());
                 nameValue = NameValue.getNameValue(data.get("investedMoney"),districtName);
                 nameValue.setValue(nameValue.getValue()+c.getInvestedMoney());
-                nameValue = NameValue.getNameValue(data.get("investedNumCent"),districtName);
-                nameValue.setValue(nameValue.getValue()+c.getInvestedNumCent());
+                total = total + c.getInvestedNum();
             }
         }
+
+        List<NameValue> nameValues = new ArrayList<>();
+        for(NameValue nameValue:data.get("investedNum")){
+            NameValue n = new NameValue();
+            n.setName(nameValue.getName());
+            n.setValue((long)(nameValue.getValue().doubleValue()/total*10000));
+            nameValues.add(n);
+        }
+        data.put("investedNumCent",nameValues);
 
         ChartPojo chartPojo = new ChartPojo();
         chartPojo.setCal(data);
@@ -88,8 +98,8 @@ public class ZBRDController {
         Map<String,List<NameValue>> data = new HashMap<>();
         data.put("investedNum",new ArrayList<NameValue>());
         data.put("investedMoney",new ArrayList<NameValue>());
-        data.put("investedNumCent",new ArrayList<NameValue>());
 
+        Long total = 0l;
         for(ChartEventIndustrySubDistictYear  c :cs){
             String districtName = c.getDistrictName();
             if(districtName != null){
@@ -98,11 +108,17 @@ public class ZBRDController {
                 nameValue.setValue(nameValue.getValue()+c.getInvestedNum());
                 nameValue = NameValue.getNameValue(data.get("investedMoney"),districtName);
                 nameValue.setValue(nameValue.getValue()+c.getInvestedMoney());
-                nameValue = NameValue.getNameValue(data.get("investedNumCent"),districtName);
-                nameValue.setValue(nameValue.getValue()+c.getInvestedNumCent());
+                total = total + c.getInvestedNum();
             }
         }
-
+        List<NameValue> nameValues = new ArrayList<>();
+        for(NameValue nameValue:data.get("investedNum")){
+            NameValue n = new NameValue();
+            n.setName(nameValue.getName());
+            n.setValue((long)(nameValue.getValue().doubleValue()/total*10000));
+            nameValues.add(n);
+        }
+        data.put("investedNumCent",nameValues);
         ChartPojo chartPojo = new ChartPojo();
         chartPojo.setCal(data);
         messageInfo.setData(chartPojo);

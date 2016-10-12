@@ -31,4 +31,6 @@ public interface ProjectFacede {
 	MessageInfo<ProjectSearchTitleInfo> getProjectSearchTitleInfo();
 
 	MessageInfo<QueryResultInfo<ProjectInfo>> searchProject(ProjectQueryInfo projectQueryInfo);
+
+	MessageInfo<QueryResultInfo<ProjectInfo>> queryCompetationlist(ProjectQueryInfo projectQueryInfo);
 }

@@ -171,4 +171,23 @@ public class ProjectBiz {
     }
 
 
+	public Message<QueryResult<Project>> queryCompetationlist(ProjectQuery projectQuery) {
+		Message<QueryResult<Project>> message = new Message<QueryResult<Project>>();
+        try {
+            QueryResult<Project> queryResult = new QueryResult<Project>();
+            PageHelper.startPage(projectQuery.getPageIndex(), projectQuery.getPageSize());
+            List<Project> projectList = projectDAO.queryCompetationlist(projectQuery);
+            PageInfo<Project> pageInfo = new PageInfo<Project>(projectList);
+            queryResult.setPages(pageInfo.getPages());
+            queryResult.setTotal(pageInfo.getTotal());
+            queryResult.setRecords(projectList);
+            message.setData(queryResult);
+        } catch (Exception e) {
+            LOGGER.error("queryProject", "分页查询Project失败", e);
+            message.setMessageStatus(MessageStatus.SYS_ERROR);
+        }
+        return message;
+	}
+
+
 }

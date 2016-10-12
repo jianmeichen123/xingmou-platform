@@ -97,4 +97,11 @@ public class ProjectController {
 		MessageInfo<QueryResultInfo<ProjectInfo>> resultMessageInfo = projectFacede.searchProject(projectQueryInfo);
 		return resultMessageInfo;
 	}
+	
+	@RequestMapping("queryCompetationlist")
+	@ResponseBody
+	public MessageInfo<QueryResultInfo<ProjectInfo>>  queryCompetationlist (@RequestBody ProjectQueryInfo projectQueryInfo) {
+		MessageInfo<QueryResultInfo<ProjectInfo>> resultMessageInfo = projectFacede.queryCompetationlist(projectQueryInfo);
+		return resultMessageInfo;
+	}
 }

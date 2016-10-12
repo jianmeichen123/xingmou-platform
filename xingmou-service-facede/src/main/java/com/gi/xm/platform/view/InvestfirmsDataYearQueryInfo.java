@@ -75,7 +75,15 @@ public class InvestfirmsDataYearQueryInfo extends QueryInfo {
 	 * @Fields industrySubName :
 	 */
 	private String industrySubName;
+	private Long[] yearList;
 
+	public Long[] getYearList() {
+		return yearList;
+	}
+
+	public void setYearList(Long[] yearList) {
+		this.yearList = yearList;
+	}
 	public String getIndustrySubName() {
 		return industrySubName;
 	}

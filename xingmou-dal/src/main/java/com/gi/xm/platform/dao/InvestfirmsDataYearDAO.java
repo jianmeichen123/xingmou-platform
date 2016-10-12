@@ -22,7 +22,8 @@ public interface InvestfirmsDataYearDAO {
     List<InvestfirmsDataYear> selectAll();
 
 	List<InvestfirmsDataYear> queryInvestfirmsDataYear(InvestfirmsDataYearQuery investfirmsDataYearQuery);
-			
+	List<InvestfirmsDataYear> queryInvestfirmsDataYearByIndustry(InvestfirmsDataYearQuery investfirmsDataYearQuery);
+	List<InvestfirmsDataYear> queryInvestfirmsDataYearBySub(InvestfirmsDataYearQuery investfirmsDataYearQuery);
     int updateByPrimaryKey(InvestfirmsDataYear investfirmsDataYear);
 	
 				

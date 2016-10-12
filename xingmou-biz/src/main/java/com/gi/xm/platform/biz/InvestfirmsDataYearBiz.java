@@ -123,8 +123,41 @@ public class InvestfirmsDataYearBiz  {
 		}
 		return message;
 	}
+	public Message<QueryResult<InvestfirmsDataYear>> queryInvestfirmsDataYearByIndustry(InvestfirmsDataYearQuery investfirmsDataYearQuery) {
+		Message<QueryResult<InvestfirmsDataYear>> message = new Message<QueryResult<InvestfirmsDataYear>>();
+		try {
+			QueryResult<InvestfirmsDataYear> queryResult = new QueryResult<InvestfirmsDataYear>();
+			PageHelper.startPage(investfirmsDataYearQuery.getPageIndex(), investfirmsDataYearQuery.getPageSize());
+			List<InvestfirmsDataYear> investfirmsDataYearList = investfirmsDataYearDAO.queryInvestfirmsDataYearByIndustry(investfirmsDataYearQuery);
+			PageInfo<InvestfirmsDataYear> pageInfo = new PageInfo<InvestfirmsDataYear>(investfirmsDataYearList);
+			queryResult.setPages(pageInfo.getPages());
+			queryResult.setTotal(pageInfo.getTotal());
+			queryResult.setRecords(investfirmsDataYearList);
+			message.setData(queryResult);
+		} catch (Exception e) {
+			LOGGER.error("queryInvestfirmsDataYear", "分页查询InvestfirmsDataYear失败", e);
+			message.setMessageStatus(MessageStatus.SYS_ERROR);
+		}
+		return message;
+	}
+	public Message<QueryResult<InvestfirmsDataYear>> queryInvestfirmsDataYearBySub(InvestfirmsDataYearQuery investfirmsDataYearQuery) {
+		Message<QueryResult<InvestfirmsDataYear>> message = new Message<QueryResult<InvestfirmsDataYear>>();
+		try {
+			QueryResult<InvestfirmsDataYear> queryResult = new QueryResult<InvestfirmsDataYear>();
+			PageHelper.startPage(investfirmsDataYearQuery.getPageIndex(), investfirmsDataYearQuery.getPageSize());
+			List<InvestfirmsDataYear> investfirmsDataYearList = investfirmsDataYearDAO.queryInvestfirmsDataYearBySub(investfirmsDataYearQuery);
+			PageInfo<InvestfirmsDataYear> pageInfo = new PageInfo<InvestfirmsDataYear>(investfirmsDataYearList);
+			queryResult.setPages(pageInfo.getPages());
+			queryResult.setTotal(pageInfo.getTotal());
+			queryResult.setRecords(investfirmsDataYearList);
+			message.setData(queryResult);
+		} catch (Exception e) {
+			LOGGER.error("queryInvestfirmsDataYear", "分页查询InvestfirmsDataYear失败", e);
+			message.setMessageStatus(MessageStatus.SYS_ERROR);
+		}
+		return message;
+	}
 
-		
 	public Message<List<InvestfirmsDataYear>> getListByInvestfirmId(Long investfirmId){
 
 		Message<List<InvestfirmsDataYear>> message = new Message<List<InvestfirmsDataYear>>();

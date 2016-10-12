@@ -127,17 +127,35 @@
 		FROM dm_investfirms_data_year a LEFT JOIN  dm_files b ON a.investfirm_id=b.source_id AND b.type=1
 		<include refid="queryWhereAndOrder" />
 	</select>
-	
+	<select id="queryInvestfirmsDataYearByIndustry" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.InvestfirmsDataYearQuery">
+		SELECT
+		a.*,b.pic as pic
+		FROM dm_investfirms_industry_data_year a LEFT JOIN  dm_files b ON a.investfirm_id=b.source_id AND b.type=1
+		<include refid="queryWhereAndOrder" />
+	</select>
+
+	<select id="queryInvestfirmsDataYearBySub" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.InvestfirmsDataYearQuery">
+		SELECT
+		a.*,b.pic as pic
+		FROM dm_investfirms_industry_sub_data_year a LEFT JOIN  dm_files b ON a.investfirm_id=b.source_id AND b.type=1
+		<include refid="queryWhereAndOrder" />
+	</select>
+
+
 	<sql id="queryWhereAndOrder">
 		<where>
 					<if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>
 								<if test="year!=null">AND year = #{year,jdbcType=INTEGER}</if>
+			<if test="yearList!=null">AND year in
+				<foreach item="item" index="index" collection="yearList" open="(" separator="," close=")">
+					#{item}
+				</foreach></if>
 								<if test="investfirmId!=null">AND investfirm_id = #{investfirmId,jdbcType=BIGINT}</if>
 								<if test="investfirmName!=null and investfirmName!=''">AND investfirm_name = #{investfirmName,jdbcType=VARCHAR}</if>
 								<if test="industryNames!=null and industryNames!=''">AND industry_names = #{industryNames,jdbcType=VARCHAR}</if>
 								<if test="roundANum!=null">AND round_a_num = #{roundANum,jdbcType=INTEGER}</if>
-			<if test="industryId!=null">AND industry_id = #{industryId,jdbcType=INTEGER}</if>
-			<if test="industrySubId!=null">AND industry_sub_id = #{industrySubId,jdbcType=INTEGER}</if>
+		                    	<if test="industryId!=null and industryId > 0">AND industry_id = #{industryId,jdbcType=INTEGER}</if>
+		                    	<if test="industrySubId!=null and industrySubId > 0">AND industry_sub_id = #{industrySubId,jdbcType=INTEGER}</if>
 								<if test="roundAMoney!=null">AND round_a_money = #{roundAMoney,jdbcType=BIGINT}</if>
 								<if test="roundBNum!=null">AND round_b_num = #{roundBNum,jdbcType=INTEGER}</if>
 								<if test="roundBMoney!=null">AND round_b_money = #{roundBMoney,jdbcType=BIGINT}</if>

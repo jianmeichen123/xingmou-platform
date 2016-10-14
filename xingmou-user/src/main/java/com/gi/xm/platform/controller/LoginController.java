@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import com.galaxyinternet.common.controller.BaseControllerImpl;
 import com.galaxyinternet.framework.core.constants.Constants;
-import com.galaxyinternet.framework.core.model.Header;
 import com.galaxyinternet.framework.core.model.ResponseData;
 import com.galaxyinternet.framework.core.model.Result;
 import com.galaxyinternet.framework.core.model.Result.Status;
@@ -157,12 +156,12 @@ public class LoginController extends BaseControllerImpl<User, User> {
         ResponseData<User> responsebody = new ResponseData<User>();
         cache.remove("xm:"+s+":"+uid);
         Cookie cookie = new Cookie("_uid_", null);
-        cookie.setMaxAge(0);
+        cookie.setMaxAge(60*60*24*2);
         cookie.setDomain("xm.gi.com");
         cookie.setPath("/");
         response.addCookie(cookie);
         cookie = new Cookie("s_", null);
-        cookie.setMaxAge(0);
+        cookie.setMaxAge(60*60*24*2);
         cookie.setDomain("xm.gi.com");
         cookie.setPath("/");
         response.addCookie(cookie);

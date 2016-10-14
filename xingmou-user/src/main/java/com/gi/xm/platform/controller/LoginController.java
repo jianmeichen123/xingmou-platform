@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.galaxyinternet.common.controller.BaseControllerImpl;
 import com.galaxyinternet.framework.core.constants.Constants;
+import com.galaxyinternet.framework.core.model.Header;
 import com.galaxyinternet.framework.core.model.ResponseData;
 import com.galaxyinternet.framework.core.model.Result;
 import com.galaxyinternet.framework.core.model.Result.Status;
@@ -40,7 +41,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
         return this.userService;
     }
 
-    private String xmIndex = "http://xm.gi.com/html/xmcx.html";
+    private String xmIndex = "http://xmqa.gi.com/html/xmcx.html";
     /**
      * 跳转登录
      */
@@ -49,7 +50,6 @@ public class LoginController extends BaseControllerImpl<User, User> {
         String key = "xm:"+s+":"+uid;
         String user = cache.getValue(key);
         if(user!=null){
-            setCookie(response,uid,s);
             return "redirect:"+xmIndex;
         }
         return "login";
@@ -67,30 +67,18 @@ public class LoginController extends BaseControllerImpl<User, User> {
             return "redirect:" + xmIndex;
         }
         setCacheSessionId("fx", u, uid);
-        setCookie(response,uid,"fx");
+        Cookie cookie = new Cookie("_uid_", uid);
+        cookie.setMaxAge(60*60*24*365*5);
+        cookie.setDomain("xmqa.gi.com");
+        cookie.setPath("/");
+        response.addCookie(cookie);
+        cookie = new Cookie("s_", "fx");
+        cookie.setMaxAge(60*60*24*365*5);
+        cookie.setDomain("xmqa.gi.com");
+        cookie.setPath("/");
         return "login";
     }
 
-    /**
-     *
-     * @param response
-     * @param uid
-     * @param s 来源
-     */
-    public void setCookie(HttpServletResponse response ,String uid,String s){
-
-        Cookie cookie = new Cookie("_uid_", uid);
-        cookie.setMaxAge(60*60*24*365*5);
-        cookie.setDomain("xm.gi.com");
-        cookie.setPath("/");
-        response.addCookie(cookie);
-        cookie = new Cookie("s_", s);
-        cookie.setMaxAge(60*60*24*365*5);
-        cookie.setDomain("xm.gi.com");
-        cookie.setPath("/");
-        response.addCookie(cookie);
-
-    }
     @RequestMapping(value = "/me")
     @ResponseBody
     public String  me(HttpServletResponse response, @CookieValue(name = "_uid_")String uid,@CookieValue(name = "s_")String s) {
@@ -127,7 +115,15 @@ public class LoginController extends BaseControllerImpl<User, User> {
             responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "登录成功！"));
 
 
-            setCookie(response,sessionId,"xm");
+            Cookie cookie = new Cookie("_uid_", sessionId);
+            cookie.setMaxAge(60*60*24*365*5);
+            cookie.setDomain("xmqa.gi.com");
+            cookie.setPath("/");
+            response.addCookie(cookie);
+            cookie = new Cookie("s_", "xm");
+            cookie.setMaxAge(60*60*24*365*5);
+            cookie.setDomain("xmqa.gi.com");
+            cookie.setPath("/");
             //logger.info(user.getEmail()+" login_success xm");
         }
         return responsebody;
@@ -156,13 +152,13 @@ public class LoginController extends BaseControllerImpl<User, User> {
         ResponseData<User> responsebody = new ResponseData<User>();
         cache.remove("xm:"+s+":"+uid);
         Cookie cookie = new Cookie("_uid_", null);
-        cookie.setMaxAge(60*60*24*2);
-        cookie.setDomain("xm.gi.com");
+        cookie.setMaxAge(0);
+        cookie.setDomain("xmqa.gi.com");
         cookie.setPath("/");
         response.addCookie(cookie);
         cookie = new Cookie("s_", null);
-        cookie.setMaxAge(60*60*24*2);
-        cookie.setDomain("xm.gi.com");
+        cookie.setMaxAge(0);
+        cookie.setDomain("xmqa.gi.com");
         cookie.setPath("/");
         response.addCookie(cookie);
         responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "退出登录"));

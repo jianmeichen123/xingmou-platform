@@ -119,11 +119,11 @@ public class LoginController extends BaseControllerImpl<User, User> {
             cookie.setMaxAge(60*60*24*365*5);
             cookie.setDomain("xm.gi.com");
             cookie.setPath("/");
-            response.addCookie(cookie);
             cookie = new Cookie("s_", "xm");
             cookie.setMaxAge(60*60*24*365*5);
             cookie.setDomain("xm.gi.com");
             cookie.setPath("/");
+            response.addCookie(cookie);
             //logger.info(user.getEmail()+" login_success xm");
         }
         return responsebody;

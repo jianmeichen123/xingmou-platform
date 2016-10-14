@@ -215,6 +215,7 @@
 		<include refid="selectFields" />
 		FROM dm_invest_events
 		WHERE  project_id = #{projectId,jdbcType=BIGINT}
+		order by invest_date desc
 	</select>
 
 </mapper>

@@ -10,7 +10,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -42,12 +41,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
         return this.userService;
     }
 
-    @Value("xmIndex")
-    private String xmIndex = "http://xmdev.gi.com/html/xmcx.html";
-
-    @Value("domain")
-    private  String domain = "xmdev.gi.com";
-
+    private String xmIndex = "http://xm.gi.com/html/xmcx.html";
     /**
      * 跳转登录
      */
@@ -88,12 +82,12 @@ public class LoginController extends BaseControllerImpl<User, User> {
 
         Cookie cookie = new Cookie("_uid_", uid);
         cookie.setMaxAge(60*60*24*365*5);
-        cookie.setDomain(domain);
+        cookie.setDomain("xm.gi.com");
         cookie.setPath("/");
         response.addCookie(cookie);
         cookie = new Cookie("s_", s);
         cookie.setMaxAge(60*60*24*365*5);
-        cookie.setDomain(domain);
+        cookie.setDomain("xm.gi.com");
         cookie.setPath("/");
         response.addCookie(cookie);
 
@@ -163,14 +157,14 @@ public class LoginController extends BaseControllerImpl<User, User> {
         ResponseData<User> responsebody = new ResponseData<User>();
         cache.remove("xm:"+s+":"+uid);
         Cookie cookie = new Cookie("_uid_", null);
-        cookie.setDomain(domain);
-        cookie.setPath("/");
         cookie.setMaxAge(0);
+        cookie.setDomain("xm.gi.com");
+        cookie.setPath("/");
         response.addCookie(cookie);
         cookie = new Cookie("s_", null);
-        cookie.setDomain(domain);
-        cookie.setPath("/");
         cookie.setMaxAge(0);
+        cookie.setDomain("xm.gi.com");
+        cookie.setPath("/");
         response.addCookie(cookie);
         responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "退出登录"));
         return "login";

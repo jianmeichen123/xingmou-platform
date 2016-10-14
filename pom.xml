@@ -30,8 +30,6 @@
         <module>xingmou-restful</module>
         <module>xingmou-news-manage</module>
         <module>xingmou-user</module>
-        <module>xingmou-service-app-facede</module>
-        <module>xingmou-service-app</module>
     </modules>
     <packaging>pom</packaging>
 

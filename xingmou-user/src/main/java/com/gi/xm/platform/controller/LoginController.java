@@ -78,16 +78,17 @@ public class LoginController extends BaseControllerImpl<User, User> {
      */
     public void setCookie(HttpServletResponse response ,String uid,String s){
 
-        Cookie cookie = new Cookie("_uid_", uid);
-        cookie.setMaxAge(60*60*24*365*5);
-        cookie.setDomain("xm.gi.com");
-        cookie.setPath("/");
-        response.addCookie(cookie);
-        cookie = new Cookie("s_", s);
-        cookie.setMaxAge(60*60*24*365*5);
-        cookie.setDomain("xm.gi.com");
-        cookie.setPath("/");
-        response.addCookie(cookie);
+        Cookie uid_ = new Cookie("_uid_", uid);
+        uid_.setMaxAge(60*60*24*365*5);
+        uid_.setDomain("xm.gi.com");
+        uid_.setPath("/");
+        response.addCookie(uid_);
+
+        Cookie s_ = new Cookie("s_", s);
+        s_.setMaxAge(60*60*24*365*5);
+        s_.setDomain("xm.gi.com");
+        s_.setPath("/");
+        response.addCookie(s_);
 
     }
     @RequestMapping(value = "/me")

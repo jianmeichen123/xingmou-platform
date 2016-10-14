@@ -175,7 +175,7 @@
 		</where>
 		<choose>
 			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
-			<otherwise>order by round_num,round_money desc</otherwise>
+			<otherwise>order by round_num desc,round_money desc</otherwise>
 		</choose>
 	</sql>
 	

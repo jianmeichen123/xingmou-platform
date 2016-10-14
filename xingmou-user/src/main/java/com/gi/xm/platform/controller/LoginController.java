@@ -4,7 +4,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import com.galaxyinternet.common.controller.BaseControllerImpl;
 import com.galaxyinternet.framework.core.constants.Constants;
-import com.galaxyinternet.framework.core.model.Header;
 import com.galaxyinternet.framework.core.model.ResponseData;
 import com.galaxyinternet.framework.core.model.Result;
 import com.galaxyinternet.framework.core.model.Result.Status;
@@ -50,6 +48,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
         String key = "xm:"+s+":"+uid;
         String user = cache.getValue(key);
         if(user!=null){
+            setCookie(response,uid,s);
             return "redirect:"+xmIndex;
         }
         return "login";
@@ -67,19 +66,30 @@ public class LoginController extends BaseControllerImpl<User, User> {
             return "redirect:" + xmIndex;
         }
         setCacheSessionId("fx", u, uid);
+        setCookie(response,uid,"fx");
+        return "login";
+    }
+
+    /**
+     *
+     * @param response
+     * @param uid
+     * @param s 来源
+     */
+    public void setCookie(HttpServletResponse response ,String uid,String s){
+
         Cookie cookie = new Cookie("_uid_", uid);
         cookie.setMaxAge(60*60*24*365*5);
         cookie.setDomain("xm.gi.com");
         cookie.setPath("/");
         response.addCookie(cookie);
-        cookie = new Cookie("s_", "fx");
+        cookie = new Cookie("s_", s);
         cookie.setMaxAge(60*60*24*365*5);
         cookie.setDomain("xm.gi.com");
         cookie.setPath("/");
         response.addCookie(cookie);
-        return "login";
-    }
 
+    }
     @RequestMapping(value = "/me")
     @ResponseBody
     public String  me(HttpServletResponse response, @CookieValue(name = "_uid_")String uid,@CookieValue(name = "s_")String s) {
@@ -110,19 +120,13 @@ public class LoginController extends BaseControllerImpl<User, User> {
         if (user == null) {
             responsebody.setResult(new Result(Status.ERROR, Constants.IS_UP_WRONG, "用户名或密码错误！"));
         } else {
+
             String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
             setCacheSessionId("xm", user, sessionId);
             responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "登录成功！"));
-            Cookie cookie = new Cookie("_uid_", sessionId);
-            cookie.setMaxAge(60*60*24*365*5);
-            cookie.setDomain("xm.gi.com");
-            cookie.setPath("/");
-            response.addCookie(cookie);
-            cookie = new Cookie("s_", "xm");
-            cookie.setMaxAge(60*60*24*365*5);
-            cookie.setDomain("xm.gi.com");
-            cookie.setPath("/");
-            response.addCookie(cookie);
+
+
+            setCookie(response,sessionId,"xm");
             //logger.info(user.getEmail()+" login_success xm");
         }
         return responsebody;
@@ -151,13 +155,13 @@ public class LoginController extends BaseControllerImpl<User, User> {
         ResponseData<User> responsebody = new ResponseData<User>();
         cache.remove("xm:"+s+":"+uid);
         Cookie cookie = new Cookie("_uid_", null);
-        cookie.setMaxAge(0);
+        cookie.setMaxAge(60*60*24*2);
         cookie.setDomain("xm.gi.com");
         cookie.setPath("/");
         response.addCookie(cookie);
         cookie = new Cookie("s_", null);
-        cookie.setMaxAge(0);
-        cookie.setDomain("xm.gi.com");
+        cookie.setMaxAge(60*60*24*2);
+        cookie.setDomain("xmv.gi.com");
         cookie.setPath("/");
         response.addCookie(cookie);
         responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "退出登录"));

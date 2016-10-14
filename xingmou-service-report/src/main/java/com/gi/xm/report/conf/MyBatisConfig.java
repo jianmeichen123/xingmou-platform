@@ -63,9 +63,6 @@ public class MyBatisConfig implements TransactionManagementConfigurer {
 
     @Bean(name = "sqlSessionTemplateReport")
     public SqlSessionTemplate sqlSessionTemplate(@Qualifier("sqlSessionFactoryReport") SqlSessionFactory sqlSessionFactoryReport) {
-        System.out.print("----------------------------------------");
-        System.out.print(sqlSessionFactoryReport);
-        System.out.print("----------------------------------------");
         return new SqlSessionTemplate(sqlSessionFactoryReport);
     }
 

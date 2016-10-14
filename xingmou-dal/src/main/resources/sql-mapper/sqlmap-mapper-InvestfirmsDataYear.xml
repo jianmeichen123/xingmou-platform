@@ -124,20 +124,20 @@
 	<select id="queryInvestfirmsDataYear" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.InvestfirmsDataYearQuery">
 		SELECT
           a.*,b.pic as pic
-		FROM dm_investfirms_data_year a LEFT JOIN  dm_files b ON a.investfirm_id=b.source_id AND b.type=1
+		FROM dm_investfirms_data_year a LEFT JOIN  dm_files b ON  a.investfirm_source_id=b.source_id AND b.type=2
 		<include refid="queryWhereAndOrder" />
 	</select>
 	<select id="queryInvestfirmsDataYearByIndustry" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.InvestfirmsDataYearQuery">
 		SELECT
 		a.*,b.pic as pic
-		FROM dm_investfirms_industry_data_year a LEFT JOIN  dm_files b ON a.investfirm_id=b.source_id AND b.type=1
+		FROM dm_investfirms_industry_data_year a LEFT JOIN  dm_files b ON a.investfirm_source_id=b.source_id AND b.type=2
 		<include refid="queryWhereAndOrder" />
 	</select>
 
 	<select id="queryInvestfirmsDataYearBySub" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.InvestfirmsDataYearQuery">
 		SELECT
 		a.*,b.pic as pic
-		FROM dm_investfirms_industry_sub_data_year a LEFT JOIN  dm_files b ON a.investfirm_id=b.source_id AND b.type=1
+		FROM dm_investfirms_industry_sub_data_year a LEFT JOIN  dm_files b ON  a.investfirm_source_id=b.source_id AND b.type=2
 		<include refid="queryWhereAndOrder" />
 	</select>
 

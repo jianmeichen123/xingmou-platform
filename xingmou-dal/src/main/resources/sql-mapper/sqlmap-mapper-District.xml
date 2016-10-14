@@ -99,7 +99,8 @@
 		<include refid="selectFields" />
 		FROM dw_v_district
 		WHERE  type = #{type,jdbcType=INTEGER}
-		AND level = #{level,jdbcType=TINYINT} 
+		AND level = #{level,jdbcType=TINYINT}
+		AND displayorder != -1
 	</select>
 			
 	<select id="selectByUpidDisplayorder" resultMap="BaseResultMap">

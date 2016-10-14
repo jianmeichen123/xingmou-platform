@@ -53,7 +53,7 @@
 	<select id="selectAll" resultMap="BaseResultMap">
 		SELECT
 		<include refid="selectFields" />
-		FROM dw_v_district
+		FROM dw_v_district where displayorder != -1
 	</select>
 	
 	<select id="queryDistrict" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.DistrictQuery">

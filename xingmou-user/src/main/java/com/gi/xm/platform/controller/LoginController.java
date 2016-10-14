@@ -76,6 +76,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
         cookie.setMaxAge(60*60*24*365*5);
         cookie.setDomain("xm.gi.com");
         cookie.setPath("/");
+        response.addCookie(cookie);
         return "login";
     }
 
@@ -109,16 +110,14 @@ public class LoginController extends BaseControllerImpl<User, User> {
         if (user == null) {
             responsebody.setResult(new Result(Status.ERROR, Constants.IS_UP_WRONG, "用户名或密码错误！"));
         } else {
-
             String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
             setCacheSessionId("xm", user, sessionId);
             responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "登录成功！"));
-
-
             Cookie cookie = new Cookie("_uid_", sessionId);
             cookie.setMaxAge(60*60*24*365*5);
             cookie.setDomain("xm.gi.com");
             cookie.setPath("/");
+            response.addCookie(cookie);
             cookie = new Cookie("s_", "xm");
             cookie.setMaxAge(60*60*24*365*5);
             cookie.setDomain("xm.gi.com");

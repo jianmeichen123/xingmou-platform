@@ -36,7 +36,18 @@ public class InvestfirmsDataYearController {
 	@ResponseBody
 	public MessageInfo<QueryResultInfo<InvestfirmsDataYearInfo>>  queryInvestfirmsDataYear (@RequestBody InvestfirmsDataYearQueryInfo investfirmsDataYearQueryInfo) {
 
-		MessageInfo<QueryResultInfo<InvestfirmsDataYearInfo>> resultMessageInfo = investfirmsDataYearFacede.queryInvestfirmsDataYear(investfirmsDataYearQueryInfo);
+		MessageInfo<QueryResultInfo<InvestfirmsDataYearInfo>> resultMessageInfo = null;
+		//查子行业
+		if (investfirmsDataYearQueryInfo != null && investfirmsDataYearQueryInfo.getIndustrySubId()!=null) {
+			resultMessageInfo = investfirmsDataYearFacede.queryInvestfirmsDataYearBySub(investfirmsDataYearQueryInfo);
+		} else if(investfirmsDataYearQueryInfo != null && investfirmsDataYearQueryInfo.getIndustryId()!=null){
+			//一级行业
+			resultMessageInfo = investfirmsDataYearFacede.queryInvestfirmsDataYearByIndustry(investfirmsDataYearQueryInfo);
+		} else {
+			//全部行业
+			resultMessageInfo = investfirmsDataYearFacede.queryInvestfirmsDataYear(investfirmsDataYearQueryInfo);
+		}
+
 		return resultMessageInfo;
 	}
 

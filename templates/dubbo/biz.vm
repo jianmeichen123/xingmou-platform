@@ -1,0 +1,244 @@
+#set($mapperClass=$name.getMapperClassName($table))
+
+#set($mapperVarName=$name.getMapperVarName($table))
+
+#set($modelClass=$name.getModelClassName($table))
+#set($modelVar=$name.getModelVarName($table))
+#set($bizClass=$name.getBizClassName($table))
+#set($primaryKeyVarName=$code.getVarName($table.primaryKey.memberColumns[0].propertyName))
+#set($primaryKeyParameter=$code.getParameters($table.primaryKey.memberColumns))
+#set($messageQueryClass=$name.getMessageQueryClassName($table))
+#set($messageQueryVar=$name.getMessageQueryVarName($table))
+#set($modelQueryClass=$name.getModelQueryClassName($table))
+#set($modelQueryVar=$name.getModelQueryVarName($table))
+package ${mybatisgen.p.get("basePackage")}.biz;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
+import $name.getFullMapperClassName($table);
+
+import ${mybatisgen.p.get("basePackage")}.biz.common.Message;
+import ${mybatisgen.p.get("basePackage")}.biz.common.MessageStatus;
+import ${mybatisgen.p.get("basePackage")}.biz.common.QueryResult;
+import ${name.getFullModelClassName($table)};
+import ${name.getFullModelQueryClassName($table)};
+
+@Service("$name.getBizVarName($table)")
+public class $bizClass  {
+
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(${bizClass}.class);
+
+    @Autowired
+	$mapperClass $mapperVarName;
+
+
+
+	#if($table.hasDeleteColumn())
+	public Message<Integer> delete$modelClass($primaryKeyParameter,String operatorId){
+		Message<Integer> message = new Message<Integer>();
+		try {
+			int result = ${mapperVarName}.logicalDeleteByPrimaryKey($primaryKeyVarName,operatorId);
+			message.setData(result);
+
+		} catch (Exception e) {
+			LOGGER.error("delete","删除${table.getDisplayName()}失败", e);
+			message.setMessageStatus(MessageStatus.SYS_ERROR);
+		}
+		return message;
+	}
+	#else
+
+	public Message<Integer> delete$modelClass($primaryKeyParameter){
+		Message<Integer> message = new Message<Integer>();
+		try {
+
+			int result = ${mapperVarName}.deleteByPrimaryKey($primaryKeyVarName);
+			message.setData(result);
+
+		} catch (Exception e) {
+			LOGGER.error("delete","删除失败", e);
+			message.setMessageStatus(MessageStatus.SYS_ERROR);
+		}
+		return message;
+	}
+	#end
+
+
+    public Message<${table.primaryColumn.javaType}> create$modelClass($modelClass $modelVar){
+		Message<${table.primaryColumn.javaType}> message = new Message<${table.primaryColumn.javaType}>();
+		try {
+			#if($table.hasUniqueIndex())
+			$modelClass same = null;
+			#end
+			#foreach($index in ${table.indexes})
+        	#if($index.isUnique())
+        	same = ${mapperVarName}.${sql.getIndexSelectName($index)}(${code.getParameterValues($modelVar,$index.memberColumns)});
+			if(same!=null){
+				message.setMessageStatus(MessageStatus.SAME_DATA_EXISTS, "TODO：这里请写清楚");
+				return message;
+			}
+			#end
+			#end
+			${mapperVarName}.insert( $modelVar );
+			message.setData(${modelVar}.getId());
+
+		} catch (Exception e) {
+			LOGGER.error("create$modelClass","创建${table.getDisplayName()}失败", e);
+			message.setMessageStatus(MessageStatus.SYS_ERROR);
+		}
+		return message;
+	}
+	public Message<Integer> update$modelClass($modelClass $modelVar){
+		Message<Integer> message = new Message<Integer>();
+		try {
+
+			$modelClass ${modelVar}Last = ${mapperVarName}.selectByPrimaryKeyForUpdate( ${modelVar}.${table.primaryColumn.getter}() );
+			if( ${modelVar}Last == null){
+				message.setMessageStatus(MessageStatus.DATA_NOT_EXISTS, "TODO：这里请写清楚");
+				return message;
+			}
+
+			#if($table.hasUniqueIndex())
+			$modelClass same = null;
+			#end
+			#foreach($index in ${table.indexes})
+        	#if($index.isUnique())
+        	same = ${mapperVarName}.${sql.getIndexSelectName($index)}(${code.getParameterValues($modelVar,$index.memberColumns)});
+			if(same!=null && !same.${table.primaryColumn.getter}().equals(${modelVar}.${table.primaryColumn.getter}())){
+				message.setMessageStatus(MessageStatus.SAME_DATA_EXISTS, "TODO：这里请写清楚");
+				return message;
+			}
+			#end
+			#end
+			int result = ${mapperVarName}.updateByPrimaryKey( $modelVar );
+			message.setData(result);
+
+		} catch (Exception e) {
+			LOGGER.error("update$modelClass","更新${table.getDisplayName()}失败", e);
+			message.setMessageStatus(MessageStatus.SYS_ERROR);
+		}
+		return message;
+	}
+
+	#if($table.hasStatusColumn())
+	public Message<Integer> changeStatus($table.primaryColumn.javaType $table.primaryColumn.propertyName,$table.statusColumn.javaType $table.statusColumn.propertyName,String operatorId){
+		Message<Integer> message = new Message<Integer>();
+		try {
+
+			$modelClass ${modelVar}Last = ${mapperVarName}.selectByPrimaryKeyForUpdate($table.primaryColumn.propertyName );
+			if( ${modelVar}Last == null){
+				message.setMessageStatus(MessageStatus.DATA_NOT_EXISTS, "TODO：这里请写清楚");
+				return message;
+			}
+
+			//TODO：其他判断
+
+			int result = ${mapperVarName}.changeStatus($table.primaryColumn.propertyName,status,operatorId);
+			message.setData(result);
+
+		} catch (Exception e) {
+			LOGGER.error("changeStatus","更新${table.getDisplayName()}状态失败", e);
+			message.setMessageStatus(MessageStatus.SYS_ERROR);
+		}
+		return message;
+	}
+	#end
+	public Message<$modelClass> get$modelClass( $primaryKeyParameter ){
+		Message<$modelClass> message = new Message<$modelClass>();
+		try {
+			$modelClass $modelVar = ${mapperVarName}.selectByPrimaryKey( $primaryKeyVarName );
+			message.setData($modelVar);
+
+		} catch (Exception e) {
+			LOGGER.error("get$modelClass","根据主键查询${table.getDisplayName()}失败", e);
+			message.setMessageStatus(MessageStatus.SYS_ERROR);
+		}
+		return message;
+	}
+
+    public Message<List<$modelClass>> getAll$modelClass(){
+
+		Message<List<$modelClass>> message = new Message<List<$modelClass>>();
+		try {
+			List<$modelClass> ${modelVar}List = ${mapperVarName}.selectAll();
+			message.setData( ${modelVar}List);
+		} catch (Exception e) {
+			LOGGER.error("getAll$modelClass","查询全部${table.getDisplayName()}失败", e);
+			message.setMessageStatus(MessageStatus.SYS_ERROR);
+		}
+		return message;
+	}
+
+	public Message<QueryResult<${modelClass}>> query${modelClass}(${modelQueryClass} ${modelQueryVar}) {
+		Message<QueryResult<${modelClass}>> message = new Message<QueryResult<${modelClass}>>();
+		try {
+			QueryResult<${modelClass}> queryResult = new QueryResult<${modelClass}>();
+			PageHelper.startPage(${modelQueryVar}.getPageIndex(), ${modelQueryVar}.getPageSize());
+			List<${modelClass}> ${modelVar}List = ${mapperVarName}.query${modelClass}(${modelQueryVar});
+			PageInfo<${modelClass}> pageInfo = new PageInfo<${modelClass}>(${modelVar}List);
+			queryResult.setPages(pageInfo.getPages());
+			queryResult.setTotal(pageInfo.getTotal());
+			queryResult.setRecords(${modelVar}List);
+			message.setData(queryResult);
+		} catch (Exception e) {
+			LOGGER.error("query${modelClass}", "分页查询${table.getDisplayName()}失败", e);
+			message.setMessageStatus(MessageStatus.SYS_ERROR);
+		}
+		return message;
+	}
+
+    	public Message<List<${modelClass}>> query(${modelQueryClass} ${modelQueryVar}) {
+    		Message<List<${modelClass}>> message = new Message<List<${modelClass}>>();
+    		try {
+    			List<${modelClass}> ${modelVar}List = ${mapperVarName}.query${modelClass}(${modelQueryVar});
+    			message.setData(${modelVar}List);
+    		} catch (Exception e) {
+    			LOGGER.error("query${modelClass}", "多条件查询${table.getDisplayName()}失败", e);
+    			message.setMessageStatus(MessageStatus.SYS_ERROR);
+    		}
+    		return message;
+    	}
+
+	#foreach($index in $table.indexes)
+	#if($index.isUnique())
+
+	public Message<$modelClass> ${sql.getIndexBizName($index)}(${code.getParameters($index.memberColumns)}){
+		Message<$modelClass> message = new Message<$modelClass>();
+		try {
+			$modelClass ${modelVar} = ${mapperVarName}.${sql.getIndexSelectName($index)}(${code.getParameterValues($index.memberColumns)});
+			message.setData( ${modelVar});
+		} catch (Exception e) {
+			LOGGER.error("${sql.getIndexBizName($index)}","查询${table.getDisplayName()}失败", e);
+			message.setMessageStatus(MessageStatus.SYS_ERROR);
+		}
+		return message;
+	}
+	#else
+
+	public Message<List<$modelClass>> ${sql.getIndexBizName($index)}(${code.getParameters($index.memberColumns)}){
+
+		Message<List<$modelClass>> message = new Message<List<$modelClass>>();
+		try {
+			List<$modelClass> ${modelVar}List = ${mapperVarName}.${sql.getIndexSelectName($index)}(${code.getParameterValues($index.memberColumns)});
+			message.setData(${modelVar}List);
+		} catch (Exception e) {
+			LOGGER.error("${sql.getIndexBizName($index)}","查询${table.getDisplayName()}失败", e);
+			message.setMessageStatus(MessageStatus.SYS_ERROR);
+		}
+		return message;
+	}
+	#end
+	#end
+
+
+}

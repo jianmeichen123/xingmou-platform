@@ -203,4 +203,14 @@ public class ProjectFacedeImpl implements ProjectFacede {
         return messageInfo;
     }
 
+	@Override
+	public MessageInfo<QueryResultInfo<ProjectInfo>> queryCompetationlist(ProjectQueryInfo projectQueryInfo) {
+		ProjectQuery projectQuery = ProjectConvertor.toProjectQuery(projectQueryInfo);
+		Message<QueryResult<Project>> message = projectBiz.queryCompetationlist(projectQuery);
+		MessageInfo<QueryResultInfo<ProjectInfo>> messageInfo = new MessageInfo<QueryResultInfo<ProjectInfo>>();
+		QueryResultInfo<ProjectInfo> queryResultInfo = ProjectConvertor.toQueryResultInfo(message.getData());
+		messageInfo.setData(queryResultInfo);
+		return messageInfo;
+	}
+
 }

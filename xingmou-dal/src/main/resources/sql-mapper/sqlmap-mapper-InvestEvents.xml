@@ -166,9 +166,9 @@
 								<if test="districtName!=null and districtName!=''">AND district_name = #{districtName,jdbcType=VARCHAR}</if>
 								<if test="districtSubId!=null">AND district_sub_id = #{districtSubId,jdbcType=BIGINT}</if>
 								<if test="districtSubName!=null and districtSubName!=''">AND district_sub_name = #{districtSubName,jdbcType=VARCHAR}</if>
-								<if test="industryId!=null">AND industry_id = #{industryId,jdbcType=BIGINT}</if>
+								<if test="industryId!=null">AND a.industry_id = #{industryId,jdbcType=BIGINT}</if>
 								<if test="industryName!=null and industryName!=''">AND industry_name = #{industryName,jdbcType=VARCHAR}</if>
-								<if test="industrySubId!=null">AND industry_sub_id = #{industrySubId,jdbcType=BIGINT}</if>
+								<if test="industrySubId!=null">AND a.industry_sub_id = #{industrySubId,jdbcType=BIGINT}</if>
 								<if test="industrySubName!=null and industrySubName!=''">AND industry_sub_name = #{industrySubName,jdbcType=VARCHAR}</if>
 								<if test="investPer!=null and investPer!=''">AND invest_per = #{investPer,jdbcType=VARCHAR}</if>
 								<if test="investfirmNames!=null and investfirmNames!=''">AND investfirm_names = #{investfirmNames,jdbcType=VARCHAR}</if>

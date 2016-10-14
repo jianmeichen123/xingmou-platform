@@ -34,4 +34,7 @@ public interface ProjectDAO {
 	List<Project> selectBySourceId(@Param("sourceId") Long sourceId);
 
 	List<Project> searchProject(ProjectQuery projectQuery);
+
+
+	List<Project> queryCompetationlist(ProjectQuery projectQuery);
 }

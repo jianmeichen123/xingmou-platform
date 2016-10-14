@@ -124,6 +124,24 @@ public class IndustryFirstDataYearBiz  {
 		return message;
 	}
 
+
+	public Message<QueryResult<IndustryFirstDataYear>> queryIndustryDataYear(IndustryFirstDataYearQuery industryFirstDataYearQuery) {
+		Message<QueryResult<IndustryFirstDataYear>> message = new Message<QueryResult<IndustryFirstDataYear>>();
+		try {
+			QueryResult<IndustryFirstDataYear> queryResult = new QueryResult<IndustryFirstDataYear>();
+			PageHelper.startPage(industryFirstDataYearQuery.getPageIndex(), industryFirstDataYearQuery.getPageSize());
+			List<IndustryFirstDataYear> industryFirstDataYearList = industryFirstDataYearDAO.queryIndustryDataYear(industryFirstDataYearQuery);
+			PageInfo<IndustryFirstDataYear> pageInfo = new PageInfo<IndustryFirstDataYear>(industryFirstDataYearList);
+			queryResult.setPages(pageInfo.getPages());
+			queryResult.setTotal(pageInfo.getTotal());
+			queryResult.setRecords(industryFirstDataYearList);
+			message.setData(queryResult);
+		} catch (Exception e) {
+			LOGGER.error("queryIndustryFirstDataYear", "分页查询IndustryFirstDataYear失败", e);
+			message.setMessageStatus(MessageStatus.SYS_ERROR);
+		}
+		return message;
+	}
     	public Message<List<IndustryFirstDataYear>> query(IndustryFirstDataYearQuery industryFirstDataYearQuery) {
     		Message<List<IndustryFirstDataYear>> message = new Message<List<IndustryFirstDataYear>>();
     		try {

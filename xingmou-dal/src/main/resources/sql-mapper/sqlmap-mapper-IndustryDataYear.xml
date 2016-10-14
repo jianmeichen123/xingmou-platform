@@ -116,13 +116,13 @@
 	<select id="selectAll" resultMap="BaseResultMap">
 		SELECT
 		<include refid="selectFields" />
-		FROM dm_industry_data_year
+		FROM dm_chart_data_industry_year
 	</select>
 	
 	<select id="queryIndustryDataYear" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.IndustryDataYearQuery">
 		SELECT
 		<include refid="selectFields" />
-		FROM dm_industry_data_year
+		FROM dm_chart_data_industry_year
 		<include refid="queryWhereAndOrder" />
 	</select>
 	
@@ -135,9 +135,9 @@
 										#{item}
 									</foreach></if>
 
-								<if test="industryId!=null">AND industry_id = #{industryId,jdbcType=INTEGER}</if>
+								<if test="industryId!=null and industryId > 0">AND industry_id = #{industryId,jdbcType=INTEGER}</if>
 								<if test="industryName!=null and industryName!=''">AND industry_name = #{industryName,jdbcType=VARCHAR}</if>
-								<if test="industrySubId!=null">AND industry_sub_id = #{industrySubId,jdbcType=INTEGER}</if>
+								<if test="industrySubId!=null and industrySubId > 0">AND industry_sub_id = #{industrySubId,jdbcType=INTEGER}</if>
 								<if test="industrySubName!=null and industrySubName!=''">AND industry_sub_name = #{industrySubName,jdbcType=VARCHAR}</if>
 								<if test="marketMoney!=null">AND market_money = #{marketMoney,jdbcType=DECIMAL}</if>
 								<if test="marketMoneyRate!=null">AND market_money_rate = #{marketMoneyRate,jdbcType=DOUBLE}</if>
@@ -166,14 +166,14 @@
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
 		SELECT
 		<include refid="selectFields" />
-		FROM dm_industry_data_year
+		FROM dm_chart_data_industry_year
 		WHERE id = #{id,jdbcType=BIGINT} 
 	</select>
 
 	<select id="selectByPrimaryKeyForUpdate" resultMap="BaseResultMap" parameterType="java.lang.Long">
 		SELECT
 		<include refid="selectFields" />
-		FROM dm_industry_data_year
+		FROM dm_chart_data_industry_year
 		WHERE id = #{id,jdbcType=BIGINT} 
 		FOR UPDATE
 	</select>
@@ -181,7 +181,7 @@
 	<select id="selectByIndustryIdYaar" resultMap="BaseResultMap">
 		SELECT
 		<include refid="selectFields" />
-		FROM dm_industry_data_year
+		FROM dm_chart_data_industry_year
 		WHERE  industry_id = #{industryId,jdbcType=INTEGER}
 		AND yaar in
         <foreach item="item" index="index" collection="yaars" open="(" separator="," close=")">
@@ -192,25 +192,28 @@
 	<select id="selectByYaarIndustrySubId" resultMap="BaseResultMap">
 		SELECT
 		<include refid="selectFields" />
-		FROM dm_industry_data_year
+		FROM dm_chart_data_industry_year
 		WHERE  yaar in
         <foreach item="item" index="index" collection="yaars" open="(" separator="," close=")">
             #{item}
         </foreach>
-        AND industry_sub_id = #{industrySubId,jdbcType=INTEGER}
+		<if test="industrySubId != null and industrySubId > 0">
+			AND industry_sub_id = #{industrySubId,jdbcType=INTEGER}
+		</if>
+
 	</select>
 			
 	<select id="selectByIndustryId" resultMap="BaseResultMap">
 		SELECT
 		<include refid="selectFields" />
-		FROM dm_industry_data_year
+		FROM dm_chart_data_industry_year
 		WHERE  industry_id = #{industryId,jdbcType=INTEGER}
 	</select>
 			
 	<select id="selectByYaar" resultMap="BaseResultMap">
 		SELECT
 		<include refid="selectFields" />
-		FROM dm_industry_data_year
+		FROM dm_chart_data_industry_year
 		WHERE  yaar in
 		<foreach item="item" index="index" collection="yaars" open="(" separator="," close=")">
 			#{item}

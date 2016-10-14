@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.xm.report.dao.ChartEventIndustrySubRoundYearDAO">
+	<resultMap id="BaseResultMap" type="com.gi.xm.report.pojo.ChartEventIndustrySubRoundYear">
+					<id column="id" property="id" jdbcType="BIGINT" />
+								<result column="year" property="year" jdbcType="INTEGER" />
+								<result column="industry_id" property="industryId" jdbcType="INTEGER" />
+								<result column="industry_name" property="industryName" jdbcType="VARCHAR" />
+								<result column="industry_sub_id" property="industrySubId" jdbcType="INTEGER" />
+								<result column="industry_sub_name" property="industrySubName" jdbcType="VARCHAR" />
+								<result column="round_id" property="roundId" jdbcType="INTEGER" />
+								<result column="round_name" property="roundName" jdbcType="VARCHAR" />
+								<result column="invested_num" property="investedNum" jdbcType="INTEGER" />
+								<result column="invested_money" property="investedMoney" jdbcType="BIGINT" />
+								<result column="project_invested_num" property="projectInvestedNum" jdbcType="INTEGER" />
+								<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+						</resultMap>
+
+
+	<insert id="insert" parameterType="com.gi.xm.report.pojo.ChartEventIndustrySubRoundYear" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO dm_chart_event_industry_sub_round_year (
+			year,
+			industry_id,
+			industry_name,
+			industry_sub_id,
+			industry_sub_name,
+			round_id,
+			round_name,
+			invested_num,
+			invested_money,
+			project_invested_num,
+			add_time,
+			update_time
+		)
+		VALUES
+		(
+			#{year,jdbcType=INTEGER},
+			#{industryId,jdbcType=INTEGER},
+			#{industryName,jdbcType=VARCHAR},
+			#{industrySubId,jdbcType=INTEGER},
+			#{industrySubName,jdbcType=VARCHAR},
+			#{roundId,jdbcType=INTEGER},
+			#{roundName,jdbcType=VARCHAR},
+			#{investedNum,jdbcType=INTEGER},
+			#{investedMoney,jdbcType=BIGINT},
+			#{projectInvestedNum,jdbcType=INTEGER},
+			#{addTime,jdbcType=TIMESTAMP},
+			 UNIX_TIMESTAMP()
+		)
+	</insert>
+
+	<sql id="selectFields">
+	id,year,industry_id,industry_name,industry_sub_id,industry_sub_name,round_id,round_name,invested_num,invested_money,project_invested_num
+	</sql>
+	
+			
+	<select id="selectByIndustryId" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_chart_event_industry_sub_round_year
+		WHERE  industry_id = #{industryId,jdbcType=INTEGER}
+	</select>
+			
+	<select id="selectByRoundId" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_chart_event_industry_sub_round_year
+		WHERE  round_id = #{roundId,jdbcType=INTEGER}
+	</select>
+			
+	<select id="selectByYearIndustryId" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_chart_event_industry_sub_round_year
+		WHERE  year in
+		<foreach item="item" index="index" collection="years" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		<if test="industryId !=null" >
+			AND
+			industry_id = #{industryId,jdbcType=INTEGER}
+		</if>
+	</select>
+		
+</mapper>

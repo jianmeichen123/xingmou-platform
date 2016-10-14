@@ -1,0 +1,100 @@
+#set($mapperClass=$name.getMapperClassName($table))
+
+#set($mapperVarName=$name.getMapperVarName($table))
+
+#set($modelClass=$name.getModelClassName($table))
+#set($modelVar=$name.getModelVarName($table))
+#set($bizClass=$name.getBizClassName($table))
+#set($primaryKeyVarName=$code.getVarName($table.primaryKey.memberColumns[0].propertyName))
+#set($primaryKeyParameter=$code.getParameters($table.primaryKey.memberColumns))
+#set($messageInfoQueryClass=$name.getMessageInfoQueryClassName($table))
+#set($messageInfoQueryVar=$name.getMessageInfoQueryVarName($table))
+#set($modelQueryClass=$name.getModelQueryClassName($table))
+#set($modelQueryVar=$name.getModelQueryVarName($table))
+package ${mybatisgen.p.get("basePackage")}.biz;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
+import $name.getFullMapperClassName($table);
+
+import com.gi.xm.platform.view.common.MessageInfo;
+import ${name.getFullModelClassName($table)};
+
+@Service("$name.getBizVarName($table)")
+public class $bizClass  {
+
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(${bizClass}.class);
+
+    @Autowired
+	$mapperClass $mapperVarName;
+
+
+
+    public MessageInfo<${table.primaryColumn.javaType}> create$modelClass($modelClass $modelVar){
+		MessageInfo<${table.primaryColumn.javaType}> messageInfo = new MessageInfo<${table.primaryColumn.javaType}>();
+		try {
+			#if($table.hasUniqueIndex())
+			$modelClass same = null;
+			#end
+			#foreach($index in ${table.indexes})
+        	#if($index.isUnique())
+        	same = ${mapperVarName}.${sql.getIndexSelectName($index)}(${code.getParameterValues($modelVar,$index.memberColumns)});
+			if(same!=null){
+				messageInfo.setMessageInfoStatus(MessageInfoStatus.SAME_DATA_EXISTS, "TODO：这里请写清楚");
+				return messageInfo;
+			}
+			#end
+			#end
+			${mapperVarName}.insert( $modelVar );
+			messageInfo.setData(${modelVar}.getId());
+
+		} catch (Exception e) {
+			LOGGER.error("create$modelClass","创建${table.getDisplayName()}失败", e);
+			messageInfo.setMessageInfoStatus(MessageInfoStatus.SYS_ERROR);
+		}
+		return messageInfo;
+	}
+
+	#foreach($index in $table.indexes)
+	#if($index.isUnique())
+
+	public MessageInfo<$modelClass> ${sql.getIndexBizName($index)}(${code.getParameters($index.memberColumns)}){
+		MessageInfo<$modelClass> messageInfo = new MessageInfo<$modelClass>();
+		try {
+			$modelClass ${modelVar} = ${mapperVarName}.${sql.getIndexSelectName($index)}(${code.getParameterValues($index.memberColumns)});
+			messageInfo.setData( ${modelVar});
+		} catch (Exception e) {
+			LOGGER.error("${sql.getIndexBizName($index)}","查询${table.getDisplayName()}失败", e);
+			messageInfo.setMessageInfoStatus(MessageInfoStatus.SYS_ERROR);
+		}
+		return messageInfo;
+	}
+	#else
+
+	public MessageInfo<List<$modelClass>> ${sql.getIndexBizName($index)}(${code.getParameters($index.memberColumns)}){
+
+		MessageInfo<List<$modelClass>> messageInfo = new MessageInfo<List<$modelClass>>();
+		try {
+			List<$modelClass> ${modelVar}List = ${mapperVarName}.${sql.getIndexSelectName($index)}(${code.getParameterValues($index.memberColumns)});
+			messageInfo.setData(${modelVar}List);
+		} catch (Exception e) {
+			LOGGER.error("${sql.getIndexBizName($index)}","查询${table.getDisplayName()}失败", e);
+			messageInfo.setMessageInfoStatus(MessageInfoStatus.SYS_ERROR);
+		}
+		return messageInfo;
+	}
+	#end
+	#end
+
+
+}

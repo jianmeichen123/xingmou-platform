@@ -21,8 +21,9 @@ public interface IndustryFirstDataYearFacede {
     MessageInfo<List<IndustryFirstDataYearInfo>> getAllIndustryFirstDataYear();
 			
     MessageInfo<QueryResultInfo<IndustryDataYearInfo>> queryIndustryFirstDataYear(IndustryFirstDataYearQueryInfo industryFirstDataYearQueryInfo);
-	
-		
+	MessageInfo<QueryResultInfo<IndustryDataYearInfo>> queryIndustryDataYear(IndustryFirstDataYearQueryInfo industryFirstDataYearQueryInfo);
+
+
 	MessageInfo<List<IndustryDataYearInfo>> getListByIndustryIdYaar(Integer industryId, Integer[] yaars);
 			
 	MessageInfo<List<IndustryFirstDataYearInfo>> getListByYaar(Integer[] yaars);

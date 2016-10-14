@@ -67,7 +67,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
         }
         setCacheSessionId("fx", u, uid);
         setCookie(response,uid,"fx");
-        return "login";
+        return "redirect:" + xmIndex;
     }
 
     /**

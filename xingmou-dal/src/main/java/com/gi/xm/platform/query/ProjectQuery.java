@@ -88,6 +88,8 @@ public class ProjectQuery extends Query {
 
 	private Long[] districtIds;
 
+    private Long[] districtSubIds;
+
 	private Long[] industryIds;
 
 	private Long[] industrySubIds;
@@ -430,5 +432,13 @@ public class ProjectQuery extends Query {
 
     public void setCreateDateEnd(String createDateEnd) {
         this.createDateEnd = createDateEnd;
+    }
+
+    public Long[] getDistrictSubIds() {
+        return districtSubIds;
+    }
+
+    public void setDistrictSubIds(Long[] districtSubIds) {
+        this.districtSubIds = districtSubIds;
     }
 }

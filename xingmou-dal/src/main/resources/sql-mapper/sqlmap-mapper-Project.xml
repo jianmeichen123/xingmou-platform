@@ -290,11 +290,32 @@
                     #{item}
                 </foreach>
             </if>
-            <if test="districtIds!=null">
+            <if test="districtIds!=null and districtSubIds == null ">
                 AND district_id in
                 <foreach item="item" index="index" collection="districtIds" open="(" separator="," close=")">
                     #{item}
                 </foreach>
+            </if>
+            <if test="districtIds==null and districtSubIds != null ">
+                AND district_sub_id in
+                <foreach item="item" index="index" collection="districtSubIds" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="districtIds != null and districtSubIds != null ">
+                AND
+                (
+                district_id in
+                <foreach item="item" index="index" collection="districtIds" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+                OR
+                district_sub_id in
+                <foreach item="item" index="index" collection="districtSubIds" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+
+                )
             </if>
             <if test="newestEventRoundIds!=null">
                 AND newest_event_round_id in

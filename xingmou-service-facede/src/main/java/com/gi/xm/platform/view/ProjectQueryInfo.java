@@ -92,6 +92,8 @@ public class ProjectQueryInfo extends QueryInfo {
 
     private Long[] industryIds;
 
+    private Long[] districtSubIds;
+
     private Long[] industrySubIds;
 
     private String createDateStart;
@@ -441,5 +443,13 @@ public class ProjectQueryInfo extends QueryInfo {
 
     public String getSearchFields() {
         return searchFields;
+    }
+
+    public Long[] getDistrictSubIds() {
+        return districtSubIds;
+    }
+
+    public void setDistrictSubIds(Long[] districtSubIds) {
+        this.districtSubIds = districtSubIds;
     }
 }

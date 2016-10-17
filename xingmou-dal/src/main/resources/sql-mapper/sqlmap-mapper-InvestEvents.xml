@@ -201,12 +201,13 @@
 			die.`investfirm_names`, die.`industry_name`, die.`industry_sub_name`   
 		FROM 
 			dm_invest_events_investfirm  
-				diei  
-			LEFT JOIN 
+				diei
+		LEFT JOIN
 				dm_invest_events  die ON diei.`event_id` = die.`id` 
 		WHERE 
 			diei.`investfirm_id` = #{id}
-		
+		ORDER BY
+			die.`invest_date` desc
 	</select>
 
 

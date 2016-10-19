@@ -46,18 +46,18 @@
 		<where>
 			<if test="id!=null">AND id = #{id,jdbcType=INTEGER}</if>
 
-			<if test="industryIdList!=null">AND a.`industry_id` in
-				<foreach item="item" index="index" collection="industryIdList" open="(" separator="," close=")">
+			<if test="industryIds!=null">AND a.`industry_id` in
+				<foreach item="item" index="index" collection="industryIds" open="(" separator="," close=")">
 					#{item}
 				</foreach>
 			</if>
-			<if test="roundIdList!=null">AND a.`round_id` in
-				<foreach item="item" index="index" collection="roundIdList" open="(" separator="," close=")">
+			<if test="newestEventRoundIds!=null">AND a.`round_id` in
+				<foreach item="item" index="index" collection="newestEventRoundIds" open="(" separator="," close=")">
 					#{item}
 				</foreach>
 			</if>
 			<if test="investfirmId!=null">AND investfirm_id = #{investfirmId,jdbcType=BIGINT}</if>
-			<if test="investfirmName!=null and investfirmName!=''">AND c.investfirm_name = #{investfirmName,jdbcType=VARCHAR}</if>
+			<if test="investfirmName!=null and investfirmName!=''">AND c.investfirm_name like CONCAT('%',#{investfirmName,jdbcType=VARCHAR},'%' )</if>
 			<if test="investfirmLink!=null and investfirmLink!=''">AND investfirm_link = #{investfirmLink,jdbcType=VARCHAR}</if>
 			<if test="investNum!=null">AND invest_num = #{investNum,jdbcType=INTEGER}</if>
 			<if test="investMoney!=null">AND invest_money = #{investMoney,jdbcType=BIGINT}</if>

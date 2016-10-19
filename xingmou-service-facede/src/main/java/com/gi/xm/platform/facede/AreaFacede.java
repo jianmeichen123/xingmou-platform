@@ -16,10 +16,14 @@ public interface AreaFacede {
 	MessageInfo<Integer> updateArea(AreaInfo areaInfo);
 		
 	MessageInfo<AreaInfo> getArea(Long id);
-		
+
+    /**
+     * 获取全部领域
+     * @return
+     */
     MessageInfo<List<AreaInfo>> getAllArea();
 			
-    MessageInfo<QueryResultInfo<AreaInfo>> queryArea(AreaQueryInfo areaQueryInfo);
+    //MessageInfo<QueryResultInfo<AreaInfo>> queryArea(AreaQueryInfo areaQueryInfo);
 	
 	
 

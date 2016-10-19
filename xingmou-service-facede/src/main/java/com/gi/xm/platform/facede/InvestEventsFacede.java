@@ -19,7 +19,12 @@ public interface InvestEventsFacede {
 	MessageInfo<InvestEventsInfo> getInvestEvents(Long id);
 		
     MessageInfo<List<InvestEventsInfo>> getAllInvestEvents();
-			
+
+    /**
+     *
+     * @param investEventsQueryInfo
+     * @return
+     */
     MessageInfo<QueryResultInfo<InvestEventsInfo>> queryInvestEvents(InvestEventsQueryInfo investEventsQueryInfo);
     List<InvestEventsInfo>  queryProject(InvestEventsQueryInfo investEventsQueryInfo);
 

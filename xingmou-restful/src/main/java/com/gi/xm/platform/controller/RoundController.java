@@ -57,6 +57,13 @@ public class RoundController {
 		return messageInfo;
 	}
 
+	@RequestMapping("getInvestedRounds")
+	@ResponseBody
+	public MessageInfo<List<RoundInfo>> getInvestedRounds(){
+		MessageInfo<List<RoundInfo>>  messageInfo = roundFacede.getInvestedRounds();
+		return messageInfo;
+	}
 
-	
+
+
 }

@@ -61,7 +61,11 @@
         <include refid="selectFields"/>
         FROM dw_v_round
     </select>
-
+    <select id="selectRounds" resultMap="BaseResultMap">
+        SELECT
+        <include refid="selectFields"/>
+        FROM dw_v_round WHERE TYPE =1 AND parent_id!=0
+    </select>
     <select id="queryRound" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.RoundQuery">
         SELECT
         <include refid="selectFields"/>

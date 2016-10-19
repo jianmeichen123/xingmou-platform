@@ -18,7 +18,7 @@ public interface RoundFacede {
 	MessageInfo<RoundInfo> getRound(Integer id);
 		
     MessageInfo<List<RoundInfo>> getAllRound();
-			
+    MessageInfo<List<RoundInfo>> getInvestedRounds();
     MessageInfo<QueryResultInfo<RoundInfo>> queryRound(RoundQueryInfo roundQueryInfo);
 	
 	

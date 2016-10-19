@@ -34,7 +34,7 @@
 
 	<select id="queryInvestfirmsData" resultMap="BaseResultMap" parameterType="com.gi.xm.report.pojo.InvestfirmsData">
 		select
-		c.`id`,c.`investfirm_id`,c.`investfirm_link`,c.`invest_num`,c.`invest_money`,c.`invest_industry`,c.`invest_round`,c.`invest_month_rate`,c.`newest_invest_projects`
+		c.`id`,c.`investfirm_id`, c.investfirm_name,c.`investfirm_link`,c.`invest_num`,c.`invest_money`,c.`invest_industry`,c.`invest_round`,c.`invest_month_rate`,c.`newest_invest_projects`
 		from edw2.dm_invest_events a
 		left join edw2.dm_invest_events_investfirm b on a.id=b.`event_id`
 		left join edw2.dm_investfirms_data c on b.`investfirm_id`= c.`investfirm_id`
@@ -57,7 +57,7 @@
 				</foreach>
 			</if>
 			<if test="investfirmId!=null">AND investfirm_id = #{investfirmId,jdbcType=BIGINT}</if>
-			<if test="investfirmName!=null and investfirmName!=''">AND investfirm_name = #{investfirmName,jdbcType=VARCHAR}</if>
+			<if test="investfirmName!=null and investfirmName!=''">AND c.investfirm_name = #{investfirmName,jdbcType=VARCHAR}</if>
 			<if test="investfirmLink!=null and investfirmLink!=''">AND investfirm_link = #{investfirmLink,jdbcType=VARCHAR}</if>
 			<if test="investNum!=null">AND invest_num = #{investNum,jdbcType=INTEGER}</if>
 			<if test="investMoney!=null">AND invest_money = #{investMoney,jdbcType=BIGINT}</if>
@@ -103,7 +103,7 @@
 	</select>
 	<select id="top10InvestMoney" resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		select
-              investfirm_id,investfirm_name,invest_money
+              investfirm_id,investfirm_name,invest_money,invest_num
 		     from dm_investfirms_data t
         ORDER BY invest_money desc LIMIT 10
 

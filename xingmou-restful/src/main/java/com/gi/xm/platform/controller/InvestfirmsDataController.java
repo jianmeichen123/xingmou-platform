@@ -11,6 +11,7 @@ import com.gi.xm.report.pojo.Area;
 import com.gi.xm.report.pojo.InvestfirmsData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -27,7 +28,7 @@ public class InvestfirmsDataController {
 
 	@RequestMapping("search")
 	@ResponseBody
-	public MessageInfo<QueryResultInfo<InvestfirmsData>>  queryInvestfirms (InvestfirmsData investfirmsData) {
+	public MessageInfo<QueryResultInfo<InvestfirmsData>>  queryInvestfirms (@RequestBody InvestfirmsData investfirmsData) {
 		if (investfirmsData.getOrder() != null&&investfirmsData.getOrderBy() != null){
 			if (investfirmsData.getOrderBy().equalsIgnoreCase("createDate")){
 				investfirmsData.setOrderBy("create_date");

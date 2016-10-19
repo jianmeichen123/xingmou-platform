@@ -24,7 +24,7 @@ public class InvestfirmsDataController {
 
 	
 
-	@RequestMapping("query")
+	@RequestMapping("search")
 	@ResponseBody
 	public MessageInfo<QueryResultInfo<InvestfirmsData>>  queryInvestfirms (InvestfirmsData investfirmsData) {
 		if (investfirmsData.getOrder() != null&&investfirmsData.getOrderBy() != null){
@@ -40,7 +40,7 @@ public class InvestfirmsDataController {
 				investfirmsData.setOrderBy("create_date");
 			}
 		}
-		
+
 		MessageInfo<QueryResultInfo<InvestfirmsData>> resultMessageInfo = investfirmsDataBiz.queryInvestfirmsData(investfirmsData);
 		return resultMessageInfo;
 	}

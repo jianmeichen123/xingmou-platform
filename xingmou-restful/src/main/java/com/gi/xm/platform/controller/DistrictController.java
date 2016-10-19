@@ -38,6 +38,8 @@ public class DistrictController {
 		return resultMessageInfo;
 	}
 
+/*
+
     @RequestMapping("create")
     @ResponseBody
     public MessageInfo<Integer> createDistrict(DistrictInfo districtInfo){
@@ -51,6 +53,7 @@ public class DistrictController {
 		MessageInfo<Integer> messageInfo =  districtFacede.updateDistrict(districtInfo);
 		return messageInfo;
 	}
+*/
 
     @RequestMapping("get")
     @ResponseBody
@@ -59,12 +62,15 @@ public class DistrictController {
 		return messageInfo;
 	}
 
+/*
+
     @RequestMapping("getAll")
     @ResponseBody
     public MessageInfo<List<DistrictInfo>> getAllDistrict(){
 		MessageInfo<List<DistrictInfo>>  messageInfo = districtFacede.getAllDistrict();
 		return messageInfo;
 	}
+*/
 
 
 		

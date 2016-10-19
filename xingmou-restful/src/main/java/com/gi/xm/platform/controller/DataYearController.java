@@ -24,11 +24,6 @@ public class DataYearController {
 	@Reference(check = false)
 	private DataYearFacede dataYearFacede;
 
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public ModelAndView index() {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		return new ModelAndView("dataYear/index", modelMap);
-	}
 
 	@RequestMapping("query")
 	@ResponseBody
@@ -36,6 +31,7 @@ public class DataYearController {
 		MessageInfo<QueryResultInfo<DataYearInfo>> resultMessageInfo = dataYearFacede.queryDataYear(dataYearQueryInfo);
 		return resultMessageInfo;
 	}
+/*
 
     @RequestMapping("create")
     @ResponseBody
@@ -52,6 +48,7 @@ public class DataYearController {
 		MessageInfo<Integer> messageInfo =  dataYearFacede.updateDataYear(dataYearInfo);
 		return messageInfo;
 	}
+*/
 
     @RequestMapping("get")
     @ResponseBody
@@ -59,6 +56,7 @@ public class DataYearController {
 		MessageInfo<DataYearInfo> messageInfo =  dataYearFacede.getDataYear(id);
 		return messageInfo;
 	}
+/*
 
     @RequestMapping("getAll")
     @ResponseBody
@@ -66,6 +64,7 @@ public class DataYearController {
 		MessageInfo<List<DataYearInfo>>  messageInfo = dataYearFacede.getAllDataYear();
 		return messageInfo;
 	}
+*/
 
 
 		

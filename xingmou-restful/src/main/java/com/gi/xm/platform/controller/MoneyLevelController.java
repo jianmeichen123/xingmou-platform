@@ -25,11 +25,6 @@ public class MoneyLevelController {
 	@Reference(check = false)
 	private MoneyLevelFacede moneyLevelFacede;
 
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public ModelAndView index() {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		return new ModelAndView("moneyLevel/index", modelMap);
-	}
 
 	@RequestMapping("query")
 	@ResponseBody
@@ -37,6 +32,7 @@ public class MoneyLevelController {
 		MessageInfo<QueryResultInfo<MoneyLevelInfo>> resultMessageInfo = moneyLevelFacede.queryMoneyLevel(moneyLevelQueryInfo);
 		return resultMessageInfo;
 	}
+/*
 
     @RequestMapping("create")
     @ResponseBody
@@ -51,6 +47,7 @@ public class MoneyLevelController {
 		MessageInfo<Integer> messageInfo =  moneyLevelFacede.updateMoneyLevel(moneyLevelInfo);
 		return messageInfo;
 	}
+*/
 
     @RequestMapping("get")
     @ResponseBody

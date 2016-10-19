@@ -25,11 +25,6 @@ public class FilesController {
 	@Reference(check = false)
 	private FilesFacede filesFacede;
 
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public ModelAndView index() {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		return new ModelAndView("files/index", modelMap);
-	}
 
 	@RequestMapping("query")
 	@ResponseBody
@@ -37,6 +32,7 @@ public class FilesController {
 		MessageInfo<QueryResultInfo<FilesInfo>> resultMessageInfo = filesFacede.queryFiles(filesQueryInfo);
 		return resultMessageInfo;
 	}
+/*
 
     @RequestMapping("create")
     @ResponseBody
@@ -51,6 +47,7 @@ public class FilesController {
 		MessageInfo<Integer> messageInfo =  filesFacede.updateFiles(filesInfo);
 		return messageInfo;
 	}
+*/
 
     @RequestMapping("get")
     @ResponseBody
@@ -58,6 +55,7 @@ public class FilesController {
 		MessageInfo<FilesInfo> messageInfo =  filesFacede.getFiles(id);
 		return messageInfo;
 	}
+/*
 
     @RequestMapping("getAll")
     @ResponseBody
@@ -65,6 +63,7 @@ public class FilesController {
 		MessageInfo<List<FilesInfo>>  messageInfo = filesFacede.getAllFiles();
 		return messageInfo;
 	}
+*/
 
 
 		

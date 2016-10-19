@@ -37,6 +37,7 @@ public class InvestorAreasController {
 		MessageInfo<QueryResultInfo<InvestorAreasInfo>> resultMessageInfo = investorAreasFacede.queryInvestorAreas(investorAreasQueryInfo);
 		return resultMessageInfo;
 	}
+/*
 
     @RequestMapping("create")
     @ResponseBody
@@ -51,6 +52,7 @@ public class InvestorAreasController {
 		MessageInfo<Integer> messageInfo =  investorAreasFacede.updateInvestorAreas(investorAreasInfo);
 		return messageInfo;
 	}
+*/
 
     @RequestMapping("get")
     @ResponseBody
@@ -59,12 +61,14 @@ public class InvestorAreasController {
 		return messageInfo;
 	}
 
+/*
     @RequestMapping("getAll")
     @ResponseBody
     public MessageInfo<List<InvestorAreasInfo>> getAllInvestorAreas(){
 		MessageInfo<List<InvestorAreasInfo>>  messageInfo = investorAreasFacede.getAllInvestorAreas();
 		return messageInfo;
 	}
+*/
 
 
 	

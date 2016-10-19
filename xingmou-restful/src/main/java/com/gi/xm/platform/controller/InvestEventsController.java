@@ -23,11 +23,6 @@ public class InvestEventsController {
 	@Reference(check = false)
 	private InvestEventsFacede investEventsFacede;
 
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public ModelAndView index() {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		return new ModelAndView("investEvents/index", modelMap);
-	}
 
 	@RequestMapping("query")
 	@ResponseBody
@@ -35,6 +30,7 @@ public class InvestEventsController {
 		MessageInfo<QueryResultInfo<InvestEventsInfo>> resultMessageInfo = investEventsFacede.queryInvestEvents(investEventsQueryInfo);
 		return resultMessageInfo;
 	}
+/*
 
     @RequestMapping("create")
     @ResponseBody
@@ -49,6 +45,7 @@ public class InvestEventsController {
 		MessageInfo<Integer> messageInfo =  investEventsFacede.updateInvestEvents(investEventsInfo);
 		return messageInfo;
 	}
+*/
 
     @RequestMapping("get")
     @ResponseBody
@@ -56,6 +53,7 @@ public class InvestEventsController {
 		MessageInfo<InvestEventsInfo> messageInfo =  investEventsFacede.getInvestEvents(id);
 		return messageInfo;
 	}
+/*
 
     @RequestMapping("getAll")
     @ResponseBody
@@ -63,6 +61,7 @@ public class InvestEventsController {
 		MessageInfo<List<InvestEventsInfo>>  messageInfo = investEventsFacede.getAllInvestEvents();
 		return messageInfo;
 	}
+*/
 
     @RequestMapping("getEventByInvestfirmId")
 	@ResponseBody

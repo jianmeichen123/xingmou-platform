@@ -25,11 +25,9 @@ public class IndustryFirstDataYearController {
     @Reference
 	private IndustryFirstDataYearFacede industryFirstDataYearFacede;
 
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public ModelAndView index() {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		return new ModelAndView("industryFirstDataYear/index", modelMap);
-	}
+
+/*
+
     @RequestMapping("create")
     @ResponseBody
     public MessageInfo<Long> createIndustryFirstDataYear(IndustryFirstDataYearInfo industryFirstDataYearInfo){
@@ -43,6 +41,7 @@ public class IndustryFirstDataYearController {
 		MessageInfo<Integer> messageInfo =  industryFirstDataYearFacede.updateIndustryFirstDataYear(industryFirstDataYearInfo);
 		return messageInfo;
 	}
+*/
 
     @RequestMapping("get")
     @ResponseBody
@@ -51,13 +50,14 @@ public class IndustryFirstDataYearController {
 		return messageInfo;
 	}
 
+    /*
     @RequestMapping("getAll")
     @ResponseBody
     public MessageInfo<List<IndustryFirstDataYearInfo>> getAllIndustryFirstDataYear(){
 		MessageInfo<List<IndustryFirstDataYearInfo>>  messageInfo = industryFirstDataYearFacede.getAllIndustryFirstDataYear();
 		return messageInfo;
 	}
-
+*/
 
 
 

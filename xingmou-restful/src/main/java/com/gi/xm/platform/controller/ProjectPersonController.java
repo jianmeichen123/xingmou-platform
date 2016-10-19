@@ -30,11 +30,6 @@ public class ProjectPersonController {
 	@Reference(check = false)
 	private ProjectPersonFacede projectPersonFacede;
 
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public ModelAndView index() {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		return new ModelAndView("projectPerson/index", modelMap);
-	}
 
 	@RequestMapping("query")
 	@ResponseBody
@@ -42,6 +37,7 @@ public class ProjectPersonController {
 		MessageInfo<QueryResultInfo<ProjectPersonInfo>> resultMessageInfo = projectPersonFacede.queryProjectPerson(projectPersonQueryInfo);
 		return resultMessageInfo;
 	}
+/*
 
     @RequestMapping("create")
     @ResponseBody
@@ -56,6 +52,7 @@ public class ProjectPersonController {
 		MessageInfo<Integer> messageInfo =  projectPersonFacede.updateProjectPerson(projectPersonInfo);
 		return messageInfo;
 	}
+*/
 
     @RequestMapping("get")
     @ResponseBody
@@ -64,13 +61,7 @@ public class ProjectPersonController {
 		return messageInfo;
 	}
 
-    @RequestMapping("getAll")
-    @ResponseBody
-    public MessageInfo<List<ProjectPersonInfo>> getAllProjectPerson(){
-		MessageInfo<List<ProjectPersonInfo>>  messageInfo = projectPersonFacede.getAllProjectPerson();
-		return messageInfo;
-	}
-    
+
   /*  @RequestMapping("queryPersonByProjectId")
     @ResponseBody
     public MessageInfo<List<ProjectPersonInfo>> queryPersonByProjectId(Integer projectId,Integer type,String orderBy,String order){

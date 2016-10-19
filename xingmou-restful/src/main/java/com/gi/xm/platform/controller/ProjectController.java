@@ -43,15 +43,6 @@ public class ProjectController {
 		return messageInfo;
 	}
 
-    @RequestMapping("getAll")
-    @ResponseBody
-    public MessageInfo<List<ProjectInfo>> getAllProject(){
-		MessageInfo<List<ProjectInfo>>  messageInfo = projectFacede.getAllProject();
-		return messageInfo;
-	}
-
-
-		
     @RequestMapping("getListBySourceId")
     @ResponseBody
 	public MessageInfo<List<ProjectInfo>> getListBySourceId(Long sourceId){

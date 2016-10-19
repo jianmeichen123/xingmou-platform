@@ -9,7 +9,7 @@ import com.gi.xm.platform.view.FilesInfo;
 import com.gi.xm.platform.view.FilesQueryInfo;
 
 public interface FilesFacede {
-		MessageInfo<Integer> deleteFiles(Long id);
+	MessageInfo<Integer> deleteFiles(Long id);
 		
     MessageInfo<Long> createFiles(FilesInfo filesInfo);
 		

@@ -9,7 +9,7 @@ import com.gi.xm.platform.view.AreaInfo;
 import com.gi.xm.platform.view.AreaQueryInfo;
 
 public interface AreaFacede {
-		MessageInfo<Integer> deleteArea(Long id);
+    MessageInfo<Integer> deleteArea(Long id);
 		
     MessageInfo<Long> createArea(AreaInfo areaInfo);
 		

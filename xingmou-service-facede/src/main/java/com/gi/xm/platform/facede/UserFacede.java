@@ -9,7 +9,7 @@ import com.gi.xm.platform.view.UserInfo;
 import com.gi.xm.platform.view.UserQueryInfo;
 
 public interface UserFacede {
-		MessageInfo<Integer> deleteUser(Long id);
+	MessageInfo<Integer> deleteUser(Long id);
 		
     MessageInfo<Long> createUser(UserInfo userInfo);
 		

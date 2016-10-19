@@ -47,8 +47,16 @@ public class DataInfo implements Serializable {
 	 * @Fields updateTime : 
 	 */
 	private Timestamp updateTime;
-		
-    
+	private Integer investfirmNum;
+
+	public Integer getInvestfirmNum() {
+		return investfirmNum;
+	}
+
+	public void setInvestfirmNum(Integer investfirmNum) {
+		this.investfirmNum = investfirmNum;
+	}
+
 	public Integer getId(){
 		return id;
 	}

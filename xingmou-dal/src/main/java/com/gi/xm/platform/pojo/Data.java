@@ -40,7 +40,16 @@ public class Data extends Pojo {
 	 * @Fields investedMoneyPerProject : 单项目融资均额(元)
 	 */
 	private Long investedMoneyPerProject;
-	
+	private Integer investfirmNum;
+
+	public Integer getInvestfirmNum() {
+		return investfirmNum;
+	}
+
+	public void setInvestfirmNum(Integer investfirmNum) {
+		this.investfirmNum = investfirmNum;
+	}
+
 	/**
 	 * @Fields addTime : 
 	 */

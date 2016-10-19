@@ -71,7 +71,7 @@
 
 		</where>
 
-		   group by c.`id`
+		   group by  c.`investfirm_id` HAVING c.investfirm_id is not null
 		<choose>
 			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
 			<otherwise>order by id desc</otherwise>

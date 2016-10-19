@@ -28,4 +28,5 @@ public interface $mapperClass {
 	#end
 	#end
 
+    List<${modelClass}> query${modelClass}($modelQueryClass $modelQueryVar);
 }

@@ -30,6 +30,7 @@
         <module>xingmou-restful</module>
         <module>xingmou-news-manage</module>
         <module>xingmou-user</module>
+        <module>xingmou-service-query-facede</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -105,16 +106,9 @@
 
             <dependency>
                 <groupId>com.gi</groupId>
-                <artifactId>xingmou-service-app-facede</artifactId>
+                <artifactId>xingmou-service-query-facede</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
-
-            <dependency>
-                <groupId>com.gi</groupId>
-                <artifactId>xingmou-service-app</artifactId>
-                <version>1.0-bt-SNAPSHOT</version>
-            </dependency>
-            <!-- 自身模块 start-->
             <dependency>
                 <groupId>cglib</groupId>
                 <artifactId>cglib</artifactId>

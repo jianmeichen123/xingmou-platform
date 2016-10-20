@@ -75,7 +75,15 @@ public class RoundFacedeImpl implements RoundFacede {
 		messageInfo.setData(roundInfoList);
 		return messageInfo;	
 	}
+	@Cacheable(value = "roundInfo",keyGenerator = "wiselyKeyGenerator")
+	public MessageInfo<List<RoundInfo>> getInvestedRounds(){
 
+		Message<List<Round>> message  = roundBiz.getInvestedRounds();
+		MessageInfo<List<RoundInfo>> messageInfo = MessageConvertor.toMessageInfo(message);
+		List<RoundInfo> roundInfoList = RoundConvertor.toRoundInfoList(message.getData());
+		messageInfo.setData(roundInfoList);
+		return messageInfo;
+	}
 	public MessageInfo<QueryResultInfo<RoundInfo>> queryRound(RoundQueryInfo roundQueryInfo) {
 		RoundQuery roundQuery = RoundConvertor.toRoundQuery(roundQueryInfo);
 		Message<QueryResult<Round>> message = roundBiz.queryRound(roundQuery);

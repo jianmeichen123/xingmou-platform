@@ -9,7 +9,9 @@ import com.gi.xm.platform.view.common.QueryResultInfo;
 import com.gi.xm.report.biz.InvestfirmsDataBiz;
 import com.gi.xm.report.pojo.Area;
 import com.gi.xm.report.pojo.InvestfirmsData;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -19,14 +21,14 @@ import java.util.List;
 @RequestMapping("tzjg")
 public class InvestfirmsDataController {
 
-	@Reference(check = false)
+	@Autowired
 	private InvestfirmsDataBiz investfirmsDataBiz;
 
 	
 
 	@RequestMapping("search")
 	@ResponseBody
-	public MessageInfo<QueryResultInfo<InvestfirmsData>>  queryInvestfirms (InvestfirmsData investfirmsData) {
+	public MessageInfo<QueryResultInfo<InvestfirmsData>>  queryInvestfirms (@RequestBody InvestfirmsData investfirmsData) {
 		if (investfirmsData.getOrder() != null&&investfirmsData.getOrderBy() != null){
 			if (investfirmsData.getOrderBy().equalsIgnoreCase("createDate")){
 				investfirmsData.setOrderBy("create_date");
@@ -59,7 +61,7 @@ public class InvestfirmsDataController {
 	}
 
 
-	@RequestMapping("top10InvestNum")
+	@RequestMapping("investfirmField")
 	@ResponseBody
 	public  MessageInfo<List<Area>> investfirmField() {
 		MessageInfo<List<Area>> resultMessageInfo = investfirmsDataBiz.investfirmField();

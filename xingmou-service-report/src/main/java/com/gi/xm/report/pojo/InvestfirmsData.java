@@ -80,6 +80,25 @@ public class InvestfirmsData extends Pojo {
 	//
 	private List<Integer> industryIdList;
 	private List<Integer> roundIdList;
+	private Integer[] newestEventRoundIds;
+
+	private Long[] industryIds;
+
+	public Integer[] getNewestEventRoundIds() {
+		return newestEventRoundIds;
+	}
+
+	public void setNewestEventRoundIds(Integer[] newestEventRoundIds) {
+		this.newestEventRoundIds = newestEventRoundIds;
+	}
+
+	public Long[] getIndustryIds() {
+		return industryIds;
+	}
+
+	public void setIndustryIds(Long[] industryIds) {
+		this.industryIds = industryIds;
+	}
 
 	public List<Integer> getIndustryIdList() {
 		return industryIdList;

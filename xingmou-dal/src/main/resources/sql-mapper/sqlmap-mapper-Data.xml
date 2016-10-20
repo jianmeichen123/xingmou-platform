@@ -9,7 +9,9 @@
 								<result column="invested_money_per_project" property="investedMoneyPerProject" jdbcType="BIGINT" />
 								<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
 								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-						</resultMap>
+		             			<result column="investfirm_num" property="investfirmNum" jdbcType="INTEGER" />
+
+	</resultMap>
 
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		DELETE FROM dm_data
@@ -50,7 +52,7 @@
 		
 		
 	<sql id="selectFields">
-	id,project_num,project_invested_num,invested_money,invested_money_per_project,add_time,update_time
+	id,project_num,project_invested_num,invested_money,investfirm_num,invested_money_per_project,add_time,update_time
 	</sql>
 	
 	<select id="selectAll" resultMap="BaseResultMap">

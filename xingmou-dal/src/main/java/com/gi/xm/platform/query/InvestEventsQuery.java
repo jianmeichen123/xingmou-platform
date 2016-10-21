@@ -67,6 +67,8 @@ public class InvestEventsQuery extends Query {
 	private Integer[] newestEventRoundIds;
 
     private Long[] districtIds;
+    
+    private Long[] districtSubIds;
 
     private Long[] industryIds;
     
@@ -166,6 +168,14 @@ public class InvestEventsQuery extends Query {
 	}
 	public Long getSourceId() {
 		return sourceId;
+	}
+
+	public Long[] getDistrictSubIds() {
+		return districtSubIds;
+	}
+
+	public void setDistrictSubIds(Long[] districtSubIds) {
+		this.districtSubIds = districtSubIds;
 	}
 
 	public void setSourceId(Long sourceId) {

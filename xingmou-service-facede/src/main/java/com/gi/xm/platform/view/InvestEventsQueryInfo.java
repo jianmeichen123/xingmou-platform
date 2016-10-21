@@ -67,6 +67,8 @@ public class InvestEventsQueryInfo extends QueryInfo {
 	private Integer[] newestEventRoundIds;
 
     private Long[] districtIds;
+    
+    private Long[] districtSubIds;
 
     private Long[] industryIds;
     
@@ -171,6 +173,14 @@ public class InvestEventsQueryInfo extends QueryInfo {
 		return moneyNum;
 	}
 	
+	public Long[] getDistrictSubIds() {
+		return districtSubIds;
+	}
+
+	public void setDistrictSubIds(Long[] districtSubIds) {
+		this.districtSubIds = districtSubIds;
+	}
+
 	public void setMoneyNum(BigDecimal moneyNum){
 		this.moneyNum = moneyNum;
 	}

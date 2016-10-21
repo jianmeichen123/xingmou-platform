@@ -103,11 +103,17 @@
 		FOR UPDATE
 	</select>
 			
-	<select id="selectBySourceId" resultMap="BaseResultMap">
+	<select id="selectBySourceIdsType" resultMap="BaseResultMap">
 		SELECT
 		<include refid="selectFields" />
 		FROM dm_files
-		WHERE  source_id = #{sourceId,jdbcType=BIGINT}
+		WHERE
+			type = #{type,jdbcType=INTEGER}
+		 AND
+			source_id in
+			<foreach item="item" index="index" collection="sourceIds" open="(" separator="," close=")">
+				#{item}
+			</foreach>
 	</select>
 		
 </mapper>

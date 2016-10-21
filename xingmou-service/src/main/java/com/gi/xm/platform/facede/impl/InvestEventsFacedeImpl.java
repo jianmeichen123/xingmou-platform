@@ -77,6 +77,11 @@ public class InvestEventsFacedeImpl implements InvestEventsFacede {
 		return messageInfo;	
 	}
 
+	/**
+	 * 
+	 * @param investEventsQueryInfo
+	 * @return
+     */
 	public MessageInfo<QueryResultInfo<InvestEventsInfo>> queryInvestEvents(InvestEventsQueryInfo investEventsQueryInfo) {
 		InvestEventsQuery investEventsQuery = InvestEventsConvertor.toInvestEventsQuery(investEventsQueryInfo);
 		Message<QueryResult<InvestEvents>> message = investEventsBiz.queryInvestEvents(investEventsQuery);

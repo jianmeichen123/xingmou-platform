@@ -65,13 +65,4 @@ public class FilesController {
 	}
 */
 
-
-		
-    @RequestMapping("getListBySourceId")
-    @ResponseBody
-	public MessageInfo<List<FilesInfo>> getListBySourceId(Long sourceId){
-		MessageInfo<List<FilesInfo>> messageInfo = filesFacede.getListBySourceId(sourceId);
-		return messageInfo;
-	}
-		
 }

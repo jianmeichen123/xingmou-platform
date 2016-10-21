@@ -1,7 +1,10 @@
 package com.gi.xm.platform.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.gi.xm.platform.facede.FilesFacede;
+import com.gi.xm.platform.view.FilesInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +26,8 @@ public class ProjectController {
     @Reference
 	private ProjectFacede projectFacede;
 
+	@Reference
+	private FilesFacede filesFacede;
 
 	@RequestMapping("query")
 	@ResponseBody
@@ -42,6 +47,7 @@ public class ProjectController {
 		MessageInfo<ProjectInfo> messageInfo =  projectFacede.getProject(id);
 		return messageInfo;
 	}
+/*
 
     @RequestMapping("getListBySourceId")
     @ResponseBody
@@ -49,6 +55,7 @@ public class ProjectController {
 		MessageInfo<List<ProjectInfo>> messageInfo = projectFacede.getListBySourceId(sourceId);
 		return messageInfo;
 	}
+*/
 
 
 
@@ -85,14 +92,37 @@ public class ProjectController {
 		}
 		String returnFields = projectQueryInfo.getSearchFields();
         projectQueryInfo.setReturnFields(returnFields);
-		MessageInfo<QueryResultInfo<ProjectInfo>> resultMessageInfo = projectFacede.searchProject(projectQueryInfo);
-		return resultMessageInfo;
+		MessageInfo<QueryResultInfo<ProjectInfo>> messageInfo = projectFacede.searchProject(projectQueryInfo);
+        if (messageInfo.isSuccess()&&messageInfo.getData()!=null&&!messageInfo.getData().getRecords().isEmpty()){
+            List<Long> sourceIds = new ArrayList<>();
+            List<ProjectInfo> projectInfos = messageInfo.getData().getRecords();
+            for (ProjectInfo projectInfo: projectInfos){
+                projectInfo.setPic("/project/pic/"+projectInfo.getSourceId()+".png");
+                if(projectInfo.getSourceId()!=null){
+                    sourceIds.add(projectInfo.getSourceId());
+                }
+            }
+            MessageInfo<List<FilesInfo>> fileMessageInfo = filesFacede.getListBySourceIdsType(sourceIds,1);
+            if(fileMessageInfo.isSuccess()&&!fileMessageInfo.getData().isEmpty()){
+                for(FilesInfo filesInfo :fileMessageInfo.getData()){
+                    for (ProjectInfo projectInfo: projectInfos){
+                       if (projectInfo.getSourceId()!=null&&filesInfo.getPic()!=null&&filesInfo.getSourceId().intValue()==projectInfo.getSourceId()){
+                            projectInfo.setPic(filesInfo.getPic());
+                       }
+                    }
+                }
+            }
+
+        }
+		return messageInfo;
 	}
 	
+/*
 	@RequestMapping("queryCompetationlist")
 	@ResponseBody
 	public MessageInfo<QueryResultInfo<ProjectInfo>>  queryCompetationlist (@RequestBody ProjectQueryInfo projectQueryInfo) {
 		MessageInfo<QueryResultInfo<ProjectInfo>> resultMessageInfo = projectFacede.queryCompetationlist(projectQueryInfo);
 		return resultMessageInfo;
 	}
+*/
 }

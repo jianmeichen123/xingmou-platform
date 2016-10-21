@@ -22,7 +22,7 @@ public interface FilesFacede {
     MessageInfo<QueryResultInfo<FilesInfo>> queryFiles(FilesQueryInfo filesQueryInfo);
 	
 		
-	MessageInfo<List<FilesInfo>> getListBySourceId(Long sourceId);
+	MessageInfo<List<FilesInfo>> getListBySourceIdsType(List<Long> sourceIds,Integer Type);
 		
 
 }

@@ -26,7 +26,7 @@ public interface FilesDAO {
     int updateByPrimaryKey(Files files);
 	
 				
-	List<Files> selectBySourceId(@Param("sourceId") Long sourceId);
+	List<Files> selectBySourceIdsType(@Param("sourceIds") List<Long> sourceIds,@Param("type") Integer type );
 		
 
 }

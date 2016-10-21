@@ -145,9 +145,20 @@ public class InvestEventsInfo implements Serializable {
 	 * @return
 	 */
 	private Long sourceId;
+	
+	private String pic;
 
+	
 	public String getProjectName() {
 		return projectName;
+	}
+
+	public String getPic() {
+		return pic;
+	}
+
+	public void setPic(String pic) {
+		this.pic = pic;
 	}
 
 	public void setProjectName(String projectName) {

@@ -1,5 +1,6 @@
 package com.gi.xm.platform.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -9,10 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.gi.xm.platform.facede.FilesFacede;
 import com.gi.xm.platform.facede.InvestEventsFacede;
+import com.gi.xm.platform.view.FilesInfo;
 import com.gi.xm.platform.view.InvestEventsInfo;
 import com.gi.xm.platform.view.InvestEventsQueryInfo;
 import com.gi.xm.platform.view.InvestfirmsQueryInfo;
+import com.gi.xm.platform.view.ProjectInfo;
 import com.gi.xm.platform.view.common.MessageInfo;
 import com.gi.xm.platform.view.common.QueryResultInfo;
 
@@ -23,7 +27,9 @@ public class InvestEventsController {
 	@Reference(check = false)
 	private InvestEventsFacede investEventsFacede;
 
-
+	@Reference(check = false)
+	private FilesFacede filesFacede;
+	
 	@RequestMapping("query")
 	@ResponseBody
 	public MessageInfo<QueryResultInfo<InvestEventsInfo>>  queryInvestEvents (@RequestBody InvestEventsQueryInfo investEventsQueryInfo) {
@@ -43,6 +49,29 @@ public class InvestEventsController {
 				investEventsQueryInfo.setOrderBy("invest_date");
 			}
 	    MessageInfo<QueryResultInfo<InvestEventsInfo>> resultMessageInfo = investEventsFacede.queryInvestEvents(investEventsQueryInfo);
+	    if (resultMessageInfo.isSuccess()&&resultMessageInfo.getData()!=null&&!resultMessageInfo.getData().getRecords().isEmpty()){
+            List<Long> sourceIds = new ArrayList<>();
+            List<InvestEventsInfo> eventsInfos = resultMessageInfo.getData().getRecords();
+            for (InvestEventsInfo eventsInfo: eventsInfos){
+            	eventsInfo.setPic("/project/pic/"+eventsInfo.getSourceId()+".png");
+                if(eventsInfo.getSourceId()!=null){
+                    sourceIds.add(eventsInfo.getSourceId());
+                }
+            }
+            MessageInfo<List<FilesInfo>> fileMessageInfo = filesFacede.getListBySourceIdsType(sourceIds,1);
+            if(fileMessageInfo.isSuccess()&&!fileMessageInfo.getData().isEmpty()){
+                for(FilesInfo filesInfo :fileMessageInfo.getData()){
+                    for (InvestEventsInfo eventsInfo: eventsInfos){
+                       if (eventsInfo.getSourceId()!=null&&filesInfo.getPic()!=null&&filesInfo.getSourceId().intValue()==eventsInfo.getSourceId()){
+                    	   eventsInfo.setPic(filesInfo.getPic());
+                       }
+                    }
+                }
+            }
+
+        }
+	    
+	    
 	    return resultMessageInfo;
 	}
 /*

@@ -25,7 +25,9 @@ public interface DistrictFacede {
     /**
      *
      * @param type 海外or国内
+	 *             1.国内  2.国外
      * @param level 地区等级
+*                   地区等级：1，省级；2，市级；3，县级；4，乡镇
      * @return
      */
 	MessageInfo<List<DistrictInfo>> getListByTypeLevel(Integer type, Integer level);

@@ -15,10 +15,10 @@ public interface AreaFacede {
 		
 	MessageInfo<Integer> updateArea(AreaInfo areaInfo);
 		
-	MessageInfo<AreaInfo> getArea(Long id);
+	//MessageInfo<AreaInfo> getArea(Long id);
 
     /**
-     * 获取全部领域
+     * 获取全部领域(仅投资机构使用)
      * @return
      */
     MessageInfo<List<AreaInfo>> getAllArea();

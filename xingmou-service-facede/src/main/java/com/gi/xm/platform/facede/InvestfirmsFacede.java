@@ -9,7 +9,7 @@ import com.gi.xm.platform.view.InvestfirmsInfo;
 import com.gi.xm.platform.view.InvestfirmsQueryInfo;
 
 public interface InvestfirmsFacede {
-		MessageInfo<Integer> deleteInvestfirms(Long id);
+	MessageInfo<Integer> deleteInvestfirms(Long id);
 		
     MessageInfo<Long> createInvestfirms(InvestfirmsInfo investfirmsInfo);
 		
@@ -18,7 +18,8 @@ public interface InvestfirmsFacede {
 	MessageInfo<InvestfirmsInfo> getInvestfirms(Long id);
 		
     MessageInfo<List<InvestfirmsInfo>> getAllInvestfirms();
-			
+
+	
     MessageInfo<QueryResultInfo<InvestfirmsInfo>> queryInvestfirms(InvestfirmsQueryInfo investfirmsQueryInfo);
 	
 		

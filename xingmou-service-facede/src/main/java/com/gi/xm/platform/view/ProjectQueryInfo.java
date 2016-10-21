@@ -88,12 +88,29 @@ public class ProjectQueryInfo extends QueryInfo {
 
 	private Integer[] newestEventRoundIds;
 
+
+
+    /**
+     * @Fields  地区ids
+     */
     private Long[] districtIds;
 
+
+    /**
+     * @Fields  行业ids
+     */
     private Long[] industryIds;
 
+
+    /**
+     * @Fields  二级地区ids
+     */
     private Long[] districtSubIds;
 
+
+    /**
+     * @Fields  二级行业ids
+     */
     private Long[] industrySubIds;
 
     private String createDateStart;

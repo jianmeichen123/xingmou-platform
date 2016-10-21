@@ -4,14 +4,14 @@
 	<resultMap id="BaseResultMap" type="com.gi.xm.platform.pojo.Data">
 					<id column="id" property="id" jdbcType="INTEGER" />
 								<result column="project_num" property="projectNum" jdbcType="INTEGER" />
+								<result column="event_num" property="eventNum" jdbcType="INTEGER" />
+								<result column="investfirm_num" property="investfirmNum" jdbcType="INTEGER" />
 								<result column="project_invested_num" property="projectInvestedNum" jdbcType="INTEGER" />
 								<result column="invested_money" property="investedMoney" jdbcType="BIGINT" />
 								<result column="invested_money_per_project" property="investedMoneyPerProject" jdbcType="BIGINT" />
 								<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
 								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-		             			<result column="investfirm_num" property="investfirmNum" jdbcType="INTEGER" />
-
-	</resultMap>
+						</resultMap>
 
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		DELETE FROM dm_data
@@ -52,7 +52,7 @@
 		
 		
 	<sql id="selectFields">
-	id,project_num,project_invested_num,invested_money,investfirm_num,invested_money_per_project,add_time,update_time
+	id,project_num,event_num,investfirm_num,project_invested_num,invested_money,invested_money_per_project,add_time,update_time
 	</sql>
 	
 	<select id="selectAll" resultMap="BaseResultMap">

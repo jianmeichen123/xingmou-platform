@@ -61,6 +61,58 @@ public class InvestEventsQuery extends Query {
 	private Timestamp updateTime;
 	//新加
 	private String projectName;
+	
+	
+	private Integer[] newestEventRoundIds;
+
+    private Long[] districtIds;
+
+    private Long[] industryIds;
+
+    private String createDateStart;
+
+    private String createDateEnd;
+    
+	
+	public Integer[] getNewestEventRoundIds() {
+		return newestEventRoundIds;
+	}
+
+	public void setNewestEventRoundIds(Integer[] newestEventRoundIds) {
+		this.newestEventRoundIds = newestEventRoundIds;
+	}
+
+	public Long[] getDistrictIds() {
+		return districtIds;
+	}
+
+	public void setDistrictIds(Long[] districtIds) {
+		this.districtIds = districtIds;
+	}
+
+	public Long[] getIndustryIds() {
+		return industryIds;
+	}
+
+	public void setIndustryIds(Long[] industryIds) {
+		this.industryIds = industryIds;
+	}
+
+	public String getCreateDateStart() {
+		return createDateStart;
+	}
+
+	public void setCreateDateStart(String createDateStart) {
+		this.createDateStart = createDateStart;
+	}
+
+	public String getCreateDateEnd() {
+		return createDateEnd;
+	}
+
+	public void setCreateDateEnd(String createDateEnd) {
+		this.createDateEnd = createDateEnd;
+	}
 
 	public String getProjectName() {
 		return projectName;

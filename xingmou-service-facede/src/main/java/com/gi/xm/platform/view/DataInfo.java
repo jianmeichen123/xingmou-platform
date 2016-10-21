@@ -37,7 +37,16 @@ public class DataInfo implements Serializable {
 	 * @Fields investedMoneyPerProject : 单项目融资均额(元)
 	 */
 	private Long investedMoneyPerProject;
-			
+	/**
+	 * @Fields investedMoneyPerProject : 融资机构数量
+	 */
+	private Integer investfirmNum;
+	
+	/**
+	 * @Fields eventNum : 融资事件数量
+	 */
+	private Integer eventNum;
+	
 	/**
 	 * @Fields addTime : 
 	 */
@@ -47,16 +56,8 @@ public class DataInfo implements Serializable {
 	 * @Fields updateTime : 
 	 */
 	private Timestamp updateTime;
-	private Integer investfirmNum;
-
-	public Integer getInvestfirmNum() {
-		return investfirmNum;
-	}
-
-	public void setInvestfirmNum(Integer investfirmNum) {
-		this.investfirmNum = investfirmNum;
-	}
-
+		
+    
 	public Integer getId(){
 		return id;
 	}
@@ -111,5 +112,21 @@ public class DataInfo implements Serializable {
 	
 	public void setUpdateTime(Timestamp updateTime){
 		this.updateTime = updateTime;
+	}
+
+	public Integer getInvestfirmNum() {
+		return investfirmNum;
+	}
+
+	public void setInvestfirmNum(Integer investfirmNum) {
+		this.investfirmNum = investfirmNum;
+	}
+
+	public Integer getEventNum() {
+		return eventNum;
+	}
+
+	public void setEventNum(Integer eventNum) {
+		this.eventNum = eventNum;
 	}
     }

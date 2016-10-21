@@ -130,11 +130,12 @@
 		FROM dm_invest_events
 	</select>
 	
+	
 	<select id="queryInvestEvents" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.InvestEventsQuery">
 		SELECT
 		<include refid="selectFields" />
 		FROM dm_invest_events
-		<include refid="queryWhereAndOrder" />
+		<include refid="searchQueryWhereAndOrder" />
 	</select>
 
 	<!--left join -->
@@ -147,6 +148,47 @@
 
 
 	</select>
+	
+	<sql id="searchQueryWhereAndOrder">
+        <where>
+
+			<!-- 模糊查询 -->
+			<if test="title != null">
+			 title  like replace('%${title}%',' ','') or (INSTR(investfirm_names,'${title}') >0)
+			</if>
+			
+            <if test="industryIds!=null">
+                AND industry_id in
+                <foreach item="item" index="index" collection="industryIds" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+          
+            <if test="districtIds!=null">
+                AND district_id in
+                <foreach item="item" index="index" collection="districtIds" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="newestEventRoundIds!=null">
+                AND round_id in
+                <foreach item="item" index="index" collection="newestEventRoundIds" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="createDateStart!=null and createDateStart!=''">
+                AND invest_date >= #{createDateStart,jdbcType=VARCHAR}
+            </if>
+            <if test="createDateEnd!=null and createDateEnd!=''">
+                AND  invest_date &lt;= #{createDateEnd,jdbcType=VARCHAR} 
+            </if>
+        </where>
+        <choose>
+            <when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
+            <otherwise>order by invest_date desc</otherwise>
+        </choose>
+    </sql>
+    
 	<sql id="queryWhereAndOrder">
 		<where>
 					<if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>
@@ -206,6 +248,7 @@
 				dm_invest_events  die ON diei.`event_id` = die.`id` 
 		WHERE 
 			diei.`investfirm_id` = #{id}
+		order by invest_date desc
 		ORDER BY
 			die.`invest_date` desc
 	</select>

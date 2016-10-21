@@ -1,12 +1,12 @@
 package com.gi.xm.platform.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.gi.xm.platform.facede.InvestEventsFacede;
@@ -26,9 +26,24 @@ public class InvestEventsController {
 
 	@RequestMapping("query")
 	@ResponseBody
-	public MessageInfo<QueryResultInfo<InvestEventsInfo>>  queryInvestEvents (InvestEventsQueryInfo investEventsQueryInfo) {
-		MessageInfo<QueryResultInfo<InvestEventsInfo>> resultMessageInfo = investEventsFacede.queryInvestEvents(investEventsQueryInfo);
-		return resultMessageInfo;
+	public MessageInfo<QueryResultInfo<InvestEventsInfo>>  queryInvestEvents (@RequestBody InvestEventsQueryInfo investEventsQueryInfo) {
+		
+		 if(investEventsQueryInfo.getCreateDateEnd()!=null){
+			 investEventsQueryInfo.setCreateDateEnd(((Integer.parseInt(investEventsQueryInfo.getCreateDateEnd())+1)+""));
+	        }
+
+	        if (investEventsQueryInfo.getOrder() != null&&investEventsQueryInfo.getOrderBy() != null){
+				 if (investEventsQueryInfo.getOrderBy().equalsIgnoreCase("moneyNum")) {
+					investEventsQueryInfo.setOrderBy("money_num");
+				}else  if(investEventsQueryInfo.getOrderBy().equalsIgnoreCase("investDate")){
+	                investEventsQueryInfo.setOrderBy("invest_date");
+	            }
+			}else {
+				investEventsQueryInfo.setOrder("desc");
+				investEventsQueryInfo.setOrderBy("invest_date");
+			}
+	    MessageInfo<QueryResultInfo<InvestEventsInfo>> resultMessageInfo = investEventsFacede.queryInvestEvents(investEventsQueryInfo);
+	    return resultMessageInfo;
 	}
 /*
 
@@ -44,7 +59,7 @@ public class InvestEventsController {
 	public MessageInfo<Integer> updateInvestEvents(InvestEventsInfo investEventsInfo){
 		MessageInfo<Integer> messageInfo =  investEventsFacede.updateInvestEvents(investEventsInfo);
 		return messageInfo;
-	}
+	} 
 */
 
     @RequestMapping("get")

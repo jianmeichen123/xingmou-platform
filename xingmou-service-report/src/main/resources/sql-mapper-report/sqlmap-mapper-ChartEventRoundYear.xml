@@ -64,14 +64,14 @@
 	<select id="selectByRoundYear" resultMap="BaseResultMap">
 		SELECT round_name, year, SUM(invested_num) AS invested_num
 		FROM dm_chart_event_round_year
-		GROUP BY round_name, year 
+		GROUP BY round_name, year ,ordernum
 		ORDER By ordernum ASC
 	</select>
 	
 	<select id="selectRoundNames" resultType="java.lang.String">
 		SELECT round_name
 		FROM dm_chart_event_round_year
-		GROUP BY round_name
+		GROUP BY round_name ,ordernum
 		ORDER By ordernum ASC
 	</select>
 	

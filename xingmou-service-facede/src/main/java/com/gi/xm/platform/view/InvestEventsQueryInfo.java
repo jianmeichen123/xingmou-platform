@@ -1,9 +1,9 @@
 package com.gi.xm.platform.view;
 
-import java.util.Date;
 import java.math.BigDecimal;
-import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Date;
+
 import com.gi.xm.platform.view.common.QueryInfo;
 
 public class InvestEventsQueryInfo extends QueryInfo {
@@ -69,11 +69,14 @@ public class InvestEventsQueryInfo extends QueryInfo {
     private Long[] districtIds;
 
     private Long[] industryIds;
+    
+    private Long[] industrySubIds;
 
     private String createDateStart;
 
     private String createDateEnd;
     
+	private Long sourceId;
     
 	
 	public Integer[] getNewestEventRoundIds() {
@@ -156,6 +159,14 @@ public class InvestEventsQueryInfo extends QueryInfo {
 		this.money = money;
 	}
     
+	public Long[] getIndustrySubIds() {
+		return industrySubIds;
+	}
+
+	public void setIndustrySubIds(Long[] industrySubIds) {
+		this.industrySubIds = industrySubIds;
+	}
+
 	public BigDecimal getMoneyNum(){
 		return moneyNum;
 	}
@@ -180,6 +191,14 @@ public class InvestEventsQueryInfo extends QueryInfo {
 		this.currencyTitle = currencyTitle;
 	}
     
+	public Long getSourceId() {
+		return sourceId;
+	}
+
+	public void setSourceId(Long sourceId) {
+		this.sourceId = sourceId;
+	}
+
 	public String getCurrencyCode(){
 		return currencyCode;
 	}

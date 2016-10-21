@@ -62,12 +62,15 @@ public class InvestEventsQuery extends Query {
 	//新加
 	private String projectName;
 	
+	private Long sourceId;
 	
 	private Integer[] newestEventRoundIds;
 
     private Long[] districtIds;
 
     private Long[] industryIds;
+    
+    private Long[] industrySubIds;
 
     private String createDateStart;
 
@@ -143,6 +146,14 @@ public class InvestEventsQuery extends Query {
 		this.projectId = projectId;
 	}
     
+	public Long[] getIndustrySubIds() {
+		return industrySubIds;
+	}
+
+	public void setIndustrySubIds(Long[] industrySubIds) {
+		this.industrySubIds = industrySubIds;
+	}
+
 	public String getInvestMoney(){
 		return investMoney;
 	}
@@ -153,6 +164,14 @@ public class InvestEventsQuery extends Query {
 	public String getMoney(){
 		return money;
 	}
+	public Long getSourceId() {
+		return sourceId;
+	}
+
+	public void setSourceId(Long sourceId) {
+		this.sourceId = sourceId;
+	}
+
 	public void setMoney(String money){
 		this.money = money;
 	}

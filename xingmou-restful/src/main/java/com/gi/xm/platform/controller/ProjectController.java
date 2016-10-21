@@ -117,12 +117,12 @@ public class ProjectController {
 		return messageInfo;
 	}
 	
-/*
+
 	@RequestMapping("queryCompetationlist")
 	@ResponseBody
 	public MessageInfo<QueryResultInfo<ProjectInfo>>  queryCompetationlist (@RequestBody ProjectQueryInfo projectQueryInfo) {
 		MessageInfo<QueryResultInfo<ProjectInfo>> resultMessageInfo = projectFacede.queryCompetationlist(projectQueryInfo);
 		return resultMessageInfo;
 	}
-*/
+
 }

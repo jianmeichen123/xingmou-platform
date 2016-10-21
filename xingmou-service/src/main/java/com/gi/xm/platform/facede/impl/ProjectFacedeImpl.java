@@ -128,7 +128,7 @@ public class ProjectFacedeImpl implements ProjectFacede {
             return messageInfo;
         }
         //轮次
-        Message<List<Round>> m2 = roundBiz.getListByType(1);
+        Message<List<Round>> m2 = roundBiz.getByTypeParentId(1,null);
         if (!m2.isSuccess()){
             messageInfo = MessageConvertor.toMessageInfo(m2);
             return messageInfo;

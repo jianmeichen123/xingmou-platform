@@ -56,7 +56,6 @@ public class DistrictFacedeImpl implements DistrictFacede {
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-		@Cacheable(value = "districtInfo",keyGenerator = "wiselyKeyGenerator")
 	public MessageInfo<DistrictInfo> getDistrict( Integer id ){
 		
 		Message<District> message  = districtBiz.getDistrict( id );
@@ -66,7 +65,6 @@ public class DistrictFacedeImpl implements DistrictFacede {
 		return messageInfo;
 	}
 
-    @Cacheable(value = "districtInfo",keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<List<DistrictInfo>> getAllDistrict(){
 	
 		Message<List<District>> message  = districtBiz.getAllDistrict();

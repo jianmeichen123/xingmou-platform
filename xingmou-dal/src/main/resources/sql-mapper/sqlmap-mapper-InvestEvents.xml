@@ -277,7 +277,6 @@
 				dm_invest_events  die ON diei.`event_id` = die.`id` 
 		WHERE 
 			diei.`investfirm_id` = #{id}
-		order by invest_date desc
 		ORDER BY
 			die.`invest_date` desc
 	</select>

@@ -21,15 +21,10 @@ public interface RoundDAO {
 	
     List<Round> selectAll();
 
-    /**
-     * 投资事件轮次
-     * @return
-     */
-    List<Round>  selectRounds();
 	List<Round> queryRound(RoundQuery roundQuery);
 			
     int updateByPrimaryKey(Round round);
 
-    List<Round> selectByType(@Param("type") Integer type);
+    List<Round> selectByTypeParentId(@Param("type") Integer type,@Param("parentId") Integer parentId);
 
 }

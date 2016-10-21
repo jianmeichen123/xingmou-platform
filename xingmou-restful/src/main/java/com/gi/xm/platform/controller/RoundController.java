@@ -48,22 +48,14 @@ public class RoundController {
 		MessageInfo<RoundInfo> messageInfo =  roundFacede.getRound(id);
 		return messageInfo;
 	}
-*/
-
-    @RequestMapping("getAll")
+	    @RequestMapping("getAll")
     @ResponseBody
     public MessageInfo<List<RoundInfo>> getAllRound(){
 		MessageInfo<List<RoundInfo>>  messageInfo = roundFacede.getAllRound();
 		return messageInfo;
 	}
 
-	@RequestMapping("getInvestedRounds")
-	@ResponseBody
-	public MessageInfo<List<RoundInfo>> getInvestedRounds(){
-		MessageInfo<List<RoundInfo>>  messageInfo = roundFacede.getInvestedRounds();
-		return messageInfo;
-	}
-
+*/
 
 
 }

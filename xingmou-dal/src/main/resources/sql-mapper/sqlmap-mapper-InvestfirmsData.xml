@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.xm.platform.dao.InvestfirmsDataDAO">
+	<resultMap id="BaseResultMap" type="com.gi.xm.platform.pojo.InvestfirmsData">
+					<id column="id" property="id" jdbcType="INTEGER" />
+								<result column="investfirm_id" property="investfirmId" jdbcType="BIGINT" />
+								<result column="investfirm_name" property="investfirmName" jdbcType="VARCHAR" />
+								<result column="investfirm_link" property="investfirmLink" jdbcType="VARCHAR" />
+								<result column="invest_num" property="investNum" jdbcType="INTEGER" />
+								<result column="invest_money" property="investMoney" jdbcType="BIGINT" />
+								<result column="invest_industry" property="investIndustry" jdbcType="VARCHAR" />
+								<result column="invest_round" property="investRound" jdbcType="VARCHAR" />
+								<result column="newest_invest_projects" property="newestInvestProjects" jdbcType="LONGVARCHAR" />
+								<result column="invest_month_rate" property="investMonthRate" jdbcType="INTEGER" />
+								<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+						</resultMap>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		DELETE FROM dm_investfirms_data
+		WHERE id = #{id,jdbcType=INTEGER} 
+	</delete>
+	
+	<insert id="insert" parameterType="com.gi.xm.platform.pojo.InvestfirmsData" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO dm_investfirms_data (
+			investfirm_id,
+			investfirm_name,
+			investfirm_link,
+			invest_num,
+			invest_money,
+			invest_industry,
+			invest_round,
+			newest_invest_projects,
+			invest_month_rate,
+			add_time,
+			update_time
+		)
+		VALUES
+		(
+			#{investfirmId,jdbcType=BIGINT},
+			#{investfirmName,jdbcType=VARCHAR},
+			#{investfirmLink,jdbcType=VARCHAR},
+			#{investNum,jdbcType=INTEGER},
+			#{investMoney,jdbcType=BIGINT},
+			#{investIndustry,jdbcType=VARCHAR},
+			#{investRound,jdbcType=VARCHAR},
+			#{newestInvestProjects,jdbcType=LONGVARCHAR},
+			#{investMonthRate,jdbcType=INTEGER},
+			#{addTime,jdbcType=TIMESTAMP},
+			 UNIX_TIMESTAMP()
+		)
+	</insert>
+
+	<update id="updateByPrimaryKey" parameterType="com.gi.xm.platform.pojo.InvestfirmsData">
+		UPDATE dm_investfirms_data
+		SET
+			<if test="investfirmName!=null">investfirm_name = #{investfirmName,jdbcType=VARCHAR},</if>
+			<if test="investfirmLink!=null">investfirm_link = #{investfirmLink,jdbcType=VARCHAR},</if>
+			<if test="investIndustry!=null">invest_industry = #{investIndustry,jdbcType=VARCHAR},</if>
+			<if test="investRound!=null">invest_round = #{investRound,jdbcType=VARCHAR},</if>
+			<if test="newestInvestProjects!=null">newest_invest_projects = #{newestInvestProjects,jdbcType=LONGVARCHAR},</if>
+			<if test="investfirmId!=null">investfirm_id = #{investfirmId,jdbcType=BIGINT},</if>
+			<if test="investNum!=null">invest_num = #{investNum,jdbcType=INTEGER},</if>
+			<if test="investMoney!=null">invest_money = #{investMoney,jdbcType=BIGINT},</if>
+			<if test="investMonthRate!=null">invest_month_rate = #{investMonthRate,jdbcType=INTEGER},</if>
+			<if test="addTime!=null">add_time = #{addTime,jdbcType=TIMESTAMP},</if>
+	    WHERE id = #{id,jdbcType=INTEGER} 
+	</update>
+	
+		
+		
+	<sql id="selectFields">
+	id,investfirm_id,investfirm_name,investfirm_link,invest_num,invest_money,invest_industry,invest_round,newest_invest_projects,invest_month_rate,add_time,update_time
+	</sql>
+	
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_investfirms_data
+	</select>
+	<select id="queryInvestfirmsData" resultMap="BaseResultMap"  parameterType="com.gi.xm.platform.query.InvestfirmsDataQuery">
+		select
+		c.`id`,c.`investfirm_id`, c.investfirm_name,c.`investfirm_link`,c.`invest_num`,c.`invest_money`,c.`invest_industry`,c.`invest_round`,c.`invest_month_rate`,c.`newest_invest_projects`
+		from dm_invest_events a
+		left join dm_invest_events_investfirm b on a.id=b.`event_id`
+		left join dm_investfirms_data c on b.`investfirm_id`= c.`investfirm_id`
+		<include refid="queryWhereAndOrder" />
+
+	</select>
+
+	<sql id="queryWhereAndOrder">
+		<where>
+			<if test="id!=null">AND id = #{id,jdbcType=INTEGER}</if>
+
+			<if test="industryIds!=null">AND a.`industry_id` in
+				<foreach item="item" index="index" collection="industryIds" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			<if test="newestEventRoundIds!=null">AND a.`round_id` in
+				<foreach item="item" index="index" collection="newestEventRoundIds" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			<if test="investfirmId!=null">AND investfirm_id = #{investfirmId,jdbcType=BIGINT}</if>
+			<if test="investfirmName!=null and investfirmName!=''">AND c.investfirm_name like CONCAT('%',#{investfirmName,jdbcType=VARCHAR},'%' )</if>
+			<if test="investfirmLink!=null and investfirmLink!=''">AND investfirm_link = #{investfirmLink,jdbcType=VARCHAR}</if>
+			<if test="investNum!=null">AND invest_num = #{investNum,jdbcType=INTEGER}</if>
+			<if test="investMoney!=null">AND invest_money = #{investMoney,jdbcType=BIGINT}</if>
+			<if test="investIndustry!=null and investIndustry!=''">AND invest_industry = #{investIndustry,jdbcType=VARCHAR}</if>
+			<if test="investRound!=null and investRound!=''">AND invest_round = #{investRound,jdbcType=VARCHAR}</if>
+			<if test="newestInvestProjects!=null and newestInvestProjects!=''">AND newest_invest_projects = #{newestInvestProjects,jdbcType=VARCHAR}</if>
+			<if test="investMonthRate!=null">AND invest_month_rate = #{investMonthRate,jdbcType=INTEGER}</if>
+			<if test="addTime!=null">AND add_time = #{addTime,jdbcType=TIMESTAMP}</if>
+			<if test="updateTime!=null">AND update_time = #{updateTime,jdbcType=TIMESTAMP}</if>
+
+
+		</where>
+
+		group by c.`id` HAVING c.id is not null
+		<choose>
+			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
+			<otherwise>order by id desc</otherwise>
+		</choose>
+	</sql>
+
+
+
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_investfirms_data
+		WHERE id = #{id,jdbcType=INTEGER} 
+	</select>
+
+	<select id="selectByPrimaryKeyForUpdate" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_investfirms_data
+		WHERE id = #{id,jdbcType=INTEGER} 
+		FOR UPDATE
+	</select>
+			
+	<select id="selectByInvestfirmId" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_investfirms_data
+		WHERE  investfirm_id = #{investfirmId,jdbcType=BIGINT}
+	</select>
+		
+</mapper>

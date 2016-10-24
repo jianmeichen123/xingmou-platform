@@ -56,8 +56,8 @@ public class ChartDataIndustryController {
 		List<List<Object>> data = new ArrayList<List<Object>>();
 		for(ChartDataIndustry  cd : results){
 			List<Object> ls = new ArrayList<Object>();
-			ls.add(cd.getProjectNum());
 			ls.add(cd.getInvestedNum());
+			ls.add(cd.getProjectNum());
 			ls.add(cd.getInvestedNum());
 			ls.add(cd.getInvestedMoney());
 			ls.add(cd.getIndustryName());

@@ -32,6 +32,7 @@ public class InvestfirmsData extends Pojo {
 	 */
 	private Long investfirmId;
 	
+	private Long sourceId;
 	/**
 	 * @Fields investfirmName : 冗余投资机构名称
 	 */
@@ -221,6 +222,14 @@ public class InvestfirmsData extends Pojo {
 
 	public void setInvestMoney(Long investMoney){
 		this.investMoney = investMoney;
+	}
+
+	public Long getSourceId(){
+		return sourceId;
+	}
+
+	public void setSourceId(Long sourceId){
+		this.sourceId = sourceId;
 	}
     
 	public String getInvestIndustry(){

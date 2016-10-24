@@ -128,6 +128,15 @@ public class InvestfirmsData extends Pojo {
 	private String order;
 	private String orderBy;
 	private String returnFields;
+	private String pic;
+
+	public String getPic() {
+		return pic;
+	}
+
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
 
 	public int getPageIndex() {
 		return pageIndex;

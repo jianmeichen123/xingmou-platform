@@ -31,6 +31,7 @@
         <module>xingmou-news-manage</module>
         <module>xingmou-user</module>
         <module>xingmou-upload</module>
+        <module>xingmou-mail</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -102,12 +103,12 @@
                 <artifactId>xingmou-logback</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
-
             <dependency>
                 <groupId>com.gi</groupId>
-                <artifactId>xingmou-service-query-facede</artifactId>
+                <artifactId>xingmou-mail</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
+<!---->
             <dependency>
                 <groupId>cglib</groupId>
                 <artifactId>cglib</artifactId>

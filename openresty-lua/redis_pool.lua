@@ -62,6 +62,25 @@ function redis_pool:get_key(str)
         return true,"获取key成功",val
     end
     --self:close()
-    return false,"获取key成功",val
+    return false,"获取key失败",val
 end
+
+
+function redis_pool:incr(ikey)
+    client:incr(ikey)
+end
+
+function redis_pool:get(str)
+    local res,err,client = self:get_connect()
+    if not res then
+        return false,err
+    end
+    local val ,err = client:get(str)
+
+    if  val ~= ngx.null and val ~= nil then
+        return true,"获取key成功",val
+    end
+    return false,"获取key失败",val
+end
+
 return redis_pool

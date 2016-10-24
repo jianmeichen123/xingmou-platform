@@ -66,7 +66,6 @@ public class RoundFacedeImpl implements RoundFacede {
 		return messageInfo;
 	}
 
-    @Cacheable(value = "roundInfo",keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<List<RoundInfo>> getAllRound(){
 	
 		Message<List<Round>> message  = roundBiz.getAllRound();
@@ -84,6 +83,16 @@ public class RoundFacedeImpl implements RoundFacede {
 		messageInfo.setData(queryResultInfo);
 		return messageInfo;
 	}
-   
-	
+
+	@Override
+	public MessageInfo<List<RoundInfo>> selectByTypeParentId(Integer type, Integer parentId) {
+
+		Message<List<Round>> message  = roundBiz.getByTypeParentId(type, parentId);
+		MessageInfo<List<RoundInfo>> messageInfo = MessageConvertor.toMessageInfo(message);
+		List<RoundInfo> roundInfoList = RoundConvertor.toRoundInfoList(message.getData());
+		messageInfo.setData(roundInfoList);
+		return messageInfo;
+	}
+
+
 }

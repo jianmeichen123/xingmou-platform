@@ -125,11 +125,11 @@ public class FilesBiz  {
 	}
 
 		
-	public Message<List<Files>> getListBySourceId(Long sourceId){
+	public Message<List<Files>> getListBySourceIdsType(List<Long> sourceIds,Integer type){
 
 		Message<List<Files>> message = new Message<List<Files>>();
 		try {
-			List<Files> filesList = filesDAO.selectBySourceId(sourceId);
+			List<Files> filesList = filesDAO.selectBySourceIdsType(sourceIds,type);
 			message.setData(filesList);
 		} catch (Exception e) {
 			LOGGER.error("getListBySourceId","查询Files失败", e);

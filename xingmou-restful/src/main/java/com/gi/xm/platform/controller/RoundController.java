@@ -25,18 +25,8 @@ public class RoundController {
 	@Reference(check = false)
 	private RoundFacede roundFacede;
 
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public ModelAndView index() {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		return new ModelAndView("round/index", modelMap);
-	}
 
-	@RequestMapping("query")
-	@ResponseBody
-	public MessageInfo<QueryResultInfo<RoundInfo>>  queryRound (RoundQueryInfo roundQueryInfo) {
-		MessageInfo<QueryResultInfo<RoundInfo>> resultMessageInfo = roundFacede.queryRound(roundQueryInfo);
-		return resultMessageInfo;
-	}
+/*
 
     @RequestMapping("create")
     @ResponseBody
@@ -58,14 +48,14 @@ public class RoundController {
 		MessageInfo<RoundInfo> messageInfo =  roundFacede.getRound(id);
 		return messageInfo;
 	}
-
-    @RequestMapping("getAll")
+	    @RequestMapping("getAll")
     @ResponseBody
     public MessageInfo<List<RoundInfo>> getAllRound(){
 		MessageInfo<List<RoundInfo>>  messageInfo = roundFacede.getAllRound();
 		return messageInfo;
 	}
 
+*/
 
-	
+
 }

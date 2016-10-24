@@ -33,5 +33,28 @@ $sql.getInsertValues($table)
 		$sql.getIndexWhere($index)
 	</select>
 	#end
-	
+
+
+	<select id="query$table.modelName" resultMap="BaseResultMap" parameterType="$name.getFullModelQueryClassName($table)">
+		SELECT
+		<include refid="selectFields" />
+		FROM $table.tableName
+		<include refid="queryWhereAndOrder" />
+	</select>
+
+	<sql id="queryWhereAndOrder">
+		<where>
+		#foreach($column in $table.columns)
+			#if($column.javaType=="String")<if test="${column.propertyName}!=null and ${column.propertyName}!=''">AND $column.columnName = #{${column.propertyName},jdbcType=${column.jdbcType}}</if>
+			#else<if test="${column.propertyName}!=null">AND $column.columnName = #{${column.propertyName},jdbcType=${column.jdbcType}}</if>
+			#end
+		#end
+
+		</where>
+		<choose>
+			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${esc.d}{orderBy} ${esc.d}{order}</when>
+			<otherwise>order by id desc</otherwise>
+		</choose>
+	</sql>
+
 </mapper>

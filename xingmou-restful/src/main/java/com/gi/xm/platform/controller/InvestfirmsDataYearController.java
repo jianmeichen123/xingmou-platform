@@ -50,10 +50,10 @@ public class InvestfirmsDataYearController {
 
 		return resultMessageInfo;
 	}
+/*
 
     @RequestMapping("create")
     @ResponseBody
-	@Deprecated
     public MessageInfo<Long> createInvestfirmsDataYear(InvestfirmsDataYearInfo investfirmsDataYearInfo){
         MessageInfo<Long> messageInfo =  investfirmsDataYearFacede.createInvestfirmsDataYear(investfirmsDataYearInfo);
         return messageInfo;
@@ -61,11 +61,11 @@ public class InvestfirmsDataYearController {
 
     @RequestMapping("update")
     @ResponseBody
-	@Deprecated
 	public MessageInfo<Integer> updateInvestfirmsDataYear(InvestfirmsDataYearInfo investfirmsDataYearInfo){
 		MessageInfo<Integer> messageInfo =  investfirmsDataYearFacede.updateInvestfirmsDataYear(investfirmsDataYearInfo);
 		return messageInfo;
 	}
+*/
 
     @RequestMapping("get")
     @ResponseBody
@@ -73,6 +73,7 @@ public class InvestfirmsDataYearController {
 		MessageInfo<InvestfirmsDataYearInfo> messageInfo =  investfirmsDataYearFacede.getInvestfirmsDataYear(id);
 		return messageInfo;
 	}
+/*
 
     @RequestMapping("getAll")
     @ResponseBody
@@ -81,6 +82,7 @@ public class InvestfirmsDataYearController {
 		return messageInfo;
 	}
 
+*/
 
 		
     @RequestMapping("getListByInvestfirmId")

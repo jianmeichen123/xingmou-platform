@@ -9,7 +9,7 @@ import com.gi.xm.platform.view.DataEventYearInfo;
 import com.gi.xm.platform.view.DataEventYearQueryInfo;
 
 public interface DataEventYearFacede {
-		MessageInfo<Integer> deleteDataEventYear(Long id);
+	MessageInfo<Integer> deleteDataEventYear(Long id);
 		
     MessageInfo<Long> createDataEventYear(DataEventYearInfo dataEventYearInfo);
 		

@@ -24,6 +24,10 @@ public class DataQueryInfo extends QueryInfo {
 	
 	private Long investedMoneyPerProject;
 	
+	private Integer investfirmNum;
+	
+	private Integer eventNum;
+	
 	private Timestamp addTime;
 	
 	private Timestamp updateTime;
@@ -83,5 +87,21 @@ public class DataQueryInfo extends QueryInfo {
 	
 	public void setUpdateTime(Timestamp updateTime){
 		this.updateTime = updateTime;
+	}
+
+	public Integer getInvestfirmNum() {
+		return investfirmNum;
+	}
+
+	public void setInvestfirmNum(Integer investfirmNum) {
+		this.investfirmNum = investfirmNum;
+	}
+
+	public Integer getEventNum() {
+		return eventNum;
+	}
+
+	public void setEventNum(Integer eventNum) {
+		this.eventNum = eventNum;
 	}
     }

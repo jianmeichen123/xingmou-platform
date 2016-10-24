@@ -25,18 +25,13 @@ public class InvestfirmAreaController {
 	@Reference(check = false)
 	private InvestfirmAreaFacede investfirmAreaFacede;
 
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public ModelAndView index() {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		return new ModelAndView("investfirmArea/index", modelMap);
-	}
-
 	@RequestMapping("query")
 	@ResponseBody
 	public MessageInfo<QueryResultInfo<InvestfirmAreaInfo>>  queryInvestfirmArea (InvestfirmAreaQueryInfo investfirmAreaQueryInfo) {
 		MessageInfo<QueryResultInfo<InvestfirmAreaInfo>> resultMessageInfo = investfirmAreaFacede.queryInvestfirmArea(investfirmAreaQueryInfo);
 		return resultMessageInfo;
 	}
+/*
 
     @RequestMapping("create")
     @ResponseBody
@@ -51,6 +46,7 @@ public class InvestfirmAreaController {
 		MessageInfo<Integer> messageInfo =  investfirmAreaFacede.updateInvestfirmArea(investfirmAreaInfo);
 		return messageInfo;
 	}
+*/
 
     @RequestMapping("get")
     @ResponseBody
@@ -59,15 +55,7 @@ public class InvestfirmAreaController {
 		return messageInfo;
 	}
 
-    @RequestMapping("getAll")
-    @ResponseBody
-    public MessageInfo<List<InvestfirmAreaInfo>> getAllInvestfirmArea(){
-		MessageInfo<List<InvestfirmAreaInfo>>  messageInfo = investfirmAreaFacede.getAllInvestfirmArea();
-		return messageInfo;
-	}
 
-
-		
     @RequestMapping("getListByInvestfrimId")
     @ResponseBody
 	public MessageInfo<List<InvestfirmAreaInfo>> getListByInvestfrimId(Integer investfrimId){

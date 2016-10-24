@@ -21,6 +21,22 @@ public class DataQuery extends Query {
 	private Long investedMoney;
 			
 	private Long investedMoneyPerProject;
+	
+	private Integer investfirmNum;
+	
+	public Integer getInvestfirmNum() {
+		return investfirmNum;
+	}
+	public void setInvestfirmNum(Integer investfirmNum) {
+		this.investfirmNum = investfirmNum;
+	}
+	public Integer getEventNum() {
+		return eventNum;
+	}
+	public void setEventNum(Integer eventNum) {
+		this.eventNum = eventNum;
+	}
+	private Integer eventNum;
 			
 	private Timestamp addTime;
 			

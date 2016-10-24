@@ -17,7 +17,6 @@
             <groupId>com.gi</groupId>
             <artifactId>xingmou-api-common</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.apache.zookeeper</groupId>
             <artifactId>zookeeper</artifactId>
@@ -79,4 +78,12 @@
 
         </dependency>
     </dependencies>
+    <!-- 打jar包并发布到私服 -->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>Snapshots</id>
+            <url>http://nexus.gi.com/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
 </project>

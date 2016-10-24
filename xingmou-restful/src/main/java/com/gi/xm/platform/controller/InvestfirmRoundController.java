@@ -25,18 +25,13 @@ public class InvestfirmRoundController {
 	@Reference(check = false)
 	private InvestfirmRoundFacede investfirmRoundFacede;
 
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public ModelAndView index() {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		return new ModelAndView("investfirmRound/index", modelMap);
-	}
-
 	@RequestMapping("query")
 	@ResponseBody
 	public MessageInfo<QueryResultInfo<InvestfirmRoundInfo>>  queryInvestfirmRound (InvestfirmRoundQueryInfo investfirmRoundQueryInfo) {
 		MessageInfo<QueryResultInfo<InvestfirmRoundInfo>> resultMessageInfo = investfirmRoundFacede.queryInvestfirmRound(investfirmRoundQueryInfo);
 		return resultMessageInfo;
 	}
+/*
 
     @RequestMapping("create")
     @ResponseBody
@@ -51,6 +46,7 @@ public class InvestfirmRoundController {
 		MessageInfo<Integer> messageInfo =  investfirmRoundFacede.updateInvestfirmRound(investfirmRoundInfo);
 		return messageInfo;
 	}
+*/
 
     @RequestMapping("get")
     @ResponseBody
@@ -58,14 +54,6 @@ public class InvestfirmRoundController {
 		MessageInfo<InvestfirmRoundInfo> messageInfo =  investfirmRoundFacede.getInvestfirmRound(id);
 		return messageInfo;
 	}
-
-    @RequestMapping("getAll")
-    @ResponseBody
-    public MessageInfo<List<InvestfirmRoundInfo>> getAllInvestfirmRound(){
-		MessageInfo<List<InvestfirmRoundInfo>>  messageInfo = investfirmRoundFacede.getAllInvestfirmRound();
-		return messageInfo;
-	}
-
 
 		
     @RequestMapping("getListByInvestfrimId")

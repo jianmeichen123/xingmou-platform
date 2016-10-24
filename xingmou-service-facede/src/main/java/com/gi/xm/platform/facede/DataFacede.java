@@ -9,7 +9,7 @@ import com.gi.xm.platform.view.DataInfo;
 import com.gi.xm.platform.view.DataQueryInfo;
 
 public interface DataFacede {
-		MessageInfo<Integer> deleteData(Integer id);
+    MessageInfo<Integer> deleteData(Integer id);
 		
     MessageInfo<Integer> createData(DataInfo dataInfo);
 		

@@ -4,6 +4,8 @@ package com.gi.xm.report.biz;
 
 import java.util.List;
 
+import com.gi.xm.platform.view.common.QueryResultInfo;
+import com.gi.xm.report.query.ChartDataYearQueryInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,6 +43,23 @@ public class ChartDataYearBiz  {
 		}
 		return messageInfo;
 	}
-		
+	public MessageInfo<QueryResultInfo<ChartDataYear>> queryChartDataYear(ChartDataYearQueryInfo chartDataYearQueryInfo) {
+		MessageInfo<QueryResultInfo<ChartDataYear>> message = new MessageInfo<QueryResultInfo<ChartDataYear>>();
+		try {
+			QueryResultInfo<ChartDataYear> queryResult = new QueryResultInfo<ChartDataYear>();
+			PageHelper.startPage(chartDataYearQueryInfo.getPageIndex(), chartDataYearQueryInfo.getPageSize());
+			List<ChartDataYear> chartDataYearList = chartDataYearDAO.queryChartDataYear(chartDataYearQueryInfo);
+			PageInfo<ChartDataYear> pageInfo = new PageInfo<ChartDataYear>(chartDataYearList);
+			queryResult.setPages(pageInfo.getPages());
+			queryResult.setTotal(pageInfo.getTotal());
+			queryResult.setRecords(chartDataYearList);
+			message.setData(queryResult);
+		} catch (Exception e) {
+			LOGGER.error("queryChartDataYear", "分页查询ChartDataYear失败", e);
+			message.setStatus(10001);
+		}
+		return message;
+	}
+
 
 }

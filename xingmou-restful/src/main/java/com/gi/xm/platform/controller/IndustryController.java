@@ -25,11 +25,6 @@ public class IndustryController {
 	@Reference(check = false)
 	private IndustryFacede industryFacede;
 
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public ModelAndView index() {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		return new ModelAndView("industry/index", modelMap);
-	}
 
 	@RequestMapping("query")
 	@ResponseBody
@@ -37,6 +32,7 @@ public class IndustryController {
 		MessageInfo<QueryResultInfo<IndustryInfo>> resultMessageInfo = industryFacede.queryIndustry(industryQueryInfo);
 		return resultMessageInfo;
 	}
+/*
 
     @RequestMapping("create")
     @ResponseBody
@@ -51,6 +47,7 @@ public class IndustryController {
 		MessageInfo<Integer> messageInfo =  industryFacede.updateIndustry(industryInfo);
 		return messageInfo;
 	}
+*/
 
     @RequestMapping("get")
     @ResponseBody

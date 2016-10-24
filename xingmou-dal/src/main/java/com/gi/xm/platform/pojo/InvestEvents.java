@@ -156,6 +156,12 @@ public class InvestEvents extends Pojo {
 	 * @Fields yaar : 年份
 	 */
 	private Integer year;
+	
+	/**
+	 * @Fields yaar : 项目源id
+	 * @return
+	 */
+	private Long sourceId;
 
 	public Integer getYear() {
 		return year;
@@ -361,6 +367,14 @@ public class InvestEvents extends Pojo {
 		this.addTime = addTime;
 	}
     
+	public Long getSourceId() {
+		return sourceId;
+	}
+
+	public void setSourceId(Long sourceId) {
+		this.sourceId = sourceId;
+	}
+
 	public Timestamp getUpdateTime(){
 		return updateTime;
 	}

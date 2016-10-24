@@ -139,9 +139,26 @@ public class InvestEventsInfo implements Serializable {
 	private Integer year;
 	//新加
 	private String projectName;
+	
+	/**
+	 * @Fields yaar : 项目源id
+	 * @return
+	 */
+	private Long sourceId;
+	
+	private String pic;
 
+	
 	public String getProjectName() {
 		return projectName;
+	}
+
+	public String getPic() {
+		return pic;
+	}
+
+	public void setPic(String pic) {
+		this.pic = pic;
 	}
 
 	public void setProjectName(String projectName) {
@@ -347,5 +364,13 @@ public class InvestEventsInfo implements Serializable {
 	
 	public void setYear(Integer year){
 		this.year = year;
+	}
+
+	public Long getSourceId() {
+		return sourceId;
+	}
+
+	public void setSourceId(Long sourceId) {
+		this.sourceId = sourceId;
 	}
     }

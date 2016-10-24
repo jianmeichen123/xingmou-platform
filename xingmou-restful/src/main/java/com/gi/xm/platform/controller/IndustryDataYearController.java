@@ -9,7 +9,18 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.gi.xm.platform.facede.IndustryFirstDataYearFacede;
 import com.gi.xm.platform.view.IndustryFirstDataYearInfo;
 import com.gi.xm.platform.view.IndustryFirstDataYearQueryInfo;
+import com.gi.xm.report.biz.ChartDataIndustryFirstYearBiz;
+import com.gi.xm.report.biz.ChartDataIndustryYearBiz;
+import com.gi.xm.report.biz.ChartDataYearBiz;
+import com.gi.xm.report.pojo.ChartDataIndustryFirstYear;
+import com.gi.xm.report.pojo.ChartDataIndustryYear;
+import com.gi.xm.report.pojo.ChartDataYear;
+import com.gi.xm.report.query.ChartDataIndustryFirstYearQueryInfo;
+import com.gi.xm.report.query.ChartDataIndustryYearQueryInfo;
+import com.gi.xm.report.query.ChartDataYearQueryInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,47 +42,59 @@ public class IndustryDataYearController {
     @Reference(check = false)
     private IndustryFirstDataYearFacede  industryFirstDataYearFacede;
 
+    @Autowired
+    private ChartDataIndustryFirstYearBiz chartDataIndustryFirstYearBiz;
 
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public ModelAndView index() {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		return new ModelAndView("industryDataYear/index", modelMap);
-	}
+    @Autowired
+    private ChartDataYearBiz chartDataYearBiz;
+
+    @Autowired
+    private ChartDataIndustryYearBiz chartDataIndustryYearBiz;
 
 	@RequestMapping("query")
 	@ResponseBody
-	public MessageInfo<QueryResultInfo<IndustryDataYearInfo>>  queryIndustryDataYear (@RequestBody IndustryDataYearQueryInfo industryDataYearQueryInfo) {
-		MessageInfo<QueryResultInfo<IndustryDataYearInfo>> resultMessageInfo =  new MessageInfo<QueryResultInfo<IndustryDataYearInfo>>();
+	public MessageInfo  queryIndustryDataYear (@RequestBody IndustryDataYearQueryInfo industryDataYearQueryInfo) {
+
 
         //查子行业
         if (industryDataYearQueryInfo != null && industryDataYearQueryInfo.getIndustrySubId()!=null) {
-            resultMessageInfo =  industryDataYearFacede.queryIndustryDataYear(industryDataYearQueryInfo);
+            //resultMessageInfo =  industryDataYearFacede.queryIndustryDataYear(industryDataYearQueryInfo);
+            MessageInfo<QueryResultInfo<ChartDataIndustryYear>> messageInfo =  new MessageInfo<QueryResultInfo<ChartDataIndustryYear>>();
+            ChartDataIndustryYearQueryInfo chartDataIndustryYearQueryInfo = new ChartDataIndustryYearQueryInfo();
+            chartDataIndustryYearQueryInfo.setPageIndex(industryDataYearQueryInfo.getPageIndex());
+            chartDataIndustryYearQueryInfo.setPageSize(industryDataYearQueryInfo.getPageSize());
+            chartDataIndustryYearQueryInfo.setYears(industryDataYearQueryInfo.getYearList());
+            chartDataIndustryYearQueryInfo.setIndustrySubId(industryDataYearQueryInfo.getIndustrySubId());
+            messageInfo =  chartDataIndustryYearBiz.queryChartDataIndustryYear(chartDataIndustryYearQueryInfo);
+            return  messageInfo;
         } else if(industryDataYearQueryInfo != null && industryDataYearQueryInfo.getIndustryId()!=null){
             //一级行业
-            IndustryFirstDataYearQueryInfo  industryFirstDataYearQueryInfo = new IndustryFirstDataYearQueryInfo();
-            industryFirstDataYearQueryInfo.setIndustryId(industryDataYearQueryInfo.getIndustryId());
-            industryFirstDataYearQueryInfo.setYearList(industryDataYearQueryInfo.getYearList());
-            industryFirstDataYearQueryInfo.setYaar(industryDataYearQueryInfo.getYaar());
-            industryFirstDataYearQueryInfo.setPageIndex(industryDataYearQueryInfo.getPageIndex());
-            industryFirstDataYearQueryInfo.setPageSize(industryDataYearQueryInfo.getPageSize());
-            resultMessageInfo =  industryFirstDataYearFacede.queryIndustryFirstDataYear(industryFirstDataYearQueryInfo);
+            MessageInfo<QueryResultInfo<ChartDataIndustryFirstYear>> messageInfo =  new MessageInfo<QueryResultInfo<ChartDataIndustryFirstYear>>();
+            ChartDataIndustryFirstYearQueryInfo chartDataIndustryFirstYearQueryInfo = new ChartDataIndustryFirstYearQueryInfo();
+            chartDataIndustryFirstYearQueryInfo.setIndustryId(industryDataYearQueryInfo.getIndustryId());
+            chartDataIndustryFirstYearQueryInfo.setYears(industryDataYearQueryInfo.getYearList());
+            chartDataIndustryFirstYearQueryInfo.setYaar(industryDataYearQueryInfo.getYaar());
+            chartDataIndustryFirstYearQueryInfo.setPageIndex(industryDataYearQueryInfo.getPageIndex());
+            chartDataIndustryFirstYearQueryInfo.setPageSize(industryDataYearQueryInfo.getPageSize());
+            messageInfo =  chartDataIndustryFirstYearBiz.queryChartDataIndustryFirstYear(chartDataIndustryFirstYearQueryInfo);
+            return  messageInfo;
         } else {
             //全部行业
-            IndustryFirstDataYearQueryInfo  industryFirstDataYearQueryInfo = new IndustryFirstDataYearQueryInfo();
+            MessageInfo<QueryResultInfo<ChartDataYear>> messageInfo =  new MessageInfo<QueryResultInfo<ChartDataYear>>();
+            ChartDataYearQueryInfo industryFirstDataYearQueryInfo = new ChartDataYearQueryInfo();
           //  industryFirstDataYearQueryInfo.setIndustryId(industryDataYearQueryInfo.getIndustryId());
-            industryFirstDataYearQueryInfo.setYearList(industryDataYearQueryInfo.getYearList());
-            industryFirstDataYearQueryInfo.setYaar(industryDataYearQueryInfo.getYaar());
+            industryFirstDataYearQueryInfo.setYears(industryDataYearQueryInfo.getYearList());
             industryFirstDataYearQueryInfo.setPageIndex(industryDataYearQueryInfo.getPageIndex());
             industryFirstDataYearQueryInfo.setPageSize(industryDataYearQueryInfo.getPageSize());
-            resultMessageInfo =  industryFirstDataYearFacede.queryIndustryDataYear(industryFirstDataYearQueryInfo);
+            messageInfo =  chartDataYearBiz.queryChartDataYear(industryFirstDataYearQueryInfo);
+            return  messageInfo;
         }
 
-		return resultMessageInfo;
 	}
+/*
 
     @RequestMapping("create")
     @ResponseBody
-	@Deprecated
     public MessageInfo<Long> createIndustryDataYear( IndustryDataYearInfo industryDataYearInfo){
         MessageInfo<Long> messageInfo =  industryDataYearFacede.createIndustryDataYear(industryDataYearInfo);
         return messageInfo;
@@ -79,11 +102,11 @@ public class IndustryDataYearController {
 
     @RequestMapping("update")
     @ResponseBody
-	@Deprecated
 	public MessageInfo<Integer> updateIndustryDataYear(IndustryDataYearInfo industryDataYearInfo){
 		MessageInfo<Integer> messageInfo =  industryDataYearFacede.updateIndustryDataYear(industryDataYearInfo);
 		return messageInfo;
 	}
+*/
 
     @RequestMapping("get")
     @ResponseBody
@@ -91,6 +114,7 @@ public class IndustryDataYearController {
 		MessageInfo<IndustryDataYearInfo> messageInfo =  industryDataYearFacede.getIndustryDataYear(id);
 		return messageInfo;
 	}
+/*
 
     @RequestMapping("getAll")
     @ResponseBody
@@ -99,6 +123,7 @@ public class IndustryDataYearController {
 		return messageInfo;
 	}
 
+*/
 
 		
 /*    @RequestMapping("getListByIndustryIdYaar")

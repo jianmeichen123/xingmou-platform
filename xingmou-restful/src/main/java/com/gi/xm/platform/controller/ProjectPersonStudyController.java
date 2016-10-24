@@ -25,18 +25,13 @@ public class ProjectPersonStudyController {
 	@Reference(check = false)
 	private ProjectPersonStudyFacede projectPersonStudyFacede;
 
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public ModelAndView index() {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		return new ModelAndView("projectPersonStudy/index", modelMap);
-	}
-
 	@RequestMapping("query")
 	@ResponseBody
 	public MessageInfo<QueryResultInfo<ProjectPersonStudyInfo>>  queryProjectPersonStudy (ProjectPersonStudyQueryInfo projectPersonStudyQueryInfo) {
 		MessageInfo<QueryResultInfo<ProjectPersonStudyInfo>> resultMessageInfo = projectPersonStudyFacede.queryProjectPersonStudy(projectPersonStudyQueryInfo);
 		return resultMessageInfo;
 	}
+/*
 
     @RequestMapping("create")
     @ResponseBody
@@ -51,6 +46,7 @@ public class ProjectPersonStudyController {
 		MessageInfo<Integer> messageInfo =  projectPersonStudyFacede.updateProjectPersonStudy(projectPersonStudyInfo);
 		return messageInfo;
 	}
+*/
 
     @RequestMapping("get")
     @ResponseBody
@@ -59,13 +55,4 @@ public class ProjectPersonStudyController {
 		return messageInfo;
 	}
 
-    @RequestMapping("getAll")
-    @ResponseBody
-    public MessageInfo<List<ProjectPersonStudyInfo>> getAllProjectPersonStudy(){
-		MessageInfo<List<ProjectPersonStudyInfo>>  messageInfo = projectPersonStudyFacede.getAllProjectPersonStudy();
-		return messageInfo;
-	}
-
-
-	
 }

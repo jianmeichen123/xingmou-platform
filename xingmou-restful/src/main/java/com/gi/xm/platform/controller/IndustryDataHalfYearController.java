@@ -25,11 +25,6 @@ public class IndustryDataHalfYearController {
     @Reference
 	private IndustryDataHalfYearFacede industryDataHalfYearFacede;
 
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public ModelAndView index() {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		return new ModelAndView("industryDataHalfYear/index", modelMap);
-	}
 
 	@RequestMapping("query")
 	@ResponseBody
@@ -37,6 +32,7 @@ public class IndustryDataHalfYearController {
 		MessageInfo<QueryResultInfo<IndustryDataHalfYearInfo>> resultMessageInfo = industryDataHalfYearFacede.queryIndustryDataHalfYear(industryDataHalfYearQueryInfo);
 		return resultMessageInfo;
 	}
+/*
 
     @RequestMapping("create")
     @ResponseBody
@@ -51,6 +47,7 @@ public class IndustryDataHalfYearController {
 		MessageInfo<Integer> messageInfo =  industryDataHalfYearFacede.updateIndustryDataHalfYear(industryDataHalfYearInfo);
 		return messageInfo;
 	}
+*/
 
     @RequestMapping("get")
     @ResponseBody
@@ -58,6 +55,7 @@ public class IndustryDataHalfYearController {
 		MessageInfo<IndustryDataHalfYearInfo> messageInfo =  industryDataHalfYearFacede.getIndustryDataHalfYear(id);
 		return messageInfo;
 	}
+/*
 
     @RequestMapping("getAll")
     @ResponseBody
@@ -65,6 +63,7 @@ public class IndustryDataHalfYearController {
 		MessageInfo<List<IndustryDataHalfYearInfo>>  messageInfo = industryDataHalfYearFacede.getAllIndustryDataHalfYear();
 		return messageInfo;
 	}
+*/
 
 
 		

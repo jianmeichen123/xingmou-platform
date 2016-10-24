@@ -101,10 +101,18 @@
         WHERE id = #{id,jdbcType=INTEGER}
         FOR UPDATE
     </select>
-    <select id="selectByType" resultMap="BaseResultMap">
+
+    <!--　根据类型和patentId查询 -->
+    <select id="selectByTypeParentId" resultMap="BaseResultMap">
         SELECT
-        <include refid="selectFields"/>
-        FROM dw_v_round
-        WHERE type = #{type,jdbcType=INTEGER}
+            <include refid="selectFields"/>
+        FROM
+            dw_v_round
+        WHERE
+            type = #{type,jdbcType=INTEGER}
+        <if test="parentId != null">
+            AND  parent_id = #{parentId,jdbcType=INTEGER}
+        </if>
     </select>
+
 </mapper>

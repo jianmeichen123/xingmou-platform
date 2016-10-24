@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.xm.report.dao.ChartEventRoundYearDAO">
+	<resultMap id="BaseResultMap" type="com.gi.xm.report.pojo.ChartEventRoundYear">
+					<id column="id" property="id" jdbcType="BIGINT" />
+								<result column="year" property="year" jdbcType="INTEGER" />
+								<result column="round_name" property="roundName" jdbcType="VARCHAR" />
+								<result column="ordernum" property="ordernum" jdbcType="INTEGER" />
+								<result column="invested_num" property="investedNum" jdbcType="INTEGER" />
+								<result column="invested_money" property="investedMoney" jdbcType="BIGINT" />
+								<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+						</resultMap>
+
+
+	<insert id="insert" parameterType="com.gi.xm.report.pojo.ChartEventRoundYear" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO dm_chart_event_round_year (
+			year,
+			round_name,
+			ordernum,
+			invested_num,
+			invested_money,
+			add_time,
+			update_time
+		)
+		VALUES
+		(
+			#{year,jdbcType=INTEGER},
+			#{roundName,jdbcType=VARCHAR},
+			#{ordernum,jdbcType=INTEGER},
+			#{investedNum,jdbcType=INTEGER},
+			#{investedMoney,jdbcType=BIGINT},
+			#{addTime,jdbcType=TIMESTAMP},
+			 UNIX_TIMESTAMP()
+		)
+	</insert>
+
+	<sql id="selectFields">
+	id,year,round_name,ordernum,invested_num,invested_money,add_time,update_time
+	</sql>
+	
+			
+	<select id="selectByIndustryId" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_chart_event_round_year
+		WHERE  industry_id = #{industryId,jdbcType=INTEGER}
+	</select>
+			
+	<select id="selectByRoundId" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_chart_event_round_year
+		WHERE  round_id = #{roundId,jdbcType=INTEGER}
+	</select>
+			
+	<select id="selectByYear" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_chart_event_round_year
+		WHERE  year = #{year,jdbcType=INTEGER}
+	</select>
+	
+	<select id="selectByRoundYear" resultMap="BaseResultMap">
+		SELECT round_name, year, SUM(invested_num) AS invested_num
+		FROM dm_chart_event_round_year
+		GROUP BY round_name, year ,ordernum
+		ORDER By ordernum ASC
+	</select>
+	
+	<select id="selectRoundNames" resultType="java.lang.String">
+		SELECT round_name
+		FROM dm_chart_event_round_year
+		GROUP BY round_name ,ordernum
+		ORDER By ordernum ASC
+	</select>
+	
+	<select id="selectYears" resultType="java.lang.Integer">
+		SELECT  year
+		FROM dm_chart_event_round_year
+		GROUP BY  year 
+	</select>
+		
+</mapper>

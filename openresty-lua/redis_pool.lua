@@ -67,6 +67,10 @@ end
 
 
 function redis_pool:incr(ikey)
+    local res,err,client = self:get_connect()
+    if not res then
+        return false,err
+    end
     client:incr(ikey)
 end
 

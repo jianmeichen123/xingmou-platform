@@ -1,90 +1,33 @@
-local redis = require("resty.redis")
-local cjson = require("cjson")
-local redis_pool = {}
---连接redis
-function redis_pool:get_connect()
-    if ngx.ctx[redis_pool] then
-        return true,"redis连接成功",ngx.ctx[redis_pool]
-    end
-    local red = redis:new()
-    red:set_timeout(1000) -- 1 sec
-    local ok, err = red:connect(conf.redis()['host'],conf.redis()['port'])
-    if not ok then
-	    return false,"failed to connect redis"
-    end
-    --设置redis密码
-    local count, err = red:get_reused_times()
-    if 0 == count then
-        ok, err = red:auth(conf.redis()['pass'])
-        if not ok then
-            return false,"redis failed to auth"
-        end
-    elseif err then
-        return false,"redis failed to get reused times"
-    end
-    --选择redis数据库
-    ok, err = red:select(conf.redis()['db'])
-    if not ok then
-        return false,"redis connect failed "
-    end
-    --建立redis连接池
-    ngx.ctx[redis_pool] = red
-    return true,'redis连接成功',ngx.ctx[redis_pool]
+--调用json公共组件
+cjson = require("cjson")
+fun = require("fun") -- 引用公用方法文件
+conf = require("ini") --引用配置文件
+reds = require("redis_pool") --引用redis连接池
+--mysqld = require("ttq.mysql_pool") --引用mysql连接池
+--参数校验
+check_arg = fun:check_cookie_arg() --调用参数校验方法
+if check_arg['status']  then
+    --参数校验通过，获取返回的参数，并将参数拼接
+    key = string.format("%s:%s:%s","xm",check_arg['s_'],check_arg['_uid_'])
+else
+    --ngx.say(fun:resJson(-1,check_arg['msg']))
+    ngx.exit(ngx.HTTP_UNAUTHORIZED)
+    return;
 end
 
---关闭连接池
-function redis_pool:close()
-    if ngx.ctx[redis_pool] then
-        ngx.ctx[redis_pool]:set_keepalive(60000, 300)
-        ngx.ctx[redis_pool] = nil
+--1.首先通过redis查找
+local res,err,value = reds:get_key(key)
+if not res then
+    --ngx.say(fun:resJson(-1,"系统繁忙,请稍后"))
+    ngx.exit(ngx.HTTP_FORBIDDEN)
+    return
+else
+    if value == nil or value == "null" or value == ngx.null then
+        --ngx.say(fun:resJson(-1,"无权限"))
+        ngx.exit(ngx.HTTP_UNAUTHORIZED)
+        return
     end
 end
 
----获取key的值
-function redis_pool:get_key(str)
-    local res,err,client = self:get_connect()
-    if not res then
-        return false,err
-    end
-    local val ,err = client:get(str)
-
-    if  val ~= ngx.null and val ~= nil then
-        --ngx.say(val)
-        local j = cjson.decode(val)
-        local email = j.email
-        if email == ngx.null then
-            return false,"用户不存在",val
-        end
-        client:expire(key,604800)
-        local ikey = string.format("%s:%s:%s","xm","count",email)
-        local v,e = client:incr(ikey)
-        local v,e = client:incr("%s:%s:%s:%s","xm","c",email,os.time/300*300)
-        return true,"获取key成功",val
-    end
-    --self:close()
-    return false,"获取key失败",val
-end
-
-
-function redis_pool:incr(ikey)
-    local res,err,client = self:get_connect()
-    if not res then
-        return false,err
-    end
-    client:incr(ikey)
-end
-
-function redis_pool:get(str)
-    local res,err,client = self:get_connect()
-    if not res then
-        return false,err
-    end
-    local val ,err = client:get(str)
-
-    if  val ~= ngx.null and val ~= nil then
-        return true,"获取key成功",val
-    end
-    return false,"获取key失败",val
-end
-
-return redis_pool
+--3.redis找到了信息鉴权成功
+--ngx.say(fun:resJson(0,"该项目鉴权成功,可以访问!"))

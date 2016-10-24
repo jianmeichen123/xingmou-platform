@@ -3,8 +3,7 @@ cjson = require("cjson")
 fun = require("fun") -- 引用公用方法文件
 conf = require("ini") --引用配置文件
 reds = require("redis_pool") --引用redis连接池
-lim  = require("limit") --引用redis连接池
-lim:limit()
+--mysqld = require("ttq.mysql_pool") --引用mysql连接池
 --参数校验
 check_arg = fun:check_cookie_arg() --调用参数校验方法
 if check_arg['status']  then

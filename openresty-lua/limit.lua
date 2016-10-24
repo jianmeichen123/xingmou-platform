@@ -19,7 +19,6 @@ function _L:limit()
     end
     reds:incr(myIP)
     local res,err,value = reds:get_key(key)
-    ngx.say(value)
 end
 
 return _L

@@ -10,7 +10,7 @@ function redis_pool:get_connect()
     red:set_timeout(1000) -- 1 sec
     local ok, err = red:connect(conf.redis()['host'],conf.redis()['port'])
     if not ok then
-	    return false,"failed to connect redis"
+        return false,"failed to connect redis"
     end
     --设置redis密码
     local count, err = red:get_reused_times()

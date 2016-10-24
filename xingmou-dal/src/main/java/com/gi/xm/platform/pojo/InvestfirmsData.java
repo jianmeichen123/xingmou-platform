@@ -1,23 +1,22 @@
-package com.gi.xm.report.pojo;
+package com.gi.xm.platform.pojo;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.List;
 
 public class InvestfirmsData extends Pojo {
 
         public static final String ID = "id";
-        public static final String INVESTFIRM_ID = "æŠ•èµ„æœºæ„id";
-        public static final String INVESTFIRM_NAME = "å†—ä½™æŠ•èµ„æœºæ„åç§°";
-        public static final String INVESTFIRM_LINK = "å†—ä½™æœºæ„ç½‘å€";
-        public static final String INVEST_NUM = "æ€»æŠ•èµ„ç¬”æ•°";
-        public static final String INVEST_MONEY = "æ€»æŠ•èµ„é‡‘é¢ï¼ˆå…ƒï¼‰";
-        public static final String INVEST_INDUSTRY = "æŠ•èµ„è¿‡çš„ä¸€çº§è¡Œä¸š";
-        public static final String INVEST_ROUND = "æŠ•èµ„è¿‡çš„è½®æ¬¡";
-        public static final String NEWEST_INVEST_PROJECTS = "æŠ•èµ„è¿‡çš„é¡¹ç›®åç§°ï¼ˆæœ€è¿‘ä¸‰ä¸ªï¼‰";
-        public static final String INVEST_MONTH_RATE = "ä¸ŠæœˆåŒæ¯”å¢é•¿ç‡ï¼ˆç¬”æ•°ï¼‰";
+        public static final String INVESTFIRM_ID = "??èµ??ºæ??id";
+        public static final String INVESTFIRM_NAME = "??ä½???èµ??ºæ????ç§?";
+        public static final String INVESTFIRM_LINK = "??ä½??ºæ??ç½???";
+        public static final String INVEST_NUM = "?»æ??èµ?ç¬???";
+        public static final String INVEST_MONEY = "?»æ??èµ???é¢?ï¼???ï¼?";
+        public static final String INVEST_INDUSTRY = "??èµ?è¿???ä¸?çº§è?ä¸?";
+        public static final String INVEST_ROUND = "??èµ?è¿???è½?æ¬?";
+        public static final String NEWEST_INVEST_PROJECTS = "??èµ?è¿???é¡¹ç????ç§°ï???è¿?ä¸?ä¸?ï¼?";
+        public static final String INVEST_MONTH_RATE = "ä¸?????æ¯?å¢??¿ç??ï¼?ç¬??°ï?";
         public static final String ADD_TIME = "addTime";
         public static final String UPDATE_TIME = "updateTime";
     
@@ -28,48 +27,47 @@ public class InvestfirmsData extends Pojo {
 	private Integer id;
 	
 	/**
-	 * @Fields investfirmId : æŠ•èµ„æœºæ„id
+	 * @Fields investfirmId : ??èµ??ºæ??id
 	 */
 	private Long investfirmId;
 	
-	private Long sourceId;
 	/**
-	 * @Fields investfirmName : å†—ä½™æŠ•èµ„æœºæ„åç§°
+	 * @Fields investfirmName : ??ä½???èµ??ºæ????ç§?
 	 */
 	private String investfirmName;
 	
 	/**
-	 * @Fields investfirmLink : å†—ä½™æœºæ„ç½‘å€
+	 * @Fields investfirmLink : ??ä½??ºæ??ç½???
 	 */
 	private String investfirmLink;
 	
 	/**
-	 * @Fields investNum : æ€»æŠ•èµ„ç¬”æ•°
+	 * @Fields investNum : ?»æ??èµ?ç¬???
 	 */
 	private Integer investNum;
 	
 	/**
-	 * @Fields investMoney : æ€»æŠ•èµ„é‡‘é¢ï¼ˆå…ƒï¼‰
+	 * @Fields investMoney : ?»æ??èµ???é¢?ï¼???ï¼?
 	 */
 	private Long investMoney;
 	
 	/**
-	 * @Fields investIndustry : æŠ•èµ„è¿‡çš„ä¸€çº§è¡Œä¸š
+	 * @Fields investIndustry : ??èµ?è¿???ä¸?çº§è?ä¸?
 	 */
 	private String investIndustry;
 	
 	/**
-	 * @Fields investRound : æŠ•èµ„è¿‡çš„è½®æ¬¡
+	 * @Fields investRound : ??èµ?è¿???è½?æ¬?
 	 */
 	private String investRound;
 	
 	/**
-	 * @Fields newestInvestProjects : æŠ•èµ„è¿‡çš„é¡¹ç›®åç§°ï¼ˆæœ€è¿‘ä¸‰ä¸ªï¼‰
+	 * @Fields newestInvestProjects : ??èµ?è¿???é¡¹ç????ç§°ï???è¿?ä¸?ä¸?ï¼?
 	 */
 	private String newestInvestProjects;
 	
 	/**
-	 * @Fields investMonthRate : ä¸ŠæœˆåŒæ¯”å¢é•¿ç‡ï¼ˆç¬”æ•°ï¼‰
+	 * @Fields investMonthRate : ä¸?????æ¯?å¢??¿ç??ï¼?ç¬??°ï?
 	 */
 	private Integer investMonthRate;
 	
@@ -77,10 +75,12 @@ public class InvestfirmsData extends Pojo {
 	 * @Fields addTime : 
 	 */
 	private Timestamp addTime;
+	
+	/**
+	 * @Fields updateTime : 
+	 */
+	private Timestamp updateTime;
 
-	//
-	private List<Integer> industryIdList;
-	private List<Integer> roundIdList;
 	private Integer[] newestEventRoundIds;
 
 	private Long[] industryIds;
@@ -101,90 +101,6 @@ public class InvestfirmsData extends Pojo {
 		this.industryIds = industryIds;
 	}
 
-	public List<Integer> getIndustryIdList() {
-		return industryIdList;
-	}
-
-	public void setIndustryIdList(List<Integer> industryIdList) {
-		this.industryIdList = industryIdList;
-	}
-
-	public List<Integer> getRoundIdList() {
-		return roundIdList;
-	}
-
-	public void setRoundIdList(List<Integer> roundIdList) {
-		this.roundIdList = roundIdList;
-	}
-
-	/**
-	 * @Fields updateTime : 
-	 */
-	private Timestamp updateTime;
-
-	private boolean doOrder = true ;
-	private int pageIndex = 1;
-	private int pageSize = 10;
-	private String order;
-	private String orderBy;
-	private String returnFields;
-	private String pic;
-
-	public String getPic() {
-		return pic;
-	}
-
-	public void setPic(String pic) {
-		this.pic = pic;
-	}
-
-	public int getPageIndex() {
-		return pageIndex;
-	}
-
-	public void setPageIndex(int pageIndex) {
-		this.pageIndex = pageIndex;
-	}
-
-	public int getPageSize() {
-		return pageSize;
-	}
-
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
-	}
-
-	public String getOrder() {
-		return order;
-	}
-
-	public void setOrder(String order) {
-		this.order = order;
-	}
-
-	public String getOrderBy() {
-		return orderBy;
-	}
-
-	public void setOrderBy(String orderBy) {
-		this.orderBy = orderBy;
-	}
-
-	public String getReturnFields() {
-		return returnFields;
-	}
-
-	public void setReturnFields(String returnFields) {
-		this.returnFields = returnFields;
-	}
-
-	public boolean isDoOrder() {
-		return doOrder;
-	}
-
-	public void setDoOrder(boolean doOrder) {
-		this.doOrder = doOrder;
-	}
 	public Integer getId(){
 		return id;
 	}
@@ -231,14 +147,6 @@ public class InvestfirmsData extends Pojo {
 
 	public void setInvestMoney(Long investMoney){
 		this.investMoney = investMoney;
-	}
-
-	public Long getSourceId(){
-		return sourceId;
-	}
-
-	public void setSourceId(Long sourceId){
-		this.sourceId = sourceId;
 	}
     
 	public String getInvestIndustry(){

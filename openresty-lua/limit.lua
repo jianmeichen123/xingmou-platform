@@ -8,7 +8,7 @@
 reds = require("redis_pool") --引用redis连接池
 
 local _L ={}
-function _L:limlie()
+function _L:limit()
 
     local myIP = ngx.req.get_headers()["X-Real-IP"]
     if myIP == nil then

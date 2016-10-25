@@ -39,6 +39,15 @@ public class TargetIndustryHotController {
 		if(!messageInfo.isSuccess()){
 			return messageInfo;
 		}
+		Integer pageIndex = targetIndustryHotQueryInfo.getPageIndex();
+		Integer pageSize = targetIndustryHotQueryInfo.getPageSize();
+		int rownum  = pageSize*(pageIndex-1)+1;
+		List<TargetIndustryHot> data = messageInfo.getData().getRecords();
+		if(data != null && data.size()>0){
+			for(TargetIndustryHot t: data){
+				t.setRownum(rownum++);
+			}
+		}
         return  messageInfo;
 	}
 

@@ -27,6 +27,8 @@ public class TargetIndustryHot extends Pojo {
 	 */
 	private Integer id;
 	
+	private Integer rownum;
+	
 	/**
 	 * @Fields industryId : 行业id
 	 */
@@ -229,5 +231,12 @@ public class TargetIndustryHot extends Pojo {
 
 	public void setUpdateTime(Timestamp updateTime){
 		this.updateTime = updateTime;
+	}
+	public Integer getRownum() {
+		return rownum;
+	}
+
+	public void setRownum(Integer rownum) {
+		this.rownum = rownum;
 	}
     }

@@ -68,7 +68,8 @@
 		SELECT
 		<include refid="selectFields" />
 		FROM dm_target_industry_hot
-		WHERE  industry_level = #{industryLevel,jdbcType=INTEGER}
+		WHERE invest_hot IS NOT NULL AND  industry_level = #{industryLevel,jdbcType=INTEGER}
+		ORDER BY invest_hot
 	</select>
 	
 

@@ -45,9 +45,11 @@ public class TargetIndustryHotController {
 		
     @RequestMapping("getListByIndustryLevel")
     @ResponseBody
-	public MessageInfo getListByIndustryLevel(Integer industryLevel){
-    	
-		MessageInfo<List<TargetIndustryHot>> messageInfo = targetIndustryHotBiz.getListByIndustryLevel(industryLevel);
+	public MessageInfo getListByIndustryLevel(@RequestBody TargetIndustryHotQueryInfo targetIndustryHotQueryInfo){
+    	if(targetIndustryHotQueryInfo == null || targetIndustryHotQueryInfo.getIndustryLevel() == null){
+    		return new MessageInfo();
+    	}
+		MessageInfo<List<TargetIndustryHot>> messageInfo = targetIndustryHotBiz.getListByIndustryLevel(targetIndustryHotQueryInfo.getIndustryLevel());
 		if(!messageInfo.isSuccess()){
 			return messageInfo;
 		}
@@ -57,12 +59,20 @@ public class TargetIndustryHotController {
         Map<String,Object> data = new HashMap<String,Object>();
         MessageInfo  message = new MessageInfo();
         if(ls != null){
-	        for(int i = 0; i< ls.size(); i++){
-	        	if(i<14){
+        	if(targetIndustryHotQueryInfo.getIndustryLevel().intValue()==2){
+        		for(int i = 0; i< ls.size(); i++){
+    	        	if(i<14){
+    	        		names.add(ls.get(i).getIndustryName());
+    	        		hotcounts.add(ls.get(i).getInvestHot());
+    	        	}
+    	        }
+        	}else{
+        		for(int i = 0; i< ls.size(); i++){
 	        		names.add(ls.get(i).getIndustryName());
 	        		hotcounts.add(ls.get(i).getInvestHot());
-	        	}
-	        }
+    	        }
+        	}
+	        
 	        Map<String,Object> map = new HashMap<String,Object>();
 	        data.put("hotcounts", hotcounts);
 	        data.put("names", names);

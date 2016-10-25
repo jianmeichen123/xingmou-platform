@@ -84,9 +84,7 @@
 		<foreach item="item" index="index" collection="years" open="(" separator="," close=")">
 			#{item}
 		</foreach>
-		<if test="industryId != null and industryId > 0">
-			AND industry_id = #{industryId,jdbcType=INTEGER}
-		</if>
+
 	</select>
 
 

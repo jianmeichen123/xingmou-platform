@@ -92,21 +92,21 @@
 		FROM dm_chart_event_industry_round_merge
 	</select>
 	
-	<select id="queryChartEventIndustryRoundMerge" resultMap="BaseResultMap" parameterType="com.gi.xm.report.query.ChartEventIndustryRoundMergeQuery">
+	<select id="queryChartEventIndustryRoundMerge" resultMap="BaseResultMap" parameterType="com.gi.xm.report.pojo.ChartEventIndustryRoundMerge">
 		SELECT
 		<include refid="selectFields" />
 		FROM dm_chart_event_industry_round_merge
 		<include refid="queryWhereAndOrder" />
 	</select>
 
-	<select id="chartAnalysis" resultMap="BaseResultMap" parameterType="com.gi.xm.report.query.ChartEventIndustryRoundMergeQuery">
+	<select id="chartAnalysis" resultMap="BaseResultMap" parameterType="com.gi.xm.report.pojo.ChartEventIndustryRoundMerge">
 		SELECT
 		<include refid="selectFields" />
 		FROM dm_chart_event_industry_round_merge
 		<include refid="queryWhereAndOrder" />
 	</select>
 
-	<select id="trendAnalysis" resultMap="BaseResultMap" parameterType="com.gi.xm.report.query.ChartEventIndustryRoundMergeQuery">
+	<select id="trendAnalysis" resultMap="BaseResultMap" parameterType="com.gi.xm.report.pojo.ChartEventIndustryRoundMerge">
 		SELECT
 		<include refid="selectFields" />
 		FROM dm_chart_event_industry_round_merge

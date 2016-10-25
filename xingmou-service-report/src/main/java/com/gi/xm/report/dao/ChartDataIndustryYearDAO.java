@@ -4,7 +4,6 @@ import java.util.Date;
 import java.math.BigDecimal;
 import java.util.List;
 
-import com.gi.xm.report.pojo.ChartDataIndustryFirstYear;
 import com.gi.xm.report.query.ChartDataIndustryYearQueryInfo;
 import org.apache.ibatis.annotations.Param;
 
@@ -18,7 +17,7 @@ public interface ChartDataIndustryYearDAO {
 			
 	/*List<ChartDataIndustryYear> selectByIndustryIdYaar(@Param("industryId") Integer industryId, @Param("yaar") Integer yaar);*/
 				
-	List<ChartDataIndustryFirstYear> selectByYaarIndustrySubId(@Param("years") Integer[] years, @Param("industryId") Integer industryId);
+	List<ChartDataIndustryYear> selectByYaarIndustrySubId(@Param("years") Integer[] years, @Param("industrySubId") Integer industrySubId);
 				
 /*	List<ChartDataIndustryYear> selectByIndustryId(@Param("industryId") Integer industryId);
 				

@@ -5,7 +5,6 @@ package com.gi.xm.report.biz;
 import java.util.List;
 
 import com.gi.xm.platform.view.common.QueryResultInfo;
-import com.gi.xm.report.pojo.ChartDataIndustryFirstYear;
 import com.gi.xm.report.query.ChartDataIndustryYearQueryInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,11 +32,11 @@ public class ChartDataIndustryYearBiz  {
 
 
 
-	public MessageInfo<List<ChartDataIndustryFirstYear>> getListByYaarIndustrySubId(Integer[] years, Integer industrySubId){
+	public MessageInfo<List<ChartDataIndustryYear>> getListByYaarIndustrySubId(Integer[] years, Integer industrySubId){
 
-		MessageInfo<List<ChartDataIndustryFirstYear>> messageInfo = new MessageInfo<List<ChartDataIndustryFirstYear>>();
+		MessageInfo<List<ChartDataIndustryYear>> messageInfo = new MessageInfo<List<ChartDataIndustryYear>>();
 		try {
-			List<ChartDataIndustryFirstYear> chartDataIndustryYearList = chartDataIndustryYearDAO.selectByYaarIndustrySubId(years, industrySubId);
+			List<ChartDataIndustryYear> chartDataIndustryYearList = chartDataIndustryYearDAO.selectByYaarIndustrySubId(years, industrySubId);
 			messageInfo.setData(chartDataIndustryYearList);
 		} catch (Exception e) {
 			LOGGER.error("getListByYaarIndustrySubId","查询ChartDataIndustryYear失败", e);

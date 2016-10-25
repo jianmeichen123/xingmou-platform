@@ -27,119 +27,109 @@ public class ChartDataIndustryFirstYear extends Pojo {
         public static final String INVESTED_MAX_MONEY = "最大融资金额（元）";
         public static final String ADD_TIME = "addTime";
         public static final String UPDATE_TIME = "updateTime";
-
-
+    
+	
 	/**
-	 * @Fields id :
+	 * @Fields id : 
 	 */
 	private Long id;
-
+	
 	/**
 	 * @Fields yaar : 年份
 	 */
 	private Integer yaar;
-
+	
 	/**
 	 * @Fields industryId : 一级行业id
 	 */
 	private Integer industryId;
-
+	
 	/**
 	 * @Fields industryName : 一级行业名称(冗余)
 	 */
 	private String industryName;
-
+	
 	/**
-	 * @Fields industrySubId : 二级行业id
-	 */
-	private Integer industrySubId;
-
-	/**
-	 * @Fields industrySubName : 二级行业名称（冗余）
-	 */
-	private String industrySubName;
-
-	/**
-	 * @Fields marketMoney : 市场规模-金额(市场总量)
+	 * @Fields marketMoney : 市场规模-金额(市场总量) - 亿元
 	 */
 	private Long marketMoney;
-
+	
 	/**
 	 * @Fields marketMoneyRate : 市场规模-同比增长率
 	 */
-	private Double marketMoneyRate;
-
+	private Integer marketMoneyRate;
+	
 	/**
 	 * @Fields marketUser : 用户规模
 	 */
 	private Long marketUser;
-
+	
 	/**
 	 * @Fields marketUserRate : 用户规模同比增长率
 	 */
 	private Integer marketUserRate;
-
+	
 	/**
 	 * @Fields singleUserValue : 单用户价值 = 市场规模/用户规模
 	 */
 	private Long singleUserValue;
-
+	
 	/**
 	 * @Fields marketMoneyStock : 市场存量
 	 */
 	private Long marketMoneyStock;
-
+	
 	/**
 	 * @Fields projectNum : 成立项目数
 	 */
 	private Integer projectNum;
-
+	
 	/**
 	 * @Fields investedNum : 投资笔数
 	 */
 	private Integer investedNum;
-
+	
 	/**
 	 * @Fields investedNumRate : 获投增长率(笔数增长率)
 	 */
 	private Integer investedNumRate;
-
+	
 	/**
 	 * @Fields investedMoney : 投资金额(元)
 	 */
 	private Long investedMoney;
-
+	
 	/**
 	 * @Fields investedMoneyRate : 投资金额增长率
 	 */
 	private Integer investedMoneyRate;
-
+	
 	/**
 	 * @Fields investedPerMoney : 平均融资金额(元)
 	 */
 	private Long investedPerMoney;
-
+	
 	/**
 	 * @Fields investedMedianMoney : 融资金额中位数(元)
 	 */
 	private Long investedMedianMoney;
-
+	
 	/**
 	 * @Fields investedMaxMoney : 最大融资金额（元）
 	 */
 	private Long investedMaxMoney;
-
+	
 	/**
-	 * @Fields addTime :
+	 * @Fields addTime : 
 	 */
 	private Timestamp addTime;
-
+	
 	/**
-	 * @Fields updateTime :
+	 * @Fields updateTime : 
 	 */
 	private Timestamp updateTime;
-
-
+	
+    
 	public Long getId(){
 		return id;
 	}
@@ -147,7 +137,7 @@ public class ChartDataIndustryFirstYear extends Pojo {
 	public void setId(Long id){
 		this.id = id;
 	}
-
+    
 	public Integer getYaar(){
 		return yaar;
 	}
@@ -155,7 +145,7 @@ public class ChartDataIndustryFirstYear extends Pojo {
 	public void setYaar(Integer yaar){
 		this.yaar = yaar;
 	}
-
+    
 	public Integer getIndustryId(){
 		return industryId;
 	}
@@ -163,7 +153,7 @@ public class ChartDataIndustryFirstYear extends Pojo {
 	public void setIndustryId(Integer industryId){
 		this.industryId = industryId;
 	}
-
+    
 	public String getIndustryName(){
 		return industryName;
 	}
@@ -171,23 +161,7 @@ public class ChartDataIndustryFirstYear extends Pojo {
 	public void setIndustryName(String industryName){
 		this.industryName = industryName;
 	}
-
-	public Integer getIndustrySubId(){
-		return industrySubId;
-	}
-
-	public void setIndustrySubId(Integer industrySubId){
-		this.industrySubId = industrySubId;
-	}
-
-	public String getIndustrySubName(){
-		return industrySubName;
-	}
-
-	public void setIndustrySubName(String industrySubName){
-		this.industrySubName = industrySubName;
-	}
-
+    
 	public Long getMarketMoney(){
 		return marketMoney;
 	}
@@ -195,15 +169,15 @@ public class ChartDataIndustryFirstYear extends Pojo {
 	public void setMarketMoney(Long marketMoney){
 		this.marketMoney = marketMoney;
 	}
-
-	public Double getMarketMoneyRate(){
+    
+	public Integer getMarketMoneyRate(){
 		return marketMoneyRate;
 	}
 
-	public void setMarketMoneyRate(Double marketMoneyRate){
+	public void setMarketMoneyRate(Integer marketMoneyRate){
 		this.marketMoneyRate = marketMoneyRate;
 	}
-
+    
 	public Long getMarketUser(){
 		return marketUser;
 	}
@@ -211,7 +185,7 @@ public class ChartDataIndustryFirstYear extends Pojo {
 	public void setMarketUser(Long marketUser){
 		this.marketUser = marketUser;
 	}
-
+    
 	public Integer getMarketUserRate(){
 		return marketUserRate;
 	}
@@ -219,7 +193,7 @@ public class ChartDataIndustryFirstYear extends Pojo {
 	public void setMarketUserRate(Integer marketUserRate){
 		this.marketUserRate = marketUserRate;
 	}
-
+    
 	public Long getSingleUserValue(){
 		return singleUserValue;
 	}
@@ -227,7 +201,7 @@ public class ChartDataIndustryFirstYear extends Pojo {
 	public void setSingleUserValue(Long singleUserValue){
 		this.singleUserValue = singleUserValue;
 	}
-
+    
 	public Long getMarketMoneyStock(){
 		return marketMoneyStock;
 	}
@@ -235,7 +209,7 @@ public class ChartDataIndustryFirstYear extends Pojo {
 	public void setMarketMoneyStock(Long marketMoneyStock){
 		this.marketMoneyStock = marketMoneyStock;
 	}
-
+    
 	public Integer getProjectNum(){
 		return projectNum;
 	}
@@ -243,7 +217,7 @@ public class ChartDataIndustryFirstYear extends Pojo {
 	public void setProjectNum(Integer projectNum){
 		this.projectNum = projectNum;
 	}
-
+    
 	public Integer getInvestedNum(){
 		return investedNum;
 	}
@@ -251,7 +225,7 @@ public class ChartDataIndustryFirstYear extends Pojo {
 	public void setInvestedNum(Integer investedNum){
 		this.investedNum = investedNum;
 	}
-
+    
 	public Integer getInvestedNumRate(){
 		return investedNumRate;
 	}
@@ -259,7 +233,7 @@ public class ChartDataIndustryFirstYear extends Pojo {
 	public void setInvestedNumRate(Integer investedNumRate){
 		this.investedNumRate = investedNumRate;
 	}
-
+    
 	public Long getInvestedMoney(){
 		return investedMoney;
 	}
@@ -267,7 +241,7 @@ public class ChartDataIndustryFirstYear extends Pojo {
 	public void setInvestedMoney(Long investedMoney){
 		this.investedMoney = investedMoney;
 	}
-
+    
 	public Integer getInvestedMoneyRate(){
 		return investedMoneyRate;
 	}
@@ -275,7 +249,7 @@ public class ChartDataIndustryFirstYear extends Pojo {
 	public void setInvestedMoneyRate(Integer investedMoneyRate){
 		this.investedMoneyRate = investedMoneyRate;
 	}
-
+    
 	public Long getInvestedPerMoney(){
 		return investedPerMoney;
 	}
@@ -283,7 +257,7 @@ public class ChartDataIndustryFirstYear extends Pojo {
 	public void setInvestedPerMoney(Long investedPerMoney){
 		this.investedPerMoney = investedPerMoney;
 	}
-
+    
 	public Long getInvestedMedianMoney(){
 		return investedMedianMoney;
 	}
@@ -291,7 +265,7 @@ public class ChartDataIndustryFirstYear extends Pojo {
 	public void setInvestedMedianMoney(Long investedMedianMoney){
 		this.investedMedianMoney = investedMedianMoney;
 	}
-
+    
 	public Long getInvestedMaxMoney(){
 		return investedMaxMoney;
 	}
@@ -299,7 +273,7 @@ public class ChartDataIndustryFirstYear extends Pojo {
 	public void setInvestedMaxMoney(Long investedMaxMoney){
 		this.investedMaxMoney = investedMaxMoney;
 	}
-
+    
 	public Timestamp getAddTime(){
 		return addTime;
 	}
@@ -307,7 +281,7 @@ public class ChartDataIndustryFirstYear extends Pojo {
 	public void setAddTime(Timestamp addTime){
 		this.addTime = addTime;
 	}
-
+    
 	public Timestamp getUpdateTime(){
 		return updateTime;
 	}
@@ -315,4 +289,4 @@ public class ChartDataIndustryFirstYear extends Pojo {
 	public void setUpdateTime(Timestamp updateTime){
 		this.updateTime = updateTime;
 	}
-}
+    }

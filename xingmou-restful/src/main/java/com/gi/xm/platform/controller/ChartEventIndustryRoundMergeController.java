@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 
+import com.gi.xm.platform.view.IndustryDataYearInfo;
 import com.gi.xm.platform.view.common.MessageInfo;
 import com.gi.xm.platform.view.common.QueryResultInfo;
 import com.gi.xm.report.biz.ChartDataIndustryFirstYearBiz;
@@ -48,17 +49,19 @@ public class ChartEventIndustryRoundMergeController {
 	}
 	@RequestMapping("chartDataYear/{years}/{industryId}")
 	@ResponseBody
-	public MessageInfo chartDataYear(@PathVariable("years") Integer[] years, @PathVariable("industryId") Integer industryId){
-
+	public MessageInfo<List<ChartDataIndustryYear>> chartDataYear(@PathVariable("years") Integer[] years, @PathVariable("industryId") Integer industryId){
+		MessageInfo<List<ChartDataIndustryYear>> messageInfo = null;
 		//所有一级行业
-		if (industryId==null) {
-
+		if (industryId==null ||industryId==0) {
+			messageInfo = chartDataIndustryYearBiz.getAll(years);
 		} else {
 			//二级行业
+			messageInfo = chartDataIndustryYearBiz.getListByYaarIndustryId(years,industryId);
+
 		}
 
 
-		return null;
+		return messageInfo;
 
 
 

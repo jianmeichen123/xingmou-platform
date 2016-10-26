@@ -50,7 +50,25 @@ public class InvestfirmsData extends Pojo {
 	 * @Fields investMoney : ?»æ??èµ???é¢?ï¼???ï¼?
 	 */
 	private Long investMoney;
-	
+
+	private  Long sourceId;
+	private String pic;
+
+	public String getPic() {
+		return pic;
+	}
+
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
+	public Long getSourceId() {
+		return sourceId;
+	}
+
+	public void setSourceId(Long sourceId) {
+		this.sourceId = sourceId;
+	}
+
 	/**
 	 * @Fields investIndustry : ??èµ?è¿???ä¸?çº§è?ä¸?
 	 */

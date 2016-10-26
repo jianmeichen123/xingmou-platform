@@ -103,7 +103,30 @@
 			AND industry_sub_id = #{industrySubId,jdbcType=INTEGER}
 		</if>
 	</select>
-			
+	<select id="selectByYaarIndustryId" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_chart_data_industry_year
+
+		WHERE  yaar in
+		<foreach item="item" index="index" collection="years" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		<if test="industryId!=null">AND industry_id = #{industryId,jdbcType=INTEGER}</if>
+	</select>
+
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_chart_data_industry_first_year
+
+		WHERE  yaar in
+		<foreach item="item" index="index" collection="years" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+
+	</select>
 	<select id="selectByIndustryId" resultMap="BaseResultMap">
 		SELECT
 		<include refid="selectFields" />
@@ -127,6 +150,9 @@
 		FROM dm_chart_data_industry_year
 		<include refid="queryWhereAndOrder" />
 	</select>
+
+
+
 
 	<sql id="queryWhereAndOrder">
 		<where>

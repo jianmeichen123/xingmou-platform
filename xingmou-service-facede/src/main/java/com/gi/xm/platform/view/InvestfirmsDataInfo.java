@@ -77,6 +77,16 @@ public class InvestfirmsDataInfo implements Serializable {
 
 	private Long[] industryIds;
 
+	private String pic;
+
+	public String getPic() {
+		return pic;
+	}
+
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
+
 	public Integer[] getNewestEventRoundIds() {
 		return newestEventRoundIds;
 	}

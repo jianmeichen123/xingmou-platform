@@ -22,6 +22,8 @@ public interface ChartDataIndustryYearDAO {
 /*	List<ChartDataIndustryYear> selectByIndustryId(@Param("industryId") Integer industryId);
 				
 	List<ChartDataIndustryYear> selectByYaar(@Param("yaar") Integer yaar);*/
+    List<ChartDataIndustryYear> selectAll(@Param("years") Integer[] years);
+	List<ChartDataIndustryYear> selectByYaarIndustryId(@Param("years") Integer[] years, @Param("industryId") Integer industryId);
 
 
 	List<ChartDataIndustryYear> queryChartDataIndustryYear(ChartDataIndustryYearQueryInfo chartDataIndustryYearQueryInfo);

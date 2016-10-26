@@ -45,7 +45,31 @@ public class ChartDataIndustryYearBiz  {
 		return messageInfo;
 	}
 
+	public MessageInfo<List<ChartDataIndustryYear>> getListByYaarIndustryId(Integer[] years, Integer industryId){
 
+		MessageInfo<List<ChartDataIndustryYear>> messageInfo = new MessageInfo<List<ChartDataIndustryYear>>();
+		try {
+			List<ChartDataIndustryYear> chartDataIndustryYearList = chartDataIndustryYearDAO.selectByYaarIndustryId(years, industryId);
+			messageInfo.setData(chartDataIndustryYearList);
+		} catch (Exception e) {
+			LOGGER.error("getListByYaarIndustryId","查询getListByYaarIndustryId失败", e);
+			messageInfo.setStatus(10001);
+		}
+		return messageInfo;
+	}
+
+	public MessageInfo<List<ChartDataIndustryYear>> getAll(Integer[] years){
+
+		MessageInfo<List<ChartDataIndustryYear>> messageInfo = new MessageInfo<List<ChartDataIndustryYear>>();
+		try {
+			List<ChartDataIndustryYear> chartDataIndustryYearList = chartDataIndustryYearDAO.selectAll(years);
+			messageInfo.setData(chartDataIndustryYearList);
+		} catch (Exception e) {
+			LOGGER.error("getAll","查询getAll失败", e);
+			messageInfo.setStatus(10001);
+		}
+		return messageInfo;
+	}
 	public MessageInfo<QueryResultInfo<ChartDataIndustryYear>> queryChartDataIndustryYear(ChartDataIndustryYearQueryInfo chartDataIndustryYearQueryInfo) {
 		MessageInfo<QueryResultInfo<ChartDataIndustryYear>> message = new MessageInfo<QueryResultInfo<ChartDataIndustryYear>>();
 		try {

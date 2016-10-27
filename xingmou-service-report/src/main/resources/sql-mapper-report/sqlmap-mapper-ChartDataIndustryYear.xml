@@ -105,9 +105,9 @@
 	</select>
 	<select id="selectByYaarIndustryId" resultMap="BaseResultMap">
 		SELECT
-		yaar,industry_id,industry_name,invested_num,invested_money
+		yaar,industry_sub_id,industry_sub_name,invested_num,invested_money
 
-		FROM dm_chart_data_industry_first_year
+		FROM dm_chart_data_industry_year
 
 		WHERE  yaar in
 		<foreach item="item" index="index" collection="years" open="(" separator="," close=")">

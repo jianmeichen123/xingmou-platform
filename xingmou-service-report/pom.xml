@@ -12,8 +12,6 @@
     <artifactId>xingmou-service-report</artifactId>
 
     <properties>
-        <!-- The main class to start by executing java -jar -->
-        <start-class>com.gi.xm.platform.main.XMServiceApp</start-class>
         <!--  依赖版本  -->
         <mybatis.version>3.3.1</mybatis.version>
         <mybatis.spring.version>1.2.4</mybatis.spring.version>

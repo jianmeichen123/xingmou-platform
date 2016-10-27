@@ -117,7 +117,7 @@
 		<include refid="queryWhereAndOrder1" />
 
 
-		GROUP BY money_level_order_id,money_level_name 
+		GROUP BY money_level_order_id,money_level_name
 		ORDER BY t.money_level_order_id
 
 
@@ -139,7 +139,7 @@
 			</foreach>
 		</if>
 		<if test="parentId!=null">AND parent_id = #{parentId,jdbcType=INTEGER}</if>
-		<if test="industryId!=null">AND industry_id = #{industryId,jdbcType=INTEGER}</if>
+		<if test="industryId!=null and industryId>0" >AND industry_id = #{industryId,jdbcType=INTEGER}</if>
 		<if test="industryName!=null and industryName!=''">AND industry_name = #{industryName,jdbcType=VARCHAR}</if>
 		<if test="industryLevel!=null">AND industry_level = #{industryLevel,jdbcType=INTEGER}</if>
 		<if test="moneyLevelOrderId!=null">AND money_level_order_id = #{moneyLevelOrderId,jdbcType=INTEGER}</if>
@@ -224,7 +224,7 @@
 			                        </foreach>
 								</if>
 								<if test="parentId!=null">AND parent_id = #{parentId,jdbcType=INTEGER}</if>
-								<if test="industryId!=null">AND industry_id = #{industryId,jdbcType=INTEGER}</if>
+								<if test="industryId!=null and industryId>0">AND industry_id = #{industryId,jdbcType=INTEGER}</if>
 								<if test="industryName!=null and industryName!=''">AND industry_name = #{industryName,jdbcType=VARCHAR}</if>
 								<if test="industryLevel!=null">AND industry_level = #{industryLevel,jdbcType=INTEGER}</if>
 								<if test="moneyLevelOrderId!=null">AND money_level_order_id = #{moneyLevelOrderId,jdbcType=INTEGER}</if>

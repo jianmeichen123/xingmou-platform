@@ -8,7 +8,7 @@ import java.util.Date;
 public class InvestfirmsDataInfo implements Serializable {
 
 	/**   
-	 * @Fields serialVersionUID : åº??????????? 
+	 * @Fields serialVersionUID : ï¿½??????????? 
 	 */ 
 	private static final long serialVersionUID = 1L;
 
@@ -19,47 +19,47 @@ public class InvestfirmsDataInfo implements Serializable {
 	private Integer id;
 			
 	/**
-	 * @Fields investfirmId : ??èµ??ºæ??id
+	 * @Fields investfirmId : ??ï¿½??ï¿½ï¿½??id
 	 */
 	private Long investfirmId;
 			
 	/**
-	 * @Fields investfirmName : ??ä½???èµ??ºæ????ç§?
+	 * @Fields investfirmName : ??ï¿½???ï¿½??ï¿½ï¿½????ï¿½?
 	 */
 	private String investfirmName;
 			
 	/**
-	 * @Fields investfirmLink : ??ä½??ºæ??ç½???
+	 * @Fields investfirmLink : ??ï¿½??ï¿½ï¿½??ï¿½???
 	 */
 	private String investfirmLink;
 			
 	/**
-	 * @Fields investNum : ?»æ??èµ?ç¬???
+	 * @Fields investNum : ?ï¿½ï¿½??ï¿½?ï¿½???
 	 */
 	private Integer investNum;
 			
 	/**
-	 * @Fields investMoney : ?»æ??èµ???é¢?ï¼???ï¼?
+	 * @Fields investMoney : ?ï¿½ï¿½??ï¿½???ï¿½?ï¿½???ï¿½?
 	 */
 	private Long investMoney;
 			
 	/**
-	 * @Fields investIndustry : ??èµ?è¿???ä¸?çº§è?ä¸?
+	 * @Fields investIndustry : ??ï¿½?ï¿½???ï¿½?çº§ï¿½?ï¿½?
 	 */
 	private String investIndustry;
 			
 	/**
-	 * @Fields investRound : ??èµ?è¿???è½?æ¬?
+	 * @Fields investRound : ??ï¿½?ï¿½???ï¿½?ï¿½?
 	 */
 	private String investRound;
 			
 	/**
-	 * @Fields newestInvestProjects : ??èµ?è¿???é¡¹ç????ç§°ï???è¿?ä¸?ä¸?ï¼?
+	 * @Fields newestInvestProjects : ??ï¿½?ï¿½???é¡¹ï¿½????ç§°ï¿½???ï¿½?ï¿½?ï¿½?ï¿½?
 	 */
 	private String newestInvestProjects;
 			
 	/**
-	 * @Fields investMonthRate : ä¸?????æ¯?å¢??¿ç??ï¼?ç¬??°ï?
+	 * @Fields investMonthRate : ï¿½?????ï¿½?ï¿½??ï¿½ï¿½??ï¿½?ï¿½??ï¿½ï¿½?
 	 */
 	private Integer investMonthRate;
 			
@@ -78,6 +78,16 @@ public class InvestfirmsDataInfo implements Serializable {
 	private Long[] industryIds;
 
 	private String pic;
+
+	private  Long sourceId;
+
+	public Long getSourceId() {
+		return sourceId;
+	}
+
+	public void setSourceId(Long sourceId) {
+		this.sourceId = sourceId;
+	}
 
 	public String getPic() {
 		return pic;

@@ -67,7 +67,16 @@ public class IndustryReportsInfo implements Serializable {
 	 */
 	private Timestamp updateTime;
 		
-    
+    private String source;
+
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+
 	public Integer getId(){
 		return id;
 	}

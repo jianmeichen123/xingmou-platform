@@ -12,5 +12,44 @@
     <groupId>com.gi</groupId>
     <artifactId>xingmou-doc-restful</artifactId>
 
+    <properties>
+        <!-- The main class to start by executing java -jar -->
+        <start-class>com.gi.xm.doc.restful.main.DocRestfulApp</start-class>
+    </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.gi</groupId>
+            <artifactId>xingmou-doc-biz</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gi</groupId>
+            <artifactId>xingmou-assembly</artifactId>
+        </dependency>
+        <!--自身依赖 end-->
+        <!--自身依赖 end-->
+        <dependency>
+            <groupId>com.gi</groupId>
+            <artifactId>xingmou-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging </artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jetty</artifactId>
+        </dependency>
+    </dependencies>
 </project>

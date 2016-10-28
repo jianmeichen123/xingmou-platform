@@ -2,50 +2,60 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gi.xm.doc.dao.IndustryReportsDAO">
 	<resultMap id="BaseResultMap" type="com.gi.xm.doc.pojo.IndustryReportsInfo">
-					<id column="id" property="id" jdbcType="INTEGER" />
-								<result column="title" property="title" jdbcType="VARCHAR" />
-								<result column="publish_date" property="publishDate" jdbcType="DATE" />
-								<result column="source_type" property="sourceType" jdbcType="INTEGER" />
-								<result column="icon" property="icon" jdbcType="VARCHAR" />
-								<result column="industry_id" property="industryId" jdbcType="INTEGER" />
-								<result column="industry_sub_id" property="industrySubId" jdbcType="INTEGER" />
-								<result column="summary_short" property="summaryShort" jdbcType="VARCHAR" />
-								<result column="summary" property="summary" jdbcType="VARCHAR" />
-								<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
-								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-						</resultMap>
+		<id 	column="id" property="id" jdbcType="INTEGER" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="publish_date" property="publishDate" jdbcType="DATE" />
+        <result column="year" property="year" jdbcType="INTEGER" />
+        <result column="doc_type" property="docType" jdbcType="INTEGER" />
+        <result column="source_type" property="sourceType" jdbcType="INTEGER" />
+		<result column="icon" property="icon" jdbcType="VARCHAR" />
+        <result column="source_id" property="sourceId" jdbcType="INTEGER" />
+        <result column="industry_id" property="industryId" jdbcType="INTEGER" />
+		<result column="industry_sub_id" property="industrySubId" jdbcType="INTEGER" />
+		<result column="summary_short" property="summaryShort" jdbcType="VARCHAR" />
+		<result column="summary" property="summary" jdbcType="VARCHAR" />
+		<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
 
 
 	<insert id="insert" parameterType="com.gi.xm.doc.pojo.IndustryReportsInfo" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO dm_industry_reports (
 			title,
-			publish_date,
-			source_type,
-			icon,
-			industry_id,
+            source_id,
+            doc_type
+            publish_date,
+            source_type,
+            icon,
+            industry_id,
 			industry_sub_id,
 			summary_short,
 			summary,
+            year,
+            source_type,
 			add_time,
 			update_time
 		)
 		VALUES
 		(
 			#{title,jdbcType=VARCHAR},
-			#{publishDate,jdbcType=DATE},
-			#{sourceType,jdbcType=INTEGER},
-			#{icon,jdbcType=VARCHAR},
-			#{industryId,jdbcType=INTEGER},
-			#{industrySubId,jdbcType=INTEGER},
+            #{sourceId,jdbcType=INTEGER},
+            #{docType,jdbcType=DATE},
+            #{publishDate,jdbcType=DATE},
+            #{sourceType,jdbcType=INTEGER},
+            #{icon,jdbcType=VARCHAR},
+            #{industryId,jdbcType=INTEGER},
+            #{industrySubId,jdbcType=INTEGER},
 			#{summaryShort,jdbcType=VARCHAR},
-			#{summary,jdbcType=VARCHAR},
-			#{addTime,jdbcType=TIMESTAMP},
+			#{year,jdbcType=INTEGER},
+            #{sourceType,jdbcType=INTEGER},
+            #{addTime,jdbcType=TIMESTAMP},
 			 UNIX_TIMESTAMP()
 		)
 	</insert>
 
 	<sql id="selectFields">
-	id,title,publish_date,source_type,icon,industry_id,industry_sub_id,summary_short,summary,add_time,update_time
+	id,year,doc_type,source_id,title,publish_date,source_type,icon,industry_id,industry_sub_id,summary_short,summary,add_time,update_time
 	</sql>
 	
 	
@@ -59,19 +69,16 @@
 
 	<sql id="queryWhereAndOrder">
 		<where>
-					<if test="id!=null">AND id = #{id,jdbcType=INTEGER}</if>
-								<if test="title!=null and title!=''">AND title = #{title,jdbcType=VARCHAR}</if>
-								<if test="publishDate!=null">AND publish_date = #{publishDate,jdbcType=DATE}</if>
-								<if test="sourceType!=null">AND source_type = #{sourceType,jdbcType=INTEGER}</if>
-								<if test="icon!=null and icon!=''">AND icon = #{icon,jdbcType=VARCHAR}</if>
-								<if test="industryId!=null">AND industry_id = #{industryId,jdbcType=INTEGER}</if>
-								<if test="industrySubId!=null">AND industry_sub_id = #{industrySubId,jdbcType=INTEGER}</if>
-								<if test="summaryShort!=null and summaryShort!=''">AND summary_short = #{summaryShort,jdbcType=VARCHAR}</if>
-								<if test="summary!=null">AND summary = #{summary,jdbcType=VARCHAR}</if>
-								<if test="addTime!=null">AND add_time = #{addTime,jdbcType=TIMESTAMP}</if>
-								<if test="updateTime!=null">AND update_time = #{updateTime,jdbcType=TIMESTAMP}</if>
-					
-		</where>
+                <if test="sourceType!=null">AND source_type = #{sourceType,jdbcType=INTEGER}</if>
+                <if test="industryId!=null">AND industry_id = #{industryId,jdbcType=INTEGER}</if>
+            <if test="years!=null">
+                AND years in
+                <foreach item="year" index="index" collection="years" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+
+        </where>
 		<choose>
 			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
 			<otherwise>order by id desc</otherwise>

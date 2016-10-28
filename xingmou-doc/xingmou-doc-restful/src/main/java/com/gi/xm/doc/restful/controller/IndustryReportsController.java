@@ -30,9 +30,10 @@ public class IndustryReportsController {
 					Integer sourceType = industryReportsInfo.getSourceType();
 					if ( sourceType != null && sourceType == 1){
 						industryReportsInfo.setSource("艾瑞网");
-						industryReportsInfo.setIcon("");
+
 					}else if ( sourceType != null && sourceType == 2){
 						industryReportsInfo.setSource("易观");
+                        industryReportsInfo.setIcon("/analysys/review/"+industryReportsInfo.getSourceType()+"/face.png");
 					}
 
 			}

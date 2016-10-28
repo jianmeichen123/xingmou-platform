@@ -36,8 +36,17 @@ public class IndustryReportsQueryInfo extends QueryInfo {
 	private Timestamp addTime;
 	
 	private Timestamp updateTime;
-		
-    
+
+	private Integer[] years;
+
+	public Integer[] getYears() {
+		return years;
+	}
+
+	public void setYears(Integer[] years) {
+		this.years = years;
+	}
+
 	public Integer getId(){
 		return id;
 	}

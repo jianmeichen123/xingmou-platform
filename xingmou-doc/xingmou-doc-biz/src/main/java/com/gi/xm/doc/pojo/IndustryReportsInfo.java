@@ -69,6 +69,36 @@ public class IndustryReportsInfo implements Serializable {
 		
     private String source;
 
+	private String sourceId;
+
+	private Integer year;
+
+	private Integer docType;
+
+	public Integer getDocType() {
+		return docType;
+	}
+
+	public void setDocType(Integer docType) {
+		this.docType = docType;
+	}
+
+	public Integer getYear() {
+		return year;
+	}
+
+	public void setYear(Integer year) {
+		this.year = year;
+	}
+
+	public String getSourceId() {
+		return sourceId;
+	}
+
+	public void setSourceId(String sourceId) {
+		this.sourceId = sourceId;
+	}
+
 	public String getSource() {
 		return source;
 	}

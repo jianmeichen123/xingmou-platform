@@ -67,13 +67,15 @@ public class ChartEventIndustryRoundMergeController {
 	}
 
 	private void processMerge(List<ChartEventIndustryRoundMerge> list) {
+		List<Long> list1 = new ArrayList<Long>();
+		List<Long> list2 = new ArrayList<Long>();
+		Long[] array1 = new Long[2];
+		Long[] array2 = new Long[2];
+		Double [] rankA = new Double[10];
+		Double [] rankB = new Double[5];
+
 		for (ChartEventIndustryRoundMerge data:list) {
-			Double [] rankA = new Double[10];
-			Double [] rankB = new Double[5];
-			List<Long> list1 = new ArrayList<Long>();
-			List<Long> list2 = new ArrayList<Long>();
-			Long[] array1 = new Long[2];
-			Long[] array2 = new Long[2];
+
 			list1.add(data.getInvestNumA().longValue());
 			list1.add(data.getInvestNumB().longValue());
 			list1.add(data.getInvestNumC().longValue());
@@ -95,27 +97,38 @@ public class ChartEventIndustryRoundMergeController {
 			list2.add(data.getInvestMoneyH());
 			list2.add(data.getInvestMoneyI());
 
-			array1 = getMaxInteger(list1);
 
 
-			array2 = getMaxInteger(list2);
 
-			rankA[0] = array1[0].doubleValue();
-			rankA[1] = rankA[0]  + (array1[1]-array1[0])/9.0;
-			rankA[2] = rankA[1] + (array1[1]-array1[0])/9.0;
-			rankA[3] = rankA[2] + (array1[1]-array1[0])/9.0;
-			rankA[4] = rankA[3] + (array1[1]-array1[0])/9.0;
-			rankA[5] = rankA[4] + (array1[1]-array1[0])/9.0;
-			rankA[6] = rankA[5] + (array1[1]-array1[0])/9.0;
-			rankA[7] = rankA[6] + (array1[1]-array1[0])/9.0;
-			rankA[8] = rankA[7] + (array1[1]-array1[0])/9.0;
-			rankA[9] = array1[1].doubleValue() ;
 
-			rankB[0] = array2[0].doubleValue();
-			rankB[1] = rankB[0]  + (array2[1]-array2[0])/4.0;
-			rankB[2] = rankB[1] + (array2[1]-array2[0])/4.0;
-			rankB[3] = rankB[2] + (array2[1]-array2[0])/4.0;
-			rankB[4] = array2[1].doubleValue();
+		}
+
+		array1 = getMaxInteger(list1);
+
+
+		array2 = getMaxInteger(list2);
+
+		rankA[0] = array1[0].doubleValue();
+		rankA[1] = rankA[0]  + (array1[1]-array1[0])/9.0;
+		rankA[2] = rankA[1] + (array1[1]-array1[0])/9.0;
+		rankA[3] = rankA[2] + (array1[1]-array1[0])/9.0;
+		rankA[4] = rankA[3] + (array1[1]-array1[0])/9.0;
+		rankA[5] = rankA[4] + (array1[1]-array1[0])/9.0;
+		rankA[6] = rankA[5] + (array1[1]-array1[0])/9.0;
+		rankA[7] = rankA[6] + (array1[1]-array1[0])/9.0;
+		rankA[8] = rankA[7] + (array1[1]-array1[0])/9.0;
+		rankA[9] = array1[1].doubleValue() ;
+
+		rankB[0] = array2[0].doubleValue();
+		rankB[1] = rankB[0]  + (array2[1]-array2[0])/4.0;
+		rankB[2] = rankB[1] + (array2[1]-array2[0])/4.0;
+		rankB[3] = rankB[2] + (array2[1]-array2[0])/4.0;
+		rankB[4] = array2[1].doubleValue();
+
+
+		for (ChartEventIndustryRoundMerge data:list) {
+
+
 
 			Integer numALevel = getRank(rankA,data.getInvestNumA().longValue());
 			Integer numBLevel = getRank(rankA,data.getInvestNumB().longValue());

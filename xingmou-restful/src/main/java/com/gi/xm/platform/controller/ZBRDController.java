@@ -7,6 +7,7 @@ import com.gi.xm.report.common.ChartPojo;
 import com.gi.xm.report.common.NameValue;
 import com.gi.xm.report.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,6 +47,7 @@ public class ZBRDController {
 
     @RequestMapping("map/{years}/{industryId}")
     @ResponseBody
+    @Cacheable(value = "map",keyGenerator = "reportKG")
     public MessageInfo map(@PathVariable("years") Integer[] years,@PathVariable("industryId") Integer industryId){
         MessageInfo<ChartPojo>  messageInfo = new MessageInfo<>();
         MessageInfo<List<ChartEventIndustryDistictYear>> mdata = chartEventIndustryDistictYearBiz.selectByYearIndustryId(years,industryId);
@@ -88,6 +90,7 @@ public class ZBRDController {
 
     @RequestMapping("subMap/{years}/{industryId}/{industrySubId}")
     @ResponseBody
+    @Cacheable(value = "subMap",keyGenerator = "reportKG")
     public MessageInfo subMap(@PathVariable("years") Integer[] years, @PathVariable("industrySubId") Integer industrySubId){
         MessageInfo<ChartPojo>  messageInfo = new MessageInfo<>();
         MessageInfo<List<ChartEventIndustrySubDistictYear>> mdata = chartEventIndustrySubDistictYearBiz.selectByYearIndustrySubId(years, industrySubId);
@@ -130,6 +133,7 @@ public class ZBRDController {
 
     @RequestMapping("pie/{years}/{industryId}")
     @ResponseBody
+    @Cacheable(value = "pie",keyGenerator = "reportKG")
     public MessageInfo pie(@PathVariable("years") Integer[] years,@PathVariable("industryId") Integer industryId){
         MessageInfo<ChartPojo>  messageInfo = new MessageInfo<>();
         MessageInfo<List<ChartEventIndustryMoneylevelYear>> mdata = chartEventIndustryMoneylevelYearBiz.selectByYearIndustryId(years,industryId);
@@ -156,6 +160,7 @@ public class ZBRDController {
 
     @RequestMapping("subPie/{years}/{industryId}/{industrySubId}")
     @ResponseBody
+    @Cacheable(value = "subPie",keyGenerator = "reportKG")
     public MessageInfo subPie(@PathVariable("years") Integer[] years, @PathVariable("industrySubId") Integer industrySubId){
         MessageInfo<ChartPojo>  messageInfo = new MessageInfo<>();
         MessageInfo<List<ChartEventIndustrySubMoneylevelYear>> mdata = chartEventIndustrySubMoneylevelYearBiz.selectByYearIndustrySubId(years, industrySubId);
@@ -183,6 +188,7 @@ public class ZBRDController {
 
     @RequestMapping("chartDataYear/{years}/{industryId}/{industrySubId}")
     @ResponseBody
+    @Cacheable(value = "chartDataYear",keyGenerator = "reportKG")
     public MessageInfo chartDataYear(@PathVariable("years") Integer[] years,@PathVariable("industryId") Integer industryId, @PathVariable("industrySubId") Integer industrySubId){
         MessageInfo<ChartDataYearVO>  messageInfo = new MessageInfo<>();
         ChartDataYearVO vo  = new ChartDataYearVO();

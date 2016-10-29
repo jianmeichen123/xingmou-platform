@@ -1,3 +1,4 @@
+/*
 package com.gi.xm.platform.controller;
 
 import java.util.HashMap;
@@ -32,6 +33,7 @@ public class FilesController {
 		MessageInfo<QueryResultInfo<FilesInfo>> resultMessageInfo = filesFacede.queryFiles(filesQueryInfo);
 		return resultMessageInfo;
 	}
+*/
 /*
 
     @RequestMapping("create")
@@ -47,7 +49,8 @@ public class FilesController {
 		MessageInfo<Integer> messageInfo =  filesFacede.updateFiles(filesInfo);
 		return messageInfo;
 	}
-*/
+*//*
+
 
     @RequestMapping("get")
     @ResponseBody
@@ -55,6 +58,7 @@ public class FilesController {
 		MessageInfo<FilesInfo> messageInfo =  filesFacede.getFiles(id);
 		return messageInfo;
 	}
+*/
 /*
 
     @RequestMapping("getAll")
@@ -63,6 +67,8 @@ public class FilesController {
 		MessageInfo<List<FilesInfo>>  messageInfo = filesFacede.getAllFiles();
 		return messageInfo;
 	}
-*/
+*//*
+
 
 }
+*/

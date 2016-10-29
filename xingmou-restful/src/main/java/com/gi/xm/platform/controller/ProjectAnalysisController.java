@@ -7,6 +7,7 @@ import com.gi.xm.report.common.ChartPojo;
 import com.gi.xm.report.common.NameValue;
 import com.gi.xm.report.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -110,8 +111,9 @@ public class ProjectAnalysisController {
 
     @RequestMapping("bar/{years}/{industryId}")
     @ResponseBody
-    public MessageInfo bar(@PathVariable("years") Integer[] years,@PathVariable("industryId") Integer industryId) {
-
+    @Cacheable(value = "bar",keyGenerator = "reportKG")
+    public MessageInfo bar() {
+            Integer [] years = new Integer[]{2010,2011,2012,2013,2014,2015,2016};
             MessageInfo<List<ChartProjectIndustryYear>> messageInfo = chartProjectIndustryYearBiz.selectByYear(years);
             if (!messageInfo.isSuccess()) {
                 return messageInfo;

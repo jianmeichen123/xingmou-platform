@@ -98,9 +98,6 @@ public class ChartEventIndustryRoundMergeController {
 			list2.add(data.getInvestMoneyI());
 
 
-
-
-
 		}
 
 		array1 = getMaxInteger(list1);
@@ -183,11 +180,9 @@ public class ChartEventIndustryRoundMergeController {
 	@ResponseBody
 	public MessageInfo<List<ChartDataIndustryYear>> chartDataYear(@PathVariable("years") Integer[] years, @PathVariable("industryId") Integer industryId){
 		MessageInfo<List<ChartDataIndustryYear>> messageInfo = null;
-		//所有一级行业
 		if (industryId==null ||industryId==0) {
 			messageInfo = chartDataIndustryYearBiz.getAll(years);
 		} else {
-			//二级行业
 			messageInfo = chartDataIndustryYearBiz.getListByYaarIndustryId(years,industryId);
 
 		}

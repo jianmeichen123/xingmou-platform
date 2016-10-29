@@ -1,3 +1,4 @@
+/*
 package com.gi.xm.platform.controller;
 
 import java.util.HashMap;
@@ -32,6 +33,7 @@ public class MoneyLevelController {
 		MessageInfo<QueryResultInfo<MoneyLevelInfo>> resultMessageInfo = moneyLevelFacede.queryMoneyLevel(moneyLevelQueryInfo);
 		return resultMessageInfo;
 	}
+*/
 /*
 
     @RequestMapping("create")
@@ -47,7 +49,8 @@ public class MoneyLevelController {
 		MessageInfo<Integer> messageInfo =  moneyLevelFacede.updateMoneyLevel(moneyLevelInfo);
 		return messageInfo;
 	}
-*/
+*//*
+
 
     @RequestMapping("get")
     @ResponseBody
@@ -66,3 +69,4 @@ public class MoneyLevelController {
 
 	
 }
+*/

@@ -55,7 +55,7 @@ public class IndustryReportsInfo implements Serializable {
 	/**
 	 * @Fields summary : 正文
 	 */
-	private Byte summary;
+	private String summary;
 			
 	/**
 	 * @Fields addTime : 
@@ -170,15 +170,15 @@ public class IndustryReportsInfo implements Serializable {
 	public void setSummaryShort(String summaryShort){
 		this.summaryShort = summaryShort;
 	}
-    
-	public Byte getSummary(){
+
+	public String getSummary() {
 		return summary;
 	}
-	
-	public void setSummary(Byte summary){
+
+	public void setSummary(String summary) {
 		this.summary = summary;
 	}
-    
+
 	public Timestamp getAddTime(){
 		return addTime;
 	}

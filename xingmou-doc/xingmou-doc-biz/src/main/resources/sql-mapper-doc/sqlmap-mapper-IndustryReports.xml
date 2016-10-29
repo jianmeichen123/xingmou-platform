@@ -12,8 +12,8 @@
         <result column="source_id" property="sourceId" jdbcType="INTEGER" />
         <result column="industry_id" property="industryId" jdbcType="INTEGER" />
 		<result column="industry_sub_id" property="industrySubId" jdbcType="INTEGER" />
-		<result column="summary_short" property="summaryShort" jdbcType="VARCHAR" />
-		<result column="summary" property="summary" jdbcType="VARCHAR" />
+		<result column="summary_short" property="summaryShort" jdbcType="LONGVARCHAR" />
+		<result column="summary" property="summary" jdbcType="LONGVARCHAR" />
 		<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
 		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
 	</resultMap>
@@ -47,7 +47,8 @@
             #{industryId,jdbcType=INTEGER},
             #{industrySubId,jdbcType=INTEGER},
 			#{summaryShort,jdbcType=VARCHAR},
-			#{year,jdbcType=INTEGER},
+            #{summary,jdbcType=VARCHAR},
+            #{year,jdbcType=INTEGER},
             #{sourceType,jdbcType=INTEGER},
             #{addTime,jdbcType=TIMESTAMP},
 			 UNIX_TIMESTAMP()
@@ -62,8 +63,11 @@
 
 	<select id="queryIndustryReports" resultMap="BaseResultMap" parameterType="com.gi.xm.doc.query.IndustryReportsQueryInfo">
 		SELECT
-		<include refid="selectFields" />
-		FROM dm_industry_reports
+			id,year,doc_type,source_id,title,
+			publish_date,source_type,icon,industry_id,industry_sub_id,
+			summary_short
+		FROM
+			dm_industry_reports
 		<include refid="queryWhereAndOrder" />
 	</select>
 

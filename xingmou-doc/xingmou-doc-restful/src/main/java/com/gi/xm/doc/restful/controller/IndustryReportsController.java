@@ -28,12 +28,12 @@ public class IndustryReportsController {
 		if (resultMessageInfo != null && resultMessageInfo.getData()!= null && !resultMessageInfo.getData().getRecords().isEmpty()){
 			for (IndustryReportsInfo industryReportsInfo:resultMessageInfo.getData().getRecords()){
 					Integer sourceType = industryReportsInfo.getSourceType();
-					if ( sourceType != null && sourceType == 1){
+					if ( sourceType != null && sourceType == 2){
 						industryReportsInfo.setSource("艾瑞网");
 
-					}else if ( sourceType != null && sourceType == 2){
+					}else if ( sourceType != null && sourceType == 1){
 						industryReportsInfo.setSource("易观");
-                        industryReportsInfo.setIcon("/analysys/review/"+industryReportsInfo.getSourceType()+"/face.png");
+						industryReportsInfo.setIcon("http://static.galaxyinternet.com/xm/doc/analysys/report/errorBg.jpg");
 					}
 
 			}

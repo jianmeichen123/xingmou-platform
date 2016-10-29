@@ -56,7 +56,7 @@ public class InvestfirmsDataYearFacedeImpl implements InvestfirmsDataYearFacede 
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-		@Cacheable(value = "investfirmsDataYearInfo",keyGenerator = "wiselyKeyGenerator")
+
 	public MessageInfo<InvestfirmsDataYearInfo> getInvestfirmsDataYear( Long id ){
 		
 		Message<InvestfirmsDataYear> message  = investfirmsDataYearBiz.getInvestfirmsDataYear( id );
@@ -66,7 +66,6 @@ public class InvestfirmsDataYearFacedeImpl implements InvestfirmsDataYearFacede 
 		return messageInfo;
 	}
 
-    @Cacheable(value = "investfirmsDataYearInfo",keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<List<InvestfirmsDataYearInfo>> getAllInvestfirmsDataYear(){
 	
 		Message<List<InvestfirmsDataYear>> message  = investfirmsDataYearBiz.getAllInvestfirmsDataYear();

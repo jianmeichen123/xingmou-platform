@@ -56,7 +56,7 @@ public class 	DataFacedeImpl implements DataFacede {
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-		@Cacheable(value = "dataInfo",keyGenerator = "wiselyKeyGenerator")
+
 	public MessageInfo<DataInfo> getData( Integer id ){
 		
 		Message<Data> message  = dataBiz.getData( id );
@@ -66,7 +66,6 @@ public class 	DataFacedeImpl implements DataFacede {
 		return messageInfo;
 	}
 
-    @Cacheable(value = "dataInfo",keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<List<DataInfo>> getAllData(){
 	
 		Message<List<Data>> message  = dataBiz.getAllData();

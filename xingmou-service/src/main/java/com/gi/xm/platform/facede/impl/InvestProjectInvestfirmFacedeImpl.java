@@ -52,7 +52,6 @@ public class InvestProjectInvestfirmFacedeImpl implements InvestProjectInvestfir
         return messageInfo;
     }
 
-    @Cacheable(value = "investProjectInvestfirmInfo", keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<InvestProjectInvestfirmInfo> getInvestProjectInvestfirm(Long id) {
 
         Message<InvestProjectInvestfirm> message = investProjectInvestfirmBiz.getInvestProjectInvestfirm(id);
@@ -62,7 +61,6 @@ public class InvestProjectInvestfirmFacedeImpl implements InvestProjectInvestfir
         return messageInfo;
     }
 
-    @Cacheable(value = "investProjectInvestfirmInfo", keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<List<InvestProjectInvestfirmInfo>> getAllInvestProjectInvestfirm() {
 
         Message<List<InvestProjectInvestfirm>> message = investProjectInvestfirmBiz.getAllInvestProjectInvestfirm();

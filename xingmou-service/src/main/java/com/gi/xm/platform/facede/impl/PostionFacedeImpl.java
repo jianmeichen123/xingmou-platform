@@ -56,7 +56,6 @@ public class PostionFacedeImpl implements PostionFacede {
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-		@Cacheable(value = "postionInfo",keyGenerator = "wiselyKeyGenerator")
 	public MessageInfo<PostionInfo> getPostion( Long id ){
 		
 		Message<Postion> message  = postionBiz.getPostion( id );
@@ -66,7 +65,6 @@ public class PostionFacedeImpl implements PostionFacede {
 		return messageInfo;
 	}
 
-    @Cacheable(value = "postionInfo",keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<List<PostionInfo>> getAllPostion(){
 	
 		Message<List<Postion>> message  = postionBiz.getAllPostion();

@@ -57,7 +57,6 @@ public class InvestEventsFacedeImpl implements InvestEventsFacede {
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-		@Cacheable(value = "investEventsInfo",keyGenerator = "wiselyKeyGenerator")
 	public MessageInfo<InvestEventsInfo> getInvestEvents( Long id ){
 		
 		Message<InvestEvents> message  = investEventsBiz.getInvestEvents( id );
@@ -104,7 +103,6 @@ public class InvestEventsFacedeImpl implements InvestEventsFacede {
 		InvestEventsQuery investEventsQuery = InvestEventsConvertor.toInvestEventsQuery(investEventsQueryInfo);
 		MessageInfo<QueryResultInfo<InvestEventsInfo>> messageInfo = new MessageInfo<QueryResultInfo<InvestEventsInfo>>();
 		List<InvestEventsInfo> list = InvestEventsConvertor.toInvestEventsInfoList(investEventsBiz.queryProject(investEventsQuery));
-
 		return list;
 	}
 

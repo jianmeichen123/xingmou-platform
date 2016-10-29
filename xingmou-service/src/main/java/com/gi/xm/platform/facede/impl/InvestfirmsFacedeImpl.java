@@ -56,7 +56,7 @@ public class InvestfirmsFacedeImpl implements InvestfirmsFacede {
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-	//@Cacheable(value = "investfirmsInfo",keyGenerator = "wiselyKeyGenerator")
+
 	public MessageInfo<InvestfirmsInfo> getInvestfirms( Long id ){
 		
 		Message<Investfirms> message  = investfirmsBiz.getInvestfirms( id );
@@ -66,7 +66,6 @@ public class InvestfirmsFacedeImpl implements InvestfirmsFacede {
 		return messageInfo;
 	}
 
-    @Cacheable(value = "investfirmsInfo",keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<List<InvestfirmsInfo>> getAllInvestfirms(){
 	
 		Message<List<Investfirms>> message  = investfirmsBiz.getAllInvestfirms();

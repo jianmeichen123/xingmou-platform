@@ -24,14 +24,12 @@ import java.lang.reflect.Method;
 public class RedisCacheConf {
 
     @Bean
-    public KeyGenerator wiselyKeyGenerator(){
+    public KeyGenerator docKG(){
         return new KeyGenerator() {
             @Override
             public Object generate(Object target, Method method, Object... params) {
                 StringBuilder sb = new StringBuilder();
                 sb.append("xm-doc:");
-                sb.append(target.getClass().getName());
-                sb.append(":");
                 sb.append(method.getName());
                 for (Object obj : params) {
                     sb.append(":");
@@ -57,7 +55,7 @@ public class RedisCacheConf {
     @Bean
     public CacheManager cacheManager(RedisTemplate redisTemplate) {
         RedisCacheManager redisCacheManager = new RedisCacheManager(redisTemplate);
-        redisCacheManager.setDefaultExpiration(60);
+        redisCacheManager.setDefaultExpiration(3600*24);
         return redisCacheManager;
     }
 

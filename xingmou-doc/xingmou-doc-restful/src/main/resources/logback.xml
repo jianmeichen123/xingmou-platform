@@ -31,8 +31,7 @@
         </triggeringPolicy>
     </appender>
 
-    <logger name="com.gi.xm.platform" level="DEBUG"/>
-    <logger name="com.gi.xm.report" level="DEBUG"/>
+    <logger name="com.gi.xm.doc" level="DEBUG"/>
     <!-- 日志输出级别 -->
     <root level="INFO">
         <appender-ref ref="STDOUT" />

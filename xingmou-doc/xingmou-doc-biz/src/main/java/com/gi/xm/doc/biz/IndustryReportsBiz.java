@@ -72,7 +72,44 @@ public class IndustryReportsBiz  {
             IndustryReportsInfo industryReportsInfo = industryReportsDAO.selectByPrimaryKey(id);
             messageInfo.setData(industryReportsInfo);
         } catch (Exception e) {
-            LOGGER.error("getArea","根据主键查询Area失败", e);
+            LOGGER.error("getIndustryReports","根据主键查询IndustryReportsInfo失败", e);
+            messageInfo.setStatus(10001);
+        }
+        return messageInfo;
+    }
+
+	public MessageInfo<IndustryReportsInfo> nextPage(Integer id){
+		MessageInfo<IndustryReportsInfo> messageInfo = new MessageInfo<IndustryReportsInfo>();
+		try {
+			IndustryReportsInfo industryReportsInfo = industryReportsDAO.nextPage(id);
+			messageInfo.setData(industryReportsInfo);
+		} catch (Exception e) {
+			LOGGER.error("getIndustryReports","nextPage失败", e);
+			messageInfo.setStatus(10001);
+		}
+		return messageInfo;
+	}
+
+	public MessageInfo<IndustryReportsInfo> prePage(Integer id){
+		MessageInfo<IndustryReportsInfo> messageInfo = new MessageInfo<IndustryReportsInfo>();
+		try {
+			IndustryReportsInfo industryReportsInfo = industryReportsDAO.prePage(id);
+			messageInfo.setData(industryReportsInfo);
+		} catch (Exception e) {
+			LOGGER.error("getIndustryReports","nextPage失败", e);
+			messageInfo.setStatus(10001);
+		}
+		return messageInfo;
+	}
+
+
+    public MessageInfo<List<IndustryReportsInfo>> selectByTag(Integer id,String tag){
+        MessageInfo<List<IndustryReportsInfo>> messageInfo = new MessageInfo<List<IndustryReportsInfo>>();
+        try {
+            List<IndustryReportsInfo> industryReportsInfo = industryReportsDAO.selectByTag(id, tag);
+            messageInfo.setData(industryReportsInfo);
+        } catch (Exception e) {
+            LOGGER.error("selectByTag","查询近似标签失败", e);
             messageInfo.setStatus(10001);
         }
         return messageInfo;

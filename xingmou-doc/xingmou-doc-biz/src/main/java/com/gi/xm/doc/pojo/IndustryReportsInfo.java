@@ -3,6 +3,7 @@ package com.gi.xm.doc.pojo;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 public class IndustryReportsInfo implements Serializable {
 
@@ -25,8 +26,9 @@ public class IndustryReportsInfo implements Serializable {
 	/**
 	 * @Fields publishDate :  发布日期（源）
 	 */
-	private Date publishDate;
-			
+	private String publishDate;
+
+
 	/**
 	 * @Fields sourceType : 1. 艾瑞网 2.易观
 	 */
@@ -75,6 +77,56 @@ public class IndustryReportsInfo implements Serializable {
 
 	private Integer docType;
 
+	private String tags;
+
+    private String industryName;
+
+    public String getIndustryName() {
+        return industryName;
+    }
+
+    public void setIndustryName(String industryName) {
+        this.industryName = industryName;
+    }
+
+    private IndustryReportsInfo pre;
+
+    private IndustryReportsInfo next;
+
+    private List<IndustryReportsInfo> tagLikeList;
+
+    public List<IndustryReportsInfo> getTagLikeList() {
+        return tagLikeList;
+    }
+
+    public void setTagLikeList(List<IndustryReportsInfo> tagLikeList) {
+        this.tagLikeList = tagLikeList;
+    }
+
+    public IndustryReportsInfo getPre() {
+        return pre;
+    }
+
+    public void setPre(IndustryReportsInfo pre) {
+        this.pre = pre;
+    }
+
+    public IndustryReportsInfo getNext() {
+        return next;
+    }
+
+    public void setNext(IndustryReportsInfo next) {
+        this.next = next;
+    }
+
+    public String getTags() {
+		return tags;
+	}
+
+	public void setTags(String tags) {
+		this.tags = tags;
+	}
+
 	public Integer getDocType() {
 		return docType;
 	}
@@ -122,16 +174,16 @@ public class IndustryReportsInfo implements Serializable {
 	public void setTitle(String title){
 		this.title = title;
 	}
-    
-	public Date getPublishDate(){
-		return publishDate;
-	}
-	
-	public void setPublishDate(Date publishDate){
-		this.publishDate = publishDate;
-	}
-    
-	public Integer getSourceType(){
+
+    public String getPublishDate() {
+        return publishDate;
+    }
+
+    public void setPublishDate(String publishDate) {
+        this.publishDate = publishDate;
+    }
+
+    public Integer getSourceType(){
 		return sourceType;
 	}
 	

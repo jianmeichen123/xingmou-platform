@@ -31,5 +31,10 @@ public class IndustryController {
 		MessageInfo<List<IndustryInfo>> messageInfo = industryFacede.getListByParentId(parentId);
 		return messageInfo;
 	}
-	
+	@RequestMapping("getAll")
+	@ResponseBody
+	public MessageInfo<List<IndustryInfo>> getAllIndustry(){
+		MessageInfo<List<IndustryInfo>>  messageInfo = industryFacede.getAllIndustry();
+		return messageInfo;
+	}
 }

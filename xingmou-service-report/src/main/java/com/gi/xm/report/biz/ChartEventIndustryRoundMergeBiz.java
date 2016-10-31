@@ -42,14 +42,14 @@ public class ChartEventIndustryRoundMergeBiz  {
 			queryResult.setRecords(investfirmsDataList);
 			message.setData(queryResult);
 		} catch (Exception e) {
-			LOGGER.error("queryChartEventIndustryRoundMerge", "∑÷“≥≤È—ØqueryChartEventIndustryRoundMerge ß∞‹", e);
+			LOGGER.error("queryChartEventIndustryRoundMerge", "queryChartEventIndustryRoundMerge", e);
 			message.setStatus(10001);
 		}
 		return message;
 	}
 
 	/**
-	 * Õº±Ì∑÷Œˆ
+	 * ÕºÔøΩÔøΩÔøΩÔøΩÔøΩ
 	 * @param chartEventIndustryRoundMergeQuery
 	 * @return
      */
@@ -59,7 +59,7 @@ public class ChartEventIndustryRoundMergeBiz  {
 			List<ChartEventIndustryRoundMerge> chartEventIndustryRoundMergeQueryList = chartEventIndustryRoundMergeDAO.chartAnalysis(chartEventIndustryRoundMergeQuery);
 			messageInfo.setData(chartEventIndustryRoundMergeQueryList);
 		} catch (Exception e) {
-			LOGGER.error("chartAnalysis","≤È—ØchartAnalysis ß∞‹", e);
+			LOGGER.error("chartAnalysis","chartAnalysis", e);
 			messageInfo.setStatus(10001);;
 		}
 		return messageInfo;
@@ -78,7 +78,7 @@ public class ChartEventIndustryRoundMergeBiz  {
 			queryResult.setRecords(investfirmsDataList);
 			message.setData(queryResult);
 		} catch (Exception e) {
-			LOGGER.error("queryChartEventIndustryRoundMerge", "∑÷“≥≤È—ØqueryChartEventIndustryRoundMerge ß∞‹", e);
+			LOGGER.error("chartAnalysis1", "chartAnalysis1 Â§±Ë¥•", e);
 			message.setStatus(10001);
 		}
 		return message;

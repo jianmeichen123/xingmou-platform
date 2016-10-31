@@ -157,7 +157,8 @@
 
 			<!-- 模糊查询 -->
 			<if test="title != null">
-			 title  like replace('%${title}%',' ','') or (INSTR(investfirm_names,'${title}') >0)
+			(title LIKE REPLACE('%${title}%', ' ', '') 
+				OR investfirm_names LIKE ('%${title}%') )
 			</if>
 			
             <if test="industryIds!=null">

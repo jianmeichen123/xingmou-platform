@@ -96,5 +96,4 @@
             id = #{id,jdbcType=BIGINT}
 		FOR UPDATE
 	</select>
-    <!--错的接口--->
 </mapper>

@@ -32,7 +32,7 @@
         <module>xingmou-user</module>
         <!--<module>xingmou-upload</module>-->
         <!--<module>xingmou-mail</module>-->
-        <!--<module>xingmou-doc</module>-->
+        <module>xingmou-doc</module>
     </modules>
     <packaging>pom</packaging>
 

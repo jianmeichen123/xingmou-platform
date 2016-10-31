@@ -47,17 +47,6 @@ public class DataInfo implements Serializable {
 	 */
 	private Integer eventNum;
 	
-	/**
-	 * @Fields addTime : 
-	 */
-	private Timestamp addTime;
-			
-	/**
-	 * @Fields updateTime : 
-	 */
-	private Timestamp updateTime;
-		
-    
 	public Integer getId(){
 		return id;
 	}
@@ -97,23 +86,6 @@ public class DataInfo implements Serializable {
 	public void setInvestedMoneyPerProject(Long investedMoneyPerProject){
 		this.investedMoneyPerProject = investedMoneyPerProject;
 	}
-    
-	public Timestamp getAddTime(){
-		return addTime;
-	}
-	
-	public void setAddTime(Timestamp addTime){
-		this.addTime = addTime;
-	}
-    
-	public Timestamp getUpdateTime(){
-		return updateTime;
-	}
-	
-	public void setUpdateTime(Timestamp updateTime){
-		this.updateTime = updateTime;
-	}
-
 	public Integer getInvestfirmNum() {
 		return investfirmNum;
 	}

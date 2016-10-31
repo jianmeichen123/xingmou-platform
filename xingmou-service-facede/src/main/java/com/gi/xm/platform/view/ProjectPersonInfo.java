@@ -51,17 +51,6 @@ public class ProjectPersonInfo implements Serializable {
 	private Integer isCoreMember;
 			
 	/**
-	 * @Fields addTime : 
-	 */
-	private Timestamp addTime;
-			
-	/**
-	 * @Fields updateTime : 
-	 */
-	private Timestamp updateTime;
-	
-	
-	/**
 	 * 成员工作经历
 	 * @return
 	 */
@@ -141,19 +130,4 @@ public class ProjectPersonInfo implements Serializable {
 		this.isCoreMember = isCoreMember;
 	}
     
-	public Timestamp getAddTime(){
-		return addTime;
-	}
-	
-	public void setAddTime(Timestamp addTime){
-		this.addTime = addTime;
-	}
-    
-	public Timestamp getUpdateTime(){
-		return updateTime;
-	}
-	
-	public void setUpdateTime(Timestamp updateTime){
-		this.updateTime = updateTime;
-	}
-    }
+}

@@ -22,11 +22,6 @@ public class AreaQueryInfo extends QueryInfo {
 	
 	private Integer ordernum;
 	
-	private Timestamp addTime;
-	
-	private Timestamp updateTime;
-		
-    
 	public Long getId(){
 		return id;
 	}
@@ -59,19 +54,4 @@ public class AreaQueryInfo extends QueryInfo {
 		this.ordernum = ordernum;
 	}
     
-	public Timestamp getAddTime(){
-		return addTime;
-	}
-	
-	public void setAddTime(Timestamp addTime){
-		this.addTime = addTime;
-	}
-    
-	public Timestamp getUpdateTime(){
-		return updateTime;
-	}
-	
-	public void setUpdateTime(Timestamp updateTime){
-		this.updateTime = updateTime;
-	}
-    }
+}

@@ -25,12 +25,7 @@ public class FilesQueryInfo extends QueryInfo {
 	private String picBig;
 	
 	private String picShow;
-	
-	private Timestamp addTime;
-	
-	private Timestamp updateTime;
-		
-    
+
 	public Long getId(){
 		return id;
 	}
@@ -79,19 +74,4 @@ public class FilesQueryInfo extends QueryInfo {
 		this.picShow = picShow;
 	}
     
-	public Timestamp getAddTime(){
-		return addTime;
-	}
-	
-	public void setAddTime(Timestamp addTime){
-		this.addTime = addTime;
-	}
-    
-	public Timestamp getUpdateTime(){
-		return updateTime;
-	}
-	
-	public void setUpdateTime(Timestamp updateTime){
-		this.updateTime = updateTime;
-	}
     }

@@ -42,15 +42,6 @@ public class CompanyQueryInfo extends QueryInfo {
 	
 	private String email;
 	
-	private String address;
-	
-	private String description;
-	
-	private Timestamp addTime;
-	
-	private Timestamp updateTime;
-		
-    
 	public Long getId(){
 		return id;
 	}
@@ -162,36 +153,5 @@ public class CompanyQueryInfo extends QueryInfo {
 	public void setEmail(String email){
 		this.email = email;
 	}
-    
-	public String getAddress(){
-		return address;
-	}
-	
-	public void setAddress(String address){
-		this.address = address;
-	}
-    
-	public String getDescription(){
-		return description;
-	}
-	
-	public void setDescription(String description){
-		this.description = description;
-	}
-    
-	public Timestamp getAddTime(){
-		return addTime;
-	}
-	
-	public void setAddTime(Timestamp addTime){
-		this.addTime = addTime;
-	}
-    
-	public Timestamp getUpdateTime(){
-		return updateTime;
-	}
-	
-	public void setUpdateTime(Timestamp updateTime){
-		this.updateTime = updateTime;
-	}
-    }
+
+}

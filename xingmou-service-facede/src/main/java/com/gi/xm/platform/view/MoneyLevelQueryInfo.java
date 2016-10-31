@@ -19,12 +19,7 @@ public class MoneyLevelQueryInfo extends QueryInfo {
 	private String code;
 	
 	private String title;
-	
-	private Timestamp addTime;
-	
-	private Timestamp updateTime;
-		
-    
+
 	public Integer getId(){
 		return id;
 	}
@@ -49,19 +44,4 @@ public class MoneyLevelQueryInfo extends QueryInfo {
 		this.title = title;
 	}
     
-	public Timestamp getAddTime(){
-		return addTime;
-	}
-	
-	public void setAddTime(Timestamp addTime){
-		this.addTime = addTime;
-	}
-    
-	public Timestamp getUpdateTime(){
-		return updateTime;
-	}
-	
-	public void setUpdateTime(Timestamp updateTime){
-		this.updateTime = updateTime;
-	}
-    }
+}

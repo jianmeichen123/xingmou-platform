@@ -123,16 +123,7 @@ public class InvestEventsInfo implements Serializable {
 	 */
 	private String investfirmNames;
 			
-	/**
-	 * @Fields addTime : 
-	 */
-	private Timestamp addTime;
-			
-	/**
-	 * @Fields updateTime : 
-	 */
-	private Timestamp updateTime;
-			
+
 	/**
 	 * @Fields year : 
 	 */
@@ -340,22 +331,6 @@ public class InvestEventsInfo implements Serializable {
 	
 	public void setInvestfirmNames(String investfirmNames){
 		this.investfirmNames = investfirmNames;
-	}
-    
-	public Timestamp getAddTime(){
-		return addTime;
-	}
-	
-	public void setAddTime(Timestamp addTime){
-		this.addTime = addTime;
-	}
-    
-	public Timestamp getUpdateTime(){
-		return updateTime;
-	}
-	
-	public void setUpdateTime(Timestamp updateTime){
-		this.updateTime = updateTime;
 	}
     
 	public Integer getYear(){

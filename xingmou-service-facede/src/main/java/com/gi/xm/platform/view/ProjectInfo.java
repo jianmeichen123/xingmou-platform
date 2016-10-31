@@ -188,12 +188,6 @@ public class ProjectInfo implements Serializable {
 	 * @Fields loadTime : 加载时间
 	 */
 	private Timestamp loadTime;
-			
-	/**
-	 * @Fields updateTime : 最后更新时间
-	 */
-	private Timestamp updateTime;
-
 	private  String inverstrirmNames;
 
 	public String getInverstrirmNames() {
@@ -484,12 +478,4 @@ public class ProjectInfo implements Serializable {
 		this.loadTime = loadTime;
 	}
     
-	public Timestamp getUpdateTime(){
-		return updateTime;
-	}
-	
-	public void setUpdateTime(Timestamp updateTime){
-		this.updateTime = updateTime;
-	}
-
 }

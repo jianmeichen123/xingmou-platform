@@ -19,12 +19,15 @@ public class CompanyController {
     @Reference
 	private CompanyFacede companyFacede;
 
+
+/*
 	@RequestMapping("query")
 	@ResponseBody
 	public MessageInfo<QueryResultInfo<CompanyInfo>>  queryCompany (CompanyQueryInfo companyQueryInfo) {
 		MessageInfo<QueryResultInfo<CompanyInfo>> resultMessageInfo = companyFacede.queryCompany(companyQueryInfo);
 		return resultMessageInfo;
 	}
+*/
 
     @RequestMapping("get/{id}")
     @ResponseBody

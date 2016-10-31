@@ -25,46 +25,6 @@ public class IndustryController {
 	@Reference(check = false)
 	private IndustryFacede industryFacede;
 
-/*
-	@RequestMapping("query")
-	@ResponseBody
-	public MessageInfo<QueryResultInfo<IndustryInfo>>  queryIndustry (IndustryQueryInfo industryQueryInfo) {
-		MessageInfo<QueryResultInfo<IndustryInfo>> resultMessageInfo = industryFacede.queryIndustry(industryQueryInfo);
-		return resultMessageInfo;
-	}*/
-/*
-
-    @RequestMapping("create")
-    @ResponseBody
-    public MessageInfo<Integer> createIndustry(IndustryInfo industryInfo){
-        MessageInfo<Integer> messageInfo =  industryFacede.createIndustry(industryInfo);
-        return messageInfo;
-    }
-
-    @RequestMapping("update")
-    @ResponseBody
-	public MessageInfo<Integer> updateIndustry(IndustryInfo industryInfo){
-		MessageInfo<Integer> messageInfo =  industryFacede.updateIndustry(industryInfo);
-		return messageInfo;
-	}
-*/
-
-/*
-    @RequestMapping("get")
-    @ResponseBody
-	public MessageInfo<IndustryInfo> getIndustry( Integer id ){
-		MessageInfo<IndustryInfo> messageInfo =  industryFacede.getIndustry(id);
-		return messageInfo;
-	}
-*/
-    @RequestMapping("getAll")
-    @ResponseBody
-    public MessageInfo<List<IndustryInfo>> getAllIndustry(){
-		MessageInfo<List<IndustryInfo>>  messageInfo = industryFacede.getAllIndustry();
-		return messageInfo;
-	}
-
-
 	@RequestMapping("getListByParentId")
 	@ResponseBody
 	public MessageInfo<List<IndustryInfo>> getListByParentId(Integer parentId){

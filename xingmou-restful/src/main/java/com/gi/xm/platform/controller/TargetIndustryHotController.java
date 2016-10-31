@@ -26,12 +26,6 @@ public class TargetIndustryHotController {
     @Autowired
 	private TargetIndustryHotBiz targetIndustryHotBiz;
 
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public ModelAndView index() {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		return new ModelAndView("targetIndustryHot/index", modelMap);
-	}
-
 	@RequestMapping("query")
 	@ResponseBody
 	public MessageInfo  queryTargetIndustryHot (@RequestBody TargetIndustryHotQueryInfo targetIndustryHotQueryInfo) {
@@ -82,7 +76,6 @@ public class TargetIndustryHotController {
     	        }
         	}
 	        
-	        Map<String,Object> map = new HashMap<String,Object>();
 	        data.put("hotcounts", hotcounts);
 	        data.put("names", names);
 	        message.setData(data);

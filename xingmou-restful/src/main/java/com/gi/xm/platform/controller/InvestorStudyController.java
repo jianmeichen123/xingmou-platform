@@ -25,14 +25,14 @@ public class InvestorStudyController {
 	@Reference(check = false)
 	private InvestorStudyFacede investorStudyFacede;
 
-
+/*
 	@RequestMapping("query")
 	@ResponseBody
 	public MessageInfo<QueryResultInfo<InvestorStudyInfo>>  queryInvestorStudy (InvestorStudyQueryInfo investorStudyQueryInfo) {
 		MessageInfo<QueryResultInfo<InvestorStudyInfo>> resultMessageInfo = investorStudyFacede.queryInvestorStudy(investorStudyQueryInfo);
 		return resultMessageInfo;
 	}
-/*
+
 
     @RequestMapping("create")
     @ResponseBody

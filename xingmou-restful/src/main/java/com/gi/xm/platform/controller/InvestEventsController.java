@@ -74,38 +74,6 @@ public class InvestEventsController {
 	    
 	    return resultMessageInfo;
 	}
-/*
-
-    @RequestMapping("create")
-    @ResponseBody
-    public MessageInfo<Long> createInvestEvents(InvestEventsInfo investEventsInfo){
-        MessageInfo<Long> messageInfo =  investEventsFacede.createInvestEvents(investEventsInfo);
-        return messageInfo;
-    }
-
-    @RequestMapping("update")
-    @ResponseBody
-	public MessageInfo<Integer> updateInvestEvents(InvestEventsInfo investEventsInfo){
-		MessageInfo<Integer> messageInfo =  investEventsFacede.updateInvestEvents(investEventsInfo);
-		return messageInfo;
-	} 
-*/
-
-    @RequestMapping("get")
-    @ResponseBody
-	public MessageInfo<InvestEventsInfo> getInvestEvents( Long id ){
-		MessageInfo<InvestEventsInfo> messageInfo =  investEventsFacede.getInvestEvents(id);
-		return messageInfo;
-	}
-/*
-
-    @RequestMapping("getAll")
-    @ResponseBody
-    public MessageInfo<List<InvestEventsInfo>> getAllInvestEvents(){
-		MessageInfo<List<InvestEventsInfo>>  messageInfo = investEventsFacede.getAllInvestEvents();
-		return messageInfo;
-	}
-*/
 
     @RequestMapping("getEventByInvestfirmId")
 	@ResponseBody

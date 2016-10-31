@@ -59,7 +59,7 @@ public class InvestfirmsDataYearController {
 		MessageInfo<Integer> messageInfo =  investfirmsDataYearFacede.updateInvestfirmsDataYear(investfirmsDataYearInfo);
 		return messageInfo;
 	}
-*/
+
 
     @RequestMapping("get")
     @ResponseBody
@@ -67,7 +67,7 @@ public class InvestfirmsDataYearController {
 		MessageInfo<InvestfirmsDataYearInfo> messageInfo =  investfirmsDataYearFacede.getInvestfirmsDataYear(id);
 		return messageInfo;
 	}
-/*
+
 
     @RequestMapping("getAll")
     @ResponseBody

@@ -24,14 +24,14 @@ public class InvestorRoundsController {
 
 	@Reference(check = false)
 	private InvestorRoundsFacede investorRoundsFacede;
-
+/*
 	@RequestMapping("query")
 	@ResponseBody
 	public MessageInfo<QueryResultInfo<InvestorRoundsInfo>>  queryInvestorRounds (InvestorRoundsQueryInfo investorRoundsQueryInfo) {
 		MessageInfo<QueryResultInfo<InvestorRoundsInfo>> resultMessageInfo = investorRoundsFacede.queryInvestorRounds(investorRoundsQueryInfo);
 		return resultMessageInfo;
 	}
-/*
+
 
     @RequestMapping("create")
     @ResponseBody

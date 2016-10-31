@@ -6,7 +6,6 @@ import com.gi.xm.doc.pojo.IndustryReportsInfo;
 import com.gi.xm.doc.query.IndustryReportsQueryInfo;
 import com.gi.xm.platform.view.common.MessageInfo;
 import com.gi.xm.platform.view.common.QueryResultInfo;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;

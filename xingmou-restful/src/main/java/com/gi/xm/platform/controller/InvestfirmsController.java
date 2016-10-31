@@ -34,9 +34,6 @@ public class InvestfirmsController {
 		return resultMessageInfo;
 	}
 
-    
-
-
     @RequestMapping("get")
     @ResponseBody
 	public MessageInfo<InvestfirmsInfo> getInvestfirms( Long id ){
@@ -44,14 +41,4 @@ public class InvestfirmsController {
 		return messageInfo;
 	}
 
-    
-
-		
-    @RequestMapping("getListBySourceId")
-    @ResponseBody
-	public MessageInfo<List<InvestfirmsInfo>> getListBySourceId(Long sourceId){
-		MessageInfo<List<InvestfirmsInfo>> messageInfo = investfirmsFacede.getListBySourceId(sourceId);
-		return messageInfo;
-	}
-		
 }

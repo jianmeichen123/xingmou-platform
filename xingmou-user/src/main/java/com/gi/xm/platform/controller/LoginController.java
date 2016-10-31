@@ -39,7 +39,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
         return this.userService;
     }
 
-    private String xmIndex = "http://xm.galaxyinternet.com/html/xmcx.html";
+    private String xmIndex = "http://xm.gi.com/html/xmcx.html";
     /**
      * 跳转登录
      */
@@ -80,13 +80,13 @@ public class LoginController extends BaseControllerImpl<User, User> {
 
         Cookie uid_ = new Cookie("_uid_", uid);
         uid_.setMaxAge(60*60*24*365*5);
-        uid_.setDomain("xm.galaxyinternet.com");
+        uid_.setDomain("xm.gi.com");
         uid_.setPath("/");
         response.addCookie(uid_);
 
         Cookie s_ = new Cookie("s_", s);
         s_.setMaxAge(60*60*24*365*5);
-        s_.setDomain("xm.galaxyinternet.com");
+        s_.setDomain("xm.gi.com");
         s_.setPath("/");
         response.addCookie(s_);
 
@@ -157,12 +157,12 @@ public class LoginController extends BaseControllerImpl<User, User> {
         cache.remove("xm:"+s+":"+uid);
         Cookie cookie = new Cookie("_uid_", null);
         cookie.setMaxAge(60*60*24*2);
-        cookie.setDomain("xm.galaxyinternet.com");
+        cookie.setDomain("xm.gi.com");
         cookie.setPath("/");
         response.addCookie(cookie);
         cookie = new Cookie("s_", null);
         cookie.setMaxAge(60*60*24*2);
-        cookie.setDomain("xmv.galaxyinternet.com");
+        cookie.setDomain("xm.gi.com");
         cookie.setPath("/");
         response.addCookie(cookie);
         responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "退出登录"));

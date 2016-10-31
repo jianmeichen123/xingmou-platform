@@ -1,22 +1,18 @@
 package com.gi.xm.platform.facede.convertor;
-import java.util.ArrayList;
-import java.util.List;
 
-import java.util.Date;
+import com.gi.xm.platform.biz.common.QueryResult;
+import com.gi.xm.platform.pojo.Data;
+import com.gi.xm.platform.view.DataInfo;
+import com.gi.xm.platform.view.common.QueryResultInfo;
 import org.springframework.cglib.beans.BeanCopier;
 
-import com.gi.xm.platform.view.DataInfo;
-import com.gi.xm.platform.view.DataQueryInfo;
-import com.gi.xm.platform.view.common.QueryResultInfo;
-import com.gi.xm.platform.pojo.Data;
-import com.gi.xm.platform.query.DataQuery;
-import com.gi.xm.platform.biz.common.QueryResult;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class DataConvertor {
 
 	private static final BeanCopier beanCopierForDataInfo = BeanCopier.create(Data.class, DataInfo.class, false);
 	private static final BeanCopier beanCopierForData = BeanCopier.create(DataInfo.class, Data.class, false);
-	private static final BeanCopier beanCopierForDataQuery = BeanCopier.create(DataQueryInfo.class, DataQuery.class, false);
 
 	public static DataInfo toDataInfo(Data data)
 	{
@@ -59,15 +55,6 @@ public abstract class DataConvertor {
 		return dataList;
 	}
 	
-	public static DataQuery toDataQuery(DataQueryInfo dataQueryInfo)
-	{
-		if (dataQueryInfo== null) {
-			return null;
-		}
-		DataQuery dataQuery = new DataQuery();
-		beanCopierForDataQuery.copy(dataQueryInfo, dataQuery, null);
-		return dataQuery;
-	}
 
 	public static QueryResultInfo<DataInfo> toQueryResultInfo(QueryResult<Data> queryResult)
 	{

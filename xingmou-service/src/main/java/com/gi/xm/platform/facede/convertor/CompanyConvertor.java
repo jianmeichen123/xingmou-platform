@@ -1,16 +1,15 @@
 package com.gi.xm.platform.facede.convertor;
-import java.util.ArrayList;
-import java.util.List;
 
-import java.util.Date;
-import org.springframework.cglib.beans.BeanCopier;
-
+import com.gi.xm.platform.biz.common.QueryResult;
+import com.gi.xm.platform.pojo.Company;
+import com.gi.xm.platform.query.CompanyQuery;
 import com.gi.xm.platform.view.CompanyInfo;
 import com.gi.xm.platform.view.CompanyQueryInfo;
 import com.gi.xm.platform.view.common.QueryResultInfo;
-import com.gi.xm.platform.pojo.Company;
-import com.gi.xm.platform.query.CompanyQuery;
-import com.gi.xm.platform.biz.common.QueryResult;
+import org.springframework.cglib.beans.BeanCopier;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class CompanyConvertor {
 

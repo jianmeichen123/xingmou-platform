@@ -65,4 +65,23 @@ public class ChartEventIndustryRoundMergeBiz  {
 		return messageInfo;
 
 	}
+
+
+	public MessageInfo<QueryResultInfo<ChartEventIndustryRoundMerge>> chartAnalysis1(ChartEventIndustryRoundMerge chartEventIndustryRoundMergeQuery) {
+		MessageInfo<QueryResultInfo<ChartEventIndustryRoundMerge>> message = new MessageInfo<QueryResultInfo<ChartEventIndustryRoundMerge>>();
+		try {
+			QueryResultInfo<ChartEventIndustryRoundMerge> queryResult = new QueryResultInfo<ChartEventIndustryRoundMerge>();
+			List<ChartEventIndustryRoundMerge> investfirmsDataList = chartEventIndustryRoundMergeDAO.chartAnalysis(chartEventIndustryRoundMergeQuery);
+
+			queryResult.setPages(1);
+			queryResult.setTotal(100L);
+			queryResult.setRecords(investfirmsDataList);
+			message.setData(queryResult);
+		} catch (Exception e) {
+			LOGGER.error("queryChartEventIndustryRoundMerge", "∑÷“≥≤È—ØqueryChartEventIndustryRoundMerge ß∞‹", e);
+			message.setStatus(10001);
+		}
+		return message;
+	}
+
 }

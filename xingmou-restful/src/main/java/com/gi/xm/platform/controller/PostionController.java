@@ -1,3 +1,4 @@
+/*
 package com.gi.xm.platform.controller;
 
 import java.util.HashMap;
@@ -32,6 +33,7 @@ public class PostionController {
 		MessageInfo<QueryResultInfo<PostionInfo>> resultMessageInfo = postionFacede.queryPostion(postionQueryInfo);
 		return resultMessageInfo;
 	}
+*/
 /*
 
     @RequestMapping("create")
@@ -47,7 +49,8 @@ public class PostionController {
 		MessageInfo<Integer> messageInfo =  postionFacede.updatePostion(postionInfo);
 		return messageInfo;
 	}
-*/
+*//*
+
 
     @RequestMapping("get")
     @ResponseBody
@@ -66,3 +69,4 @@ public class PostionController {
 
 	
 }
+*/

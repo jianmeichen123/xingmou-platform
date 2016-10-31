@@ -464,6 +464,205 @@ public class ChartEventIndustryRoundMerge extends Pojo {
 	private String returnFields;
 
 
+	private Long maxMoney;
+	private Long minMoney;
+	private Integer maxNum;
+	private Integer minNum;
+	private Integer moneyALevel;
+	private Integer numALevel;
+	private Integer moneyBLevel;
+	private Integer numBLevel;
+	private Integer moneyCLevel;
+	private Integer numCLevel;
+	private Integer moneyDLevel;
+	private Integer numDLevel;
+	private Integer moneyELevel;
+	private Integer numELevel;
+	private Integer moneyFLevel;
+	private Integer numFLevel;
+	private Integer moneyGLevel;
+	private Integer numGLevel;
+	private Integer moneyHLevel;
+	private Integer numHLevel;
+	private Integer moneyILevel;
+	private Integer numILevel;
+
+	public Long getMaxMoney() {
+		return maxMoney;
+	}
+
+	public void setMaxMoney(Long maxMoney) {
+		this.maxMoney = maxMoney;
+	}
+
+	public Long getMinMoney() {
+		return minMoney;
+	}
+
+	public void setMinMoney(Long minMoney) {
+		this.minMoney = minMoney;
+	}
+
+	public Integer getMaxNum() {
+		return maxNum;
+	}
+
+	public void setMaxNum(Integer maxNum) {
+		this.maxNum = maxNum;
+	}
+
+	public Integer getMinNum() {
+		return minNum;
+	}
+
+	public void setMinNum(Integer minNum) {
+		this.minNum = minNum;
+	}
+
+	public Integer getMoneyALevel() {
+		return moneyALevel;
+	}
+
+	public void setMoneyALevel(Integer moneyALevel) {
+		this.moneyALevel = moneyALevel;
+	}
+
+	public Integer getNumALevel() {
+		return numALevel;
+	}
+
+	public void setNumALevel(Integer numALevel) {
+		this.numALevel = numALevel;
+	}
+
+	public Integer getMoneyBLevel() {
+		return moneyBLevel;
+	}
+
+	public void setMoneyBLevel(Integer moneyBLevel) {
+		this.moneyBLevel = moneyBLevel;
+	}
+
+	public Integer getNumBLevel() {
+		return numBLevel;
+	}
+
+	public void setNumBLevel(Integer numBLevel) {
+		this.numBLevel = numBLevel;
+	}
+
+	public Integer getMoneyCLevel() {
+		return moneyCLevel;
+	}
+
+	public void setMoneyCLevel(Integer moneyCLevel) {
+		this.moneyCLevel = moneyCLevel;
+	}
+
+	public Integer getNumCLevel() {
+		return numCLevel;
+	}
+
+	public void setNumCLevel(Integer numCLevel) {
+		this.numCLevel = numCLevel;
+	}
+
+	public Integer getMoneyDLevel() {
+		return moneyDLevel;
+	}
+
+	public void setMoneyDLevel(Integer moneyDLevel) {
+		this.moneyDLevel = moneyDLevel;
+	}
+
+	public Integer getNumDLevel() {
+		return numDLevel;
+	}
+
+	public void setNumDLevel(Integer numDLevel) {
+		this.numDLevel = numDLevel;
+	}
+
+	public Integer getMoneyELevel() {
+		return moneyELevel;
+	}
+
+	public void setMoneyELevel(Integer moneyELevel) {
+		this.moneyELevel = moneyELevel;
+	}
+
+	public Integer getNumELevel() {
+		return numELevel;
+	}
+
+	public void setNumELevel(Integer numELevel) {
+		this.numELevel = numELevel;
+	}
+
+	public Integer getMoneyFLevel() {
+		return moneyFLevel;
+	}
+
+	public void setMoneyFLevel(Integer moneyFLevel) {
+		this.moneyFLevel = moneyFLevel;
+	}
+
+	public Integer getNumFLevel() {
+		return numFLevel;
+	}
+
+	public void setNumFLevel(Integer numFLevel) {
+		this.numFLevel = numFLevel;
+	}
+
+	public Integer getMoneyGLevel() {
+		return moneyGLevel;
+	}
+
+	public void setMoneyGLevel(Integer moneyGLevel) {
+		this.moneyGLevel = moneyGLevel;
+	}
+
+	public Integer getNumGLevel() {
+		return numGLevel;
+	}
+
+	public void setNumGLevel(Integer numGLevel) {
+		this.numGLevel = numGLevel;
+	}
+
+	public Integer getMoneyHLevel() {
+		return moneyHLevel;
+	}
+
+	public void setMoneyHLevel(Integer moneyHLevel) {
+		this.moneyHLevel = moneyHLevel;
+	}
+
+	public Integer getNumHLevel() {
+		return numHLevel;
+	}
+
+	public void setNumHLevel(Integer numHLevel) {
+		this.numHLevel = numHLevel;
+	}
+
+	public Integer getMoneyILevel() {
+		return moneyILevel;
+	}
+
+	public void setMoneyILevel(Integer moneyILevel) {
+		this.moneyILevel = moneyILevel;
+	}
+
+	public Integer getNumILevel() {
+		return numILevel;
+	}
+
+	public void setNumILevel(Integer numILevel) {
+		this.numILevel = numILevel;
+	}
+
 	public int getPageIndex() {
 		return pageIndex;
 	}

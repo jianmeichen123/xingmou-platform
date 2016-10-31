@@ -20,11 +20,6 @@ public class InvestorRoundsQueryInfo extends QueryInfo {
 	
 	private Integer roundId;
 	
-	private Timestamp addTime;
-	
-	private Timestamp updateTime;
-		
-    
 	public Long getId(){
 		return id;
 	}
@@ -49,19 +44,4 @@ public class InvestorRoundsQueryInfo extends QueryInfo {
 		this.roundId = roundId;
 	}
     
-	public Timestamp getAddTime(){
-		return addTime;
-	}
-	
-	public void setAddTime(Timestamp addTime){
-		this.addTime = addTime;
-	}
-    
-	public Timestamp getUpdateTime(){
-		return updateTime;
-	}
-	
-	public void setUpdateTime(Timestamp updateTime){
-		this.updateTime = updateTime;
-	}
-    }
+}

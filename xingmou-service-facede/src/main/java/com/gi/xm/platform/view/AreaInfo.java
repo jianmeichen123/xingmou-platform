@@ -33,17 +33,7 @@ public class AreaInfo implements Serializable {
 	 */
 	private Integer ordernum;
 			
-	/**
-	 * @Fields addTime : 
-	 */
-	private Timestamp addTime;
-			
-	/**
-	 * @Fields updateTime : 
-	 */
-	private Timestamp updateTime;
-		
-    
+
 	public Long getId(){
 		return id;
 	}
@@ -76,19 +66,4 @@ public class AreaInfo implements Serializable {
 		this.ordernum = ordernum;
 	}
     
-	public Timestamp getAddTime(){
-		return addTime;
-	}
-	
-	public void setAddTime(Timestamp addTime){
-		this.addTime = addTime;
-	}
-    
-	public Timestamp getUpdateTime(){
-		return updateTime;
-	}
-	
-	public void setUpdateTime(Timestamp updateTime){
-		this.updateTime = updateTime;
-	}
     }

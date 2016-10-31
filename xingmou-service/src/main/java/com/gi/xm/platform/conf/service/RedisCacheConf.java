@@ -1,3 +1,4 @@
+/*
 package com.gi.xm.platform.conf.service;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -16,9 +17,11 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 
 import java.lang.reflect.Method;
 
+*/
 /**
  * Created by vincent on 16-9-7.
- */
+ *//*
+
 @Configuration
 @EnableCaching
 public class RedisCacheConf {
@@ -74,3 +77,4 @@ public class RedisCacheConf {
         return template;
     }
 }
+*/

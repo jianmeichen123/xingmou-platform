@@ -1,3 +1,4 @@
+/*
 package com.gi.xm.platform.controller;
 
 import java.util.HashMap;
@@ -26,6 +27,7 @@ public class RoundController {
 	private RoundFacede roundFacede;
 
 
+*/
 /*
 
     @RequestMapping("create")
@@ -55,7 +57,9 @@ public class RoundController {
 		return messageInfo;
 	}
 
-*/
+*//*
+
 
 
 }
+*/

@@ -26,12 +26,6 @@ public class InvestfirmsDataYearController {
 	@Reference(check = false)
 	private InvestfirmsDataYearFacede investfirmsDataYearFacede;
 
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public ModelAndView index() {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		return new ModelAndView("investfirmsDataYear/index", modelMap);
-	}
-
 	@RequestMapping("query")
 	@ResponseBody
 	public MessageInfo<QueryResultInfo<InvestfirmsDataYearInfo>>  queryInvestfirmsDataYear (@RequestBody InvestfirmsDataYearQueryInfo investfirmsDataYearQueryInfo) {

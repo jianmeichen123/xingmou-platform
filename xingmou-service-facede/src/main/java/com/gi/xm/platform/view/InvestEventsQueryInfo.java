@@ -58,10 +58,6 @@ public class InvestEventsQueryInfo extends QueryInfo {
 	
 	private String investfirmNames;
 	
-	private Timestamp addTime;
-	
-	private Timestamp updateTime;
-	
 	private Integer year;
 	
 	private Integer[] newestEventRoundIds;
@@ -319,22 +315,6 @@ public class InvestEventsQueryInfo extends QueryInfo {
 	
 	public void setInvestfirmNames(String investfirmNames){
 		this.investfirmNames = investfirmNames;
-	}
-    
-	public Timestamp getAddTime(){
-		return addTime;
-	}
-	
-	public void setAddTime(Timestamp addTime){
-		this.addTime = addTime;
-	}
-    
-	public Timestamp getUpdateTime(){
-		return updateTime;
-	}
-	
-	public void setUpdateTime(Timestamp updateTime){
-		this.updateTime = updateTime;
 	}
     
 	public Integer getYear(){

@@ -42,18 +42,7 @@ public class RoundInfo implements Serializable {
 	 * @Fields parentId : 上级分类，暂时只有type＝1有上级
 	 */
 	private Long parentId;
-/*
-	*//**
-	 * @Fields addTime : 
-	 *//*
-	private Timestamp addTime;
-			
-	*//**
-	 * @Fields updateTime : 
-	 *//*
-	private Timestamp updateTime;*/
-		
-    
+
 	public Integer getId(){
 		return id;
 	}
@@ -101,23 +90,5 @@ public class RoundInfo implements Serializable {
 	public void setParentId(Long parentId){
 		this.parentId = parentId;
 	}
-/*
-
-	public Timestamp getAddTime(){
-		return addTime;
-	}
-	
-	public void setAddTime(Timestamp addTime){
-		this.addTime = addTime;
-	}
-    
-	public Timestamp getUpdateTime(){
-		return updateTime;
-	}
-	
-	public void setUpdateTime(Timestamp updateTime){
-		this.updateTime = updateTime;
-	}
-*/
 
 }

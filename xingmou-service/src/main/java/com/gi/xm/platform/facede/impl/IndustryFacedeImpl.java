@@ -56,7 +56,7 @@ public class IndustryFacedeImpl implements IndustryFacede {
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-		@Cacheable(value = "industryInfo",keyGenerator = "wiselyKeyGenerator")
+
 	public MessageInfo<IndustryInfo> getIndustry( Integer id ){
 		
 		Message<Industry> message  = industryBiz.getIndustry( id );
@@ -66,7 +66,6 @@ public class IndustryFacedeImpl implements IndustryFacede {
 		return messageInfo;
 	}
 
-    @Cacheable(value = "industryInfo",keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<List<IndustryInfo>> getAllIndustry(){
 	
 		Message<List<Industry>> message  = industryBiz.getAllIndustry();

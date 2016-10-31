@@ -170,7 +170,20 @@
 	</sql>
 	
 
+    <select id="selectByYearsParentId" resultMap="BaseResultMap">
+        SELECT
+            <include refid="selectFields" />
+        FROM
+            dm_chart_event_industry_round_merge
+        <where>
+            <if test="years!=null">AND year in
+                <foreach item="item" index="index" collection="years" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="parentId!=null">AND parent_id = #{parentId,jdbcType=INTEGER}</if>
+        </where>
 
-
+    </select>
 		
 </mapper>

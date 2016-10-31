@@ -176,19 +176,14 @@ public class ChartEventIndustryRoundMergeController {
 		}
 	}
 
-	@RequestMapping("chartDataYear/{years}/{industryId}")
+	@RequestMapping("chartDataYear/{years}/{parentId}")
 	@ResponseBody
-	public MessageInfo<List<ChartDataIndustryYear>> chartDataYear(@PathVariable("years") Integer[] years, @PathVariable("industryId") Integer industryId){
-		MessageInfo<List<ChartDataIndustryYear>> messageInfo = null;
-		if (industryId==null ||industryId==0) {
-			messageInfo = chartDataIndustryYearBiz.getAll(years);
-		} else {
-			messageInfo = chartDataIndustryYearBiz.getListByYaarIndustryId(years,industryId);
-
-		}
-
-
-
+	public MessageInfo<List<ChartEventIndustryRoundMerge>> chartDataYear(@PathVariable("years") Integer[] years, @PathVariable("parentId") Integer parentId){
+		MessageInfo<List<ChartEventIndustryRoundMerge>> messageInfo = null;
+		if (parentId == null){
+            parentId = 0;
+        }
+		messageInfo = chartEventIndustryRoundMergeBiz.selectByYearsParentId(years,parentId);
 		return messageInfo;
 
 

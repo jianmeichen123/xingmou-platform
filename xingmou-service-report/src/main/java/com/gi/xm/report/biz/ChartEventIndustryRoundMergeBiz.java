@@ -7,6 +7,7 @@ import java.util.List;
 import com.gi.xm.platform.view.common.MessageInfo;
 import com.gi.xm.platform.view.common.QueryResultInfo;
 import com.gi.xm.report.pojo.ChartEventIndustryRoundMerge;
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,7 +50,6 @@ public class ChartEventIndustryRoundMergeBiz  {
 	}
 
 	/**
-	 * ͼ�����
 	 * @param chartEventIndustryRoundMergeQuery
 	 * @return
      */
@@ -72,7 +72,6 @@ public class ChartEventIndustryRoundMergeBiz  {
 		try {
 			QueryResultInfo<ChartEventIndustryRoundMerge> queryResult = new QueryResultInfo<ChartEventIndustryRoundMerge>();
 			List<ChartEventIndustryRoundMerge> investfirmsDataList = chartEventIndustryRoundMergeDAO.chartAnalysis(chartEventIndustryRoundMergeQuery);
-
 			queryResult.setPages(1);
 			queryResult.setTotal(100L);
 			queryResult.setRecords(investfirmsDataList);
@@ -83,5 +82,24 @@ public class ChartEventIndustryRoundMergeBiz  {
 		}
 		return message;
 	}
+
+
+	/**
+	 * @param selectByYearsParentId
+	 * @return
+	 */
+	public  MessageInfo<List<ChartEventIndustryRoundMerge>> selectByYearsParentId(Integer[] years,  Integer parentId){
+		MessageInfo<List<ChartEventIndustryRoundMerge>> messageInfo = new MessageInfo<List<ChartEventIndustryRoundMerge>>();
+		try {
+			List<ChartEventIndustryRoundMerge> chartEventIndustryRoundMergeQueryList = chartEventIndustryRoundMergeDAO.selectByYearsParentId(years, parentId);
+			messageInfo.setData(chartEventIndustryRoundMergeQueryList);
+		} catch (Exception e) {
+			LOGGER.error("selectByYearsParentId","selectByYearsParentId失败", e);
+			messageInfo.setStatus(10001);;
+		}
+		return messageInfo;
+
+	}
+
 
 }

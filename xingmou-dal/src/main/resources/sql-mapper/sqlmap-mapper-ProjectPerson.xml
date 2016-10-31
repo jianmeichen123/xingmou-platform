@@ -2,15 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gi.xm.platform.dao.ProjectPersonDAO">
 	<resultMap id="BaseResultMap" type="com.gi.xm.platform.pojo.ProjectPerson">
-					<id column="id" property="id" jdbcType="INTEGER" />
-								<result column="project_id" property="projectId" jdbcType="BIGINT" />
-								<result column="name" property="name" jdbcType="VARCHAR" />
-								<result column="icon" property="icon" jdbcType="VARCHAR" />
-								<result column="postion_name" property="postionName" jdbcType="VARCHAR" />
-								<result column="is_core_member" property="isCoreMember" jdbcType="INTEGER" />
-								<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
-								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-						</resultMap>
+		<id 	column="id" 			property="id" 			jdbcType="INTEGER" />
+		<result column="project_id" 	property="projectId" 	jdbcType="BIGINT" />
+		<result column="name" 			property="name" 		jdbcType="VARCHAR" />
+		<result column="icon" 			property="icon" 		jdbcType="VARCHAR" />
+		<result column="postion_name" 	property="postionName" 	jdbcType="VARCHAR" />
+
+		<result column="is_core_member" property="isCoreMember" jdbcType="INTEGER" />
+		<result column="add_time" 		property="addTime" 		jdbcType="TIMESTAMP" />
+		<result column="update_time" 	property="updateTime" 	jdbcType="TIMESTAMP" />
+	</resultMap>
 
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		DELETE FROM dm_project_person
@@ -47,40 +48,38 @@
 			<if test="icon!=null">icon = #{icon,jdbcType=VARCHAR},</if>
 			<if test="projectId!=null">project_id = #{projectId,jdbcType=BIGINT},</if>
 			<if test="isCoreMember!=null">is_core_member = #{isCoreMember,jdbcType=INTEGER},</if>
-			<if test="addTime!=null">add_time = #{addTime,jdbcType=TIMESTAMP},</if>
-	    WHERE id = #{id,jdbcType=INTEGER} 
+	    WHERE id = #{id,jdbcType=INTEGER}
 	</update>
 	
 		
 		
 	<sql id="selectFields">
-	id,project_id,name,postion_name,icon,is_core_member,add_time,update_time
+	    id,project_id,name,postion_name,icon,
+        is_core_member,add_time,update_time
 	</sql>
 	
 	<select id="selectAll" resultMap="BaseResultMap">
 		SELECT
-		<include refid="selectFields" />
-		FROM dm_project_person
+		    <include refid="selectFields" />
+		FROM
+            dm_project_person
 	</select>
 	
 	<select id="queryProjectPerson" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.ProjectPersonQuery">
 		SELECT
-		<include refid="selectFields" />
-		FROM dm_project_person
+		    <include refid="selectFields" />
+		FROM
+            dm_project_person
 		<include refid="queryWhereAndOrder" />
 	</select>
 	
 	<sql id="queryWhereAndOrder">
 		<where>
-					<if test="id!=null">AND id = #{id,jdbcType=INTEGER}</if>
-								<if test="projectId!=null">AND project_id = #{projectId,jdbcType=BIGINT}</if>
-								<if test="name!=null and name!=''">AND name = #{name,jdbcType=VARCHAR}</if>
-								<if test="postionName!=null and name!=''">AND postion_name = #{postionName,jdbcType=VARCHAR}</if>
-								<if test="icon!=null and icon!=''">AND icon = #{icon,jdbcType=VARCHAR}</if>
-								<if test="isCoreMember!=null">AND is_core_member = #{isCoreMember,jdbcType=INTEGER}</if>
-								<if test="addTime!=null">AND add_time = #{addTime,jdbcType=TIMESTAMP}</if>
-								<if test="updateTime!=null">AND update_time = #{updateTime,jdbcType=TIMESTAMP}</if>
-							
+            <if test="id!=null">AND id = #{id,jdbcType=INTEGER}</if>
+            <if test="projectId!=null">AND project_id = #{projectId,jdbcType=BIGINT}</if>
+            <if test="name!=null and name!=''">AND name = #{name,jdbcType=VARCHAR}</if>
+            <if test="postionName!=null and name!=''">AND postion_name = #{postionName,jdbcType=VARCHAR}</if>
+            <if test="isCoreMember!=null">AND is_core_member = #{isCoreMember,jdbcType=INTEGER}</if>
 		</where>
 		<choose>
 			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
@@ -90,24 +89,31 @@
 	
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		SELECT
-		<include refid="selectFields" />
-		FROM dm_project_person
-		WHERE id = #{id,jdbcType=INTEGER} 
+    		<include refid="selectFields" />
+		FROM
+            dm_project_person
+		WHERE
+            id = #{id,jdbcType=INTEGER}
 	</select>
 	
 	<select id="getPersonByProjectId" resultMap="BaseResultMap">
 		SELECT
-		<include refid="selectFields" />
-		FROM dm_project_person
-		WHERE project_id = #{projectId,jdbcType=INTEGER} 
-		and is_core_member= #{isCoreMember,jdbcType=INTEGER}
+		    <include refid="selectFields" />
+		FROM
+            dm_project_person
+		WHERE
+            project_id = #{projectId,jdbcType=INTEGER}
+		AND
+            is_core_member= #{isCoreMember,jdbcType=INTEGER}
 	</select>
 
 	<select id="selectByPrimaryKeyForUpdate" resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		SELECT
-		<include refid="selectFields" />
-		FROM dm_project_person
-		WHERE id = #{id,jdbcType=INTEGER} 
+		    <include refid="selectFields" />
+		FROM
+            dm_project_person
+		WHERE
+            id = #{id,jdbcType=INTEGER}
 		FOR UPDATE
 	</select>
 		

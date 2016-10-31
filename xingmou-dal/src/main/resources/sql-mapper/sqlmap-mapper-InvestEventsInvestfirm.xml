@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gi.xm.platform.dao.InvestEventsInvestfirmDAO">
 	<resultMap id="BaseResultMap" type="com.gi.xm.platform.pojo.InvestEventsInvestfirm">
-					<id column="id" property="id" jdbcType="BIGINT" />
-								<result column="event_id" property="eventId" jdbcType="BIGINT" />
-								<result column="investfirm_id" property="investfirmId" jdbcType="BIGINT" />
-								<result column="investfirm_name" property="investfirmName" jdbcType="VARCHAR" />
-								<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
-								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-						</resultMap>
+		<id 	column="id" 				property="id" 				jdbcType="BIGINT" />
+		<result column="event_id" 			property="eventId" 			jdbcType="BIGINT" />
+		<result column="investfirm_id" 		property="investfirmId" 	jdbcType="BIGINT" />
+		<result column="investfirm_name" 	property="investfirmName" 	jdbcType="VARCHAR" />
+		<result column="add_time" 			property="addTime" 			jdbcType="TIMESTAMP" />
+		<result column="update_time" 		property="updateTime" 		jdbcType="TIMESTAMP" />
+	</resultMap>
 
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
 		DELETE FROM dm_invest_events_investfirm
@@ -39,38 +39,38 @@
 			<if test="investfirmName!=null">investfirm_name = #{investfirmName,jdbcType=VARCHAR},</if>
 			<if test="eventId!=null">event_id = #{eventId,jdbcType=BIGINT},</if>
 			<if test="investfirmId!=null">investfirm_id = #{investfirmId,jdbcType=BIGINT},</if>
-			<if test="addTime!=null">add_time = #{addTime,jdbcType=TIMESTAMP},</if>
-	    WHERE id = #{id,jdbcType=BIGINT} 
+	    WHERE id = #{id,jdbcType=BIGINT}
 	</update>
 	
 		
 		
 	<sql id="selectFields">
-	id,event_id,investfirm_id,investfirm_name,add_time,update_time
+		id,event_id,investfirm_id,investfirm_name,
+		add_time,update_time
 	</sql>
 	
 	<select id="selectAll" resultMap="BaseResultMap">
 		SELECT
-		<include refid="selectFields" />
-		FROM dm_invest_events_investfirm
+		    <include refid="selectFields" />
+		FROM
+            dm_invest_events_investfirm
 	</select>
 	
 	<select id="queryInvestEventsInvestfirm" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.InvestEventsInvestfirmQuery">
 		SELECT
-		<include refid="selectFields" />
-		FROM dm_invest_events_investfirm
+		    <include refid="selectFields" />
+		FROM
+            dm_invest_events_investfirm
 		<include refid="queryWhereAndOrder" />
 	</select>
 	
 	<sql id="queryWhereAndOrder">
 		<where>
-					<if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>
-								<if test="eventId!=null">AND event_id = #{eventId,jdbcType=BIGINT}</if>
-								<if test="investfirmId!=null">AND investfirm_id = #{investfirmId,jdbcType=BIGINT}</if>
-								<if test="investfirmName!=null and investfirmName!=''">AND investfirm_name = #{investfirmName,jdbcType=VARCHAR}</if>
-								<if test="addTime!=null">AND add_time = #{addTime,jdbcType=TIMESTAMP}</if>
-								<if test="updateTime!=null">AND update_time = #{updateTime,jdbcType=TIMESTAMP}</if>
-							
+            <if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>
+            <if test="eventId!=null">AND event_id = #{eventId,jdbcType=BIGINT}</if>
+            <if test="investfirmId!=null">AND investfirm_id = #{investfirmId,jdbcType=BIGINT}</if>
+            <if test="investfirmName!=null and investfirmName!=''">AND investfirm_name = #{investfirmName,jdbcType=VARCHAR}</if>
+
 		</where>
 		<choose>
 			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
@@ -80,27 +80,21 @@
 	
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
 		SELECT
-		<include refid="selectFields" />
-		FROM dm_invest_events_investfirm
-		WHERE id = #{id,jdbcType=BIGINT} 
+		    <include refid="selectFields" />
+		FROM
+            dm_invest_events_investfirm
+		WHERE
+            id = #{id,jdbcType=BIGINT}
 	</select>
 
 	<select id="selectByPrimaryKeyForUpdate" resultMap="BaseResultMap" parameterType="java.lang.Long">
 		SELECT
-		<include refid="selectFields" />
-		FROM dm_invest_events_investfirm
-		WHERE id = #{id,jdbcType=BIGINT} 
+		    <include refid="selectFields" />
+		FROM
+            dm_invest_events_investfirm
+		WHERE
+            id = #{id,jdbcType=BIGINT}
 		FOR UPDATE
 	</select>
-			
-	<select id="selectByEventId" resultMap="BaseResultMap">
-		SELECT
-		<include refid="selectFields" />
-		FROM dm_invest_events_investfirm
-		WHERE  event_id
-		<foreach item="item" index="index" collection="eventIds" open="(" separator="," close=")">
-			#{item}
-		</foreach>
-	</select>
-		
+    <!--错的接口--->
 </mapper>

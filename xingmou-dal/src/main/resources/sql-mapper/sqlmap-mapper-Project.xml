@@ -2,45 +2,51 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gi.xm.platform.dao.ProjectDAO">
 	<resultMap id="BaseResultMap" type="com.gi.xm.platform.pojo.Project">
-					<id column="id" property="id" jdbcType="BIGINT" />
-								<result column="title" property="title" jdbcType="VARCHAR" />
-								<result column="pic" property="pic" jdbcType="VARCHAR" />
-								<result column="pic_big" property="picBig" jdbcType="VARCHAR" />
-								<result column="picshow" property="picshow" jdbcType="VARCHAR" />
-								<result column="weblink" property="weblink" jdbcType="VARCHAR" />
-								<result column="ceo_name" property="ceoName" jdbcType="VARCHAR" />
-								<result column="company_id" property="companyId" jdbcType="BIGINT" />
-								<result column="company_name" property="companyName" jdbcType="VARCHAR" />
-								<result column="industry_id" property="industryId" jdbcType="BIGINT" />
-								<result column="industry_sub_id" property="industrySubId" jdbcType="BIGINT" />
-								<result column="industry_name" property="industryName" jdbcType="VARCHAR" />
-								<result column="industry_sub_name" property="industrySubName" jdbcType="VARCHAR" />
-								<result column="district_id" property="districtId" jdbcType="BIGINT" />
-								<result column="district_name" property="districtName" jdbcType="VARCHAR" />
-								<result column="district_sub_id" property="districtSubId" jdbcType="BIGINT" />
-								<result column="district_sub_name" property="districtSubName" jdbcType="VARCHAR" />
-								<result column="newest_event_id" property="newestEventId" jdbcType="BIGINT" />
-								<result column="newest_event_date" property="newestEventDate" jdbcType="VARCHAR" />
-								<result column="newest_event_round" property="newestEventRound" jdbcType="VARCHAR" />
-								<result column="newest_event_round_id" property="newestEventRoundId" jdbcType="INTEGER" />
-								<result column="newest_event_money" property="newestEventMoney" jdbcType="BIGINT" />
-								<result column="source_id" property="sourceId" jdbcType="BIGINT" />
-								<result column="create_date" property="createDate" jdbcType="VARCHAR" />
-								<result column="status" property="status" jdbcType="INTEGER" />
-								<result column="business_model" property="businessModel" jdbcType="VARCHAR" />
-								<result column="industry_pain_points" property="industryPainPoints" jdbcType="VARCHAR" />
-								<result column="team_score" property="teamScore" jdbcType="INTEGER" />
-								<result column="operation_score" property="operationScore" jdbcType="INTEGER" />
-								<result column="score" property="score" jdbcType="INTEGER" />
-								<result column="time_span" property="timeSpan" jdbcType="INTEGER" />
-								<result column="invest_info" property="investInfo" jdbcType="VARCHAR" />
-								<result column="inverstrirm_names" property="inverstrirmNames" jdbcType="VARCHAR" />
-								<result column="invest_num" property="investNum" jdbcType="INTEGER" />
-								<result column="invest_money" property="investMoney" jdbcType="BIGINT" />
-								<result column="load_time" property="loadTime" jdbcType="TIMESTAMP" />
+		<id column="id" 						property="id" 					jdbcType="BIGINT" />
+		<result column="title"		 			property="title" 				jdbcType="VARCHAR" />
+		<result column="pic" 					property="pic" 					jdbcType="VARCHAR" />
+		<result column="pic_big"	 			property="picBig" 				jdbcType="VARCHAR" />
+		<result column="picshow"		 		property="picshow" 				jdbcType="VARCHAR" />
 
-								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-						</resultMap>
+		<result column="weblink" 				property="weblink" 				jdbcType="VARCHAR" />
+		<result column="ceo_name" 				property="ceoName" 				jdbcType="VARCHAR" />
+		<result column="company_id" 			property="companyId" 			jdbcType="BIGINT" />
+		<result column="company_name" 			property="companyName"	 		jdbcType="VARCHAR" />
+		<result column="industry_id" 			property="industryId" 			jdbcType="BIGINT" />
+
+		<result column="industry_sub_id" 		property="industrySubId" 		jdbcType="BIGINT" />
+		<result column="industry_name" 			property="industryName" 		jdbcType="VARCHAR" />
+		<result column="industry_sub_name" 		property="industrySubName" 		jdbcType="VARCHAR" />
+		<result column="district_id" 			property="districtId" 			jdbcType="BIGINT" />
+		<result column="district_name" 			property="districtName" 		jdbcType="VARCHAR" />
+
+		<result column="district_sub_id" 		property="districtSubId" 		jdbcType="BIGINT" />
+		<result column="district_sub_name" 		property="districtSubName" 		jdbcType="VARCHAR" />
+		<result column="newest_event_id" 		property="newestEventId" 		jdbcType="BIGINT" />
+		<result column="newest_event_date" 		property="newestEventDate" 		jdbcType="VARCHAR" />
+		<result column="newest_event_round" 	property="newestEventRound" 	jdbcType="VARCHAR" />
+
+		<result column="newest_event_round_id" 	property="newestEventRoundId" 	jdbcType="INTEGER" />
+		<result column="newest_event_money" 	property="newestEventMoney" 	jdbcType="BIGINT" />
+		<result column="source_id" 				property="sourceId" 			jdbcType="BIGINT" />
+		<result column="create_date" 			property="createDate" 			jdbcType="VARCHAR" />
+		<result column="status" 				property="status" 				jdbcType="INTEGER" />
+
+		<result column="business_model" 		property="businessModel" 		jdbcType="VARCHAR" />
+		<result column="industry_pain_points" 	property="industryPainPoints" 	jdbcType="VARCHAR" />
+		<result column="team_score" 			property="teamScore" 			jdbcType="INTEGER" />
+		<result column="operation_score" 		property="operationScore" 		jdbcType="INTEGER" />
+		<result column="score" 					property="score" 				jdbcType="INTEGER" />
+
+		<result column="time_span" 				property="timeSpan" 			jdbcType="INTEGER" />
+		<result column="invest_info" 			property="investInfo" 			jdbcType="VARCHAR" />
+		<result column="inverstrirm_names" 		property="inverstrirmNames" 	jdbcType="VARCHAR" />
+		<result column="invest_num" 			property="investNum" 			jdbcType="INTEGER" />
+		<result column="invest_money"	 		property="investMoney" 			jdbcType="BIGINT" />
+
+		<result column="load_time" 				property="loadTime" 			jdbcType="TIMESTAMP" />
+		<result column="update_time" 			property="updateTime" 			jdbcType="TIMESTAMP" />
+	</resultMap>
 
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
 		DELETE FROM dm_project
@@ -131,16 +137,7 @@
 		UPDATE dm_project
 		SET
 			<if test="title!=null">title = #{title,jdbcType=VARCHAR},</if>
-			<if test="pic!=null">pic = #{pic,jdbcType=VARCHAR},</if>
-			<if test="picBig!=null">pic_big = #{picBig,jdbcType=VARCHAR},</if>
-			<if test="picshow!=null">picshow = #{picshow,jdbcType=VARCHAR},</if>
 			<if test="weblink!=null">weblink = #{weblink,jdbcType=VARCHAR},</if>
-			<if test="ceoName!=null">ceo_name = #{ceoName,jdbcType=VARCHAR},</if>
-			<if test="companyName!=null">company_name = #{companyName,jdbcType=VARCHAR},</if>
-			<if test="industryName!=null">industry_name = #{industryName,jdbcType=VARCHAR},</if>
-			<if test="industrySubName!=null">industry_sub_name = #{industrySubName,jdbcType=VARCHAR},</if>
-			<if test="districtName!=null">district_name = #{districtName,jdbcType=VARCHAR},</if>
-			<if test="districtSubName!=null">district_sub_name = #{districtSubName,jdbcType=VARCHAR},</if>
 			<if test="newestEventDate!=null">newest_event_date = #{newestEventDate,jdbcType=VARCHAR},</if>
 			<if test="newestEventRound!=null">newest_event_round = #{newestEventRound,jdbcType=VARCHAR},</if>
 			<if test="createDate!=null">create_date = #{createDate,jdbcType=VARCHAR},</if>
@@ -162,8 +159,7 @@
 			<if test="timeSpan!=null">time_span = #{timeSpan,jdbcType=INTEGER},</if>
 			<if test="investNum!=null">invest_num = #{investNum,jdbcType=INTEGER},</if>
 			<if test="investMoney!=null">invest_money = #{investMoney,jdbcType=BIGINT},</if>
-			<if test="loadTime!=null">load_time = #{loadTime,jdbcType=TIMESTAMP},</if>
-	    WHERE id = #{id,jdbcType=BIGINT} 
+	    WHERE id = #{id,jdbcType=BIGINT}
 	</update>
 	
 			
@@ -178,29 +174,46 @@
 		
 		
 	<sql id="selectFields">
-	id,title,pic,pic_big,picshow,weblink,ceo_name,company_id,company_name,industry_id,industry_sub_id,industry_name,industry_sub_name,district_id,district_name,district_sub_id,district_sub_name,newest_event_id,newest_event_date,newest_event_round,newest_event_round_id,newest_event_money,source_id,create_date,status,business_model,industry_pain_points,team_score,operation_score,score,time_span,invest_info,inverstrirm_names,invest_num,invest_money,load_time,update_time
+		id,title,pic,pic_big,picshow,
+		weblink,ceo_name,company_id,company_name,industry_id,
+		industry_sub_id,industry_name,industry_sub_name,district_id,district_name,
+		district_sub_id,district_sub_name,newest_event_id,newest_event_date,newest_event_round,
+		newest_event_round_id,newest_event_money,source_id,create_date,status,business_model,
+		industry_pain_points,team_score,operation_score,score,time_span,
+		invest_info,inverstrirm_names,invest_num,invest_money,load_time,
+		update_time
 	</sql>
 
 	<sql id="searchFields">
-		id,title,pic,picshow,weblink,ceo_name,company_id,company_name,industry_id,industry_sub_id,industry_name,industry_sub_name,district_id,district_name,district_sub_id,district_sub_name,newest_event_id,newest_event_date,newest_event_round,newest_event_round_id,newest_event_money,source_id,create_date,status,business_model,industry_pain_points,team_score,operation_score,score,time_span,invest_info,inverstrirm_names,invest_num,invest_money,load_time,update_time
+		id,title,pic,picshow,weblink,
+		ceo_name,company_id,company_name,industry_id,industry_sub_id,
+		industry_name,industry_sub_name,district_id,district_name,district_sub_id,
+		district_sub_name,newest_event_id,newest_event_date,newest_event_round,
+		newest_event_round_id,newest_event_money,source_id,create_date,status,business_model,
+		industry_pain_points,team_score,operation_score,score,time_span,
+		invest_info,inverstrirm_names,invest_num,invest_money,load_time,
+		update_time
 	</sql>
 
 	<select id="selectAll" resultMap="BaseResultMap">
 		SELECT
-		<include refid="selectFields" />
-		FROM dm_project
+			<include refid="selectFields" />
+		FROM
+			dm_project
 	</select>
 	
 	<select id="queryProject" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.ProjectQuery">
 		SELECT
-		<include refid="selectFields" />
-		FROM dm_project
+			<include refid="selectFields" />
+		FROM
+			dm_project
 		<include refid="queryWhereAndOrder" />
 	</select>
 	<select id="queryCompetationlist" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.ProjectQuery">
 		SELECT
-		<include refid="selectFields" />
-		FROM dm_project
+			<include refid="selectFields" />
+		FROM
+			dm_project
 		<where>
 		<if test="id!=null">AND id != #{id,jdbcType=BIGINT}</if>
 		<if test="industryId!=null">AND industry_id = #{industryId,jdbcType=BIGINT}</if>

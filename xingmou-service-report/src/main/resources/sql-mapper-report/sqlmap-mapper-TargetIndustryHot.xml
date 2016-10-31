@@ -84,20 +84,7 @@
 		<where>
 					<if test="id!=null">AND id = #{id,jdbcType=INTEGER}</if>
 								<if test="industryId!=null">AND industry_id = #{industryId,jdbcType=INTEGER}</if>
-								<if test="industryName!=null and industryName!=''">AND industry_name = #{industryName,jdbcType=VARCHAR}</if>
 								<if test="industryLevel!=null">AND industry_level = #{industryLevel,jdbcType=INTEGER}</if>
-								<if test="investHot!=null">AND invest_hot = #{investHot,jdbcType=INTEGER}</if>
-								<if test="investMoneyPerA!=null">AND invest_money_per_a = #{investMoneyPerA,jdbcType=BIGINT}</if>
-								<if test="investMoneyPerB!=null">AND invest_money_per_b = #{investMoneyPerB,jdbcType=BIGINT}</if>
-								<if test="investMoneyPerC!=null">AND invest_money_per_c = #{investMoneyPerC,jdbcType=BIGINT}</if>
-								<if test="investMoneyPerD!=null">AND invest_money_per_d = #{investMoneyPerD,jdbcType=BIGINT}</if>
-								<if test="investMoneyPerE!=null">AND invest_money_per_e = #{investMoneyPerE,jdbcType=BIGINT}</if>
-								<if test="investMoneyPerF!=null">AND invest_money_per_f = #{investMoneyPerF,jdbcType=BIGINT}</if>
-								<if test="investMoneyPerG!=null">AND invest_money_per_g = #{investMoneyPerG,jdbcType=BIGINT}</if>
-								<if test="investMoneyPerH!=null">AND invest_money_per_h = #{investMoneyPerH,jdbcType=BIGINT}</if>
-								<if test="investMoneyPerI!=null">AND invest_money_per_i = #{investMoneyPerI,jdbcType=BIGINT}</if>
-								<if test="addTime!=null">AND add_time = #{addTime,jdbcType=TIMESTAMP}</if>
-								<if test="updateTime!=null">AND update_time = #{updateTime,jdbcType=TIMESTAMP}</if>
 					
 		</where>
 		<choose>

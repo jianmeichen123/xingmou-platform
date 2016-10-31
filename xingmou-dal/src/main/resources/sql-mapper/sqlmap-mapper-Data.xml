@@ -90,16 +90,19 @@
 	
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		SELECT
-		<include refid="selectFields" />
-		FROM dm_data
+			<include refid="selectFields" />
+		FROM
+			dm_data
 		limit 1
 	</select>
 
 	<select id="selectByPrimaryKeyForUpdate" resultMap="BaseResultMap" parameterType="java.lang.Integer">
 		SELECT
-		<include refid="selectFields" />
-		FROM dm_data
-		WHERE id = #{id,jdbcType=INTEGER} 
+			<include refid="selectFields" />
+		FROM
+			dm_data
+		WHERE
+			id = #{id,jdbcType=INTEGER}
 		FOR UPDATE
 	</select>
 		

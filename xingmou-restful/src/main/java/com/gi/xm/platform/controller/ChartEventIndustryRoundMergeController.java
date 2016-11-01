@@ -183,7 +183,7 @@ public class ChartEventIndustryRoundMergeController {
 		if (parentId == null){
             parentId = 0;
         }
-		messageInfo = chartEventIndustryRoundMergeBiz.selectByYearsParentId(years,parentId);
+		messageInfo = chartEventIndustryRoundMergeBiz.selectByYearsParentId(years,parentId,1);
 		return messageInfo;
 
 

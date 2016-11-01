@@ -13,7 +13,7 @@ public interface ChartEventIndustryRoundMergeDAO {
 
 	List<ChartEventIndustryRoundMerge> queryChartEventIndustryRoundMerge(ChartEventIndustryRoundMerge chartEventIndustryRoundMergeQuery);
 
-    List<ChartEventIndustryRoundMerge> selectByYearsParentId(@Param("years") Integer[] years, @Param("parentId") Integer parentId);
+    List<ChartEventIndustryRoundMerge> selectByYearsParentId(@Param("years") Integer[] years, @Param("parentId") Integer parentId, @Param("type") Integer type);
 		
 
 }

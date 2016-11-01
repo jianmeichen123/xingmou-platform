@@ -182,6 +182,7 @@
                 </foreach>
             </if>
             <if test="parentId!=null">AND parent_id = #{parentId,jdbcType=INTEGER}</if>
+            <if test="type!=null">AND type = #{type,jdbcType=INTEGER}</if>
         </where>
 
     </select>

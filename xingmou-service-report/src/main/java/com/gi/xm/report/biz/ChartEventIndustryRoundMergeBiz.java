@@ -88,10 +88,10 @@ public class ChartEventIndustryRoundMergeBiz  {
 	 * @param selectByYearsParentId
 	 * @return
 	 */
-	public  MessageInfo<List<ChartEventIndustryRoundMerge>> selectByYearsParentId(Integer[] years,  Integer parentId){
+	public  MessageInfo<List<ChartEventIndustryRoundMerge>> selectByYearsParentId(Integer[] years,  Integer parentId,Integer type){
 		MessageInfo<List<ChartEventIndustryRoundMerge>> messageInfo = new MessageInfo<List<ChartEventIndustryRoundMerge>>();
 		try {
-			List<ChartEventIndustryRoundMerge> chartEventIndustryRoundMergeQueryList = chartEventIndustryRoundMergeDAO.selectByYearsParentId(years, parentId);
+			List<ChartEventIndustryRoundMerge> chartEventIndustryRoundMergeQueryList = chartEventIndustryRoundMergeDAO.selectByYearsParentId(years, parentId,type);
 			messageInfo.setData(chartEventIndustryRoundMergeQueryList);
 		} catch (Exception e) {
 			LOGGER.error("selectByYearsParentId","selectByYearsParentId失败", e);

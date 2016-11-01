@@ -7,7 +7,7 @@ import java.util.Date;
 public class InvestfirmsDataQuery extends Query {
 	
 	/**   
-	 * @Fields serialVersionUID : åº??????????? 
+	 * @Fields serialVersionUID :
 	 */ 
 	private static final long serialVersionUID = 1L;
 	

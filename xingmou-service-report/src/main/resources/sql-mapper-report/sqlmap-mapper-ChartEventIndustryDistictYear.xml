@@ -45,7 +45,7 @@
 	</insert>
 
 	<sql id="selectFields">
-	id,year,industry_id,industry_name,district_id,district_name,invested_num,invested_money,invested_num_cent
+	year,industry_id,industry_name,district_id,district_name,invested_num,invested_money,invested_num_cent
 	</sql>
 	
 <!--

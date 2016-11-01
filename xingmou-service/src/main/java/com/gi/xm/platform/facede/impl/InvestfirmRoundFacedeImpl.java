@@ -56,7 +56,7 @@ public class InvestfirmRoundFacedeImpl implements InvestfirmRoundFacede {
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-		@Cacheable(value = "investfirmRoundInfo",keyGenerator = "wiselyKeyGenerator")
+
 	public MessageInfo<InvestfirmRoundInfo> getInvestfirmRound( Long id ){
 		
 		Message<InvestfirmRound> message  = investfirmRoundBiz.getInvestfirmRound( id );
@@ -66,7 +66,6 @@ public class InvestfirmRoundFacedeImpl implements InvestfirmRoundFacede {
 		return messageInfo;
 	}
 
-    @Cacheable(value = "investfirmRoundInfo",keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<List<InvestfirmRoundInfo>> getAllInvestfirmRound(){
 	
 		Message<List<InvestfirmRound>> message  = investfirmRoundBiz.getAllInvestfirmRound();
@@ -85,9 +84,6 @@ public class InvestfirmRoundFacedeImpl implements InvestfirmRoundFacede {
 		return messageInfo;
 	}
    
-		
-
-
 	public MessageInfo<List<InvestfirmRoundInfo>> getListByInvestfrimId(Integer investfrimId){
 	
 		Message<List<InvestfirmRound>> message  = investfirmRoundBiz.getListByInvestfrimId(investfrimId);

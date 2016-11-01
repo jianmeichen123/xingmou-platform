@@ -7,75 +7,83 @@ import java.util.Date;
 
 public class InvestfirmsDataInfo implements Serializable {
 
-	/**   
-	 * @Fields serialVersionUID : åº??????????? 
-	 */ 
+	/**
+	 * @Fields serialVersionUID : ï¿½????????????
+	 */
 	private static final long serialVersionUID = 1L;
 
-			
+
 	/**
-	 * @Fields id : 
+	 * @Fields id :
 	 */
 	private Integer id;
-			
+
 	/**
-	 * @Fields investfirmId : ??èµ??ºæ??id
+	 * @Fields investfirmId : ??ï¿½???ï¿½ï¿½??id
 	 */
 	private Long investfirmId;
-			
+
 	/**
-	 * @Fields investfirmName : ??ä½???èµ??ºæ????ç§?
+	 * @Fields investfirmName : ??ï¿½????ï¿½???ï¿½ï¿½????ï¿½??
 	 */
 	private String investfirmName;
-			
+
 	/**
-	 * @Fields investfirmLink : ??ä½??ºæ??ç½???
+	 * @Fields investfirmLink : ??ï¿½???ï¿½ï¿½??ï¿½????
 	 */
 	private String investfirmLink;
-			
+
 	/**
-	 * @Fields investNum : ?»æ??èµ?ç¬???
+	 * @Fields investNum : ?ï¿½ï¿½??ï¿½??ï¿½????
 	 */
 	private Integer investNum;
-			
+
 	/**
-	 * @Fields investMoney : ?»æ??èµ???é¢?ï¼???ï¼?
+	 * @Fields investMoney : ?ï¿½ï¿½??ï¿½????ï¿½??ï¿½????ï¿½??
 	 */
 	private Long investMoney;
-			
+
 	/**
-	 * @Fields investIndustry : ??èµ?è¿???ä¸?çº§è?ä¸?
+	 * @Fields investIndustry : ??ï¿½??ï¿½????ï¿½??çº§ï¿½?ï¿½??
 	 */
 	private String investIndustry;
-			
+
 	/**
-	 * @Fields investRound : ??èµ?è¿???è½?æ¬?
+	 * @Fields investRound : ??ï¿½??ï¿½????ï¿½??ï¿½??
 	 */
 	private String investRound;
-			
+
 	/**
-	 * @Fields newestInvestProjects : ??èµ?è¿???é¡¹ç????ç§°ï???è¿?ä¸?ä¸?ï¼?
+	 * @Fields newestInvestProjects : ??ï¿½??ï¿½????é¡¹ï¿½????ç§°ï¿½???ï¿½??ï¿½??ï¿½??ï¿½??
 	 */
 	private String newestInvestProjects;
-			
+
 	/**
-	 * @Fields investMonthRate : ä¸?????æ¯?å¢??¿ç??ï¼?ç¬??°ï?
+	 * @Fields investMonthRate : ï¿½??????ï¿½??ï¿½???ï¿½ï¿½??ï¿½??ï¿½???ï¿½ï¿½?
 	 */
 	private Integer investMonthRate;
-			
-	/**
-	 * @Fields addTime : 
-	 */
-	private Timestamp addTime;
-			
-	/**
-	 * @Fields updateTime : 
-	 */
-	private Timestamp updateTime;
 
 	private Integer[] newestEventRoundIds;
 
 	private Long[] industryIds;
+	private Long sourceId;
+
+	public Long getSourceId() {
+		return sourceId;
+	}
+
+	public void setSourceId(Long sourceId) {
+		this.sourceId = sourceId;
+	}
+	private String pic;
+
+	public String getPic() {
+		return pic;
+	}
+
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
 
 	public Integer[] getNewestEventRoundIds() {
 		return newestEventRoundIds;
@@ -96,96 +104,81 @@ public class InvestfirmsDataInfo implements Serializable {
 	public Integer getId(){
 		return id;
 	}
-	
+
 	public void setId(Integer id){
 		this.id = id;
 	}
-    
+
 	public Long getInvestfirmId(){
 		return investfirmId;
 	}
-	
+
 	public void setInvestfirmId(Long investfirmId){
 		this.investfirmId = investfirmId;
 	}
-    
+
 	public String getInvestfirmName(){
 		return investfirmName;
 	}
-	
+
 	public void setInvestfirmName(String investfirmName){
 		this.investfirmName = investfirmName;
 	}
-    
+
 	public String getInvestfirmLink(){
 		return investfirmLink;
 	}
-	
+
 	public void setInvestfirmLink(String investfirmLink){
 		this.investfirmLink = investfirmLink;
 	}
-    
+
 	public Integer getInvestNum(){
 		return investNum;
 	}
-	
+
 	public void setInvestNum(Integer investNum){
 		this.investNum = investNum;
 	}
-    
+
 	public Long getInvestMoney(){
 		return investMoney;
 	}
-	
+
 	public void setInvestMoney(Long investMoney){
 		this.investMoney = investMoney;
 	}
-    
+
 	public String getInvestIndustry(){
 		return investIndustry;
 	}
-	
+
 	public void setInvestIndustry(String investIndustry){
 		this.investIndustry = investIndustry;
 	}
-    
+
 	public String getInvestRound(){
 		return investRound;
 	}
-	
+
 	public void setInvestRound(String investRound){
 		this.investRound = investRound;
 	}
-    
+
 	public String getNewestInvestProjects(){
 		return newestInvestProjects;
 	}
-	
+
 	public void setNewestInvestProjects(String newestInvestProjects){
 		this.newestInvestProjects = newestInvestProjects;
 	}
-    
+
 	public Integer getInvestMonthRate(){
 		return investMonthRate;
 	}
-	
+
 	public void setInvestMonthRate(Integer investMonthRate){
 		this.investMonthRate = investMonthRate;
 	}
-    
-	public Timestamp getAddTime(){
-		return addTime;
-	}
-	
-	public void setAddTime(Timestamp addTime){
-		this.addTime = addTime;
-	}
-    
-	public Timestamp getUpdateTime(){
-		return updateTime;
-	}
-	
-	public void setUpdateTime(Timestamp updateTime){
-		this.updateTime = updateTime;
-	}
-    }
+
+}

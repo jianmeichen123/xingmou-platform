@@ -56,7 +56,7 @@ public class RoundFacedeImpl implements RoundFacede {
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-		@Cacheable(value = "roundInfo",keyGenerator = "wiselyKeyGenerator")
+
 	public MessageInfo<RoundInfo> getRound( Integer id ){
 		
 		Message<Round> message  = roundBiz.getRound( id );

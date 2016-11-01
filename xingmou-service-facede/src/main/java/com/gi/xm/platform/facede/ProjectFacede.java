@@ -21,14 +21,11 @@ public interface ProjectFacede {
 		
 	MessageInfo<ProjectInfo> getProject(Long id);
 		
-    MessageInfo<List<ProjectInfo>> getAllProject();
-			
+
     MessageInfo<QueryResultInfo<ProjectInfo>> queryProject(ProjectQueryInfo projectQueryInfo);
 	
 		
 	MessageInfo<List<ProjectInfo>> getListBySourceId(Long sourceId);
-
-	MessageInfo<ProjectSearchTitleInfo> getProjectSearchTitleInfo();
 
     /**
 	 *

@@ -1,11 +1,9 @@
 package com.gi.xm.report.dao;
 
-import java.util.Date;
-import java.math.BigDecimal;
-import java.util.List;
+import com.gi.xm.report.pojo.ChartEventIndustryRoundMerge;
 import org.apache.ibatis.annotations.Param;
 
-import com.gi.xm.report.pojo.ChartEventIndustryRoundMerge;
+import java.util.List;
 
 public interface ChartEventIndustryRoundMergeDAO {
 	
@@ -14,9 +12,8 @@ public interface ChartEventIndustryRoundMergeDAO {
     List<ChartEventIndustryRoundMerge> chartAnalysis(ChartEventIndustryRoundMerge chartEventIndustryRoundMergeQuery);
 
 	List<ChartEventIndustryRoundMerge> queryChartEventIndustryRoundMerge(ChartEventIndustryRoundMerge chartEventIndustryRoundMergeQuery);
-			
 
-	
+    List<ChartEventIndustryRoundMerge> selectByYearsParentId(@Param("years") Integer[] years, @Param("parentId") Integer parentId, @Param("type") Integer type);
 		
 
 }

@@ -42,11 +42,6 @@ public class InvestfirmsQueryInfo extends QueryInfo {
 	
 	private String areaNames;
 	
-	private Timestamp addTime;
-	
-	private Timestamp updateTime;
-		
-    
 	public Long getId(){
 		return id;
 	}
@@ -159,19 +154,4 @@ public class InvestfirmsQueryInfo extends QueryInfo {
 		this.areaNames = areaNames;
 	}
     
-	public Timestamp getAddTime(){
-		return addTime;
-	}
-	
-	public void setAddTime(Timestamp addTime){
-		this.addTime = addTime;
-	}
-    
-	public Timestamp getUpdateTime(){
-		return updateTime;
-	}
-	
-	public void setUpdateTime(Timestamp updateTime){
-		this.updateTime = updateTime;
-	}
-    }
+}

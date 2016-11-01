@@ -36,7 +36,7 @@
 	</insert>
 
 	<sql id="selectFields">
-	id,year,round_name,ordernum,invested_num,invested_money,add_time,update_time
+	year,round_name,ordernum,invested_num,invested_money
 	</sql>
 	
 			

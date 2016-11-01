@@ -56,7 +56,7 @@ public class MoneyLevelFacedeImpl implements MoneyLevelFacede {
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-		@Cacheable(value = "moneyLevelInfo",keyGenerator = "wiselyKeyGenerator")
+
 	public MessageInfo<MoneyLevelInfo> getMoneyLevel( Integer id ){
 		
 		Message<MoneyLevel> message  = moneyLevelBiz.getMoneyLevel( id );
@@ -66,7 +66,6 @@ public class MoneyLevelFacedeImpl implements MoneyLevelFacede {
 		return messageInfo;
 	}
 
-    @Cacheable(value = "moneyLevelInfo",keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<List<MoneyLevelInfo>> getAllMoneyLevel(){
 	
 		Message<List<MoneyLevel>> message  = moneyLevelBiz.getAllMoneyLevel();

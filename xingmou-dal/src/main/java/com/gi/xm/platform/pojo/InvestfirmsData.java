@@ -6,20 +6,22 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 public class InvestfirmsData extends Pojo {
+/*
 
         public static final String ID = "id";
-        public static final String INVESTFIRM_ID = "??èµ??ºæ??id";
-        public static final String INVESTFIRM_NAME = "??ä½???èµ??ºæ????ç§?";
-        public static final String INVESTFIRM_LINK = "??ä½??ºæ??ç½???";
-        public static final String INVEST_NUM = "?»æ??èµ?ç¬???";
-        public static final String INVEST_MONEY = "?»æ??èµ???é¢?ï¼???ï¼?";
-        public static final String INVEST_INDUSTRY = "??èµ?è¿???ä¸?çº§è?ä¸?";
-        public static final String INVEST_ROUND = "??èµ?è¿???è½?æ¬?";
-        public static final String NEWEST_INVEST_PROJECTS = "??èµ?è¿???é¡¹ç????ç§°ï???è¿?ä¸?ä¸?ï¼?";
-        public static final String INVEST_MONTH_RATE = "ä¸?????æ¯?å¢??¿ç??ï¼?ç¬??°ï?";
+        public static final String INVESTFIRM_ID = "??ï¿½??ï¿½ï¿½??id";
+        public static final String INVESTFIRM_NAME = "??ï¿½???ï¿½??ï¿½ï¿½????ï¿½?";
+        public static final String INVESTFIRM_LINK = "??ï¿½??ï¿½ï¿½??ï¿½???";
+        public static final String INVEST_NUM = "?ï¿½ï¿½??ï¿½?ï¿½???";
+        public static final String INVEST_MONEY = "?ï¿½ï¿½??ï¿½???ï¿½?ï¿½???ï¿½?";
+        public static final String INVEST_INDUSTRY = "??ï¿½?ï¿½???ï¿½?çº§ï¿½?ï¿½?";
+        public static final String INVEST_ROUND = "??ï¿½?ï¿½???ï¿½?ï¿½?";
+        public static final String NEWEST_INVEST_PROJECTS = "??ï¿½?ï¿½???é¡¹ï¿½????ç§°ï¿½???ï¿½?ï¿½?ï¿½?ï¿½?";
+        public static final String INVEST_MONTH_RATE = "ï¿½?????ï¿½?ï¿½??ï¿½ï¿½??ï¿½?ï¿½??ï¿½ï¿½?";
         public static final String ADD_TIME = "addTime";
         public static final String UPDATE_TIME = "updateTime";
-    
+*/
+
 	
 	/**
 	 * @Fields id : 
@@ -27,47 +29,65 @@ public class InvestfirmsData extends Pojo {
 	private Integer id;
 	
 	/**
-	 * @Fields investfirmId : ??èµ??ºæ??id
+	 * @Fields investfirmId :
 	 */
 	private Long investfirmId;
 	
 	/**
-	 * @Fields investfirmName : ??ä½???èµ??ºæ????ç§?
+	 * @Fields investfirmName :
 	 */
 	private String investfirmName;
 	
 	/**
-	 * @Fields investfirmLink : ??ä½??ºæ??ç½???
+	 * @Fields investfirmLink :
 	 */
 	private String investfirmLink;
 	
 	/**
-	 * @Fields investNum : ?»æ??èµ?ç¬???
+	 * @Fields investNum :
 	 */
 	private Integer investNum;
 	
 	/**
-	 * @Fields investMoney : ?»æ??èµ???é¢?ï¼???ï¼?
+	 * @Fields investMoney :
 	 */
 	private Long investMoney;
-	
+
+	private  Long sourceId;
+	private String pic;
+
+	public String getPic() {
+		return pic;
+	}
+
+	public void setPic(String pic) {
+		this.pic = pic;
+	}
+	public Long getSourceId() {
+		return sourceId;
+	}
+
+	public void setSourceId(Long sourceId) {
+		this.sourceId = sourceId;
+	}
+
 	/**
-	 * @Fields investIndustry : ??èµ?è¿???ä¸?çº§è?ä¸?
+	 * @Fields investIndustry :
 	 */
 	private String investIndustry;
 	
 	/**
-	 * @Fields investRound : ??èµ?è¿???è½?æ¬?
+	 * @Fields investRound : ??ï¿½?ï¿½???ï¿½?ï¿½?
 	 */
 	private String investRound;
 	
 	/**
-	 * @Fields newestInvestProjects : ??èµ?è¿???é¡¹ç????ç§°ï???è¿?ä¸?ä¸?ï¼?
+	 * @Fields newestInvestProjects :
 	 */
 	private String newestInvestProjects;
 	
 	/**
-	 * @Fields investMonthRate : ä¸?????æ¯?å¢??¿ç??ï¼?ç¬??°ï?
+	 * @Fields investMonthRate :
 	 */
 	private Integer investMonthRate;
 	

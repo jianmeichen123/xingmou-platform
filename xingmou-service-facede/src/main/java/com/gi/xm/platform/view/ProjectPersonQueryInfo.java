@@ -24,11 +24,6 @@ public class ProjectPersonQueryInfo extends QueryInfo {
 	
 	private Integer isCoreMember;
 	
-	private Timestamp addTime;
-	
-	private Timestamp updateTime;
-		
-    
 	public Long getId(){
 		return id;
 	}
@@ -69,19 +64,4 @@ public class ProjectPersonQueryInfo extends QueryInfo {
 		this.isCoreMember = isCoreMember;
 	}
     
-	public Timestamp getAddTime(){
-		return addTime;
-	}
-	
-	public void setAddTime(Timestamp addTime){
-		this.addTime = addTime;
-	}
-    
-	public Timestamp getUpdateTime(){
-		return updateTime;
-	}
-	
-	public void setUpdateTime(Timestamp updateTime){
-		this.updateTime = updateTime;
-	}
-    }
+}

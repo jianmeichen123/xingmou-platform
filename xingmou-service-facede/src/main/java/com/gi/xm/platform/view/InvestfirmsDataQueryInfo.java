@@ -9,8 +9,7 @@ import com.gi.xm.platform.view.common.QueryInfo;
 public class InvestfirmsDataQueryInfo extends QueryInfo {
 	
 	/**   
-	 * @Fields serialVersionUID : åº??????????? 
-	 */ 
+	 */
 	private static final long serialVersionUID = 1L;
 
 	

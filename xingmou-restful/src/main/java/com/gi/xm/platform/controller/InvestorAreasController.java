@@ -1,3 +1,4 @@
+/*
 package com.gi.xm.platform.controller;
 
 import java.util.HashMap;
@@ -25,18 +26,13 @@ public class InvestorAreasController {
 	@Reference(check = false)
 	private InvestorAreasFacede investorAreasFacede;
 
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public ModelAndView index() {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		return new ModelAndView("investorAreas/index", modelMap);
-	}
-
 	@RequestMapping("query")
 	@ResponseBody
 	public MessageInfo<QueryResultInfo<InvestorAreasInfo>>  queryInvestorAreas (InvestorAreasQueryInfo investorAreasQueryInfo) {
 		MessageInfo<QueryResultInfo<InvestorAreasInfo>> resultMessageInfo = investorAreasFacede.queryInvestorAreas(investorAreasQueryInfo);
 		return resultMessageInfo;
 	}
+*/
 /*
 
     @RequestMapping("create")
@@ -52,7 +48,8 @@ public class InvestorAreasController {
 		MessageInfo<Integer> messageInfo =  investorAreasFacede.updateInvestorAreas(investorAreasInfo);
 		return messageInfo;
 	}
-*/
+*//*
+
 
     @RequestMapping("get")
     @ResponseBody
@@ -61,6 +58,7 @@ public class InvestorAreasController {
 		return messageInfo;
 	}
 
+*/
 /*
     @RequestMapping("getAll")
     @ResponseBody
@@ -68,8 +66,10 @@ public class InvestorAreasController {
 		MessageInfo<List<InvestorAreasInfo>>  messageInfo = investorAreasFacede.getAllInvestorAreas();
 		return messageInfo;
 	}
-*/
+*//*
+
 
 
 	
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package com.gi.xm.platform.controller;
 
 import java.util.HashMap;
@@ -25,6 +26,7 @@ public class AreaController {
 
     @Reference(check = false)
 	private AreaFacede areaFacede;
+*/
 /*
 
 	@RequestMapping("query")
@@ -54,7 +56,8 @@ public class AreaController {
 		MessageInfo<AreaInfo> messageInfo =  areaFacede.getArea(id);
 		return messageInfo;
 	}
-*/
+*//*
+
 
     @RequestMapping("getAll")
     @ResponseBody
@@ -66,3 +69,4 @@ public class AreaController {
 
 	
 }
+*/

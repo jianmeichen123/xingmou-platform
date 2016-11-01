@@ -84,8 +84,6 @@ public class ProjectQueryInfo extends QueryInfo {
 	
 	private Timestamp loadTime;
 	
-	private Timestamp updateTime;
-
 	private Integer[] newestEventRoundIds;
 
 
@@ -400,14 +398,6 @@ public class ProjectQueryInfo extends QueryInfo {
 
     public void setLoadTime(Timestamp loadTime) {
         this.loadTime = loadTime;
-    }
-
-    public Timestamp getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Timestamp updateTime) {
-        this.updateTime = updateTime;
     }
 
     public Integer[] getNewestEventRoundIds() {

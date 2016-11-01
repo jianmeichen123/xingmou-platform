@@ -1,3 +1,4 @@
+/*
 package com.gi.xm.platform.controller;
 
 import java.util.HashMap;
@@ -31,6 +32,7 @@ public class InvestfirmRoundController {
 		MessageInfo<QueryResultInfo<InvestfirmRoundInfo>> resultMessageInfo = investfirmRoundFacede.queryInvestfirmRound(investfirmRoundQueryInfo);
 		return resultMessageInfo;
 	}
+*/
 /*
 
     @RequestMapping("create")
@@ -46,7 +48,8 @@ public class InvestfirmRoundController {
 		MessageInfo<Integer> messageInfo =  investfirmRoundFacede.updateInvestfirmRound(investfirmRoundInfo);
 		return messageInfo;
 	}
-*/
+*//*
+
 
     @RequestMapping("get")
     @ResponseBody
@@ -64,3 +67,4 @@ public class InvestfirmRoundController {
 	}
 		
 }
+*/

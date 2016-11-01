@@ -25,14 +25,14 @@ public class InvestorJobController {
 	@Reference(check = false)
 	private InvestorJobFacede investorJobFacede;
 
-
+/*
 	@RequestMapping("query")
 	@ResponseBody
 	public MessageInfo<QueryResultInfo<InvestorJobInfo>>  queryInvestorJob (InvestorJobQueryInfo investorJobQueryInfo) {
 		MessageInfo<QueryResultInfo<InvestorJobInfo>> resultMessageInfo = investorJobFacede.queryInvestorJob(investorJobQueryInfo);
 		return resultMessageInfo;
 	}
-/*
+
 
     @RequestMapping("create")
     @ResponseBody

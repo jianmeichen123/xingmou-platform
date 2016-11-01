@@ -7,6 +7,7 @@ import java.util.List;
 import com.gi.xm.platform.view.common.MessageInfo;
 import com.gi.xm.platform.view.common.QueryResultInfo;
 import com.gi.xm.report.pojo.ChartEventIndustryRoundMerge;
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,14 +43,13 @@ public class ChartEventIndustryRoundMergeBiz  {
 			queryResult.setRecords(investfirmsDataList);
 			message.setData(queryResult);
 		} catch (Exception e) {
-			LOGGER.error("queryChartEventIndustryRoundMerge", "∑÷“≥≤È—ØqueryChartEventIndustryRoundMerge ß∞‹", e);
+			LOGGER.error("queryChartEventIndustryRoundMerge", "queryChartEventIndustryRoundMerge", e);
 			message.setStatus(10001);
 		}
 		return message;
 	}
 
 	/**
-	 * Õº±Ì∑÷Œˆ
 	 * @param chartEventIndustryRoundMergeQuery
 	 * @return
      */
@@ -59,10 +59,47 @@ public class ChartEventIndustryRoundMergeBiz  {
 			List<ChartEventIndustryRoundMerge> chartEventIndustryRoundMergeQueryList = chartEventIndustryRoundMergeDAO.chartAnalysis(chartEventIndustryRoundMergeQuery);
 			messageInfo.setData(chartEventIndustryRoundMergeQueryList);
 		} catch (Exception e) {
-			LOGGER.error("chartAnalysis","≤È—ØchartAnalysis ß∞‹", e);
+			LOGGER.error("chartAnalysis","chartAnalysis", e);
 			messageInfo.setStatus(10001);;
 		}
 		return messageInfo;
 
 	}
+
+
+	public MessageInfo<QueryResultInfo<ChartEventIndustryRoundMerge>> chartAnalysis1(ChartEventIndustryRoundMerge chartEventIndustryRoundMergeQuery) {
+		MessageInfo<QueryResultInfo<ChartEventIndustryRoundMerge>> message = new MessageInfo<QueryResultInfo<ChartEventIndustryRoundMerge>>();
+		try {
+			QueryResultInfo<ChartEventIndustryRoundMerge> queryResult = new QueryResultInfo<ChartEventIndustryRoundMerge>();
+			List<ChartEventIndustryRoundMerge> investfirmsDataList = chartEventIndustryRoundMergeDAO.chartAnalysis(chartEventIndustryRoundMergeQuery);
+			queryResult.setPages(1);
+			queryResult.setTotal(100L);
+			queryResult.setRecords(investfirmsDataList);
+			message.setData(queryResult);
+		} catch (Exception e) {
+			LOGGER.error("chartAnalysis1", "chartAnalysis1 Â§±Ë¥•", e);
+			message.setStatus(10001);
+		}
+		return message;
+	}
+
+
+	/**
+	 * @param selectByYearsParentId
+	 * @return
+	 */
+	public  MessageInfo<List<ChartEventIndustryRoundMerge>> selectByYearsParentId(Integer[] years,  Integer parentId,Integer type){
+		MessageInfo<List<ChartEventIndustryRoundMerge>> messageInfo = new MessageInfo<List<ChartEventIndustryRoundMerge>>();
+		try {
+			List<ChartEventIndustryRoundMerge> chartEventIndustryRoundMergeQueryList = chartEventIndustryRoundMergeDAO.selectByYearsParentId(years, parentId,type);
+			messageInfo.setData(chartEventIndustryRoundMergeQueryList);
+		} catch (Exception e) {
+			LOGGER.error("selectByYearsParentId","selectByYearsParentIdÂ§±Ë¥•", e);
+			messageInfo.setStatus(10001);;
+		}
+		return messageInfo;
+
+	}
+
+
 }

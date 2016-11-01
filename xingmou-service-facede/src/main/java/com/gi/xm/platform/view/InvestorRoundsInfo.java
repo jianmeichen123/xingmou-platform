@@ -28,17 +28,6 @@ public class InvestorRoundsInfo implements Serializable {
 	 */
 	private Integer roundId;
 			
-	/**
-	 * @Fields addTime : 
-	 */
-	private Timestamp addTime;
-			
-	/**
-	 * @Fields updateTime : 
-	 */
-	private Timestamp updateTime;
-		
-    
 	public Long getId(){
 		return id;
 	}
@@ -62,20 +51,4 @@ public class InvestorRoundsInfo implements Serializable {
 	public void setRoundId(Integer roundId){
 		this.roundId = roundId;
 	}
-    
-	public Timestamp getAddTime(){
-		return addTime;
-	}
-	
-	public void setAddTime(Timestamp addTime){
-		this.addTime = addTime;
-	}
-    
-	public Timestamp getUpdateTime(){
-		return updateTime;
-	}
-	
-	public void setUpdateTime(Timestamp updateTime){
-		this.updateTime = updateTime;
-	}
-    }
+}

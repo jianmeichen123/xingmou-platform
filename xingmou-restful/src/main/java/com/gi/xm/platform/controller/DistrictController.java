@@ -25,12 +25,7 @@ public class DistrictController {
 	@Reference(check = false)
 	private DistrictFacede districtFacede;
 
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public ModelAndView index() {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		return new ModelAndView("district/index", modelMap);
-	}
-
+/*
 	@RequestMapping("query")
 	@ResponseBody
 	public MessageInfo<QueryResultInfo<DistrictInfo>>  queryDistrict (DistrictQueryInfo districtQueryInfo) {
@@ -38,7 +33,7 @@ public class DistrictController {
 		return resultMessageInfo;
 	}
 
-/*
+
 
     @RequestMapping("create")
     @ResponseBody
@@ -55,25 +50,7 @@ public class DistrictController {
 	}
 */
 
-    @RequestMapping("get")
-    @ResponseBody
-	public MessageInfo<DistrictInfo> getDistrict( Integer id ){
-		MessageInfo<DistrictInfo> messageInfo =  districtFacede.getDistrict(id);
-		return messageInfo;
-	}
 
-/*
-
-    @RequestMapping("getAll")
-    @ResponseBody
-    public MessageInfo<List<DistrictInfo>> getAllDistrict(){
-		MessageInfo<List<DistrictInfo>>  messageInfo = districtFacede.getAllDistrict();
-		return messageInfo;
-	}
-*/
-
-
-		
     @RequestMapping("getListByTypeLevel")
     @ResponseBody
 	public MessageInfo<List<DistrictInfo>> getListByTypeLevel(Integer type, Integer level){

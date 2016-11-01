@@ -8,11 +8,13 @@
 								<result column="type" property="type" jdbcType="INTEGER" />
 								<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
 								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-						</resultMap>
+	</resultMap>
 
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-		DELETE FROM dw_v_postion
-		WHERE id = #{id,jdbcType=BIGINT} 
+		DELETE
+			FROM dw_v_postion
+		WHERE
+			id = #{id,jdbcType=BIGINT}
 	</delete>
 	
 	<insert id="insert" parameterType="com.gi.xm.platform.pojo.Postion" useGeneratedKeys="true" keyProperty="id">
@@ -39,38 +41,37 @@
 			<if test="title!=null">title = #{title,jdbcType=VARCHAR},</if>
 			<if test="code!=null">code = #{code,jdbcType=VARCHAR},</if>
 			<if test="type!=null">type = #{type,jdbcType=INTEGER},</if>
-			<if test="addTime!=null">add_time = #{addTime,jdbcType=TIMESTAMP},</if>
-	    WHERE id = #{id,jdbcType=BIGINT} 
+	    WHERE
+			id = #{id,jdbcType=BIGINT}
 	</update>
 	
 		
 		
 	<sql id="selectFields">
-	id,title,code,type,add_time,update_time
+		id,title,code,type,add_time,update_time
 	</sql>
 	
 	<select id="selectAll" resultMap="BaseResultMap">
 		SELECT
-		<include refid="selectFields" />
-		FROM dw_v_postion
+			<include refid="selectFields" />
+		FROM
+			dw_v_postion
 	</select>
 	
 	<select id="queryPostion" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.PostionQuery">
 		SELECT
-		<include refid="selectFields" />
-		FROM dw_v_postion
+			<include refid="selectFields" />
+		FROM
+			dw_v_postion
 		<include refid="queryWhereAndOrder" />
 	</select>
 	
 	<sql id="queryWhereAndOrder">
 		<where>
-					<if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>
-								<if test="title!=null and title!=''">AND title = #{title,jdbcType=VARCHAR}</if>
-								<if test="code!=null and code!=''">AND code = #{code,jdbcType=VARCHAR}</if>
-								<if test="type!=null">AND type = #{type,jdbcType=INTEGER}</if>
-								<if test="addTime!=null">AND add_time = #{addTime,jdbcType=TIMESTAMP}</if>
-								<if test="updateTime!=null">AND update_time = #{updateTime,jdbcType=TIMESTAMP}</if>
-							
+			<if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>
+			<if test="title!=null and title!=''">AND title = #{title,jdbcType=VARCHAR}</if>
+			<if test="code!=null and code!=''">AND code = #{code,jdbcType=VARCHAR}</if>
+			<if test="type!=null">AND type = #{type,jdbcType=INTEGER}</if>
 		</where>
 		<choose>
 			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
@@ -80,16 +81,20 @@
 	
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
 		SELECT
-		<include refid="selectFields" />
-		FROM dw_v_postion
-		WHERE id = #{id,jdbcType=BIGINT} 
+			<include refid="selectFields" />
+		FROM
+			dw_v_postion
+		WHERE
+			id = #{id,jdbcType=BIGINT}
 	</select>
 
 	<select id="selectByPrimaryKeyForUpdate" resultMap="BaseResultMap" parameterType="java.lang.Long">
 		SELECT
-		<include refid="selectFields" />
-		FROM dw_v_postion
-		WHERE id = #{id,jdbcType=BIGINT} 
+		    <include refid="selectFields" />
+		FROM
+            dw_v_postion
+		WHERE
+            id = #{id,jdbcType=BIGINT}
 		FOR UPDATE
 	</select>
 		

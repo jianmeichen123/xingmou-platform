@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gi.xm.platform.dao.LabelDAO">
 	<resultMap id="BaseResultMap" type="com.gi.xm.platform.pojo.Label">
-					<id column="id" property="id" jdbcType="BIGINT" />
-								<result column="title" property="title" jdbcType="VARCHAR" />
-								<result column="type" property="type" jdbcType="INTEGER" />
-								<result column="relation_id" property="relationId" jdbcType="BIGINT" />
-								<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
-								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-						</resultMap>
+		<id	 	column="id" 			property="id" 			jdbcType="BIGINT" />
+		<result column="title" 			property="title" 		jdbcType="VARCHAR" />
+		<result column="type" 			property="type" 		jdbcType="INTEGER" />
+		<result column="relation_id" 	property="relationId" 	jdbcType="BIGINT" />
+		<result column="add_time" 		property="addTime" 		jdbcType="TIMESTAMP" />
+		<result column="update_time" 	property="updateTime" 	jdbcType="TIMESTAMP" />
+	</resultMap>
 
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
 		DELETE FROM dm_label
@@ -39,38 +39,36 @@
 			<if test="title!=null">title = #{title,jdbcType=VARCHAR},</if>
 			<if test="type!=null">type = #{type,jdbcType=INTEGER},</if>
 			<if test="relationId!=null">relation_id = #{relationId,jdbcType=BIGINT},</if>
-			<if test="addTime!=null">add_time = #{addTime,jdbcType=TIMESTAMP},</if>
-	    WHERE id = #{id,jdbcType=BIGINT} 
+	    WHERE id = #{id,jdbcType=BIGINT}
 	</update>
 	
 		
 		
 	<sql id="selectFields">
-	id,title,type,relation_id,add_time,update_time
+		id,title,type,relation_id,add_time,update_time
 	</sql>
 	
 	<select id="selectAll" resultMap="BaseResultMap">
 		SELECT
-		<include refid="selectFields" />
-		FROM dm_label
+			<include refid="selectFields" />
+		FROM
+			dm_label
 	</select>
 	
 	<select id="queryLabel" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.LabelQuery">
 		SELECT
-		<include refid="selectFields" />
-		FROM dm_label
+			<include refid="selectFields" />
+		FROM
+			dm_label
 		<include refid="queryWhereAndOrder" />
 	</select>
 	
 	<sql id="queryWhereAndOrder">
 		<where>
-					<if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>
-								<if test="title!=null and title!=''">AND title = #{title,jdbcType=VARCHAR}</if>
-								<if test="type!=null">AND type = #{type,jdbcType=INTEGER}</if>
-								<if test="relationId!=null">AND relation_id = #{relationId,jdbcType=BIGINT}</if>
-								<if test="addTime!=null">AND add_time = #{addTime,jdbcType=TIMESTAMP}</if>
-								<if test="updateTime!=null">AND update_time = #{updateTime,jdbcType=TIMESTAMP}</if>
-							
+			<if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>
+			<if test="title!=null and title!=''">AND title = #{title,jdbcType=VARCHAR}</if>
+			<if test="type!=null">AND type = #{type,jdbcType=INTEGER}</if>
+			<if test="relationId!=null">AND relation_id = #{relationId,jdbcType=BIGINT}</if>
 		</where>
 		<choose>
 			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
@@ -80,32 +78,41 @@
 	
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
 		SELECT
-		<include refid="selectFields" />
-		FROM dm_label
-		WHERE id = #{id,jdbcType=BIGINT} 
+			<include refid="selectFields" />
+		FROM
+			dm_label
+		WHERE
+			id = #{id,jdbcType=BIGINT}
 	</select>
 
 	<select id="selectByPrimaryKeyForUpdate" resultMap="BaseResultMap" parameterType="java.lang.Long">
 		SELECT
-		<include refid="selectFields" />
-		FROM dm_label
-		WHERE id = #{id,jdbcType=BIGINT} 
+			<include refid="selectFields" />
+		FROM
+			dm_label
+		WHERE
+			id = #{id,jdbcType=BIGINT}
 		FOR UPDATE
 	</select>
 			
 	<select id="selectByTypeRelationId" resultMap="BaseResultMap">
 		SELECT
-		<include refid="selectFields" />
-		FROM dm_label
-		WHERE  type = #{type,jdbcType=INTEGER}
-		AND relation_id = #{relationId,jdbcType=BIGINT} 
+			<include refid="selectFields" />
+		FROM
+			dm_label
+		WHERE
+			type = #{type,jdbcType=INTEGER}
+		AND
+			relation_id = #{relationId,jdbcType=BIGINT}
 	</select>
 	
 	<select id="selectByIdList" resultMap="BaseResultMap">
 		SELECT
-		<include refid="selectFields" />
-		FROM dm_label
-		WHERE  type = #{type,jdbcType=INTEGER}
+			<include refid="selectFields" />
+		FROM
+			dm_label
+		WHERE
+			type = #{type,jdbcType=INTEGER}
 		<if test="idList != null">
 			AND relation_id IN
 			<foreach collection="idList" index="item" item="item" open="("

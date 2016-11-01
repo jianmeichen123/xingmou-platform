@@ -2,25 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gi.xm.platform.dao.CompanyDAO">
 	<resultMap id="BaseResultMap" type="com.gi.xm.platform.pojo.Company">
-					<id column="id" property="id" jdbcType="BIGINT" />
-								<result column="company_name" property="companyName" jdbcType="VARCHAR" />
-								<result column="conutry_type" property="conutryType" jdbcType="INTEGER" />
-								<result column="create_date" property="createDate" jdbcType="VARCHAR" />
-								<result column="loca_id" property="locaId" jdbcType="INTEGER" />
-								<result column="loca" property="loca" jdbcType="VARCHAR" />
-								<result column="industry_id" property="industryId" jdbcType="INTEGER" />
-								<result column="industry_name" property="industryName" jdbcType="VARCHAR" />
-								<result column="industry_sub_id" property="industrySubId" jdbcType="INTEGER" />
-								<result column="industry_sub_name" property="industrySubName" jdbcType="VARCHAR" />
-								<result column="loca_sub_id" property="locaSubId" jdbcType="INTEGER" />
-								<result column="loca_sub_name" property="locaSubName" jdbcType="VARCHAR" />
-								<result column="phone" property="phone" jdbcType="VARCHAR" />
-								<result column="email" property="email" jdbcType="VARCHAR" />
-								<result column="address" property="address" jdbcType="VARCHAR" />
-								<result column="description" property="description" jdbcType="LONGVARCHAR" />
-								<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
-								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-						</resultMap>
+	<id column="id" 					property="id"		 		jdbcType="BIGINT" />
+	<result column="company_name" 		property="companyName" 		jdbcType="VARCHAR" />
+	<result column="conutry_type" 		property="conutryType" 		jdbcType="INTEGER" />
+	<result column="create_date" 		property="createDate" 		jdbcType="VARCHAR" />
+	<result column="loca_id" 			property="locaId" 			jdbcType="INTEGER" />
+
+	<result column="loca" 				property="loca" 			jdbcType="VARCHAR" />
+	<result column="industry_id" 		property="industryId" 		jdbcType="INTEGER" />
+	<result column="industry_name" 		property="industryName" 	jdbcType="VARCHAR" />
+	<result column="industry_sub_id" 	property="industrySubId" 	jdbcType="INTEGER" />
+	<result column="industry_sub_name" 	property="industrySubName" 	jdbcType="VARCHAR" />
+
+	<result column="loca_sub_id" 		property="locaSubId" 		jdbcType="INTEGER" />
+	<result column="loca_sub_name" 		property="locaSubName" 		jdbcType="VARCHAR" />
+	<result column="phone" 				property="phone" 			jdbcType="VARCHAR" />
+	<result column="email" 				property="email" 			jdbcType="VARCHAR" />
+	<result column="address" 			property="address" 			jdbcType="VARCHAR" />
+
+	<result column="description" 		property="description" 		jdbcType="LONGVARCHAR" />
+	<result column="add_time" 			property="addTime" 			jdbcType="TIMESTAMP" />
+	<result column="update_time" 		property="updateTime" 		jdbcType="TIMESTAMP" />
+	</resultMap>
 
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
 		DELETE FROM dm_company
@@ -73,7 +76,6 @@
 		UPDATE dm_company
 		SET
 			<if test="companyName!=null">company_name = #{companyName,jdbcType=VARCHAR},</if>
-			<if test="createDate!=null">create_date = #{createDate,jdbcType=VARCHAR},</if>
 			<if test="loca!=null">loca = #{loca,jdbcType=VARCHAR},</if>
 			<if test="industryName!=null">industry_name = #{industryName,jdbcType=VARCHAR},</if>
 			<if test="industrySubName!=null">industry_sub_name = #{industrySubName,jdbcType=VARCHAR},</if>
@@ -87,14 +89,16 @@
 			<if test="industryId!=null">industry_id = #{industryId,jdbcType=INTEGER},</if>
 			<if test="industrySubId!=null">industry_sub_id = #{industrySubId,jdbcType=INTEGER},</if>
 			<if test="locaSubId!=null">loca_sub_id = #{locaSubId,jdbcType=INTEGER},</if>
-			<if test="addTime!=null">add_time = #{addTime,jdbcType=TIMESTAMP},</if>
-	    WHERE id = #{id,jdbcType=BIGINT} 
+	    WHERE id = #{id,jdbcType=BIGINT}
 	</update>
 	
 		
 		
 	<sql id="selectFields">
-	id,company_name,conutry_type,create_date,loca_id,loca,industry_id,industry_name,industry_sub_id,industry_sub_name,loca_sub_id,loca_sub_name,phone,email,address,description,add_time,update_time
+	    id,company_name,conutry_type,create_date,loca_id,
+        loca,industry_id,industry_name,industry_sub_id,industry_sub_name,
+        loca_sub_id,loca_sub_name,phone,email,address,
+        description,add_time,update_time
 	</sql>
 	
 	<select id="selectAll" resultMap="BaseResultMap">
@@ -112,25 +116,17 @@
 	
 	<sql id="queryWhereAndOrder">
 		<where>
-					<if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>
-								<if test="companyName!=null and companyName!=''">AND company_name = #{companyName,jdbcType=VARCHAR}</if>
-								<if test="conutryType!=null">AND conutry_type = #{conutryType,jdbcType=INTEGER}</if>
-								<if test="createDate!=null and createDate!=''">AND create_date = #{createDate,jdbcType=VARCHAR}</if>
-								<if test="locaId!=null">AND loca_id = #{locaId,jdbcType=INTEGER}</if>
-								<if test="loca!=null and loca!=''">AND loca = #{loca,jdbcType=VARCHAR}</if>
-								<if test="industryId!=null">AND industry_id = #{industryId,jdbcType=INTEGER}</if>
-								<if test="industryName!=null and industryName!=''">AND industry_name = #{industryName,jdbcType=VARCHAR}</if>
-								<if test="industrySubId!=null">AND industry_sub_id = #{industrySubId,jdbcType=INTEGER}</if>
-								<if test="industrySubName!=null and industrySubName!=''">AND industry_sub_name = #{industrySubName,jdbcType=VARCHAR}</if>
-								<if test="locaSubId!=null">AND loca_sub_id = #{locaSubId,jdbcType=INTEGER}</if>
-								<if test="locaSubName!=null and locaSubName!=''">AND loca_sub_name = #{locaSubName,jdbcType=VARCHAR}</if>
-								<if test="phone!=null and phone!=''">AND phone = #{phone,jdbcType=VARCHAR}</if>
-								<if test="email!=null and email!=''">AND email = #{email,jdbcType=VARCHAR}</if>
-								<if test="address!=null and address!=''">AND address = #{address,jdbcType=VARCHAR}</if>
-								<if test="description!=null and description!=''">AND description = #{description,jdbcType=LONGVARCHAR}</if>
-								<if test="addTime!=null">AND add_time = #{addTime,jdbcType=TIMESTAMP}</if>
-								<if test="updateTime!=null">AND update_time = #{updateTime,jdbcType=TIMESTAMP}</if>
-							
+            <if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>
+            <if test="companyName!=null and companyName!=''">AND company_name = #{companyName,jdbcType=VARCHAR}</if>
+            <if test="conutryType!=null">AND conutry_type = #{conutryType,jdbcType=INTEGER}</if>
+            <if test="locaId!=null">AND loca_id = #{locaId,jdbcType=INTEGER}</if>
+            <if test="loca!=null and loca!=''">AND loca = #{loca,jdbcType=VARCHAR}</if>
+            <if test="industryId!=null">AND industry_id = #{industryId,jdbcType=INTEGER}</if>
+            <if test="industrySubId!=null">AND industry_sub_id = #{industrySubId,jdbcType=INTEGER}</if>
+            <if test="locaSubId!=null">AND loca_sub_id = #{locaSubId,jdbcType=INTEGER}</if>
+            <if test="phone!=null and phone!=''">AND phone = #{phone,jdbcType=VARCHAR}</if>
+            <if test="email!=null and email!=''">AND email = #{email,jdbcType=VARCHAR}</if>
+
 		</where>
 		<choose>
 			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
@@ -140,16 +136,20 @@
 	
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
 		SELECT
-		<include refid="selectFields" />
-		FROM dm_company
-		WHERE id = #{id,jdbcType=BIGINT} 
+		    <include refid="selectFields" />
+		FROM
+            dm_company
+		WHERE
+            id = #{id,jdbcType=BIGINT}
 	</select>
 
 	<select id="selectByPrimaryKeyForUpdate" resultMap="BaseResultMap" parameterType="java.lang.Long">
 		SELECT
-		<include refid="selectFields" />
-		FROM dm_company
-		WHERE id = #{id,jdbcType=BIGINT} 
+		    <include refid="selectFields" />
+		FROM
+            dm_company
+		WHERE
+            id = #{id,jdbcType=BIGINT}
 		FOR UPDATE
 	</select>
 		

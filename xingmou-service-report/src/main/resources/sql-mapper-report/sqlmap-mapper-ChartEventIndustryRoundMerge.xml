@@ -83,7 +83,8 @@
 		
 		
 	<sql id="selectFields">
-	id,year,parent_id,industry_id,industry_name,industry_level,money_level_order_id,money_level_name,invest_num_a,invest_num_percent_a,invest_num_rate_a,invest_money_a,invest_money_rate_a,invest_money_per_a,invest_money_max_a,invest_num_b,invest_num_percent_b,invest_num_rate_b,invest_money_b,invest_money_rate_b,invest_money_per_b,invest_money_max_b,invest_num_c,invest_num_percent_c,invest_num_rate_c,invest_money_c,invest_money_rate_c,invest_money_per_c,invest_money_max_c,invest_num_d,invest_num_percent_d,invest_num_rate_d,invest_money_d,invest_money_rate_d,invest_money_per_d,invest_money_max_d,invest_num_e,invest_num_percent_e,invest_num_rate_e,invest_money_e,invest_money_rate_e,invest_money_per_e,invest_money_max_e,invest_num_f,invest_num_percent_f,invest_num_rate_f,invest_money_f,invest_money_rate_f,invest_money_per_f,invest_money_max_f,invest_num_g,invest_num_percent_g,invest_num_rate_g,invest_money_g,invest_money_rate_g,invest_money_per_g,invest_money_max_g,invest_num_h,invest_num_percent_h,invest_num_rate_h,invest_money_h,invest_money_rate_h,invest_money_per_h,invest_money_max_h,invest_num_i,invest_num_percent_i,invest_num_rate_i,invest_money_i,invest_money_rate_i,invest_money_per_i,invest_money_max_i,type,add_time,update_time
+	    year,parent_id,industry_id,industry_name,industry_level,
+        money_level_order_id,money_level_name,invest_num_a,invest_num_percent_a,invest_num_rate_a,invest_money_a,invest_money_rate_a,invest_money_per_a,invest_money_max_a,invest_num_b,invest_num_percent_b,invest_num_rate_b,invest_money_b,invest_money_rate_b,invest_money_per_b,invest_money_max_b,invest_num_c,invest_num_percent_c,invest_num_rate_c,invest_money_c,invest_money_rate_c,invest_money_per_c,invest_money_max_c,invest_num_d,invest_num_percent_d,invest_num_rate_d,invest_money_d,invest_money_rate_d,invest_money_per_d,invest_money_max_d,invest_num_e,invest_num_percent_e,invest_num_rate_e,invest_money_e,invest_money_rate_e,invest_money_per_e,invest_money_max_e,invest_num_f,invest_num_percent_f,invest_num_rate_f,invest_money_f,invest_money_rate_f,invest_money_per_f,invest_money_max_f,invest_num_g,invest_num_percent_g,invest_num_rate_g,invest_money_g,invest_money_rate_g,invest_money_per_g,invest_money_max_g,invest_num_h,invest_num_percent_h,invest_num_rate_h,invest_money_h,invest_money_rate_h,invest_money_per_h,invest_money_max_h,invest_num_i,invest_num_percent_i,invest_num_rate_i,invest_money_i,invest_money_rate_i,invest_money_per_i,invest_money_max_i,type,add_time,update_time
 	</sql>
 	
 	<select id="selectAll" resultMap="BaseResultMap">
@@ -101,9 +102,26 @@
 
 	<select id="chartAnalysis" resultMap="BaseResultMap" parameterType="com.gi.xm.report.pojo.ChartEventIndustryRoundMerge">
 		SELECT
-		<include refid="selectFields" />
-		FROM dm_chart_event_industry_round_merge
-		<include refid="queryWhereAndOrder" />
+		money_level_order_id,
+		money_level_name,
+		sum(t.invest_money_a) as invest_money_a,sum(t.invest_money_b) as invest_money_b,sum(t.invest_money_c) as invest_money_c,
+		sum(t.invest_money_d) as invest_money_d,sum(t.invest_money_e) as invest_money_e,
+		sum(t.invest_money_f) as invest_money_f,sum(t.invest_money_g) as invest_money_g,
+		sum(t.invest_money_h) as invest_money_h,sum(t.invest_money_i) as invest_money_i,
+
+
+		sum(t.invest_num_a) as invest_num_a,sum(t.invest_num_b) as invest_num_b,sum(t.invest_num_c) as invest_num_c,
+		sum(t.invest_num_d) as invest_num_d,sum(t.invest_num_e) as invest_num_e,
+		sum(t.invest_num_f) as invest_num_f,sum(t.invest_num_g) as invest_num_g,
+		sum(t.invest_num_h) as invest_num_h,sum(t.invest_num_i) as invest_num_i
+		  FROM dm_chart_event_industry_round_merge t
+		<include refid="queryWhereAndOrder1" />
+
+
+		GROUP BY money_level_order_id,money_level_name
+		ORDER BY t.money_level_order_id
+
+
 	</select>
 
 	<select id="trendAnalysis" resultMap="BaseResultMap" parameterType="com.gi.xm.report.pojo.ChartEventIndustryRoundMerge">
@@ -112,7 +130,23 @@
 		FROM dm_chart_event_industry_round_merge
 		<include refid="queryWhereAndOrder" />
 	</select>
+	<sql id="queryWhereAndOrder1">
+	<where>
+		<if test="year!=null">AND year = #{year,jdbcType=INTEGER}</if>
+		<if test="yearList!=null">AND year in
+			<foreach item="item" index="index" collection="yearList" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		<if test="parentId!=null">AND parent_id = #{parentId,jdbcType=INTEGER}</if>
+		<if test="industryId!=null and industryId>0" >AND industry_id = #{industryId,jdbcType=INTEGER}</if>
+		<if test="industryLevel!=null">AND industry_level = #{industryLevel,jdbcType=INTEGER}</if>
+		<if test="moneyLevelOrderId!=null">AND money_level_order_id = #{moneyLevelOrderId,jdbcType=INTEGER}</if>
+		<if test="type!=null">AND type = #{type,jdbcType=INTEGER}</if>
 
+	</where>
+
+	</sql>
 	<sql id="queryWhereAndOrder">
 		<where>
 					<if test="id!=null">AND id = #{id,jdbcType=INTEGER}</if>
@@ -123,78 +157,11 @@
 			                        </foreach>
 								</if>
 								<if test="parentId!=null">AND parent_id = #{parentId,jdbcType=INTEGER}</if>
-								<if test="industryId!=null">AND industry_id = #{industryId,jdbcType=INTEGER}</if>
-								<if test="industryName!=null and industryName!=''">AND industry_name = #{industryName,jdbcType=VARCHAR}</if>
+								<if test="industryId!=null and industryId>0">AND industry_id = #{industryId,jdbcType=INTEGER}</if>
 								<if test="industryLevel!=null">AND industry_level = #{industryLevel,jdbcType=INTEGER}</if>
 								<if test="moneyLevelOrderId!=null">AND money_level_order_id = #{moneyLevelOrderId,jdbcType=INTEGER}</if>
-								<if test="moneyLevelName!=null and moneyLevelName!=''">AND money_level_name = #{moneyLevelName,jdbcType=VARCHAR}</if>
-								<if test="investNumA!=null">AND invest_num_a = #{investNumA,jdbcType=INTEGER}</if>
-								<if test="investNumPercentA!=null">AND invest_num_percent_a = #{investNumPercentA,jdbcType=INTEGER}</if>
-								<if test="investNumRateA!=null">AND invest_num_rate_a = #{investNumRateA,jdbcType=INTEGER}</if>
-								<if test="investMoneyA!=null">AND invest_money_a = #{investMoneyA,jdbcType=BIGINT}</if>
-								<if test="investMoneyRateA!=null">AND invest_money_rate_a = #{investMoneyRateA,jdbcType=INTEGER}</if>
-								<if test="investMoneyPerA!=null">AND invest_money_per_a = #{investMoneyPerA,jdbcType=BIGINT}</if>
-								<if test="investMoneyMaxA!=null">AND invest_money_max_a = #{investMoneyMaxA,jdbcType=BIGINT}</if>
-								<if test="investNumB!=null">AND invest_num_b = #{investNumB,jdbcType=INTEGER}</if>
-								<if test="investNumPercentB!=null">AND invest_num_percent_b = #{investNumPercentB,jdbcType=INTEGER}</if>
-								<if test="investNumRateB!=null">AND invest_num_rate_b = #{investNumRateB,jdbcType=INTEGER}</if>
-								<if test="investMoneyB!=null">AND invest_money_b = #{investMoneyB,jdbcType=BIGINT}</if>
-								<if test="investMoneyRateB!=null">AND invest_money_rate_b = #{investMoneyRateB,jdbcType=INTEGER}</if>
-								<if test="investMoneyPerB!=null">AND invest_money_per_b = #{investMoneyPerB,jdbcType=BIGINT}</if>
-								<if test="investMoneyMaxB!=null">AND invest_money_max_b = #{investMoneyMaxB,jdbcType=BIGINT}</if>
-								<if test="investNumC!=null">AND invest_num_c = #{investNumC,jdbcType=INTEGER}</if>
-								<if test="investNumPercentC!=null">AND invest_num_percent_c = #{investNumPercentC,jdbcType=INTEGER}</if>
-								<if test="investNumRateC!=null">AND invest_num_rate_c = #{investNumRateC,jdbcType=INTEGER}</if>
-								<if test="investMoneyC!=null">AND invest_money_c = #{investMoneyC,jdbcType=BIGINT}</if>
-								<if test="investMoneyRateC!=null">AND invest_money_rate_c = #{investMoneyRateC,jdbcType=INTEGER}</if>
-								<if test="investMoneyPerC!=null">AND invest_money_per_c = #{investMoneyPerC,jdbcType=BIGINT}</if>
-								<if test="investMoneyMaxC!=null">AND invest_money_max_c = #{investMoneyMaxC,jdbcType=BIGINT}</if>
-								<if test="investNumD!=null">AND invest_num_d = #{investNumD,jdbcType=INTEGER}</if>
-								<if test="investNumPercentD!=null">AND invest_num_percent_d = #{investNumPercentD,jdbcType=INTEGER}</if>
-								<if test="investNumRateD!=null">AND invest_num_rate_d = #{investNumRateD,jdbcType=INTEGER}</if>
-								<if test="investMoneyD!=null">AND invest_money_d = #{investMoneyD,jdbcType=BIGINT}</if>
-								<if test="investMoneyRateD!=null">AND invest_money_rate_d = #{investMoneyRateD,jdbcType=INTEGER}</if>
-								<if test="investMoneyPerD!=null">AND invest_money_per_d = #{investMoneyPerD,jdbcType=BIGINT}</if>
-								<if test="investMoneyMaxD!=null">AND invest_money_max_d = #{investMoneyMaxD,jdbcType=BIGINT}</if>
-								<if test="investNumE!=null">AND invest_num_e = #{investNumE,jdbcType=INTEGER}</if>
-								<if test="investNumPercentE!=null">AND invest_num_percent_e = #{investNumPercentE,jdbcType=INTEGER}</if>
-								<if test="investNumRateE!=null">AND invest_num_rate_e = #{investNumRateE,jdbcType=INTEGER}</if>
-								<if test="investMoneyE!=null">AND invest_money_e = #{investMoneyE,jdbcType=BIGINT}</if>
-								<if test="investMoneyRateE!=null">AND invest_money_rate_e = #{investMoneyRateE,jdbcType=INTEGER}</if>
-								<if test="investMoneyPerE!=null">AND invest_money_per_e = #{investMoneyPerE,jdbcType=BIGINT}</if>
-								<if test="investMoneyMaxE!=null">AND invest_money_max_e = #{investMoneyMaxE,jdbcType=BIGINT}</if>
-								<if test="investNumF!=null">AND invest_num_f = #{investNumF,jdbcType=INTEGER}</if>
-								<if test="investNumPercentF!=null">AND invest_num_percent_f = #{investNumPercentF,jdbcType=INTEGER}</if>
-								<if test="investNumRateF!=null">AND invest_num_rate_f = #{investNumRateF,jdbcType=INTEGER}</if>
-								<if test="investMoneyF!=null">AND invest_money_f = #{investMoneyF,jdbcType=BIGINT}</if>
-								<if test="investMoneyRateF!=null">AND invest_money_rate_f = #{investMoneyRateF,jdbcType=INTEGER}</if>
-								<if test="investMoneyPerF!=null">AND invest_money_per_f = #{investMoneyPerF,jdbcType=BIGINT}</if>
-								<if test="investMoneyMaxF!=null">AND invest_money_max_f = #{investMoneyMaxF,jdbcType=BIGINT}</if>
-								<if test="investNumG!=null">AND invest_num_g = #{investNumG,jdbcType=INTEGER}</if>
-								<if test="investNumPercentG!=null">AND invest_num_percent_g = #{investNumPercentG,jdbcType=INTEGER}</if>
-								<if test="investNumRateG!=null">AND invest_num_rate_g = #{investNumRateG,jdbcType=INTEGER}</if>
-								<if test="investMoneyG!=null">AND invest_money_g = #{investMoneyG,jdbcType=BIGINT}</if>
-								<if test="investMoneyRateG!=null">AND invest_money_rate_g = #{investMoneyRateG,jdbcType=INTEGER}</if>
-								<if test="investMoneyPerG!=null">AND invest_money_per_g = #{investMoneyPerG,jdbcType=BIGINT}</if>
-								<if test="investMoneyMaxG!=null">AND invest_money_max_g = #{investMoneyMaxG,jdbcType=BIGINT}</if>
-								<if test="investNumH!=null">AND invest_num_h = #{investNumH,jdbcType=INTEGER}</if>
-								<if test="investNumPercentH!=null">AND invest_num_percent_h = #{investNumPercentH,jdbcType=INTEGER}</if>
-								<if test="investNumRateH!=null">AND invest_num_rate_h = #{investNumRateH,jdbcType=INTEGER}</if>
-								<if test="investMoneyH!=null">AND invest_money_h = #{investMoneyH,jdbcType=BIGINT}</if>
-								<if test="investMoneyRateH!=null">AND invest_money_rate_h = #{investMoneyRateH,jdbcType=INTEGER}</if>
-								<if test="investMoneyPerH!=null">AND invest_money_per_h = #{investMoneyPerH,jdbcType=BIGINT}</if>
-								<if test="investMoneyMaxH!=null">AND invest_money_max_h = #{investMoneyMaxH,jdbcType=BIGINT}</if>
-								<if test="investNumI!=null">AND invest_num_i = #{investNumI,jdbcType=INTEGER}</if>
-								<if test="investNumPercentI!=null">AND invest_num_percent_i = #{investNumPercentI,jdbcType=INTEGER}</if>
-								<if test="investNumRateI!=null">AND invest_num_rate_i = #{investNumRateI,jdbcType=INTEGER}</if>
-								<if test="investMoneyI!=null">AND invest_money_i = #{investMoneyI,jdbcType=BIGINT}</if>
-								<if test="investMoneyRateI!=null">AND invest_money_rate_i = #{investMoneyRateI,jdbcType=INTEGER}</if>
-								<if test="investMoneyPerI!=null">AND invest_money_per_i = #{investMoneyPerI,jdbcType=BIGINT}</if>
-								<if test="investMoneyMaxI!=null">AND invest_money_max_i = #{investMoneyMaxI,jdbcType=BIGINT}</if>
 								<if test="type!=null">AND type = #{type,jdbcType=INTEGER}</if>
-								<if test="addTime!=null">AND add_time = #{addTime,jdbcType=TIMESTAMP}</if>
-								<if test="updateTime!=null">AND update_time = #{updateTime,jdbcType=TIMESTAMP}</if>
-							
+
 		</where>
 		<choose>
 			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
@@ -203,7 +170,21 @@
 	</sql>
 	
 
+    <select id="selectByYearsParentId" resultMap="BaseResultMap">
+        SELECT
+            <include refid="selectFields" />
+        FROM
+            dm_chart_event_industry_round_merge
+        <where>
+            <if test="years!=null">AND year in
+                <foreach item="item" index="index" collection="years" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="parentId!=null">AND parent_id = #{parentId,jdbcType=INTEGER}</if>
+            <if test="type!=null">AND type = #{type,jdbcType=INTEGER}</if>
+        </where>
 
-
+    </select>
 		
 </mapper>

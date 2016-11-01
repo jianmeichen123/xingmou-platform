@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,6 +34,7 @@ public class ChartEventDistictController {
      */
     @RequestMapping("barAndpie")
     @ResponseBody
+	@Cacheable(value = "barAndpie",keyGenerator = "reportKG")
 	public MessageInfo barAndpie(){
 		MessageInfo<List<ChartEventIndustryDistictYear>> messageInfo = chartEventIndustryDistictYearBiz.selectDistrictTop10();
         if (!messageInfo.isSuccess()){

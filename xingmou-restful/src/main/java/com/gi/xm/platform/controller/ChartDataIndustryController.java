@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,6 +45,7 @@ public class ChartDataIndustryController {
 	 */
 	@RequestMapping("pop")
 	@ResponseBody
+	@Cacheable(value = "pop",keyGenerator = "reportKG")
 	public MessageInfo pop () {
 		MessageInfo<List<ChartDataIndustry>> resultMessageInfo = chartDataIndustryBiz.queryIndustryDistribution();
 		if(!resultMessageInfo.isSuccess()){

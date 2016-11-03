@@ -88,7 +88,7 @@
         </where>
 		<choose>
 			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
-			<otherwise>order by publish_date desc</otherwise>
+			<otherwise>order by order_num desc</otherwise>
 		</choose>
 	</sql>
 
@@ -107,9 +107,9 @@
         FROM
             dm_industry_reports
         WHERE
-            publish_date > (select publish_date from dm_industry_reports where id =  #{id,jdbcType=BIGINT})
+            order_num > (select order_num from dm_industry_reports where id =  #{id,jdbcType=BIGINT})
         ORDER  BY
-            publish_date DESC
+            order_num DESC
         LIMIT 1
     </select>
 
@@ -120,9 +120,9 @@
         FROM
             dm_industry_reports
         WHERE
-          (select publish_date from dm_industry_reports where id =  #{id,jdbcType=BIGINT}) > publish_date 
+          (select order_num from dm_industry_reports where id =  #{id,jdbcType=BIGINT}) > order_num 
         ORDER  BY
-            publish_date DESC
+            order_num DESC
         limit 1
     </select>
 
@@ -139,7 +139,7 @@
             id != #{id,jdbcType=BIGINT}
         </if>
         ORDER  BY
-            publish_date DESC
+            order_num DESC
         limit 5
     </select>
 

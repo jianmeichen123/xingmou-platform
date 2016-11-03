@@ -78,7 +78,7 @@
 	</insert>
 
 	<sql id="selectFields">
-	id,yaar,industry_id,industry_name,industry_sub_id,industry_sub_name,market_money,market_money_rate,market_user,market_user_rate,single_user_value,market_money_stock,project_num,invested_num,invested_num_rate,invested_money,invested_money_rate,invested_per_money,invested_median_money,invested_max_money,add_time,update_time
+	yaar,industry_id,industry_name,industry_sub_id,industry_sub_name,market_money,market_money_rate,market_user,market_user_rate,single_user_value,market_money_stock,project_num,invested_num,invested_num_rate,invested_money,invested_money_rate,invested_per_money,invested_median_money,invested_max_money
 	</sql>
 	
 			
@@ -103,7 +103,31 @@
 			AND industry_sub_id = #{industrySubId,jdbcType=INTEGER}
 		</if>
 	</select>
-			
+	<select id="selectByYaarIndustryId" resultMap="BaseResultMap">
+		SELECT
+		yaar,industry_sub_id,industry_sub_name,invested_num,invested_money
+
+		FROM dm_chart_data_industry_year
+
+		WHERE  yaar in
+		<foreach item="item" index="index" collection="years" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		<if test="industryId!=null">AND industry_id = #{industryId,jdbcType=INTEGER}</if>
+	</select>
+
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+		yaar,industry_id,industry_name,invested_num,invested_money
+		FROM dm_chart_data_industry_first_year
+
+		WHERE  yaar in
+		<foreach item="item" index="index" collection="years" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+
+	</select>
 	<select id="selectByIndustryId" resultMap="BaseResultMap">
 		SELECT
 		<include refid="selectFields" />
@@ -117,5 +141,34 @@
 		FROM dm_chart_data_industry_year
 		WHERE  yaar = #{yaar,jdbcType=INTEGER}
 	</select>
-		
+
+
+
+
+	<select id="queryChartDataIndustryYear" resultMap="BaseResultMap" parameterType="com.gi.xm.report.query.ChartDataIndustryYearQueryInfo">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_chart_data_industry_year
+		<include refid="queryWhereAndOrder" />
+	</select>
+
+
+
+
+	<sql id="queryWhereAndOrder">
+		<where>
+			yaar in
+			<foreach item="item" index="index" collection="years" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+			<if test="industryId!=null">AND industry_id = #{industryId,jdbcType=INTEGER}</if>
+			<if test="industrySubId!=null">AND industry_sub_id = #{industrySubId,jdbcType=INTEGER}</if>
+		</where>
+		<choose>
+			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
+			<otherwise>order by yaar desc</otherwise>
+		</choose>
+	</sql>
+
+
 </mapper>

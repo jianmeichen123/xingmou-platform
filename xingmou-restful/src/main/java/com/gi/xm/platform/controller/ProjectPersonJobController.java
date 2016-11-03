@@ -25,11 +25,6 @@ public class ProjectPersonJobController {
 	@Reference(check = false)
 	private ProjectPersonJobFacede projectPersonJobFacede;
 
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public ModelAndView index() {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		return new ModelAndView("projectPersonJob/index", modelMap);
-	}
 
 	@RequestMapping("query")
 	@ResponseBody
@@ -37,6 +32,7 @@ public class ProjectPersonJobController {
 		MessageInfo<QueryResultInfo<ProjectPersonJobInfo>> resultMessageInfo = projectPersonJobFacede.queryProjectPersonJob(projectPersonJobQueryInfo);
 		return resultMessageInfo;
 	}
+/*
 
     @RequestMapping("create")
     @ResponseBody
@@ -51,6 +47,7 @@ public class ProjectPersonJobController {
 		MessageInfo<Integer> messageInfo =  projectPersonJobFacede.updateProjectPersonJob(projectPersonJobInfo);
 		return messageInfo;
 	}
+*/
 
     @RequestMapping("get")
     @ResponseBody
@@ -59,13 +56,4 @@ public class ProjectPersonJobController {
 		return messageInfo;
 	}
 
-    @RequestMapping("getAll")
-    @ResponseBody
-    public MessageInfo<List<ProjectPersonJobInfo>> getAllProjectPersonJob(){
-		MessageInfo<List<ProjectPersonJobInfo>>  messageInfo = projectPersonJobFacede.getAllProjectPersonJob();
-		return messageInfo;
-	}
-
-
-	
 }

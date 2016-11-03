@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.xm.report.dao.ChartEventIndustryRoundMergeDAO">
+	<resultMap id="BaseResultMap" type="com.gi.xm.report.pojo.ChartEventIndustryRoundMerge">
+					<id column="id" property="id" jdbcType="INTEGER" />
+								<result column="year" property="year" jdbcType="INTEGER" />
+								<result column="parent_id" property="parentId" jdbcType="INTEGER" />
+								<result column="industry_id" property="industryId" jdbcType="INTEGER" />
+								<result column="industry_name" property="industryName" jdbcType="VARCHAR" />
+								<result column="industry_level" property="industryLevel" jdbcType="INTEGER" />
+								<result column="money_level_order_id" property="moneyLevelOrderId" jdbcType="INTEGER" />
+								<result column="money_level_name" property="moneyLevelName" jdbcType="VARCHAR" />
+								<result column="invest_num_a" property="investNumA" jdbcType="INTEGER" />
+								<result column="invest_num_percent_a" property="investNumPercentA" jdbcType="INTEGER" />
+								<result column="invest_num_rate_a" property="investNumRateA" jdbcType="INTEGER" />
+								<result column="invest_money_a" property="investMoneyA" jdbcType="BIGINT" />
+								<result column="invest_money_rate_a" property="investMoneyRateA" jdbcType="INTEGER" />
+								<result column="invest_money_per_a" property="investMoneyPerA" jdbcType="BIGINT" />
+								<result column="invest_money_max_a" property="investMoneyMaxA" jdbcType="BIGINT" />
+								<result column="invest_num_b" property="investNumB" jdbcType="INTEGER" />
+								<result column="invest_num_percent_b" property="investNumPercentB" jdbcType="INTEGER" />
+								<result column="invest_num_rate_b" property="investNumRateB" jdbcType="INTEGER" />
+								<result column="invest_money_b" property="investMoneyB" jdbcType="BIGINT" />
+								<result column="invest_money_rate_b" property="investMoneyRateB" jdbcType="INTEGER" />
+								<result column="invest_money_per_b" property="investMoneyPerB" jdbcType="BIGINT" />
+								<result column="invest_money_max_b" property="investMoneyMaxB" jdbcType="BIGINT" />
+								<result column="invest_num_c" property="investNumC" jdbcType="INTEGER" />
+								<result column="invest_num_percent_c" property="investNumPercentC" jdbcType="INTEGER" />
+								<result column="invest_num_rate_c" property="investNumRateC" jdbcType="INTEGER" />
+								<result column="invest_money_c" property="investMoneyC" jdbcType="BIGINT" />
+								<result column="invest_money_rate_c" property="investMoneyRateC" jdbcType="INTEGER" />
+								<result column="invest_money_per_c" property="investMoneyPerC" jdbcType="BIGINT" />
+								<result column="invest_money_max_c" property="investMoneyMaxC" jdbcType="BIGINT" />
+								<result column="invest_num_d" property="investNumD" jdbcType="INTEGER" />
+								<result column="invest_num_percent_d" property="investNumPercentD" jdbcType="INTEGER" />
+								<result column="invest_num_rate_d" property="investNumRateD" jdbcType="INTEGER" />
+								<result column="invest_money_d" property="investMoneyD" jdbcType="BIGINT" />
+								<result column="invest_money_rate_d" property="investMoneyRateD" jdbcType="INTEGER" />
+								<result column="invest_money_per_d" property="investMoneyPerD" jdbcType="BIGINT" />
+								<result column="invest_money_max_d" property="investMoneyMaxD" jdbcType="BIGINT" />
+								<result column="invest_num_e" property="investNumE" jdbcType="INTEGER" />
+								<result column="invest_num_percent_e" property="investNumPercentE" jdbcType="INTEGER" />
+								<result column="invest_num_rate_e" property="investNumRateE" jdbcType="INTEGER" />
+								<result column="invest_money_e" property="investMoneyE" jdbcType="BIGINT" />
+								<result column="invest_money_rate_e" property="investMoneyRateE" jdbcType="INTEGER" />
+								<result column="invest_money_per_e" property="investMoneyPerE" jdbcType="BIGINT" />
+								<result column="invest_money_max_e" property="investMoneyMaxE" jdbcType="BIGINT" />
+								<result column="invest_num_f" property="investNumF" jdbcType="INTEGER" />
+								<result column="invest_num_percent_f" property="investNumPercentF" jdbcType="INTEGER" />
+								<result column="invest_num_rate_f" property="investNumRateF" jdbcType="INTEGER" />
+								<result column="invest_money_f" property="investMoneyF" jdbcType="BIGINT" />
+								<result column="invest_money_rate_f" property="investMoneyRateF" jdbcType="INTEGER" />
+								<result column="invest_money_per_f" property="investMoneyPerF" jdbcType="BIGINT" />
+								<result column="invest_money_max_f" property="investMoneyMaxF" jdbcType="BIGINT" />
+								<result column="invest_num_g" property="investNumG" jdbcType="INTEGER" />
+								<result column="invest_num_percent_g" property="investNumPercentG" jdbcType="INTEGER" />
+								<result column="invest_num_rate_g" property="investNumRateG" jdbcType="INTEGER" />
+								<result column="invest_money_g" property="investMoneyG" jdbcType="BIGINT" />
+								<result column="invest_money_rate_g" property="investMoneyRateG" jdbcType="INTEGER" />
+								<result column="invest_money_per_g" property="investMoneyPerG" jdbcType="BIGINT" />
+								<result column="invest_money_max_g" property="investMoneyMaxG" jdbcType="BIGINT" />
+								<result column="invest_num_h" property="investNumH" jdbcType="INTEGER" />
+								<result column="invest_num_percent_h" property="investNumPercentH" jdbcType="INTEGER" />
+								<result column="invest_num_rate_h" property="investNumRateH" jdbcType="INTEGER" />
+								<result column="invest_money_h" property="investMoneyH" jdbcType="BIGINT" />
+								<result column="invest_money_rate_h" property="investMoneyRateH" jdbcType="INTEGER" />
+								<result column="invest_money_per_h" property="investMoneyPerH" jdbcType="BIGINT" />
+								<result column="invest_money_max_h" property="investMoneyMaxH" jdbcType="BIGINT" />
+								<result column="invest_num_i" property="investNumI" jdbcType="INTEGER" />
+								<result column="invest_num_percent_i" property="investNumPercentI" jdbcType="INTEGER" />
+								<result column="invest_num_rate_i" property="investNumRateI" jdbcType="INTEGER" />
+								<result column="invest_money_i" property="investMoneyI" jdbcType="BIGINT" />
+								<result column="invest_money_rate_i" property="investMoneyRateI" jdbcType="INTEGER" />
+								<result column="invest_money_per_i" property="investMoneyPerI" jdbcType="BIGINT" />
+								<result column="invest_money_max_i" property="investMoneyMaxI" jdbcType="BIGINT" />
+								<result column="type" property="type" jdbcType="INTEGER" />
+								<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+								<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+						</resultMap>
+
+
+
+		
+		
+	<sql id="selectFields">
+	    year,parent_id,industry_id,industry_name,industry_level,
+        money_level_order_id,money_level_name,invest_num_a,invest_num_percent_a,invest_num_rate_a,invest_money_a,invest_money_rate_a,invest_money_per_a,invest_money_max_a,invest_num_b,invest_num_percent_b,invest_num_rate_b,invest_money_b,invest_money_rate_b,invest_money_per_b,invest_money_max_b,invest_num_c,invest_num_percent_c,invest_num_rate_c,invest_money_c,invest_money_rate_c,invest_money_per_c,invest_money_max_c,invest_num_d,invest_num_percent_d,invest_num_rate_d,invest_money_d,invest_money_rate_d,invest_money_per_d,invest_money_max_d,invest_num_e,invest_num_percent_e,invest_num_rate_e,invest_money_e,invest_money_rate_e,invest_money_per_e,invest_money_max_e,invest_num_f,invest_num_percent_f,invest_num_rate_f,invest_money_f,invest_money_rate_f,invest_money_per_f,invest_money_max_f,invest_num_g,invest_num_percent_g,invest_num_rate_g,invest_money_g,invest_money_rate_g,invest_money_per_g,invest_money_max_g,invest_num_h,invest_num_percent_h,invest_num_rate_h,invest_money_h,invest_money_rate_h,invest_money_per_h,invest_money_max_h,invest_num_i,invest_num_percent_i,invest_num_rate_i,invest_money_i,invest_money_rate_i,invest_money_per_i,invest_money_max_i,type,add_time,update_time
+	</sql>
+	
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_chart_event_industry_round_merge
+	</select>
+	
+	<select id="queryChartEventIndustryRoundMerge" resultMap="BaseResultMap" parameterType="com.gi.xm.report.pojo.ChartEventIndustryRoundMerge">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_chart_event_industry_round_merge
+		<include refid="queryWhereAndOrder" />
+	</select>
+
+	<select id="chartAnalysis" resultMap="BaseResultMap" parameterType="com.gi.xm.report.pojo.ChartEventIndustryRoundMerge">
+		SELECT
+		money_level_order_id,
+		money_level_name,
+		sum(t.invest_money_a) as invest_money_a,sum(t.invest_money_b) as invest_money_b,sum(t.invest_money_c) as invest_money_c,
+		sum(t.invest_money_d) as invest_money_d,sum(t.invest_money_e) as invest_money_e,
+		sum(t.invest_money_f) as invest_money_f,sum(t.invest_money_g) as invest_money_g,
+		sum(t.invest_money_h) as invest_money_h,sum(t.invest_money_i) as invest_money_i,
+
+
+		sum(t.invest_num_a) as invest_num_a,sum(t.invest_num_b) as invest_num_b,sum(t.invest_num_c) as invest_num_c,
+		sum(t.invest_num_d) as invest_num_d,sum(t.invest_num_e) as invest_num_e,
+		sum(t.invest_num_f) as invest_num_f,sum(t.invest_num_g) as invest_num_g,
+		sum(t.invest_num_h) as invest_num_h,sum(t.invest_num_i) as invest_num_i
+		  FROM dm_chart_event_industry_round_merge t
+		<include refid="queryWhereAndOrder1" />
+
+
+		GROUP BY money_level_order_id,money_level_name
+		ORDER BY t.money_level_order_id
+
+
+	</select>
+
+	<select id="trendAnalysis" resultMap="BaseResultMap" parameterType="com.gi.xm.report.pojo.ChartEventIndustryRoundMerge">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_chart_event_industry_round_merge
+		<include refid="queryWhereAndOrder" />
+	</select>
+	<sql id="queryWhereAndOrder1">
+	<where>
+		<if test="year!=null">AND year = #{year,jdbcType=INTEGER}</if>
+		<if test="yearList!=null">AND year in
+			<foreach item="item" index="index" collection="yearList" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		<if test="parentId!=null">AND parent_id = #{parentId,jdbcType=INTEGER}</if>
+		<if test="industryId!=null and industryId>0" >AND industry_id = #{industryId,jdbcType=INTEGER}</if>
+		<if test="industryLevel!=null">AND industry_level = #{industryLevel,jdbcType=INTEGER}</if>
+		<if test="moneyLevelOrderId!=null">AND money_level_order_id = #{moneyLevelOrderId,jdbcType=INTEGER}</if>
+		<if test="type!=null">AND type = #{type,jdbcType=INTEGER}</if>
+
+	</where>
+
+	</sql>
+	<sql id="queryWhereAndOrder">
+		<where>
+					<if test="id!=null">AND id = #{id,jdbcType=INTEGER}</if>
+								<if test="year!=null">AND year = #{year,jdbcType=INTEGER}</if>
+		                    	<if test="yearList!=null">AND year in
+			                    	<foreach item="item" index="index" collection="yearList" open="(" separator="," close=")">
+				                           	#{item}
+			                        </foreach>
+								</if>
+								<if test="parentId!=null">AND parent_id = #{parentId,jdbcType=INTEGER}</if>
+								<if test="industryId!=null and industryId>0">AND industry_id = #{industryId,jdbcType=INTEGER}</if>
+								<if test="industryLevel!=null">AND industry_level = #{industryLevel,jdbcType=INTEGER}</if>
+								<if test="moneyLevelOrderId!=null">AND money_level_order_id = #{moneyLevelOrderId,jdbcType=INTEGER}</if>
+								<if test="type!=null">AND type = #{type,jdbcType=INTEGER}</if>
+
+		</where>
+		<choose>
+			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
+			<otherwise>order by id desc</otherwise>
+		</choose>
+	</sql>
+	
+
+    <select id="selectByYearsParentId" resultMap="BaseResultMap">
+        SELECT
+            <include refid="selectFields" />
+        FROM
+            dm_chart_event_industry_round_merge
+        <where>
+            <if test="years!=null">AND year in
+                <foreach item="item" index="index" collection="years" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="parentId!=null">AND parent_id = #{parentId,jdbcType=INTEGER}</if>
+            <if test="type!=null">AND type = #{type,jdbcType=INTEGER}</if>
+        </where>
+
+    </select>
+		
+</mapper>

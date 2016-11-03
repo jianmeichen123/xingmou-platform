@@ -61,6 +61,63 @@ public class InvestEventsQuery extends Query {
 	private Timestamp updateTime;
 	//新加
 	private String projectName;
+	
+	private Long sourceId;
+	
+	private Integer[] newestEventRoundIds;
+
+    private Long[] districtIds;
+    
+    private Long[] districtSubIds;
+
+    private Long[] industryIds;
+    
+    private Long[] industrySubIds;
+
+    private String createDateStart;
+
+    private String createDateEnd;
+    
+	
+	public Integer[] getNewestEventRoundIds() {
+		return newestEventRoundIds;
+	}
+
+	public void setNewestEventRoundIds(Integer[] newestEventRoundIds) {
+		this.newestEventRoundIds = newestEventRoundIds;
+	}
+
+	public Long[] getDistrictIds() {
+		return districtIds;
+	}
+
+	public void setDistrictIds(Long[] districtIds) {
+		this.districtIds = districtIds;
+	}
+
+	public Long[] getIndustryIds() {
+		return industryIds;
+	}
+
+	public void setIndustryIds(Long[] industryIds) {
+		this.industryIds = industryIds;
+	}
+
+	public String getCreateDateStart() {
+		return createDateStart;
+	}
+
+	public void setCreateDateStart(String createDateStart) {
+		this.createDateStart = createDateStart;
+	}
+
+	public String getCreateDateEnd() {
+		return createDateEnd;
+	}
+
+	public void setCreateDateEnd(String createDateEnd) {
+		this.createDateEnd = createDateEnd;
+	}
 
 	public String getProjectName() {
 		return projectName;
@@ -91,6 +148,14 @@ public class InvestEventsQuery extends Query {
 		this.projectId = projectId;
 	}
     
+	public Long[] getIndustrySubIds() {
+		return industrySubIds;
+	}
+
+	public void setIndustrySubIds(Long[] industrySubIds) {
+		this.industrySubIds = industrySubIds;
+	}
+
 	public String getInvestMoney(){
 		return investMoney;
 	}
@@ -101,6 +166,22 @@ public class InvestEventsQuery extends Query {
 	public String getMoney(){
 		return money;
 	}
+	public Long getSourceId() {
+		return sourceId;
+	}
+
+	public Long[] getDistrictSubIds() {
+		return districtSubIds;
+	}
+
+	public void setDistrictSubIds(Long[] districtSubIds) {
+		this.districtSubIds = districtSubIds;
+	}
+
+	public void setSourceId(Long sourceId) {
+		this.sourceId = sourceId;
+	}
+
 	public void setMoney(String money){
 		this.money = money;
 	}

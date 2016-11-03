@@ -56,7 +56,6 @@ public class ProjectPersonJobFacedeImpl implements ProjectPersonJobFacede {
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-		@Cacheable(value = "projectPersonJobInfo",keyGenerator = "wiselyKeyGenerator")
 	public MessageInfo<ProjectPersonJobInfo> getProjectPersonJob( Long id ){
 		
 		Message<ProjectPersonJob> message  = projectPersonJobBiz.getProjectPersonJob( id );
@@ -66,7 +65,6 @@ public class ProjectPersonJobFacedeImpl implements ProjectPersonJobFacede {
 		return messageInfo;
 	}
 
-    @Cacheable(value = "projectPersonJobInfo",keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<List<ProjectPersonJobInfo>> getAllProjectPersonJob(){
 	
 		Message<List<ProjectPersonJob>> message  = projectPersonJobBiz.getAllProjectPersonJob();

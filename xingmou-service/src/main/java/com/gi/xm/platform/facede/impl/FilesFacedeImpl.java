@@ -56,7 +56,6 @@ public class FilesFacedeImpl implements FilesFacede {
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-		@Cacheable(value = "filesInfo",keyGenerator = "wiselyKeyGenerator")
 	public MessageInfo<FilesInfo> getFiles( Long id ){
 		
 		Message<Files> message  = filesBiz.getFiles( id );
@@ -66,7 +65,6 @@ public class FilesFacedeImpl implements FilesFacede {
 		return messageInfo;
 	}
 
-    @Cacheable(value = "filesInfo",keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<List<FilesInfo>> getAllFiles(){
 	
 		Message<List<Files>> message  = filesBiz.getAllFiles();
@@ -84,13 +82,10 @@ public class FilesFacedeImpl implements FilesFacede {
 		messageInfo.setData(queryResultInfo);
 		return messageInfo;
 	}
-   
-		
 
 
-	public MessageInfo<List<FilesInfo>> getListBySourceId(Long sourceId){
-	
-		Message<List<Files>> message  = filesBiz.getListBySourceId(sourceId);
+	public MessageInfo<List<FilesInfo>> getListBySourceIdsType(List<Long> sourceIds, Integer type) {
+		Message<List<Files>> message  = filesBiz.getListBySourceIdsType(sourceIds,type);
 		MessageInfo<List<FilesInfo>> messageInfo = MessageConvertor.toMessageInfo(message);
 		List<FilesInfo> filesInfoList = FilesConvertor.toFilesInfoList(message.getData());
 		messageInfo.setData(filesInfoList);

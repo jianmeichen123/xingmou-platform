@@ -124,11 +124,11 @@ public class RoundBiz  {
 		return message;
 	}
 
-	public Message<List<Round>> getListByType(Integer type){
+	public Message<List<Round>> getByTypeParentId(Integer type,Integer parentId){
 
 		Message<List<Round>> message = new Message<List<Round>>();
 		try {
-			List<Round> roundList = roundDAO.selectByType(type);
+			List<Round> roundList = roundDAO.selectByTypeParentId(type,parentId);
 			message.setData(roundList);
 		} catch (Exception e) {
 			LOGGER.error("getListByType","查询Round失败", e);

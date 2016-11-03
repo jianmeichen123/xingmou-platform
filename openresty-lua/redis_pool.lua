@@ -10,7 +10,7 @@ function redis_pool:get_connect()
     red:set_timeout(1000) -- 1 sec
     local ok, err = red:connect(conf.redis()['host'],conf.redis()['port'])
     if not ok then
-	    return false,"failed to connect redis"
+        return false,"failed to connect redis"
     end
     --设置redis密码
     local count, err = red:get_reused_times()
@@ -58,6 +58,7 @@ function redis_pool:get_key(str)
         client:expire(key,604800)
         local ikey = string.format("%s:%s:%s","xm","count",email)
         local v,e = client:incr(ikey)
+        local v,e = client:incr("%s:%s:%s:%s","xm","c",email,os.time/300*300)
         return true,"获取key成功",val
     end
     --self:close()

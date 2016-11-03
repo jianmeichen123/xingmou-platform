@@ -25,6 +25,6 @@ public interface RoundDAO {
 			
     int updateByPrimaryKey(Round round);
 
-    List<Round> selectByType(@Param("type") Integer type);
+    List<Round> selectByTypeParentId(@Param("type") Integer type,@Param("parentId") Integer parentId);
 
 }

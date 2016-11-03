@@ -6,10 +6,9 @@ import java.util.Date;
 import com.gi.xm.platform.view.common.MessageInfo;
 import com.gi.xm.platform.view.common.QueryResultInfo;
 import com.gi.xm.platform.view.DataInfo;
-import com.gi.xm.platform.view.DataQueryInfo;
 
 public interface DataFacede {
-		MessageInfo<Integer> deleteData(Integer id);
+    MessageInfo<Integer> deleteData(Integer id);
 		
     MessageInfo<Integer> createData(DataInfo dataInfo);
 		
@@ -19,8 +18,4 @@ public interface DataFacede {
 		
     MessageInfo<List<DataInfo>> getAllData();
 			
-    MessageInfo<QueryResultInfo<DataInfo>> queryData(DataQueryInfo dataQueryInfo);
-	
-	
-
 }

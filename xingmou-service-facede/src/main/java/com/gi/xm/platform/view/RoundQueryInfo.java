@@ -26,11 +26,6 @@ public class RoundQueryInfo extends QueryInfo {
 	
 	private Long parentId;
 	
-	private Timestamp addTime;
-	
-	private Timestamp updateTime;
-		
-    
 	public Integer getId(){
 		return id;
 	}
@@ -79,19 +74,4 @@ public class RoundQueryInfo extends QueryInfo {
 		this.parentId = parentId;
 	}
     
-	public Timestamp getAddTime(){
-		return addTime;
-	}
-	
-	public void setAddTime(Timestamp addTime){
-		this.addTime = addTime;
-	}
-    
-	public Timestamp getUpdateTime(){
-		return updateTime;
-	}
-	
-	public void setUpdateTime(Timestamp updateTime){
-		this.updateTime = updateTime;
-	}
-    }
+}

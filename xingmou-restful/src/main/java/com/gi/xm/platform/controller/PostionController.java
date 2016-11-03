@@ -1,3 +1,4 @@
+/*
 package com.gi.xm.platform.controller;
 
 import java.util.HashMap;
@@ -25,11 +26,6 @@ public class PostionController {
 	@Reference(check = false)
 	private PostionFacede postionFacede;
 
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public ModelAndView index() {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		return new ModelAndView("postion/index", modelMap);
-	}
 
 	@RequestMapping("query")
 	@ResponseBody
@@ -37,6 +33,8 @@ public class PostionController {
 		MessageInfo<QueryResultInfo<PostionInfo>> resultMessageInfo = postionFacede.queryPostion(postionQueryInfo);
 		return resultMessageInfo;
 	}
+*/
+/*
 
     @RequestMapping("create")
     @ResponseBody
@@ -51,6 +49,8 @@ public class PostionController {
 		MessageInfo<Integer> messageInfo =  postionFacede.updatePostion(postionInfo);
 		return messageInfo;
 	}
+*//*
+
 
     @RequestMapping("get")
     @ResponseBody
@@ -69,3 +69,4 @@ public class PostionController {
 
 	
 }
+*/

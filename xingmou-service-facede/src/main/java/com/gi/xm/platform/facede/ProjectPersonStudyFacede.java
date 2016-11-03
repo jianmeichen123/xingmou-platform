@@ -9,7 +9,7 @@ import com.gi.xm.platform.view.ProjectPersonStudyInfo;
 import com.gi.xm.platform.view.ProjectPersonStudyQueryInfo;
 
 public interface ProjectPersonStudyFacede {
-		MessageInfo<Integer> deleteProjectPersonStudy(Long id);
+    MessageInfo<Integer> deleteProjectPersonStudy(Long id);
 		
     MessageInfo<Long> createProjectPersonStudy(ProjectPersonStudyInfo projectPersonStudyInfo);
 		

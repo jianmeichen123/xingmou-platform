@@ -26,7 +26,6 @@ public class CompanyFacedeImpl implements CompanyFacede {
 				
 		
     
-	//@Cacheable(value = "companyInfo",keyGenerator = "wiselyKeyGenerator")
 	public MessageInfo<CompanyInfo> getCompany( Long id ){
 		
 		Message<Company> message  = companyBiz.getCompany( id );

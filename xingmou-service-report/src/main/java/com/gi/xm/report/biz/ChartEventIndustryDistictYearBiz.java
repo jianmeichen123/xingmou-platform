@@ -82,6 +82,20 @@ public class ChartEventIndustryDistictYearBiz  {
 		}
 		return messageInfo;
 	}
+	
+	public MessageInfo<List<ChartEventIndustryDistictYear>> selectDistrictTop10(){
+
+		MessageInfo<List<ChartEventIndustryDistictYear>> messageInfo = new MessageInfo<List<ChartEventIndustryDistictYear>>();
+		try {
+			List<ChartEventIndustryDistictYear> chartEventIndustryDistictYearList = chartEventIndustryDistictYearDAO.selectDistrictTop10();
+			messageInfo.setData(chartEventIndustryDistictYearList);
+		} catch (Exception e) {
+			LOGGER.error("selectDistrictTop10","查询ChartEventIndustryDistictYear失败", e);
+			messageInfo.setStatus(10001);
+		}
+		return messageInfo;
+	}
+	
 		
 
 }

@@ -17,7 +17,11 @@ public interface IndustryFacede {
 	MessageInfo<Integer> updateIndustry(IndustryInfo industryInfo);
 		
 	MessageInfo<IndustryInfo> getIndustry(Integer id);
-		
+
+    /**
+     * 获取全部行业(仅项目和投资事件使用)
+     * @return
+     */
     MessageInfo<List<IndustryInfo>> getAllIndustry();
 			
     MessageInfo<QueryResultInfo<IndustryInfo>> queryIndustry(IndustryQueryInfo industryQueryInfo);

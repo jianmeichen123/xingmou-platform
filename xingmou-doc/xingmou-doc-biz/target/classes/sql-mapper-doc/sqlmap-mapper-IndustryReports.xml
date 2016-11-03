@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.xm.doc.dao.IndustryReportsDAO">
+	<resultMap id="BaseResultMap" type="com.gi.xm.doc.pojo.IndustryReportsInfo">
+		<id 	column="id" property="id" jdbcType="INTEGER" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="publish_date" property="publishDate" jdbcType="DATE" />
+        <result column="year" property="year" jdbcType="INTEGER" />
+        <result column="doc_type" property="docType" jdbcType="INTEGER" />
+        <result column="source_type" property="sourceType" jdbcType="INTEGER" />
+		<result column="icon" property="icon" jdbcType="VARCHAR" />
+        <result column="source_id" property="sourceId" jdbcType="VARCHAR" />
+        <result column="industry_id" property="industryId" jdbcType="INTEGER" />
+		<result column="industry_sub_id" property="industrySubId" jdbcType="INTEGER" />
+		<result column="summary_short" property="summaryShort" jdbcType="LONGVARCHAR" />
+		<result column="summary" property="summary" jdbcType="LONGVARCHAR" />
+		<result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+		<result column="tags" 	property="tags" jdbcType="VARCHAR" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="industry_name" property="industryName" jdbcType="VARCHAR" />
+
+	</resultMap>
+
+
+	<insert id="insert" parameterType="com.gi.xm.doc.pojo.IndustryReportsInfo" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO dm_industry_reports (
+			title,
+            source_id,
+            doc_type
+            publish_date,
+            source_type,
+            icon,
+            industry_id,
+			industry_sub_id,
+			summary_short,
+			summary,
+            year,
+            source_type,
+			add_time,
+			update_time
+		)
+		VALUES
+		(
+			#{title,jdbcType=VARCHAR},
+            #{sourceId,jdbcType=INTEGER},
+            #{docType,jdbcType=DATE},
+            #{publishDate,jdbcType=DATE},
+            #{sourceType,jdbcType=INTEGER},
+            #{icon,jdbcType=VARCHAR},
+            #{industryId,jdbcType=INTEGER},
+            #{industrySubId,jdbcType=INTEGER},
+			#{summaryShort,jdbcType=VARCHAR},
+            #{summary,jdbcType=VARCHAR},
+            #{year,jdbcType=INTEGER},
+            #{sourceType,jdbcType=INTEGER},
+            #{addTime,jdbcType=TIMESTAMP},
+			 UNIX_TIMESTAMP()
+		)
+	</insert>
+
+	<sql id="selectFields">
+	id,industry_name,year,tags,doc_type,source_id,title,publish_date,source_type,icon,industry_id,industry_sub_id,summary_short,summary,add_time,update_time
+	</sql>
+	
+	
+
+	<select id="queryIndustryReports" resultMap="BaseResultMap" parameterType="com.gi.xm.doc.query.IndustryReportsQueryInfo">
+		SELECT
+			id,year,doc_type,source_id,title,tags,
+			publish_date,source_type,icon,industry_id,industry_sub_id,
+			summary_short,industry_name
+		FROM
+			dm_industry_reports
+		<include refid="queryWhereAndOrder" />
+	</select>
+
+	<sql id="queryWhereAndOrder">
+		<where>
+                <if test="sourceType!=null">AND source_type = #{sourceType,jdbcType=INTEGER}</if>
+                <if test="industryId!=null">AND industry_id = #{industryId,jdbcType=INTEGER}</if>
+            <if test="years!=null">
+                AND years in
+                <foreach item="year" index="index" collection="years" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+
+        </where>
+		<choose>
+			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
+			<otherwise>order by order_num desc</otherwise>
+		</choose>
+	</sql>
+
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		SELECT
+		<include refid="selectFields" />
+		FROM dm_industry_reports
+		WHERE id = #{id,jdbcType=BIGINT}
+	</select>
+
+    <!--下一页-->
+    <select id="nextPage" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        SELECT
+            id,title
+        FROM
+            dm_industry_reports
+        WHERE
+            order_num > (select order_num from dm_industry_reports where id =  #{id,jdbcType=BIGINT})
+        ORDER  BY
+            order_num ASC
+        LIMIT 1
+    </select>
+
+    <!--上一页 -->
+    <select id="prePage" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        SELECT
+            id,title
+        FROM
+            dm_industry_reports
+        WHERE
+          (select order_num from dm_industry_reports where id =  #{id,jdbcType=BIGINT}) > order_num 
+        ORDER  BY
+            order_num DESC
+        limit 1
+    </select>
+
+
+    <select id="selectByTag" resultMap="BaseResultMap" >
+        SELECT
+            id,title
+        FROM
+            dm_industry_reports
+        where
+            tags like CONCAT('%',#{tag,jdbcType=VARCHAR},'%' )
+        <if test="id!=null">
+        AND
+            id != #{id,jdbcType=BIGINT}
+        </if>
+        ORDER  BY
+            order_num DESC
+        limit 5
+    </select>
+
+</mapper>

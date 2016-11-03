@@ -26,12 +26,6 @@ public class InvestfirmsDataYearController {
 	@Reference(check = false)
 	private InvestfirmsDataYearFacede investfirmsDataYearFacede;
 
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public ModelAndView index() {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		return new ModelAndView("investfirmsDataYear/index", modelMap);
-	}
-
 	@RequestMapping("query")
 	@ResponseBody
 	public MessageInfo<QueryResultInfo<InvestfirmsDataYearInfo>>  queryInvestfirmsDataYear (@RequestBody InvestfirmsDataYearQueryInfo investfirmsDataYearQueryInfo) {
@@ -50,10 +44,10 @@ public class InvestfirmsDataYearController {
 
 		return resultMessageInfo;
 	}
+/*
 
     @RequestMapping("create")
     @ResponseBody
-	@Deprecated
     public MessageInfo<Long> createInvestfirmsDataYear(InvestfirmsDataYearInfo investfirmsDataYearInfo){
         MessageInfo<Long> messageInfo =  investfirmsDataYearFacede.createInvestfirmsDataYear(investfirmsDataYearInfo);
         return messageInfo;
@@ -61,11 +55,11 @@ public class InvestfirmsDataYearController {
 
     @RequestMapping("update")
     @ResponseBody
-	@Deprecated
 	public MessageInfo<Integer> updateInvestfirmsDataYear(InvestfirmsDataYearInfo investfirmsDataYearInfo){
 		MessageInfo<Integer> messageInfo =  investfirmsDataYearFacede.updateInvestfirmsDataYear(investfirmsDataYearInfo);
 		return messageInfo;
 	}
+
 
     @RequestMapping("get")
     @ResponseBody
@@ -74,6 +68,7 @@ public class InvestfirmsDataYearController {
 		return messageInfo;
 	}
 
+
     @RequestMapping("getAll")
     @ResponseBody
     public MessageInfo<List<InvestfirmsDataYearInfo>> getAllInvestfirmsDataYear(){
@@ -81,6 +76,7 @@ public class InvestfirmsDataYearController {
 		return messageInfo;
 	}
 
+*/
 
 		
     @RequestMapping("getListByInvestfirmId")

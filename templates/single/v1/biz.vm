@@ -97,4 +97,23 @@ public class $bizClass  {
 	#end
 
 
+
+	public Message<QueryResult<${modelClass}>> query${modelClass}(${modelQueryClass} ${modelQueryVar}) {
+		Message<QueryResult<${modelClass}>> message = new Message<QueryResult<${modelClass}>>();
+		try {
+			QueryResult<${modelClass}> queryResult = new QueryResult<${modelClass}>();
+			PageHelper.startPage(${modelQueryVar}.getPageIndex(), ${modelQueryVar}.getPageSize());
+			List<${modelClass}> ${modelVar}List = ${mapperVarName}.query${modelClass}(${modelQueryVar});
+			PageInfo<${modelClass}> pageInfo = new PageInfo<${modelClass}>(${modelVar}List);
+			queryResult.setPages(pageInfo.getPages());
+			queryResult.setTotal(pageInfo.getTotal());
+			queryResult.setRecords(${modelVar}List);
+			message.setData(queryResult);
+		} catch (Exception e) {
+			LOGGER.error("query${modelClass}", "分页查询${table.getDisplayName()}失败", e);
+			message.setMessageStatus(MessageStatus.SYS_ERROR);
+		}
+		return message;
+	}
+
 }

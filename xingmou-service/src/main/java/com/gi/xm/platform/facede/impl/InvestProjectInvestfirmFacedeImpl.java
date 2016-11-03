@@ -52,7 +52,6 @@ public class InvestProjectInvestfirmFacedeImpl implements InvestProjectInvestfir
         return messageInfo;
     }
 
-    @Cacheable(value = "investProjectInvestfirmInfo", keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<InvestProjectInvestfirmInfo> getInvestProjectInvestfirm(Long id) {
 
         Message<InvestProjectInvestfirm> message = investProjectInvestfirmBiz.getInvestProjectInvestfirm(id);
@@ -62,7 +61,6 @@ public class InvestProjectInvestfirmFacedeImpl implements InvestProjectInvestfir
         return messageInfo;
     }
 
-    @Cacheable(value = "investProjectInvestfirmInfo", keyGenerator = "wiselyKeyGenerator")
     public MessageInfo<List<InvestProjectInvestfirmInfo>> getAllInvestProjectInvestfirm() {
 
         Message<List<InvestProjectInvestfirm>> message = investProjectInvestfirmBiz.getAllInvestProjectInvestfirm();
@@ -110,74 +108,4 @@ public class InvestProjectInvestfirmFacedeImpl implements InvestProjectInvestfir
         return messageInfo;
     }
 
-
-    /*public MessageInfo<RelationInfo> getRelationInfo(Integer year, Integer industryId, Integer industrySubId) {
-        InvestProjectInvestfirmQuery query = new InvestProjectInvestfirmQuery();
-        query.setYear(year);
-        query.setIndustryId(industryId);
-        query.setIndustrySubId(industrySubId);
-        Message<List<InvestProjectInvestfirm>> message = investProjectInvestfirmBiz.query(query);
-        if (message == null) {
-            MessageInfo<RelationInfo> messageInfo = MessageConvertor.toMessageInfo(message);
-            return messageInfo;
-        }
-        List<ProjectEventRelationInfo> prs = new ArrayList<>();
-        List<InvestfirmsRelationInfo> irs = new ArrayList<>();
-        for (InvestProjectInvestfirm ipi :message.getData()){
-            makeInvestfirmRelation(irs,ipi);
-            makeProjectRelation(prs,ipi);
-        }
-        for (ProjectEventRelationInfo pr :prs){
-          for(InvestProjectInvestfirm ipi :message.getData()){
-              if ( pr.getProjectId().intValue() == ipi.getProjectId().intValue() && ipi.getInvestfirmId() !=null){
-                  Set<Long> iids = pr.getInvestfirmId();
-                  if (iids == null){
-                      iids = new HashSet<>();
-                      pr.setInvestfirmId(iids);
-                  }
-                  iids.add(ipi.getInvestfirmId());
-              }
-          }
-        }
-        RelationInfo r = new RelationInfo();
-        r.setIs(irs);
-        r.setPs(prs);
-        MessageInfo<RelationInfo> m = new MessageInfo<>();
-        m.setData(r);
-        return m;
-    }*/
-
-    private void makeProjectRelation(List<ProjectEventRelationInfo> l, InvestProjectInvestfirm ip) {
-        ProjectEventRelationInfo o = null;
-        for (ProjectEventRelationInfo p : l) {
-            if (p.getProjectId().intValue() == o.getProjectId().intValue()) {
-                p.setTotal(p.getTotal() + 1);
-                break;
-            }
-        }
-        if (o == null){
-            o  = new ProjectEventRelationInfo();
-            o.setProjectId(ip.getProjectId());
-            o.setProjectName(ip.getProjectName());
-            o.setTotal(1);
-            l.add(o);
-        }
-    }
-
-
-    private void makeInvestfirmRelation(List<InvestfirmsRelationInfo> l, InvestProjectInvestfirm ip) {
-        InvestfirmsRelationInfo o = null;
-        for (InvestfirmsRelationInfo p : l) {
-            if (ip.getInvestfirmId()!=null && p.getInvestfirmId().intValue() == ip.getInvestfirmId().intValue()) {
-                p.setTotal(p.getTotal() + 1);
-                break;
-            }
-        }
-        if (o == null){
-            o.setInvestfirmId(ip.getInvestfirmId());
-            o.setName(ip.getInvestfirmName());
-            o.setTotal(1);
-            l.add(o);
-        }
-    }
 }

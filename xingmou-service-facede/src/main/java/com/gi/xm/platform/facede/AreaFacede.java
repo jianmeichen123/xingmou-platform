@@ -9,17 +9,21 @@ import com.gi.xm.platform.view.AreaInfo;
 import com.gi.xm.platform.view.AreaQueryInfo;
 
 public interface AreaFacede {
-		MessageInfo<Integer> deleteArea(Long id);
+    MessageInfo<Integer> deleteArea(Long id);
 		
     MessageInfo<Long> createArea(AreaInfo areaInfo);
 		
 	MessageInfo<Integer> updateArea(AreaInfo areaInfo);
 		
-	MessageInfo<AreaInfo> getArea(Long id);
-		
+	//MessageInfo<AreaInfo> getArea(Long id);
+
+    /**
+     * 获取全部领域(仅投资机构使用)
+     * @return
+     */
     MessageInfo<List<AreaInfo>> getAllArea();
 			
-    MessageInfo<QueryResultInfo<AreaInfo>> queryArea(AreaQueryInfo areaQueryInfo);
+    //MessageInfo<QueryResultInfo<AreaInfo>> queryArea(AreaQueryInfo areaQueryInfo);
 	
 	
 

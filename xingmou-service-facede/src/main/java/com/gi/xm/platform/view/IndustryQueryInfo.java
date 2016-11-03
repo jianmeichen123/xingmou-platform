@@ -21,12 +21,7 @@ public class IndustryQueryInfo extends QueryInfo {
 	private String code;
 	
 	private Integer parentId;
-	
-	private Timestamp addTime;
-	
-	private Timestamp updateTime;
-		
-    
+
 	public Integer getId(){
 		return id;
 	}
@@ -58,20 +53,5 @@ public class IndustryQueryInfo extends QueryInfo {
 	public void setParentId(Integer parentId){
 		this.parentId = parentId;
 	}
-    
-	public Timestamp getAddTime(){
-		return addTime;
-	}
-	
-	public void setAddTime(Timestamp addTime){
-		this.addTime = addTime;
-	}
-    
-	public Timestamp getUpdateTime(){
-		return updateTime;
-	}
-	
-	public void setUpdateTime(Timestamp updateTime){
-		this.updateTime = updateTime;
-	}
-    }
+
+}

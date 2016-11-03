@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Vendor: Pivotal Software, Inc.
+Implementation-Title: xingmou-doc-restful
+Implementation-Version: 1.0
+Implementation-Vendor-Id: com.gi
+Build-Jdk: 1.7.0_79
+Built-By: wangkun
+Created-By: Maven Integration for Eclipse
+Main-Class: com.gi.xm.doc.restful.main.DocRestfulApp
+

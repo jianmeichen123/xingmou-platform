@@ -20,11 +20,7 @@ public class InvestfirmAreaQueryInfo extends QueryInfo {
 	
 	private Integer areaId;
 	
-	private Timestamp addTime;
-	
-	private Timestamp updateTime;
-		
-    
+
 	public Long getId(){
 		return id;
 	}
@@ -49,19 +45,4 @@ public class InvestfirmAreaQueryInfo extends QueryInfo {
 		this.areaId = areaId;
 	}
     
-	public Timestamp getAddTime(){
-		return addTime;
-	}
-	
-	public void setAddTime(Timestamp addTime){
-		this.addTime = addTime;
-	}
-    
-	public Timestamp getUpdateTime(){
-		return updateTime;
-	}
-	
-	public void setUpdateTime(Timestamp updateTime){
-		this.updateTime = updateTime;
-	}
-    }
+}

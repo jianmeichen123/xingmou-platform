@@ -45,7 +45,7 @@
 	</insert>
 
 	<sql id="selectFields">
-	id,year,industry_id,industry_name,district_id,district_name,invested_num,invested_money,invested_num_cent
+	year,industry_id,industry_name,district_id,district_name,invested_num,invested_money,invested_num_cent
 	</sql>
 	
 <!--
@@ -75,5 +75,11 @@
 			AND industry_id = #{industryId,jdbcType=INTEGER}
 		</if>
 	</select>
-		
+	
+	<select id="selectDistrictTop10" resultMap="BaseResultMap">
+		 SELECT district_name,sum(invested_num) as invested_num
+		 FROM dm_chart_event_industry_distict_year  
+		 GROUP BY district_name
+		 ORDER BY sum(invested_num) desc
+	</select>
 </mapper>

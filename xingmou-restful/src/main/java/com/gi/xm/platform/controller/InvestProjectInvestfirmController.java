@@ -25,12 +25,6 @@ public class InvestProjectInvestfirmController {
 	@Reference(check = false)
 	private InvestEventsFacede investEventsFacede;
 
-	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public ModelAndView index() {
-		Map<String, Object> modelMap = new HashMap<String, Object>();
-		return new ModelAndView("investProjectInvestfirm/index", modelMap);
-	}
-
 	@RequestMapping("query")
 	@ResponseBody
 	public RelationVO  queryInvestProjectInvestfirm (@RequestBody InvestProjectInvestfirmQueryInfo investProjectInvestfirmQueryInfo) {
@@ -54,6 +48,7 @@ public class InvestProjectInvestfirmController {
 		vo.setPiList(piList);
 		return vo;
 	}
+/*
 
     @RequestMapping("create")
     @ResponseBody
@@ -70,6 +65,7 @@ public class InvestProjectInvestfirmController {
 		MessageInfo<Integer> messageInfo =  investProjectInvestfirmFacede.updateInvestProjectInvestfirm(investProjectInvestfirmInfo);
 		return messageInfo;
 	}
+*/
 
     @RequestMapping("get")
     @ResponseBody
@@ -77,13 +73,13 @@ public class InvestProjectInvestfirmController {
 		MessageInfo<InvestProjectInvestfirmInfo> messageInfo =  investProjectInvestfirmFacede.getInvestProjectInvestfirm(id);
 		return messageInfo;
 	}
-
+/*
     @RequestMapping("getAll")
     @ResponseBody
     public MessageInfo<List<InvestProjectInvestfirmInfo>> getAllInvestProjectInvestfirm(){
 		MessageInfo<List<InvestProjectInvestfirmInfo>>  messageInfo = investProjectInvestfirmFacede.getAllInvestProjectInvestfirm();
 		return messageInfo;
-	}
+	}*/
 
 
 		

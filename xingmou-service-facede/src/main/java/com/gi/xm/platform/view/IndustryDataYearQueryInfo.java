@@ -54,10 +54,6 @@ public class IndustryDataYearQueryInfo extends QueryInfo {
 	
 	private Long investedMaxMoney;
 	
-	private Timestamp addTime;
-	
-	private Timestamp updateTime;
-
 	private Long[] yearList;
 
 	public Long[] getYearList() {
@@ -228,19 +224,4 @@ public class IndustryDataYearQueryInfo extends QueryInfo {
 		this.investedMaxMoney = investedMaxMoney;
 	}
     
-	public Timestamp getAddTime(){
-		return addTime;
-	}
-	
-	public void setAddTime(Timestamp addTime){
-		this.addTime = addTime;
-	}
-    
-	public Timestamp getUpdateTime(){
-		return updateTime;
-	}
-	
-	public void setUpdateTime(Timestamp updateTime){
-		this.updateTime = updateTime;
-	}
-    }
+}

@@ -56,7 +56,7 @@ public class AreaFacedeImpl implements AreaFacede {
 		messageInfo.setData(message.getData());
 		return messageInfo;	
 	}
-		@Cacheable(value = "areaInfo",keyGenerator = "wiselyKeyGenerator")
+
 	public MessageInfo<AreaInfo> getArea( Long id ){
 		
 		Message<Area> message  = areaBiz.getArea( id );

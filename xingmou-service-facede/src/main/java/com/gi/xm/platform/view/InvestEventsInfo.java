@@ -123,25 +123,33 @@ public class InvestEventsInfo implements Serializable {
 	 */
 	private String investfirmNames;
 			
-	/**
-	 * @Fields addTime : 
-	 */
-	private Timestamp addTime;
-			
-	/**
-	 * @Fields updateTime : 
-	 */
-	private Timestamp updateTime;
-			
+
 	/**
 	 * @Fields year : 
 	 */
 	private Integer year;
 	//新加
 	private String projectName;
+	
+	/**
+	 * @Fields yaar : 项目源id
+	 * @return
+	 */
+	private Long sourceId;
+	
+	private String pic;
 
+	
 	public String getProjectName() {
 		return projectName;
+	}
+
+	public String getPic() {
+		return pic;
+	}
+
+	public void setPic(String pic) {
+		this.pic = pic;
 	}
 
 	public void setProjectName(String projectName) {
@@ -325,27 +333,19 @@ public class InvestEventsInfo implements Serializable {
 		this.investfirmNames = investfirmNames;
 	}
     
-	public Timestamp getAddTime(){
-		return addTime;
-	}
-	
-	public void setAddTime(Timestamp addTime){
-		this.addTime = addTime;
-	}
-    
-	public Timestamp getUpdateTime(){
-		return updateTime;
-	}
-	
-	public void setUpdateTime(Timestamp updateTime){
-		this.updateTime = updateTime;
-	}
-    
 	public Integer getYear(){
 		return year;
 	}
 	
 	public void setYear(Integer year){
 		this.year = year;
+	}
+
+	public Long getSourceId() {
+		return sourceId;
+	}
+
+	public void setSourceId(Long sourceId) {
+		this.sourceId = sourceId;
 	}
     }

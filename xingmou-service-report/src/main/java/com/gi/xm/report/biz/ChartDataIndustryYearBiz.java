@@ -4,6 +4,8 @@ package com.gi.xm.report.biz;
 
 import java.util.List;
 
+import com.gi.xm.platform.view.common.QueryResultInfo;
+import com.gi.xm.report.query.ChartDataIndustryYearQueryInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,5 +44,36 @@ public class ChartDataIndustryYearBiz  {
 		}
 		return messageInfo;
 	}
+
+	public MessageInfo<List<ChartDataIndustryYear>> getAll(Integer[] years){
+
+		MessageInfo<List<ChartDataIndustryYear>> messageInfo = new MessageInfo<List<ChartDataIndustryYear>>();
+		try {
+			List<ChartDataIndustryYear> chartDataIndustryYearList = chartDataIndustryYearDAO.selectAll(years);
+			messageInfo.setData(chartDataIndustryYearList);
+		} catch (Exception e) {
+			LOGGER.error("getAll","查询getAll失败", e);
+			messageInfo.setStatus(10001);
+		}
+		return messageInfo;
+	}
+	public MessageInfo<QueryResultInfo<ChartDataIndustryYear>> queryChartDataIndustryYear(ChartDataIndustryYearQueryInfo chartDataIndustryYearQueryInfo) {
+		MessageInfo<QueryResultInfo<ChartDataIndustryYear>> message = new MessageInfo<QueryResultInfo<ChartDataIndustryYear>>();
+		try {
+			QueryResultInfo<ChartDataIndustryYear> queryResult = new QueryResultInfo<ChartDataIndustryYear>();
+			PageHelper.startPage(chartDataIndustryYearQueryInfo.getPageIndex(), chartDataIndustryYearQueryInfo.getPageSize());
+			List<ChartDataIndustryYear> chartDataIndustryYearList = chartDataIndustryYearDAO.queryChartDataIndustryYear(chartDataIndustryYearQueryInfo);
+			PageInfo<ChartDataIndustryYear> pageInfo = new PageInfo<ChartDataIndustryYear>(chartDataIndustryYearList);
+			queryResult.setPages(pageInfo.getPages());
+			queryResult.setTotal(pageInfo.getTotal());
+			queryResult.setRecords(chartDataIndustryYearList);
+			message.setData(queryResult);
+		} catch (Exception e) {
+			LOGGER.error("queryChartDataIndustryYear", "分页查询ChartDataIndustryYear失败", e);
+			message.setStatus(10001);
+		}
+		return message;
+	}
+
 
 }

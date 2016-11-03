@@ -60,7 +60,7 @@ public class InvestfirmsDataController {
                 }
             }
             MessageInfo<List<FilesInfo>> fileMessageInfo = filesFacede.getListBySourceIdsType(sourceIds,2);
-            if(fileMessageInfo.isSuccess()&&!fileMessageInfo.getData().isEmpty()){
+            if(fileMessageInfo.isSuccess()&&fileMessageInfo.getData()!=null&&!fileMessageInfo.getData().isEmpty()){
                 for(FilesInfo filesInfo :fileMessageInfo.getData()){
                     for (InvestfirmsData i: investfirmsDatas){
                         if (i.getSourceId()!=null&&filesInfo.getPic()!=null&&filesInfo.getSourceId().intValue()==i.getSourceId()){

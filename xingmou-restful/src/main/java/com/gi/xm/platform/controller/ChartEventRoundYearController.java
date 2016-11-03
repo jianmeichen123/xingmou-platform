@@ -42,7 +42,7 @@ public class ChartEventRoundYearController {
         	List<Integer> years = chartEventRoundYearBiz.getYears().getData();
         	Map<String,Map<Integer,Integer>> data = new LinkedHashMap<String,Map<Integer,Integer>>();
         	for(String rn : roundNames){
-        		Map<Integer,Integer> map  = new HashMap<Integer,Integer>();
+        		Map<Integer,Integer> map  = new LinkedHashMap<Integer,Integer>();
         		for(Integer yr :years){
         			map.put(yr.intValue(), 0);
         		}

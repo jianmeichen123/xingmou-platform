@@ -59,7 +59,7 @@ public class InvestEventsController {
                 }
             }
             MessageInfo<List<FilesInfo>> fileMessageInfo = filesFacede.getListBySourceIdsType(sourceIds,1);
-            if(fileMessageInfo.isSuccess()&&!fileMessageInfo.getData().isEmpty()){
+            if(fileMessageInfo.isSuccess()&&fileMessageInfo.getData()!=null&&!fileMessageInfo.getData().isEmpty()){
                 for(FilesInfo filesInfo :fileMessageInfo.getData()){
                     for (InvestEventsInfo eventsInfo: eventsInfos){
                        if (eventsInfo.getSourceId()!=null&&filesInfo.getPic()!=null&&filesInfo.getSourceId().intValue()==eventsInfo.getSourceId()){

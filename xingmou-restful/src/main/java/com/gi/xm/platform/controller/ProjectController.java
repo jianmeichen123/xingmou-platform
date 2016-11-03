@@ -164,7 +164,7 @@ public class ProjectController {
                 }
             }
             MessageInfo<List<FilesInfo>> fileMessageInfo = filesFacede.getListBySourceIdsType(sourceIds,1);
-            if(fileMessageInfo.isSuccess()&&!fileMessageInfo.getData().isEmpty()){
+            if(fileMessageInfo.isSuccess()&&fileMessageInfo.getData()!=null&&!fileMessageInfo.getData().isEmpty()){
                 for(FilesInfo filesInfo :fileMessageInfo.getData()){
                     for (ProjectInfo projectInfo: projectInfos){
                        if (projectInfo.getSourceId()!=null&&filesInfo.getPic()!=null&&filesInfo.getSourceId().intValue()==projectInfo.getSourceId()){

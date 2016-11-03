@@ -107,7 +107,7 @@
         FROM
             dm_industry_reports
         WHERE
-            id > #{id,jdbcType=BIGINT}
+            publish_date > (select publish_date from dm_industry_reports where id =  #{id,jdbcType=BIGINT})
         ORDER  BY
             publish_date DESC
         LIMIT 1
@@ -120,7 +120,7 @@
         FROM
             dm_industry_reports
         WHERE
-            #{id,jdbcType=BIGINT} > id
+            publish_date > (select publish_date from dm_industry_reports where id =  #{id,jdbcType=BIGINT})
         ORDER  BY
             publish_date DESC
         limit 1

@@ -49,7 +49,7 @@ public class ChartEventIndustryRoundMergeController {
 		MessageInfo<QueryResultInfo<ChartEventIndustryRoundMerge>> resultMessageInfo = chartEventIndustryRoundMergeBiz.chartAnalysis1(chartEventIndustryRoundMerge);
 		List<ChartEventIndustryRoundMerge> list = resultMessageInfo.getData().getRecords();
 		if(list==null||list.isEmpty()){
-			return new MessageInfo();
+			return resultMessageInfo;
 		}
 		processMerge(list);
 		resultMessageInfo.getData().setRecords(list);

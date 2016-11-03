@@ -44,10 +44,13 @@ public class ChartEventIndustryRoundMergeController {
 
 	@RequestMapping("chartAnalysis1")
 	@ResponseBody
-	public MessageInfo<QueryResultInfo<ChartEventIndustryRoundMerge>> chartAnalysis1 (@RequestBody ChartEventIndustryRoundMerge chartEventIndustryRoundMerge) {
+	public MessageInfo chartAnalysis1 (@RequestBody ChartEventIndustryRoundMerge chartEventIndustryRoundMerge) {
 
 		MessageInfo<QueryResultInfo<ChartEventIndustryRoundMerge>> resultMessageInfo = chartEventIndustryRoundMergeBiz.chartAnalysis1(chartEventIndustryRoundMerge);
 		List<ChartEventIndustryRoundMerge> list = resultMessageInfo.getData().getRecords();
+		if(list==null&&list.isEmpty()){
+			return new MessageInfo();
+		}
 		processMerge(list);
 		resultMessageInfo.getData().setRecords(list);
 		return resultMessageInfo;

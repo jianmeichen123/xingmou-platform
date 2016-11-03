@@ -109,7 +109,7 @@
         WHERE
             order_num > (select order_num from dm_industry_reports where id =  #{id,jdbcType=BIGINT})
         ORDER  BY
-            order_num DESC
+            order_num ASC
         LIMIT 1
     </select>
 

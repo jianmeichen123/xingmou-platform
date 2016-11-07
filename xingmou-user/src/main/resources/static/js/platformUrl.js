@@ -2,9 +2,9 @@ var Constants = {
 	//platformContentURL: "http://xm.dev.userinternet.com/"
 
 		//platformContentURL: "http://localhost:8080/user-xingmou-server/"
-		platformContentURL: "http://xm.gi.com/user/",
+		platformContentURL: "http://xm.galaxyinternet.com/user/",
 
-		htmlContentUrl : "http://xm.gi.com/html/"
+		htmlContentUrl : "http://xm.galaxyinternet.com/html/"
 
 		//platformContentURL: endpointObj["project.home.page.url"]
 }

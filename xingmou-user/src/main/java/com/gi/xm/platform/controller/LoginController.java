@@ -39,7 +39,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
         return this.userService;
     }
 
-    private String xmIndex = "http://xm.galaxyinternet.com/html/xmcx.html";
+    private static String xmIndex = "http://xm.galaxyinternet.com/html/xmcx.html";
     /**
      * 跳转登录
      */

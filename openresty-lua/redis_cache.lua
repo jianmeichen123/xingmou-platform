@@ -2,7 +2,7 @@
 local redis = require("resty.redis")
 local cjson = require("cjson")
 local redis_cache_pool = {}
-
+local nil_data = {}
 --连接redis
 function redis_cache_pool:get_connect()
 
@@ -50,16 +50,16 @@ end
 function redis_cache_pool:get_key(str)
     local res,err,client = self:get_connect()
     if not res then
-        return false,err
+        return false,err,nil_data
     end
     local val ,err = client:get(str)
 
     if  val ~= ngx.null and val ~= nil then
         --ngx.say(val)
-        local j = cjson.decode(val)
-        return true,"get key success",j
+        local data = cjson.decode(val)
+        return true,"get key success",data
     end
     --self:close()
-    return false,"get key false",val
+    return false,"get key false",nil_data
 end
 return redis_cache_pool

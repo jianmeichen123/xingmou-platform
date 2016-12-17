@@ -4,7 +4,7 @@ var Constants = {
 		//platformContentURL: "http://localhost:8080/user-xingmou-server/"
 		platformContentURL: "http://xmdev.gi.com/user/",
 
-		htmlContentUrl : "http://xmdev.gi.com/html/"
+		htmlContentUrl : "http://xmdev.gi.com/"
 
 		//platformContentURL: endpointObj["project.home.page.url"]
 }
@@ -42,7 +42,7 @@ var platformUrl = {
 	 */
 	updatePwd : Constants.platformContentURL + "user/user/updatePwd",
 
-	xmcx : Constants.htmlContentUrl + "xmcx.html",
+	xmcx : Constants.htmlContentUrl + "index.html",
 }
 
 

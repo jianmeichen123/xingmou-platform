@@ -41,7 +41,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
         return this.userService;
     }
 
-    private String xmIndex = "http://xmdev.gi.com/html/xmcx.html";
+    private String xmIndex = "http://xmdev.gi.com/index.html";
     /**
      * 跳转登录
      */
@@ -79,7 +79,6 @@ public class LoginController extends BaseControllerImpl<User, User> {
      * @param s 来源
      */
     public void setCookie(HttpServletResponse response ,String uid,String s){
-
         Cookie cookie = new Cookie("_uid_", uid);
         cookie.setMaxAge(60*60*24*365*5);
         cookie.setDomain("xmdev.gi.com");
@@ -129,7 +128,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
 
 
             setCookie(response,sessionId,"xm");
-            //logger.info(user.getEmail()+" login_success xm");
+            logger.info(user.getEmail()+" login_success xm");
         }
         return responsebody;
     }

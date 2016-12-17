@@ -19,14 +19,15 @@ function checkform(){
 
  function login(){
 	
-	 checkform();
+    checkform();
 	 
-		 //判断是否勾选了自动登录
-		 var b = new Base64();  
-	     var nickName = b.encode($("#nickName").val());  
-	     var password = b.encode($("#password").val());  
-	     var jsonData={"nickName":nickName,"password":password};
-		 sendPostRequestByJsonObj(platformUrl.toLogin,jsonData,logincallback);
+     //判断是否勾选了自动登录
+     console.log($("#nickName").val())
+     var b = new Base64();
+     var nickName = b.encode($("#nickName").val());
+     var password = b.encode($("#password").val());
+     var jsonData={"nickName":nickName,"password":password};
+     sendPostRequestByJsonObj(platformUrl.toLogin,jsonData,logincallback);
 		 
 		 
   }
@@ -37,7 +38,7 @@ function checkform(){
 		 forwardWithHeader(platformUrl.xmcx);
 		return false;
 	 }else{
-		 layer.msg(data.result.message);
+	     $(".log_title").text(data.result.message)
 	 }
  }
  function keylogin(){

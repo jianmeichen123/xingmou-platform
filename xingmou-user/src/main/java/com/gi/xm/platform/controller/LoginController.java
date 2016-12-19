@@ -42,6 +42,10 @@ public class LoginController extends BaseControllerImpl<User, User> {
     }
 
     private String xmIndex = "http://xmdev.gi.com/index.html";
+
+    private String domain = "xmdev.gi.com";
+
+
     /**
      * 跳转登录
      */
@@ -50,7 +54,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
         String key = "xm:"+s+":"+uid;
         String user = cache.getValue(key);
         if(user!=null){
-            setCookie(response,uid,s);
+            setCookie(response,uid,s,false);
             return "redirect:"+xmIndex;
         }
         return "login";
@@ -68,7 +72,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
             return "redirect:" + xmIndex;
         }
         setCacheSessionId("fx", u, uid);
-        setCookie(response,uid,"fx");
+        setCookie(response,uid,"fx",false);
         return "login";
     }
 
@@ -78,15 +82,15 @@ public class LoginController extends BaseControllerImpl<User, User> {
      * @param uid
      * @param s 来源
      */
-    public void setCookie(HttpServletResponse response ,String uid,String s){
+    public void setCookie(HttpServletResponse response ,String uid,String s,boolean notAuto){
         Cookie cookie = new Cookie("_uid_", uid);
-        cookie.setMaxAge(60*60*24*365*5);
-        cookie.setDomain("xmdev.gi.com");
+        cookie.setMaxAge(notAutoLogin(notAuto));
+        cookie.setDomain(domain);
         cookie.setPath("/");
         response.addCookie(cookie);
         cookie = new Cookie("s_", s);
-        cookie.setMaxAge(60*60*24*365*5);
-        cookie.setDomain("xmdev.gi.com");
+        cookie.setMaxAge(notAutoLogin(notAuto));
+        cookie.setDomain(domain);
         cookie.setPath("/");
         response.addCookie(cookie);
 
@@ -105,7 +109,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
      */
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseData<User> login(@RequestBody User user, HttpServletRequest request,HttpServletResponse response) {
+    public ResponseData<User> login(boolean notAuto,@RequestBody User user, HttpServletRequest request,HttpServletResponse response) {
         ResponseData<User> responsebody = new ResponseData<User>();
         String nickName= user.getNickName();
         String password = user.getPassword();
@@ -127,7 +131,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
             responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "登录成功！"));
 
 
-            setCookie(response,sessionId,"xm");
+            setCookie(response,sessionId,"xm",notAuto);
             logger.info(user.getEmail()+" login_success xm");
         }
         return responsebody;
@@ -156,13 +160,13 @@ public class LoginController extends BaseControllerImpl<User, User> {
         ResponseData<User> responsebody = new ResponseData<User>();
         cache.remove("xm:"+s+":"+uid);
         Cookie cookie = new Cookie("_uid_", null);
-        cookie.setMaxAge(60*60*24*2);
-        cookie.setDomain("xmdev.gi.com");
+        cookie.setMaxAge(1);
+        cookie.setDomain(domain);
         cookie.setPath("/");
         response.addCookie(cookie);
         cookie = new Cookie("s_", null);
-        cookie.setMaxAge(60*60*24*2);
-        cookie.setDomain("xmdev.gi.com");
+        cookie.setMaxAge(1);
+        cookie.setDomain(domain);
         cookie.setPath("/");
         response.addCookie(cookie);
         responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "退出登录"));
@@ -186,7 +190,9 @@ public class LoginController extends BaseControllerImpl<User, User> {
         return true;
     }
 
-
+    private int notAutoLogin(boolean isAuto){
+        return !isAuto?60*60*24*30:60*60*2;
+    }
 
 
 }

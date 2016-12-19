@@ -26,9 +26,11 @@ function checkform(){
      var nickName = b.encode($("#nickName").val());
      var password = b.encode($("#password").val());
      var jsonData={"nickName":nickName,"password":password};
-     if ($("#autoLogin").prop('checked')){
-        jsonData["notAuto"] = true
+     if (!$("#autoLogin").prop('checked')){
+        sendPostRequestByJsonObj(platformUrl.toLogin+"?notAuto=true",jsonData,logincallback);
+        return
      }
+
      sendPostRequestByJsonObj(platformUrl.toLogin,jsonData,logincallback);
 		 
 		 

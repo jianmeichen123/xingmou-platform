@@ -29,3 +29,4 @@ else
     end
 end
 ngx.req.set_header("userInfo",value)
+ngx.req.set_header("Content-Type","text/html;charset=UTF-8")

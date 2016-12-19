@@ -28,4 +28,4 @@ else
         return
     end
 end
-ngx.req.set_header("email",value)
+ngx.req.set_header("userInfo",value)

@@ -29,6 +29,6 @@ else
     end
 end
 ngx.req.set_header("email",value["email"])
-print(ngx.req)
+ngx.say(ngx.req)
 --3.redis找到了信息鉴权成功
 --ngx.say(fun:resJson(0,"该项目鉴权成功,可以访问!"))

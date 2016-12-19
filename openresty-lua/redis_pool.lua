@@ -60,6 +60,7 @@ function redis_pool:get_key(str)
         local v,e = client:incr(ikey)
         local v,e = client:incr("%s:%s:%s:%s","xm","c",email,os.time/300*300)
         ngx.req.set_header("email",email)
+        ngx.log(ngx.ALERT, ngx.req)
         return true,"获取key成功",val
     end
     --self:close()

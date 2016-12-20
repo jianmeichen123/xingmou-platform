@@ -4,19 +4,14 @@ package com.gi.xm.platform.facede.impl;
 import java.util.*;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.gi.xm.platform.biz.DistrictBiz;
-import com.gi.xm.platform.biz.IndustryBiz;
-import com.gi.xm.platform.biz.RoundBiz;
+import com.gi.xm.platform.biz.*;
 import com.gi.xm.platform.facede.IndustryFacede;
 import com.gi.xm.platform.facede.convertor.*;
-import com.gi.xm.platform.pojo.District;
-import com.gi.xm.platform.pojo.Industry;
-import com.gi.xm.platform.pojo.Round;
+import com.gi.xm.platform.pojo.*;
 import com.gi.xm.platform.view.*;
+import com.gi.xm.platform.view.common.Contants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
-
-import com.gi.xm.platform.biz.ProjectBiz;
 
 import com.gi.xm.platform.view.common.MessageInfo;
 import com.gi.xm.platform.view.common.QueryResultInfo;
@@ -24,7 +19,6 @@ import com.gi.xm.platform.view.common.QueryResultInfo;
 
 import com.gi.xm.platform.biz.common.Message;
 import com.gi.xm.platform.biz.common.QueryResult;
-import com.gi.xm.platform.pojo.Project;
 import com.gi.xm.platform.query.ProjectQuery;
 
 
@@ -35,6 +29,9 @@ public class ProjectFacedeImpl implements ProjectFacede {
 
 	@Autowired
 	private ProjectBiz projectBiz;
+
+	@Autowired
+	private LabelBiz labelBiz;
 
 	public MessageInfo<Integer> deleteProject(Long id){
 		
@@ -125,6 +122,24 @@ public class ProjectFacedeImpl implements ProjectFacede {
 		Message<QueryResult<Project>> message = projectBiz.queryCompetationlist(projectQuery);
 		MessageInfo<QueryResultInfo<ProjectInfo>> messageInfo = new MessageInfo<QueryResultInfo<ProjectInfo>>();
 		QueryResultInfo<ProjectInfo> queryResultInfo = ProjectConvertor.toQueryResultInfo(message.getData());
+
+		Long projectId = projectQueryInfo.getId();
+		Message<List<Label>>  labelInfo = labelBiz.getListByTypeRelationId(Contants.LABEL_PROJECT,projectId);
+		List<Label> labelList = labelInfo.getData();
+		List<String> labels = new ArrayList<String>();
+
+		if(null != labelList && !labelList.isEmpty()){
+			for(Label label:labelList){
+				labels.add(label.getTitle());
+			}
+		}
+		//填充projectInfo labels
+		List<ProjectInfo> projectInfos = queryResultInfo.getRecords();
+		if(null != projectInfos && !projectInfos.isEmpty()){
+			for(ProjectInfo projectInfo :projectInfos){
+				projectInfo.setLabels(labels);
+			}
+		}
 		messageInfo.setData(queryResultInfo);
 		return messageInfo;
 	}

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 public class ProjectInfo implements Serializable {
@@ -183,7 +184,11 @@ public class ProjectInfo implements Serializable {
 	 * @Fields investMoney : 该项目的融资总金额
 	 */
 	private Long investMoney;
-			
+	/**
+	 * @Fields labels : 项目的标签
+	 */
+	private List<String> labels;
+
 	/**
 	 * @Fields loadTime : 加载时间
 	 */
@@ -477,5 +482,12 @@ public class ProjectInfo implements Serializable {
 	public void setLoadTime(Timestamp loadTime){
 		this.loadTime = loadTime;
 	}
-    
+
+	public List<String> getLabels() {
+		return labels;
+	}
+
+	public void setLabels(List<String> labels) {
+		this.labels = labels;
+	}
 }

@@ -188,6 +188,10 @@ public class ProjectInfo implements Serializable {
 	 * @Fields labels : 项目的标签
 	 */
 	private List<String> labels;
+	/**
+	 * 项目简介
+	 */
+	private String description;
 
 	/**
 	 * @Fields loadTime : 加载时间
@@ -489,5 +493,13 @@ public class ProjectInfo implements Serializable {
 
 	public void setLabels(List<String> labels) {
 		this.labels = labels;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

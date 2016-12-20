@@ -98,6 +98,8 @@ public class ProjectQuery extends Query {
 
 	private String createDateEnd;
 
+    private  String description;
+
     public Long getId() {
         return id;
     }
@@ -440,5 +442,13 @@ public class ProjectQuery extends Query {
 
     public void setDistrictSubIds(Long[] districtSubIds) {
         this.districtSubIds = districtSubIds;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

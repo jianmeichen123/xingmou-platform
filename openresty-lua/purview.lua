@@ -29,4 +29,4 @@ else
     end
 end
 ngx.header.content_type="application/json;charset=utf8"
-ngx.req.set_header("userInfo",value)
+ngx.req.set_header("email",email)

@@ -70,7 +70,9 @@
     </insert>
 
     <sql id="selectFields">
-        id,year,month,industry_id,industry_name,industry_sub_id,industry_sub_name,district_id,district_name,invest_num,invest_money,create_num,active_investfirm_num,industry_type,has_ym,has_distict,add_time,update_time
+        year,month,industry_id,industry_name,industry_sub_id,industry_sub_name,
+        district_id,district_name,invest_num,invest_money,create_num,
+        active_investfirm_num,industry_type,has_ym,has_distict
     </sql>
 
 

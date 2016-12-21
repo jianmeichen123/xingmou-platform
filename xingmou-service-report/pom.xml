@@ -116,8 +116,8 @@
                 <configuration>
                     <basePackage>com.gi.xm.report</basePackage>
                     <prefix>dw_v_,dw_,dm_</prefix>
-                    <url>jdbc:mysql://127.0.0.1:3306/edw_chart</url>
-                    <tables>dm_chart_data_industry_first_year,dm_chart_data_industry_year</tables>
+                    <url>jdbc:mysql://10.9.130.142/edw2</url>
+                    <tables>dm_target_month</tables>
                     <username>xmuser</username>
                     <password>qcDKywE7Ka52</password>
                     <output_root_dir>/home/vincent/tmp/</output_root_dir>

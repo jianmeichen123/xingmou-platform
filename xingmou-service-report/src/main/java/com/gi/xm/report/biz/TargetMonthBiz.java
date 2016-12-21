@@ -35,7 +35,6 @@ public class TargetMonthBiz  {
     public MessageInfo<List<TargetMonth>> queryTargetMonthList(TargetMonthQuery targetMonthQuery) {
         MessageInfo<List<TargetMonth>> message = new MessageInfo<List<TargetMonth>>();
         try {
-            PageHelper.startPage(targetMonthQuery.getPageIndex(), targetMonthQuery.getPageSize());
             List<TargetMonth> targetMonthList = targetMonthDAO.queryTargetMonth(targetMonthQuery);
             message.setData(targetMonthList);
         } catch (Exception e) {

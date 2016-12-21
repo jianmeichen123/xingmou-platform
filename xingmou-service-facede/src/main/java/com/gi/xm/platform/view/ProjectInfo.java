@@ -194,6 +194,7 @@ public class ProjectInfo implements Serializable {
 	private String description;
 
 	/**
+	 *
 	 * @Fields loadTime : 加载时间
 	 */
 	private Timestamp loadTime;

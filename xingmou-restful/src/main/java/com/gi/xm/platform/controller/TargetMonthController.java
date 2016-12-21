@@ -7,6 +7,7 @@ import com.gi.xm.report.pojo.TargetMonth;
 import com.gi.xm.report.query.TargetMonthQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -28,7 +29,7 @@ public class TargetMonthController {
 
     @RequestMapping("queryList")
     @ResponseBody
-    public MessageInfo<List<TargetMonth>>  queryTargetMonthList (TargetMonthQuery targetMonthQueryInfo) {
+    public MessageInfo<List<TargetMonth>>  queryTargetMonthList (@RequestBody TargetMonthQuery targetMonthQueryInfo) {
         MessageInfo<List<TargetMonth>> resultMessageInfo = targetMonthBiz.queryTargetMonthList(targetMonthQueryInfo);
         return resultMessageInfo;
     }

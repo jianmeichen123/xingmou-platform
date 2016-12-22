@@ -22,7 +22,7 @@ public class TargetMonthController {
 
     @RequestMapping("query")
     @ResponseBody
-    public MessageInfo<QueryResultInfo<TargetMonth>> queryTargetMonth (TargetMonthQuery targetMonthQueryInfo) {
+    public MessageInfo<QueryResultInfo<TargetMonth>> queryTargetMonth (@RequestBody TargetMonthQuery targetMonthQueryInfo) {
         MessageInfo<QueryResultInfo<TargetMonth>> resultMessageInfo = targetMonthBiz.queryTargetMonth(targetMonthQueryInfo);
         return resultMessageInfo;
     }

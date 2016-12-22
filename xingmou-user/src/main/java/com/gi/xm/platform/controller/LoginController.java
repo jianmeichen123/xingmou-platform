@@ -25,6 +25,9 @@ import com.galaxyinternet.framework.core.utils.SessionUtils;
 import com.galaxyinternet.model.user.User;
 import com.galaxyinternet.service.UserService;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 @Controller
 @RequestMapping("/userlogin")
 public class LoginController extends BaseControllerImpl<User, User> {
@@ -147,7 +150,16 @@ public class LoginController extends BaseControllerImpl<User, User> {
         u.setEmail(user.getEmail());
         u.setRoleId(user.getRoleId());
         u.setRealName(user.getRealName());
-        cache.setValue("xm:"+from+":"+sessionId, JSON.toJSONString(u)); // 将sessionId存入cache
+        String json = null;
+        try {
+            json = URLEncoder.encode(JSON.toJSONString(u),"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            logger.error("json utf8-8编码失败");
+        }
+        if (json!=null){
+            cache.setValue("xm:"+from+":"+sessionId, json); // 将sessionId存入cache
+            logger.info(sessionId+" "+json);
+        }
     }
 
     /**

@@ -40,6 +40,7 @@ function redis_pool:close()
     end
 end
 
+
 ---获取key的值
 function redis_pool:get_key(str)
     local res,err,client = self:get_connect()
@@ -50,7 +51,7 @@ function redis_pool:get_key(str)
 
     if  val ~= ngx.null and val ~= nil then
         --ngx.say(val)
-        local j = cjson.decode(val)
+        local j = cjson.decode(string.gsub(val, '%%(%x%x)', function(h) return string.char(tonumber(h, 16)) end))
         local email = j.email
         if email == ngx.null then
             return false,"用户不存在",val

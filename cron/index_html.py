@@ -42,8 +42,8 @@ def data_total():
     investor_total = cursor.fetchall()[0][0]
 
     data = {"project":project_total,"invest_events":invest_events_total,"investfirm":investfirm_total,"investor":investor_total}
-    str = json.dumps(data)
-    red.set("index:data_total",str)
+    s = json.dumps(data)
+    red.set("index:data_total",s)
 
 
 def top_invest():
@@ -72,22 +72,25 @@ def top_invest():
         data["add_time"] = row[6].strftime("%Y-%m-%d %H:%M:%S")
         data["title"] = row[7]
         data["pic"] = row[8]
+        if data['pic'] == None or data["pic"] == "":
+            data['pic'] = "project/default.png"
         datas.append(data)
-    str = json.dumps(datas)
-    red.set("index:topinvest",str)
+    s = json.dumps(datas)
+    red.set("index:topinvest",s)
 
 
 def top_project():
 
     n = cursor.execute("select "
-                       "p.id, p.title ,p.district_name,p.district_sub_name,p.pic_xm,p.description, "
-                       "p.newest_event_round ,pp.name as p_name, pp.postion_name ,l.title as tag from dm_project p "
-                       "left join dm_project_person pp on pp.project_id = p.id  "
-                       "left join dm_label l on l.relation_id = p.id and type = 1  "
+                       " p.id, p.title ,p.district_name,p.district_sub_name,p.pic_xm,p.description, "
+                       "p.newest_event_round ,pp.name as p_name, pp.postion_name  from dm_project p "
+                       "right join dm_project_person pp on pp.project_id = p.id  "
+                        " group by p.id "
                        "order by p.id desc "
                        "limit 4;")
 
     datas = []
+    project_ids = []
     for row in cursor.fetchall():
         data = {}
         data["id"] = row[0]
@@ -95,16 +98,26 @@ def top_project():
         data["district_name"] = row[2]
         data["district_sub_name"] = row[3]
         data["pic_xm"] = row[4]
+        if data['pic_xm'] == None or data["pic_xm"] == "":
+            data['pic_xm'] = "project/default.png"
         data["description"] = row[5]
         data["newest_event_round"] = row[6]
         data["p_name"] = row[7]
         data["postion_name"] = row[8]
-        data["tag"] = row[9]
+        #data["tag"] = row[9]
 
         datas.append(data)
-    str = json.dumps(datas)
+    for data in datas:
+        tags = []
+        cursor.execute("select title from dm_label where type =1 and relation_id = "+str(data["id"])+"")
+        #cursor.execute("select title from dm_label where type =1 and relation_id = 16488")
+        for row in cursor.fetchall():
+            tags.append(row[0])
+        data["tags"] = tags
+
+    s = json.dumps(datas)
     #print str
-    red.set("index:topproject",str)
+    red.set("index:topproject",s)
 
 def top_investfirm():
     n = cursor.execute("select i.id , i.name ,count(i.id) total from dm_investfirms i right join dm_invest_events_investfirm iei   on iei.investfirm_id = i.id  group by iei.investfirm_id order by total desc limit 10")
@@ -116,9 +129,9 @@ def top_investfirm():
         data["total"] = row[2]
 
         datas.append(data)
-    str = json.dumps(datas)
+    s = json.dumps(datas)
     #print str
-    red.set("index:topinvestfirm",str)
+    red.set("index:topinvestfirm",s)
 
 def last_weekinvestfirm():
 
@@ -136,8 +149,8 @@ def last_weekinvestfirm():
         data["total"] = row[2]
 
         datas.append(data)
-    str = json.dumps(datas)
-    red.set("index:lastweekinvestfirm",str)
+    s = json.dumps(datas)
+    red.set("index:lastweekinvestfirm",s)
 
 def doc():
     n = cursor_doc.execute("select "
@@ -162,8 +175,8 @@ def doc():
             data["source_type"] = "艾瑞"
 
         datas.append(data)
-    str = json.dumps(datas)
-    red.set("index:topdoc",str)
+    s = json.dumps(datas)
+    red.set("index:topdoc",s)
 
 if __name__ == '__main__':
     data_total()

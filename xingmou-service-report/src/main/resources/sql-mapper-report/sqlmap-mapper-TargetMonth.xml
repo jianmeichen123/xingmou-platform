@@ -81,18 +81,12 @@
 
     <sql id="queryWhereAndOrder">
         <where>
-            <if test="id!=null">AND id = #{id,jdbcType=INTEGER}</if>
             <if test="year!=null">AND year = #{year,jdbcType=INTEGER}</if>
             <if test="month!=null">AND month = #{month,jdbcType=INTEGER}</if>
             <if test="ym!=null">AND ym = #{ym,jdbcType=DATE}</if>
             <if test="industryId!=null">AND industry_id = #{industryId,jdbcType=INTEGER}</if>
-            <if test="industryName!=null and industryName!=''">AND industry_name = #{industryName,jdbcType=VARCHAR}</if>
             <if test="industrySubId!=null">AND industry_sub_id = #{industrySubId,jdbcType=INTEGER}</if>
-            <if test="industrySubName!=null and industrySubName!=''">AND industry_sub_name =
-                #{industrySubName,jdbcType=VARCHAR}
-            </if>
             <if test="districtId!=null">AND district_id = #{districtId,jdbcType=INTEGER}</if>
-            <if test="districtName!=null and districtName!=''">AND district_name = #{districtName,jdbcType=VARCHAR}</if>
             <if test="investNum!=null">AND invest_num = #{investNum,jdbcType=INTEGER}</if>
             <if test="investMoney!=null">AND invest_money = #{investMoney,jdbcType=BIGINT}</if>
             <if test="createNum!=null">AND create_num = #{createNum,jdbcType=INTEGER}</if>
@@ -100,8 +94,6 @@
             </if>
             <if test="type!=null">AND type = #{type,jdbcType=INTEGER}</if>
             <if test="industryType!=null">AND industry_type = #{industryType,jdbcType=INTEGER}</if>
-            <if test="addTime!=null">AND add_time = #{addTime,jdbcType=TIMESTAMP}</if>
-            <if test="updateTime!=null">AND update_time = #{updateTime,jdbcType=TIMESTAMP}</if>
 
         </where>
         <choose>

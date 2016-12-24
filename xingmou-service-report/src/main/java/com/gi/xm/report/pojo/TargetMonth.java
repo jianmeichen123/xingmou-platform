@@ -10,6 +10,7 @@ public class TargetMonth extends Pojo {
         public static final String ID = "id";
         public static final String YEAR = "年";
         public static final String MONTH = "月";
+        public static final String YM = "ym";
         public static final String INDUSTRY_ID = "一级行业id";
         public static final String INDUSTRY_NAME = "一级行业名";
         public static final String INDUSTRY_SUB_ID = "二级行业id";
@@ -20,9 +21,8 @@ public class TargetMonth extends Pojo {
         public static final String INVEST_MONEY = "融资金额";
         public static final String CREATE_NUM = "新增项目数";
         public static final String ACTIVE_INVESTFIRM_NUM = "活跃机构数";
+        public static final String TYPE = "type";
         public static final String INDUSTRY_TYPE = "1.行业一级 2.行业二级";
-        public static final String HAS_YM = "1.含年月  2.不含年月";
-        public static final String HAS_DISTICT = "1.含地区  2.不含地区";
         public static final String ADD_TIME = "addTime";
         public static final String UPDATE_TIME = "updateTime";
     
@@ -41,6 +41,11 @@ public class TargetMonth extends Pojo {
 	 * @Fields month : 月
 	 */
 	private Integer month;
+	
+	/**
+	 * @Fields ym : 
+	 */
+	private Date ym;
 	
 	/**
 	 * @Fields industryId : 一级行业id
@@ -93,19 +98,14 @@ public class TargetMonth extends Pojo {
 	private Integer activeInvestfirmNum;
 	
 	/**
+	 * @Fields type : 
+	 */
+	private Integer type;
+	
+	/**
 	 * @Fields industryType : 1.行业一级 2.行业二级
 	 */
 	private Integer industryType;
-	
-	/**
-	 * @Fields hasYm : 1.含年月  2.不含年月
-	 */
-	private Integer hasYm;
-	
-	/**
-	 * @Fields hasDistict : 1.含地区  2.不含地区
-	 */
-	private Integer hasDistict;
 	
 	/**
 	 * @Fields addTime : 
@@ -140,6 +140,14 @@ public class TargetMonth extends Pojo {
 
 	public void setMonth(Integer month){
 		this.month = month;
+	}
+    
+	public Date getYm(){
+		return ym;
+	}
+
+	public void setYm(Date ym){
+		this.ym = ym;
 	}
     
 	public Integer getIndustryId(){
@@ -222,28 +230,20 @@ public class TargetMonth extends Pojo {
 		this.activeInvestfirmNum = activeInvestfirmNum;
 	}
     
+	public Integer getType(){
+		return type;
+	}
+
+	public void setType(Integer type){
+		this.type = type;
+	}
+    
 	public Integer getIndustryType(){
 		return industryType;
 	}
 
 	public void setIndustryType(Integer industryType){
 		this.industryType = industryType;
-	}
-    
-	public Integer getHasYm(){
-		return hasYm;
-	}
-
-	public void setHasYm(Integer hasYm){
-		this.hasYm = hasYm;
-	}
-    
-	public Integer getHasDistict(){
-		return hasDistict;
-	}
-
-	public void setHasDistict(Integer hasDistict){
-		this.hasDistict = hasDistict;
 	}
     
 	public Timestamp getAddTime(){

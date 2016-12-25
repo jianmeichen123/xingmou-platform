@@ -24,11 +24,11 @@
         <module>xingmou-biz</module>
         <module>xingmou-service-facede</module>
         <module>xingmou-service</module>
-        <module>xingmou-mongodb</module>
+        <!--<module>xingmou-mongodb</module>-->
         <!--<module>xingmou-ictclas</module>-->
         <module>xingmou-service-report</module>
         <module>xingmou-restful</module>
-        <!--<module>xingmou-news-manage</module>-->
+        <module>xingmou-user</module>
         <!--<module>xingmou-upload</module>-->
         <!--<module>xingmou-mail</module>-->
         <module>xingmou-doc</module>

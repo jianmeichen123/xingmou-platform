@@ -226,10 +226,13 @@ public class Project extends Pojo {
 	private Timestamp updateTime;
 
 	private String inverstrirmNames;
+
 	/**
 	 * @Fields description :项目简介
 	 */
 	private  String description;
+
+	public Integer sourceType;
 
 	public String getInverstrirmNames() {
 		return inverstrirmNames;
@@ -535,5 +538,11 @@ public class Project extends Pojo {
 		this.updateTime = updateTime;
 	}
 
+	public Integer getSourceType() {
+		return sourceType;
+	}
 
-    }
+	public void setSourceType(Integer sourceType) {
+		this.sourceType = sourceType;
+	}
+}

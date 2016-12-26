@@ -200,6 +200,7 @@ public class ProjectInfo implements Serializable {
 	private Timestamp loadTime;
 	private  String inverstrirmNames;
 
+	public Integer sourceType;
 	public String getInverstrirmNames() {
 		return inverstrirmNames;
 	}
@@ -502,5 +503,13 @@ public class ProjectInfo implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Integer getSourceType() {
+		return sourceType;
+	}
+
+	public void setSourceType(Integer sourceType) {
+		this.sourceType = sourceType;
 	}
 }

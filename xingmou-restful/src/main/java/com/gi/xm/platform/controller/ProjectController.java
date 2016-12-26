@@ -167,6 +167,10 @@ public class ProjectController {
             if(fileMessageInfo.isSuccess()&&fileMessageInfo.getData()!=null&&!fileMessageInfo.getData().isEmpty()){
                 for(FilesInfo filesInfo :fileMessageInfo.getData()){
                     for (ProjectInfo projectInfo: projectInfos){
+                        if(null != projectInfo.getSourceType() && projectInfo.getSourceType() ==3){
+                            projectInfo.setPic("/img/fx_logo_small.png");
+                            continue;
+                        }
                        if (projectInfo.getSourceId()!=null&&filesInfo.getPic()!=null&&filesInfo.getSourceId().intValue()==projectInfo.getSourceId()){
                             projectInfo.setPic(filesInfo.getPic());
                        }

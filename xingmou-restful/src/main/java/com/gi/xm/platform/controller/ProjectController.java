@@ -158,10 +158,6 @@ public class ProjectController {
             List<Long> sourceIds = new ArrayList<>();
             List<ProjectInfo> projectInfos = messageInfo.getData().getRecords();
             for (ProjectInfo projectInfo: projectInfos){
-                if(null != projectInfo.getSourceType() && projectInfo.getSourceType() ==3){
-                    projectInfo.setPic("/img/fx_logo_small.png");
-                    continue;
-                }
                 projectInfo.setPic("/project/pic/"+projectInfo.getSourceId()+".png");
                 if(projectInfo.getSourceId()!=null){
                     sourceIds.add(projectInfo.getSourceId());

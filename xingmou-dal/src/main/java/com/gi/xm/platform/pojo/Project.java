@@ -226,6 +226,10 @@ public class Project extends Pojo {
 	private Timestamp updateTime;
 
 	private String inverstrirmNames;
+	/**
+	 * @Fields description :项目简介
+	 */
+	private  String description;
 
 	public String getInverstrirmNames() {
 		return inverstrirmNames;
@@ -495,6 +499,14 @@ public class Project extends Pojo {
 		return investNum;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public void setInvestNum(Integer investNum){
 		this.investNum = investNum;
 	}
@@ -522,4 +534,6 @@ public class Project extends Pojo {
 	public void setUpdateTime(Timestamp updateTime){
 		this.updateTime = updateTime;
 	}
+
+
     }

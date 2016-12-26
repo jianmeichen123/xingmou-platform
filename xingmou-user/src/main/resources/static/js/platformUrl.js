@@ -1,10 +1,10 @@
 var Constants = {
-	//platformContentURL: "http://xm.dev.userinternet.com/"
+	//platformContentURL: "http://ctdn.qa.userinternet.com/"
 
 		//platformContentURL: "http://localhost:8080/user-xingmou-server/"
-		platformContentURL: "http://xm.galaxyinternet.com/user/",
+		platformContentURL: "http://ctdnqa.gi.com/user/",
 
-		htmlContentUrl : "http://xm.galaxyinternet.com/html/"
+		htmlContentUrl : "http://ctdnqa.gi.com/"
 
 		//platformContentURL: endpointObj["project.home.page.url"]
 }
@@ -42,7 +42,7 @@ var platformUrl = {
 	 */
 	updatePwd : Constants.platformContentURL + "user/user/updatePwd",
 
-	xmcx : Constants.htmlContentUrl + "xmcx.html",
+	ctdncx : Constants.htmlContentUrl + "index.html",
 }
 
 

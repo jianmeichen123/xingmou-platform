@@ -1,18 +1,6 @@
 package com.gi.xm.platform.controller;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.alibaba.fastjson.JSON;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
 import com.galaxyinternet.common.controller.BaseControllerImpl;
 import com.galaxyinternet.framework.core.constants.Constants;
 import com.galaxyinternet.framework.core.model.ResponseData;
@@ -22,6 +10,19 @@ import com.galaxyinternet.framework.core.service.BaseService;
 import com.galaxyinternet.framework.core.utils.SessionUtils;
 import com.galaxyinternet.model.user.User;
 import com.galaxyinternet.service.UserService;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 @Controller
 @RequestMapping("/userlogin")
@@ -39,20 +40,21 @@ public class LoginController extends BaseControllerImpl<User, User> {
         return this.userService;
     }
 
-    private static  String xmIndex = "http://xm.galaxyinternet.com/html/xmcx.html";
+    private String ctdnIndex = "http://ctdnqa.gi.com/index.html";
+
+    private String domain = "ctdnqa.gi.com";
 
 
-    private static  String domain = "xm.galaxyinternet.com";
     /**
      * 跳转登录
      */
     @RequestMapping(value = "/toLogin")
     public String toLogin(HttpServletResponse response, @CookieValue(name = "_uid_",required = false)String uid,@CookieValue(name = "s_",required = false)String s) {
-        String key = "xm:"+s+":"+uid;
+        String key = "ctdn:"+s+":"+uid;
         String user = cache.getValue(key);
         if(user!=null){
-            setCookie(response,uid,s);
-            return "redirect:"+xmIndex;
+            setCookie(response,uid,s,false);
+            return "redirect:"+ctdnIndex;
         }
         return "login";
     }
@@ -63,14 +65,14 @@ public class LoginController extends BaseControllerImpl<User, User> {
         if (u == null){
             return "login";
         }
-        String key = "xm:fx:"+uid;
+        String key = "ctdn:fx:"+uid;
         String user = cache.getValue(key);
         if(user!=null) {
-            return "redirect:" + xmIndex;
+            return "redirect:" + ctdnIndex;
         }
         setCacheSessionId("fx", u, uid);
-        setCookie(response,uid,"fx");
-        return "redirect:" + xmIndex;
+        setCookie(response,uid,"fx",false);
+        return "login";
     }
 
     /**
@@ -79,25 +81,23 @@ public class LoginController extends BaseControllerImpl<User, User> {
      * @param uid
      * @param s 来源
      */
-    public void setCookie(HttpServletResponse response ,String uid,String s){
-
-        Cookie uid_ = new Cookie("_uid_", uid);
-        uid_.setMaxAge(60*60*24*365*5);
-        uid_.setDomain(domain);
-        uid_.setPath("/");
-        response.addCookie(uid_);
-
-        Cookie s_ = new Cookie("s_", s);
-        s_.setMaxAge(60*60*24*365*5);
-        s_.setDomain(domain);
-        s_.setPath("/");
-        response.addCookie(s_);
+    public void setCookie(HttpServletResponse response ,String uid,String s,boolean notAuto){
+        Cookie cookie = new Cookie("_uid_", uid);
+        cookie.setMaxAge(notAutoLogin(notAuto));
+        cookie.setDomain(domain);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+        cookie = new Cookie("s_", s);
+        cookie.setMaxAge(notAutoLogin(notAuto));
+        cookie.setDomain(domain);
+        cookie.setPath("/");
+        response.addCookie(cookie);
 
     }
     @RequestMapping(value = "/me")
     @ResponseBody
     public String  me(HttpServletResponse response, @CookieValue(name = "_uid_")String uid,@CookieValue(name = "s_")String s) {
-        String userJson = cache.getValue("xm:"+s+":"+uid);
+        String userJson = cache.getValue("ctdn:"+s+":"+uid);
         return userJson;
     }
 
@@ -108,7 +108,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
      */
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseData<User> login(@RequestBody User user, HttpServletRequest request,HttpServletResponse response) {
+    public ResponseData<User> login(boolean notAuto,@RequestBody User user, HttpServletRequest request,HttpServletResponse response) {
         ResponseData<User> responsebody = new ResponseData<User>();
         String nickName= user.getNickName();
         String password = user.getPassword();
@@ -126,12 +126,12 @@ public class LoginController extends BaseControllerImpl<User, User> {
         } else {
 
             String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
-            setCacheSessionId("xm", user, sessionId);
+            setCacheSessionId("ctdn", user, sessionId);
             responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "登录成功！"));
 
 
-            setCookie(response,sessionId,"xm");
-            //logger.info(user.getEmail()+" login_success xm");
+            setCookie(response,sessionId,"ctdn",notAuto);
+            logger.info(user.getEmail()+" login_success ctdn");
         }
         return responsebody;
     }
@@ -146,7 +146,16 @@ public class LoginController extends BaseControllerImpl<User, User> {
         u.setEmail(user.getEmail());
         u.setRoleId(user.getRoleId());
         u.setRealName(user.getRealName());
-        cache.setValue("xm:"+from+":"+sessionId, JSON.toJSONString(u)); // 将sessionId存入cache
+        String json = null;
+        try {
+            json = URLEncoder.encode(JSON.toJSONString(u),"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            logger.error("json utf8-8编码失败");
+        }
+        if (json!=null){
+            cache.setValue("ctdn:"+from+":"+sessionId, json); // 将sessionId存入cache
+            logger.info(sessionId+" "+json);
+        }
     }
 
     /**
@@ -157,14 +166,14 @@ public class LoginController extends BaseControllerImpl<User, User> {
     @RequestMapping(value = "/logout", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public String logout(HttpServletRequest request,HttpServletResponse response,@CookieValue(name = "_uid_",required = false)String uid,@CookieValue(name = "s_",required = false)String s) {
         ResponseData<User> responsebody = new ResponseData<User>();
-        cache.remove("xm:"+s+":"+uid);
+        cache.remove("ctdn:"+s+":"+uid);
         Cookie cookie = new Cookie("_uid_", null);
-        cookie.setMaxAge(60*60*24*2);
+        cookie.setMaxAge(1);
         cookie.setDomain(domain);
         cookie.setPath("/");
         response.addCookie(cookie);
         cookie = new Cookie("s_", null);
-        cookie.setMaxAge(60*60*24*2);
+        cookie.setMaxAge(1);
         cookie.setDomain(domain);
         cookie.setPath("/");
         response.addCookie(cookie);
@@ -189,7 +198,9 @@ public class LoginController extends BaseControllerImpl<User, User> {
         return true;
     }
 
-
+    private int notAutoLogin(boolean isAuto){
+        return !isAuto?60*60*24*30:60*60*2;
+    }
 
 
 }

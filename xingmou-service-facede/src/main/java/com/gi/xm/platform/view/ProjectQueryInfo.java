@@ -83,7 +83,9 @@ public class ProjectQueryInfo extends QueryInfo {
 	private Long investMoney;
 	
 	private Timestamp loadTime;
-	
+
+    private  String description;
+
 	private Integer[] newestEventRoundIds;
 
 
@@ -118,7 +120,7 @@ public class ProjectQueryInfo extends QueryInfo {
     private String searchFields ="id,title,weblink,ceo_name,company_id,company_name,industry_id,industry_sub_id," +
             "industry_name,industry_sub_name,district_id,district_name,district_sub_id,district_sub_name,newest_event_id," +
             "newest_event_date,newest_event_round,newest_event_round_id,newest_event_money,source_id,create_date,status," +
-            "business_model,industry_pain_points,team_score,operation_score,score,time_span,invest_info,inverstrirm_names,invest_num,invest_money,source_id";
+            "business_model,industry_pain_points,team_score,operation_score,score,time_span,invest_info,inverstrirm_names,invest_num,invest_money,source_id,description";
 
     public Long getId() {
         return id;
@@ -458,5 +460,13 @@ public class ProjectQueryInfo extends QueryInfo {
 
     public void setDistrictSubIds(Long[] districtSubIds) {
         this.districtSubIds = districtSubIds;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

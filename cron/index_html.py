@@ -12,7 +12,7 @@ reload(sys)
 sys.setdefaultencoding("utf-8")
 
 
-red = redis.Redis(host='10.9.210.22', port=6385, db=1,password="xhhl-redis")
+red = redis.Redis(host='10.9.210.22', port=6386, db=1,password="xhhl-redis")
 
 conn=MySQLdb.connect(host="10.9.130.142",user="xmuser",passwd="qcDKywE7Ka52",db="edw2",charset="utf8")
 conn_doc=MySQLdb.connect(host="10.9.130.142",user="xmuser",passwd="qcDKywE7Ka52",db="xm_doc",charset="utf8")

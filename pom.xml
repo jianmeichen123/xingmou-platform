@@ -15,7 +15,6 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>xingmou-assembly</module>
-        <!-- <module>xingmou-confg-server</module> -->
         <module>xingmou-logback</module>
         <module>xingmou-redis</module>
         <module>xingmou-dal</module>
@@ -24,19 +23,17 @@
         <module>xingmou-biz</module>
         <module>xingmou-service-facede</module>
         <module>xingmou-service</module>
-        <!--<module>xingmou-mongodb</module>-->
-        <!--<module>xingmou-ictclas</module>-->
+        <module>xingmou-mongodb</module>
         <module>xingmou-service-report</module>
         <module>xingmou-restful</module>
-        <!--<module>xingmou-news-manage</module>-->
         <module>xingmou-user</module>
-        <!--<module>xingmou-upload</module>-->
-        <!--<module>xingmou-mail</module>-->
         <module>xingmou-doc</module>
+        <module>xingmou-data-rest</module>
     </modules>
     <packaging>pom</packaging>
 
     <properties>
+        <xingmou.version>1.0-SNAPSHOT</xingmou.version>
         <cglib.version>3.2.0</cglib.version>
         <commons.lang.version>2.6</commons.lang.version>
         <commons.dbcp>1.4</commons.dbcp>
@@ -56,67 +53,72 @@
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-common</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${xingmou.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-assembly</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${xingmou.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-dal</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${xingmou.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-mongodb</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${xingmou.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-redis</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${xingmou.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-service-facede</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${xingmou.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-service</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${xingmou.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-biz</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${xingmou.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-api-common</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${xingmou.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-service-report</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${xingmou.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-logback</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${xingmou.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-mail</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${xingmou.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-doc</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${xingmou.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.gi</groupId>
+                <artifactId>xingmou-data-rest</artifactId>
+                <version>${xingmou.version}</version>
             </dependency>
             <!---->
             <dependency>

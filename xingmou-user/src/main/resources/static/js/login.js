@@ -39,7 +39,7 @@ function checkform(){
  
  function logincallback(data){
 	 if(data.result.status=="OK"){
-		 forwardWithHeader(platformUrl.xmcx);
+		 forwardWithHeader(platformUrl.ctdncx);
 		return false;
 	 }else{
 	     $(".log_title").text(data.result.message)

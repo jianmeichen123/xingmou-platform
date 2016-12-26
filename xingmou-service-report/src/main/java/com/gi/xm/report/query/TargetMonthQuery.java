@@ -2,7 +2,6 @@ package com.gi.xm.report.query;
 
 import com.gi.xm.platform.view.common.QueryInfo;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -19,6 +18,8 @@ public class TargetMonthQuery extends QueryInfo {
 	private Integer year;
 			
 	private Integer month;
+			
+	private Date ym;
 			
 	private Integer industryId;
 			
@@ -40,11 +41,9 @@ public class TargetMonthQuery extends QueryInfo {
 			
 	private Integer activeInvestfirmNum;
 			
+	private Integer type;
+			
 	private Integer industryType;
-			
-	private Integer hasYm;
-			
-	private Integer hasDistict;
 			
 	private Timestamp addTime;
 			
@@ -70,6 +69,13 @@ public class TargetMonthQuery extends QueryInfo {
 	}
 	public void setMonth(Integer month){
 		this.month = month;
+	}
+    
+	public Date getYm(){
+		return ym;
+	}
+	public void setYm(Date ym){
+		this.ym = ym;
 	}
     
 	public Integer getIndustryId(){
@@ -142,25 +148,18 @@ public class TargetMonthQuery extends QueryInfo {
 		this.activeInvestfirmNum = activeInvestfirmNum;
 	}
     
+	public Integer getType(){
+		return type;
+	}
+	public void setType(Integer type){
+		this.type = type;
+	}
+    
 	public Integer getIndustryType(){
 		return industryType;
 	}
 	public void setIndustryType(Integer industryType){
 		this.industryType = industryType;
-	}
-    
-	public Integer getHasYm(){
-		return hasYm;
-	}
-	public void setHasYm(Integer hasYm){
-		this.hasYm = hasYm;
-	}
-    
-	public Integer getHasDistict(){
-		return hasDistict;
-	}
-	public void setHasDistict(Integer hasDistict){
-		this.hasDistict = hasDistict;
 	}
     
 	public Timestamp getAddTime(){
@@ -176,4 +175,4 @@ public class TargetMonthQuery extends QueryInfo {
 	public void setUpdateTime(Timestamp updateTime){
 		this.updateTime = updateTime;
 	}
-}
+    }

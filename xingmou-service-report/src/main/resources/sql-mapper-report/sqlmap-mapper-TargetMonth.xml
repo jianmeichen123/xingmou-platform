@@ -2,28 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gi.xm.report.dao.TargetMonthDAO">
     <resultMap id="BaseResultMap" type="com.gi.xm.report.pojo.TargetMonth">
-        <id     column="id"                     property="id"                   jdbcType="INTEGER"/>
-        <result column="year"                   property="year"                 jdbcType="INTEGER"/>
-        <result column="month"                  property="month"                jdbcType="INTEGER"/>
-        <result column="industry_id"            property="industryId"           jdbcType="INTEGER"/>
-        <result column="industry_name"          property="industryName"         jdbcType="VARCHAR"/>
-
-        <result column="industry_sub_id"        property="industrySubId"        jdbcType="INTEGER"/>
-        <result column="industry_sub_name"      property="industrySubName"      jdbcType="VARCHAR"/>
-        <result column="district_id"            property="districtId"           jdbcType="INTEGER"/>
-        <result column="district_name"          property="districtName"         jdbcType="VARCHAR"/>
-        <result column="invest_num"             property="investNum"            jdbcType="INTEGER"/>
-
-        <result column="invest_money"           property="investMoney"          jdbcType="BIGINT"/>
-        <result column="create_num"             property="createNum"            jdbcType="INTEGER"/>
-        <result column="active_investfirm_num"  property="activeInvestfirmNum"  jdbcType="INTEGER"/>
-        <result column="industry_type"          property="industryType"         jdbcType="INTEGER"/>
-        <result column="has_ym"                 property="hasYm"                jdbcType="INTEGER"/>
-
-        <result column="has_distict"            property="hasDistict"           jdbcType="INTEGER"/>
-        <result column="add_time"               property="addTime"              jdbcType="TIMESTAMP"/>
-        <result column="update_time"            property="updateTime"           jdbcType="TIMESTAMP"/>
-
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="year" property="year" jdbcType="INTEGER"/>
+        <result column="month" property="month" jdbcType="INTEGER"/>
+        <result column="ym" property="ym" jdbcType="DATE"/>
+        <result column="industry_id" property="industryId" jdbcType="INTEGER"/>
+        <result column="industry_name" property="industryName" jdbcType="VARCHAR"/>
+        <result column="industry_sub_id" property="industrySubId" jdbcType="INTEGER"/>
+        <result column="industry_sub_name" property="industrySubName" jdbcType="VARCHAR"/>
+        <result column="district_id" property="districtId" jdbcType="INTEGER"/>
+        <result column="district_name" property="districtName" jdbcType="VARCHAR"/>
+        <result column="invest_num" property="investNum" jdbcType="INTEGER"/>
+        <result column="invest_money" property="investMoney" jdbcType="BIGINT"/>
+        <result column="create_num" property="createNum" jdbcType="INTEGER"/>
+        <result column="active_investfirm_num" property="activeInvestfirmNum" jdbcType="INTEGER"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="industry_type" property="industryType" jdbcType="INTEGER"/>
+        <result column="add_time" property="addTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
 
@@ -31,6 +27,7 @@
         INSERT INTO dm_target_month (
         year,
         month,
+        ym,
         industry_id,
         industry_name,
         industry_sub_id,
@@ -41,9 +38,8 @@
         invest_money,
         create_num,
         active_investfirm_num,
+        type,
         industry_type,
-        has_ym,
-        has_distict,
         add_time,
         update_time
         )
@@ -51,6 +47,7 @@
         (
         #{year,jdbcType=INTEGER},
         #{month,jdbcType=INTEGER},
+        #{ym,jdbcType=DATE},
         #{industryId,jdbcType=INTEGER},
         #{industryName,jdbcType=VARCHAR},
         #{industrySubId,jdbcType=INTEGER},
@@ -61,18 +58,17 @@
         #{investMoney,jdbcType=BIGINT},
         #{createNum,jdbcType=INTEGER},
         #{activeInvestfirmNum,jdbcType=INTEGER},
+        #{type,jdbcType=INTEGER},
         #{industryType,jdbcType=INTEGER},
-        #{hasYm,jdbcType=INTEGER},
-        #{hasDistict,jdbcType=INTEGER},
         #{addTime,jdbcType=TIMESTAMP},
         UNIX_TIMESTAMP()
         )
     </insert>
 
     <sql id="selectFields">
-        year,month,industry_id,industry_name,industry_sub_id,industry_sub_name,
-        district_id,district_name,invest_num,invest_money,create_num,
-        active_investfirm_num,industry_type,has_ym,has_distict
+        year,month,ym,industry_id,industry_name,
+        industry_sub_id,industry_sub_name,district_id,district_name,invest_num,
+        invest_money,create_num,active_investfirm_num,type,industry_type
     </sql>
 
 
@@ -87,17 +83,17 @@
         <where>
             <if test="year!=null">AND year = #{year,jdbcType=INTEGER}</if>
             <if test="month!=null">AND month = #{month,jdbcType=INTEGER}</if>
+            <if test="ym!=null">AND ym = #{ym,jdbcType=DATE}</if>
             <if test="industryId!=null">AND industry_id = #{industryId,jdbcType=INTEGER}</if>
             <if test="industrySubId!=null">AND industry_sub_id = #{industrySubId,jdbcType=INTEGER}</if>
             <if test="districtId!=null">AND district_id = #{districtId,jdbcType=INTEGER}</if>
-            <if test="districtName!=null and districtName!=''">AND district_name = #{districtName,jdbcType=VARCHAR}</if>
             <if test="investNum!=null">AND invest_num = #{investNum,jdbcType=INTEGER}</if>
             <if test="investMoney!=null">AND invest_money = #{investMoney,jdbcType=BIGINT}</if>
             <if test="createNum!=null">AND create_num = #{createNum,jdbcType=INTEGER}</if>
-            <if test="activeInvestfirmNum!=null">AND active_investfirm_num = #{activeInvestfirmNum,jdbcType=INTEGER}</if>
+            <if test="activeInvestfirmNum!=null">AND active_investfirm_num = #{activeInvestfirmNum,jdbcType=INTEGER}
+            </if>
+            <if test="type!=null">AND type = #{type,jdbcType=INTEGER}</if>
             <if test="industryType!=null">AND industry_type = #{industryType,jdbcType=INTEGER}</if>
-            <if test="hasYm!=null">AND has_ym = #{hasYm,jdbcType=INTEGER}</if>
-            <if test="hasDistict!=null">AND has_distict = #{hasDistict,jdbcType=INTEGER}</if>
 
         </where>
         <choose>

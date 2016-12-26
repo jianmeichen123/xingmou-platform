@@ -1,11 +1,15 @@
 package com.gi.xm.platform.controller;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
+import com.galaxyinternet.common.controller.BaseControllerImpl;
+import com.galaxyinternet.framework.core.constants.Constants;
+import com.galaxyinternet.framework.core.model.ResponseData;
+import com.galaxyinternet.framework.core.model.Result;
+import com.galaxyinternet.framework.core.model.Result.Status;
+import com.galaxyinternet.framework.core.service.BaseService;
+import com.galaxyinternet.framework.core.utils.SessionUtils;
+import com.galaxyinternet.model.user.User;
+import com.galaxyinternet.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,17 +18,9 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import com.galaxyinternet.common.controller.BaseControllerImpl;
-import com.galaxyinternet.framework.core.constants.Constants;
-import com.galaxyinternet.framework.core.model.Header;
-import com.galaxyinternet.framework.core.model.ResponseData;
-import com.galaxyinternet.framework.core.model.Result;
-import com.galaxyinternet.framework.core.model.Result.Status;
-import com.galaxyinternet.framework.core.service.BaseService;
-import com.galaxyinternet.framework.core.utils.SessionUtils;
-import com.galaxyinternet.model.user.User;
-import com.galaxyinternet.service.UserService;
-
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
@@ -44,9 +40,9 @@ public class LoginController extends BaseControllerImpl<User, User> {
         return this.userService;
     }
 
-    private String xmIndex = "http://xmdev.gi.com/index.html";
+    private String ctdnIndex = "http://ctdndev.gi.com/index.html";
 
-    private String domain = "xmdev.gi.com";
+    private String domain = "ctdndev.gi.com";
 
 
     /**
@@ -54,11 +50,11 @@ public class LoginController extends BaseControllerImpl<User, User> {
      */
     @RequestMapping(value = "/toLogin")
     public String toLogin(HttpServletResponse response, @CookieValue(name = "_uid_",required = false)String uid,@CookieValue(name = "s_",required = false)String s) {
-        String key = "xm:"+s+":"+uid;
+        String key = "ctdn:"+s+":"+uid;
         String user = cache.getValue(key);
         if(user!=null){
             setCookie(response,uid,s,false);
-            return "redirect:"+xmIndex;
+            return "redirect:"+ctdnIndex;
         }
         return "login";
     }
@@ -69,10 +65,10 @@ public class LoginController extends BaseControllerImpl<User, User> {
         if (u == null){
             return "login";
         }
-        String key = "xm:fx:"+uid;
+        String key = "ctdn:fx:"+uid;
         String user = cache.getValue(key);
         if(user!=null) {
-            return "redirect:" + xmIndex;
+            return "redirect:" + ctdnIndex;
         }
         setCacheSessionId("fx", u, uid);
         setCookie(response,uid,"fx",false);
@@ -101,7 +97,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
     @RequestMapping(value = "/me")
     @ResponseBody
     public String  me(HttpServletResponse response, @CookieValue(name = "_uid_")String uid,@CookieValue(name = "s_")String s) {
-        String userJson = cache.getValue("xm:"+s+":"+uid);
+        String userJson = cache.getValue("ctdn:"+s+":"+uid);
         return userJson;
     }
 
@@ -130,12 +126,12 @@ public class LoginController extends BaseControllerImpl<User, User> {
         } else {
 
             String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
-            setCacheSessionId("xm", user, sessionId);
+            setCacheSessionId("ctdn", user, sessionId);
             responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "登录成功！"));
 
 
-            setCookie(response,sessionId,"xm",notAuto);
-            logger.info(user.getEmail()+" login_success xm");
+            setCookie(response,sessionId,"ctdn",notAuto);
+            logger.info(user.getEmail()+" login_success ctdn");
         }
         return responsebody;
     }
@@ -157,7 +153,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
             logger.error("json utf8-8编码失败");
         }
         if (json!=null){
-            cache.setValue("xm:"+from+":"+sessionId, json); // 将sessionId存入cache
+            cache.setValue("ctdn:"+from+":"+sessionId, json); // 将sessionId存入cache
             logger.info(sessionId+" "+json);
         }
     }
@@ -170,7 +166,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
     @RequestMapping(value = "/logout", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public String logout(HttpServletRequest request,HttpServletResponse response,@CookieValue(name = "_uid_",required = false)String uid,@CookieValue(name = "s_",required = false)String s) {
         ResponseData<User> responsebody = new ResponseData<User>();
-        cache.remove("xm:"+s+":"+uid);
+        cache.remove("ctdn:"+s+":"+uid);
         Cookie cookie = new Cookie("_uid_", null);
         cookie.setMaxAge(1);
         cookie.setDomain(domain);

@@ -8,10 +8,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "baidu_news")
 public class BaiduNews extends Pojo {
 
-    private  String author;
+    private String author;
     private String url;
     private String abs;
     private String title;
+    private String imgUrl;
+    private Long publicTime;
+    private Long sortTime;
 
     public String getAuthor() {
         return author;
@@ -68,9 +71,5 @@ public class BaiduNews extends Pojo {
     public void setSortTime(Long sortTime) {
         this.sortTime = sortTime;
     }
-
-    private String imgUrl;
-    private Long publicTime;
-    private Long sortTime;
 
 }

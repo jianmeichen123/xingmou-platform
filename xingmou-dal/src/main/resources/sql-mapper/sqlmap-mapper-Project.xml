@@ -5,7 +5,7 @@
 		<id column="id" 						property="id" 					jdbcType="BIGINT" />
 		<result column="title"		 			property="title" 				jdbcType="VARCHAR" />
 		<result column="pic" 					property="pic" 					jdbcType="VARCHAR" />
-		<result column="pic_big"	 			property="picBig" 				jdbcType="VARCHAR" />
+		<result column="pic_big_xm"	 			property="picBig" 				jdbcType="VARCHAR" />
 		<result column="picshow"		 		property="picshow" 				jdbcType="VARCHAR" />
 
 		<result column="weblink" 				property="weblink" 				jdbcType="VARCHAR" />
@@ -13,6 +13,7 @@
 		<result column="company_id" 			property="companyId" 			jdbcType="BIGINT" />
 		<result column="company_name" 			property="companyName"	 		jdbcType="VARCHAR" />
 		<result column="industry_id" 			property="industryId" 			jdbcType="BIGINT" />
+		<result column="description" 			property="description" 			jdbcType="VARCHAR" />
 
 		<result column="industry_sub_id" 		property="industrySubId" 		jdbcType="BIGINT" />
 		<result column="industry_name" 			property="industryName" 		jdbcType="VARCHAR" />
@@ -64,6 +65,7 @@
 			company_id,
 			company_name,
 			industry_id,
+		    description,
 			industry_sub_id,
 			industry_name,
 			industry_sub_name,
@@ -103,6 +105,7 @@
 			#{companyId,jdbcType=BIGINT},
 			#{companyName,jdbcType=VARCHAR},
 			#{industryId,jdbcType=BIGINT},
+			#{description,jdbcType=VARCHAR},
 			#{industrySubId,jdbcType=BIGINT},
 			#{industryName,jdbcType=VARCHAR},
 			#{industrySubName,jdbcType=VARCHAR},
@@ -143,9 +146,10 @@
 			<if test="createDate!=null">create_date = #{createDate,jdbcType=VARCHAR},</if>
 			<if test="businessModel!=null">business_model = #{businessModel,jdbcType=VARCHAR},</if>
 			<if test="industryPainPoints!=null">industry_pain_points = #{industryPainPoints,jdbcType=VARCHAR},</if>
-			<if test="investInfo!=null">invest_info = #{investInfo,jdbcType=VARCHAR},</if>
+			<if test="investInfo!=null">invest_info = #{investInfo,jdbcType=description},</if>
 			<if test="companyId!=null">company_id = #{companyId,jdbcType=BIGINT},</if>
 			<if test="industryId!=null">industry_id = #{industryId,jdbcType=BIGINT},</if>
+		    <if test="description!=null">description = #{description,jdbcType=description},</if>
 			<if test="industrySubId!=null">industry_sub_id = #{industrySubId,jdbcType=BIGINT},</if>
 			<if test="districtId!=null">district_id = #{districtId,jdbcType=BIGINT},</if>
 			<if test="districtSubId!=null">district_sub_id = #{districtSubId,jdbcType=BIGINT},</if>
@@ -174,8 +178,8 @@
 		
 		
 	<sql id="selectFields">
-		id,title,pic,pic_big,picshow,
-		weblink,ceo_name,company_id,company_name,industry_id,
+		id,title,pic,pic_big_xm,picshow,
+		weblink,ceo_name,company_id,company_name,industry_id,description,
 		industry_sub_id,industry_name,industry_sub_name,district_id,district_name,
 		district_sub_id,district_sub_name,newest_event_id,newest_event_date,newest_event_round,
 		newest_event_round_id,newest_event_money,source_id,create_date,status,business_model,
@@ -186,7 +190,7 @@
 
 	<sql id="searchFields">
 		id,title,pic,picshow,weblink,
-		ceo_name,company_id,company_name,industry_id,industry_sub_id,
+		ceo_name,company_id,company_name,industry_id,description,industry_sub_id,
 		industry_name,industry_sub_name,district_id,district_name,district_sub_id,
 		district_sub_name,newest_event_id,newest_event_date,newest_event_round,
 		newest_event_round_id,newest_event_money,source_id,create_date,status,business_model,
@@ -235,6 +239,7 @@
 								<if test="companyId!=null">AND company_id = #{companyId,jdbcType=BIGINT}</if>
 								<if test="companyName!=null and companyName!=''">AND company_name = #{companyName,jdbcType=VARCHAR}</if>
 								<if test="industryId!=null">AND industry_id = #{industryId,jdbcType=BIGINT}</if>
+								<if test="description!=null">AND description = #{description,jdbcType=VARCHAR}</if>
 								<if test="industrySubId!=null">AND industry_sub_id = #{industrySubId,jdbcType=BIGINT}</if>
 								<if test="industryName!=null and industryName!=''">AND industry_name = #{industryName,jdbcType=VARCHAR}</if>
 								<if test="industrySubName!=null and industrySubName!=''">AND industry_sub_name = #{industrySubName,jdbcType=VARCHAR}</if>

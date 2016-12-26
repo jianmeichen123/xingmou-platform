@@ -8,7 +8,7 @@ reds = require("redis_pool") --引用redis连接池
 check_arg = fun:check_cookie_arg() --调用参数校验方法
 if check_arg['status']  then
     --参数校验通过，获取返回的参数，并将参数拼接
-    key = string.format("%s:%s:%s","xm",check_arg['s_'],check_arg['_uid_'])
+    key = string.format("%s:%s:%s","ctdn",check_arg['s_'],check_arg['_uid_'])
 else
     --ngx.say(fun:resJson(-1,check_arg['msg']))
     ngx.exit(ngx.HTTP_UNAUTHORIZED)
@@ -28,6 +28,5 @@ else
         return
     end
 end
-
---3.redis找到了信息鉴权成功
---ngx.say(fun:resJson(0,"该项目鉴权成功,可以访问!"))
+ngx.header.content_type="application/json;charset=utf8"
+ngx.req.set_header("userInfo",value)

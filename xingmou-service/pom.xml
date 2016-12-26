@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.gi</groupId>
     <artifactId>xingmou-service</artifactId>
-    <version>1.0-bt</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
 
     <properties>

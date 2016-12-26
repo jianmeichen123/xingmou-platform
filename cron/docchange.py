@@ -3,24 +3,27 @@
 
 import json
 
+import datetime
 import pymongo
 import time, MySQLdb
 
 import sys
 reload(sys)
 sys.setdefaultencoding("utf-8")
+import redis
+# 连接，可选不同数据库
+rc = redis.Redis(host='10.10.0.147')
 
-
+mongodb_host = "10.10.0.107"
 
 industes = ["金融","教育,培训","汽车,交通","本地生活","医疗,健康","企业服务","社交,网络","旅游,户外","硬件","广告,营销","文化,娱乐","体育,运动","物流","房产,服务","电子商务","游戏","工具,软件","云计算,大数据"]
 
 
-def get_db(host="10.10.0.107", port=27011,dbName="doc"):
+def get_db(host=mongodb_host, port=27011,dbName="doc"):
 
     client = pymongo.MongoClient(host=host,port=port)
     db = client[dbName]
-    if host == "10.10.0.107":
-        db.authenticate(name="xingmou", password="xingmou7pDxcer8", mechanism='SCRAM-SHA-1')
+    db.authenticate(name="xingmou", password="xingmou7pDxcer8", mechanism='SCRAM-SHA-1')
     return db
 
 
@@ -32,9 +35,9 @@ sql = "INSERT INTO dm_industry_reports ( title,tags, source_id,source_url, sourc
       "VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s ,%s,%s,%s,%s,%s)"
 
 
-def analysy_report():
-    con = get_collection(get_db(dbName="doc",host="10.10.0.107"),"analysys-report")
-    rows = con.find()
+def analysy_report(id):
+    con = get_collection(get_db(),"analysys-report")
+    rows = con.find({"id":id})
     data = []
     for row in rows:
         tags = ""
@@ -66,15 +69,17 @@ def analysy_report():
         param = (row["mainTitle"].strip(),tags.decode('utf8'),str(row["id"]),source_url,row["cname"].strip(),
                  timeStr,articeImage,str(row['summary']).strip(),"2016","1",images,"1",industyId,industyName)
         data.append(param)
-    conn=MySQLdb.connect(host="10.9.130.142",user="xmuser",passwd="qcDKywE7Ka52",db="xm_doc",charset="utf8")
-    cursor = conn.cursor()
-    cursor.executemany(sql,data)
-    conn.commit()
-    conn
+    if len(data) >0:
+        conn=MySQLdb.connect(host="10.9.130.142",user="xmuser",passwd="qcDKywE7Ka52",db="xm_doc",charset="utf8")
+        cursor = conn.cursor()
+        cursor.executemany(sql,data)
+        conn.commit()
+    else:
+        print "insert 0"
 
-def analysys_review():
-    con = get_collection(get_db(dbName="doc",host="10.10.0.107"),"analysys-review")
-    rows = con.find()
+def analysys_review(id):
+    con = get_collection(get_db(),"analysys-review")
+    rows = con.find({"id":id})
     data = []
     conn=MySQLdb.connect(host="10.9.130.142",user="xmuser",passwd="qcDKywE7Ka52",db="xm_doc",charset="utf8")
     cursor = conn.cursor()
@@ -105,15 +110,15 @@ def analysys_review():
         cursor.execute(sql,param)
     conn.commit()
 
-def iresearch_report():
-    con = get_collection(get_db(dbName="doc",host="10.10.0.107"),"iresearch-report")
-    rows = con.find()
+def iresearch_report(id):
+    con = get_collection(get_db(),"iresearch-report")
+    rows = con.find({"id":id})
     data = []
     sql = "INSERT INTO dm_industry_reports ( title,tags, source_id,source_url, source_type_name, publish_date ,icon, summary_short, year,source_type,summary,doc_type,industry_id,industry_name) " \
             "VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s ,%s,%s,%s,%s,%s))"
 
     for row in rows:
-        if row["url"].find("20160") !=-1:
+        if row["url"].find("20160")  !=-1 or row["url"].find("20170"):
             if row.has_key("datas"):
                 tags = ""
                 if row.has_key("tabs") and  row["tabs"] != None :
@@ -134,9 +139,9 @@ def iresearch_report():
     cursor.executemany(sql,data)
     conn.commit()
 
-def iresearch_news():
-    con = get_collection(get_db(dbName="doc",host="10.10.0.107"),"iresearch-news")
-    rows = con.find({})
+def iresearch_news(id):
+    con = get_collection(get_db(),"iresearch-news")
+    rows = con.find({"id":id})
     data = []
     sql = "INSERT INTO dm_industry_reports ( title,tags, source_id,source_url, source_type_name, publish_date ,icon, summary_short, year,source_type,summary,doc_type,industry_id,industry_name) " \
           "VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s ,%s,%s,%s,%s,%s)"
@@ -179,7 +184,25 @@ def do_idust(text):
     return -1
 
 if __name__ == '__main__':
-    analysy_report()
-    analysys_review()
-    #iresearch_report()
-    iresearch_news()
+    ps = rc.pubsub()
+
+    ps.subscribe(['dev'])
+
+    for item in ps.listen():
+        if item['type'] == 'message':
+            j = item["data"]
+            t = item["data"].split(":")[0]
+            id = item["data"].split(":")[1]
+            if t == "analysy_report":
+                analysy_report(id)
+            elif t == "analysys_review":
+                analysys_review(id)
+            elif t == "iresearch_news":
+                iresearch_news(id)
+            elif t == "iresearch_report":
+                iresearch_report(id)
+            conn=MySQLdb.connect(host="10.9.130.142",user="xmuser",passwd="qcDKywE7Ka52",db="xm_doc",charset="utf8")
+            cursor = conn.cursor()
+
+            cursor.execute("call order_num()")
+            conn.commit()

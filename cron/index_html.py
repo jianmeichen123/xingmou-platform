@@ -47,7 +47,7 @@ def data_total():
 
 
 def top_invest():
-
+    td = datetime.date.today()
     n = cursor.execute("select "
                        "ie.project_id ,ie.invest_money,ie.invest_date,ie.round_name,ie.industry_name,"
                        "ie.investfirm_names,ie.add_time,p.title,p.pic_xm "
@@ -58,14 +58,21 @@ def top_invest():
                        "order by "
                        "ie.id "
                        "desc "
-                       "limit 5")
+                       "limit 8")
 
     datas = []
     for row in cursor.fetchall():
         data = {}
         data["project_id"] = row[0]
         data["invest_money"] = row[1]
-        data["invest_date"] = row[2].strftime("%Y-%m-%d")
+        invest_date  = data["invest_date"] = row[2]
+        d = (td-invest_date).days
+        if (d == 0):
+            data["invest_date"] = str(d) +"刚刚"
+        elif (d <=4):
+            data["invest_date"] = str(d) +"天前"
+        else:
+            data["invest_date"] = row[2].strftime("%Y-%m-%d")
         data["round_name"] = row[3]
         data["industry_name"] = row[4]
         data["investfirm_names"] = row[5]
@@ -87,7 +94,7 @@ def top_project():
                        "right join dm_project_person pp on pp.project_id = p.id  "
                         " group by p.id "
                        "order by p.id desc "
-                       "limit 4;")
+                       "limit 6;")
 
     datas = []
     project_ids = []

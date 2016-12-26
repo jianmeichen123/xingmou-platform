@@ -94,7 +94,7 @@ def top_project():
                        "right join dm_project_person pp on pp.project_id = p.id  "
                         " group by p.id "
                        "order by p.id desc "
-                       "limit 6;")
+                       "limit 4;")
 
     datas = []
     project_ids = []

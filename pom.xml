@@ -33,7 +33,6 @@
     <packaging>pom</packaging>
 
     <properties>
-        <xingmou.version>1.0-SNAPSHOT</xingmou.version>
         <cglib.version>3.2.0</cglib.version>
         <commons.lang.version>2.6</commons.lang.version>
         <commons.dbcp>1.4</commons.dbcp>
@@ -53,72 +52,72 @@
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-common</artifactId>
-                <version>${xingmou.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-assembly</artifactId>
-                <version>${xingmou.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-dal</artifactId>
-                <version>${xingmou.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-mongodb</artifactId>
-                <version>${xingmou.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-redis</artifactId>
-                <version>${xingmou.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-service-facede</artifactId>
-                <version>${xingmou.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-service</artifactId>
-                <version>${xingmou.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-biz</artifactId>
-                <version>${xingmou.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-api-common</artifactId>
-                <version>${xingmou.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-service-report</artifactId>
-                <version>${xingmou.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-logback</artifactId>
-                <version>${xingmou.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-mail</artifactId>
-                <version>${xingmou.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-doc</artifactId>
-                <version>${xingmou.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-data-rest</artifactId>
-                <version>${xingmou.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <!---->
             <dependency>

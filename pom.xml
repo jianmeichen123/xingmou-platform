@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <!-- Inherit defaults from Spring Boot -->
@@ -9,6 +9,24 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>1.3.5.RELEASE</version>
     </parent>
+    <!-- 如有Nexus私服, 取消注释并指向正确的服务器地址. -->
+    <repositories>
+        <repository>
+            <id>nexus</id>
+            <name>Team Nexus Repository</name>
+            <url>http://nexus.gi.com/content/groups/public/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>ignore</checksumPolicy>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>ignore</checksumPolicy>
+            </releases>
+        </repository>
+    </repositories>
 
     <groupId>com.gi</groupId>
     <artifactId>xingmou-platform</artifactId>
@@ -31,7 +49,6 @@
         <module>xingmou-data-rest</module>
     </modules>
     <packaging>pom</packaging>
-
     <properties>
         <xingmou.version>1.0-SNAPSHOT</xingmou.version>
         <cglib.version>3.2.0</cglib.version>
@@ -45,7 +62,9 @@
         <mybatis.spring.version>1.2.4</mybatis.spring.version>
         <mapper.version>3.3.6</mapper.version>
         <pagehelper.version>4.1.1</pagehelper.version>
+        <kotlin.version>1.0.0</kotlin.version>
     </properties>
+
     <dependencyManagement>
         <dependencies>
             <!-- require dependency:begin -->
@@ -150,11 +169,11 @@
                 <artifactId>mybatis-spring</artifactId>
                 <version>${mybatis.spring.version}</version>
             </dependency>
-<!--            <dependency>
-                <groupId>commons-dbcp</groupId>
-                <artifactId>commons-dbcp</artifactId>
-                <version>${commons.dbcp}</version>
-            </dependency>-->
+            <!--            <dependency>
+                            <groupId>commons-dbcp</groupId>
+                            <artifactId>commons-dbcp</artifactId>
+                            <version>${commons.dbcp}</version>
+                        </dependency>-->
             <!--spring-->
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -243,9 +262,37 @@
                 <artifactId>logback-classic</artifactId>
                 <version>1.1.3</version>
             </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.16.6</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-stdlib</artifactId>
+                <version>${kotlin.version}</version>
+            </dependency>
+
         </dependencies>
 
     </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib</artifactId>
+            <version>${kotlin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-test</artifactId>
+            <version>${kotlin.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+
     <build>
         <plugins>
 
@@ -259,7 +306,28 @@
                     <encoding>UTF8</encoding>
                 </configuration>
             </plugin>
-
+            <plugin>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <version>${kotlin.version}</version>
+                <configuration/>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>test-compile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>test-compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
         </plugins>
     </build>

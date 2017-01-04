@@ -19,6 +19,10 @@
         <!--自身依赖 start-->
         <dependency>
             <groupId>com.gi</groupId>
+            <artifactId>xingmou-api-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.gi</groupId>
             <artifactId>xingmou-assembly</artifactId>
         </dependency>
         <dependency>

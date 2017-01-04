@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("news")
-public class AreaController {
+public class NewsController {
 
     @Autowired
     private BaiduNewsService baiduNewsService;
@@ -21,6 +21,7 @@ public class AreaController {
     @RequestMapping("query")
     @ResponseBody
     public MessageInfo<QueryResultInfo<BaiduNews>> page(@RequestBody BaiduNewsQuery baiduNewsQuery){
+        
         return baiduNewsService.page(baiduNewsQuery);
     }
 	

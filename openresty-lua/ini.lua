@@ -7,7 +7,7 @@ function _CONF.redis()
 end
 
 function _CONF.redis_cache()
-    local  redis_config = {host='10.9.210.22',pass='xhhl-redis',port=6386,db=15} --redis配置项
+    local  redis_config = {host='10.9.210.22',pass='xhhl-redis',port=6385,db=15} --redis配置项
     return redis_config
 end
 

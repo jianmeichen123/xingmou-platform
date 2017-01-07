@@ -1,4 +1,4 @@
-package com.gi.xm.doc.restful.config;
+package com.gi.xm.platform.conf.rest;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -24,12 +24,41 @@ import java.lang.reflect.Method;
 public class RedisCacheConf {
 
     @Bean
-    public KeyGenerator docKG(){
+    public KeyGenerator reportKG(){
         return new KeyGenerator() {
             @Override
             public Object generate(Object target, Method method, Object... params) {
                 StringBuilder sb = new StringBuilder();
-                sb.append("xm-doc:");
+                sb.append("xm-report:");
+                sb.append(method.getName());
+                for (Object obj : params) {
+                    sb.append(":");
+                    if(obj instanceof  Integer[]){
+                        Integer [] arr = ( Integer[] ) obj ;
+                        StringBuffer b = new StringBuffer("[");
+                        for (Integer str :arr){
+                            b.append(str);
+                            b.append(",");
+                        }
+                        b.setCharAt(b.length()-1,']');
+                        sb.append(b);
+                    }else {
+                        sb.append(obj.toString());
+                    }
+                }
+                return sb.toString();
+            }
+        };
+
+    }
+
+    @Bean
+    public KeyGenerator api(){
+        return new KeyGenerator() {
+            @Override
+            public Object generate(Object target, Method method, Object... params) {
+                StringBuilder sb = new StringBuilder();
+                sb.append("xm-api:");
                 sb.append(method.getName());
                 for (Object obj : params) {
                     sb.append(":");

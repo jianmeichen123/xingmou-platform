@@ -6,12 +6,12 @@ function checkform(){
 	    
 	    if(nickName==""){
 			$("#nickName").focus();
-	        layer.tips('请输入用户名', '#nickName');
+			$(".log_title").text("用户名不能为空")
 	        return false;
 	    } 
 	    if(password==""){
 			$("#password").focus();
-	        layer.tips('请输入密码', '#password');
+	        $(".log_title").text("密码不能为空")
 	        return false;
 	    }
 	    return true;
@@ -19,7 +19,7 @@ function checkform(){
 
  function login(){
 	
-    checkform();
+    if !checkform() return;
 	 
      //判断是否勾选了自动登录
      var b = new Base64();

@@ -47,7 +47,8 @@ public class ProjectController {
 	 */
     @RequestMapping("get/{id}")
     @ResponseBody
-	public MessageInfo<ProjectInfo> getProject( @PathVariable Long id ){
+    @Cacheable(value = "project:id",keyGenerator = "api")
+    public MessageInfo<ProjectInfo> getProject( @PathVariable Long id ){
 		MessageInfo<ProjectInfo> messageInfo =  projectFacede.getProject(id);
 		return messageInfo;
 	}

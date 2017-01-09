@@ -52,6 +52,9 @@ function _M:check_cookie_arg()
 
     return t
 end
-
+function _M:decodeURI(s)
+    s = string.gsub(s, '%%(%x%x)', function(h) return string.char(tonumber(h, 16)) end)
+    return s
+end
 
 return _M

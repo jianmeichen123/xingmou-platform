@@ -113,7 +113,7 @@ public class ProjectAnalysisController {
     @ResponseBody
     @Cacheable(value = "bar",keyGenerator = "reportKG")
     public MessageInfo bar() {
-            Integer [] years = new Integer[]{2010,2011,2012,2013,2014,2015,2016};
+            Integer [] years = new Integer[]{2010,2011,2012,2013,2014,2015,2016,2017};
             MessageInfo<List<ChartProjectIndustryYear>> messageInfo = chartProjectIndustryYearBiz.selectByYear(years);
             if (!messageInfo.isSuccess()) {
                 return messageInfo;

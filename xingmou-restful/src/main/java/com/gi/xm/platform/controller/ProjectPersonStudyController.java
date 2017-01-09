@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -50,6 +51,7 @@ public class ProjectPersonStudyController {
 
     @RequestMapping("get")
     @ResponseBody
+	@Cacheable(value = "projectPersonStudyInfo:id",keyGenerator = "api")
 	public MessageInfo<ProjectPersonStudyInfo> getProjectPersonStudy( Long id ){
 		MessageInfo<ProjectPersonStudyInfo> messageInfo =  projectPersonStudyFacede.getProjectPersonStudy(id);
 		return messageInfo;

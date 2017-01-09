@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -53,6 +54,7 @@ public class DistrictController {
 
     @RequestMapping("getListByTypeLevel")
     @ResponseBody
+	@Cacheable(value = "districtInfo:type:level",keyGenerator = "api")
 	public MessageInfo<List<DistrictInfo>> getListByTypeLevel(Integer type, Integer level){
 		MessageInfo<List<DistrictInfo>> messageInfo = districtFacede.getListByTypeLevel(type, level);
 		return messageInfo;
@@ -60,6 +62,7 @@ public class DistrictController {
 			
     @RequestMapping("getListByUpidDisplayorder")
     @ResponseBody
+	@Cacheable(value = "districtInfo:upid:displayorder",keyGenerator = "api")
 	public MessageInfo<List<DistrictInfo>> getListByUpidDisplayorder(Integer upid, Integer displayorder){
 		MessageInfo<List<DistrictInfo>> messageInfo = districtFacede.getListByUpidDisplayorder(upid, displayorder);
 		return messageInfo;

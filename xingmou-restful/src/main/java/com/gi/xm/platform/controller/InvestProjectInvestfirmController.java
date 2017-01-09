@@ -8,6 +8,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 
 import com.gi.xm.platform.facede.InvestEventsFacede;
 import com.gi.xm.platform.view.*;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -69,6 +70,7 @@ public class InvestProjectInvestfirmController {
 
     @RequestMapping("get")
     @ResponseBody
+	@Cacheable(value = "investProjectInvestfirmInfo:id",keyGenerator = "api")
 	public MessageInfo<InvestProjectInvestfirmInfo> getInvestProjectInvestfirm( Long id ){
 		MessageInfo<InvestProjectInvestfirmInfo> messageInfo =  investProjectInvestfirmFacede.getInvestProjectInvestfirm(id);
 		return messageInfo;
@@ -85,6 +87,7 @@ public class InvestProjectInvestfirmController {
 		
     @RequestMapping("getListByInvestId")
     @ResponseBody
+	@Cacheable(value = "investProjectInvestfirmInfo:investId",keyGenerator = "api")
 	public MessageInfo<List<InvestProjectInvestfirmInfo>> getListByInvestId(Long investId){
 		MessageInfo<List<InvestProjectInvestfirmInfo>> messageInfo = investProjectInvestfirmFacede.getListByInvestId(investId);
 		return messageInfo;
@@ -92,6 +95,7 @@ public class InvestProjectInvestfirmController {
 			
     @RequestMapping("getListByInvestfirmId")
     @ResponseBody
+	@Cacheable(value = "investProjectInvestfirmInfo:investfirmId",keyGenerator = "api")
 	public MessageInfo<List<InvestProjectInvestfirmInfo>> getListByInvestfirmId(Long investfirmId){
 		MessageInfo<List<InvestProjectInvestfirmInfo>> messageInfo = investProjectInvestfirmFacede.getListByInvestfirmId(investfirmId);
 		return messageInfo;
@@ -99,6 +103,7 @@ public class InvestProjectInvestfirmController {
 			
     @RequestMapping("getListByProjectId")
     @ResponseBody
+	@Cacheable(value = "investProjectInvestfirmInfo:projectId",keyGenerator = "api")
 	public MessageInfo<List<InvestProjectInvestfirmInfo>> getListByProjectId(Long projectId){
 		MessageInfo<List<InvestProjectInvestfirmInfo>> messageInfo = investProjectInvestfirmFacede.getListByProjectId(projectId);
 		return messageInfo;

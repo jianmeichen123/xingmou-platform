@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,6 +57,7 @@ public class ProjectPersonController {
 
     @RequestMapping("get")
     @ResponseBody
+	@Cacheable(value = "projectPersonInfo:id",keyGenerator = "api")
 	public MessageInfo<ProjectPersonInfo> getProjectPerson( Integer id ){
 		MessageInfo<ProjectPersonInfo> messageInfo =  projectPersonFacede.getProjectPerson(id);
 		return messageInfo;

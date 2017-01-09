@@ -1,5 +1,6 @@
 package com.gi.xm.platform.controller;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +32,7 @@ public class CompanyController {
 
     @RequestMapping("get/{id}")
     @ResponseBody
+	@Cacheable(value = "company",keyGenerator = "api")
 	public MessageInfo<CompanyInfo> getCompany( @PathVariable Long id ){
 		MessageInfo<CompanyInfo> messageInfo =  companyFacede.getCompany(id);
 		return messageInfo;

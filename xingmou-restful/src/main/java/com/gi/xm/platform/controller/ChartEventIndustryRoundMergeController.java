@@ -1,23 +1,21 @@
 package com.gi.xm.platform.controller;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.*;
-
-import com.alibaba.dubbo.config.annotation.Reference;
-
-import com.gi.xm.platform.view.IndustryDataYearInfo;
 import com.gi.xm.platform.view.common.MessageInfo;
 import com.gi.xm.platform.view.common.QueryResultInfo;
 import com.gi.xm.report.biz.ChartDataIndustryFirstYearBiz;
 import com.gi.xm.report.biz.ChartDataIndustryYearBiz;
 import com.gi.xm.report.biz.ChartEventIndustryRoundMergeBiz;
-import com.gi.xm.report.pojo.*;
+import com.gi.xm.report.pojo.ChartEventIndustryRoundMerge;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Controller
 @RequestMapping("chartEventIndustryRoundMerge")

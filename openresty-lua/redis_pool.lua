@@ -59,9 +59,10 @@ function redis_pool:get_key(str)
         --    return false,"用户不存在",val
         --end
         --client:expire(key,604800)
-        local ikey = string.format("%s:%s:%s","xm","count",email)
-        local v,e = client:incr(str)
-        --local v,e = client:incr("%s:%s:%s:%s","xm","c",email,os.time/300*300)
+        local ikey = string.format("%s:%s:%s","ctdn","count",email)
+        client:incr(ikey)
+        --client:incr("%s:%s:%s:%s","ctdn","c/5m",email,os.time/300*300)
+        --client:expire(key,604800)
         return true,"获取key成功",val
     end
     --self:close()

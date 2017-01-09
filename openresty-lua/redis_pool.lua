@@ -51,14 +51,14 @@ function redis_pool:get_key(str)
 
     if  val ~= ngx.null and val ~= nil then
         --ngx.say(val)
-        local j = cjson.decode(val)
-        local email = j.email
+        --local j = cjson.decode(val)
+        --local email = j.email
         --if email == ngx.null then
         --    return false,"用户不存在",val
         --end
         --client:expire(key,604800)
-        local countkey = string.format("%s:%s:%s","ctdn","count",email)
-        local v,e = client:incr(countkey)
+        --local countkey = string.format("%s:%s:%s","ctdn","count",email)
+        --local v,e = client:incr(countkey)
         --local v,e = client:incr("%s:%s:%s:%s","xm","c",email,os.time/300*300)
         return true,"获取key成功",val
     end

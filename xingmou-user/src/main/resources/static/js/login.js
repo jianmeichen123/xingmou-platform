@@ -19,7 +19,7 @@ function checkform(){
 
  function login(){
 	
-    if !checkform() return;
+    if (!checkform()){return};
 	 
      //判断是否勾选了自动登录
      var b = new Base64();

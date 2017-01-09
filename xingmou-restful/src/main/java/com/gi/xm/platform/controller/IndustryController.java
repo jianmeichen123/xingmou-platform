@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,12 +28,14 @@ public class IndustryController {
 
 	@RequestMapping("getListByParentId")
 	@ResponseBody
+	@Cacheable(value = "industryInfo:parentId",keyGenerator = "api")
 	public MessageInfo<List<IndustryInfo>> getListByParentId(Integer parentId){
 		MessageInfo<List<IndustryInfo>> messageInfo = industryFacede.getListByParentId(parentId);
 		return messageInfo;
 	}
 	@RequestMapping("getAll")
 	@ResponseBody
+	@Cacheable(value = "industryInfo:all",keyGenerator = "api")
 	public MessageInfo<List<IndustryInfo>> getAllIndustry(){
 		MessageInfo<List<IndustryInfo>>  messageInfo = industryFacede.getAllIndustry();
 		return messageInfo;

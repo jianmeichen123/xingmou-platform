@@ -13,6 +13,7 @@ import com.gi.xm.report.biz.InvestfirmsDataBiz;
 import com.gi.xm.report.pojo.Area;
 import com.gi.xm.report.pojo.InvestfirmsData;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -76,6 +77,7 @@ public class InvestfirmsDataController {
 	}
 	@RequestMapping("top10InvestMoney")
 	@ResponseBody
+    @Cacheable(value = "top10InvestMoney",keyGenerator = "api")
 	public  MessageInfo<List<InvestfirmsData>>  top10InvestMoney () {
 		MessageInfo<List<InvestfirmsData>> resultMessageInfo = investfirmsDataBiz.top10InvestMoney();
 		return resultMessageInfo;
@@ -83,7 +85,8 @@ public class InvestfirmsDataController {
 
 	@RequestMapping("top10InvestNum")
 	@ResponseBody
-	public  MessageInfo<List<InvestfirmsData>>  top10InvestNum () {
+    @Cacheable(value = "top10InvestNum",keyGenerator = "api")
+    public  MessageInfo<List<InvestfirmsData>>  top10InvestNum () {
 		MessageInfo<List<InvestfirmsData>> resultMessageInfo = investfirmsDataBiz.top10InvestNum();
 		return resultMessageInfo;
 	}
@@ -91,6 +94,7 @@ public class InvestfirmsDataController {
 
 	@RequestMapping("investfirmField")
 	@ResponseBody
+    @Cacheable(value = "investfirmField",keyGenerator = "api")
 	public  MessageInfo<List<Area>> investfirmField() {
 		MessageInfo<List<Area>> resultMessageInfo = investfirmsDataBiz.investfirmField();
 		return resultMessageInfo;

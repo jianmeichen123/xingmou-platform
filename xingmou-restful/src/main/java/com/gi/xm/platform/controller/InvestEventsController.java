@@ -3,6 +3,7 @@ package com.gi.xm.platform.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -86,6 +87,7 @@ public class InvestEventsController {
 
 	@RequestMapping("getListByProjectId/{projectId}")
 	@ResponseBody
+	@Cacheable(value = "investEventsInfoList:projectId",keyGenerator = "api")
 	public MessageInfo<List<InvestEventsInfo>> getListByProjectId(@PathVariable("projectId") Long projectId){
 		MessageInfo<List<InvestEventsInfo>> messageInfo = investEventsFacede.getListByProjectId(projectId);
 		return messageInfo;

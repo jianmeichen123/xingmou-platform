@@ -42,6 +42,15 @@ public class RedisCacheConf {
                         }
                         b.setCharAt(b.length()-1,']');
                         sb.append(b);
+                    }  else if(obj instanceof  Long[]){
+                        Long [] arr = ( Long[] ) obj ;
+                        StringBuffer b = new StringBuffer("[");
+                        for (Long str :arr){
+                            b.append(str);
+                            b.append(",");
+                        }
+                        b.setCharAt(b.length()-1,']');
+                        sb.append(b);
                     }else {
                         sb.append(obj.toString());
                     }
@@ -66,6 +75,15 @@ public class RedisCacheConf {
                         Integer [] arr = ( Integer[] ) obj ;
                         StringBuffer b = new StringBuffer("[");
                         for (Integer str :arr){
+                            b.append(str);
+                            b.append(",");
+                        }
+                        b.setCharAt(b.length()-1,']');
+                        sb.append(b);
+                    }  else if(obj instanceof  Long[]){
+                        Long [] arr = ( Long[] ) obj ;
+                        StringBuffer b = new StringBuffer("[");
+                        for (Long str :arr){
                             b.append(str);
                             b.append(",");
                         }

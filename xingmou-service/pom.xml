@@ -8,9 +8,8 @@
         <groupId>com.gi</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <groupId>com.gi</groupId>
     <artifactId>xingmou-service</artifactId>
-    <version>1.0-bt-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>

@@ -173,7 +173,7 @@
         <dependency>
             <groupId>com.galaxyinternet</groupId>
             <artifactId>galaxy-cache</artifactId>
-            <version>1.0.5.20-xingmou-qa-SNAPSHOT</version>
+            <version>xm_1.0.5.20</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

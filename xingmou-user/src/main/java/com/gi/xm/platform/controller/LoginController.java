@@ -70,7 +70,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
         if(user!=null) {
             return "redirect:" + ctdnIndex;
         }
-        setCacheSessionId("fx", u, uid);
+        setCacheSessionId("fx", u, uid,false);
         setCookie(response,uid,"fx",false);
         return "redirect:"+ctdnIndex;
     }
@@ -126,7 +126,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
         } else {
 
             String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
-            setCacheSessionId("ctdn", user, sessionId);
+            setCacheSessionId("ctdn", user, sessionId,notAuto);
             responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "登录成功！"));
 
 
@@ -141,7 +141,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
      * @param from
      * @param user
      */
-    private void setCacheSessionId(String from, User user, String sessionId) {
+    private void setCacheSessionId(String from, User user, String sessionId,boolean notAuto) {
         User u = new User();
         u.setEmail(user.getEmail());
         u.setRoleId(user.getRoleId());
@@ -153,7 +153,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
             logger.error("json utf8-8编码失败");
         }
         if (json!=null){
-            cache.setValue("ctdn:"+from+":"+sessionId, json); // 将sessionId存入cache
+            cache.setValue("ctdn:"+from+":"+sessionId, json,notAutoLogin(notAuto)); // 将sessionId存入cache
             logger.info(sessionId+" "+json);
         }
     }

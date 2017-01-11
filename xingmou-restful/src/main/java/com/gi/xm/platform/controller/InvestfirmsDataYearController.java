@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -81,6 +82,7 @@ public class InvestfirmsDataYearController {
 		
     @RequestMapping("getListByInvestfirmId")
     @ResponseBody
+	@Cacheable(value = "investfirmsDataYearInfo:investfirmId",keyGenerator = "api")
 	public MessageInfo<List<InvestfirmsDataYearInfo>> getListByInvestfirmId(Long investfirmId){
 		MessageInfo<List<InvestfirmsDataYearInfo>> messageInfo = investfirmsDataYearFacede.getListByInvestfirmId(investfirmId);
 		return messageInfo;
@@ -88,6 +90,7 @@ public class InvestfirmsDataYearController {
 			
     @RequestMapping("getListByYear")
     @ResponseBody
+	@Cacheable(value = "investfirmsDataYearInfo:year",keyGenerator = "api")
 	public MessageInfo<List<InvestfirmsDataYearInfo>> getListByYear(Integer year){
 		MessageInfo<List<InvestfirmsDataYearInfo>> messageInfo = investfirmsDataYearFacede.getListByYear(year);
 		return messageInfo;

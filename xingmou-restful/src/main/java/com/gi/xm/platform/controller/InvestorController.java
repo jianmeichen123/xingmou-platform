@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,6 +51,7 @@ public class InvestorController {
 
     @RequestMapping("get")
     @ResponseBody
+	@Cacheable(value = "investorInfo:id",keyGenerator = "api")
 	public MessageInfo<InvestorInfo> getInvestor( Long id ){
 		MessageInfo<InvestorInfo> messageInfo =  investorFacede.getInvestor(id);
 		return messageInfo;

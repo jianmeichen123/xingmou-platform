@@ -123,20 +123,18 @@ public class ProjectFacedeImpl implements ProjectFacede {
 		MessageInfo<QueryResultInfo<ProjectInfo>> messageInfo = new MessageInfo<QueryResultInfo<ProjectInfo>>();
 		QueryResultInfo<ProjectInfo> queryResultInfo = ProjectConvertor.toQueryResultInfo(message.getData());
 
-		Long projectId = projectQueryInfo.getId();
-		Message<List<Label>>  labelInfo = labelBiz.getListByTypeRelationId(Contants.LABEL_PROJECT,projectId);
-		List<Label> labelList = labelInfo.getData();
-		List<String> labels = new ArrayList<String>();
-
-		if(null != labelList && !labelList.isEmpty()){
-			for(Label label:labelList){
-				labels.add(label.getTitle());
-			}
-		}
 		//填充projectInfo labels
 		List<ProjectInfo> projectInfos = queryResultInfo.getRecords();
 		if(null != projectInfos && !projectInfos.isEmpty()){
 			for(ProjectInfo projectInfo :projectInfos){
+				Message<List<Label>>  labelInfo = labelBiz.getListByTypeRelationId(Contants.LABEL_PROJECT,projectInfo.getId());
+				List<Label> labelList = labelInfo.getData();
+				List<String> labels = new ArrayList<String>();
+				if(null != labelList && !labelList.isEmpty()){
+					for(Label label:labelList){
+						labels.add(label.getTitle());
+					}
+				}
 				projectInfo.setLabels(labels);
 			}
 		}

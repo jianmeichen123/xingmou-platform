@@ -17,5 +17,4 @@
 
     <dubbo:consumer timeout="6000" retries="0" check="false"/>
 
-    <dubbo:registry file="${user.home}/ctdn-cloud-rest.cache"/>
 </beans>

@@ -43,4 +43,6 @@
 	<dubbo:consumer timeout="6000" retries="0" check="false"/>
 
     <dubbo:reference interface="com.galaxyinternet.service.UserService" id="com.galaxyinternet.service.UserService" version="1.0.0" />
+
+	<dubbo:registry file="${user.home}/ctdn-cloud-user.cache"/>
 </beans>

@@ -16,6 +16,7 @@
     <!-- 使用zookeeper注册中心暴露服务地址 -->
     <dubbo:registry address="${dubbo.registry.address.base}"/>
 
+
     <dubbo:provider timeout="6000" retries="0" />
 
 </beans>

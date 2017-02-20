@@ -28,6 +28,7 @@
 		<result column="newest_event_date" 		property="newestEventDate" 		jdbcType="VARCHAR" />
 		<result column="newest_event_round" 	property="newestEventRound" 	jdbcType="VARCHAR" />
 
+		<result column="newest_event_money" 	property="newestEventMoney" 	jdbcType="INTEGER" />
 		<result column="newest_event_round_id" 	property="newestEventRoundId" 	jdbcType="INTEGER" />
 		<result column="newest_event_inverstrirm_names" property="newestEventInvestfirms" 	jdbcType="VARCHAR" />
 		<result column="inverstrirm_names" 		property="inverstrirmNames" 	jdbcType="VARCHAR" />

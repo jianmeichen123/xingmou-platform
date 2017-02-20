@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.ProjectsDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.Projects">
+					<id column="id" property="id" jdbcType="BIGINT" />
+								<result column="title" property="title" jdbcType="VARCHAR" />
+								<result column="company_id" property="companyId" jdbcType="BIGINT" />
+								<result column="industry_id" property="industryId" jdbcType="BIGINT" />
+								<result column="industry_name" property="industryName" jdbcType="VARCHAR" />
+								<result column="industry_sub_id" property="industrySubId" jdbcType="BIGINT" />
+								<result column="industry_sub_name" property="industrySubName" jdbcType="VARCHAR" />
+								<result column="product_release_date" property="productReleaseDate" jdbcType="DATE" />
+								<result column="product_url" property="productUrl" jdbcType="VARCHAR" />
+								<result column="product_info" property="productInfo" jdbcType="LONGVARCHAR" />
+								<result column="product_compete" property="productCompete" jdbcType="LONGVARCHAR" />
+								<result column="product_achievements" property="productAchievements" jdbcType="LONGVARCHAR" />
+								<result column="bp_file" property="bpFile" jdbcType="VARCHAR" />
+								<result column="product_logo" property="productLogo" jdbcType="VARCHAR" />
+								<result column="created_uid" property="createdUid" jdbcType="BIGINT" />
+								<result column="created_uname" property="createdUname" jdbcType="VARCHAR" />
+								<result column="status" property="status" jdbcType="INTEGER" />
+								<result column="add_time" property="addTime" jdbcType="BIGINT" />
+								<result column="update_time" property="updateTime" jdbcType="BIGINT" />
+						</resultMap>
+
+
+	<insert id="insert" parameterType="com.gi.ctdn.pojo.Projects" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO ctdn_projects (
+			title,
+			company_id,
+			industry_id,
+			industry_name,
+			industry_sub_id,
+			industry_sub_name,
+			product_release_date,
+			product_url,
+			product_info,
+			product_compete,
+			product_achievements,
+			bp_file,
+			product_logo,
+			created_uid,
+			created_uname,
+			status,
+			add_time,
+			update_time
+		)
+		VALUES
+		(
+			#{title,jdbcType=VARCHAR},
+			#{companyId,jdbcType=BIGINT},
+			#{industryId,jdbcType=BIGINT},
+			#{industryName,jdbcType=VARCHAR},
+			#{industrySubId,jdbcType=BIGINT},
+			#{industrySubName,jdbcType=VARCHAR},
+			#{productReleaseDate,jdbcType=DATE},
+			#{productUrl,jdbcType=VARCHAR},
+			#{productInfo,jdbcType=LONGVARCHAR},
+			#{productCompete,jdbcType=LONGVARCHAR},
+			#{productAchievements,jdbcType=LONGVARCHAR},
+			#{bpFile,jdbcType=VARCHAR},
+			#{productLogo,jdbcType=VARCHAR},
+			#{createdUid,jdbcType=BIGINT},
+			#{createdUname,jdbcType=VARCHAR},
+			#{status,jdbcType=INTEGER},
+			#{addTime,jdbcType=BIGINT},
+			 UNIX_TIMESTAMP()
+		)
+	</insert>
+
+	<sql id="selectFields">
+	id,title,company_id,industry_id,industry_name,industry_sub_id,industry_sub_name,product_release_date,product_url,product_info,product_compete,product_achievements,bp_file,product_logo,created_uid,created_uname,status,add_time,update_time
+	</sql>
+	
+	
+
+	<select id="queryProjects" resultMap="BaseResultMap" parameterType="com.gi.ctdn.query.ProjectsQuery">
+		SELECT
+		<include refid="selectFields" />
+		FROM ctdn_projects
+		<include refid="queryWhereAndOrder" />
+	</select>
+
+	<sql id="queryWhereAndOrder">
+		<where>
+					<if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>
+								<if test="title!=null and title!=''">AND title = #{title,jdbcType=VARCHAR}</if>
+								<if test="companyId!=null">AND company_id = #{companyId,jdbcType=BIGINT}</if>
+								<if test="industryId!=null">AND industry_id = #{industryId,jdbcType=BIGINT}</if>
+								<if test="industryName!=null and industryName!=''">AND industry_name = #{industryName,jdbcType=VARCHAR}</if>
+								<if test="industrySubId!=null">AND industry_sub_id = #{industrySubId,jdbcType=BIGINT}</if>
+								<if test="industrySubName!=null and industrySubName!=''">AND industry_sub_name = #{industrySubName,jdbcType=VARCHAR}</if>
+								<if test="productReleaseDate!=null">AND product_release_date = #{productReleaseDate,jdbcType=DATE}</if>
+								<if test="productUrl!=null and productUrl!=''">AND product_url = #{productUrl,jdbcType=VARCHAR}</if>
+								<if test="productInfo!=null and productInfo!=''">AND product_info = #{productInfo,jdbcType=LONGVARCHAR}</if>
+								<if test="productCompete!=null and productCompete!=''">AND product_compete = #{productCompete,jdbcType=LONGVARCHAR}</if>
+								<if test="productAchievements!=null and productAchievements!=''">AND product_achievements = #{productAchievements,jdbcType=LONGVARCHAR}</if>
+								<if test="bpFile!=null and bpFile!=''">AND bp_file = #{bpFile,jdbcType=VARCHAR}</if>
+								<if test="productLogo!=null and productLogo!=''">AND product_logo = #{productLogo,jdbcType=VARCHAR}</if>
+								<if test="createdUid!=null">AND created_uid = #{createdUid,jdbcType=BIGINT}</if>
+								<if test="createdUname!=null and createdUname!=''">AND created_uname = #{createdUname,jdbcType=VARCHAR}</if>
+								<if test="status!=null">AND status = #{status,jdbcType=INTEGER}</if>
+								<if test="addTime!=null">AND add_time = #{addTime,jdbcType=BIGINT}</if>
+								<if test="updateTime!=null">AND update_time = #{updateTime,jdbcType=BIGINT}</if>
+					
+		</where>
+		<choose>
+			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
+			<otherwise>order by id desc</otherwise>
+		</choose>
+	</sql>
+
+</mapper>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.CompanysDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.Companys">
+					<id column="id" property="id" jdbcType="BIGINT" />
+								<result column="title" property="title" jdbcType="VARCHAR" />
+								<result column="district_id" property="districtId" jdbcType="INTEGER" />
+								<result column="district_name" property="districtName" jdbcType="VARCHAR" />
+								<result column="district_sub_id" property="districtSubId" jdbcType="INTEGER" />
+								<result column="district_sub_name" property="districtSubName" jdbcType="VARCHAR" />
+								<result column="employee_number" property="employeeNumber" jdbcType="INTEGER" />
+								<result column="found_date" property="foundDate" jdbcType="DATE" />
+								<result column="round_id" property="roundId" jdbcType="INTEGER" />
+								<result column="round_name" property="roundName" jdbcType="VARCHAR" />
+								<result column="created_uid" property="createdUid" jdbcType="BIGINT" />
+								<result column="created_uname" property="createdUname" jdbcType="VARCHAR" />
+								<result column="add_time" property="addTime" jdbcType="BIGINT" />
+								<result column="update_time" property="updateTime" jdbcType="BIGINT" />
+						</resultMap>
+
+
+	<insert id="insert" parameterType="com.gi.ctdn.pojo.Companys" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO ctdn_companys (
+			title,
+			district_id,
+			district_name,
+			district_sub_id,
+			district_sub_name,
+			employee_number,
+			found_date,
+			round_id,
+			round_name,
+			created_uid,
+			created_uname,
+			add_time,
+			update_time
+		)
+		VALUES
+		(
+			#{title,jdbcType=VARCHAR},
+			#{districtId,jdbcType=INTEGER},
+			#{districtName,jdbcType=VARCHAR},
+			#{districtSubId,jdbcType=INTEGER},
+			#{districtSubName,jdbcType=VARCHAR},
+			#{employeeNumber,jdbcType=INTEGER},
+			#{foundDate,jdbcType=DATE},
+			#{roundId,jdbcType=INTEGER},
+			#{roundName,jdbcType=VARCHAR},
+			#{createdUid,jdbcType=BIGINT},
+			#{createdUname,jdbcType=VARCHAR},
+			#{addTime,jdbcType=BIGINT},
+			 UNIX_TIMESTAMP()
+		)
+	</insert>
+
+	<sql id="selectFields">
+	id,title,district_id,district_name,district_sub_id,district_sub_name,employee_number,found_date,round_id,round_name,created_uid,created_uname,add_time,update_time
+	</sql>
+	
+	
+
+	<select id="queryCompanys" resultMap="BaseResultMap" parameterType="com.gi.ctdn.query.CompanysQuery">
+		SELECT
+		<include refid="selectFields" />
+		FROM ctdn_companys
+		<include refid="queryWhereAndOrder" />
+	</select>
+
+	<sql id="queryWhereAndOrder">
+		<where>
+					<if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>
+								<if test="title!=null and title!=''">AND title = #{title,jdbcType=VARCHAR}</if>
+								<if test="districtId!=null">AND district_id = #{districtId,jdbcType=INTEGER}</if>
+								<if test="districtName!=null and districtName!=''">AND district_name = #{districtName,jdbcType=VARCHAR}</if>
+								<if test="districtSubId!=null">AND district_sub_id = #{districtSubId,jdbcType=INTEGER}</if>
+								<if test="districtSubName!=null and districtSubName!=''">AND district_sub_name = #{districtSubName,jdbcType=VARCHAR}</if>
+								<if test="employeeNumber!=null">AND employee_number = #{employeeNumber,jdbcType=INTEGER}</if>
+								<if test="foundDate!=null">AND found_date = #{foundDate,jdbcType=DATE}</if>
+								<if test="roundId!=null">AND round_id = #{roundId,jdbcType=INTEGER}</if>
+								<if test="roundName!=null and roundName!=''">AND round_name = #{roundName,jdbcType=VARCHAR}</if>
+								<if test="createdUid!=null">AND created_uid = #{createdUid,jdbcType=BIGINT}</if>
+								<if test="createdUname!=null and createdUname!=''">AND created_uname = #{createdUname,jdbcType=VARCHAR}</if>
+								<if test="addTime!=null">AND add_time = #{addTime,jdbcType=BIGINT}</if>
+								<if test="updateTime!=null">AND update_time = #{updateTime,jdbcType=BIGINT}</if>
+					
+		</where>
+		<choose>
+			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
+			<otherwise>order by id desc</otherwise>
+		</choose>
+	</sql>
+
+</mapper>

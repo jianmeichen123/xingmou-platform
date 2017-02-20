@@ -29,7 +29,8 @@
 		<result column="newest_event_round" 	property="newestEventRound" 	jdbcType="VARCHAR" />
 
 		<result column="newest_event_round_id" 	property="newestEventRoundId" 	jdbcType="INTEGER" />
-		<result column="newest_event_money" 	property="newestEventMoney" 	jdbcType="BIGINT" />
+		<result column="newest_event_inverstrirm_names" property="newestEventInvestfirms" 	jdbcType="VARCHAR" />
+		<result column="inverstrirm_names" 		property="inverstrirmNames" 	jdbcType="VARCHAR" />
 		<result column="source_id" 				property="sourceId" 			jdbcType="BIGINT" />
 		<result column="create_date" 			property="createDate" 			jdbcType="VARCHAR" />
 		<result column="status" 				property="status" 				jdbcType="INTEGER" />
@@ -182,7 +183,7 @@
 		id,title,pic,pic_big_xm,picshow,source_type,
 		weblink,ceo_name,company_id,company_name,industry_id,description,
 		industry_sub_id,industry_name,industry_sub_name,district_id,district_name,
-		district_sub_id,district_sub_name,newest_event_id,newest_event_date,newest_event_round,
+		district_sub_id,district_sub_name,newest_event_id,newest_event_date,newest_event_round,newest_event_inverstrirm_names,
 		newest_event_round_id,newest_event_money,source_id,create_date,status,business_model,
 		industry_pain_points,team_score,operation_score,score,time_span,
 		invest_info,inverstrirm_names,invest_num,invest_money,load_time,
@@ -193,7 +194,7 @@
 		id,title,pic,picshow,weblink,
 		ceo_name,company_id,company_name,industry_id,description,industry_sub_id,
 		industry_name,industry_sub_name,district_id,district_name,district_sub_id,
-		district_sub_name,newest_event_id,newest_event_date,newest_event_round,
+		district_sub_name,newest_event_id,newest_event_date,newest_event_round,newest_event_inverstrirm_names,
 		newest_event_round_id,newest_event_money,source_id,create_date,status,business_model,
 		industry_pain_points,team_score,operation_score,score,time_span,
 		invest_info,inverstrirm_names,invest_num,invest_money,load_time,

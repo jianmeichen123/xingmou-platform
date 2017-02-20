@@ -199,6 +199,10 @@ public class ProjectInfo implements Serializable {
 	 */
 	private Timestamp loadTime;
 	private  String inverstrirmNames;
+	/**
+	 * @Fileds
+	 */
+	private String  newestEventInvestfirms;
 
 	public Integer sourceType;
 	public String getInverstrirmNames() {
@@ -511,5 +515,13 @@ public class ProjectInfo implements Serializable {
 
 	public void setSourceType(Integer sourceType) {
 		this.sourceType = sourceType;
+	}
+
+	public String getNewestEventInvestfirms() {
+		return newestEventInvestfirms;
+	}
+
+	public void setNewestEventInvestfirms(String newestEventInvestfirms) {
+		this.newestEventInvestfirms = newestEventInvestfirms;
 	}
 }

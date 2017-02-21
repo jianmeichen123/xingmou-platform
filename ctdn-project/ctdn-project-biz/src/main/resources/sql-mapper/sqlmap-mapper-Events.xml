@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.gi.ctdn.dao.EventsDAO">
-	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.Events">
+<mapper namespace="com.gi.com.gi.ctdn.dao.EventsDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.EventsInfo">
 					<id column="id" property="id" jdbcType="BIGINT" />
 								<result column="project_id" property="projectId" jdbcType="BIGINT" />
 								<result column="round_id" property="roundId" jdbcType="INTEGER" />
@@ -18,7 +18,7 @@
 						</resultMap>
 
 
-	<insert id="insert" parameterType="com.gi.ctdn.pojo.Events" useGeneratedKeys="true" keyProperty="id">
+	<insert id="insert" parameterType="com.gi.ctdn.pojo.EventsInfo" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO ctdn_events (
 			project_id,
 			round_id,
@@ -63,7 +63,7 @@
 	</select>
 	
 
-	<select id="queryEvents" resultMap="BaseResultMap" parameterType="com.gi.ctdn.query.EventsQuery">
+	<select id="queryEvents" resultMap="BaseResultMap" parameterType="com.gi.ctdn.query.EventsQueryInfo">
 		SELECT
 		<include refid="selectFields" />
 		FROM ctdn_events

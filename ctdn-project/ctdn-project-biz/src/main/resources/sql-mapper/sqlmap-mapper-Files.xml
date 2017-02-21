@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.gi.ctdn.dao.FilesDAO">
-	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.Files">
+<mapper namespace="com.gi.com.gi.ctdn.dao.FilesDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.FilesInfo">
 					<id column="id" property="id" jdbcType="BIGINT" />
 								<result column="type" property="type" jdbcType="INTEGER" />
 								<result column="relation_id" property="relationId" jdbcType="BIGINT" />
@@ -13,7 +13,7 @@
 						</resultMap>
 
 
-	<insert id="insert" parameterType="com.gi.ctdn.pojo.Files" useGeneratedKeys="true" keyProperty="id">
+	<insert id="insert" parameterType="com.gi.ctdn.pojo.FilesInfo" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO ctdn_files (
 			type,
 			relation_id,
@@ -41,7 +41,7 @@
 	
 	
 
-	<select id="queryFiles" resultMap="BaseResultMap" parameterType="com.gi.ctdn.query.FilesQuery">
+	<select id="queryFiles" resultMap="BaseResultMap" parameterType="com.gi.ctdn.query.FilesQueryInfo">
 		SELECT
 		<include refid="selectFields" />
 		FROM ctdn_files

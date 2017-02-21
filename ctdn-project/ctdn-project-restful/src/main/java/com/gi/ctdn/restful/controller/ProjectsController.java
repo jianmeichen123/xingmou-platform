@@ -2,16 +2,14 @@ package com.gi.ctdn.restful.controller;
 
 
 import com.gi.xm.platform.view.common.MessageInfo;
+import com.gi.ctdn.biz.CompanysBiz;
+import com.gi.ctdn.biz.FilesBiz;
+import com.gi.ctdn.biz.ProjectProductBiz;
+import com.gi.ctdn.biz.ProjectsBiz;
+import com.gi.ctdn.pojo.FilesInfo;
+import com.gi.ctdn.pojo.ProjectProductInfo;
+import com.gi.ctdn.pojo.ProjectsInfo;
 import com.gi.xm.platform.view.common.QueryResultInfo;
-import ctdn.biz.CompanysBiz;
-import ctdn.biz.FilesBiz;
-import ctdn.biz.ProjectProductBiz;
-import ctdn.biz.ProjectsBiz;
-import ctdn.pojo.CompanysInfo;
-import ctdn.pojo.FilesInfo;
-import ctdn.pojo.ProjectProductInfo;
-import ctdn.pojo.ProjectsInfo;
-import ctdn.query.ProjectsQueryInfo;
 import jdk.nashorn.internal.ir.annotations.Reference;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,10 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("projects")
@@ -48,7 +43,7 @@ public class ProjectsController {
 	@ResponseBody
 	public MessageInfo<Long> createProjects(@RequestBody ProjectsInfo projectsInfo){
 		MessageInfo<Long> messageInfo = new MessageInfo<>();
-		//验证表单项
+		//check 表单必填项
 		if(projectsInfo.getTitle()==null || projectsInfo.getIndustryId() ==null || projectsInfo.getIndustryName()==null
 				||projectsInfo.getProductInfo()==null ||projectsInfo.getProductCompete() ==null
 				||projectsInfo.getBpFile() ==null || projectsInfo.getProductLogo()==null || projectsInfo.getProjectPicList()==null){
@@ -56,18 +51,11 @@ public class ProjectsController {
 			messageInfo.setStatus(10001);
 			return messageInfo;
 		}
-		List<String> labelList = projectsInfo.getLabelNameList();
-		StringBuilder labelNames = new StringBuilder("");
-		for(int i = 0;i<labelList.size();i++){
-			labelNames.append(labelList.get(i));
-			if(i>0 && i!= (labelList.size()-1)){
-				labelNames.append(",");
-			}
-		}
-		projectsInfo.setLabelNames(labelNames.toString());
+		Date now  = new Date();
+		projectsInfo.setAddTime(now);
 		messageInfo = projectsBiz.createProjects(projectsInfo);
 		Long id = messageInfo.getData();
-		Date now  = new Date();
+
 		Long createUid = projectsInfo.getCreatedUid();
 		String createUname = projectsInfo.getCreatedUname();
 
@@ -84,23 +72,15 @@ public class ProjectsController {
 			filesBiz.updateFiles(filesInfo);
 		}
 
-		//save　产品地址 url格式：产品类别|产品名称｜产品地址
-		List<String> productUrlList = projectsInfo.getProductUrlList();
-		for(String url: productUrlList){
-			String tmp[] = url.split("|");
-			ProjectProductInfo projectProductInfo = new ProjectProductInfo();
-			projectProductInfo.setAddTime(now);
-			projectProductInfo.setProjectId(id);
-			projectProductInfo.setAddressType(tmp[0]);
-			projectProductInfo.setProductName(tmp[1]);
-			projectProductInfo.setProductAddress(tmp[2]);
-			projectProductBiz.updateProjectProduct(projectProductInfo);
+		//save　产品地址
+		List<ProjectProductInfo> productList = projectsInfo.getProductList();
+		for(ProjectProductInfo productInfo: productList){
+			productInfo.setAddTime(now);
+			productInfo.setProjectId(id);
+			projectProductBiz.updateProjectProduct(productInfo);
 		}
 		return messageInfo;
 	}
-
-
-
 
 	@RequestMapping("updateProject")
 	@ResponseBody
@@ -115,7 +95,7 @@ public class ProjectsController {
 			return messageInfo;
 		}
 
-		//验证表单项
+		//check 表单必填项
 		if(projectsInfo.getTitle()==null || projectsInfo.getIndustryId() ==null || projectsInfo.getIndustryName()==null
 				||projectsInfo.getProductInfo()==null ||projectsInfo.getProductCompete() ==null
 				||projectsInfo.getBpFile() ==null || projectsInfo.getProductLogo()==null || projectsInfo.getProjectPicList()==null){
@@ -130,16 +110,7 @@ public class ProjectsController {
 			messageInfo.setStatus(10001);
 			return messageInfo;
 		}
-
-		List<String> labelList = projectsInfo.getLabelNameList();
-		StringBuilder labelNames = new StringBuilder("");
-		for(int i = 0;i<labelList.size();i++){
-			labelNames.append(labelList.get(i));
-			if(i>0 && i!= (labelList.size()-1)){
-				labelNames.append(",");
-			}
-		}
-		projectsInfo.setLabelNames(labelNames.toString());
+		projectsInfo.setUpdateTime(new Date());
 		messageInfo = projectsBiz.updateProject(projectsInfo);
 		Date now  = new Date();
 
@@ -155,39 +126,47 @@ public class ProjectsController {
 		}
 
 		//update　产品地址 url格式：产品类别|产品名称｜产品地址
-		List<String> productUrlList = projectsInfo.getProductUrlList();
-		for(String url: productUrlList){
-			String tmp[] = url.split("|");
-			ProjectProductInfo projectProductInfo = new ProjectProductInfo();
-			projectProductInfo.setAddTime(now);
-			projectProductInfo.setProjectId(id);
-			projectProductInfo.setAddressType(tmp[0]);
-			projectProductInfo.setProductName(tmp[1]);
-			projectProductInfo.setProductAddress(tmp[2]);
-			projectProductBiz.updateProjectProduct(projectProductInfo);
+		List<ProjectProductInfo> productList = projectsInfo.getProductList();
+		for(ProjectProductInfo productInfo: productList){
+			productInfo.setAddTime(now);
+			productInfo.setProjectId(id);
+			projectProductBiz.updateProjectProduct(productInfo);
 		}
 		return messageInfo;
 	}
 
-	@RequestMapping("query")
+
+	@RequestMapping("queryById")
 	@ResponseBody
-	public MessageInfo<QueryResultInfo<ProjectsInfo>> queryProjects (ProjectsQueryInfo projectsQueryInfo) {
-		MessageInfo<QueryResultInfo<ProjectsInfo>> resultMessageInfo = projectsBiz.queryProjects(projectsQueryInfo);
-		return resultMessageInfo;
-	}
-
-   /* @RequestMapping("get")
-    @ResponseBody
-	public MessageInfo<ProjectsInfo> getProjects( Long id ){
-		MessageInfo<ProjectsInfo> messageInfo =  projectsBiz.getProjects(id);
+	public MessageInfo<ProjectsInfo> queryById (Long id) {
+		MessageInfo<ProjectsInfo> messageInfo = new MessageInfo<ProjectsInfo>();
+		if(id == null){
+			messageInfo.setMessage("缺失项目id！");
+			messageInfo.setStatus(10001);
+			return messageInfo;
+		}
+		messageInfo  = projectsBiz.queryById(id);
+		ProjectsInfo projectsInfo = messageInfo.getData();
+		if(null != projectsInfo){
+			List<ProjectProductInfo> projectProductInfoList = projectProductBiz.queryListByProjectId(id).getData();
+			List<FilesInfo> filesInfoList = filesBiz.queryListByProjectId(id).getData();
+			if(!filesInfoList.isEmpty()){
+				List<String> projectPicList = new ArrayList<String>();
+				for(FilesInfo filesInfo:filesInfoList){
+					projectPicList.add(filesInfo.getFilePath());
+				}
+				projectsInfo.setProjectPicList(projectPicList);
+			}
+			projectsInfo.setProductList(projectProductInfoList);
+			messageInfo.setData(projectsInfo);
+		}else{
+			messageInfo.setMessage("项目id 错误！");
+			messageInfo.setStatus(10001);
+		}
 		return messageInfo;
 	}
 
-    @RequestMapping("getAll")
-    @ResponseBody
-    public MessageInfo<List<ProjectsInfo>> getAllProjects(){
-		MessageInfo<List<ProjectsInfo>>  messageInfo = projectsBiz.getAllProjects();
-		return messageInfo;
-	}*/
-
+	/*@RequestMapping
+	@ResponseBody
+	public MessageInfo<QueryResultInfo<List<ProjectsInfo>>> */
 }

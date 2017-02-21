@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.gi.ctdn.dao.TeamMemberJobDAO">
-	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.TeamMemberJob">
+<mapper namespace="com.gi.com.gi.ctdn.dao.TeamMemberJobDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.TeamMemberJobInfo">
 					<id column="id" property="id" jdbcType="BIGINT" />
 								<result column="member_id" property="memberId" jdbcType="BIGINT" />
 								<result column="company_name" property="companyName" jdbcType="VARCHAR" />
@@ -17,7 +17,7 @@
 						</resultMap>
 
 
-	<insert id="insert" parameterType="com.gi.ctdn.pojo.TeamMemberJob" useGeneratedKeys="true" keyProperty="id">
+	<insert id="insert" parameterType="com.gi.ctdn.pojo.TeamMemberJobInfo" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO ctdn_team_member_job (
 			member_id,
 			company_name,
@@ -53,7 +53,7 @@
 	
 	
 
-	<select id="queryTeamMemberJob" resultMap="BaseResultMap" parameterType="com.gi.ctdn.query.TeamMemberJobQuery">
+	<select id="queryTeamMemberJob" resultMap="BaseResultMap" parameterType="com.gi.ctdn.query.TeamMemberJobQueryInfo">
 		SELECT
 		<include refid="selectFields" />
 		FROM ctdn_team_member_job

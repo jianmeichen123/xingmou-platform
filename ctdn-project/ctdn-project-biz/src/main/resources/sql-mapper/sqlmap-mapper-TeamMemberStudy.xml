@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.gi.ctdn.dao.TeamMemberStudyDAO">
-	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.TeamMemberStudy">
+<mapper namespace="com.gi.com.gi.ctdn.dao.TeamMemberStudyDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.TeamMemberStudyInfo">
 					<id column="id" property="id" jdbcType="BIGINT" />
 								<result column="member_id" property="memberId" jdbcType="BIGINT" />
 								<result column="shool_name" property="shoolName" jdbcType="VARCHAR" />
@@ -17,7 +17,7 @@
 						</resultMap>
 
 
-	<insert id="insert" parameterType="com.gi.ctdn.pojo.TeamMemberStudy" useGeneratedKeys="true" keyProperty="id">
+	<insert id="insert" parameterType="com.gi.ctdn.pojo.TeamMemberStudyInfo" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO ctdn_team_member_study (
 			member_id,
 			shool_name,
@@ -53,7 +53,7 @@
 	
 	
 
-	<select id="queryTeamMemberStudy" resultMap="BaseResultMap" parameterType="com.gi.ctdn.query.TeamMemberStudyQuery">
+	<select id="queryTeamMemberStudy" resultMap="BaseResultMap" parameterType="com.gi.ctdn.query.TeamMemberStudyQueryInfo">
 		SELECT
 		<include refid="selectFields" />
 		FROM ctdn_team_member_study

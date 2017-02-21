@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.gi.ctdn.dao.CompanysDAO">
-	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.Companys">
+<mapper namespace="com.gi.com.gi.ctdn.dao.CompanysDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.CompanysInfo">
 					<id column="id" property="id" jdbcType="BIGINT" />
 								<result column="title" property="title" jdbcType="VARCHAR" />
 								<result column="district_id" property="districtId" jdbcType="INTEGER" />
@@ -19,7 +19,7 @@
 						</resultMap>
 
 
-	<insert id="insert" parameterType="com.gi.ctdn.pojo.Companys" useGeneratedKeys="true" keyProperty="id">
+	<insert id="insert" parameterType="com.gi.ctdn.pojo.CompanysInfo" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO ctdn_companys (
 			title,
 			district_id,
@@ -59,7 +59,7 @@
 	
 	
 
-	<select id="queryCompanys" resultMap="BaseResultMap" parameterType="com.gi.ctdn.query.CompanysQuery">
+	<select id="queryCompanys" resultMap="BaseResultMap" parameterType="com.gi.ctdn.query.CompanysQueryInfo">
 		SELECT
 		<include refid="selectFields" />
 		FROM ctdn_companys

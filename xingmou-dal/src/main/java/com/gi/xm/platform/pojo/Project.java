@@ -234,6 +234,11 @@ public class Project extends Pojo {
 
 	public Integer sourceType;
 
+	/**
+	 * @Fileds
+	 */
+	private String  newestEventInvestfirms;
+
 	public String getInverstrirmNames() {
 		return inverstrirmNames;
 	}
@@ -540,6 +545,14 @@ public class Project extends Pojo {
 
 	public Integer getSourceType() {
 		return sourceType;
+	}
+
+	public String getNewestEventInvestfirms() {
+		return newestEventInvestfirms;
+	}
+
+	public void setNewestEventInvestfirms(String newestEventInvestfirms) {
+		this.newestEventInvestfirms = newestEventInvestfirms;
 	}
 
 	public void setSourceType(Integer sourceType) {

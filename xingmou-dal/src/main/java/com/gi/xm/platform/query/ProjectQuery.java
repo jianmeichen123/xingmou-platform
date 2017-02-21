@@ -63,8 +63,8 @@ public class ProjectQuery extends Query {
 	private Integer status;
 			
 	private String businessModel;
-			
-	private String industryPainPoints;
+
+    private String industryPainPoints;
 			
 	private Integer teamScore;
 			
@@ -99,6 +99,8 @@ public class ProjectQuery extends Query {
 	private String createDateEnd;
 
     private  String description;
+
+    private String  newestEventInvestfirms;
 
     public Long getId() {
         return id;
@@ -450,5 +452,12 @@ public class ProjectQuery extends Query {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+    public String getNewestEventInvestfirms() {
+        return newestEventInvestfirms;
+    }
+
+    public void setNewestEventInvestfirms(String newestEventInvestfirms) {
+        this.newestEventInvestfirms = newestEventInvestfirms;
     }
 }

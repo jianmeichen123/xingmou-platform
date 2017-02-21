@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.FilesDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.Files">
+					<id column="id" property="id" jdbcType="BIGINT" />
+								<result column="type" property="type" jdbcType="INTEGER" />
+								<result column="relation_id" property="relationId" jdbcType="BIGINT" />
+								<result column="file_path" property="filePath" jdbcType="VARCHAR" />
+								<result column="created_uid" property="createdUid" jdbcType="BIGINT" />
+								<result column="created_uname" property="createdUname" jdbcType="VARCHAR" />
+								<result column="add_time" property="addTime" jdbcType="BIGINT" />
+								<result column="update_time" property="updateTime" jdbcType="BIGINT" />
+						</resultMap>
+
+
+	<insert id="insert" parameterType="com.gi.ctdn.pojo.Files" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO ctdn_files (
+			type,
+			relation_id,
+			file_path,
+			created_uid,
+			created_uname,
+			add_time,
+			update_time
+		)
+		VALUES
+		(
+			#{type,jdbcType=INTEGER},
+			#{relationId,jdbcType=BIGINT},
+			#{filePath,jdbcType=VARCHAR},
+			#{createdUid,jdbcType=BIGINT},
+			#{createdUname,jdbcType=VARCHAR},
+			#{addTime,jdbcType=BIGINT},
+			 UNIX_TIMESTAMP()
+		)
+	</insert>
+
+	<sql id="selectFields">
+	id,type,relation_id,file_path,created_uid,created_uname,add_time,update_time
+	</sql>
+	
+	
+
+	<select id="queryFiles" resultMap="BaseResultMap" parameterType="com.gi.ctdn.query.FilesQuery">
+		SELECT
+		<include refid="selectFields" />
+		FROM ctdn_files
+		<include refid="queryWhereAndOrder" />
+	</select>
+
+	<sql id="queryWhereAndOrder">
+		<where>
+					<if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>
+								<if test="type!=null">AND type = #{type,jdbcType=INTEGER}</if>
+								<if test="relationId!=null">AND relation_id = #{relationId,jdbcType=BIGINT}</if>
+								<if test="filePath!=null and filePath!=''">AND file_path = #{filePath,jdbcType=VARCHAR}</if>
+								<if test="createdUid!=null">AND created_uid = #{createdUid,jdbcType=BIGINT}</if>
+								<if test="createdUname!=null and createdUname!=''">AND created_uname = #{createdUname,jdbcType=VARCHAR}</if>
+								<if test="addTime!=null">AND add_time = #{addTime,jdbcType=BIGINT}</if>
+								<if test="updateTime!=null">AND update_time = #{updateTime,jdbcType=BIGINT}</if>
+					
+		</where>
+		<choose>
+			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
+			<otherwise>order by id desc</otherwise>
+		</choose>
+	</sql>
+
+</mapper>

@@ -8,6 +8,7 @@ import com.gi.ctdn.pojo.EventsInfo;
 import jdk.nashorn.internal.ir.annotations.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,10 +32,10 @@ public class InvestEventsController {
     public MessageInfo<Long> createCompany(@RequestBody EventsInfo eventsInfo){
         MessageInfo<Long> messageInfo = new MessageInfo<>();
         //验证表单必填项
-        if(eventsInfo.getProjectId() == null || eventsInfo.getRoundName()== null ||
+        if(eventsInfo.getProjectId() == null || StringUtils.isEmpty(eventsInfo.getRoundName())||
             eventsInfo.getRoundId() == null ||eventsInfo.getEventDate() == null ||
-            eventsInfo.getInvestfirmNames() == null || eventsInfo.getEventMoney() == null||
-            eventsInfo.getCurrencyName() == null ){
+            StringUtils.isEmpty(eventsInfo.getInvestfirmNames())|| eventsInfo.getEventMoney() == null||
+            StringUtils.isEmpty(eventsInfo.getCurrencyName())){
 
             messageInfo.setStatus(10001);
             messageInfo.setMessage("必填项未填写完整!");
@@ -54,10 +55,10 @@ public class InvestEventsController {
             return messageInfo;
         }
         //验证表单必填项
-        if(eventsInfo.getProjectId() == null || eventsInfo.getRoundName()== null ||
+        if(eventsInfo.getProjectId() == null || StringUtils.isEmpty(eventsInfo.getRoundName())||
                 eventsInfo.getRoundId() == null ||eventsInfo.getEventDate() == null ||
-                eventsInfo.getInvestfirmNames() == null || eventsInfo.getEventMoney() == null||
-                eventsInfo.getCurrencyName() == null ){
+                StringUtils.isEmpty(eventsInfo.getInvestfirmNames())|| eventsInfo.getEventMoney() == null||
+                StringUtils.isEmpty(eventsInfo.getCurrencyName())){
 
             messageInfo.setStatus(10001);
             messageInfo.setMessage("必填项未填写完整!");

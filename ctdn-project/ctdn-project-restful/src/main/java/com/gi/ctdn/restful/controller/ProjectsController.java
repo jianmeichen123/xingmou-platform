@@ -15,6 +15,7 @@ import jdk.nashorn.internal.ir.annotations.Reference;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -53,9 +54,9 @@ public class ProjectsController {
 			return messageInfo;
 		}
 		//check 表单必填项
-		if(projectsInfo.getTitle()==null || projectsInfo.getIndustryId() ==null || projectsInfo.getIndustryName()==null
-				||projectsInfo.getProductInfo()==null ||projectsInfo.getProductCompete() ==null
-				||projectsInfo.getBpFile() ==null || projectsInfo.getProductLogo()==null || projectsInfo.getProjectPicList()==null){
+		if(projectsInfo.getTitle()==null || projectsInfo.getIndustryId() ==null || StringUtils.isEmpty(projectsInfo.getIndustryName())
+				||StringUtils.isEmpty(projectsInfo.getProductInfo()) ||StringUtils.isEmpty(projectsInfo.getProductCompete())
+				||StringUtils.isEmpty(projectsInfo.getBpFile()) || StringUtils.isEmpty(projectsInfo.getProductLogo()) || projectsInfo.getProjectPicList()==null){
 			messageInfo.setMessage("必填项未填写完整!");
 			messageInfo.setStatus(10001);
 			return messageInfo;
@@ -78,9 +79,9 @@ public class ProjectsController {
 		}
 
 		//check 表单必填项
-		if(projectsInfo.getTitle()==null || projectsInfo.getIndustryId() ==null || projectsInfo.getIndustryName()==null
-				||projectsInfo.getProductInfo()==null ||projectsInfo.getProductCompete() ==null
-				||projectsInfo.getBpFile() ==null || projectsInfo.getProductLogo()==null || projectsInfo.getProjectPicList()==null){
+		if(projectsInfo.getTitle()==null || projectsInfo.getIndustryId() ==null || StringUtils.isEmpty(projectsInfo.getIndustryName())
+				||StringUtils.isEmpty(projectsInfo.getProductInfo()) ||StringUtils.isEmpty(projectsInfo.getProductCompete())
+				||StringUtils.isEmpty(projectsInfo.getBpFile()) || StringUtils.isEmpty(projectsInfo.getProductLogo()) || projectsInfo.getProjectPicList()==null){
 			messageInfo.setMessage("必填项未填写完整!");
 			messageInfo.setStatus(10001);
 			return messageInfo;

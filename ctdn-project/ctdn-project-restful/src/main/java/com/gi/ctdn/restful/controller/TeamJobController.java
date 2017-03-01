@@ -7,6 +7,7 @@ import com.gi.ctdn.biz.TeamMemberJobBiz;
 import com.gi.ctdn.pojo.TeamMemberJobInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,13 +40,13 @@ public class TeamJobController {
             messageInfo.setMessage("teammember id 缺失！");
             return messageInfo;
         }
-        if(teamMemberJobInfo.getCompanyName()==null ||teamMemberJobInfo.getPosition() == null||
+        if(StringUtils.isEmpty(teamMemberJobInfo.getCompanyName()) ||StringUtils.isEmpty(teamMemberJobInfo.getPosition())||
                  teamMemberJobInfo.getStartDate() ==null|| teamMemberJobInfo.getEndDate() == null ){
             messageInfo.setMessage("必填项未填写完整!");
             messageInfo.setStatus(10001);
             return messageInfo;
         }
-        if(teamMemberJobInfo.getDescrip() !=null && teamMemberJobInfo.getDescrip().length()>150){
+        if(StringUtils.isEmpty(teamMemberJobInfo.getDescrip()) && teamMemberJobInfo.getDescrip().length()>150){
             messageInfo.setMessage("详情描述超出限制长度!");
             messageInfo.setStatus(10001);
             return messageInfo;
@@ -68,13 +69,13 @@ public class TeamJobController {
             messageInfo.setMessage("id缺失！");
             return messageInfo;
         }
-        if(teamMemberJobInfo.getCompanyName()==null ||teamMemberJobInfo.getPosition() == null||
+        if(StringUtils.isEmpty(teamMemberJobInfo.getCompanyName()) ||StringUtils.isEmpty(teamMemberJobInfo.getPosition())||
                 teamMemberJobInfo.getStartDate() ==null|| teamMemberJobInfo.getEndDate() == null ){
             messageInfo.setMessage("必填项未填写完整!");
             messageInfo.setStatus(10001);
             return messageInfo;
         }
-        if(teamMemberJobInfo.getDescrip() !=null && teamMemberJobInfo.getDescrip().length()>150){
+        if(StringUtils.isEmpty(teamMemberJobInfo.getDescrip()) && teamMemberJobInfo.getDescrip().length()>150){
             messageInfo.setMessage("详情描述超出限制长度!");
             messageInfo.setStatus(10001);
             return messageInfo;

@@ -7,6 +7,7 @@ import com.gi.ctdn.biz.TeamMemberStudyBiz;
 import com.gi.ctdn.pojo.TeamMemberStudyInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,14 +40,14 @@ public class TeamStudyController {
             messageInfo.setMessage("member id 缺失！");
             return messageInfo;
         }
-        if(teamMemberStudyInfo.getShoolName()==null ||teamMemberStudyInfo.getMajor() == null||
-                teamMemberStudyInfo.getDegree() == null || teamMemberStudyInfo.getStartDate() ==null||
+        if(StringUtils.isEmpty(teamMemberStudyInfo.getShoolName()) ||StringUtils.isEmpty(teamMemberStudyInfo.getMajor())||
+                StringUtils.isEmpty(teamMemberStudyInfo.getDegree()) || teamMemberStudyInfo.getStartDate() ==null||
                 teamMemberStudyInfo.getEndDate() == null ){
             messageInfo.setMessage("必填项未填写完整!");
             messageInfo.setStatus(10001);
             return messageInfo;
         }
-        if(teamMemberStudyInfo.getDescrip() !=null && teamMemberStudyInfo.getDescrip().length()>150){
+        if(StringUtils.isEmpty(teamMemberStudyInfo.getDescrip()) && teamMemberStudyInfo.getDescrip().length()>150){
             messageInfo.setMessage("详情描述超出限制长度!");
             messageInfo.setStatus(10001);
             return messageInfo;
@@ -69,14 +70,14 @@ public class TeamStudyController {
             messageInfo.setMessage("id缺失！");
             return messageInfo;
         }
-        if(teamMemberStudyInfo.getShoolName()==null ||teamMemberStudyInfo.getMajor() == null||
-                teamMemberStudyInfo.getDegree() == null || teamMemberStudyInfo.getStartDate() ==null||
+        if(StringUtils.isEmpty(teamMemberStudyInfo.getShoolName()) ||StringUtils.isEmpty(teamMemberStudyInfo.getMajor())||
+                StringUtils.isEmpty(teamMemberStudyInfo.getDegree()) || teamMemberStudyInfo.getStartDate() ==null||
                 teamMemberStudyInfo.getEndDate() == null ){
             messageInfo.setMessage("必填项未填写完整!");
             messageInfo.setStatus(10001);
             return messageInfo;
         }
-        if(teamMemberStudyInfo.getDescrip() !=null && teamMemberStudyInfo.getDescrip().length()>150){
+        if(StringUtils.isEmpty(teamMemberStudyInfo.getDescrip()) && teamMemberStudyInfo.getDescrip().length()>150){
             messageInfo.setMessage("详情描述超出限制长度!");
             messageInfo.setStatus(10001);
             return messageInfo;

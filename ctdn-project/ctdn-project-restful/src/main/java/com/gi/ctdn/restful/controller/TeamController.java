@@ -6,6 +6,7 @@ import com.gi.ctdn.biz.TeamMembersBiz;
 import com.gi.ctdn.pojo.TeamMembersInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,10 +33,10 @@ public class TeamController {
     @ResponseBody
     public MessageInfo<Long> createTeamMemer(@RequestBody TeamMembersInfo teamMembersInfo){
         MessageInfo<Long> messageInfo = new MessageInfo<>();
-        if(teamMembersInfo.getProjectId() == null || teamMembersInfo.getAvatar()== null ||
-                teamMembersInfo.getName() == null ||teamMembersInfo.getSex() == null||
-                teamMembersInfo.getEmail() == null || teamMembersInfo.getPhone() == null||
-                teamMembersInfo.getInfo() == null ){
+        if(teamMembersInfo.getProjectId() == null || StringUtils.isEmpty(teamMembersInfo.getAvatar()) ||
+                StringUtils.isEmpty(teamMembersInfo.getName())||
+                StringUtils.isEmpty(teamMembersInfo.getEmail())|| StringUtils.isEmpty(teamMembersInfo.getPhone())||
+                StringUtils.isEmpty(teamMembersInfo.getInfo())){
             messageInfo.setStatus(10001);
             messageInfo.setMessage("必填项未填写完整!");
             return messageInfo;
@@ -58,10 +59,10 @@ public class TeamController {
             messageInfo.setMessage("id缺失!");
             return messageInfo;
         }
-        if(teamMembersInfo.getProjectId() == null || teamMembersInfo.getAvatar()== null ||
-                teamMembersInfo.getName() == null ||teamMembersInfo.getSex() == null||
-                teamMembersInfo.getEmail() == null || teamMembersInfo.getPhone() == null||
-                teamMembersInfo.getInfo() == null ){
+        if(teamMembersInfo.getProjectId() == null || StringUtils.isEmpty(teamMembersInfo.getAvatar()) ||
+                StringUtils.isEmpty(teamMembersInfo.getName())||
+                StringUtils.isEmpty(teamMembersInfo.getEmail())|| StringUtils.isEmpty(teamMembersInfo.getPhone())||
+                StringUtils.isEmpty(teamMembersInfo.getInfo())){
 
             messageInfo.setStatus(10001);
             messageInfo.setMessage("必填项未填写完整!");

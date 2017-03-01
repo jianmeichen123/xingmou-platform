@@ -1,14 +1,13 @@
 package com.gi.ctdn.restful.controller;
 
-import com.gi.ctdn.query.CompanysQueryInfo;
-import com.gi.xm.platform.view.common.MessageInfo;
 import com.gi.ctdn.biz.CompanysBiz;
 import com.gi.ctdn.biz.ProjectsBiz;
 import com.gi.ctdn.pojo.CompanysInfo;
 import com.gi.ctdn.pojo.ProjectsInfo;
-import jdk.nashorn.internal.ir.annotations.Reference;
+import com.gi.xm.platform.view.common.MessageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,9 +36,10 @@ public class CompanysController {
     public MessageInfo<Long> createCompany(@RequestBody CompanysInfo companysInfo){
         MessageInfo<Long> messageInfo = new MessageInfo<>();
         //验证表单必填项
-        if(companysInfo.getTitle()==null || companysInfo.getDistrictId() ==null || companysInfo.getDistrictSubId()==null
-                ||companysInfo.getDistrictName()==null ||companysInfo.getDistrictSubName() ==null
-                ||companysInfo.getEmployeeNumber() ==null || companysInfo.getFoundDate()==null || companysInfo.getRoundName()==null){
+
+        if(StringUtils.isEmpty(companysInfo.getTitle())|| companysInfo.getDistrictId() ==null || companysInfo.getDistrictSubId()==null
+                ||StringUtils.isEmpty(companysInfo.getDistrictName())||StringUtils.isEmpty(companysInfo.getDistrictSubName())
+                ||companysInfo.getEmployeeNumber() ==null || companysInfo.getFoundDate()==null || StringUtils.isEmpty(companysInfo.getRoundName())){
             messageInfo.setMessage("必填项未填写完整!");
             messageInfo.setStatus(10001);
             return messageInfo;
@@ -58,9 +58,9 @@ public class CompanysController {
     public MessageInfo<Long> updateCompany(@RequestBody CompanysInfo companysInfo){
         MessageInfo<Long> messageInfo = new MessageInfo<>();
         //验证表单必填项
-        if(companysInfo.getTitle()==null || companysInfo.getDistrictId() ==null || companysInfo.getDistrictSubId()==null
-                ||companysInfo.getDistrictName()==null ||companysInfo.getDistrictSubName() ==null
-                ||companysInfo.getEmployeeNumber() ==null || companysInfo.getFoundDate()==null || companysInfo.getRoundName()==null){
+        if(StringUtils.isEmpty(companysInfo.getTitle()) || companysInfo.getDistrictId() ==null || companysInfo.getDistrictSubId()==null
+                ||StringUtils.isEmpty(companysInfo.getDistrictName()) ||StringUtils.isEmpty(companysInfo.getDistrictSubName())
+                ||companysInfo.getEmployeeNumber() ==null || companysInfo.getFoundDate()==null || StringUtils.isEmpty(companysInfo.getRoundName())){
             messageInfo.setMessage("必填项未填写完整!");
             messageInfo.setStatus(10001);
             return messageInfo;

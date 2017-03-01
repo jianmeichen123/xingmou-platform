@@ -63,7 +63,6 @@
 			<if test="needStatus!=null"> need_status = #{needStatus,jdbcType=INTEGER},</if>
 			<if test="createdUid!=null"> created_uid = #{createdUid,jdbcType=BIGINT},</if>
 			<if test="createdUname!=null and createdUname!=''"> created_uname = #{createdUname,jdbcType=VARCHAR},</if>
-			<if test="addTime!=null"> add_time = #{addTime,jdbcType=TIMESTAMP},</if>
 			<if test="updateTime!=null"> update_time = #{updateTime,jdbcType=BIGINT}</if>
 		</set>
 		<where>

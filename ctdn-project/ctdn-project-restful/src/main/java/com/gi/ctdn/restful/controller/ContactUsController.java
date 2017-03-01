@@ -6,6 +6,7 @@ import com.gi.ctdn.biz.ProjectContactBiz;
 import com.gi.ctdn.pojo.ProjectContactInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,9 +34,9 @@ public class ContactUsController {
     public MessageInfo<Long> createCompany(@RequestBody ProjectContactInfo projectContactInfo){
         MessageInfo<Long> messageInfo = new MessageInfo<>();
         //验证表单必填项
-        if(projectContactInfo.getProjectId() == null || projectContactInfo.getContactRole()== null ||
-                projectContactInfo.getContactName() == null ||projectContactInfo.getContactPosition()== null ||
-                projectContactInfo.getContactEmail() == null || projectContactInfo.getContactPhone() == null){
+        if(projectContactInfo.getProjectId() == null || StringUtils.isEmpty(projectContactInfo.getContactRole()) ||
+                StringUtils.isEmpty(projectContactInfo.getContactName()) ||StringUtils.isEmpty(projectContactInfo.getContactPosition()) ||
+                StringUtils.isEmpty(projectContactInfo.getContactEmail()) || StringUtils.isEmpty(projectContactInfo.getContactPhone())){
 
             messageInfo.setStatus(10001);
             messageInfo.setMessage("必填项未填写完整!");
@@ -58,9 +59,9 @@ public class ContactUsController {
             return messageInfo;
         }
         //验证表单必填项
-        if(projectContactInfo.getProjectId() == null || projectContactInfo.getContactRole()== null ||
-                projectContactInfo.getContactName() == null ||projectContactInfo.getContactPosition()== null ||
-                projectContactInfo.getContactEmail() == null || projectContactInfo.getContactPhone() == null){
+        if(projectContactInfo.getProjectId() == null || StringUtils.isEmpty(projectContactInfo.getContactRole()) ||
+                StringUtils.isEmpty(projectContactInfo.getContactName()) ||StringUtils.isEmpty(projectContactInfo.getContactPosition()) ||
+                StringUtils.isEmpty(projectContactInfo.getContactEmail()) || StringUtils.isEmpty(projectContactInfo.getContactPhone())){
 
             messageInfo.setStatus(10001);
             messageInfo.setMessage("必填项未填写完整!");

@@ -1,10 +1,13 @@
 package com.gi.ctdn.restful.controller;
 
 import com.gi.ctdn.query.TeamMemberStudyQueryInfo;
+import com.gi.ctdn.util.DateUtil;
 import com.gi.xm.platform.view.common.MessageInfo;
 import com.gi.ctdn.biz.TeamMemberStudyBiz;
 import com.gi.ctdn.pojo.TeamMemberStudyInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,6 +18,7 @@ import java.util.List;
 /**
  * Created by zcy on 17-2-20.
  */
+@Controller
 @RequestMapping("teamStudy")
 public class TeamStudyController {
 
@@ -47,8 +51,6 @@ public class TeamStudyController {
             messageInfo.setStatus(10001);
             return messageInfo;
         }
-
-        teamMemberStudyInfo.setAddTime(new Date());
         messageInfo = teamMemberStudyBiz.createTeamMemberStudy(teamMemberStudyInfo);
         return messageInfo;
     }
@@ -79,7 +81,6 @@ public class TeamStudyController {
             messageInfo.setStatus(10001);
             return messageInfo;
         }
-        teamMemberStudyInfo.setUpdateTime(new Date());
         messageInfo = teamMemberStudyBiz.updateTeamMemberStudy(teamMemberStudyInfo);
         return messageInfo;
     }
@@ -89,9 +90,9 @@ public class TeamStudyController {
      * @param memberId　团队成员id
      * @return
      */
-    @RequestMapping("queryList")
+    @RequestMapping("queryList/{memberId}")
     @ResponseBody
-    public MessageInfo<List<TeamMemberStudyInfo>> query(Long memberId){
+    public MessageInfo<List<TeamMemberStudyInfo>> query(@PathVariable("memberId") Long memberId){
         MessageInfo<List<TeamMemberStudyInfo>> messageInfo = new MessageInfo<List<TeamMemberStudyInfo>>();
         if(memberId == null){
             messageInfo.setStatus(10001);
@@ -107,9 +108,9 @@ public class TeamStudyController {
      * @param id
      * @return
      */
-    @RequestMapping("deleteMemberStudy")
+    @RequestMapping("deleteMemberStudy/{id}")
     @ResponseBody
-    public MessageInfo deleteMember(Long id){
+    public MessageInfo deleteMember(@PathVariable("id") Long id){
         MessageInfo messageInfo = new MessageInfo();
         if(id == null){
             messageInfo.setStatus(10001);

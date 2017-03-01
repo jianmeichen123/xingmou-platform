@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.gi.com.gi.ctdn.dao.ProjectContactDAO">
+<mapper namespace="com.gi.ctdn.dao.ProjectContactDAO">
 	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.ProjectContactInfo">
-					<id column="id" property="id" jdbcType="BIGINT" />
-								<result column="project_id" property="projectId" jdbcType="BIGINT" />
-								<result column="contact_name" property="contactName" jdbcType="VARCHAR" />
-								<result column="contact_position" property="contactPosition" jdbcType="VARCHAR" />
-								<result column="contact_email" property="contactEmail" jdbcType="VARCHAR" />
-								<result column="contact_phone" property="contactPhone" jdbcType="VARCHAR" />
-								<result column="contact_role" property="contactRole" jdbcType="VARCHAR" />
-								<result column="created_uid" property="createdUid" jdbcType="BIGINT" />
-								<result column="created_uname" property="createdUname" jdbcType="VARCHAR" />
-								<result column="add_time" property="addTime" jdbcType="BIGINT" />
-								<result column="update_time" property="updateTime" jdbcType="BIGINT" />
-						</resultMap>
+			<id column="id" property="id" jdbcType="BIGINT" />
+			<result column="project_id" property="projectId" jdbcType="BIGINT" />
+			<result column="contact_name" property="contactName" jdbcType="VARCHAR" />
+			<result column="contact_position" property="contactPosition" jdbcType="VARCHAR" />
+			<result column="contact_email" property="contactEmail" jdbcType="VARCHAR" />
+			<result column="contact_phone" property="contactPhone" jdbcType="VARCHAR" />
+			<result column="contact_role" property="contactRole" jdbcType="VARCHAR" />
+			<result column="created_uid" property="createdUid" jdbcType="BIGINT" />
+			<result column="created_uname" property="createdUname" jdbcType="VARCHAR" />
+			<result column="add_time" property="addTime" jdbcType="BIGINT" />
+			<result column="update_time" property="updateTime" jdbcType="BIGINT" />
+	</resultMap>
 
 
 	<insert id="insert" parameterType="com.gi.ctdn.pojo.ProjectContactInfo" useGeneratedKeys="true" keyProperty="id">
@@ -40,24 +40,43 @@
 			#{createdUid,jdbcType=BIGINT},
 			#{createdUname,jdbcType=VARCHAR},
 			#{addTime,jdbcType=BIGINT},
-			 UNIX_TIMESTAMP()
+			#{updateTime,jdbcType=BIGINT}
 		)
 	</insert>
 
+	<update id="update" parameterType="com.gi.ctdn.pojo.ProjectContactInfo" >
+		UPDATE  ctdn_project_contact
+		<set>
+			<if test="contactName!=null and contactName!=''"> contact_name = #{contactName,jdbcType=VARCHAR},</if>
+			<if test="contactPosition!=null and contactPosition!=''"> contact_position = #{contactPosition,jdbcType=VARCHAR},</if>
+			<if test="contactEmail!=null and contactEmail!=''"> contact_email = #{contactEmail,jdbcType=VARCHAR},</if>
+			<if test="contactPhone!=null and contactPhone!=''"> contact_phone = #{contactPhone,jdbcType=VARCHAR},</if>
+			<if test="contactRole!=null and contactRole!=''"> contact_role = #{contactRole,jdbcType=VARCHAR},</if>
+			<if test="createdUid!=null"> created_uid = #{createdUid,jdbcType=BIGINT},</if>
+			<if test="createdUname!=null and createdUname!=''"> created_uname = #{createdUname,jdbcType=VARCHAR},</if>
+			<if test="updateTime!=null"> update_time = #{updateTime,jdbcType=BIGINT}</if>
+		</set>
+		<where>
+			id = #{id,jdbcType=BIGINT}
+		</where>
+	</update>
+
 	<sql id="selectFields">
-	id,project_id,contact_name,contact_position,contact_email,contact_phone,contact_role,created_uid,created_uname,add_time,update_time
+	id,project_id,contact_name,contact_position,contact_email,contact_phone,contact_role,created_uid,created_uname
 	</sql>
-	
+
 	
 
-	<select id="queryProjectContact" resultMap="BaseResultMap" parameterType="com.gi.ctdn.query.ProjectContactQueryInfo">
+	<select id="queryByProjectId" resultMap="BaseResultMap" parameterType="java.lang.Long">
 		SELECT
-		<include refid="selectFields" />
-		FROM ctdn_project_contact
-		<include refid="queryWhereAndOrder" />
+			<include refid="selectFields" />
+		FROM
+			ctdn_project_contact
+		WHERE
+			project_id = #{projectId,jdbcType=BIGINT}
 	</select>
 
-	<sql id="queryWhereAndOrder">
+	<!--<sql id="queryWhereAndOrder">
 		<where>
 					<if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>
 								<if test="projectId!=null">AND project_id = #{projectId,jdbcType=BIGINT}</if>
@@ -76,6 +95,6 @@
 			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
 			<otherwise>order by id desc</otherwise>
 		</choose>
-	</sql>
+	</sql>-->
 
 </mapper>

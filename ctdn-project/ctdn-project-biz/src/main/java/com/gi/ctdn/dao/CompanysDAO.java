@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface CompanysDAO {
 	
-    Long insert(CompanysInfo companys);
+    int insert(CompanysInfo companys);
 
     Long update(CompanysInfo companys);
 
-    CompanysInfo queryByProjectId(Long projectId);
+    CompanysInfo queryById(Long projectId);
 }

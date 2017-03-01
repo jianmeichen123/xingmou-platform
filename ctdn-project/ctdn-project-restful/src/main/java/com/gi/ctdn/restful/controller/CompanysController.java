@@ -9,6 +9,7 @@ import com.gi.ctdn.pojo.ProjectsInfo;
 import jdk.nashorn.internal.ir.annotations.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -43,16 +44,6 @@ public class CompanysController {
             messageInfo.setStatus(10001);
             return messageInfo;
         }
-        //根据projectId 查询 companyId 再update
-        Long projectId = companysInfo.getProjectId();
-        ProjectsInfo projectsInfo = projectsBiz.queryById(projectId).getData();
-        if(projectsInfo == null || projectsInfo.getCompanyId()==null){
-            messageInfo.setMessage("projectId 错误！");
-            messageInfo.setStatus(10001);
-            return messageInfo;
-        }
-        Long id = projectsInfo.getCompanyId();
-        companysInfo.setId(id);
         messageInfo = companysBiz.update(companysInfo);
         return messageInfo;
     }
@@ -74,26 +65,26 @@ public class CompanysController {
             messageInfo.setStatus(10001);
             return messageInfo;
         }
-        Long projectId = companysInfo.getProjectId();
-        ProjectsInfo projectsInfo = projectsBiz.queryById(projectId).getData();
-        if(projectsInfo == null || projectsInfo.getCompanyId()==null){
-            messageInfo.setMessage("projectId或companyId缺失！");
-            messageInfo.setStatus(10001);
-        }
-        Long comanyId = projectsInfo.getCompanyId();
         companysBiz.update(companysInfo);
         return messageInfo;
     }
 
-    @RequestMapping("queryByProjectId")
+    @RequestMapping("queryByProjectId/{projectId}")
     @ResponseBody
-    public MessageInfo<CompanysInfo> queryByProjectId(Long projectId){
+    public MessageInfo<CompanysInfo> queryByProjectId(@PathVariable("projectId") Long projectId){
         MessageInfo<CompanysInfo> messageInfo = new MessageInfo<CompanysInfo>();
         if(null == projectId){
             messageInfo.setMessage("projectId 缺失！");
             messageInfo.setStatus(10001);
         }
-        CompanysInfo companysInfo = companysBiz.queryByProjectId(projectId).getData();
+        ProjectsInfo projectsInfo = projectsBiz.queryById(projectId).getData();
+        if(projectsInfo == null || projectsInfo.getCompanyId()==null){
+            messageInfo.setMessage("projectId错误或companyId缺失！");
+            messageInfo.setStatus(10001);
+            return messageInfo;
+        }
+        Long id = projectsInfo.getCompanyId();
+        CompanysInfo companysInfo = companysBiz.queryById(id).getData();
         if(null != companysInfo){
             messageInfo.setData(companysInfo);
         }

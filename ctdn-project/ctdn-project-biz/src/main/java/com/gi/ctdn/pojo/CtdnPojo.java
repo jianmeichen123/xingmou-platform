@@ -1,5 +1,7 @@
 package com.gi.ctdn.pojo;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -9,12 +11,12 @@ public class CtdnPojo {
     /**
      * @Fields addTime :
      */
-    private Date addTime;
+    private Long addTime;
 
     /**
      * @Fields updateTime :
      */
-    private Date updateTime;
+    private Long updateTime;
 
     /**
      * @Fields createdUid : 创建人id
@@ -32,20 +34,20 @@ public class CtdnPojo {
      */
     private Integer isDeleted;
 
-    public Date getAddTime() {
-        return addTime;
-    }
-
-    public void setAddTime(Date addTime) {
-        this.addTime = addTime;
-    }
-
-    public Date getUpdateTime() {
+    public Long getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Long getAddTime() {
+        return addTime;
+    }
+
+    public void setAddTime(Long addTime) {
+        this.addTime = addTime;
     }
 
     public Long getCreatedUid() {

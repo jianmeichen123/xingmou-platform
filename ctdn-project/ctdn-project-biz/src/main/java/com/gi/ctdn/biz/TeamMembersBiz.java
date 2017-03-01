@@ -9,6 +9,7 @@ import com.gi.ctdn.pojo.TeamMembersInfo;
 import com.gi.ctdn.query.TeamMemberJobQueryInfo;
 import com.gi.ctdn.query.TeamMemberStudyQueryInfo;
 import com.gi.ctdn.query.TeamMembersQueryInfo;
+import com.gi.ctdn.util.DateUtil;
 import com.gi.xm.platform.view.common.MessageInfo;
 import com.gi.xm.platform.view.common.QueryResultInfo;
 import com.github.pagehelper.PageHelper;
@@ -36,28 +37,33 @@ public class TeamMembersBiz  {
 	@Autowired
 	TeamMemberStudyBiz teamMemberStudyBiz;
 
-
-    public MessageInfo<Long> createTeamMembers(TeamMembersInfo teamMembers){
+    public MessageInfo<Long> createTeamMembers(TeamMembersInfo teamMembersInfo){
 		MessageInfo<Long> messageInfo = new MessageInfo<Long>();
 		try {
-			teamMembersDAO.insert( teamMembers );
-			messageInfo.setData(teamMembers.getId());
-
+			teamMembersInfo.setAddTime(DateUtil.getNow());
+			teamMembersInfo.setCreatedUid(teamMembersInfo.getCreatedUid());
+			teamMembersInfo.setCreatedUname(teamMembersInfo.getCreatedUname());
+			teamMembersDAO.insert( teamMembersInfo );
+			messageInfo.setData(teamMembersInfo.getId());
 		} catch (Exception e) {
 			LOGGER.error("createTeamMembers","创建TeamMembers失败", e);
+			messageInfo.setMessage("创建TeamMembers失败");
 			messageInfo.setStatus(10001);
 		}
 		return messageInfo;
 	}
 
-	public MessageInfo<Long> updateTeamMembers(TeamMembersInfo teamMembers){
+	public MessageInfo<Long> updateTeamMembers(TeamMembersInfo teamMembersInfo){
 		MessageInfo<Long> messageInfo = new MessageInfo<Long>();
 		try {
-			teamMembersDAO.update( teamMembers );
-			messageInfo.setData(teamMembers.getId());
+			teamMembersInfo.setUpdateTime(DateUtil.getNow());
+			teamMembersInfo.setCreatedUid(teamMembersInfo.getCreatedUid());
+			teamMembersInfo.setCreatedUname(teamMembersInfo.getCreatedUname());
+			teamMembersDAO.update( teamMembersInfo );
+			messageInfo.setData(teamMembersInfo.getId());
 
 		} catch (Exception e) {
-			LOGGER.error("createTeamMembers","创建TeamMembers失败", e);
+			LOGGER.error("updateTeamMembers","修改TeamMembers失败", e);
 			messageInfo.setStatus(10001);
 		}
 		return messageInfo;
@@ -68,7 +74,6 @@ public class TeamMembersBiz  {
 		MessageInfo<List<TeamMembersInfo>> messageInfo = new MessageInfo<List<TeamMembersInfo>>();
 		try {
 			List<TeamMembersInfo> teamMembersInfoList = teamMembersDAO.queryByProjectId( projectId );
-			List<Long> memberIdList = new ArrayList<Long>();
 			//通过memeberId 查询job study list
 			if(!teamMembersInfoList.isEmpty()){
 				for(TeamMembersInfo membersInfo:teamMembersInfoList){
@@ -86,23 +91,6 @@ public class TeamMembersBiz  {
 		return messageInfo;
 	}
 
-	public MessageInfo<QueryResultInfo<TeamMembersInfo>> queryTeamMembers(TeamMembersQueryInfo teamMembersQuery) {
-		MessageInfo<QueryResultInfo<TeamMembersInfo>> messageInfo = new MessageInfo<QueryResultInfo<TeamMembersInfo>>();
-		try {
-			QueryResultInfo<TeamMembersInfo> queryResult = new QueryResultInfo<TeamMembersInfo>();
-			PageHelper.startPage(teamMembersQuery.getPageIndex(), teamMembersQuery.getPageSize());
-			List<TeamMembersInfo> teamMembersList = teamMembersDAO.queryTeamMembers(teamMembersQuery);
-			PageInfo<TeamMembersInfo> pageInfo = new PageInfo<TeamMembersInfo>(teamMembersList);
-			queryResult.setPages(pageInfo.getPages());
-			queryResult.setTotal(pageInfo.getTotal());
-			queryResult.setRecords(teamMembersList);
-			messageInfo.setData(queryResult);
-		} catch (Exception e) {
-			LOGGER.error("queryTeamMembers", "分页查询TeamMembers失败", e);
-			messageInfo.setStatus(10001);
-		}
-		return messageInfo;
-	}
 
 	public MessageInfo deleteMember(Long id) {
 		MessageInfo messageInfo = new MessageInfo();

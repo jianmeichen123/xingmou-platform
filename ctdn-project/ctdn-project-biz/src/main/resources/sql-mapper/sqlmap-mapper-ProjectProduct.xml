@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.gi.com.gi.ctdn.dao.ProjectProductDAO">
+<mapper namespace="com.gi.ctdn.dao.ProjectProductDAO">
 	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.ProjectProductInfo">
-					<id column="id" property="id" jdbcType="BIGINT" />
-								<result column="project_id" property="projectId" jdbcType="BIGINT" />
-								<result column="address_type" property="addressType" jdbcType="VARCHAR" />
-								<result column="product_name" property="productName" jdbcType="VARCHAR" />
-								<result column="product_address" property="productAddress" jdbcType="VARCHAR" />
-								<result column="add_time" property="addTime" jdbcType="BIGINT" />
-								<result column="update_time" property="updateTime" jdbcType="BIGINT" />
-						</resultMap>
+			<id column="id" property="id" jdbcType="BIGINT" />
+			<result column="project_id" property="projectId" jdbcType="BIGINT" />
+			<result column="address_type" property="addressType" jdbcType="VARCHAR" />
+			<result column="product_name" property="productName" jdbcType="VARCHAR" />
+			<result column="product_address" property="productAddress" jdbcType="VARCHAR" />
+			<result column="add_time" property="addTime" jdbcType="BIGINT" />
+			<result column="update_time" property="updateTime" jdbcType="BIGINT" />
+	</resultMap>
 
 
 	<insert id="insert" parameterType="com.gi.ctdn.pojo.ProjectProductInfo" useGeneratedKeys="true" keyProperty="id">
@@ -28,24 +28,39 @@
 			#{productName,jdbcType=VARCHAR},
 			#{productAddress,jdbcType=VARCHAR},
 			#{addTime,jdbcType=BIGINT},
-			 UNIX_TIMESTAMP()
+			#{updateTime,jdbcType=BIGINT}
 		)
 	</insert>
 
 	<sql id="selectFields">
-	id,project_id,address_type,product_name,product_address,add_time,update_time
+		id,project_id,address_type,product_name,product_address
 	</sql>
 	
 	
 
-	<select id="queryProjectProduct" resultMap="BaseResultMap" parameterType="com.gi.ctdn.query.ProjectProductQueryInfo">
+	<select id="queryListByProjectId" resultMap="BaseResultMap" parameterType="java.lang.Long">
 		SELECT
-		<include refid="selectFields" />
-		FROM ctdn_project_product
-		<include refid="queryWhereAndOrder" />
+			<include refid="selectFields" />
+		FROM
+			ctdn_project_product
+		WHERE
+			project_id = #{projectId,jdbcType=BIGINT}
+		AND
+			is_deleted = 0
 	</select>
 
-	<sql id="queryWhereAndOrder">
+	<update id = "deleteByProjectId" parameterType="java.lang.Long">
+		UPDATE  ctdn_project_product
+		<set>
+			is_deleted = 1
+		</set>
+		<where>
+			project_id = #{projectId,jdbcType=BIGINT}
+			and is_deleted = 0
+		</where>
+	</update>
+
+	<!--<sql id="queryWhereAndOrder">
 		<where>
 					<if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>
 								<if test="projectId!=null">AND project_id = #{projectId,jdbcType=BIGINT}</if>
@@ -60,6 +75,5 @@
 			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
 			<otherwise>order by id desc</otherwise>
 		</choose>
-	</sql>
-
+	</sql>-->
 </mapper>

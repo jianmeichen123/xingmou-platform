@@ -8,11 +8,13 @@ import java.util.List;
 
 public interface ProjectsDAO {
 	
-    Long insert(ProjectsInfo projects);
+    int insert(ProjectsInfo projects);
+
+    int update(ProjectsInfo projects);
 
     List<ProjectsInfo> queryProjects(ProjectsQueryInfo projectsQuery);
 
-    ProjectsInfo getById(Long id);
+    ProjectsInfo queryById(Long id);
 
-    Long update(ProjectsInfo projects);
+    Integer deteleById(Long id);
 }

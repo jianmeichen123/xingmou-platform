@@ -46,12 +46,19 @@ public class ProjectsQueryInfo extends QueryInfo {
 	private String createdUname;
 	
 	private Integer status;
-	
+
 	private Long addTime;
-	
+
 	private Long updateTime;
+	
+	private Long startLongTime;
+	
+	private Long endLongTime;
 		
-    
+    private String startDate;
+
+	private String endDate;
+
 	public Long getId(){
 		return id;
 	}
@@ -187,20 +194,52 @@ public class ProjectsQueryInfo extends QueryInfo {
 	public void setStatus(Integer status){
 		this.status = status;
 	}
-    
-	public Long getAddTime(){
+
+	public Long getStartLongTime() {
+		return startLongTime;
+	}
+
+	public void setStartLongTime(Long startLongTime) {
+		this.startLongTime = startLongTime;
+	}
+
+	public Long getEndLongTime() {
+		return endLongTime;
+	}
+
+	public void setEndLongTime(Long endLongTime) {
+		this.endLongTime = endLongTime;
+	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+	public Long getAddTime() {
 		return addTime;
 	}
-	
-	public void setAddTime(Long addTime){
+
+	public void setAddTime(Long addTime) {
 		this.addTime = addTime;
 	}
-    
-	public Long getUpdateTime(){
+
+	public Long getUpdateTime() {
 		return updateTime;
 	}
-	
-	public void setUpdateTime(Long updateTime){
+
+	public void setUpdateTime(Long updateTime) {
 		this.updateTime = updateTime;
 	}
-    }
+}

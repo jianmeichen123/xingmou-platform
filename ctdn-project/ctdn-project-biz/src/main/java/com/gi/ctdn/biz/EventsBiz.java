@@ -4,6 +4,8 @@ package com.gi.ctdn.biz;
 
 import com.gi.ctdn.dao.EventsDAO;
 import com.gi.ctdn.pojo.EventsInfo;
+import com.gi.ctdn.query.EventsQueryInfo;
+import com.gi.ctdn.util.DateUtil;
 import com.gi.xm.platform.view.common.MessageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,11 +25,12 @@ public class EventsBiz  {
 
 
 
-    public MessageInfo<Long> createEvents(EventsInfo events){
+    public MessageInfo<Long> createEvents(EventsInfo eventsInfo){
 		MessageInfo<Long> messageInfo = new MessageInfo<Long>();
 		try {
-			eventsDAO.insert( events );
-			messageInfo.setData(events.getId());
+			eventsInfo.setAddTime(DateUtil.getNow());
+			eventsDAO.insert( eventsInfo );
+			messageInfo.setData(eventsInfo.getId());
 
 		} catch (Exception e) {
 			LOGGER.error("createEvents","创建Events失败", e);
@@ -36,14 +39,14 @@ public class EventsBiz  {
 		return messageInfo;
 	}
 
-	public MessageInfo<Long> updateEvents(EventsInfo events){
+	public MessageInfo<Long> updateEvents(EventsInfo eventsInfo){
 		MessageInfo<Long> messageInfo = new MessageInfo<Long>();
 		try {
-			eventsDAO.insert( events );
-			messageInfo.setData(events.getId());
-
+			eventsInfo.setUpdateTime(DateUtil.getNow());
+			eventsDAO.update( eventsInfo );
+			messageInfo.setData(eventsInfo.getId());
 		} catch (Exception e) {
-			LOGGER.error("createEvents","修Events失败", e);
+			LOGGER.error("updateEvents","修Events失败", e);
 			messageInfo.setStatus(10001);
 		}
 		return messageInfo;
@@ -53,7 +56,7 @@ public class EventsBiz  {
 
 		MessageInfo<List<EventsInfo>> messageInfo = new MessageInfo<List<EventsInfo>>();
 		try {
-			List<EventsInfo> eventsList = eventsDAO.selectByProjectId(projectId);
+			List<EventsInfo> eventsList = eventsDAO.queryByProjectId(projectId);
 			messageInfo.setData(eventsList);
 		} catch (Exception e) {
 			LOGGER.error("getListByProjectId","查询Events失败", e);
@@ -76,4 +79,17 @@ public class EventsBiz  {
 		return messageInfo;
 	}
 
+	public MessageInfo<List<EventsInfo>> queryListByProjects(List<Long> idList) {
+		MessageInfo<List<EventsInfo>> messageInfo = new MessageInfo<List<EventsInfo>>();
+		try {
+			EventsQueryInfo eventQuery = new EventsQueryInfo();
+			eventQuery.setProjectIdList(idList);
+			List<EventsInfo> eventList = eventsDAO.queryListByProjects(eventQuery);
+			messageInfo.setData(eventList);
+		} catch (Exception e) {
+			LOGGER.error("queryListByProjects", "查询Events失败", e);
+			messageInfo.setStatus(10001);
+		}
+		return messageInfo;
+	}
 }

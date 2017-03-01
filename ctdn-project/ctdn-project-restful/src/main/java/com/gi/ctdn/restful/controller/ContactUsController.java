@@ -1,9 +1,12 @@
 package com.gi.ctdn.restful.controller;
 
+import com.gi.ctdn.util.DateUtil;
 import com.gi.xm.platform.view.common.MessageInfo;
 import com.gi.ctdn.biz.ProjectContactBiz;
 import com.gi.ctdn.pojo.ProjectContactInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,6 +16,8 @@ import java.util.Date;
 /**
  * Created by zcy on 17-2-20.
  */
+@Controller
+@RequestMapping("contactUs")
 public class ContactUsController {
 
     @Autowired
@@ -36,7 +41,6 @@ public class ContactUsController {
             messageInfo.setMessage("必填项未填写完整!");
             return messageInfo;
         }
-        projectContactInfo.setAddTime(new Date());
         messageInfo = projectContactBiz.createProjectContact(projectContactInfo);
         return messageInfo;
     }
@@ -48,7 +52,7 @@ public class ContactUsController {
     @ResponseBody
     public MessageInfo<Long> updateContact(@RequestBody ProjectContactInfo projectContactInfo){
         MessageInfo<Long> messageInfo = new MessageInfo<>();
-        if(null != projectContactInfo.getProjectId() ){
+        if(null == projectContactInfo.getProjectId() ){
             messageInfo.setStatus(10001);
             messageInfo.setMessage("project id 缺失!");
             return messageInfo;
@@ -62,7 +66,7 @@ public class ContactUsController {
             messageInfo.setMessage("必填项未填写完整!");
             return messageInfo;
         }
-        projectContactInfo.setUpdateTime(new Date());
+
         messageInfo = projectContactBiz.updateProjectContact(projectContactInfo);
         return messageInfo;
     }
@@ -70,9 +74,9 @@ public class ContactUsController {
     /**
      * 查询projectId下的联系我们
      */
-    @RequestMapping("queryByProjectId")
+    @RequestMapping("queryByProjectId/{projectId}")
     @ResponseBody
-    public MessageInfo<ProjectContactInfo> queryByProjectId(Long projectId){
+    public MessageInfo<ProjectContactInfo> queryByProjectId(@PathVariable("projectId") Long projectId){
         MessageInfo<ProjectContactInfo> messageInfo = new MessageInfo<ProjectContactInfo>();
         if(projectId == null ){
             messageInfo.setStatus(10001);

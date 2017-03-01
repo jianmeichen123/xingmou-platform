@@ -1,6 +1,7 @@
 package com.gi.ctdn.pojo;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 public class ProjectsInfo extends CtdnPojo implements Serializable {
@@ -89,6 +90,26 @@ public class ProjectsInfo extends CtdnPojo implements Serializable {
 	 * @Fields projectPicList
 	 */
 	private List<String> projectPicList;
+
+	/**
+	 * @Fields 最新融资轮次
+     */
+	private String newestRoundName;
+
+	/**
+	 * @Fields 最新融资时间
+     */
+	private Date newestInvestDate;
+
+	/**
+	 *  @Fields 融资金额单位
+	 */
+	private String currentName;
+
+	/**
+	 * @Fields 最新融资金额
+	 */
+	private Long newestEventMoney;
 
 	public Long getId(){
 		return id;
@@ -216,5 +237,37 @@ public class ProjectsInfo extends CtdnPojo implements Serializable {
 
 	public void setProjectPicList(List<String> projectPicList) {
 		this.projectPicList = projectPicList;
+	}
+
+	public String getNewestRoundName() {
+		return newestRoundName;
+	}
+
+	public void setNewestRoundName(String newestRoundName) {
+		this.newestRoundName = newestRoundName;
+	}
+
+	public Date getNewestInvestDate() {
+		return newestInvestDate;
+	}
+
+	public void setNewestInvestDate(Date newestInvestDate) {
+		this.newestInvestDate = newestInvestDate;
+	}
+
+	public Long getNewestEventMoney() {
+		return newestEventMoney;
+	}
+
+	public void setNewestEventMoney(Long newestEventMoney) {
+		this.newestEventMoney = newestEventMoney;
+	}
+
+	public void setCurrentName(String currentName) {
+		this.currentName = currentName;
+	}
+
+	public String getCurrentName() {
+		return currentName;
 	}
 }

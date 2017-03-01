@@ -27,6 +27,8 @@ public class CompanysQueryInfo extends QueryInfo {
 	private Integer employeeNumber;
 	
 	private Date foundDate;
+
+	private Integer needStatus;
 	
 	private Integer roundId;
 	
@@ -140,5 +142,13 @@ public class CompanysQueryInfo extends QueryInfo {
 
 	public void setProjectId(Long projectId) {
 		this.projectId = projectId;
+	}
+
+	public void setNeedStatus(Integer needStatus) {
+		this.needStatus = needStatus;
+	}
+
+	public Integer getNeedStatus() {
+		return needStatus;
 	}
 }

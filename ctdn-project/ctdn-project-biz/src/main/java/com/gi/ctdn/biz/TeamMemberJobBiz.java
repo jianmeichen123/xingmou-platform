@@ -6,6 +6,7 @@ package com.gi.ctdn.biz;
 import com.gi.ctdn.dao.TeamMemberJobDAO;
 import com.gi.ctdn.pojo.TeamMemberJobInfo;
 import com.gi.ctdn.query.TeamMemberJobQueryInfo;
+import com.gi.ctdn.util.DateUtil;
 import com.gi.xm.platform.view.common.MessageInfo;
 import com.gi.xm.platform.view.common.QueryResultInfo;
 import com.github.pagehelper.PageHelper;
@@ -28,16 +29,16 @@ public class TeamMemberJobBiz  {
 
 
 
-    public MessageInfo<Long> createTeamMemberJob(TeamMemberJobInfo teamMemberJob){
+    public MessageInfo<Long> createTeamMemberJob(TeamMemberJobInfo teamMemberJobInfo){
 		MessageInfo<Long> messageInfo = new MessageInfo<Long>();
 		try {
-
-			teamMemberJobDAO.insert( teamMemberJob );
-			messageInfo.setData(teamMemberJob.getId());
-
+			teamMemberJobInfo.setAddTime(DateUtil.getNow());
+			teamMemberJobDAO.insert( teamMemberJobInfo );
+			messageInfo.setData(teamMemberJobInfo.getId());
 		} catch (Exception e) {
 			LOGGER.error("createTeamMemberJob","创建TeamMemberJob失败", e);
 			messageInfo.setStatus(10001);
+			messageInfo.setMessage("失败");
 		}
 		return messageInfo;
 	}
@@ -45,13 +46,13 @@ public class TeamMemberJobBiz  {
 	public MessageInfo<Long> updateTeamMemberJob(TeamMemberJobInfo teamMemberJob){
 		MessageInfo<Long> messageInfo = new MessageInfo<Long>();
 		try {
-
+			teamMemberJob.setUpdateTime(DateUtil.getNow());
 			teamMemberJobDAO.update( teamMemberJob );
 			messageInfo.setData(teamMemberJob.getId());
-
 		} catch (Exception e) {
 			LOGGER.error("updateTeamMemberJob","修改TeamMemberJob失败", e);
 			messageInfo.setStatus(10001);
+			messageInfo.setMessage("失败");
 		}
 		return messageInfo;
 	}
@@ -80,21 +81,4 @@ public class TeamMemberJobBiz  {
 		return messageInfo;
 	}
 
-	public MessageInfo<QueryResultInfo<TeamMemberJobInfo>> queryTeamMemberJob(TeamMemberJobQueryInfo teamMemberJobQuery) {
-		MessageInfo<QueryResultInfo<TeamMemberJobInfo>> messageInfo = new MessageInfo<QueryResultInfo<TeamMemberJobInfo>>();
-		try {
-			QueryResultInfo<TeamMemberJobInfo> queryResult = new QueryResultInfo<TeamMemberJobInfo>();
-			PageHelper.startPage(teamMemberJobQuery.getPageIndex(), teamMemberJobQuery.getPageSize());
-			List<TeamMemberJobInfo> teamMemberJobList = teamMemberJobDAO.queryTeamMemberJob(teamMemberJobQuery);
-			PageInfo<TeamMemberJobInfo> pageInfo = new PageInfo<TeamMemberJobInfo>(teamMemberJobList);
-			queryResult.setPages(pageInfo.getPages());
-			queryResult.setTotal(pageInfo.getTotal());
-			queryResult.setRecords(teamMemberJobList);
-			messageInfo.setData(queryResult);
-		} catch (Exception e) {
-			LOGGER.error("queryTeamMemberJob", "分页查询TeamMemberJob失败", e);
-			messageInfo.setStatus(10001);
-		}
-		return messageInfo;
-	}
 }

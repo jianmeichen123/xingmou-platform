@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.gi.com.gi.ctdn.dao.TeamMembersDAO">
+<mapper namespace="com.gi.ctdn.dao.TeamMembersDAO">
 	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.TeamMembersInfo">
 					<id column="id" property="id" jdbcType="BIGINT" />
 								<result column="project_id" property="projectId" jdbcType="BIGINT" />
@@ -46,24 +46,66 @@
 			#{createdUid,jdbcType=BIGINT},
 			#{createdUname,jdbcType=VARCHAR},
 			#{addTime,jdbcType=BIGINT},
-			 UNIX_TIMESTAMP()
+			#{updateTime,jdbcType=BIGINT}
 		)
 	</insert>
 
-	<sql id="selectFields">
-	id,project_id,avatar,name,sex,email,phone,info,is_founder,created_uid,created_uname,add_time,update_time
-	</sql>
-	
-	
+	<update id="update" parameterType="com.gi.ctdn.pojo.TeamMembersInfo" >
+		UPDATE  ctdn_team_members
+		<set>
+			<if test="id!=null"> id = #{id,jdbcType=BIGINT},</if>
+			<if test="projectId!=null"> project_id = #{projectId,jdbcType=BIGINT},</if>
+			<if test="avatar!=null and avatar!=''"> avatar = #{avatar,jdbcType=VARCHAR},</if>
+			<if test="name!=null and name!=''"> name = #{name,jdbcType=VARCHAR},</if>
+			<if test="sex!=null and sex!=''"> sex = #{sex,jdbcType=VARCHAR},</if>
+			<if test="email!=null and email!=''"> email = #{email,jdbcType=VARCHAR},</if>
+			<if test="phone!=null and phone!=''"> phone = #{phone,jdbcType=VARCHAR},</if>
+			<if test="info!=null and info!=''"> info = #{info,jdbcType=VARCHAR},</if>
+			<if test="isFounder!=null"> is_founder = #{isFounder,jdbcType=INTEGER},</if>
+			<if test="createdUid!=null"> created_uid = #{createdUid,jdbcType=BIGINT},</if>
+			<if test="createdUname!=null and createdUname!=''"> created_uname = #{createdUname,jdbcType=VARCHAR},</if>
+			<if test="isDeleted!=null"> is_deleted = #{isDeleted,jdbcType=INTEGER},</if>
+			<if test="updateTime!=null"> update_time = #{updateTime,jdbcType=BIGINT}</if>
+		</set>
+		<where>
+			id = #{id,jdbcType=BIGINT}
+		</where>
+	</update>
 
-	<select id="queryTeamMembers" resultMap="BaseResultMap" parameterType="com.gi.ctdn.query.TeamMembersQueryInfo">
+	<update id ="delete" parameterType="java.lang.Long">
+		UPDATE ctdn_team_members
+		<set>
+			is_deleted = 1
+		</set>
+		<where>
+			 id = #{id,jdbcType=BIGINT}
+		</where>
+	</update>
+
+	<sql id="selectFields">
+	id,project_id,avatar,name,sex,email,phone,info,is_founder,created_uid,created_uname
+	</sql>
+
+	<select id="queryById" resultMap="BaseResultMap" parameterType="java.lang.Long">
 		SELECT
-		<include refid="selectFields" />
-		FROM ctdn_team_members
-		<include refid="queryWhereAndOrder" />
+			<include refid="selectFields" />
+		FROM
+			ctdn_team_members
+		WHERE
+			id = #{id,jdbcType=BIGINT}
 	</select>
 
-	<sql id="queryWhereAndOrder">
+	<select id="queryByProjectId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		SELECT
+			<include refid="selectFields" />
+		FROM
+			ctdn_team_members
+		WHERE
+			project_id = #{projectId,jdbcType=BIGINT}
+		AND is_deleted = 0
+	</select>
+
+	<!--<sql id="queryWhereAndOrder">
 		<where>
 					<if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>
 								<if test="projectId!=null">AND project_id = #{projectId,jdbcType=BIGINT}</if>
@@ -84,6 +126,6 @@
 			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
 			<otherwise>order by id desc</otherwise>
 		</choose>
-	</sql>
+	</sql>-->
 
 </mapper>

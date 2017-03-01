@@ -1,9 +1,12 @@
 package com.gi.ctdn.restful.controller;
 
+import com.gi.ctdn.util.DateUtil;
 import com.gi.xm.platform.view.common.MessageInfo;
 import com.gi.ctdn.biz.TeamMembersBiz;
 import com.gi.ctdn.pojo.TeamMembersInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,6 +17,8 @@ import java.util.List;
 /**
  * Created by zcy on 17-2-20.
  */
+@Controller
+@RequestMapping("teamMembers")
 public class TeamController {
     @Autowired
     private TeamMembersBiz teamMembersBiz;
@@ -31,14 +36,10 @@ public class TeamController {
                 teamMembersInfo.getName() == null ||teamMembersInfo.getSex() == null||
                 teamMembersInfo.getEmail() == null || teamMembersInfo.getPhone() == null||
                 teamMembersInfo.getInfo() == null ){
-
             messageInfo.setStatus(10001);
             messageInfo.setMessage("必填项未填写完整!");
             return messageInfo;
         }
-        teamMembersInfo.setAddTime(new Date());
-        teamMembersInfo.setCreatedUid(teamMembersInfo.getCreatedUid());
-        teamMembersInfo.setCreatedUname(teamMembersInfo.getCreatedUname());
         messageInfo = teamMembersBiz.createTeamMembers(teamMembersInfo);
         return messageInfo;
     }
@@ -66,9 +67,6 @@ public class TeamController {
             messageInfo.setMessage("必填项未填写完整!");
             return messageInfo;
         }
-        teamMembersInfo.setUpdateTime(new Date());
-        teamMembersInfo.setCreatedUid(teamMembersInfo.getCreatedUid());
-        teamMembersInfo.setCreatedUname(teamMembersInfo.getCreatedUname());
         messageInfo = teamMembersBiz.updateTeamMembers(teamMembersInfo);
         return messageInfo;
     }
@@ -78,9 +76,9 @@ public class TeamController {
      * @param projectId
      * @return
      */
-    @RequestMapping("queryList")
+    @RequestMapping("queryList/{projectId}")
     @ResponseBody
-    public MessageInfo<List<TeamMembersInfo>> query(Long projectId){
+    public MessageInfo<List<TeamMembersInfo>> query(@PathVariable("projectId") Long projectId){
         MessageInfo<List<TeamMembersInfo>> messageInfo = new MessageInfo<List<TeamMembersInfo>>();
         if(projectId == null){
             messageInfo.setStatus(10001);
@@ -91,9 +89,9 @@ public class TeamController {
         return  messageInfo;
     }
 
-    @RequestMapping("queryOneMember")
+    @RequestMapping("queryOneMember/{id}")
     @ResponseBody
-    public MessageInfo<TeamMembersInfo> queryOneMember(Long id){
+    public MessageInfo<TeamMembersInfo> queryOneMember(@PathVariable("id") Long id){
         MessageInfo<TeamMembersInfo> messageInfo = new MessageInfo<TeamMembersInfo>();
         if(id == null){
             messageInfo.setStatus(10001);
@@ -108,9 +106,9 @@ public class TeamController {
      * @param id
      * @return
      */
-    @RequestMapping("deleteMember")
+    @RequestMapping("deleteMember/{id}")
     @ResponseBody
-    public MessageInfo deleteMember(Long id){
+    public MessageInfo deleteMember(@PathVariable("id") Long id){
         MessageInfo messageInfo = new MessageInfo();
         if(id == null){
             messageInfo.setStatus(10001);

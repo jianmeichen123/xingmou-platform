@@ -1,10 +1,13 @@
 package com.gi.ctdn.restful.controller;
 
 import com.gi.ctdn.query.TeamMemberJobQueryInfo;
+import com.gi.ctdn.util.DateUtil;
 import com.gi.xm.platform.view.common.MessageInfo;
 import com.gi.ctdn.biz.TeamMemberJobBiz;
 import com.gi.ctdn.pojo.TeamMemberJobInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,6 +18,7 @@ import java.util.List;
 /**
  * Created by zcy on 17-2-20.
  */
+@Controller
 @RequestMapping("teamJob")
 public class TeamJobController {
 
@@ -46,8 +50,6 @@ public class TeamJobController {
             messageInfo.setStatus(10001);
             return messageInfo;
         }
-
-        teamMemberJobInfo.setAddTime(new Date());
         messageInfo = teamMemberJobBiz.createTeamMemberJob(teamMemberJobInfo);
         return messageInfo;
     }
@@ -77,7 +79,6 @@ public class TeamJobController {
             messageInfo.setStatus(10001);
             return messageInfo;
         }
-        teamMemberJobInfo.setUpdateTime(new Date());
         messageInfo = teamMemberJobBiz.updateTeamMemberJob(teamMemberJobInfo);
         return messageInfo;
     }
@@ -87,9 +88,9 @@ public class TeamJobController {
      * @param memberId　团队成员id
      * @return
      */
-    @RequestMapping("queryList")
+    @RequestMapping("queryList/{memberId}")
     @ResponseBody
-    public MessageInfo<List<TeamMemberJobInfo>> query(Long memberId){
+    public MessageInfo<List<TeamMemberJobInfo>> query(@PathVariable("memberId") Long memberId){
         MessageInfo<List<TeamMemberJobInfo>> messageInfo = new MessageInfo<List<TeamMemberJobInfo>>();
         if(memberId == null){
             messageInfo.setStatus(10001);
@@ -105,9 +106,9 @@ public class TeamJobController {
      * @param id
      * @return
      */
-    @RequestMapping("deleteMemberJob")
+    @RequestMapping("deleteMemberJob/{id}")
     @ResponseBody
-    public MessageInfo deleteMember(Long id){
+    public MessageInfo deleteMember(@PathVariable("id") Long id){
         MessageInfo messageInfo = new MessageInfo();
         if(id == null){
             messageInfo.setStatus(10001);

@@ -20,10 +20,6 @@
             <groupId>com.gi</groupId>
             <artifactId>xingmou-api-common</artifactId>
         </dependency>
-        <!-- <dependency>
-             <groupId>com.gi</groupId>
-             <artifactId>xingmou-redis</artifactId>
-         </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jetty</artifactId>
@@ -32,7 +28,6 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
         </dependency>
-        <!--dubbox rst-->
 
         <!--dal -->
         <dependency>
@@ -112,7 +107,8 @@
                     <basePackage>com.gi.ctdn</basePackage>
                     <prefix>ctdn_</prefix>
                     <url>jdbc:mysql://10.9.130.142/xm</url>
-                    <tables>ctdn_project_product,ctdn_projects,</tables>
+                    <tables>ctdn_projects,ctdn_companys,ctdn_events,ctdn_files,ctdn_project_contact,
+                        ctdn_project_product,ctdn_team_member_job,ctdn_team_member_study,ctdn_team_members</tables>
                     <username>xmuser</username>
                     <password>qcDKywE7Ka52</password>
                     <output_root_dir>/home/zcy/tmp/</output_root_dir>

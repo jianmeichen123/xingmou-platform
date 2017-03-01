@@ -50,6 +50,11 @@ public class CompanysInfo extends  CtdnPojo implements Serializable {
 	 * @Fields foundDate : 公司成立时间
 	 */
 	private Date foundDate;
+
+	/**
+	 * @Fields needStatus:融资需求
+	 */
+	private Integer needStatus;
 			
 	/**
 	 * @Fields roundId : 融资阶段id
@@ -154,5 +159,12 @@ public class CompanysInfo extends  CtdnPojo implements Serializable {
 	public void setRoundName(String roundName){
 		this.roundName = roundName;
 	}
-    
-    }
+
+	public void setNeedStatus(Integer needStatus) {
+		this.needStatus = needStatus;
+	}
+
+	public Integer getNeedStatus() {
+		return needStatus;
+	}
+}

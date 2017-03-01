@@ -13,6 +13,4 @@ public interface ProjectContactDAO {
     Long update(ProjectContactInfo projectContact);
 
     ProjectContactInfo queryByProjectId(Long projectId);
-	
-    List<ProjectContactInfo> queryProjectContact(ProjectContactQueryInfo projectContactQuery);
 }

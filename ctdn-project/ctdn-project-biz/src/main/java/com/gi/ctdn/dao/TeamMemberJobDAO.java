@@ -15,9 +15,6 @@ public interface TeamMemberJobDAO {
 
     Integer delete(TeamMemberJobQueryInfo teamMemberJobQueryInfo);
 
-    List<TeamMemberJobInfo> queryTeamMemberStudy(TeamMemberJobQueryInfo teamMemberJobQueryInfo);
-
     List<TeamMemberJobInfo> queryByMemberId(Long memberId);
 
-    List<TeamMemberJobInfo> queryTeamMemberJob(TeamMemberJobQueryInfo teamMemberJobQuery);
 }

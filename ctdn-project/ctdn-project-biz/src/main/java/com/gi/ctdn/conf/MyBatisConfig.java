@@ -26,7 +26,8 @@ import java.util.Properties;
  */
 @Configuration()
 @EnableTransactionManagement(proxyTargetClass = true)
-@MapperScan(basePackages = {"com.gi.ctdn"})
+@MapperScan(basePackages = {"com.gi.ctdn.dao"})
+@Import(CtdnDBConf.class)
 public class MyBatisConfig implements TransactionManagementConfigurer {
 
     @Resource(name = "dataSourceCtdn")

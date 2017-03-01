@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.gi.com.gi.ctdn.dao.FilesDAO">
+<mapper namespace="com.gi.ctdn.dao.FilesDAO">
 	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.FilesInfo">
-					<id column="id" property="id" jdbcType="BIGINT" />
-								<result column="type" property="type" jdbcType="INTEGER" />
-								<result column="relation_id" property="relationId" jdbcType="BIGINT" />
-								<result column="file_path" property="filePath" jdbcType="VARCHAR" />
-								<result column="created_uid" property="createdUid" jdbcType="BIGINT" />
-								<result column="created_uname" property="createdUname" jdbcType="VARCHAR" />
-								<result column="add_time" property="addTime" jdbcType="BIGINT" />
-								<result column="update_time" property="updateTime" jdbcType="BIGINT" />
-						</resultMap>
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="type" property="type" jdbcType="INTEGER" />
+		<result column="relation_id" property="relationId" jdbcType="BIGINT" />
+		<result column="file_path" property="filePath" jdbcType="VARCHAR" />
+		<result column="created_uid" property="createdUid" jdbcType="BIGINT" />
+		<result column="created_uname" property="createdUname" jdbcType="VARCHAR" />
+		<result column="add_time" property="addTime" jdbcType="BIGINT" />
+		<result column="update_time" property="updateTime" jdbcType="BIGINT" />
+	</resultMap>
 
 
 	<insert id="insert" parameterType="com.gi.ctdn.pojo.FilesInfo" useGeneratedKeys="true" keyProperty="id">
@@ -31,24 +31,42 @@
 			#{createdUid,jdbcType=BIGINT},
 			#{createdUname,jdbcType=VARCHAR},
 			#{addTime,jdbcType=BIGINT},
-			 UNIX_TIMESTAMP()
+			#{updateTime,jdbcType=BIGINT}
 		)
 	</insert>
 
 	<sql id="selectFields">
-	id,type,relation_id,file_path,created_uid,created_uname,add_time,update_time
+	id,type,relation_id,file_path
 	</sql>
-	
-	
 
-	<select id="queryFiles" resultMap="BaseResultMap" parameterType="com.gi.ctdn.query.FilesQueryInfo">
+
+
+	<select id="queryListByProjectId" resultMap="BaseResultMap" parameterType="java.lang.Long">
 		SELECT
-		<include refid="selectFields" />
-		FROM ctdn_files
-		<include refid="queryWhereAndOrder" />
+			<include refid="selectFields" />
+		FROM
+			ctdn_files
+		WHERE
+			relation_id = #{projectId,jdbcType=BIGINT}
+		AND
+			type = 1
+		AND
+			is_deleted = 0
 	</select>
 
-	<sql id="queryWhereAndOrder">
+	<update id = "deleteByProjectId" parameterType="java.lang.Long">
+		UPDATE  ctdn_files
+		<set>
+			is_deleted = 1
+		</set>
+		<where>
+			relation_id = #{projectId,jdbcType=BIGINT}
+			and is_deleted = 0
+			and type = 1
+		</where>
+	</update>
+
+	<!--<sql id="queryWhereAndOrder">
 		<where>
 					<if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>
 								<if test="type!=null">AND type = #{type,jdbcType=INTEGER}</if>
@@ -64,6 +82,6 @@
 			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
 			<otherwise>order by id desc</otherwise>
 		</choose>
-	</sql>
+	</sql>-->
 
 </mapper>

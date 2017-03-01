@@ -4,6 +4,7 @@ package com.gi.ctdn.query;
 import com.gi.xm.platform.view.common.QueryInfo;
 
 import java.util.Date;
+import java.util.List;
 
 public class EventsQueryInfo extends QueryInfo {
 	
@@ -38,6 +39,8 @@ public class EventsQueryInfo extends QueryInfo {
 	private Long addTime;
 	
 	private Long updateTime;
+
+	private List<Long> projectIdList;
 		
     
 	public Long getId(){
@@ -143,4 +146,12 @@ public class EventsQueryInfo extends QueryInfo {
 	public void setUpdateTime(Long updateTime){
 		this.updateTime = updateTime;
 	}
-    }
+
+	public void setProjectIdList(List<Long> projectIdList) {
+		this.projectIdList = projectIdList;
+	}
+
+	public List<Long> getProjectIdList() {
+		return projectIdList;
+	}
+}

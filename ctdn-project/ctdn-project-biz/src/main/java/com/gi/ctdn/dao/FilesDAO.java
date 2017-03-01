@@ -7,11 +7,10 @@ import com.gi.ctdn.query.FilesQueryInfo;
 import java.util.List;
 
 public interface FilesDAO {
-	
-    Long update(FilesInfo files);
 
-
-    List<FilesInfo> queryFiles(FilesQueryInfo filesQuery);
+    Long insert(FilesInfo files);
 
     List<FilesInfo> queryListByProjectId(Long projectId);
+
+    Integer deleteByProjectId(Long id);
 }

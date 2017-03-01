@@ -12,9 +12,9 @@ public interface EventsDAO {
 
     Long update(EventsInfo events);
 			
-	List<EventsInfo> selectByProjectId(@Param("projectId") Long projectId);
+	List<EventsInfo> queryByProjectId(@Param("projectId") Long projectId);
 		
-    List<EventsInfo> queryEvents(EventsQueryInfo eventsQuery);
-
     EventsInfo queryById(Long id);
+
+    List<EventsInfo> queryListByProjects(EventsQueryInfo eventQuery);
 }

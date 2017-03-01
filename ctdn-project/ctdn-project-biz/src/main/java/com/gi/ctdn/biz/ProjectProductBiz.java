@@ -25,50 +25,40 @@ public class ProjectProductBiz  {
     @Autowired
 	ProjectProductDAO projectProductDAO;
 
-    public MessageInfo<Long> updateProjectProduct(ProjectProductInfo projectProduct){
+	public MessageInfo<Long> createProjectProduct(ProjectProductInfo projectProduct){
 		MessageInfo<Long> messageInfo = new MessageInfo<Long>();
 		try {
-			projectProductDAO.update( projectProduct );
+			projectProductDAO.insert( projectProduct );
 			messageInfo.setData(projectProduct.getId());
-
 		} catch (Exception e) {
-			LOGGER.error("createProjectProduct","创建ProjectProduct失败", e);
+			LOGGER.error("createProjectProduct","修改ProjectProduct失败", e);
 			messageInfo.setStatus(10001);
 		}
 		return messageInfo;
 	}
 
+	public MessageInfo<Integer> deleteByProjectId(Long projectId){
+		MessageInfo<Integer> messageInfo = new MessageInfo<Integer>();
+		try {
+			Integer ret = projectProductDAO.deleteByProjectId( projectId );
+			messageInfo.setData(ret);
+		} catch (Exception e) {
+			LOGGER.error("deleteByProjectId","删除ProjectProduct失败", e);
+			messageInfo.setStatus(10001);
+		}
+		return messageInfo;
+	}
 
 	public MessageInfo<List<ProjectProductInfo>> queryListByProjectId(Long projectId){
 		MessageInfo<List<ProjectProductInfo>> messageInfo = new MessageInfo<List<ProjectProductInfo>>();
 		try {
 			List<ProjectProductInfo> projectProductInfoList = projectProductDAO.queryListByProjectId(projectId);
 			messageInfo.setData(projectProductInfoList);
-
 		} catch (Exception e) {
 			LOGGER.error("queryListByProjectId","根据 projectId查询列表失败", e);
 			messageInfo.setStatus(10001);
 		}
 		return messageInfo;
 	}
-
-	public MessageInfo<QueryResultInfo<ProjectProductInfo>> queryProjectProduct(ProjectProductQueryInfo projectProductQuery) {
-		MessageInfo<QueryResultInfo<ProjectProductInfo>> messageInfo = new MessageInfo<QueryResultInfo<ProjectProductInfo>>();
-		try {
-			QueryResultInfo<ProjectProductInfo> queryResult = new QueryResultInfo<ProjectProductInfo>();
-			PageHelper.startPage(projectProductQuery.getPageIndex(), projectProductQuery.getPageSize());
-			List<ProjectProductInfo> projectProductList = projectProductDAO.queryProjectProduct(projectProductQuery);
-			PageInfo<ProjectProductInfo> pageInfo = new PageInfo<ProjectProductInfo>(projectProductList);
-			queryResult.setPages(pageInfo.getPages());
-			queryResult.setTotal(pageInfo.getTotal());
-			queryResult.setRecords(projectProductList);
-			messageInfo.setData(queryResult);
-		} catch (Exception e) {
-			LOGGER.error("queryProjectProduct", "分页查询ProjectProduct失败", e);
-			messageInfo.setStatus(10001);
-		}
-		return messageInfo;
-	}
-
 
 }

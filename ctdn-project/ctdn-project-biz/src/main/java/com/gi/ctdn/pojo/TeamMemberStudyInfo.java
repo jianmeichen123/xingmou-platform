@@ -59,27 +59,6 @@ public class TeamMemberStudyInfo extends CtdnPojo implements Serializable {
 	 */
 	private String descrip;
 	
-	/**
-	 * @Fields createdUid : 创建人uid
-	 */
-	private Long createdUid;
-	
-	/**
-	 * @Fields createdUname : 创建人名称
-	 */
-	private String createdUname;
-	
-	/**
-	 * @Fields addTime : 
-	 */
-	private Long addTime;
-	
-	/**
-	 * @Fields updateTime : 
-	 */
-	private Long updateTime;
-	
-    
 	public Long getId(){
 		return id;
 	}
@@ -144,8 +123,4 @@ public class TeamMemberStudyInfo extends CtdnPojo implements Serializable {
 		this.descrip = descrip;
 	}
     
-	public Long getCreatedUid(){
-		return createdUid;
-	}
-
     }

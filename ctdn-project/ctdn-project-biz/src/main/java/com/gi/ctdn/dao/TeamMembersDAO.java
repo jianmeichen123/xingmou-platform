@@ -18,5 +18,4 @@ public interface TeamMembersDAO {
 
     List<TeamMembersInfo> queryByProjectId (Long projectId);
 
-    List<TeamMembersInfo> queryTeamMembers(TeamMembersQueryInfo teamMembersQuery);
 }

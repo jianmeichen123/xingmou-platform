@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.gi.com.gi.ctdn.dao.EventsDAO">
+<mapper namespace="com.gi.ctdn.dao.EventsDAO">
 	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.EventsInfo">
-					<id column="id" property="id" jdbcType="BIGINT" />
-								<result column="project_id" property="projectId" jdbcType="BIGINT" />
-								<result column="round_id" property="roundId" jdbcType="INTEGER" />
-								<result column="round_name" property="roundName" jdbcType="VARCHAR" />
-								<result column="event_date" property="eventDate" jdbcType="DATE" />
-								<result column="investfirm_names" property="investfirmNames" jdbcType="VARCHAR" />
-								<result column="event_money" property="eventMoney" jdbcType="BIGINT" />
-								<result column="currency_id" property="currencyId" jdbcType="INTEGER" />
-								<result column="currency_name" property="currencyName" jdbcType="VARCHAR" />
-								<result column="created_uid" property="createdUid" jdbcType="BIGINT" />
-								<result column="created_uname" property="createdUname" jdbcType="VARCHAR" />
-								<result column="add_time" property="addTime" jdbcType="BIGINT" />
-								<result column="update_time" property="updateTime" jdbcType="BIGINT" />
-						</resultMap>
+			<id column="id" property="id" jdbcType="BIGINT" />
+			<result column="project_id" property="projectId" jdbcType="BIGINT" />
+			<result column="round_id" property="roundId" jdbcType="INTEGER" />
+			<result column="round_name" property="roundName" jdbcType="VARCHAR" />
+			<result column="event_date" property="eventDate" jdbcType="DATE" />
+			<result column="investfirm_names" property="investfirmNames" jdbcType="VARCHAR" />
+			<result column="event_money" property="eventMoney" jdbcType="BIGINT" />
+			<result column="currency_id" property="currencyId" jdbcType="INTEGER" />
+			<result column="currency_name" property="currencyName" jdbcType="VARCHAR" />
+			<result column="created_uid" property="createdUid" jdbcType="BIGINT" />
+			<result column="created_uname" property="createdUname" jdbcType="VARCHAR" />
+			<result column="add_time" property="addTime" jdbcType="BIGINT" />
+			<result column="update_time" property="updateTime" jdbcType="BIGINT" />
+	</resultMap>
 
 
 	<insert id="insert" parameterType="com.gi.ctdn.pojo.EventsInfo" useGeneratedKeys="true" keyProperty="id">
@@ -46,31 +46,73 @@
 			#{createdUid,jdbcType=BIGINT},
 			#{createdUname,jdbcType=VARCHAR},
 			#{addTime,jdbcType=BIGINT},
-			 UNIX_TIMESTAMP()
+			#{updateTime,jdbcType=BIGINT}
+
 		)
 	</insert>
 
+	<update id="update" parameterType="com.gi.ctdn.pojo.EventsInfo" >
+		UPDATE  ctdn_events
+		<set>
+			<if test="roundId!=null"> round_id = #{roundId,jdbcType=INTEGER},</if>
+			<if test="roundName!=null and roundName!=''"> round_name = #{roundName,jdbcType=VARCHAR},</if>
+			<if test="eventDate!=null"> event_date = #{eventDate,jdbcType=DATE},</if>
+			<if test="investfirmNames!=null and investfirmNames!=''"> investfirm_names = #{investfirmNames,jdbcType=VARCHAR},</if>
+			<if test="eventMoney!=null"> event_money = #{eventMoney,jdbcType=BIGINT},</if>
+			<if test="currencyId!=null"> currency_id = #{currencyId,jdbcType=INTEGER},</if>
+			<if test="currencyName!=null and currencyName!=''"> currency_name = #{currencyName,jdbcType=VARCHAR},</if>
+			<if test="createdUid!=null"> created_uid = #{createdUid,jdbcType=BIGINT},</if>
+			<if test="createdUname!=null and createdUname!=''"> created_uname = #{createdUname,jdbcType=VARCHAR},</if>
+			<if test="updateTime!=null"> update_time = #{updateTime,jdbcType=BIGINT}</if>
+		</set>
+		<where>
+			<trim prefixOverrides="and">
+				<if test="id != null"> and id =#{id}</if>
+			</trim>
+		</where>
+	</update>
+
 	<sql id="selectFields">
-	id,project_id,round_id,round_name,event_date,investfirm_names,event_money,currency_id,currency_name,created_uid,created_uname,add_time,update_time
+	id,project_id,round_name,event_date,investfirm_names,event_money,currency_name
 	</sql>
 	
 			
-	<select id="selectByProjectId" resultMap="BaseResultMap">
+	<select id="queryByProjectId" resultMap="BaseResultMap" parameterType = "java.lang.Long">
 		SELECT
-		<include refid="selectFields" />
-		FROM ctdn_events
-		WHERE  project_id = #{projectId,jdbcType=BIGINT}
-	</select>
-	
-
-	<select id="queryEvents" resultMap="BaseResultMap" parameterType="com.gi.ctdn.query.EventsQueryInfo">
-		SELECT
-		<include refid="selectFields" />
-		FROM ctdn_events
-		<include refid="queryWhereAndOrder" />
+			<include refid="selectFields" />
+		FROM
+			ctdn_events
+		WHERE
+			project_id = #{projectId,jdbcType=BIGINT}
+		ORDER BY
+			event_date desc
 	</select>
 
-	<sql id="queryWhereAndOrder">
+	<select id="queryListByProjects" resultMap="BaseResultMap"  parameterType="com.gi.ctdn.query.EventsQueryInfo">
+		SELECT
+			<include refid="selectFields" />
+		FROM
+			ctdn_events
+		WHERE
+			ctdn_events.project_id in
+		<if test="projectIdList != null">
+			<foreach collection="projectIdList" item="employeeId" index="index"
+					 open="(" close=")" separator=",">
+				#{employeeId}
+			</foreach>
+		</if>
+	</select>
+
+	<select id="queryById" resultMap="BaseResultMap" parameterType = "java.lang.Long">
+		SELECT
+			<include refid="selectFields" />
+		FROM
+			ctdn_events
+		WHERE
+			id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<!--<sql id="queryWhereAndOrder">
 		<where>
 					<if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>
 								<if test="projectId!=null">AND project_id = #{projectId,jdbcType=BIGINT}</if>
@@ -91,6 +133,6 @@
 			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
 			<otherwise>order by id desc</otherwise>
 		</choose>
-	</sql>
+	</sql>-->
 
 </mapper>

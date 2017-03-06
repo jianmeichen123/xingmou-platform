@@ -6,6 +6,7 @@ import com.gi.xm.platform.view.common.MessageInfo;
 import com.gi.ctdn.biz.EventsBiz;
 import com.gi.ctdn.pojo.EventsInfo;
 import jdk.nashorn.internal.ir.annotations.Reference;
+import org.omg.CORBA.INTERNAL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -41,7 +42,11 @@ public class InvestEventsController {
             messageInfo.setMessage("必填项未填写完整!");
             return messageInfo;
         }
-        messageInfo = eventsBiz.createEvents(eventsInfo);
+        if(eventsInfo.getId() == null){
+            messageInfo = eventsBiz.createEvents(eventsInfo);
+        }else{
+            messageInfo = eventsBiz.updateEvents(eventsInfo);
+        }
         return messageInfo;
     }
 
@@ -84,6 +89,18 @@ public class InvestEventsController {
             messageInfo.setMessage("event id 错误！");
             messageInfo.setStatus(10001);
         }
+        return messageInfo;
+    }
+
+    @RequestMapping("delete/{id}")
+    @ResponseBody
+    public  MessageInfo<Integer> deleteById(@PathVariable("id") Long id){
+        MessageInfo<Integer> messageInfo =  new MessageInfo<Integer>();
+        if(id ==null){
+            messageInfo.setMessage(" id 错误！");
+            messageInfo.setStatus(10001);
+        }
+        messageInfo = eventsBiz.deleteById(id);
         return messageInfo;
     }
 

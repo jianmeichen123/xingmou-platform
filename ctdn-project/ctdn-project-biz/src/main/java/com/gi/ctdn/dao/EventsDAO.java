@@ -17,4 +17,6 @@ public interface EventsDAO {
     EventsInfo queryById(Long id);
 
     List<EventsInfo> queryListByProjects(EventsQueryInfo eventQuery);
+
+    int deleteById(Long id);
 }

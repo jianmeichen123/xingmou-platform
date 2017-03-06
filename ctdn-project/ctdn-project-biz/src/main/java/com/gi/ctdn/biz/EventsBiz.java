@@ -92,4 +92,16 @@ public class EventsBiz  {
 		}
 		return messageInfo;
 	}
+
+	public MessageInfo<Integer> deleteById(Long id) {
+		MessageInfo<Integer> messageInfo = new MessageInfo<Integer>();
+		try {
+			int ret = eventsDAO.deleteById(id);
+			messageInfo.setData(ret);
+		} catch (Exception e) {
+			LOGGER.error("deleteById", "删除Events失败", e);
+			messageInfo.setStatus(10001);
+		}
+		return messageInfo;
+	}
 }

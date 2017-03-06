@@ -61,7 +61,11 @@ public class ProjectsController {
 			messageInfo.setStatus(10001);
 			return messageInfo;
 		}
-		messageInfo = projectsBiz.createProjects(projectsInfo);
+		if(projectsInfo.getId() != null){
+			messageInfo = projectsBiz.updateProject(projectsInfo);
+		}else{
+			messageInfo = projectsBiz.createProjects(projectsInfo);
+		}
 		return messageInfo;
 	}
 

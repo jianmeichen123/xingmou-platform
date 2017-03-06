@@ -15,3 +15,4 @@ public class RestfulApp {
         SpringApplication.run(RestfulApp.class, args);
     }
 }
+

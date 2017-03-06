@@ -15,8 +15,8 @@ import $name.getFullModelClassName($table);
 
 public interface $mapperClass {
 	
-    int insert($table.modelName $modelVar);
-
+    Long  insert($table.modelName $modelVar);
+    Long  update($table.modelName $modelVar);
 
 	#foreach($index in $table.indexes)
 	#if($index.isUnique())

@@ -54,8 +54,8 @@ public class ProjectsController {
 			return messageInfo;
 		}
 		//check 表单必填项
-		if(projectsInfo.getTitle()==null || projectsInfo.getIndustryId() ==null || StringUtils.isEmpty(projectsInfo.getIndustryName())
-				||StringUtils.isEmpty(projectsInfo.getProductInfo()) ||StringUtils.isEmpty(projectsInfo.getProductCompete())
+		if(projectsInfo.getTitle()==null || projectsInfo.getIndustryId() ==null || StringUtils.isEmpty(projectsInfo.getIndustryName())||
+		projectsInfo.getProductList().isEmpty() ||StringUtils.isEmpty(projectsInfo.getProductCompete())
 				||StringUtils.isEmpty(projectsInfo.getBpFile()) || StringUtils.isEmpty(projectsInfo.getProductLogo()) || projectsInfo.getProjectPicList()==null){
 			messageInfo.setMessage("必填项未填写完整!");
 			messageInfo.setStatus(10001);
@@ -80,7 +80,7 @@ public class ProjectsController {
 
 		//check 表单必填项
 		if(projectsInfo.getTitle()==null || projectsInfo.getIndustryId() ==null || StringUtils.isEmpty(projectsInfo.getIndustryName())
-				||StringUtils.isEmpty(projectsInfo.getProductInfo()) ||StringUtils.isEmpty(projectsInfo.getProductCompete())
+				||projectsInfo.getProductList().isEmpty() ||StringUtils.isEmpty(projectsInfo.getProductCompete())
 				||StringUtils.isEmpty(projectsInfo.getBpFile()) || StringUtils.isEmpty(projectsInfo.getProductLogo()) || projectsInfo.getProjectPicList()==null){
 			messageInfo.setMessage("必填项未填写完整!");
 			messageInfo.setStatus(10001);

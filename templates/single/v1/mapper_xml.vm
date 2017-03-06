@@ -20,6 +20,17 @@ $sql.getInsertValues($table)
 		)
 	</insert>
 
+    <update id="update" parameterType="$name.getFullModelClassName($table)" >
+    		UPDATE  $table.tableName
+    		<SET>
+    		   #foreach($column in $table.columns)
+               			#if($column.javaType=="String")<if test="${column.propertyName}!=null and ${column.propertyName}!=''"> $column.columnName = #{${column.propertyName},jdbcType=${column.jdbcType}}</if>
+               			#else<if test="${column.propertyName}!=null"> $column.columnName = #{${column.propertyName},jdbcType=${column.jdbcType}}</if>
+               			#end
+               	#end
+    		</SET>
+    </update>
+
 	<sql id="selectFields">
 	$sql.getSelectedFileds($table.columns)
 	</sql>

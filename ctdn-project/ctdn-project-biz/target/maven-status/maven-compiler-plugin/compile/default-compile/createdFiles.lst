@@ -16,9 +16,10 @@ com/gi/ctdn/biz/ProjectProductBiz.class
 com/gi/ctdn/dao/IndustryLabelDAO.class
 com/gi/ctdn/pojo/ProjectsInfo.class
 com/gi/ctdn/biz/TeamMembersBiz.class
+com/gi/ctdn/util/DateUtil.class
 com/gi/ctdn/conf/MyBatisConfig.class
-com/gi/ctdn/pojo/ProjectProductInfo.class
 com/gi/ctdn/pojo/ProjectContactInfo.class
+com/gi/ctdn/pojo/ProjectProductInfo.class
 com/gi/ctdn/query/TeamMemberStudyQueryInfo.class
 com/gi/ctdn/dao/TeamMemberJobDAO.class
 com/gi/ctdn/pojo/CompanysInfo.class

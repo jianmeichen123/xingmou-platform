@@ -73,7 +73,7 @@
 	</update>
 
 	<sql id="selectFields">
-	id,project_id,round_name,event_date,investfirm_names,event_money,currency_name
+	id,project_id,round_id,round_name,event_date,investfirm_names,event_money,currency_name,currency_id
 	</sql>
 	
 			
@@ -111,6 +111,13 @@
 		WHERE
 			id = #{id,jdbcType=BIGINT}
 	</select>
+
+	<delete id ="deleteById" parameterType="java.lang.Long">
+		DELETE FROM ctdn_events
+		<where>
+			id = #{id,jdbcType=BIGINT}
+		</where>
+	</delete>
 
 	<!--<sql id="queryWhereAndOrder">
 		<where>

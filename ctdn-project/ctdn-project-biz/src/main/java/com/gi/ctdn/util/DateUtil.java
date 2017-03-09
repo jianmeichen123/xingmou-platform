@@ -24,12 +24,16 @@ public class DateUtil {
     }
 
     public  static  void main(String args[]){
-        try {
+       /* try {
             System.out.println(convertStringToDate("2017-02-28"));
             System.out.print(new Date());
         } catch (ParseException e) {
             e.printStackTrace();
-        }
+        }*/
+
+            boolean f = org.springframework.util.StringUtils.isEmpty("ss");
+            System.out.print(f);
+
     }
 
 }

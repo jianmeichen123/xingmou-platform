@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
+
 /**
  * Created by zcy on 17-2-20.
  */
@@ -34,12 +36,11 @@ public class CompanysController {
     @RequestMapping("createCompany")
     @ResponseBody
     public MessageInfo<Long> createCompany(@RequestBody CompanysInfo companysInfo){
-        MessageInfo<Long> messageInfo = new MessageInfo<>();
+        MessageInfo<Long> messageInfo = new MessageInfo<Long>();
         //验证表单必填项
-
-        if(StringUtils.isEmpty(companysInfo.getTitle())|| companysInfo.getDistrictId() ==null || companysInfo.getDistrictSubId()==null
-                ||StringUtils.isEmpty(companysInfo.getDistrictName())||StringUtils.isEmpty(companysInfo.getDistrictSubName())
-                ||companysInfo.getEmployeeNumber() ==null || companysInfo.getFoundDate()==null || StringUtils.isEmpty(companysInfo.getRoundName())){
+        if(StringUtils.isEmpty(companysInfo.getTitle()) || companysInfo.getDistrictId() ==null || companysInfo.getDistrictSubId()==null
+                ||companysInfo.getDistrictName()==null||companysInfo.getDistrictSubName()==null
+                ||companysInfo.getEmployeeNumber() ==null || companysInfo.getFoundDate()==null ||companysInfo.getNeedStatus() ==null){
             messageInfo.setMessage("必填项未填写完整!");
             messageInfo.setStatus(10001);
             return messageInfo;
@@ -58,9 +59,9 @@ public class CompanysController {
     public MessageInfo<Long> updateCompany(@RequestBody CompanysInfo companysInfo){
         MessageInfo<Long> messageInfo = new MessageInfo<>();
         //验证表单必填项
-        if(StringUtils.isEmpty(companysInfo.getTitle()) || companysInfo.getDistrictId() ==null || companysInfo.getDistrictSubId()==null
-                ||StringUtils.isEmpty(companysInfo.getDistrictName()) ||StringUtils.isEmpty(companysInfo.getDistrictSubName())
-                ||companysInfo.getEmployeeNumber() ==null || companysInfo.getFoundDate()==null || StringUtils.isEmpty(companysInfo.getRoundName())){
+        if(companysInfo.getTitle() == null|| companysInfo.getDistrictId() ==null || companysInfo.getDistrictSubId()==null
+                ||companysInfo.getDistrictName()==null||companysInfo.getDistrictSubName()==null
+                ||companysInfo.getEmployeeNumber() ==null || companysInfo.getFoundDate()==null ){
             messageInfo.setMessage("必填项未填写完整!");
             messageInfo.setStatus(10001);
             return messageInfo;

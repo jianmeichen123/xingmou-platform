@@ -119,15 +119,15 @@ public class CompanysInfo extends  CtdnPojo implements Serializable {
 	public void setDistrictSubName(String districtSubName){
 		this.districtSubName = districtSubName;
 	}
-    
-	public Integer getEmployeeNumber(){
+
+	public Integer getEmployeeNumber() {
 		return employeeNumber;
 	}
-	
-	public void setEmployeeNumber(Integer employeeNumber){
+
+	public void setEmployeeNumber(Integer employeeNumber) {
 		this.employeeNumber = employeeNumber;
 	}
-    
+
 	public Date getFoundDate(){
 		return foundDate;
 	}

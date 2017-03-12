@@ -52,7 +52,11 @@ public class TeamStudyController {
             messageInfo.setStatus(10001);
             return messageInfo;
         }
-        messageInfo = teamMemberStudyBiz.createTeamMemberStudy(teamMemberStudyInfo);
+        if(teamMemberStudyInfo.getId()==null){
+            messageInfo = teamMemberStudyBiz.createTeamMemberStudy(teamMemberStudyInfo);
+        }else {
+            messageInfo = teamMemberStudyBiz.updateTeamMemberStudy(teamMemberStudyInfo);
+        }
         return messageInfo;
     }
 
@@ -121,6 +125,22 @@ public class TeamStudyController {
         TeamMemberStudyQueryInfo study = new TeamMemberStudyQueryInfo();
         study.setId(id);
         messageInfo = teamMemberStudyBiz.deleteMemberStudy(study);
+        return  messageInfo;
+    }
+
+    /**
+     *
+     */
+    @RequestMapping("queryOneStudy/{id}")
+    @ResponseBody
+    public MessageInfo<TeamMemberStudyInfo> queryOneJob(@PathVariable("id") Long id){
+        MessageInfo<TeamMemberStudyInfo> messageInfo = new MessageInfo<TeamMemberStudyInfo>();
+        if(id == null) {
+            messageInfo.setStatus(10001);
+            messageInfo.setMessage("study id 缺失！");
+            return messageInfo;
+        }
+        messageInfo = teamMemberStudyBiz.queryById(id);
         return  messageInfo;
     }
 }

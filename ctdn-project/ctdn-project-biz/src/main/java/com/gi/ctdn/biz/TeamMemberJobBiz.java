@@ -81,4 +81,15 @@ public class TeamMemberJobBiz  {
 		return messageInfo;
 	}
 
+    public MessageInfo<TeamMemberJobInfo> queryById(Long id) {
+		MessageInfo messageInfo = new MessageInfo();
+		try {
+			TeamMemberJobInfo jobInfo  = teamMemberJobDAO.queryById(id);
+			messageInfo.setData(jobInfo);
+		} catch (Exception e) {
+			LOGGER.error("queryById","queryById job失败", e);
+			messageInfo.setStatus(10001);
+		}
+		return messageInfo;
+    }
 }

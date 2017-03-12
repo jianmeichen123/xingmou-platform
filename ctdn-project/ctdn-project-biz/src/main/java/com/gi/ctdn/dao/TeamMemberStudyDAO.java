@@ -17,4 +17,6 @@ public interface TeamMemberStudyDAO {
     List<TeamMemberStudyInfo> queryByMemberId(Long memberId);
 
     Integer delete(TeamMemberStudyQueryInfo teamMemberStudyQueryInfo);
+
+    TeamMemberStudyInfo queryById(Long id);
 }

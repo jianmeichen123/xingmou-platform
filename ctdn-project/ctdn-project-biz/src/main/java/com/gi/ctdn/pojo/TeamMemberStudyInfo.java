@@ -122,5 +122,6 @@ public class TeamMemberStudyInfo extends CtdnPojo implements Serializable {
 	public void setDescrip(String descrip){
 		this.descrip = descrip;
 	}
-    
-    }
+
+
+}

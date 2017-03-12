@@ -42,7 +42,12 @@ public class ContactUsController {
             messageInfo.setMessage("必填项未填写完整!");
             return messageInfo;
         }
-        messageInfo = projectContactBiz.createProjectContact(projectContactInfo);
+        if(projectContactInfo.getId()==null){
+            messageInfo = projectContactBiz.createProjectContact(projectContactInfo);
+        }else{
+            messageInfo = projectContactBiz.updateProjectContact(projectContactInfo);
+        }
+
         return messageInfo;
     }
 

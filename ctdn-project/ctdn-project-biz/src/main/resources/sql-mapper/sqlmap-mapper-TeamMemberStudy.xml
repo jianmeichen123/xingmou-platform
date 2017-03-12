@@ -94,6 +94,14 @@
 			is_deleted = 0
 	</select>
 
+	<select id="queryById"  resultMap="BaseResultMap" parameterType="java.lang.Long">
+		SELECT
+		<include refid="selectFields" />
+		FROM
+		ctdn_team_member_study
+		WHERE
+		id = #{id,jdbcType=BIGINT}
+	</select>
 
 	<!--<sql id="queryWhereAndOrder">
 		<where>

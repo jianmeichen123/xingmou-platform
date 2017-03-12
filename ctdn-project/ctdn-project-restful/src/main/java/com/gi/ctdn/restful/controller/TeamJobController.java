@@ -51,7 +51,11 @@ public class TeamJobController {
             messageInfo.setStatus(10001);
             return messageInfo;
         }
-        messageInfo = teamMemberJobBiz.createTeamMemberJob(teamMemberJobInfo);
+        if(teamMemberJobInfo.getId()==null){
+            messageInfo = teamMemberJobBiz.createTeamMemberJob(teamMemberJobInfo);
+        }else{
+            messageInfo = teamMemberJobBiz.updateTeamMemberJob(teamMemberJobInfo);
+        }
         return messageInfo;
     }
 
@@ -119,6 +123,22 @@ public class TeamJobController {
         TeamMemberJobQueryInfo job = new TeamMemberJobQueryInfo();
         job.setId(id);
         messageInfo = teamMemberJobBiz.deleteMemberJob(job);
+        return  messageInfo;
+    }
+
+    /**
+     *
+     */
+    @RequestMapping("queryOneJob/{id}")
+    @ResponseBody
+    public MessageInfo<TeamMemberJobInfo> queryOneJob(@PathVariable("id") Long id){
+        MessageInfo<TeamMemberJobInfo> messageInfo = new MessageInfo<TeamMemberJobInfo>();
+        if(id == null) {
+            messageInfo.setStatus(10001);
+            messageInfo.setMessage("job id 缺失！");
+            return messageInfo;
+        }
+        messageInfo = teamMemberJobBiz.queryById(id);
         return  messageInfo;
     }
 }

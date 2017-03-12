@@ -17,4 +17,5 @@ public interface TeamMemberJobDAO {
 
     List<TeamMemberJobInfo> queryByMemberId(Long memberId);
 
+    TeamMemberJobInfo queryById(Long id);
 }

@@ -77,4 +77,16 @@ public class TeamMemberStudyBiz  {
 		}
 		return messageInfo;
 	}
+
+    public MessageInfo<TeamMemberStudyInfo> queryById(Long id) {
+		MessageInfo messageInfo = new MessageInfo();
+		try {
+			TeamMemberStudyInfo jobInfo  = teamMemberStudyDAO.queryById(id);
+			messageInfo.setData(jobInfo);
+		} catch (Exception e) {
+			LOGGER.error("queryById","queryById study失败", e);
+			messageInfo.setStatus(10001);
+		}
+		return messageInfo;
+    }
 }

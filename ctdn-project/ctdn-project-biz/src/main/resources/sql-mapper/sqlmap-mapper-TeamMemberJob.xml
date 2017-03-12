@@ -92,7 +92,14 @@
 		AND
 			is_deleted = 0
 	</select>
-
+	<select id="queryById"  resultMap="BaseResultMap" parameterType="java.lang.Long">
+		SELECT
+			<include refid="selectFields" />
+		FROM
+			ctdn_team_member_job
+		WHERE
+			id = #{id,jdbcType=BIGINT}
+	</select>
 	<!--<sql id="queryWhereAndOrder">
 		<where>
 					<if test="id!=null">AND id = #{id,jdbcType=BIGINT}</if>

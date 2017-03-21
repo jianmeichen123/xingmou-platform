@@ -10,8 +10,7 @@ import org.springframework.context.annotation.ImportResource;
  */
 
 @SpringBootApplication
-@ComponentScan(basePackages={"com.gi.xm"})
-@ImportResource("classpath*:dubbo/spring-consumer.xml")//启动加在dubbo配置文件
+@ComponentScan(basePackages={"com.gi"})
 public class DataRestApp {
 
 

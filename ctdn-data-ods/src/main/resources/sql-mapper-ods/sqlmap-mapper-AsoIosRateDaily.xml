@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.ods.dao.AsoIosRateDailyDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.ods.pojo.AsoIosRateDaily">
+		<id 	column="id" 		property="id" 			jdbcType="INTEGER" />
+		<result column="date" 		property="date" 		jdbcType="INTEGER" />
+		<result column="title" 		property="title" 		jdbcType="VARCHAR" />
+		<result column="appid" 		property="appid" 		jdbcType="BIGINT" />
+		<result column="negetives" 	property="negetives" 	jdbcType="INTEGER" />
+
+		<result column="positives" 	property="positives" 	jdbcType="INTEGER" />
+	</resultMap>
+
+
+	<sql id="selectFields">
+	    id,date,title,appid,negetives,
+        positives
+	</sql>
+	
+			
+	<select id="selectByAppid" resultMap="BaseResultMap">
+		SELECT
+		    <include refid="selectFields" />
+		FROM
+            aso_ios_rate_daily
+		WHERE
+            appid = #{appid,jdbcType=BIGINT}
+	</select>
+	
+</mapper>

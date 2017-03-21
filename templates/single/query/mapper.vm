@@ -15,9 +15,6 @@ import $name.getFullModelClassName($table);
 
 public interface $mapperClass {
 	
-    int insert($table.modelName $modelVar);
-
-
 	#foreach($index in $table.indexes)
 	#if($index.isUnique())
 	
@@ -28,5 +25,4 @@ public interface $mapperClass {
 	#end
 	#end
 
-    List<${modelClass}> query${modelClass}($modelQueryClass $modelQueryVar);
 }

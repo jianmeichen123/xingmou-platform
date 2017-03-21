@@ -4,8 +4,9 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.sql.Timestamp;
 import java.util.Date;
+import com.gi.xm.platform.view.common.PojoInfo;
 
-public class $table.modelName extends Pojo {
+public class $table.modelName extends PojoInfo {
 
     #foreach($column in $table.columns)
     public static final String ${column.columnName.toUpperCase()} = "$column.displayName";

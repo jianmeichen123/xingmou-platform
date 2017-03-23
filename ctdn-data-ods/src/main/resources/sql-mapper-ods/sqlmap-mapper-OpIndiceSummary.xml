@@ -18,7 +18,7 @@
 
 
 	<sql id="selectFields">
-	    id,code,appname,type,appid,index_1,index_2,avg_score,update_date
+	    code,appname,type,appid,index_1,index_2,avg_score,update_date
 	</sql>
 	
 			

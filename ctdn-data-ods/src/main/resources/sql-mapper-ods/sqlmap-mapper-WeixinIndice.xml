@@ -17,8 +17,7 @@
 
 
 	<sql id="selectFields">
-		id,date,count_date,title,wxid,
-		article_clicks_count,article_count,article_likes_count,avg_article_clicks_count,avg_article_likes_count
+		date,count_date,article_clicks_count,article_count,article_likes_count,avg_article_clicks_count,avg_article_likes_count
 	</sql>
 	
 			

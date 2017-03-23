@@ -19,6 +19,7 @@ public class AlexaPvUv extends PojoInfo {
         public static final String UV = "uv";
         public static final String UV_C = "uvC";
         public static final String CODE = "code";
+        public static final String RANK = "rank";
     
 	
 	/**
@@ -41,6 +42,7 @@ public class AlexaPvUv extends PojoInfo {
 	/**
 	 * @Fields domain : 网站域名
 	 */
+	@JsonIgnore
 	private String domain;
 	
 	/**
@@ -70,6 +72,11 @@ public class AlexaPvUv extends PojoInfo {
 	 */
 	@JsonIgnore
 	private String code;
+	
+	/**
+	 * @Fields rank : 
+	 */
+	private Integer rank;
 	
     
 	public Integer getId(){
@@ -142,5 +149,13 @@ public class AlexaPvUv extends PojoInfo {
 
 	public void setCode(String code){
 		this.code = code;
+	}
+    
+	public Integer getRank(){
+		return rank;
+	}
+
+	public void setRank(Integer rank){
+		this.rank = rank;
 	}
     }

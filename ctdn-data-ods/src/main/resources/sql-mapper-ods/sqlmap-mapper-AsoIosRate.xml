@@ -20,9 +20,7 @@
 
 
 	<sql id="selectFields">
-		id,date,title,appid,r1,
-		r2,r3,r4,r5,sumr,
-		avgr,type
+		date,r1,r2,r3,r4,r5,sumr,avgr,type
 	</sql>
 	
 			

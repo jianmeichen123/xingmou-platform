@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("op")
@@ -39,6 +41,8 @@ public class OPController {
     private QqAndroidRateDailyBiz qqAndroidRateDailyBiz;
     @Autowired
     private WeixinIndiceBiz weixinIndiceBiz;
+    @Autowired
+    private WeiboIndiceBiz weiboIndiceBiz;
 
 
     @RequestMapping("pvuv/{code}")
@@ -70,6 +74,25 @@ public class OPController {
         return messageInfo;
     }
 
+    /**
+     * ios所有运营数据
+     * @param appid
+     * @return
+     */
+    @RequestMapping("ios/{appid}")
+    @ResponseBody
+    public Map ios(@PathVariable Long appid) {
+        MessageInfo<List<AsoIosDown>> downData = asoIosDownBiz.getListByAppid(appid);
+        MessageInfo<List<AsoIosRate>> rateData = asoIosRateBiz.getListByAppid(appid);
+        MessageInfo<List<AsoIosRateDaily>> rateDailyData = asoIosRateDailyBiz.getListByAppid(appid);
+        Map<String,Object> map = new HashMap<>();
+        map.put("downData",downData);
+        map.put("rateData",rateData);
+        map.put("rateDailyData",rateDailyData);
+        return map;
+    }
+
+
 
 
     @RequestMapping("is/{code}")
@@ -95,13 +118,29 @@ public class OPController {
     }
 
 
-
-
     @RequestMapping("qqandroidratedaily/{appid}")
     @ResponseBody
-    public MessageInfo<List<QqAndroidRateDaily>> getListByAppid(@PathVariable Long appid){
+    public MessageInfo<List<QqAndroidRateDaily>> qqAndroidRateDaily(@PathVariable Long appid){
         MessageInfo<List<QqAndroidRateDaily>> messageInfo = qqAndroidRateDailyBiz.getListByAppid(appid);
         return messageInfo;
+    }
+
+    /**
+     * android所有运营数据
+     * @param appid
+     * @return
+     */
+    @RequestMapping("android/{appid}")
+    @ResponseBody
+    public Map android(@PathVariable Long appid) {
+        MessageInfo<List<QqAndroidDown>> downData = qqAndroidDownBiz.getListByAppid(appid);
+        MessageInfo<List<QqAndroidRate>> rateData = qqAndroidRateBiz.getListByAppid(appid);
+        MessageInfo<List<QqAndroidRateDaily>> rateDailyData = qqAndroidRateDailyBiz.getListByAppid(appid);
+        Map<String,Object> map = new HashMap<>();
+        map.put("downData",downData);
+        map.put("rateData",rateData);
+        map.put("rateDailyData",rateDailyData);
+        return map;
     }
 
     @RequestMapping("weixinindice/{wxid}")
@@ -110,4 +149,14 @@ public class OPController {
         MessageInfo<List<WeixinIndice>> messageInfo = weixinIndiceBiz.getListByWxid(wxid);
         return messageInfo;
     }
+
+
+    @RequestMapping("weiboIndice/{wbid}")
+    @ResponseBody
+    public MessageInfo<List<WeiboIndice>> weiboIndice(@PathVariable Long wbid){
+        MessageInfo<List<WeiboIndice>> messageInfo = weiboIndiceBiz.getListByWbid(wbid);
+        return messageInfo;
+    }
+
+
 }

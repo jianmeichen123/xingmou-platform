@@ -12,7 +12,7 @@
 
 
 	<sql id="selectFields">
-		id,date,title,appid,negetives,positives
+		date,negetives,positives
 	</sql>
 	
 			

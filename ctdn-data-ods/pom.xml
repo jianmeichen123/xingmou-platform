@@ -112,7 +112,7 @@
                     <url>jdbc:mysql://10.10.1.169/ods</url>
                     <username>ctdnop</username>
                     <prefix>dw_</prefix>
-                    <tables>alexa_pv_uv,aso_ios_down,aso_ios_rate,aso_ios_rate_daily,op_indice_summary,qq_android_down,qq_android_rate,qq_android_rate_daily,weixin_indice</tables>
+                    <tables>alexa_pv_uv,weibo_indice</tables>
                     <password>C20t1d7n3@op!data</password>
                     <output_root_dir>/home/vincent/tmp/</output_root_dir>
                     <templates_dir>/home/vincent/workspace_idea/company/xm-platform/xingmou-platform/templates/single/query/

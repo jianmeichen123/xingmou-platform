@@ -13,7 +13,7 @@
 
 
 	<sql id="selectFields">
-		id,date,title,appid,downsum,downday
+		date,downsum,downday
 	</sql>
 	
 			

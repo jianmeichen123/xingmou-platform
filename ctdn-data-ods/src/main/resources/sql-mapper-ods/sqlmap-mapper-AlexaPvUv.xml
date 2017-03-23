@@ -13,12 +13,12 @@
 		<result column="uv" 	property="uv"       jdbcType="BIGINT" />
 		<result column="uv_c" 	property="uvC"      jdbcType="BIGINT" />
 		<result column="code" 	property="code"     jdbcType="CHAR" />
-
+		<result column="rank" 	property="rank" 	jdbcType="INTEGER" />
 	</resultMap>
 
 
 	<sql id="selectFields">
-		id,date,title,domain,pv,uv,code
+		date,pv,uv,rank
 	</sql>
 	
 			

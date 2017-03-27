@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.ods.dao.AsoIosRateDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.ods.pojo.AsoIosRate">
+		<id 	column="id" 	property="id" 		jdbcType="INTEGER" />
+		<result column="date" 	property="date" 	jdbcType="INTEGER" />
+		<result column="title" 	property="title" 	jdbcType="VARCHAR" />
+		<result column="appid" 	property="appid" 	jdbcType="BIGINT" />
+		<result column="r1" 	property="r1" 		jdbcType="INTEGER" />
+
+		<result column="r2" 	property="r2" 		jdbcType="INTEGER" />
+		<result column="r3" 	property="r3" 		jdbcType="INTEGER" />
+		<result column="r4" 	property="r4" 		jdbcType="INTEGER" />
+		<result column="r5" 	property="r5" 		jdbcType="INTEGER" />
+		<result column="sumr" 	property="sumr" 	jdbcType="INTEGER" />
+
+		<result column="avgr" 	property="avgr" 	jdbcType="INTEGER" />
+		<result column="type" 	property="type" 	jdbcType="INTEGER" />
+	</resultMap>
+
+
+	<sql id="selectFields">
+		date,r1,r2,r3,r4,r5,sumr,avgr,type
+	</sql>
+	
+			
+	<select id="selectByAppid" resultMap="BaseResultMap">
+		SELECT
+			<include refid="selectFields" />
+		FROM
+			aso_ios_rate
+		WHERE
+			appid = #{appid,jdbcType=BIGINT}
+	</select>
+	
+</mapper>

@@ -1,5 +1,7 @@
 package com.gi.xm.platform.view.common;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.io.Serializable;
 
 /**
@@ -7,6 +9,7 @@ import java.io.Serializable;
  */
 public class PojoInfo implements Serializable {
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String uid;
 
     public String getUid() {

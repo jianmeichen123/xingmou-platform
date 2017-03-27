@@ -5,15 +5,19 @@
     <parent>
         <artifactId>xingmou-platform</artifactId>
         <groupId>com.gi</groupId>
-        <version>1.0-qa-SNAPSHOT</version>
+        <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>xingmou-service-report</artifactId>
+    <artifactId>ctdn-data-ods</artifactId>
     <dependencies>
         <dependency>
             <groupId>com.gi</groupId>
             <artifactId>xingmou-assembly</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.gi</groupId>
+            <artifactId>xingmou-api-common</artifactId>
         </dependency>
         <dependency>
             <groupId>com.gi</groupId>
@@ -104,19 +108,20 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <basePackage>com.gi.xm.report</basePackage>
-                    <prefix>dw_v_,dw_,dm_</prefix>
-                    <url>jdbc:mysql://10.9.130.142/edw2</url>
-                    <tables>dm_target_month</tables>
-                    <username>xmuser</username>
-                    <password>qcDKywE7Ka52</password>
+                    <basePackage>com.gi.ctdn.ods</basePackage>
+                    <url>jdbc:mysql://10.10.1.169/ods</url>
+                    <username>ctdnop</username>
+                    <prefix>dw_</prefix>
+                    <tables>alexa_pv_uv,weibo_indice</tables>
+                    <password>C20t1d7n3@op!data</password>
                     <output_root_dir>/home/vincent/tmp/</output_root_dir>
-                    <templates_dir>/home/vincent/workspace_idea/company/xm-platform/xingmou-platform/templates/single/v1/
+                    <templates_dir>/home/vincent/workspace_idea/company/xm-platform/xingmou-platform/templates/single/query/
                     </templates_dir>
                 </configuration>
             </plugin>
             <!--  mvn com.v4java:maven-mybatis-gen-plugin:gen -s ~/etc/settings-ali.xml -->
         </plugins>
     </build>
+
 
 </project>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="$name.getFullMapperClassName($table)">
+	<resultMap id="BaseResultMap" type="$name.getFullModelClassName($table)">
+$i=0
+#foreach($column in $table.columns)
+    #if($column.isPrimary())
+        <id column="$column.columnName" property="$column.propertyName" jdbcType="$column.jdbcType" />
+    #else
+        <result column="$column.columnName" property="$column.propertyName" jdbcType="$column.jdbcType" />
+    #end
+$i = $+1
+#end
+	</resultMap>
+
+
+	<sql id="selectFields">
+	    $sql.getSelectedFileds($table.columns)
+	</sql>
+	
+	#foreach($index in $table.indexes)
+		
+	<select id="$sql.getIndexSelectName($index)" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    $table.tableName
+		$sql.getIndexWhere($index)
+	</select>
+	#end
+
+</mapper>

@@ -147,6 +147,12 @@
                 <artifactId>xingmou-data-rest</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.gi</groupId>
+                <artifactId>ctdn-data-ods</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <!---->
             <dependency>
                 <groupId>cglib</groupId>

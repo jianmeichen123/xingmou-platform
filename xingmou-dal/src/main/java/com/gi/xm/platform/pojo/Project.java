@@ -239,9 +239,20 @@ public class Project extends Pojo {
 	 */
 	private String  newestEventInvestfirms;
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    private String code;
+
 	public String getInverstrirmNames() {
 		return inverstrirmNames;
 	}
+
 
 	public void setInverstrirmNames(String inverstrirmNames) {
 		this.inverstrirmNames = inverstrirmNames;

@@ -50,6 +50,7 @@
 
 		<result column="load_time" 				property="loadTime" 			jdbcType="TIMESTAMP" />
 		<result column="update_time" 			property="updateTime" 			jdbcType="TIMESTAMP" />
+        <result column="code" 			        property="code" 			    jdbcType="VARCHAR" />
 	</resultMap>
 
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
@@ -188,7 +189,7 @@
 		newest_event_round_id,newest_event_money,source_id,create_date,status,business_model,
 		industry_pain_points,team_score,operation_score,score,time_span,
 		invest_info,inverstrirm_names,invest_num,invest_money,load_time,
-		update_time
+		update_time,code
 	</sql>
 
 	<sql id="searchFields">
@@ -199,7 +200,7 @@
 		newest_event_round_id,newest_event_money,source_id,create_date,status,business_model,
 		industry_pain_points,team_score,operation_score,score,time_span,
 		invest_info,inverstrirm_names,invest_num,invest_money,load_time,
-		update_time
+		update_time,code
 	</sql>
 
 	<select id="selectAll" resultMap="BaseResultMap">

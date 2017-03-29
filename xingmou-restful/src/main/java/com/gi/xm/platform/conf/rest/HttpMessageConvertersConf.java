@@ -1,3 +1,4 @@
+/*
 package com.gi.xm.platform.conf.rest;
 
 import com.alibaba.fastjson.serializer.SerializerFeature;
@@ -8,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 
+*/
 /**
  * Created with IntelliJ IDEA.
  * User: vincent
@@ -16,7 +18,8 @@ import org.springframework.http.converter.HttpMessageConverter;
  * Package: com.gi.xm.platform.conf.rest
  * Company: 星河互联
  * Group:   创投大脑
- */
+ *//*
+
 @Configuration
 public class HttpMessageConvertersConf {
 
@@ -25,6 +28,7 @@ public class HttpMessageConvertersConf {
     public HttpMessageConverters fastJsonHttpMessageConverters() {
         FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
         FastJsonConfig fastJsonConfig = new FastJsonConfig();
+        fastJsonConfig.setSerializerFeatures(SerializerFeature.);
         fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);
         fastConverter.setFastJsonConfig(fastJsonConfig);
         HttpMessageConverter<?> converter = fastConverter;
@@ -32,3 +36,4 @@ public class HttpMessageConvertersConf {
     }
 }
 
+*/

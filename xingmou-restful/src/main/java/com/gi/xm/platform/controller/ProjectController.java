@@ -56,7 +56,6 @@ public class ProjectController {
 
     @RequestMapping("getSearchTitle")
     @ResponseBody
-    @Cacheable(value = "searchTitle",keyGenerator = "api")
     public MessageInfo searchTitle() {
         //MessageInfo<ProjectSearchTitleInfo> messageInfo = projectFacede.getProjectSearchTitleInfo();
         MessageInfo<ProjectSearchTitleInfo> messageInfo = null;

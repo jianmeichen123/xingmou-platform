@@ -249,6 +249,8 @@ public class Project extends Pojo {
 
     private String code;
 
+    private Double similar;
+
 	public String getInverstrirmNames() {
 		return inverstrirmNames;
 	}
@@ -569,4 +571,12 @@ public class Project extends Pojo {
 	public void setSourceType(Integer sourceType) {
 		this.sourceType = sourceType;
 	}
+
+    public void setSimilar(Double similar) {
+        this.similar = similar;
+    }
+
+    public Double getSimilar() {
+        return similar;
+    }
 }

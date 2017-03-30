@@ -36,5 +36,8 @@ public interface ProjectDAO {
 	List<Project> searchProject(ProjectQuery projectQuery);
 
 
-	List<Project> queryCompetationlist(ProjectQuery projectQuery);
+	List<Project> queryCompetationlist(@Param("id") Long id);
+
+	List<Project> queryCompetitiveSimilar(@Param("id") Long id);
+
 }

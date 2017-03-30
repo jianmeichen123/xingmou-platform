@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("projectBiz")
@@ -175,12 +176,27 @@ public class ProjectBiz {
 		Message<QueryResult<Project>> message = new Message<QueryResult<Project>>();
         try {
             QueryResult<Project> queryResult = new QueryResult<Project>();
-            PageHelper.startPage(projectQuery.getPageIndex(), projectQuery.getPageSize());
-            List<Project> projectList = projectDAO.queryCompetationlist(projectQuery);
-            PageInfo<Project> pageInfo = new PageInfo<Project>(projectList);
-            queryResult.setPages(pageInfo.getPages());
-            queryResult.setTotal(pageInfo.getTotal());
-            queryResult.setRecords(projectList);
+            List<Project> newList =  new ArrayList<>();
+           // PageHelper.startPage(projectQuery.getPageIndex(), projectQuery.getPageSize());
+            //查询竞品列表
+            List<Project> pList = projectDAO.queryCompetationlist(projectQuery.getId());
+            if(pList != null && !pList.isEmpty()){
+                List<Project> cList =  projectDAO.queryCompetitiveSimilar(projectQuery.getId());
+                for(Project s :cList){
+                    String code = s.getCode();
+                    Double similar = s.getSimilar();
+                    for(Project p :pList){
+                        if(code.equals(p.getCode())){
+                            p.setSimilar(similar);
+                            newList.add(p);
+                        }
+                    }
+                }
+            }
+            PageInfo<Project> pageInfo = new PageInfo<Project>(newList);
+          /*  queryResult.setPages(pageInfo.getPages());
+            queryResult.setTotal(pageInfo.getTotal());*/
+            queryResult.setRecords(newList);
             message.setData(queryResult);
         } catch (Exception e) {
             LOGGER.error("queryProject", "分页查询Project失败", e);

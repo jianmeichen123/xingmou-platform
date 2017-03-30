@@ -10,6 +10,6 @@ import com.gi.ctdn.ods.pojo.OpIndiceSummary;
 public interface OpIndiceSummaryDAO {
 	
 			
-	List<OpIndiceSummary> selectByCode(@Param("code") String code);
-		
+	List<OpIndiceSummary> selectByCode(@Param("code") String code,@Param("updateDate")Integer updateDate);
+
 }

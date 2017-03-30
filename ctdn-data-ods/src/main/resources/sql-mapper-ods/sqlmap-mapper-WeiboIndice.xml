@@ -10,7 +10,6 @@
 
         <result column="fans" property="fans" jdbcType="BIGINT" />
         <result column="follow" property="follow" jdbcType="INTEGER" />
-        <result column="group" property="group" jdbcType="INTEGER" />
         <result column="interact" property="interact" jdbcType="INTEGER" />
 
     </resultMap>

@@ -50,7 +50,7 @@
 
 		<result column="load_time" 				property="loadTime" 			jdbcType="TIMESTAMP" />
 		<result column="update_time" 			property="updateTime" 			jdbcType="TIMESTAMP" />
-		<result column="code" 					property="code" 				jdbcType="VARCHAR" />
+        <result column="code" 			        property="code" 			    jdbcType="VARCHAR" />
 	</resultMap>
 
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">

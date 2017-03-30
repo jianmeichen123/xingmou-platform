@@ -46,6 +46,11 @@ public class OPController {
     @ResponseBody
     public MessageInfo<List<AlexaPvUv>> alexaPvUvpvuv(String domain) {
         if(domain!=null){
+            domain = domain.replace("https://","");
+            domain = domain.replace("http://","");
+            if (domain.indexOf("/")!=-1){
+                domain = domain.split("/")[0];
+            }
             String arr [] =domain.split(".");
             int len = arr.length;
             if (len >2){

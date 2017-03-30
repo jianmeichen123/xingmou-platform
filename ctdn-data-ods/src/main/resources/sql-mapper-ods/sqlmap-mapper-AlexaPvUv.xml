@@ -37,9 +37,9 @@
 		SELECT
 		<include refid="selectFields" />
 		FROM
-		alexa_pv_uv
+		    alexa_pv_uv
 		WHERE
-		code = #{code,jdbcType=CHAR}
+            domain = #{domain,jdbcType=CHAR}
 	</select>
 
 </mapper>

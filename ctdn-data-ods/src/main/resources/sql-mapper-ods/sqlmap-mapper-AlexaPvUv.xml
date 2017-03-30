@@ -1,45 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gi.ctdn.ods.dao.AlexaPvUvDAO">
-	<resultMap id="BaseResultMap" type="com.gi.ctdn.ods.pojo.AlexaPvUv">
+    <resultMap id="BaseResultMap" type="com.gi.ctdn.ods.pojo.AlexaPvUv">
 
         <id 	column="id" 	property="id"       jdbcType="INTEGER" />
-		<result column="date" 	property="date"     jdbcType="INTEGER" />
-		<result column="title" 	property="title"    jdbcType="VARCHAR" />
-		<result column="domain" property="domain"   jdbcType="VARCHAR" />
-		<result column="pv" 	property="pv"       jdbcType="INTEGER" />
+        <result column="date" 	property="date"     jdbcType="INTEGER" />
+        <result column="title" 	property="title"    jdbcType="VARCHAR" />
+        <result column="domain" property="domain"   jdbcType="VARCHAR" />
+        <result column="pv" 	property="pv"       jdbcType="INTEGER" />
 
         <result column="pv_c" 	property="pvC"      jdbcType="INTEGER" />
-		<result column="uv" 	property="uv"       jdbcType="BIGINT" />
-		<result column="uv_c" 	property="uvC"      jdbcType="BIGINT" />
-		<result column="code" 	property="code"     jdbcType="CHAR" />
-		<result column="rank" 	property="rank" 	jdbcType="INTEGER" />
-	</resultMap>
+        <result column="uv" 	property="uv"       jdbcType="BIGINT" />
+        <result column="uv_c" 	property="uvC"      jdbcType="BIGINT" />
+        <result column="code" 	property="code"     jdbcType="CHAR" />
+        <result column="rank" 	property="rank" 	jdbcType="INTEGER" />
+    </resultMap>
 
 
-	<sql id="selectFields">
-		date,pv,uv,rank
-	</sql>
-	
-			
-	<select id="selectByCode" resultMap="BaseResultMap">
-		SELECT
-		<include refid="selectFields" />
-		FROM
-            alexa_pv_uv
-		WHERE
-            code = #{code,jdbcType=CHAR}
-	</select>
+    <sql id="selectFields">
+        date,pv,uv,rank
+    </sql>
+
+
+    <select id="selectByCode" resultMap="BaseResultMap">
+        select
+        <include refid="selectFields" />
+        from ods.op_indice_summary a
+        left join
+        (select code,type,max(update_date) as update_date
+        from
+        ods.op_indice_summary
+        where
+        code=#{code,jdbcType=CHAR}
+        group by type) b
+        on a.code=b.code and a.type=b.type and a.update_date=b.update_date
+        where a.code=#{code,jdbcType=CHAR}
+        and b.code is not null
+        order by a.type
+    </select>
 
 
 
-	<select id="selectByDomain" resultMap="BaseResultMap">
-		SELECT
-		<include refid="selectFields" />
-		FROM
-		    alexa_pv_uv
-		WHERE
-            domain = #{domain,jdbcType=CHAR}
-	</select>
+    <select id="selectByDomain" resultMap="BaseResultMap">
+        SELECT
+        <include refid="selectFields" />
+        FROM
+        alexa_pv_uv
+        WHERE
+        domain = #{domain,jdbcType=CHAR}
+    </select>
 
 </mapper>

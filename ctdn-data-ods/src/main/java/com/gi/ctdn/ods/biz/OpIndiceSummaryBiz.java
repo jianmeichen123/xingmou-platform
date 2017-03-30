@@ -27,11 +27,11 @@ public class OpIndiceSummaryBiz  {
 
 
 		
-	public MessageInfo<List<OpIndiceSummary>> getListByCode(String code){
+	public MessageInfo<List<OpIndiceSummary>> getListByCode(String code,Integer updateDate){
 
 		MessageInfo<List<OpIndiceSummary>> messageInfo = new MessageInfo<List<OpIndiceSummary>>();
 		try {
-			List<OpIndiceSummary> opIndiceSummaryList = opIndiceSummaryDAO.selectByCode(code);
+			List<OpIndiceSummary> opIndiceSummaryList = opIndiceSummaryDAO.selectByCode(code,updateDate);
 			messageInfo.setData(opIndiceSummaryList);
 		} catch (Exception e) {
 			LOGGER.error("getListByCode","查询OpIndiceSummary失败", e);
@@ -39,7 +39,5 @@ public class OpIndiceSummaryBiz  {
 		}
 		return messageInfo;
 	}
-		
-
 
 }

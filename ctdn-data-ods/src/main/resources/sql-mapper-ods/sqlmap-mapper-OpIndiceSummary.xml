@@ -27,7 +27,10 @@
             <include refid="selectFields" />
 		FROM
 		    op_indice_summary
-		WHERE  code = #{code,jdbcType=VARCHAR}
+		WHERE
+			code = #{code,jdbcType=VARCHAR}
+		AND
+			update_date = #{updateDate,jdbcType=VARCHAR}
 	</select>
 	
 </mapper>

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -98,7 +100,10 @@ public class OPController {
     @RequestMapping("is/{code}")
     @ResponseBody
     public MessageInfo<List<OpIndiceSummary>> opIndiceSummary(@PathVariable String code){
-        MessageInfo<List<OpIndiceSummary>> messageInfo = opIndiceSummaryBiz.getListByCode(code);
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        Calendar cal = Calendar.getInstance();// 取当前日期。
+        cal.add(Calendar.DAY_OF_MONTH, -1);
+        MessageInfo<List<OpIndiceSummary>> messageInfo = opIndiceSummaryBiz.getListByCode(code,Integer.valueOf(format.format(cal.getTime())));
         return messageInfo;
     }
 

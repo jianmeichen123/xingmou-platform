@@ -30,5 +30,16 @@
 		WHERE
             code = #{code,jdbcType=CHAR}
 	</select>
-	
+
+
+
+	<select id="selectByDomain" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM
+		alexa_pv_uv
+		WHERE
+		code = #{code,jdbcType=CHAR}
+	</select>
+
 </mapper>

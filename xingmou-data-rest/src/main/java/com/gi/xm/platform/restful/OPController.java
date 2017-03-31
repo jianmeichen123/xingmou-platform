@@ -111,10 +111,7 @@ public class OPController {
         @RequestMapping("is/{code}")
         @ResponseBody
         public MessageInfo<List<OpIndiceSummary>> opIndiceSummary(@PathVariable String code){
-            SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-            Calendar cal = Calendar.getInstance();// 取当前日期。
-            cal.add(Calendar.DAY_OF_MONTH, -1);
-            MessageInfo<List<OpIndiceSummary>> messageInfo = opIndiceSummaryBiz.getListByCode(code,Integer.valueOf(format.format(cal.getTime())));
+            MessageInfo<List<OpIndiceSummary>> messageInfo = opIndiceSummaryBiz.getListByCode(code);
             return messageInfo;
         }
 

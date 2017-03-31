@@ -23,14 +23,22 @@
 	
 			
 	<select id="selectByCode" resultMap="BaseResultMap">
-		SELECT
-            <include refid="selectFields" />
-		FROM
-		    op_indice_summary
-		WHERE
-			code = #{code,jdbcType=VARCHAR}
-		AND
-			update_date = #{updateDate,jdbcType=VARCHAR}
+        SELECT
+        *
+        FROM
+        ods.op_indice_summary a
+        LEFT JOIN
+        (SELECT
+        code, type, MAX(update_date) AS update_date
+        FROM
+        ods.op_indice_summary
+        WHERE
+        code = '1agt65'= #{code,jdbcType=CHAR}
+        GROUP BY type) b ON a.code = b.code AND a.type = b.type
+        AND a.update_date = b.update_date
+        WHERE
+        a.code = = #{code,jdbcType=CHAR} AND b.code IS NOT NULL
+        ORDER BY a.type
 	</select>
 	
 </mapper>

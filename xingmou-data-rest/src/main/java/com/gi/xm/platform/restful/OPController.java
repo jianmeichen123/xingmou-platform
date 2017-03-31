@@ -42,6 +42,14 @@ public class OPController {
     private WeiboIndiceBiz weiboIndiceBiz;
 
 
+    @RequestMapping("pvuv/{code}")
+    @ResponseBody
+    public MessageInfo<List<AlexaPvUv>> alexaPvUvpvuv(@PathVariable String code) {
+        MessageInfo<List<AlexaPvUv>> messageInfo = alexaPvUvBiz.getListByCode(code);
+        return messageInfo;
+    }
+/*
+
     @RequestMapping("pvuv")
     @ResponseBody
     public MessageInfo<List<AlexaPvUv>> alexaPvUvpvuv(String domain) {
@@ -64,6 +72,7 @@ public class OPController {
         MessageInfo<List<AlexaPvUv>> messageInfo = alexaPvUvBiz.getListByDoamin(domain);
         return messageInfo;
         }
+*/
 
         @RequestMapping("iosdown/{appid}")
         @ResponseBody

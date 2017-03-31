@@ -28,8 +28,10 @@
 		<result column="newest_event_date" 		property="newestEventDate" 		jdbcType="VARCHAR" />
 		<result column="newest_event_round" 	property="newestEventRound" 	jdbcType="VARCHAR" />
 
+		<result column="newest_event_money" 	property="newestEventMoney" 	jdbcType="INTEGER" />
 		<result column="newest_event_round_id" 	property="newestEventRoundId" 	jdbcType="INTEGER" />
-		<result column="newest_event_money" 	property="newestEventMoney" 	jdbcType="BIGINT" />
+		<result column="newest_event_inverstrirm_names" property="newestEventInvestfirms" 	jdbcType="VARCHAR" />
+		<result column="inverstrirm_names" 		property="inverstrirmNames" 	jdbcType="VARCHAR" />
 		<result column="source_id" 				property="sourceId" 			jdbcType="BIGINT" />
 		<result column="create_date" 			property="createDate" 			jdbcType="VARCHAR" />
 		<result column="status" 				property="status" 				jdbcType="INTEGER" />
@@ -45,6 +47,7 @@
 		<result column="inverstrirm_names" 		property="inverstrirmNames" 	jdbcType="VARCHAR" />
 		<result column="invest_num" 			property="investNum" 			jdbcType="INTEGER" />
 		<result column="invest_money"	 		property="investMoney" 			jdbcType="BIGINT" />
+		<result column="similar"	 			property="similar" 				jdbcType="DOUBLE" />
 
 		<result column="load_time" 				property="loadTime" 			jdbcType="TIMESTAMP" />
 		<result column="update_time" 			property="updateTime" 			jdbcType="TIMESTAMP" />
@@ -52,9 +55,9 @@
 
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
 		DELETE FROM dm_project
-		WHERE id = #{id,jdbcType=BIGINT} 
+		WHERE id = #{id,jdbcType=BIGINT}
 	</delete>
-	
+
 	<insert id="insert" parameterType="com.gi.xm.platform.pojo.Project" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO dm_project (
 			title,
@@ -166,26 +169,26 @@
 			<if test="investMoney!=null">invest_money = #{investMoney,jdbcType=BIGINT},</if>
 	    WHERE id = #{id,jdbcType=BIGINT}
 	</update>
-	
-			
+
+
 	<update id="changeStatus">
 		UPDATE dm_project
 		SET
     		update_time = UNIX_TIMESTAMP(),
     		update_userid=#{updateUserid,jdbcType=VARCHAR},
             status=#{status,jdbcType=INTEGER}
-	    WHERE id = #{id,jdbcType=BIGINT} 
+	    WHERE id = #{id,jdbcType=BIGINT}
 	</update>
-		
-		
+
+
 	<sql id="selectFields">
 		id,title,pic,pic_big_xm,picshow,source_type,
 		weblink,ceo_name,company_id,company_name,industry_id,description,
 		industry_sub_id,industry_name,industry_sub_name,district_id,district_name,
-		district_sub_id,district_sub_name,newest_event_id,newest_event_date,newest_event_round,
+		district_sub_id,district_sub_name,newest_event_id,newest_event_date,newest_event_round,newest_event_inverstrirm_names,
 		newest_event_round_id,newest_event_money,source_id,create_date,status,business_model,
 		industry_pain_points,team_score,operation_score,score,time_span,
-		invest_info,inverstrirm_names,invest_num,invest_money,load_time,
+		invest_info,inverstrirm_names,invest_num,invest_money,code,load_time,
 		update_time
 	</sql>
 
@@ -193,7 +196,7 @@
 		id,title,pic,picshow,weblink,
 		ceo_name,company_id,company_name,industry_id,description,industry_sub_id,
 		industry_name,industry_sub_name,district_id,district_name,district_sub_id,
-		district_sub_name,newest_event_id,newest_event_date,newest_event_round,
+		district_sub_name,newest_event_id,newest_event_date,newest_event_round,newest_event_inverstrirm_names,
 		newest_event_round_id,newest_event_money,source_id,create_date,status,business_model,
 		industry_pain_points,team_score,operation_score,score,time_span,
 		invest_info,inverstrirm_names,invest_num,invest_money,load_time,
@@ -214,20 +217,27 @@
 			dm_project
 		<include refid="queryWhereAndOrder" />
 	</select>
-	<select id="queryCompetationlist" resultMap="BaseResultMap" parameterType="com.gi.xm.platform.query.ProjectQuery">
+	<select id="queryCompetationlist" resultMap="BaseResultMap" parameterType="java.lang.Long">
 		SELECT
-			<include refid="selectFields" />
+		<include refid="selectFields" />
 		FROM
-			dm_project
-		<where>
-		<if test="id!=null">AND id != #{id,jdbcType=BIGINT}</if>
-		<if test="industryId!=null">AND industry_id = #{industryId,jdbcType=BIGINT}</if>
-		<if test="industrySubId!=null">AND industry_sub_id = #{industrySubId,jdbcType=BIGINT}</if>
+		dm_project
+		<where> code in (
+			SELECT dm_competitive_product.sim_prod_code FROM dm_competitive_product WHERE dm_competitive_product.base_prod_code =
+			(select code from dm_project where dm_project.id = #{id,jdbcType=BIGINT}
+			)
+			)
 		</where>
-		<choose>
-			<when test="order!=null and orderBy!=null and order!='' and orderBy!=''">order by ${orderBy} ${order}</when>
-			<otherwise>order by id desc</otherwise>
-		</choose>
+	</select>
+
+	<select id="queryCompetitiveSimilar" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		SELECT
+		sim_prod_code as code, dm_competitive_product.similarity as similar
+		FROM
+		dm_competitive_product
+		<where>
+			base_prod_code = (select code from dm_project where dm_project.id = #{id,jdbcType=BIGINT})
+		</where>
 	</select>
 	
 	

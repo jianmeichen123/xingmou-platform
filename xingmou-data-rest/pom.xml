@@ -9,7 +9,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.gi</groupId>
     <artifactId>xingmou-data-rest</artifactId>
     <properties>
         <!-- The main class to start by executing java -jar -->
@@ -28,6 +27,11 @@
         <dependency>
             <groupId>com.gi</groupId>
             <artifactId>xingmou-mongodb</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.gi</groupId>
+            <artifactId>ctdn-data-ods</artifactId>
         </dependency>
         <!--自身依赖 end-->
         <dependency>

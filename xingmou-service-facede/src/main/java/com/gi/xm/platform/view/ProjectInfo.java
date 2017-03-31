@@ -194,13 +194,32 @@ public class ProjectInfo implements Serializable {
 	private String description;
 
 	/**
+	 * 相似度
+	 */
+	private Double similar;
+
+	/**
 	 *
 	 * @Fields loadTime : 加载时间
 	 */
 	private Timestamp loadTime;
 	private  String inverstrirmNames;
+	/**
+	 * @Fileds
+	 */
+	private String  newestEventInvestfirms;
 
 	public Integer sourceType;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    private String code;
 	public String getInverstrirmNames() {
 		return inverstrirmNames;
 	}
@@ -511,5 +530,21 @@ public class ProjectInfo implements Serializable {
 
 	public void setSourceType(Integer sourceType) {
 		this.sourceType = sourceType;
+	}
+
+	public String getNewestEventInvestfirms() {
+		return newestEventInvestfirms;
+	}
+
+	public void setNewestEventInvestfirms(String newestEventInvestfirms) {
+		this.newestEventInvestfirms = newestEventInvestfirms;
+	}
+
+	public Double getSimilar() {
+		return similar;
+	}
+
+	public void setSimilar(Double similar) {
+		this.similar = similar;
 	}
 }

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.ods.dao.OpIndiceSummaryDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.ods.pojo.OpIndiceSummary">
+
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="code" property="code" jdbcType="VARCHAR" />
+        <result column="appname" property="appname" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="VARCHAR" />
+        <result column="appid" property="appid" jdbcType="VARCHAR" />
+
+        <result column="index_1" property="index1" jdbcType="BIGINT" />
+        <result column="index_2" property="index2" jdbcType="BIGINT" />
+        <result column="avg_score" property="avgScore" jdbcType="INTEGER" />
+        <result column="update_date" property="updateDate" jdbcType="INTEGER" />
+
+	</resultMap>
+
+
+	<sql id="selectFields">
+	    code,appname,type,appid,index_1,index_2,avg_score,update_date
+	</sql>
+	
+			
+	<select id="selectByCode" resultMap="BaseResultMap">
+        SELECT
+        *
+        FROM
+        ods.op_indice_summary a
+        LEFT JOIN
+        (SELECT
+        code, type, MAX(update_date) AS update_date
+        FROM
+        ods.op_indice_summary
+        WHERE
+        code = #{code,jdbcType=CHAR}
+        GROUP BY type) b ON a.code = b.code AND a.type = b.type
+        AND a.update_date = b.update_date
+        WHERE
+        a.code = #{code,jdbcType=CHAR} AND b.code IS NOT NULL
+        ORDER BY a.type
+	</select>
+	
+</mapper>

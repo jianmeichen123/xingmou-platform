@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.ods.dao.WeiboIndiceDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.ods.pojo.WeiboIndice">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="date" property="date" jdbcType="INTEGER" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="wbid" property="wbid" jdbcType="BIGINT" />
+        <result column="weibo" property="weibo" jdbcType="INTEGER" />
+
+        <result column="fans" property="fans" jdbcType="BIGINT" />
+        <result column="follow" property="follow" jdbcType="INTEGER" />
+        <result column="interact" property="interact" jdbcType="INTEGER" />
+
+    </resultMap>
+
+
+	<sql id="selectFields">
+	   date,weibo,fans,follow,interact
+	</sql>
+
+    <select id="selectByWbid" resultMap="BaseResultMap">
+        SELECT
+            <include refid="selectFields" />
+        FROM
+            weibo_indice
+        WHERE
+            wbid = #{wbid,jdbcType=BIGINT}
+    </select>
+
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.ods.dao.WeixinIndiceDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.ods.pojo.WeixinIndice">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="date" property="date" jdbcType="INTEGER" />
+		<result column="count_date" property="countDate" jdbcType="DATE" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="wxid" property="wxid" jdbcType="VARCHAR" />
+
+		<result column="article_clicks_count" property="articleClicksCount" jdbcType="INTEGER" />
+		<result column="article_count" property="articleCount" jdbcType="INTEGER" />
+		<result column="article_likes_count" property="articleLikesCount" jdbcType="INTEGER" />
+		<result column="avg_article_clicks_count" property="avgArticleClicksCount" jdbcType="INTEGER" />
+		<result column="avg_article_likes_count" property="avgArticleLikesCount" jdbcType="INTEGER" />
+	</resultMap>
+
+
+	<sql id="selectFields">
+		date,count_date,article_clicks_count,article_count,article_likes_count,avg_article_clicks_count,avg_article_likes_count
+	</sql>
+	
+			
+	<select id="selectByWxid" resultMap="BaseResultMap">
+		SELECT
+			<include refid="selectFields" />
+		FROM
+			weixin_indice
+		WHERE
+			wxid = #{wxid,jdbcType=VARCHAR}
+	</select>
+	
+</mapper>

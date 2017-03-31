@@ -234,9 +234,28 @@ public class Project extends Pojo {
 
 	public Integer sourceType;
 
+
+	/**
+	 * @Fileds
+	 */
+	private String  newestEventInvestfirms;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    private String code;
+
+    private Double similar;
+
 	public String getInverstrirmNames() {
 		return inverstrirmNames;
 	}
+
 
 	public void setInverstrirmNames(String inverstrirmNames) {
 		this.inverstrirmNames = inverstrirmNames;
@@ -542,7 +561,23 @@ public class Project extends Pojo {
 		return sourceType;
 	}
 
+	public String getNewestEventInvestfirms() {
+		return newestEventInvestfirms;
+	}
+
+	public void setNewestEventInvestfirms(String newestEventInvestfirms) {
+		this.newestEventInvestfirms = newestEventInvestfirms;
+	}
+
 	public void setSourceType(Integer sourceType) {
 		this.sourceType = sourceType;
 	}
+
+    public void setSimilar(Double similar) {
+        this.similar = similar;
+    }
+
+    public Double getSimilar() {
+        return similar;
+    }
 }

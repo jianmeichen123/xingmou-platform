@@ -42,7 +42,6 @@
         <module>xingmou-service-facede</module>
         <module>xingmou-service</module>
         <module>xingmou-mongodb</module>
-        <module>xingmou-service-report</module>
         <module>xingmou-restful</module>
         <module>xingmou-user</module>
         <module>xingmou-doc</module>

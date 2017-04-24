@@ -4,6 +4,7 @@ import com.gi.ctdn.biz.CapitalTypeBiz;
 import com.gi.ctdn.pojo.CapitalType;
 import com.gi.xm.platform.view.common.MessageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,6 +24,7 @@ public class CommonRest {
 
     @RequestMapping("capitalType")
     @ResponseBody
+    @Cacheable(value = "capitalType",keyGenerator = "baseKG")
     public MessageInfo<List<CapitalType>> capitalType(){
         return capitalTypeBiz.getAllCapitalType();
     }
@@ -30,6 +32,7 @@ public class CommonRest {
 
     @RequestMapping("comQuery")
     @ResponseBody
+    @Cacheable(value = "proQuery",keyGenerator = "baseKG")
     public MessageInfo<Map> proQuery(){
 
         return null;

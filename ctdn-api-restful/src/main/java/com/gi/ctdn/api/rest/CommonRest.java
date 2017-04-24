@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by vincent on 17-4-24.
@@ -25,4 +26,14 @@ public class CommonRest {
     public MessageInfo<List<CapitalType>> capitalType(){
         return capitalTypeBiz.getAllCapitalType();
     }
+
+
+    @RequestMapping("comQuery")
+    @ResponseBody
+    public MessageInfo<Map> proQuery(){
+
+        return null;
+    }
+
+
 }

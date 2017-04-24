@@ -2,14 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="$name.getFullMapperClassName($table)">
 	<resultMap id="BaseResultMap" type="$name.getFullModelClassName($table)">
-$i=0
 #foreach($column in $table.columns)
     #if($column.isPrimary())
         <id column="$column.columnName" property="$column.propertyName" jdbcType="$column.jdbcType" />
     #else
         <result column="$column.columnName" property="$column.propertyName" jdbcType="$column.jdbcType" />
     #end
-$i = $+1
 #end
 	</resultMap>
 
@@ -28,5 +26,13 @@ $i = $+1
 		$sql.getIndexWhere($index)
 	</select>
 	#end
+
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    $table.tableName
+	</select>
 
 </mapper>

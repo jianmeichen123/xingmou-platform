@@ -1,10 +1,8 @@
 package com.gi.xm.platform.view.common;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.io.Serializable;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MessageInfo<E> implements Serializable {
 
 	/**   

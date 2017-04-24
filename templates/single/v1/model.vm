@@ -2,9 +2,11 @@ package ${mybatisgen.p.get("basePackage")}.model;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.sql.Timestamp;
 import java.util.Date;
 
+/**
+ *  $table.comment
+ */
 public class $table.modelName extends Pojo {
 
     #foreach($column in $table.columns)

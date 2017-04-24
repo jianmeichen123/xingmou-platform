@@ -70,4 +70,16 @@ public class $bizClass  {
 
 
 
+    public MessageInfo<List<$modelClass>> getAll$modelClass(){
+
+		MessageInfo<List<$modelClass>> messageInfo = new MessageInfo<List<$modelClass>>();
+		try {
+			List<$modelClass> ${modelVar}List = ${mapperVarName}.selectAll();
+			messageInfo.setData( ${modelVar}List);
+		} catch (Exception e) {
+			LOGGER.error("getAll$modelClass","查询全部${table.getDisplayName()}失败", e);
+			messageInfo.setStatus(10001);
+		}
+		return messageInfo;
+	}
 }

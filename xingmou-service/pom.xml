@@ -6,7 +6,7 @@
     <parent>
         <artifactId>xingmou-platform</artifactId>
         <groupId>com.gi</groupId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.1-SNAPSHOT</version>
     </parent>
     <artifactId>xingmou-service</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -14,7 +14,6 @@
 
     <properties>
         <!-- The main class to start by executing java -jar -->
-        <start-class>com.gi.xm.platform.main.XMServiceApp</start-class>
     </properties>
 
     <dependencies>
@@ -108,8 +107,7 @@
                     <username>xmuser</username>
                     <password>qcDKywE7Ka52</password>
                     <output_root_dir>/home/vincent/tmp/</output_root_dir>
-                    <templates_dir>/home/vincent/workspace_idea/company/xm-platform/xingmou-platform/templates/
-                    </templates_dir>
+                    <templates_dir>/home/vincent/IdeaProjects/ctdn/xingmou-platform/templates/single/v1/</templates_dir>
                 </configuration>
             </plugin>
             <!--  mvn com.v4java:maven-mybatis-gen-plugin:gen -s ~/etc/settings-ali.xml -->

@@ -25,4 +25,5 @@ public interface $mapperClass {
 	#end
 	#end
 
+	List<${modelClass}> selectAll();
 }

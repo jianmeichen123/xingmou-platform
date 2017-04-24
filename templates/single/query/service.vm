@@ -51,4 +51,5 @@ public interface ${name.getServiceClassName($table)} {
 	#end
 
 
+    MessageInfo<List<$messageClass>> selectAll();
 }

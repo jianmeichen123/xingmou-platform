@@ -21,10 +21,6 @@
         </dependency>
         <dependency>
             <groupId>com.gi</groupId>
-            <artifactId>xingmou-api-common</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.gi</groupId>
             <artifactId>xingmou-redis</artifactId>
         </dependency>
         <dependency>

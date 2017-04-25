@@ -13,7 +13,10 @@
     <groupId>com.gi</groupId>
     <artifactId>xingmou-platform</artifactId>
     <version>1.1-SNAPSHOT</version>
-    <modules>
+    <packaging>pom</packaging>
+
+
+   <modules>
         <module>xingmou-assembly</module>
         <module>xingmou-logback</module>
         <module>xingmou-redis</module>
@@ -22,16 +25,15 @@
         <module>xingmou-api-common</module>
         <module>xingmou-biz</module>
         <module>xingmou-mongodb</module>
-        <!--<module>xingmou-user</module>-->
+
+       <!--<module>xingmou-user</module>
+       -->
         <module>xingmou-doc</module>
         <module>xingmou-data-rest</module>
         <module>ctdn-data-ods</module>
         <module>ctdn-biz</module>
         <module>ctdn-api-restful</module>
     </modules>
-    <packaging>pom</packaging>
-
-
 
     <properties>
         <xingmou.version>1.1-SNAPSHOT</xingmou.version>
@@ -157,6 +159,28 @@
                 <artifactId>mybatis-spring</artifactId>
                 <version>${mybatis.spring.version}</version>
             </dependency>
+
+            <!--Mybatis-->
+            <!-- Mybatis Generator -->
+            <dependency>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-core</artifactId>
+                <version>1.3.2</version>
+                <scope>compile</scope>
+                <optional>true</optional>
+            </dependency>
+            <!--分页插件-->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper</artifactId>
+                <version>${pagehelper.version}</version>
+            </dependency>
+            <!--通用Mapper-->
+            <dependency>
+                <groupId>tk.mybatis</groupId>
+                <artifactId>mapper</artifactId>
+                <version>${mapper.version}</version>
+            </dependency>
             <!--            <dependency>
                             <groupId>commons-dbcp</groupId>
                             <artifactId>commons-dbcp</artifactId>
@@ -253,6 +277,12 @@
                 <artifactId>lombok</artifactId>
                 <version>1.16.6</version>
             </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>1.0.11</version>
+            </dependency>
+
         </dependencies>
 
     </dependencyManagement>

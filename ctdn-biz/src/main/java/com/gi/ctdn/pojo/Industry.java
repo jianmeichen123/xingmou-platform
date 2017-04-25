@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
+
 import com.gi.xm.platform.view.common.PojoInfo;
 
 public class Industry extends PojoInfo {
@@ -12,6 +14,7 @@ public class Industry extends PojoInfo {
         public static final String INDUSTRYID = "industryId";
         public static final String PARENTID = "parentId";
         public static final String NAME = "name";
+        public static final String INDUSTRYLIST = "industryList";
         public static final String VAL = "val";
     
 	
@@ -29,6 +32,11 @@ public class Industry extends PojoInfo {
 	 * @Fields parentId : 
 	 */
 	private Integer parentId;
+
+	/**
+	 * @Fields parentId :
+	 */
+	private List<Industry> industryList;
 	
 	/**
 	 * @Fields name : 
@@ -80,4 +88,8 @@ public class Industry extends PojoInfo {
 	public void setVal(Integer val){
 		this.val = val;
 	}
+
+	public List getIndustryList(){ return industryList; }
+
+	public void setIndustrylist(List list){ this.industryList = list; }
     }

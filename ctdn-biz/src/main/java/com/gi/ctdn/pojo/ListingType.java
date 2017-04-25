@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
+
 import com.gi.xm.platform.view.common.PojoInfo;
 
 public class ListingType extends PojoInfo {
@@ -14,6 +16,7 @@ public class ListingType extends PojoInfo {
         public static final String TYPENAME = "typeName";
         public static final String PARENTID = "parentId";
         public static final String VAL = "val";
+        public static final String DATA = "data";
     
 	
 	/**
@@ -45,6 +48,11 @@ public class ListingType extends PojoInfo {
 	 * @Fields val : 
 	 */
 	private Integer val;
+
+	/**
+	 * @Fields listingTypeList :
+	 */
+	private List<ListingType> listingTypeList;
 	
     
 	public Integer getId(){
@@ -94,4 +102,8 @@ public class ListingType extends PojoInfo {
 	public void setVal(Integer val){
 		this.val = val;
 	}
+
+	public List getListingTypeList() { return listingTypeList; }
+
+	public void setListingTypeList(List list) { this.listingTypeList = list; }
     }

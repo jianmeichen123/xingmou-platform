@@ -11,4 +11,8 @@ public interface IndustryDAO {
 	
 	
 	List<Industry> selectAll();
+
+	List<Industry> selectFirstIndustry();
+
+	List<Industry> selectNextIndustry(@Param("industryId") Integer industryId);
 }

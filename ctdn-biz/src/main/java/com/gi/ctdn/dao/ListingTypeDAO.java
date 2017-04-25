@@ -11,4 +11,8 @@ public interface ListingTypeDAO {
 	
 	
 	List<ListingType> selectAll();
+
+	List<ListingType> selectListingType();
+
+	List<ListingType> selectSecondListingType(@Param("typeId") Integer typeId);
 }

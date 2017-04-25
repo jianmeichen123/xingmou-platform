@@ -2,6 +2,7 @@
 
 package com.gi.ctdn.biz;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -34,7 +35,22 @@ public class DistrictBiz  {
 		MessageInfo<List<District>> messageInfo = new MessageInfo<List<District>>();
 		try {
 			List<District> districtList = districtDAO.selectAll();
-			messageInfo.setData( districtList);
+			if (districtList != null){
+				for (District district : districtList
+						) {
+					Integer districtType = district.getDistrictType();
+					if (districtType == 0){
+						List<District> innerList = new ArrayList<>();
+						innerList.add(district);
+						messageInfo.setData(innerList);
+					}
+					if (districtType == 1){
+						List<District> outerList = new ArrayList<>();
+						outerList.add(district);
+						messageInfo.setData(outerList);
+					}
+				}
+			}
 		} catch (Exception e) {
 			LOGGER.error("getAllDistrict","查询全部District失败", e);
 			messageInfo.setStatus(10001);

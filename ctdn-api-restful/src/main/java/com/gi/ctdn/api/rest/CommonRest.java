@@ -94,15 +94,14 @@ public class CommonRest {
         List<District> districts = districtMessageInfo.getData();
         List<District> fatherDistrictList = new ArrayList<>();
         for (District fatherDistrict: districts) {
-            if (fatherDistrict.getParentId() != 0){
-                List<District> sonDistrictList = new ArrayList<>();
-                for (District sonDistrict : districts) {
-                    if (sonDistrict.getParentId().intValue() == fatherDistrict.getId().intValue()){
-                        sonDistrictList.add(sonDistrict);
-                    }
+            List<District> sonDistrictList = new ArrayList<>();
+            for (District sonDistrict : districts) {
+                if (sonDistrict.getParentId().intValue() == fatherDistrict.getId().intValue()){
+                    sonDistrictList.add(sonDistrict);
                 }
-                fatherDistrict.setChildren(sonDistrictList);
-            }else {
+            }
+            fatherDistrict.setChildren(sonDistrictList);
+            if (fatherDistrict.getParentId() == 0){
                 fatherDistrictList.add(fatherDistrict);
             }
         }
@@ -123,15 +122,14 @@ public class CommonRest {
         List<Industry> industryList = industryMessageInfo.getData();
         List<Industry> fatherIndustryList = new ArrayList<>();
         for (Industry fatherIndustry : industryList) {
-            if (fatherIndustry.getParentId() !=0 ) {
-                List<Industry> sonIndustryList = new ArrayList<>();
-                for (Industry sonIndustry : industryList) {
-                    if (sonIndustry.getParentId().intValue() == fatherIndustry.getId().intValue()) {
-                        sonIndustryList.add(sonIndustry);
-                    }
+            List<Industry> sonIndustryList = new ArrayList<>();
+            for (Industry sonIndustry : industryList) {
+                if (sonIndustry.getParentId().intValue() == fatherIndustry.getId().intValue()) {
+                    sonIndustryList.add(sonIndustry);
                 }
-                fatherIndustry.setIndustrylist(sonIndustryList);
-            }else{
+            }
+            fatherIndustry.setIndustrylist(sonIndustryList);
+            if (fatherIndustry.getParentId() == 0){
                 fatherIndustryList.add(fatherIndustry);
             }
         }
@@ -152,15 +150,14 @@ public class CommonRest {
         List<ListingType> listingTypeList = listingTypeMessageInfo.getData();
         List<ListingType> fatherListingTypeList = new ArrayList<>();
         for (ListingType fatherListingType : listingTypeList) {
-            if (fatherListingType.getParentId() != 0){
-                List<ListingType> sonListingTypeList = new ArrayList<>();
-                for (ListingType sonListingType : listingTypeList) {
-                    if (sonListingType.getParentId().intValue() == fatherListingType.getId().intValue()){
-                         sonListingTypeList.add(sonListingType);
-                    }
+            List<ListingType> sonListingTypeList = new ArrayList<>();
+            for (ListingType sonListingType : listingTypeList) {
+                if (sonListingType.getParentId().intValue() == fatherListingType.getId().intValue()){
+                     sonListingTypeList.add(sonListingType);
                 }
-                fatherListingType.setChildren(sonListingTypeList);
-            }else {
+            }
+            fatherListingType.setChildren(sonListingTypeList);
+            if (fatherListingType.getParentId() ==0 ){
                 fatherListingTypeList.add(fatherListingType);
             }
         }

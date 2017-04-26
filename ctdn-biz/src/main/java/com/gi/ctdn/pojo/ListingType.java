@@ -16,7 +16,8 @@ public class ListingType extends PojoInfo {
         public static final String TYPENAME = "typeName";
         public static final String PARENTID = "parentId";
         public static final String VAL = "val";
-        public static final String DATA = "data";
+        public static final String CHILDREN = "children";
+
     
 	
 	/**
@@ -52,7 +53,7 @@ public class ListingType extends PojoInfo {
 	/**
 	 * @Fields listingTypeList :
 	 */
-	private List<ListingType> listingTypeList;
+	private List<ListingType> children;
 	
     
 	public Integer getId(){
@@ -103,7 +104,7 @@ public class ListingType extends PojoInfo {
 		this.val = val;
 	}
 
-	public List getListingTypeList() { return listingTypeList; }
+	public List getChildren() { return children; }
 
-	public void setListingTypeList(List list) { this.listingTypeList = list; }
+	public void setChildren(List children) { this.children = children; }
     }

@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
+
 import com.gi.xm.platform.view.common.PojoInfo;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -16,6 +18,7 @@ public class District extends PojoInfo {
         public static final String PARENTID = "parentId";
         public static final String DISTRICTTYPE = "districtType";
         public static final String VAL = "val";
+        public static final String CHILDREN = "children";
     
 	
 	/**
@@ -47,6 +50,11 @@ public class District extends PojoInfo {
 	 * @Fields val : 
 	 */
 	private Integer val;
+
+	/**
+	 * @FIelds children
+	 */
+	private List<District> children;
 	
     
 	public Integer getId(){
@@ -96,4 +104,8 @@ public class District extends PojoInfo {
 	public void setVal(Integer val){
 		this.val = val;
 	}
+
+	public List getChildren() { return children; }
+
+	public void setChildren(List children) { this.children = children; }
     }

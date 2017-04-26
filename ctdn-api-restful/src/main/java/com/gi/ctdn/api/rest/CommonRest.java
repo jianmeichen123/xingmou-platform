@@ -140,24 +140,23 @@ public class CommonRest {
     @ResponseBody
     @Cacheable(value = "proQuery",keyGenerator = "baseKG")
     public MessageInfo<Map> proQuery(){
-
+        MessageInfo<Map> messageInfo = new MessageInfo<>();
         Map<String,Object> map = new HashMap<>();
         MessageInfo<List<Industry>> industriesMessageInfo = industryBiz.getAllIndustry();
-        if (industriesMessageInfo != null){
-            map.put("industriesMessageInfo",industriesMessageInfo);
-        }
+        map.put("industriesMessageInfo",industriesMessageInfo.getData());
+        messageInfo.setMessage(industriesMessageInfo.getMessage());
+        messageInfo.setStatus(industriesMessageInfo.getStatus());
 
-        MessageInfo<List<InvestRound>> investRoundsMessageInfo = investRoundBiz.getAllInvestRound();
-        if (investRoundsMessageInfo!= null){
-            map.put("investRoundsMessageInfo",investRoundsMessageInfo);
-        }
+        MessageInfo<List<InvestRound>> investRoundMessageInfo = investRoundBiz.getAllInvestRound();
+        map.put("investRoundMessageInfo",investRoundMessageInfo.getData());
+        messageInfo.setMessage(industriesMessageInfo.getMessage());
+        messageInfo.setStatus(industriesMessageInfo.getStatus());
 
         MessageInfo<List<District>> districtsMessageInfo = districtBiz.getAllDistrict();
-        if (districtsMessageInfo != null){
-            map.put("districtsMessageInfo",districtsMessageInfo);
-        }
+        map.put("districtsMessageInfo",districtsMessageInfo.getData());
+        messageInfo.setMessage(districtsMessageInfo.getMessage());
+        messageInfo.setStatus(districtsMessageInfo.getStatus());
 
-        MessageInfo<Map> messageInfo = new MessageInfo<>();
         messageInfo.setData(map);
         return messageInfo;
     }
@@ -170,29 +169,27 @@ public class CommonRest {
     @ResponseBody
     @Cacheable(value = "investEventQuery",keyGenerator = "baseKG")
     public MessageInfo<Map> investEventQuery(){
-
+        MessageInfo<Map> messageInfo = new MessageInfo<>();
         Map<String,Object> map = new HashMap<>();
         MessageInfo<List<Industry>> industriesMessageInfo = industryBiz.getAllIndustry();
-        if (industriesMessageInfo != null){
-            map.put("industriesMessageInfo",industriesMessageInfo);
-        }
+        map.put("industriesMessageInfo",industriesMessageInfo.getData());
+        messageInfo.setMessage(industriesMessageInfo.getMessage());
+        messageInfo.setStatus(industriesMessageInfo.getStatus());
 
-        MessageInfo<List<InvestRound>> investRoundsMessageInfo = investRoundBiz.getAllInvestRound();
-        if (investRoundsMessageInfo!= null){
-            map.put("investRoundsMessageInfo",investRoundsMessageInfo);
-        }
+        MessageInfo<List<InvestRound>> investRoundMessageInfo = investRoundBiz.getAllInvestRound();
+        map.put("investRoundMessageInfo",investRoundMessageInfo.getData());
+        messageInfo.setMessage(industriesMessageInfo.getMessage());
+        messageInfo.setStatus(industriesMessageInfo.getStatus());
 
         MessageInfo<List<District>> districtsMessageInfo = districtBiz.getAllDistrict();
-        if (districtsMessageInfo != null){
-            map.put("districtsMessageInfo",districtsMessageInfo);
-        }
+        map.put("districtsMessageInfo",districtsMessageInfo.getData());
+        messageInfo.setMessage(districtsMessageInfo.getMessage());
+        messageInfo.setStatus(districtsMessageInfo.getStatus());
 
         MessageInfo<List<CurrencyType>> currencyTypeMessageInfo = currencyTypeBiz.getAllCurrencyType();
-        if (currencyTypeMessageInfo != null){
-            map.put("currencyTypeMessageInfo",currencyTypeMessageInfo);
-        }
+        map.put("currencyTypeMessageInfo",currencyTypeMessageInfo.getData());
+        currencyTypeMessageInfo.setMessage(currencyTypeMessageInfo.getMessage());
 
-        MessageInfo<Map> messageInfo = new MessageInfo<>();
         messageInfo.setData(map);
         return messageInfo;
     }
@@ -205,32 +202,32 @@ public class CommonRest {
     @ResponseBody
     @Cacheable(value = "mergeEventQuery",keyGenerator = "baseKG")
     public MessageInfo<Map> mergeEventQuery(){
-
+        MessageInfo<Map> messageInfo = new MessageInfo<>();
         Map<String,Object> map = new HashMap<>();
         MessageInfo<List<Industry>> industriesMessageInfo = industryBiz.getAllIndustry();
-        if (industriesMessageInfo != null){
-            map.put("industriesMessageInfo",industriesMessageInfo);
-        }
+        map.put("industriesMessageInfo",industriesMessageInfo.getData());
+        messageInfo.setMessage(industriesMessageInfo.getMessage());
+        messageInfo.setStatus(industriesMessageInfo.getStatus());
 
         MessageInfo<List<MergeType>> mergeTypeMessageInfo = mergeTypeBiz.getAllMergeType();
-        if (mergeTypeMessageInfo != null){
-            map.put("mergeTypeMessageInfo",mergeTypeMessageInfo);
-        }
+        map.put("mergeTypeMessageInfo",mergeTypeMessageInfo.getData());
+        mergeTypeMessageInfo.setMessage(mergeTypeMessageInfo.getMessage());
+        mergeTypeMessageInfo.setStatus(mergeTypeMessageInfo.getStatus());
 
 
         MessageInfo<List<MergeStatus>> mergeStatusMessageInfo = mergeStatusBiz.getAllMergeStatus();
-        if (mergeTypeMessageInfo != null){
-            map.put("mergeStatusMessageInfo",mergeStatusMessageInfo);
-        }
+        map.put("mergeStatusMessageInfo",mergeStatusMessageInfo.getData());
+        mergeStatusMessageInfo.setMessage(mergeStatusMessageInfo.getMessage());
+        mergeStatusMessageInfo.setStatus(mergeStatusMessageInfo.getStatus());
 
         //股权比例暂缺
 
         MessageInfo<List<CurrencyType>> currencyTypeMessageInfo = currencyTypeBiz.getAllCurrencyType();
-        if (currencyTypeMessageInfo != null){
-            map.put("currencyTypeMessageInfo",currencyTypeMessageInfo);
-        }
+        map.put("currencyTypeMessageInfo",currencyTypeMessageInfo.getData());
+        currencyTypeMessageInfo.setMessage(currencyTypeMessageInfo.getMessage());
+        currencyTypeMessageInfo.setStatus(currencyTypeMessageInfo.getStatus());
 
-        MessageInfo<Map> messageInfo = new MessageInfo<>();
+
         messageInfo.setData(map);
         return messageInfo;
     }
@@ -243,19 +240,18 @@ public class CommonRest {
     @ResponseBody
     @Cacheable(value = "listingQuery",keyGenerator = "baseKG")
     public MessageInfo<Map> listingQuery(){
-
+        MessageInfo<Map> messageInfo = new MessageInfo<>();
         Map<String,Object> map = new HashMap<>();
         MessageInfo<List<Industry>> industriesMessageInfo = industryBiz.getAllIndustry();
-        if (industriesMessageInfo != null){
-            map.put("industriesMessageInfo",industriesMessageInfo);
-        }
+        map.put("industriesMessageInfo",industriesMessageInfo.getData());
+        messageInfo.setMessage(industriesMessageInfo.getMessage());
+        messageInfo.setStatus(industriesMessageInfo.getStatus());
 
         MessageInfo<List<ListingType>> listingTypeMessageInfo = listingTypeBiz.getAllListingType();
-        if (listingTypeMessageInfo!= null){
-            map.put("listingTypeMessageInfo",listingTypeMessageInfo);
-        }
+        map.put("listingTypeMessageInfo",listingTypeMessageInfo.getData());
+        listingTypeMessageInfo.setMessage(listingTypeMessageInfo.getMessage());
+        listingTypeMessageInfo.setStatus(listingTypeMessageInfo.getStatus());
 
-        MessageInfo<Map> messageInfo = new MessageInfo<>();
         messageInfo.setData(map);
         return messageInfo;
     }
@@ -268,29 +264,29 @@ public class CommonRest {
     @ResponseBody
     @Cacheable(value = "quitEventQuery",keyGenerator = "baseKG")
     public MessageInfo<Map> quitEventQuery(){
-
+        MessageInfo<Map> messageInfo = new MessageInfo<>();
         Map<String,Object> map = new HashMap<>();
         MessageInfo<List<Industry>> industriesMessageInfo = industryBiz.getAllIndustry();
-        if (industriesMessageInfo != null){
-            map.put("industriesMessageInfo",industriesMessageInfo);
-        }
+        map.put("industriesMessageInfo",industriesMessageInfo.getData());
+        messageInfo.setMessage(industriesMessageInfo.getMessage());
+        messageInfo.setStatus(industriesMessageInfo.getStatus());
 
         MessageInfo<List<QuitType>> quitTypeMessageInfo = quitTypeBiz.getAllQuitType();
-        if (quitTypeMessageInfo!= null){
-            map.put("quitTypeMessageInfo",quitTypeMessageInfo);
-        }
+        map.put("quitTypeMessageInfo",quitTypeMessageInfo.getData());
+        quitTypeMessageInfo.setMessage(quitTypeMessageInfo.getMessage());
+        quitTypeMessageInfo.setStatus(quitTypeMessageInfo.getStatus());
 
         MessageInfo<List<District>> districtsMessageInfo = districtBiz.getAllDistrict();
-        if (districtsMessageInfo != null){
-            map.put("districtsMessageInfo",districtsMessageInfo);
-        }
+        map.put("districtsMessageInfo",districtsMessageInfo.getData());
+        messageInfo.setMessage(districtsMessageInfo.getMessage());
+        messageInfo.setStatus(districtsMessageInfo.getStatus());
 
         MessageInfo<List<CurrencyType>> currencyTypeMessageInfo = currencyTypeBiz.getAllCurrencyType();
-        if (currencyTypeMessageInfo != null){
-            map.put("currencyTypeMessageInfo",currencyTypeMessageInfo);
-        }
+        map.put("currencyTypeMessageInfo",currencyTypeMessageInfo.getData());
+        currencyTypeMessageInfo.setMessage(currencyTypeMessageInfo.getMessage());
+        currencyTypeMessageInfo.setStatus(currencyTypeMessageInfo.getStatus());
 
-        MessageInfo<Map> messageInfo = new MessageInfo<>();
+
         messageInfo.setData(map);
         return messageInfo;
     }
@@ -303,29 +299,27 @@ public class CommonRest {
     @ResponseBody
     @Cacheable(value = "orgQuery",keyGenerator = "baseKG")
     public MessageInfo<Map> orgQuery(){
-
+        MessageInfo<Map> messageInfo = new MessageInfo<>();
         Map<String,Object> map = new HashMap<>();
         MessageInfo<List<Industry>> industriesMessageInfo = industryBiz.getAllIndustry();
-        if (industriesMessageInfo != null){
-            map.put("industriesMessageInfo",industriesMessageInfo);
-        }
+        map.put("industriesMessageInfo",industriesMessageInfo.getData());
+        messageInfo.setMessage(industriesMessageInfo.getMessage());
+        messageInfo.setStatus(industriesMessageInfo.getStatus());
 
         MessageInfo<List<InvestRound>> investRoundMessageInfo = investRoundBiz.getAllInvestRound();
-        if (investRoundMessageInfo!= null){
-            map.put("investRoundMessageInfo",investRoundMessageInfo);
-        }
+        map.put("investRoundMessageInfo",investRoundMessageInfo.getData());
+        messageInfo.setMessage(industriesMessageInfo.getMessage());
+        messageInfo.setStatus(industriesMessageInfo.getStatus());
 
         MessageInfo<List<District>> districtsMessageInfo = districtBiz.getAllDistrict();
-        if (districtsMessageInfo != null){
-            map.put("districtsMessageInfo",districtsMessageInfo);
-        }
+        map.put("districtsMessageInfo",districtsMessageInfo.getData());
+        messageInfo.setMessage(districtsMessageInfo.getMessage());
+        messageInfo.setStatus(districtsMessageInfo.getStatus());
 
         MessageInfo<List<CurrencyType>> currencyTypeMessageInfo = currencyTypeBiz.getAllCurrencyType();
-        if (currencyTypeMessageInfo != null){
-            map.put("currencyTypeMessageInfo",currencyTypeMessageInfo);
-        }
-
-        MessageInfo<Map> messageInfo = new MessageInfo<>();
+        map.put("currencyTypeMessageInfo",currencyTypeMessageInfo.getData());
+        messageInfo.setMessage(currencyTypeMessageInfo.getMessage());
+        messageInfo.setStatus(currencyTypeMessageInfo.getStatus());
         messageInfo.setData(map);
         return messageInfo;
     }

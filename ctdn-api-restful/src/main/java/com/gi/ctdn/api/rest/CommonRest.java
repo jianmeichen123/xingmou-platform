@@ -52,46 +52,69 @@ public class CommonRest {
     private EquityRateBiz equityRateBiz;
 
 
+    /**
+     *资本类型查询
+     * @return messageInfo
+     */
     @RequestMapping("capitalType")
     @ResponseBody
     @Cacheable(value = "capitalType",keyGenerator = "baseKG")
     public MessageInfo<List<CapitalType>> capitalType(){
-        return capitalTypeBiz.getAllCapitalType();
-    }
-
-
-    @RequestMapping("currencyType")
-    @ResponseBody
-    @Cacheable(value = "currencyType",keyGenerator = "baseKG")
-    public MessageInfo<List<CurrencyType>> currencyType() {
-        return currencyTypeBiz.getAllCurrencyType();
-    }
-
-
-    @RequestMapping("district")
-    @ResponseBody
-    @Cacheable(value = "district",keyGenerator = "baseKG")
-    public MessageInfo<Map> district() {
-        MessageInfo<Map> messageInfo = new MessageInfo<>();
-        Map<String,Object> map = new HashMap<>();
-        MessageInfo<List<District>> districtMessageInfo = districtBiz.getAllDistrict();
-        List<District> districts = districtMessageInfo.getData();
-        List<District> districtFatherInfo = new ArrayList<>();
-        List<District> districtSonInfo = new ArrayList<>();
-        for (District district: districts) {
-            if (district.getParentId().intValue()==0){
-                districtFatherInfo.add(district);
-            }else {
-                districtSonInfo.add(district);
-            }
-        }
-        map.put("districtSonInfo",districtSonInfo);
-        map.put("districtFatherInfo",districtFatherInfo);
-        messageInfo.setData(map);
+        MessageInfo<List<CapitalType>> messageInfo = capitalTypeBiz.getAllCapitalType();
+        messageInfo.setMessage(messageInfo.getMessage());
+        messageInfo.setStatus(messageInfo.getStatus());
         return messageInfo;
     }
 
 
+    /**
+     *货币类型查询
+     * @return messageInfo
+     */
+    @RequestMapping("currencyType")
+    @ResponseBody
+    @Cacheable(value = "currencyType",keyGenerator = "baseKG")
+    public MessageInfo<List<CurrencyType>> currencyType() {
+        MessageInfo<List<CurrencyType>> messageInfo = currencyTypeBiz.getAllCurrencyType();
+        messageInfo.setMessage(messageInfo.getMessage());
+        messageInfo.setStatus(messageInfo.getStatus());
+        return messageInfo;
+    }
+
+
+    /**
+     *地区查询
+     * @return messageInfo
+     */
+    @RequestMapping("district")
+    @ResponseBody
+    @Cacheable(value = "district",keyGenerator = "baseKG")
+    public MessageInfo<List<District>> district() {
+        MessageInfo<List<District>> districtMessageInfo = districtBiz.getAllDistrict();
+        List<District> districts = districtMessageInfo.getData();
+        List<District> fatherDistrictList = new ArrayList<>();
+        for (District fatherDistrict: districts) {
+            if (fatherDistrict.getParentId() != 0){
+                List<District> sonDistrictList = new ArrayList<>();
+                for (District sonDistrict : districts) {
+                    if (sonDistrict.getParentId().intValue() == fatherDistrict.getId().intValue()){
+                        sonDistrictList.add(sonDistrict);
+                    }
+                }
+                fatherDistrict.setChildren(sonDistrictList);
+            }else {
+                fatherDistrictList.add(fatherDistrict);
+            }
+        }
+        districtMessageInfo.setData(fatherDistrictList);
+        return districtMessageInfo;
+    }
+
+
+    /**
+     *行业查询
+     * @return messageInfo
+     */
     @RequestMapping("industry")
     @ResponseBody
     @Cacheable(value = "industry",keyGenerator = "baseKG")
@@ -100,10 +123,10 @@ public class CommonRest {
         List<Industry> industryList = industryMessageInfo.getData();
         List<Industry> fatherIndustryList = new ArrayList<>();
         for (Industry fatherIndustry : industryList) {
-            if (fatherIndustry.getParentId().intValue() !=0 ) {
+            if (fatherIndustry.getParentId() !=0 ) {
                 List<Industry> sonIndustryList = new ArrayList<>();
                 for (Industry sonIndustry : industryList) {
-                    if (sonIndustry.getParentId().intValue() == fatherIndustry.getIndustryId().intValue()) {
+                    if (sonIndustry.getParentId().intValue() == fatherIndustry.getId().intValue()) {
                         sonIndustryList.add(sonIndustry);
                     }
                 }
@@ -117,80 +140,127 @@ public class CommonRest {
     }
 
 
+    /**
+     *上市类型查询
+     * @return messageInfo
+     */
     @RequestMapping("listingType")
     @ResponseBody
     @Cacheable(value = "listingType",keyGenerator = "baseKG")
-    public MessageInfo<Map> listingType() {
-        MessageInfo<Map> messageInfo = new MessageInfo<>();
-        Map<String,Object> map = new HashMap<>();
+    public MessageInfo<List<ListingType>> listingType() {
         MessageInfo<List<ListingType>> listingTypeMessageInfo = listingTypeBiz.getAllListingType();
         List<ListingType> listingTypeList = listingTypeMessageInfo.getData();
-        List<ListingType> fatherListingTypeInfo = new ArrayList<>();
-        List<ListingType> sonListingTypeInfo = new ArrayList<>();
-        for (ListingType listingType : listingTypeList) {
-            if (listingType.getParentId().intValue() != 0){
-                sonListingTypeInfo.add(listingType);
+        List<ListingType> fatherListingTypeList = new ArrayList<>();
+        for (ListingType fatherListingType : listingTypeList) {
+            if (fatherListingType.getParentId() != 0){
+                List<ListingType> sonListingTypeList = new ArrayList<>();
+                for (ListingType sonListingType : listingTypeList) {
+                    if (sonListingType.getParentId().intValue() == fatherListingType.getId().intValue()){
+                         sonListingTypeList.add(sonListingType);
+                    }
+                }
+                fatherListingType.setChildren(sonListingTypeList);
             }else {
-                fatherListingTypeInfo.add(listingType);
+                fatherListingTypeList.add(fatherListingType);
             }
         }
-        map.put("fatherListingTypeInfo",fatherListingTypeInfo);
-        map.put("sonListingTypeInfo",sonListingTypeInfo);
-        messageInfo.setData(map);
-        return messageInfo;
+        listingTypeMessageInfo.setData(fatherListingTypeList);
+        return listingTypeMessageInfo;
     }
 
 
+    /**
+     *投资轮次查询
+     * @return messageInfo
+     */
     @RequestMapping("investRound")
     @ResponseBody
     @Cacheable(value = "investRound",keyGenerator = "baseKG")
     public MessageInfo<List<InvestRound>> investRound() {
-        return investRoundBiz.getAllInvestRound();
+        MessageInfo<List<InvestRound>> messageInfo = investRoundBiz.getAllInvestRound();
+        messageInfo.setMessage(messageInfo.getMessage());
+        messageInfo.setStatus(messageInfo.getStatus());
+        return messageInfo;
     }
 
 
+    /**
+     *合并状态查询
+     * @return messageInfo
+     */
     @RequestMapping("mergeStatus")
     @ResponseBody
     @Cacheable(value = "mergeStatus",keyGenerator = "baseKG")
     public MessageInfo<List<MergeStatus>> mergeStatus() {
-        return mergeStatusBiz.getAllMergeStatus();
+        MessageInfo<List<MergeStatus>> messageInfo = mergeStatusBiz.getAllMergeStatus();
+        messageInfo.setMessage(messageInfo.getMessage());
+        messageInfo.setStatus(messageInfo.getStatus());
+        return messageInfo;
     }
 
 
+    /**
+     *合并类型查询
+     * @return messageInfo
+     */
     @RequestMapping("mergeType")
     @ResponseBody
     @Cacheable(value = "mergeType",keyGenerator = "baseKG")
     public MessageInfo<List<MergeType>> mergeType() {
-        return mergeTypeBiz.getAllMergeType();
+        MessageInfo<List<MergeType>> messageInfo = mergeTypeBiz.getAllMergeType();
+        messageInfo.setMessage(messageInfo.getMessage());
+        messageInfo.setStatus(messageInfo.getStatus());
+        return messageInfo;
     }
 
 
+    /**
+     *机构类型查询
+     * @return messageInfo
+     */
     @RequestMapping("orgType")
     @ResponseBody
     @Cacheable(value = "orgType",keyGenerator = "baseKG")
     public MessageInfo<List<OrgType>> orgType() {
-        return orgTypeBiz.getAllOrgType();
+        MessageInfo<List<OrgType>> messageInfo = orgTypeBiz.getAllOrgType();
+        messageInfo.setMessage(messageInfo.getMessage());
+        messageInfo.setStatus(messageInfo.getStatus());
+        return messageInfo;
     }
 
 
+    /**
+     *退出类型查询
+     * @return messageInfo
+     */
     @RequestMapping("quitType")
     @ResponseBody
     @Cacheable(value = "quitType",keyGenerator = "baseKG")
     public MessageInfo<List<QuitType>> quitType() {
-        return quitTypeBiz.getAllQuitType();
+        MessageInfo<List<QuitType>> messageInfo = quitTypeBiz.getAllQuitType();
+        messageInfo.setMessage(messageInfo.getMessage());
+        messageInfo.setStatus(messageInfo.getStatus());
+        return messageInfo;
     }
 
 
+    /**
+     *股权比例查询
+     * @return messageInfo
+     */
     @RequestMapping("equityRate")
     @ResponseBody
     @Cacheable(value = "equityRate",keyGenerator = "baseKG")
     public MessageInfo<List<EquityRate>> equityRate() {
-        return equityRateBiz.getAllEquityRate();
+        MessageInfo<List<EquityRate>> messageInfo = equityRateBiz.getAllEquityRate();
+        messageInfo.setMessage(messageInfo.getMessage());
+        messageInfo.setStatus(messageInfo.getStatus());
+        return messageInfo;
     }
 
     /**
      * 企业项目综合查询
-     * @return
+     * @return messageInfo
      */
     @RequestMapping("comQuery")
     @ResponseBody
@@ -208,7 +278,7 @@ public class CommonRest {
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
-        MessageInfo<Map> districtsMessageInfo = district();
+        MessageInfo<List<District>> districtsMessageInfo = district();
         map.put("districtsMessageInfo",districtsMessageInfo.getData());
         messageInfo.setMessage(districtsMessageInfo.getMessage());
         messageInfo.setStatus(districtsMessageInfo.getStatus());
@@ -219,7 +289,7 @@ public class CommonRest {
 
     /**
      * 投资事件综合查询
-     * @return
+     * @return messageInfo
      */
     @RequestMapping("investEventQuery")
     @ResponseBody
@@ -237,7 +307,7 @@ public class CommonRest {
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
-        MessageInfo<Map> districtsMessageInfo = district();
+        MessageInfo<List<District>> districtsMessageInfo = district();
         map.put("districtsMessageInfo",districtsMessageInfo.getData());
         messageInfo.setMessage(districtsMessageInfo.getMessage());
         messageInfo.setStatus(districtsMessageInfo.getStatus());
@@ -252,7 +322,7 @@ public class CommonRest {
 
     /**
      * 并购事件综合查询
-     * @return
+     * @return messageInfo
      */
     @RequestMapping("mergeEventQuery")
     @ResponseBody
@@ -293,7 +363,7 @@ public class CommonRest {
 
     /**
      * 上市挂牌综合查询
-     * @return
+     * @return messageInfo
      */
     @RequestMapping("listingQuery")
     @ResponseBody
@@ -306,7 +376,7 @@ public class CommonRest {
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
-        MessageInfo<Map> listingTypeMessageInfo = listingType();
+        MessageInfo<List<ListingType>> listingTypeMessageInfo = listingType();
         map.put("listingTypeMessageInfo",listingTypeMessageInfo.getData());
         listingTypeMessageInfo.setMessage(listingTypeMessageInfo.getMessage());
         listingTypeMessageInfo.setStatus(listingTypeMessageInfo.getStatus());
@@ -317,7 +387,7 @@ public class CommonRest {
 
     /**
      * 退出事件综合查询
-     * @return
+     * @return messageInfo
      */
     @RequestMapping("quitEventQuery")
     @ResponseBody
@@ -335,7 +405,7 @@ public class CommonRest {
         quitTypeMessageInfo.setMessage(quitTypeMessageInfo.getMessage());
         quitTypeMessageInfo.setStatus(quitTypeMessageInfo.getStatus());
 
-        MessageInfo<Map> districtsMessageInfo = district();
+        MessageInfo<List<District>> districtsMessageInfo = district();
         map.put("districtsMessageInfo",districtsMessageInfo.getData());
         messageInfo.setMessage(districtsMessageInfo.getMessage());
         messageInfo.setStatus(districtsMessageInfo.getStatus());
@@ -352,7 +422,7 @@ public class CommonRest {
 
     /**
      * 投资机构综合查询
-     * @return
+     * @return messageInfo
      */
     @RequestMapping("orgQuery")
     @ResponseBody
@@ -370,7 +440,7 @@ public class CommonRest {
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
-        MessageInfo<Map> districtsMessageInfo = district();
+        MessageInfo<List<District>> districtsMessageInfo = district();
         map.put("districtsMessageInfo",districtsMessageInfo.getData());
         messageInfo.setMessage(districtsMessageInfo.getMessage());
         messageInfo.setStatus(districtsMessageInfo.getStatus());

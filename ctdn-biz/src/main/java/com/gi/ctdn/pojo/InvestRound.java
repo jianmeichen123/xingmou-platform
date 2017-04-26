@@ -5,7 +5,9 @@ import java.sql.Timestamp;
 import java.sql.Timestamp;
 import java.util.Date;
 import com.gi.xm.platform.view.common.PojoInfo;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class InvestRound extends PojoInfo {
 
         public static final String ID = "id";

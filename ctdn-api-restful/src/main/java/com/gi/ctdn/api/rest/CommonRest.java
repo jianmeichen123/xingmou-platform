@@ -9,10 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by vincent on 17-4-24.
@@ -51,6 +48,9 @@ public class CommonRest {
     @Autowired
     private QuitTypeBiz quitTypeBiz;
 
+    @Autowired
+    private EquityRateBiz equityRateBiz;
+
 
     @RequestMapping("capitalType")
     @ResponseBody
@@ -71,8 +71,24 @@ public class CommonRest {
     @RequestMapping("district")
     @ResponseBody
     @Cacheable(value = "district",keyGenerator = "baseKG")
-    public MessageInfo<List<District>> district() {
-        return districtBiz.getAllDistrict();
+    public MessageInfo<Map> district() {
+        MessageInfo<Map> messageInfo = new MessageInfo<>();
+        Map<String,Object> map = new HashMap<>();
+        MessageInfo<List<District>> districtMessageInfo = districtBiz.getAllDistrict();
+        List<District> districts = districtMessageInfo.getData();
+        List<District> districtFatherInfo = new ArrayList<>();
+        List<District> districtSonInfo = new ArrayList<>();
+        for (District district: districts) {
+            if (district.getParentId().intValue()==0){
+                districtFatherInfo.add(district);
+            }else {
+                districtSonInfo.add(district);
+            }
+        }
+        map.put("districtSonInfo",districtSonInfo);
+        map.put("districtFatherInfo",districtFatherInfo);
+        messageInfo.setData(map);
+        return messageInfo;
     }
 
 
@@ -80,15 +96,48 @@ public class CommonRest {
     @ResponseBody
     @Cacheable(value = "industry",keyGenerator = "baseKG")
     public MessageInfo<List<Industry>> industry() {
-        return industryBiz.getAllIndustry();
+        MessageInfo<List<Industry>> industryMessageInfo = industryBiz.getAllIndustry();
+        List<Industry> industryList = industryMessageInfo.getData();
+        List<Industry> fatherIndustryList = new ArrayList<>();
+        for (Industry fatherIndustry : industryList) {
+            if (fatherIndustry.getParentId().intValue() !=0 ) {
+                List<Industry> sonIndustryList = new ArrayList<>();
+                for (Industry sonIndustry : industryList) {
+                    if (sonIndustry.getParentId().intValue() == fatherIndustry.getIndustryId().intValue()) {
+                        sonIndustryList.add(sonIndustry);
+                    }
+                }
+                fatherIndustry.setIndustrylist(sonIndustryList);
+            }else{
+                fatherIndustryList.add(fatherIndustry);
+            }
+        }
+        industryMessageInfo.setData(fatherIndustryList);
+        return industryMessageInfo;
     }
 
 
     @RequestMapping("listingType")
     @ResponseBody
     @Cacheable(value = "listingType",keyGenerator = "baseKG")
-    public MessageInfo<List<ListingType>> listingType() {
-        return listingTypeBiz.getListingType();
+    public MessageInfo<Map> listingType() {
+        MessageInfo<Map> messageInfo = new MessageInfo<>();
+        Map<String,Object> map = new HashMap<>();
+        MessageInfo<List<ListingType>> listingTypeMessageInfo = listingTypeBiz.getAllListingType();
+        List<ListingType> listingTypeList = listingTypeMessageInfo.getData();
+        List<ListingType> fatherListingTypeInfo = new ArrayList<>();
+        List<ListingType> sonListingTypeInfo = new ArrayList<>();
+        for (ListingType listingType : listingTypeList) {
+            if (listingType.getParentId().intValue() != 0){
+                sonListingTypeInfo.add(listingType);
+            }else {
+                fatherListingTypeInfo.add(listingType);
+            }
+        }
+        map.put("fatherListingTypeInfo",fatherListingTypeInfo);
+        map.put("sonListingTypeInfo",sonListingTypeInfo);
+        messageInfo.setData(map);
+        return messageInfo;
     }
 
 
@@ -132,6 +181,13 @@ public class CommonRest {
     }
 
 
+    @RequestMapping("equityRate")
+    @ResponseBody
+    @Cacheable(value = "equityRate",keyGenerator = "baseKG")
+    public MessageInfo<List<EquityRate>> equityRate() {
+        return equityRateBiz.getAllEquityRate();
+    }
+
     /**
      * 企业项目综合查询
      * @return
@@ -142,7 +198,7 @@ public class CommonRest {
     public MessageInfo<Map> proQuery(){
         MessageInfo<Map> messageInfo = new MessageInfo<>();
         Map<String,Object> map = new HashMap<>();
-        MessageInfo<List<Industry>> industriesMessageInfo = industryBiz.getAllIndustry();
+        MessageInfo<List<Industry>> industriesMessageInfo = industry();
         map.put("industriesMessageInfo",industriesMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
@@ -152,7 +208,7 @@ public class CommonRest {
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
-        MessageInfo<List<District>> districtsMessageInfo = districtBiz.getAllDistrict();
+        MessageInfo<Map> districtsMessageInfo = district();
         map.put("districtsMessageInfo",districtsMessageInfo.getData());
         messageInfo.setMessage(districtsMessageInfo.getMessage());
         messageInfo.setStatus(districtsMessageInfo.getStatus());
@@ -171,7 +227,7 @@ public class CommonRest {
     public MessageInfo<Map> investEventQuery(){
         MessageInfo<Map> messageInfo = new MessageInfo<>();
         Map<String,Object> map = new HashMap<>();
-        MessageInfo<List<Industry>> industriesMessageInfo = industryBiz.getAllIndustry();
+        MessageInfo<List<Industry>> industriesMessageInfo = industry();
         map.put("industriesMessageInfo",industriesMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
@@ -181,7 +237,7 @@ public class CommonRest {
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
-        MessageInfo<List<District>> districtsMessageInfo = districtBiz.getAllDistrict();
+        MessageInfo<Map> districtsMessageInfo = district();
         map.put("districtsMessageInfo",districtsMessageInfo.getData());
         messageInfo.setMessage(districtsMessageInfo.getMessage());
         messageInfo.setStatus(districtsMessageInfo.getStatus());
@@ -204,7 +260,7 @@ public class CommonRest {
     public MessageInfo<Map> mergeEventQuery(){
         MessageInfo<Map> messageInfo = new MessageInfo<>();
         Map<String,Object> map = new HashMap<>();
-        MessageInfo<List<Industry>> industriesMessageInfo = industryBiz.getAllIndustry();
+        MessageInfo<List<Industry>> industriesMessageInfo = industry();
         map.put("industriesMessageInfo",industriesMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
@@ -220,7 +276,10 @@ public class CommonRest {
         mergeStatusMessageInfo.setMessage(mergeStatusMessageInfo.getMessage());
         mergeStatusMessageInfo.setStatus(mergeStatusMessageInfo.getStatus());
 
-        //股权比例暂缺
+        MessageInfo<List<EquityRate>> equityRateMessageInfo = equityRateBiz.getAllEquityRate();
+        map.put("equityRateMessageInfo",equityRateMessageInfo.getData());
+        equityRateMessageInfo.setMessage(equityRateMessageInfo.getMessage());
+        equityRateMessageInfo.setStatus(equityRateMessageInfo.getStatus());
 
         MessageInfo<List<CurrencyType>> currencyTypeMessageInfo = currencyTypeBiz.getAllCurrencyType();
         map.put("currencyTypeMessageInfo",currencyTypeMessageInfo.getData());
@@ -242,12 +301,12 @@ public class CommonRest {
     public MessageInfo<Map> listingQuery(){
         MessageInfo<Map> messageInfo = new MessageInfo<>();
         Map<String,Object> map = new HashMap<>();
-        MessageInfo<List<Industry>> industriesMessageInfo = industryBiz.getAllIndustry();
+        MessageInfo<List<Industry>> industriesMessageInfo = industry();
         map.put("industriesMessageInfo",industriesMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
-        MessageInfo<List<ListingType>> listingTypeMessageInfo = listingTypeBiz.getAllListingType();
+        MessageInfo<Map> listingTypeMessageInfo = listingType();
         map.put("listingTypeMessageInfo",listingTypeMessageInfo.getData());
         listingTypeMessageInfo.setMessage(listingTypeMessageInfo.getMessage());
         listingTypeMessageInfo.setStatus(listingTypeMessageInfo.getStatus());
@@ -266,7 +325,7 @@ public class CommonRest {
     public MessageInfo<Map> quitEventQuery(){
         MessageInfo<Map> messageInfo = new MessageInfo<>();
         Map<String,Object> map = new HashMap<>();
-        MessageInfo<List<Industry>> industriesMessageInfo = industryBiz.getAllIndustry();
+        MessageInfo<List<Industry>> industriesMessageInfo = industry();
         map.put("industriesMessageInfo",industriesMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
@@ -276,7 +335,7 @@ public class CommonRest {
         quitTypeMessageInfo.setMessage(quitTypeMessageInfo.getMessage());
         quitTypeMessageInfo.setStatus(quitTypeMessageInfo.getStatus());
 
-        MessageInfo<List<District>> districtsMessageInfo = districtBiz.getAllDistrict();
+        MessageInfo<Map> districtsMessageInfo = district();
         map.put("districtsMessageInfo",districtsMessageInfo.getData());
         messageInfo.setMessage(districtsMessageInfo.getMessage());
         messageInfo.setStatus(districtsMessageInfo.getStatus());
@@ -301,7 +360,7 @@ public class CommonRest {
     public MessageInfo<Map> orgQuery(){
         MessageInfo<Map> messageInfo = new MessageInfo<>();
         Map<String,Object> map = new HashMap<>();
-        MessageInfo<List<Industry>> industriesMessageInfo = industryBiz.getAllIndustry();
+        MessageInfo<List<Industry>> industriesMessageInfo = industry();
         map.put("industriesMessageInfo",industriesMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
@@ -311,7 +370,7 @@ public class CommonRest {
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
-        MessageInfo<List<District>> districtsMessageInfo = districtBiz.getAllDistrict();
+        MessageInfo<Map> districtsMessageInfo = district();
         map.put("districtsMessageInfo",districtsMessageInfo.getData());
         messageInfo.setMessage(districtsMessageInfo.getMessage());
         messageInfo.setStatus(districtsMessageInfo.getStatus());

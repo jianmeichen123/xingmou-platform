@@ -21,6 +21,8 @@
         <include refid="selectFields"/>
         FROM
         app_district
+        WHERE districtLevel &lt; 2
+
     </select>
 
 </mapper>

@@ -22,22 +22,4 @@
         app_industry
     </select>
 
-    <select id="selectFirstIndustry" resultMap="BaseResultMap">
-        SELECT
-        <include refid="selectFields"/>
-        FROM
-        app_industry
-        WHERE
-        parentId = 0
-    </select>
-
-    <select id="selectNextIndustry" resultMap="BaseResultMap">
-        SELECT
-        <include refid="selectFields"/>
-        FROM
-        app_industry
-        WHERE
-        parentId = #{industryId}
-    </select>
-
 </mapper>

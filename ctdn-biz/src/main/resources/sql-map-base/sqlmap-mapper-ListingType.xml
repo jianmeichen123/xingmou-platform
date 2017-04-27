@@ -23,22 +23,4 @@
         app_listing_type
     </select>
 
-    <select id="selectListingType" resultMap="BaseResultMap">
-        SELECT
-        <include refid="selectFields"/>
-        FROM
-        app_listing_type
-        WHERE
-        parentId = 0
-    </select>
-
-    <select id="selectSecondListingType" resultMap="BaseResultMap">
-        SELECT
-        <include refid="selectFields"/>
-        FROM
-        app_listing_type
-        WHERE
-        parentId = #{ typeId }
-    </select>
-
 </mapper>

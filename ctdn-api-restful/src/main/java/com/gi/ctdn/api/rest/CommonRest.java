@@ -106,6 +106,8 @@ public class CommonRest {
             }
         }
         districtMessageInfo.setData(fatherDistrictList);
+        districtMessageInfo.setMessage(districtMessageInfo.getMessage());
+        districtMessageInfo.setStatus(districtMessageInfo.getStatus());
         return districtMessageInfo;
     }
 
@@ -134,6 +136,8 @@ public class CommonRest {
             }
         }
         industryMessageInfo.setData(fatherIndustryList);
+        industryMessageInfo.setMessage(industryMessageInfo.getMessage());
+        industryMessageInfo.setStatus(industryMessageInfo.getStatus());
         return industryMessageInfo;
     }
 
@@ -162,6 +166,8 @@ public class CommonRest {
             }
         }
         listingTypeMessageInfo.setData(fatherListingTypeList);
+        listingTypeMessageInfo.setMessage(listingTypeMessageInfo.getMessage());
+        listingTypeMessageInfo.setStatus(listingTypeMessageInfo.getStatus());
         return listingTypeMessageInfo;
     }
 

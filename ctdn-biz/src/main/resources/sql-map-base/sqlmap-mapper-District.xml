@@ -20,9 +20,9 @@
         SELECT
         <include refid="selectFields"/>
         FROM
-            app_district
-        where
-           2 > districtLevel  order by districtLevel
+        app_district
+        WHERE districtLevel &lt; 2
+
     </select>
 
 </mapper>

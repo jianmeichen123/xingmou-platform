@@ -3,13 +3,13 @@
 <mapper namespace="com.gi.ctdn.dao.EquityRateDAO">
     <resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.EquityRate">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="equityRate" property="equityRate" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="val" property="val" jdbcType="TINYINT"/>
     </resultMap>
 
 
     <sql id="selectFields">
-        id,equityRate,val
+        id,name,val
     </sql>
 
 

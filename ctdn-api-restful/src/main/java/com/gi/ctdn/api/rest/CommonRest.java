@@ -130,7 +130,7 @@ public class CommonRest {
                     sonIndustryList.add(sonIndustry);
                 }
             }
-            fatherIndustry.setIndustrylist(sonIndustryList);
+            fatherIndustry.setChildren(sonIndustryList);
             if (fatherIndustry.getParentId() == 0){
                 fatherIndustryList.add(fatherIndustry);
             }

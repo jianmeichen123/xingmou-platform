@@ -6,8 +6,9 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.gi.xm.platform.view.common.PojoInfo;
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Industry extends PojoInfo {
 
         public static final String ID = "id";
@@ -36,7 +37,8 @@ public class Industry extends PojoInfo {
 	/**
 	 * @Fields parentId :
 	 */
-	private List<Industry> industryList;
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	private List<Industry> children;
 	
 	/**
 	 * @Fields name : 
@@ -89,7 +91,11 @@ public class Industry extends PojoInfo {
 		this.val = val;
 	}
 
-	public List getIndustryList(){ return industryList; }
+	public List<Industry> getChildren() {
+		return children;
+	}
 
-	public void setIndustrylist(List list){ this.industryList = list; }
-    }
+	public void setChildren(List<Industry> children) {
+		this.children = children;
+	}
+}

@@ -286,6 +286,12 @@ public class CommonRest {
         messageInfo.setMessage(districtsMessageInfo.getMessage());
         messageInfo.setStatus(districtsMessageInfo.getStatus());
 
+        MessageInfo<List<CurrencyType>> currencyTypeMessageInfo = currencyType();
+        map.put("currencyType",currencyTypeMessageInfo.getData());
+        messageInfo.setMessage(currencyTypeMessageInfo.getMessage());
+        messageInfo.setStatus(currencyTypeMessageInfo.getStatus());
+
+
         messageInfo.setData(map);
         return messageInfo;
     }

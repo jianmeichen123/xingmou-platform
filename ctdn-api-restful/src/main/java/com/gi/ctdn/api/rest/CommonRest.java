@@ -272,17 +272,17 @@ public class CommonRest {
         MessageInfo<Map> messageInfo = new MessageInfo<>();
         Map<String,Object> map = new HashMap<>();
         MessageInfo<List<Industry>> industriesMessageInfo = industry();
-        map.put("industriesMessageInfo",industriesMessageInfo.getData());
+        map.put("industries",industriesMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
         MessageInfo<List<InvestRound>> investRoundMessageInfo = investRoundBiz.getAllInvestRound();
-        map.put("investRoundMessageInfo",investRoundMessageInfo.getData());
+        map.put("investRound",investRoundMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
         MessageInfo<List<District>> districtsMessageInfo = district();
-        map.put("districtsMessageInfo",districtsMessageInfo.getData());
+        map.put("districts",districtsMessageInfo.getData());
         messageInfo.setMessage(districtsMessageInfo.getMessage());
         messageInfo.setStatus(districtsMessageInfo.getStatus());
 
@@ -301,22 +301,22 @@ public class CommonRest {
         MessageInfo<Map> messageInfo = new MessageInfo<>();
         Map<String,Object> map = new HashMap<>();
         MessageInfo<List<Industry>> industriesMessageInfo = industry();
-        map.put("industriesMessageInfo",industriesMessageInfo.getData());
+        map.put("industries",industriesMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
         MessageInfo<List<InvestRound>> investRoundMessageInfo = investRoundBiz.getAllInvestRound();
-        map.put("investRoundMessageInfo",investRoundMessageInfo.getData());
+        map.put("investRound",investRoundMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
         MessageInfo<List<District>> districtsMessageInfo = district();
-        map.put("districtsMessageInfo",districtsMessageInfo.getData());
+        map.put("districts",districtsMessageInfo.getData());
         messageInfo.setMessage(districtsMessageInfo.getMessage());
         messageInfo.setStatus(districtsMessageInfo.getStatus());
 
         MessageInfo<List<CurrencyType>> currencyTypeMessageInfo = currencyTypeBiz.getAllCurrencyType();
-        map.put("currencyTypeMessageInfo",currencyTypeMessageInfo.getData());
+        map.put("currencyType",currencyTypeMessageInfo.getData());
         currencyTypeMessageInfo.setMessage(currencyTypeMessageInfo.getMessage());
 
         messageInfo.setData(map);
@@ -334,28 +334,28 @@ public class CommonRest {
         MessageInfo<Map> messageInfo = new MessageInfo<>();
         Map<String,Object> map = new HashMap<>();
         MessageInfo<List<Industry>> industriesMessageInfo = industry();
-        map.put("industriesMessageInfo",industriesMessageInfo.getData());
+        map.put("industries",industriesMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
         MessageInfo<List<MergeType>> mergeTypeMessageInfo = mergeTypeBiz.getAllMergeType();
-        map.put("mergeTypeMessageInfo",mergeTypeMessageInfo.getData());
+        map.put("mergeType",mergeTypeMessageInfo.getData());
         mergeTypeMessageInfo.setMessage(mergeTypeMessageInfo.getMessage());
         mergeTypeMessageInfo.setStatus(mergeTypeMessageInfo.getStatus());
 
 
         MessageInfo<List<MergeStatus>> mergeStatusMessageInfo = mergeStatusBiz.getAllMergeStatus();
-        map.put("mergeStatusMessageInfo",mergeStatusMessageInfo.getData());
+        map.put("mergeStatus",mergeStatusMessageInfo.getData());
         mergeStatusMessageInfo.setMessage(mergeStatusMessageInfo.getMessage());
         mergeStatusMessageInfo.setStatus(mergeStatusMessageInfo.getStatus());
 
         MessageInfo<List<EquityRate>> equityRateMessageInfo = equityRateBiz.getAllEquityRate();
-        map.put("equityRateMessageInfo",equityRateMessageInfo.getData());
+        map.put("equityRate",equityRateMessageInfo.getData());
         equityRateMessageInfo.setMessage(equityRateMessageInfo.getMessage());
         equityRateMessageInfo.setStatus(equityRateMessageInfo.getStatus());
 
         MessageInfo<List<CurrencyType>> currencyTypeMessageInfo = currencyTypeBiz.getAllCurrencyType();
-        map.put("currencyTypeMessageInfo",currencyTypeMessageInfo.getData());
+        map.put("currencyType",currencyTypeMessageInfo.getData());
         currencyTypeMessageInfo.setMessage(currencyTypeMessageInfo.getMessage());
         currencyTypeMessageInfo.setStatus(currencyTypeMessageInfo.getStatus());
 
@@ -375,12 +375,12 @@ public class CommonRest {
         MessageInfo<Map> messageInfo = new MessageInfo<>();
         Map<String,Object> map = new HashMap<>();
         MessageInfo<List<Industry>> industriesMessageInfo = industry();
-        map.put("industriesMessageInfo",industriesMessageInfo.getData());
+        map.put("industries",industriesMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
         MessageInfo<List<ListingType>> listingTypeMessageInfo = listingType();
-        map.put("listingTypeMessageInfo",listingTypeMessageInfo.getData());
+        map.put("listingType",listingTypeMessageInfo.getData());
         listingTypeMessageInfo.setMessage(listingTypeMessageInfo.getMessage());
         listingTypeMessageInfo.setStatus(listingTypeMessageInfo.getStatus());
 
@@ -399,22 +399,22 @@ public class CommonRest {
         MessageInfo<Map> messageInfo = new MessageInfo<>();
         Map<String,Object> map = new HashMap<>();
         MessageInfo<List<Industry>> industriesMessageInfo = industry();
-        map.put("industriesMessageInfo",industriesMessageInfo.getData());
+        map.put("industries",industriesMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
         MessageInfo<List<QuitType>> quitTypeMessageInfo = quitTypeBiz.getAllQuitType();
-        map.put("quitTypeMessageInfo",quitTypeMessageInfo.getData());
+        map.put("quitType",quitTypeMessageInfo.getData());
         quitTypeMessageInfo.setMessage(quitTypeMessageInfo.getMessage());
         quitTypeMessageInfo.setStatus(quitTypeMessageInfo.getStatus());
 
         MessageInfo<List<District>> districtsMessageInfo = district();
-        map.put("districtsMessageInfo",districtsMessageInfo.getData());
+        map.put("districts",districtsMessageInfo.getData());
         messageInfo.setMessage(districtsMessageInfo.getMessage());
         messageInfo.setStatus(districtsMessageInfo.getStatus());
 
         MessageInfo<List<CurrencyType>> currencyTypeMessageInfo = currencyTypeBiz.getAllCurrencyType();
-        map.put("currencyTypeMessageInfo",currencyTypeMessageInfo.getData());
+        map.put("currencyType",currencyTypeMessageInfo.getData());
         currencyTypeMessageInfo.setMessage(currencyTypeMessageInfo.getMessage());
         currencyTypeMessageInfo.setStatus(currencyTypeMessageInfo.getStatus());
 
@@ -434,22 +434,22 @@ public class CommonRest {
         MessageInfo<Map> messageInfo = new MessageInfo<>();
         Map<String,Object> map = new HashMap<>();
         MessageInfo<List<Industry>> industriesMessageInfo = industry();
-        map.put("industriesMessageInfo",industriesMessageInfo.getData());
+        map.put("industries",industriesMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
         MessageInfo<List<InvestRound>> investRoundMessageInfo = investRoundBiz.getAllInvestRound();
-        map.put("investRoundMessageInfo",investRoundMessageInfo.getData());
+        map.put("investRound",investRoundMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
         MessageInfo<List<District>> districtsMessageInfo = district();
-        map.put("districtsMessageInfo",districtsMessageInfo.getData());
+        map.put("districts",districtsMessageInfo.getData());
         messageInfo.setMessage(districtsMessageInfo.getMessage());
         messageInfo.setStatus(districtsMessageInfo.getStatus());
 
         MessageInfo<List<CurrencyType>> currencyTypeMessageInfo = currencyTypeBiz.getAllCurrencyType();
-        map.put("currencyTypeMessageInfo",currencyTypeMessageInfo.getData());
+        map.put("currencyType",currencyTypeMessageInfo.getData());
         messageInfo.setMessage(currencyTypeMessageInfo.getMessage());
         messageInfo.setStatus(currencyTypeMessageInfo.getStatus());
         messageInfo.setData(map);

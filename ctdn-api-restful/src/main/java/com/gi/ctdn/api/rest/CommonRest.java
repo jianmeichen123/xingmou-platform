@@ -272,7 +272,7 @@ public class CommonRest {
         MessageInfo<Map> messageInfo = new MessageInfo<>();
         Map<String,Object> map = new HashMap<>();
         MessageInfo<List<Industry>> industriesMessageInfo = industry();
-        map.put("industryIds",industriesMessageInfo.getData());
+        map.put("industry",industriesMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
@@ -307,7 +307,7 @@ public class CommonRest {
         MessageInfo<Map> messageInfo = new MessageInfo<>();
         Map<String,Object> map = new HashMap<>();
         MessageInfo<List<Industry>> industriesMessageInfo = industry();
-        map.put("industryIds",industriesMessageInfo.getData());
+        map.put("industry",industriesMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
@@ -340,7 +340,7 @@ public class CommonRest {
         MessageInfo<Map> messageInfo = new MessageInfo<>();
         Map<String,Object> map = new HashMap<>();
         MessageInfo<List<Industry>> industriesMessageInfo = industry();
-        map.put("industryIds",industriesMessageInfo.getData());
+        map.put("industry",industriesMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
@@ -381,7 +381,7 @@ public class CommonRest {
         MessageInfo<Map> messageInfo = new MessageInfo<>();
         Map<String,Object> map = new HashMap<>();
         MessageInfo<List<Industry>> industriesMessageInfo = industry();
-        map.put("industryIds",industriesMessageInfo.getData());
+        map.put("industry",industriesMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
@@ -405,7 +405,7 @@ public class CommonRest {
         MessageInfo<Map> messageInfo = new MessageInfo<>();
         Map<String,Object> map = new HashMap<>();
         MessageInfo<List<Industry>> industriesMessageInfo = industry();
-        map.put("industryIds",industriesMessageInfo.getData());
+        map.put("industry",industriesMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
@@ -440,7 +440,7 @@ public class CommonRest {
         MessageInfo<Map> messageInfo = new MessageInfo<>();
         Map<String,Object> map = new HashMap<>();
         MessageInfo<List<Industry>> industriesMessageInfo = industry();
-        map.put("industryIds",industriesMessageInfo.getData());
+        map.put("industry",industriesMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 

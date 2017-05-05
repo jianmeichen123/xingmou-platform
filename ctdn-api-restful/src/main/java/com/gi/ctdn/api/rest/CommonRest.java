@@ -277,7 +277,7 @@ public class CommonRest {
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
         MessageInfo<List<InvestRound>> investRoundMessageInfo = investRoundBiz.getAllInvestRound();
-        map.put("investRound",investRoundMessageInfo.getData());
+        map.put("roundList",investRoundMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 

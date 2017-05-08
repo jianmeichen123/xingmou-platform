@@ -495,7 +495,6 @@ public class CommonRest {
         messageInfo.setStatus(currencyTypeMessageInfo.getStatus());
         //融资
 
-
         //并购
 
         MessageInfo<List<MergeType>> mergeTypeMessageInfo = mergeType();
@@ -522,7 +521,6 @@ public class CommonRest {
         listingTypeMessageInfo.setMessage(listingTypeMessageInfo.getMessage());
         listingTypeMessageInfo.setStatus(listingTypeMessageInfo.getStatus());
 
-
         //退出
         map.put("industry",industriesMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
@@ -533,17 +531,13 @@ public class CommonRest {
         quitTypeMessageInfo.setMessage(quitTypeMessageInfo.getMessage());
         quitTypeMessageInfo.setStatus(quitTypeMessageInfo.getStatus());
 
-
         //投资机构
-
 
         MessageInfo<List<OrgType>> orgTypeTypeMessageInfo = orgType();
         map.put("orgType",orgTypeTypeMessageInfo.getData());
         messageInfo.setMessage(orgTypeTypeMessageInfo.getMessage());
         messageInfo.setStatus(orgTypeTypeMessageInfo.getStatus());
         messageInfo.setData(map);
-        messageInfo.setData(map);
-
         return messageInfo;
     }
 

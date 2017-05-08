@@ -444,7 +444,7 @@ public class CommonRest {
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
-        MessageInfo<List<InvestRound>> investRoundMessageInfo = investRoundBiz.getAllInvestRound();
+        MessageInfo<List<InvestRound>> investRoundMessageInfo = investRound();
         map.put("roundList",investRoundMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
@@ -454,11 +454,96 @@ public class CommonRest {
         messageInfo.setMessage(districtsMessageInfo.getMessage());
         messageInfo.setStatus(districtsMessageInfo.getStatus());
 
-        MessageInfo<List<CurrencyType>> currencyTypeMessageInfo = currencyTypeBiz.getAllCurrencyType();
+        MessageInfo<List<OrgType>> orgTypeTypeMessageInfo = orgType();
+        map.put("OrgType",orgTypeTypeMessageInfo.getData());
+        messageInfo.setMessage(orgTypeTypeMessageInfo.getMessage());
+        messageInfo.setStatus(orgTypeTypeMessageInfo.getStatus());
+        messageInfo.setData(map);
+        return messageInfo;
+    }
+
+
+
+    /**
+     *所有综合查询
+     * @return messageInfo
+     */
+    @RequestMapping("allQuery")
+    @ResponseBody
+    public MessageInfo<Map> allQuery(){
+        //企业
+        MessageInfo<Map> messageInfo = new MessageInfo<>();
+        Map<String,Object> map = new HashMap<>();
+        MessageInfo<List<Industry>> industriesMessageInfo = industry();
+        map.put("industry",industriesMessageInfo.getData());
+        messageInfo.setMessage(industriesMessageInfo.getMessage());
+        messageInfo.setStatus(industriesMessageInfo.getStatus());
+
+        MessageInfo<List<InvestRound>> investRoundMessageInfo = investRound();
+        map.put("roundList",investRoundMessageInfo.getData());
+        messageInfo.setMessage(industriesMessageInfo.getMessage());
+        messageInfo.setStatus(industriesMessageInfo.getStatus());
+
+        MessageInfo<List<District>> districtsMessageInfo = district();
+        map.put("district",districtsMessageInfo.getData());
+        messageInfo.setMessage(districtsMessageInfo.getMessage());
+        messageInfo.setStatus(districtsMessageInfo.getStatus());
+
+        MessageInfo<List<CurrencyType>> currencyTypeMessageInfo = currencyType();
         map.put("currencyType",currencyTypeMessageInfo.getData());
         messageInfo.setMessage(currencyTypeMessageInfo.getMessage());
         messageInfo.setStatus(currencyTypeMessageInfo.getStatus());
+        //融资
+
+
+        //并购
+
+        MessageInfo<List<MergeType>> mergeTypeMessageInfo = mergeType();
+        map.put("mergeType",mergeTypeMessageInfo.getData());
+        mergeTypeMessageInfo.setMessage(mergeTypeMessageInfo.getMessage());
+        mergeTypeMessageInfo.setStatus(mergeTypeMessageInfo.getStatus());
+
+
+        MessageInfo<List<MergeStatus>> mergeStatusMessageInfo = mergeStatus();
+        map.put("mergeStatus",mergeStatusMessageInfo.getData());
+        mergeStatusMessageInfo.setMessage(mergeStatusMessageInfo.getMessage());
+        mergeStatusMessageInfo.setStatus(mergeStatusMessageInfo.getStatus());
+
+        MessageInfo<List<EquityRate>> equityRateMessageInfo = equityRate();
+        map.put("equityRate",equityRateMessageInfo.getData());
+        equityRateMessageInfo.setMessage(equityRateMessageInfo.getMessage());
+        equityRateMessageInfo.setStatus(equityRateMessageInfo.getStatus());
+
+
+        //上市挂牌
+
+        MessageInfo<List<ListingType>> listingTypeMessageInfo = listingType();
+        map.put("listingType",listingTypeMessageInfo.getData());
+        listingTypeMessageInfo.setMessage(listingTypeMessageInfo.getMessage());
+        listingTypeMessageInfo.setStatus(listingTypeMessageInfo.getStatus());
+
+
+        //退出
+        map.put("industry",industriesMessageInfo.getData());
+        messageInfo.setMessage(industriesMessageInfo.getMessage());
+        messageInfo.setStatus(industriesMessageInfo.getStatus());
+
+        MessageInfo<List<QuitType>> quitTypeMessageInfo = quitType();
+        map.put("quitType",quitTypeMessageInfo.getData());
+        quitTypeMessageInfo.setMessage(quitTypeMessageInfo.getMessage());
+        quitTypeMessageInfo.setStatus(quitTypeMessageInfo.getStatus());
+
+
+        //投资机构
+
+
+        MessageInfo<List<OrgType>> orgTypeTypeMessageInfo = orgType();
+        map.put("orgType",orgTypeTypeMessageInfo.getData());
+        messageInfo.setMessage(orgTypeTypeMessageInfo.getMessage());
+        messageInfo.setStatus(orgTypeTypeMessageInfo.getStatus());
         messageInfo.setData(map);
+        messageInfo.setData(map);
+
         return messageInfo;
     }
 

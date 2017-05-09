@@ -111,6 +111,11 @@
             </dependency>
             <dependency>
                 <groupId>com.gi</groupId>
+                <artifactId>ctdn-data-ods</artifactId>
+                <version>${xingmou.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.gi</groupId>
                 <artifactId>xingmou-logback</artifactId>
                 <version>${xingmou.version}</version>
             </dependency>

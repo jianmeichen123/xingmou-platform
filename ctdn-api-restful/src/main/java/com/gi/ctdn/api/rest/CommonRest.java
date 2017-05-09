@@ -455,7 +455,7 @@ public class CommonRest {
         messageInfo.setStatus(districtsMessageInfo.getStatus());
 
         MessageInfo<List<OrgType>> orgTypeTypeMessageInfo = orgType();
-        map.put("OrgType",orgTypeTypeMessageInfo.getData());
+        map.put("orgType",orgTypeTypeMessageInfo.getData());
         messageInfo.setMessage(orgTypeTypeMessageInfo.getMessage());
         messageInfo.setStatus(orgTypeTypeMessageInfo.getStatus());
         messageInfo.setData(map);

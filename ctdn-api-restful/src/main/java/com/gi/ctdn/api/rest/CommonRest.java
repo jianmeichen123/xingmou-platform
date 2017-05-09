@@ -464,6 +464,12 @@ public class CommonRest {
         messageInfo.setMessage(currencyTypeMessageInfo.getMessage());
         messageInfo.setStatus(currencyTypeMessageInfo.getStatus());
 
+
+        MessageInfo<List<CapitalType>> capitalTypeMessageInfo = capitalType();
+        map.put("capitalType",capitalTypeMessageInfo.getData());
+        messageInfo.setMessage(capitalTypeMessageInfo.getMessage());
+        messageInfo.setStatus(capitalTypeMessageInfo.getStatus());
+
         messageInfo.setData(map);
         return messageInfo;
     }
@@ -543,6 +549,13 @@ public class CommonRest {
         map.put("orgType",orgTypeTypeMessageInfo.getData());
         messageInfo.setMessage(orgTypeTypeMessageInfo.getMessage());
         messageInfo.setStatus(orgTypeTypeMessageInfo.getStatus());
+
+
+        MessageInfo<List<CapitalType>> capitalTypeMessageInfo = capitalType();
+        map.put("capitalType",capitalTypeMessageInfo.getData());
+        messageInfo.setMessage(capitalTypeMessageInfo.getMessage());
+        messageInfo.setStatus(capitalTypeMessageInfo.getStatus());
+
         messageInfo.setData(map);
         return messageInfo;
     }

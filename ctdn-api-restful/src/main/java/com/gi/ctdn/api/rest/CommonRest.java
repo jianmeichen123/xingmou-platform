@@ -458,6 +458,12 @@ public class CommonRest {
         map.put("orgType",orgTypeTypeMessageInfo.getData());
         messageInfo.setMessage(orgTypeTypeMessageInfo.getMessage());
         messageInfo.setStatus(orgTypeTypeMessageInfo.getStatus());
+
+        MessageInfo<List<CurrencyType>> currencyTypeMessageInfo = currencyType();
+        map.put("currencyType",currencyTypeMessageInfo.getData());
+        messageInfo.setMessage(currencyTypeMessageInfo.getMessage());
+        messageInfo.setStatus(currencyTypeMessageInfo.getStatus());
+
         messageInfo.setData(map);
         return messageInfo;
     }

@@ -277,7 +277,7 @@ public class CommonRest {
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
         MessageInfo<List<InvestRound>> investRoundMessageInfo = investRoundBiz.getAllInvestRound();
-        map.put("roundList",investRoundMessageInfo.getData());
+        map.put("investRound",investRoundMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
@@ -312,7 +312,7 @@ public class CommonRest {
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
         MessageInfo<List<InvestRound>> investRoundMessageInfo = investRoundBiz.getAllInvestRound();
-        map.put("roundList",investRoundMessageInfo.getData());
+        map.put("investRound",investRoundMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
@@ -445,7 +445,7 @@ public class CommonRest {
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
         MessageInfo<List<InvestRound>> investRoundMessageInfo = investRound();
-        map.put("roundList",investRoundMessageInfo.getData());
+        map.put("investRound",investRoundMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
@@ -493,7 +493,7 @@ public class CommonRest {
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
         MessageInfo<List<InvestRound>> investRoundMessageInfo = investRound();
-        map.put("roundList",investRoundMessageInfo.getData());
+        map.put("investRound",investRoundMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 

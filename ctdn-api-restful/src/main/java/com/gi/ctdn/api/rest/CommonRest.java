@@ -51,6 +51,8 @@ public class CommonRest {
     @Autowired
     private EquityRateBiz equityRateBiz;
 
+    @Autowired
+    private  InvestStagesBiz investStagesBiz;
 
     /**
      *资本类型查询
@@ -261,6 +263,17 @@ public class CommonRest {
         return messageInfo;
     }
 
+
+    @RequestMapping("investStages")
+    @ResponseBody
+    @Cacheable(value = "equityRate",keyGenerator = "baseKG")
+    public MessageInfo<List<InvestStages>> investStages() {
+        MessageInfo<List<InvestStages>> messageInfo = investStagesBiz.getAllInvestStages();
+        messageInfo.setMessage(messageInfo.getMessage());
+        messageInfo.setStatus(messageInfo.getStatus());
+        return messageInfo;
+    }
+
     /**
      * 企业项目综合查询
      * @return messageInfo
@@ -444,8 +457,8 @@ public class CommonRest {
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
-        MessageInfo<List<InvestRound>> investRoundMessageInfo = investRound();
-        map.put("roundList",investRoundMessageInfo.getData());
+        MessageInfo<List<InvestStages>> investRoundMessageInfo = investStages();
+        map.put("investStages",investRoundMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
@@ -537,6 +550,11 @@ public class CommonRest {
         map.put("orgType",orgTypeTypeMessageInfo.getData());
         messageInfo.setMessage(orgTypeTypeMessageInfo.getMessage());
         messageInfo.setStatus(orgTypeTypeMessageInfo.getStatus());
+
+        MessageInfo<List<InvestStages>> investStagesMessageInfo = investStages();
+        map.put("investStages",investStagesMessageInfo.getData());
+        messageInfo.setMessage(investStagesMessageInfo.getMessage());
+        messageInfo.setStatus(investStagesMessageInfo.getStatus());
         messageInfo.setData(map);
         return messageInfo;
     }

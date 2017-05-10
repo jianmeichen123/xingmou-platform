@@ -455,21 +455,9 @@ public class CommonRest {
         messageInfo.setStatus(districtsMessageInfo.getStatus());
 
         MessageInfo<List<OrgType>> orgTypeTypeMessageInfo = orgType();
-        map.put("orgType",orgTypeTypeMessageInfo.getData());
+        map.put("OrgType",orgTypeTypeMessageInfo.getData());
         messageInfo.setMessage(orgTypeTypeMessageInfo.getMessage());
         messageInfo.setStatus(orgTypeTypeMessageInfo.getStatus());
-
-        MessageInfo<List<CurrencyType>> currencyTypeMessageInfo = currencyType();
-        map.put("currencyType",currencyTypeMessageInfo.getData());
-        messageInfo.setMessage(currencyTypeMessageInfo.getMessage());
-        messageInfo.setStatus(currencyTypeMessageInfo.getStatus());
-
-
-        MessageInfo<List<CapitalType>> capitalTypeMessageInfo = capitalType();
-        map.put("capitalType",capitalTypeMessageInfo.getData());
-        messageInfo.setMessage(capitalTypeMessageInfo.getMessage());
-        messageInfo.setStatus(capitalTypeMessageInfo.getStatus());
-
         messageInfo.setData(map);
         return messageInfo;
     }
@@ -482,7 +470,6 @@ public class CommonRest {
      */
     @RequestMapping("allQuery")
     @ResponseBody
-    @Cacheable(value = "allQuery",keyGenerator = "baseKG")
     public MessageInfo<Map> allQuery(){
         //企业
         MessageInfo<Map> messageInfo = new MessageInfo<>();
@@ -550,13 +537,6 @@ public class CommonRest {
         map.put("orgType",orgTypeTypeMessageInfo.getData());
         messageInfo.setMessage(orgTypeTypeMessageInfo.getMessage());
         messageInfo.setStatus(orgTypeTypeMessageInfo.getStatus());
-
-
-        MessageInfo<List<CapitalType>> capitalTypeMessageInfo = capitalType();
-        map.put("capitalType",capitalTypeMessageInfo.getData());
-        messageInfo.setMessage(capitalTypeMessageInfo.getMessage());
-        messageInfo.setStatus(capitalTypeMessageInfo.getStatus());
-
         messageInfo.setData(map);
         return messageInfo;
     }

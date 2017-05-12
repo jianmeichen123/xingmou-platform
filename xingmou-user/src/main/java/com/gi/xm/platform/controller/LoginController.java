@@ -40,7 +40,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
         return this.userService;
     }
 
-    private String ctdnIndex = "http://ctdndev.gi.com/index.html";
+    private String ctdnIndex = "http://ctdndev.gi.com/list_page_com.html";
 
     private String domain = "ctdndev.gi.com";
 

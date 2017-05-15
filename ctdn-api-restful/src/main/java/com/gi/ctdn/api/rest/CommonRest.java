@@ -472,9 +472,15 @@ public class CommonRest {
         messageInfo.setStatus(districtsMessageInfo.getStatus());
 
         MessageInfo<List<OrgType>> orgTypeTypeMessageInfo = orgType();
-        map.put("OrgType",orgTypeTypeMessageInfo.getData());
+        map.put("orgType",orgTypeTypeMessageInfo.getData());
         messageInfo.setMessage(orgTypeTypeMessageInfo.getMessage());
         messageInfo.setStatus(orgTypeTypeMessageInfo.getStatus());
+
+        MessageInfo<List<CapitalType>> capitalTypeMessageInfo = capitalType();
+        map.put("capitalType",capitalTypeMessageInfo.getData());
+        messageInfo.setMessage(capitalTypeMessageInfo.getMessage());
+        messageInfo.setStatus(capitalTypeMessageInfo.getStatus());
+
         messageInfo.setData(map);
         return messageInfo;
     }
@@ -559,6 +565,13 @@ public class CommonRest {
         map.put("investStages",investStagesMessageInfo.getData());
         messageInfo.setMessage(investStagesMessageInfo.getMessage());
         messageInfo.setStatus(investStagesMessageInfo.getStatus());
+
+
+        MessageInfo<List<CapitalType>> capitalTypeMessageInfo = capitalType();
+        map.put("capitalType",capitalTypeMessageInfo.getData());
+        messageInfo.setMessage(capitalTypeMessageInfo.getMessage());
+        messageInfo.setStatus(capitalTypeMessageInfo.getStatus());
+
         messageInfo.setData(map);
         return messageInfo;
     }

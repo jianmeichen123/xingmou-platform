@@ -526,13 +526,7 @@ public class CommonRest {
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
-        List<InvestRound> investRounds = new ArrayList<>();
-        for (InvestRound investRound:investRoundMessageInfo.getData()){
-            if (!"尚未获投".equals(investRound.getName())){
-                investRounds.add(investRound);
-            }
-        }
-        map.put("investRound",investRounds);
+        map.put("investRound",investRound());
 
         MessageInfo<List<District>> districtsMessageInfo = district();
         map.put("district",districtsMessageInfo.getData());

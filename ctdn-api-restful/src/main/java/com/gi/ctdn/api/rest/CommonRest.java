@@ -175,16 +175,35 @@ public class CommonRest {
 
 
     /**
-     *投资轮次查询
+     *轮次查询(包含尚未获投)
+     * @return messageInfo
+     */
+    @RequestMapping("round")
+    @ResponseBody
+    @Cacheable(value = "investRound",keyGenerator = "baseKG")
+    public MessageInfo<List<InvestRound>> round() {
+        MessageInfo<List<InvestRound>> messageInfo = investRoundBiz.getAllInvestRound();
+        messageInfo.setMessage(messageInfo.getMessage());
+        messageInfo.setStatus(messageInfo.getStatus());
+        return messageInfo;
+    }
+
+    /**
+     *投资轮次查询(不包含尚未获投)
      * @return messageInfo
      */
     @RequestMapping("investRound")
     @ResponseBody
     @Cacheable(value = "investRound",keyGenerator = "baseKG")
     public MessageInfo<List<InvestRound>> investRound() {
-        MessageInfo<List<InvestRound>> messageInfo = investRoundBiz.getAllInvestRound();
-        messageInfo.setMessage(messageInfo.getMessage());
-        messageInfo.setStatus(messageInfo.getStatus());
+        MessageInfo<List<InvestRound>> messageInfo = round();
+        List<InvestRound> investRounds = new ArrayList<>();
+        for (InvestRound investRound:round().getData()){
+            if (!"尚未获投".equals(investRound.getName())){
+                investRounds.add(investRound);
+            }
+        }
+        messageInfo.setData(investRounds);
         return messageInfo;
     }
 
@@ -293,8 +312,8 @@ public class CommonRest {
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
-        MessageInfo<List<InvestRound>> investRoundMessageInfo = investRoundBiz.getAllInvestRound();
-        map.put("investRound",investRoundMessageInfo.getData());
+        MessageInfo<List<InvestRound>> investRoundMessageInfo = round();
+        map.put("round",investRoundMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
@@ -328,7 +347,7 @@ public class CommonRest {
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
-        MessageInfo<List<InvestRound>> investRoundMessageInfo = investRoundBiz.getAllInvestRound();
+        MessageInfo<List<InvestRound>> investRoundMessageInfo = investRound();
         map.put("investRound",investRoundMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
@@ -502,10 +521,18 @@ public class CommonRest {
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
-        MessageInfo<List<InvestRound>> investRoundMessageInfo = investRound();
-        map.put("investRound",investRoundMessageInfo.getData());
+        MessageInfo<List<InvestRound>> investRoundMessageInfo = round();
+        map.put("round",investRoundMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
+
+        List<InvestRound> investRounds = new ArrayList<>();
+        for (InvestRound investRound:investRoundMessageInfo.getData()){
+            if (!"尚未获投".equals(investRound.getName())){
+                investRounds.add(investRound);
+            }
+        }
+        map.put("investRound",investRounds);
 
         MessageInfo<List<District>> districtsMessageInfo = district();
         map.put("district",districtsMessageInfo.getData());

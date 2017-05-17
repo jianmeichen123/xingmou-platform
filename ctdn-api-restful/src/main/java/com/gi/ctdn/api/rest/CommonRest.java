@@ -521,12 +521,17 @@ public class CommonRest {
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
-        MessageInfo<List<InvestRound>> investRoundMessageInfo = round();
-        map.put("round",investRoundMessageInfo.getData());
-        messageInfo.setMessage(industriesMessageInfo.getMessage());
-        messageInfo.setStatus(industriesMessageInfo.getStatus());
+        MessageInfo<List<InvestRound>> roundMessageInfo = round();
+        map.put("round",roundMessageInfo.getData());
+        messageInfo.setMessage(roundMessageInfo.getMessage());
+        messageInfo.setStatus(roundMessageInfo.getStatus());
 
-        map.put("investRound",investRound());
+
+        MessageInfo<List<InvestRound>> investRoundMessageInfo = investRound();
+        map.put("investRound",investRoundMessageInfo.getData());
+        messageInfo.setMessage(investRoundMessageInfo.getMessage());
+        messageInfo.setStatus(investRoundMessageInfo.getStatus());
+
 
         MessageInfo<List<District>> districtsMessageInfo = district();
         map.put("district",districtsMessageInfo.getData());

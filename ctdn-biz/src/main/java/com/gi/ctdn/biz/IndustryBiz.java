@@ -43,4 +43,17 @@ public class IndustryBiz  {
 		return messageInfo;
 	}
 
+	public MessageInfo<List<Industry>> getIndustrysByStatus(int status){
+
+		MessageInfo<List<Industry>> messageInfo = new MessageInfo<List<Industry>>();
+		try {
+			List<Industry> industryList = industryDAO.selectindustrysByStatus(status);
+			messageInfo.setData( industryList);
+		} catch (Exception e) {
+			LOGGER.error("getIndustrysByStatus","查询Industry失败", e);
+			messageInfo.setStatus(10001);
+		}
+		return messageInfo;
+	}
+
 }

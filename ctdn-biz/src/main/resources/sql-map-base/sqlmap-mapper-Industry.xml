@@ -22,4 +22,11 @@
         app_industry
     </select>
 
+    <select id="selectindustrysByStatus" resultMap="BaseResultMap">
+        SELECT
+        <include refid="selectFields"/>
+        FROM
+        app_industry
+        WHERE status = #{status,jdbcType=BIGINT}
+    </select>
 </mapper>

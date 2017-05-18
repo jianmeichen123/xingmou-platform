@@ -20,4 +20,12 @@
         app_invest_round
     </select>
 
+    <select id="selectInvestRoundsByStatus" resultMap="BaseResultMap">
+        SELECT
+        <include refid="selectFields"/>
+        FROM
+        app_invest_round
+        WHERE status = #{status,jdbcType=BIGINT}
+    </select>
+
 </mapper>

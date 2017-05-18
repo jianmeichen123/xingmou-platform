@@ -29,7 +29,7 @@ public class InvestRound extends PojoInfo {
 	 * @Fields val : 
 	 */
 	private Integer val;
-	
+
     
 	public Integer getId(){
 		return id;

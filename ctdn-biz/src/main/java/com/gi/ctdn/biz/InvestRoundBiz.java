@@ -41,4 +41,17 @@ public class InvestRoundBiz  {
 		}
 		return messageInfo;
 	}
+
+	public MessageInfo<List<InvestRound>> getInvestRoundsByStatus(int status){
+
+		MessageInfo<List<InvestRound>> messageInfo = new MessageInfo<List<InvestRound>>();
+		try {
+			List<InvestRound> investRoundList = investRoundDAO.selectInvestRoundsByStatus(status);
+			messageInfo.setData( investRoundList);
+		} catch (Exception e) {
+			LOGGER.error("getInvestRoundsByStatus","查询InvestRounds失败", e);
+			messageInfo.setStatus(10001);
+		}
+		return messageInfo;
+	}
 }

@@ -11,4 +11,7 @@ public interface InvestRoundDAO {
 	
 	
 	List<InvestRound> selectAll();
+
+	List<InvestRound> selectInvestRoundsByStatus(@Param("status") int status);
+
 }

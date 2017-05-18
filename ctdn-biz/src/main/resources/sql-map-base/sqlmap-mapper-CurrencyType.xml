@@ -18,6 +18,7 @@
         <include refid="selectFields"/>
         FROM
         app_currency_type
+        WHERE val = 0
     </select>
 
 </mapper>

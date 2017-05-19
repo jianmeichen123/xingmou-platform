@@ -122,7 +122,7 @@ public class CommonRest {
     @ResponseBody
     @Cacheable(value = "industry",keyGenerator = "baseKG")
     public MessageInfo<List<Industry>> industry() {
-        MessageInfo<List<Industry>> industryMessageInfo = industryBiz.getAllIndustry();
+        MessageInfo<List<Industry>> industryMessageInfo = industryBiz.getIndustrysByStatus(1);
         List<Industry> industryList = industryMessageInfo.getData();
         List<Industry> fatherIndustryList = new ArrayList<>();
         for (Industry fatherIndustry : industryList) {
@@ -143,6 +143,35 @@ public class CommonRest {
         return industryMessageInfo;
     }
 
+
+    /**
+     *行业查询
+     * @return messageInfo
+     */
+    @RequestMapping("orgIndustry")
+    @ResponseBody
+    @Cacheable(value = "orgIndustry",keyGenerator = "baseKG")
+    public MessageInfo<List<Industry>> orgIndustry() {
+        MessageInfo<List<Industry>> industryMessageInfo = industryBiz.getIndustrysByStatus(2);
+//        List<Industry> industryList = industryMessageInfo.getData();
+//        List<Industry> fatherIndustryList = new ArrayList<>();
+//        for (Industry fatherIndustry : industryList) {
+//            List<Industry> sonIndustryList = new ArrayList<>();
+//            for (Industry sonIndustry : industryList) {
+//                if (sonIndustry.getParentId().intValue() == fatherIndustry.getId().intValue()) {
+//                    sonIndustryList.add(sonIndustry);
+//                }
+//            }
+//            fatherIndustry.setChildren(sonIndustryList);
+//            if (fatherIndustry.getParentId() == 0){
+//                fatherIndustryList.add(fatherIndustry);
+//            }
+//        }
+//        industryMessageInfo.setData(fatherIndustryList);
+        industryMessageInfo.setMessage(industryMessageInfo.getMessage());
+        industryMessageInfo.setStatus(industryMessageInfo.getStatus());
+        return industryMessageInfo;
+    }
 
     /**
      *上市类型查询
@@ -475,8 +504,8 @@ public class CommonRest {
     public MessageInfo<Map> orgQuery(){
         MessageInfo<Map> messageInfo = new MessageInfo<>();
         Map<String,Object> map = new HashMap<>();
-        MessageInfo<List<Industry>> industriesMessageInfo = industry();
-        map.put("industry",industriesMessageInfo.getData());
+        MessageInfo<List<Industry>> industriesMessageInfo = orgIndustry();
+        map.put("orgIndustry",industriesMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
@@ -597,6 +626,11 @@ public class CommonRest {
         map.put("capitalType",capitalTypeMessageInfo.getData());
         messageInfo.setMessage(capitalTypeMessageInfo.getMessage());
         messageInfo.setStatus(capitalTypeMessageInfo.getStatus());
+
+        MessageInfo<List<Industry>> orgIndustriesMessageInfo = orgIndustry();
+        map.put("orgIndustry",orgIndustriesMessageInfo.getData());
+        messageInfo.setMessage(orgIndustriesMessageInfo.getMessage());
+        messageInfo.setStatus(orgIndustriesMessageInfo.getStatus());
 
         messageInfo.setData(map);
         return messageInfo;

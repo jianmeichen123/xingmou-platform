@@ -208,7 +208,7 @@ public class CommonRest {
     @ResponseBody
     @Cacheable(value = "orgRound",keyGenerator = "baseKG")
     public MessageInfo<List<InvestRound>> orgRound() {
-        MessageInfo<List<InvestRound>> messageInfo = investRoundBiz.getInvestRoundsByStatus(2);
+        MessageInfo<List<InvestRound>> messageInfo = investRoundBiz.getInvestRoundsByStatus(3);
         return messageInfo;
     }
     /**

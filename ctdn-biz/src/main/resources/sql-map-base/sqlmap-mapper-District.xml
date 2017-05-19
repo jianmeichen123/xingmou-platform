@@ -18,10 +18,12 @@
 
     <select id="selectAll" resultMap="BaseResultMap">
         SELECT
-        <include refid="selectFields"/>
+            <include refid="selectFields"/>
         FROM
-        app_district
-        WHERE districtLevel &lt; 2
+            app_district
+        WHERE
+            districtLevel &lt; 2
+        order by districtType asc
 
     </select>
 

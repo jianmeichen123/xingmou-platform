@@ -63,8 +63,6 @@ public class CommonRest {
     @Cacheable(value = "capitalType",keyGenerator = "baseKG")
     public MessageInfo<List<CapitalType>> capitalType(){
         MessageInfo<List<CapitalType>> messageInfo = capitalTypeBiz.getAllCapitalType();
-        messageInfo.setMessage(messageInfo.getMessage());
-        messageInfo.setStatus(messageInfo.getStatus());
         return messageInfo;
     }
 
@@ -78,8 +76,6 @@ public class CommonRest {
     @Cacheable(value = "currencyType",keyGenerator = "baseKG")
     public MessageInfo<List<CurrencyType>> currencyType() {
         MessageInfo<List<CurrencyType>> messageInfo = currencyTypeBiz.getAllCurrencyType();
-        messageInfo.setMessage(messageInfo.getMessage());
-        messageInfo.setStatus(messageInfo.getStatus());
         return messageInfo;
     }
 
@@ -108,8 +104,6 @@ public class CommonRest {
             }
         }
         districtMessageInfo.setData(fatherDistrictList);
-        districtMessageInfo.setMessage(districtMessageInfo.getMessage());
-        districtMessageInfo.setStatus(districtMessageInfo.getStatus());
         return districtMessageInfo;
     }
 
@@ -138,8 +132,6 @@ public class CommonRest {
             }
         }
         industryMessageInfo.setData(fatherIndustryList);
-        industryMessageInfo.setMessage(industryMessageInfo.getMessage());
-        industryMessageInfo.setStatus(industryMessageInfo.getStatus());
         return industryMessageInfo;
     }
 
@@ -153,23 +145,6 @@ public class CommonRest {
     @Cacheable(value = "orgIndustry",keyGenerator = "baseKG")
     public MessageInfo<List<Industry>> orgIndustry() {
         MessageInfo<List<Industry>> industryMessageInfo = industryBiz.getIndustrysByStatus(2);
-//        List<Industry> industryList = industryMessageInfo.getData();
-//        List<Industry> fatherIndustryList = new ArrayList<>();
-//        for (Industry fatherIndustry : industryList) {
-//            List<Industry> sonIndustryList = new ArrayList<>();
-//            for (Industry sonIndustry : industryList) {
-//                if (sonIndustry.getParentId().intValue() == fatherIndustry.getId().intValue()) {
-//                    sonIndustryList.add(sonIndustry);
-//                }
-//            }
-//            fatherIndustry.setChildren(sonIndustryList);
-//            if (fatherIndustry.getParentId() == 0){
-//                fatherIndustryList.add(fatherIndustry);
-//            }
-//        }
-//        industryMessageInfo.setData(fatherIndustryList);
-        industryMessageInfo.setMessage(industryMessageInfo.getMessage());
-        industryMessageInfo.setStatus(industryMessageInfo.getStatus());
         return industryMessageInfo;
     }
 
@@ -197,8 +172,6 @@ public class CommonRest {
             }
         }
         listingTypeMessageInfo.setData(fatherListingTypeList);
-        listingTypeMessageInfo.setMessage(listingTypeMessageInfo.getMessage());
-        listingTypeMessageInfo.setStatus(listingTypeMessageInfo.getStatus());
         return listingTypeMessageInfo;
     }
 
@@ -211,9 +184,7 @@ public class CommonRest {
     @ResponseBody
     @Cacheable(value = "investRound",keyGenerator = "baseKG")
     public MessageInfo<List<InvestRound>> round() {
-        MessageInfo<List<InvestRound>> messageInfo = investRoundBiz.getAllInvestRound();
-        messageInfo.setMessage(messageInfo.getMessage());
-        messageInfo.setStatus(messageInfo.getStatus());
+        MessageInfo<List<InvestRound>> messageInfo = investRoundBiz.getInvestRoundsByStatus(1);
         return messageInfo;
     }
 
@@ -225,18 +196,21 @@ public class CommonRest {
     @ResponseBody
     @Cacheable(value = "investRound",keyGenerator = "baseKG")
     public MessageInfo<List<InvestRound>> investRound() {
-        MessageInfo<List<InvestRound>> messageInfo = round();
-        List<InvestRound> investRounds = new ArrayList<>();
-        for (InvestRound investRound:round().getData()){
-            if (!"尚未获投".equals(investRound.getName())){
-                investRounds.add(investRound);
-            }
-        }
-        messageInfo.setData(investRounds);
+        MessageInfo<List<InvestRound>> messageInfo = investRoundBiz.getInvestRoundsByStatus(2);
         return messageInfo;
     }
 
-
+    /**
+     *投资轮次查询(不包含尚未获投)
+     * @return messageInfo
+     */
+    @RequestMapping("orgRound")
+    @ResponseBody
+    @Cacheable(value = "orgRound",keyGenerator = "baseKG")
+    public MessageInfo<List<InvestRound>> orgRound() {
+        MessageInfo<List<InvestRound>> messageInfo = investRoundBiz.getInvestRoundsByStatus(2);
+        return messageInfo;
+    }
     /**
      *合并状态查询
      * @return messageInfo
@@ -246,8 +220,6 @@ public class CommonRest {
     @Cacheable(value = "mergeStatus",keyGenerator = "baseKG")
     public MessageInfo<List<MergeStatus>> mergeStatus() {
         MessageInfo<List<MergeStatus>> messageInfo = mergeStatusBiz.getAllMergeStatus();
-        messageInfo.setMessage(messageInfo.getMessage());
-        messageInfo.setStatus(messageInfo.getStatus());
         return messageInfo;
     }
 
@@ -261,8 +233,6 @@ public class CommonRest {
     @Cacheable(value = "mergeType",keyGenerator = "baseKG")
     public MessageInfo<List<MergeType>> mergeType() {
         MessageInfo<List<MergeType>> messageInfo = mergeTypeBiz.getAllMergeType();
-        messageInfo.setMessage(messageInfo.getMessage());
-        messageInfo.setStatus(messageInfo.getStatus());
         return messageInfo;
     }
 
@@ -276,8 +246,6 @@ public class CommonRest {
     @Cacheable(value = "orgType",keyGenerator = "baseKG")
     public MessageInfo<List<OrgType>> orgType() {
         MessageInfo<List<OrgType>> messageInfo = orgTypeBiz.getAllOrgType();
-        messageInfo.setMessage(messageInfo.getMessage());
-        messageInfo.setStatus(messageInfo.getStatus());
         return messageInfo;
     }
 
@@ -291,8 +259,6 @@ public class CommonRest {
     @Cacheable(value = "quitType",keyGenerator = "baseKG")
     public MessageInfo<List<QuitType>> quitType() {
         MessageInfo<List<QuitType>> messageInfo = quitTypeBiz.getAllQuitType();
-        messageInfo.setMessage(messageInfo.getMessage());
-        messageInfo.setStatus(messageInfo.getStatus());
         return messageInfo;
     }
 
@@ -306,8 +272,6 @@ public class CommonRest {
     @Cacheable(value = "equityRate",keyGenerator = "baseKG")
     public MessageInfo<List<EquityRate>> equityRate() {
         MessageInfo<List<EquityRate>> messageInfo = equityRateBiz.getAllEquityRate();
-        messageInfo.setMessage(messageInfo.getMessage());
-        messageInfo.setStatus(messageInfo.getStatus());
         return messageInfo;
     }
 
@@ -321,8 +285,6 @@ public class CommonRest {
     @Cacheable(value = "investStages",keyGenerator = "baseKG")
     public MessageInfo<List<InvestStages>> investStages() {
         MessageInfo<List<InvestStages>> messageInfo = investStagesBiz.getAllInvestStages();
-        messageInfo.setMessage(messageInfo.getMessage());
-        messageInfo.setStatus(messageInfo.getStatus());
         return messageInfo;
     }
 
@@ -503,7 +465,9 @@ public class CommonRest {
     @Cacheable(value = "orgQuery",keyGenerator = "baseKG")
     public MessageInfo<Map> orgQuery(){
         MessageInfo<Map> messageInfo = new MessageInfo<>();
+
         Map<String,Object> map = new HashMap<>();
+
         MessageInfo<List<Industry>> industriesMessageInfo = orgIndustry();
         map.put("orgIndustry",industriesMessageInfo.getData());
         messageInfo.setMessage(industriesMessageInfo.getMessage());
@@ -631,6 +595,11 @@ public class CommonRest {
         map.put("orgIndustry",orgIndustriesMessageInfo.getData());
         messageInfo.setMessage(orgIndustriesMessageInfo.getMessage());
         messageInfo.setStatus(orgIndustriesMessageInfo.getStatus());
+
+        MessageInfo<List<InvestRound>> orgRoundsMessageInfo = orgRound();
+        map.put("orgRound",orgRoundsMessageInfo.getData());
+        messageInfo.setMessage(orgRoundsMessageInfo.getMessage());
+        messageInfo.setStatus(orgRoundsMessageInfo.getStatus());
 
         messageInfo.setData(map);
         return messageInfo;

@@ -23,7 +23,7 @@
             app_district
         WHERE
             districtLevel &lt; 2
-        order by districtType asc
+        order by districtType,sort asc
 
     </select>
 

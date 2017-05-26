@@ -505,6 +505,7 @@ public class CommonRest {
      */
     @RequestMapping("allQuery")
     @ResponseBody
+    @Cacheable(value = "allQuery",keyGenerator = "baseKG")
     public MessageInfo<Map> allQuery(){
         //企业
         MessageInfo<Map> messageInfo = new MessageInfo<>();

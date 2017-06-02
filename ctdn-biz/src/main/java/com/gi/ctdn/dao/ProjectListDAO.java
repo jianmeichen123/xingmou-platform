@@ -11,8 +11,8 @@ public interface ProjectListDAO {
 
 	List<ProjectList> selectByCode(@Param("code") String code);
 
-	List<ProjectList> queryCompetationlist(@Param("id") Integer id);
+	List<ProjectList> queryCompetationlist(ProjectList projectQuery);
 
-	List<ProjectList> queryCompetitiveSimilar(@Param("id") Integer id);
+	List<ProjectList> queryCompetitiveSimilar(ProjectList projectQuery);
 		
 }

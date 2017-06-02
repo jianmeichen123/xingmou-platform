@@ -49,27 +49,25 @@
 		WHERE  code = #{code,jdbcType=VARCHAR}
 	</select>
 
-
-    <select id="queryCompetationlist" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    <select id="queryCompetationlist" resultMap="BaseResultMap" parameterType="com.gi.ctdn.pojo.ProjectList">
         SELECT
         <include refid="selectFields" />
         FROM
-        dm_project
+        app_project_list
         <where> code in (
             SELECT dm_competitive_product.sim_prod_code FROM dm_competitive_product WHERE dm_competitive_product.base_prod_code =
-            (select code from dm_project where dm_project.id = #{id,jdbcType=BIGINT}
-            )
+            (select code from app_project_list where app_project_list.id = #{id,jdbcType=BIGINT}
+            ) and is_same = #{isSame,jdbcType=BIGINT}
             )
         </where>
     </select>
-
-    <select id="queryCompetitiveSimilar" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    <select id="queryCompetitiveSimilar" resultMap="BaseResultMap" parameterType="com.gi.ctdn.pojo.ProjectList">
         SELECT
-        sim_prod_code as code, dm_competitive_product.similarity as similar
+        sim_prod_code as code, dm_competitive_product.similarity as similarity
         FROM
         dm_competitive_product
         <where>
-            base_prod_code = (select code from dm_project where dm_project.id = #{id,jdbcType=BIGINT})
+            base_prod_code = (select code from app_project_list where app_project_list.id = #{id,jdbcType=BIGINT}) and is_same = #{isSame,jdbcType=BIGINT}
         </where>
     </select>
 

@@ -77,6 +77,11 @@ public class ProjectList extends PojoInfo {
 	 * similar 竞品相似度
 	 */
 	private  Double similarity ;
+
+	/**
+	 * 直接间接
+	 */
+	private Integer isSame;
 	
 	/**
 	 * @Fields investSideJson : {"investSideJson":[{"title":"红杉资本","id":2,"isleader":"0"}]}
@@ -265,6 +270,14 @@ public class ProjectList extends PojoInfo {
 
 	public void setLatestFinanceAmountStr(String latestFinanceAmountStr){
 		this.latestFinanceAmountStr = latestFinanceAmountStr;
+	}
+
+	public void setIsSame(Integer isSame) {
+		this.isSame = isSame;
+	}
+
+	public Integer getIsSame() {
+		return isSame;
 	}
 
 	public Double getSimilarity() {

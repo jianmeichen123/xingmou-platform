@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.ProjectListDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.ProjectList">
+            <id column="id" property="id" jdbcType="INTEGER" />
+                <result column="code" property="code" jdbcType="VARCHAR" />
+                <result column="projTitle" property="projTitle" jdbcType="VARCHAR" />
+                <result column="runState" property="runState" jdbcType="CHAR" />
+                <result column="needFinance" property="needFinance" jdbcType="CHAR" />
+                <result column="addr" property="addr" jdbcType="VARCHAR" />
+                <result column="setupDT" property="setupDT" jdbcType="VARCHAR" />
+                <result column="labels" property="labels" jdbcType="VARCHAR" />
+                <result column="introduce" property="introduce" jdbcType="VARCHAR" />
+                <result column="latestFinanceDT" property="latestFinanceDT" jdbcType="DATE" />
+                <result column="latestFinanceRound" property="latestFinanceRound" jdbcType="VARCHAR" />
+                <result column="latestFinanceAmountNum" property="latestFinanceAmountNum" jdbcType="INTEGER" />
+                <result column="latestFinanceAmountStr" property="latestFinanceAmountStr" jdbcType="VARCHAR" />
+                <result column="similarity" property="similarity" jdbcType="VARCHAR" />
+                <result column="investSideJson" property="investSideJson" jdbcType="VARCHAR" />
+                <result column="firmDesc" property="firmDesc" jdbcType="LONGVARCHAR" />
+                <result column="firmPos" property="firmPos" jdbcType="LONGVARCHAR" />
+                <result column="persona" property="persona" jdbcType="LONGVARCHAR" />
+                <result column="prodSrv" property="prodSrv" jdbcType="LONGVARCHAR" />
+                <result column="bizModel" property="bizModel" jdbcType="LONGVARCHAR" />
+                <result column="industryName" property="industryName" jdbcType="VARCHAR" />
+                <result column="industrySubName" property="industrySubName" jdbcType="VARCHAR" />
+                <result column="industryIds" property="industryIds" jdbcType="VARCHAR" />
+                <result column="districtId" property="districtId" jdbcType="INTEGER" />
+                <result column="districtSubId" property="districtSubId" jdbcType="INTEGER" />
+                <result column="districtName" property="districtName" jdbcType="VARCHAR" />
+                <result column="districtSubName" property="districtSubName" jdbcType="VARCHAR" />
+                <result column="logoSmall" property="logoSmall" jdbcType="VARCHAR" />
+                <result column="logoBig" property="logoBig" jdbcType="VARCHAR" />
+                <result column="currencyType" property="currencyType" jdbcType="VARCHAR" />
+                <result column="loadDate" property="loadDate" jdbcType="BIGINT" />
+    	</resultMap>
+
+
+	<sql id="selectFields">
+	    id,code,projTitle,runState,needFinance,addr,setupDT,labels,introduce,latestFinanceDT,latestFinanceRound,latestFinanceAmountNum,latestFinanceAmountStr,investSideJson,firmDesc,firmPos,persona,prodSrv,bizModel,industryName,industrySubName,industryIds,districtId,districtSubId,districtName,districtSubName,logoSmall,logoBig,currencyType,loadDate
+	</sql>
+	
+			
+	<select id="selectByCode" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_project_list
+		WHERE  code = #{code,jdbcType=VARCHAR}
+	</select>
+
+
+    <select id="queryCompetationlist" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        SELECT
+        <include refid="selectFields" />
+        FROM
+        dm_project
+        <where> code in (
+            SELECT dm_competitive_product.sim_prod_code FROM dm_competitive_product WHERE dm_competitive_product.base_prod_code =
+            (select code from dm_project where dm_project.id = #{id,jdbcType=BIGINT}
+            )
+            )
+        </where>
+    </select>
+
+    <select id="queryCompetitiveSimilar" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        SELECT
+        sim_prod_code as code, dm_competitive_product.similarity as similar
+        FROM
+        dm_competitive_product
+        <where>
+            base_prod_code = (select code from dm_project where dm_project.id = #{id,jdbcType=BIGINT})
+        </where>
+    </select>
+
+</mapper>

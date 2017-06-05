@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.EventInfoDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.EventInfo">
+            <id column="eventId" property="eventId" jdbcType="INTEGER" />
+            <result column="investevent" property="investevent" jdbcType="VARCHAR" />
+            <result column="code" property="code" jdbcType="VARCHAR" />
+            <result column="round" property="round" jdbcType="VARCHAR" />
+            <result column="districtName" property="districtName" jdbcType="VARCHAR" />
+            <result column="districtSubName" property="districtSubName" jdbcType="VARCHAR" />
+            <result column="investDate" property="investDate" jdbcType="DATE" />
+            <result column="company" property="company" jdbcType="VARCHAR" />
+            <result column="stage" property="stage" jdbcType="VARCHAR" />
+            <result column="valuation" property="valuation" jdbcType="INTEGER" />
+            <result column="stock" property="stock" jdbcType="INTEGER" />
+            <result column="mode" property="mode" jdbcType="VARCHAR" />
+            <result column="desc" property="desc" jdbcType="LONGVARCHAR" />
+            <result column="sourceId" property="sourceId" jdbcType="INTEGER" />
+            <result column="sourceCode" property="sourceCode" jdbcType="INTEGER" />
+            <result column="logo" property="logo" jdbcType="VARCHAR" />
+            <result column="industryName" property="industryName" jdbcType="VARCHAR" />
+            <result column="industrySubName" property="industrySubName" jdbcType="VARCHAR" />
+            <result column="industryGrandsonName" property="industryGrandsonName" jdbcType="VARCHAR" />
+            <result column="industryIds" property="industryIds" jdbcType="VARCHAR" />
+            <result column="districtId" property="districtId" jdbcType="INTEGER" />
+            <result column="districtSubId" property="districtSubId" jdbcType="INTEGER" />
+            <result column="amountNum" property="amountNum" jdbcType="INTEGER" />
+            <result column="amountStr" property="amountStr" jdbcType="VARCHAR" />
+            <result column="currencyType" property="currencyType" jdbcType="VARCHAR" />
+            <result column="investSideJson" property="investSideJson" jdbcType="VARCHAR" />
+            <result column="bodyRole" property="bodyRole" jdbcType="VARCHAR" />
+            <result column="sourceType" property="sourceType" jdbcType="VARCHAR" />
+            <result column="isClick" property="isClick" jdbcType="VARCHAR" />
+            <result column="invstorgids" property="invstorgids" jdbcType="VARCHAR" />
+            <result column="invstorgnames" property="invstorgnames" jdbcType="VARCHAR" />
+    </resultMap>
+
+
+	<sql id="selectFields">
+	    investevent,eventId,code,round,districtName,districtSubName,investDate,company,stage,valuation,stock,mode,desc,sourceId,sourceCode,logo,industryName,industrySubName,industryGrandsonName,industryIds,districtId,districtSubId,amountNum,amountStr,currencyType,investSideJson,bodyRole,sourceType,isClick,invstorgids,invstorgnames
+	</sql>
+	
+			
+	<select id="selectBySourceCode" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_event_info
+		WHERE  sourceCode = #{sourceCode,jdbcType=INTEGER}
+	</select>
+			
+	<select id="selectByEventId" resultMap="BaseResultMap"  parameterType="java.lang.Integer">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_event_info
+		WHERE  eventId = #{eventId,jdbcType=INTEGER}
+	</select>
+	
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_event_info
+	</select>
+
+</mapper>

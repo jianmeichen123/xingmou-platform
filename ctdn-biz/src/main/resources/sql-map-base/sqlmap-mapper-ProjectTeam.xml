@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.ProjectTeamDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.ProjectTeam">
+            <id column="projectId" property="projectId" jdbcType="INTEGER" />
+                <result column="code" property="code" jdbcType="VARCHAR" />
+                <result column="projTitle" property="projTitle" jdbcType="VARCHAR" />
+                <result column="name" property="name" jdbcType="VARCHAR" />
+                <result column="job" property="job" jdbcType="VARCHAR" />
+                <result column="state" property="state" jdbcType="VARCHAR" />
+                <result column="college" property="college" jdbcType="VARCHAR" />
+                <result column="edu" property="edu" jdbcType="VARCHAR" />
+                <result column="introduction" property="introduction" jdbcType="LONGVARCHAR" />
+                <result column="sourcecode" property="sourcecode" jdbcType="VARCHAR" />
+    	</resultMap>
+
+
+	<sql id="selectFields">
+	    projectId,code,projTitle,name,job,state,college,edu,introduction,sourcecode
+	</sql>
+	
+			
+	<select id="selectBySourcecode" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_project_team
+		WHERE  sourcecode = #{sourcecode,jdbcType=VARCHAR}
+	</select>
+	
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_project_team
+	</select>
+
+</mapper>

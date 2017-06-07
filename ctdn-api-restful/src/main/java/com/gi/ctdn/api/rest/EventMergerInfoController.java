@@ -23,15 +23,15 @@ public class EventMergerInfoController {
     @Autowired
 	private EventMergerInfoBiz eventMergerInfoBiz;
 
-	/**
-	 * 根据项目code查询并购事件
-	 * @param sourceCode
-	 * @return
-	 */
-    @RequestMapping("getListBySourceCode/{sourceCode}")
-    @ResponseBody
-	public MessageInfo<List<EventMergerInfo>> getListBySourceCode(String sourceCode){
-		MessageInfo<List<EventMergerInfo>> messageInfo = eventMergerInfoBiz.getListBySourceCode(sourceCode);
-		return messageInfo;
-	}
+//	/**
+//	 * 根据项目code查询并购事件
+//	 * @param sourceCode
+//	 * @return
+//	 */
+//    @RequestMapping("getListBySourceCode/{sourceCode}")
+//    @ResponseBody
+//	public MessageInfo<List<EventMergerInfo>> getListBySourceCode(String sourceCode){
+//		MessageInfo<List<EventMergerInfo>> messageInfo = eventMergerInfoBiz.getListBySourceCode(sourceCode);
+//		return messageInfo;
+//	}
 }

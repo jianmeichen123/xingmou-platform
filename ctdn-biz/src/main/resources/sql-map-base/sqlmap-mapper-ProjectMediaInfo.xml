@@ -18,12 +18,12 @@
 	</sql>
 	
 			
-	<select id="selectBySourceCode" resultMap="BaseResultMap">
+	<select id="selectBySourceCodeAndType" resultMap="BaseResultMap" >
 		SELECT
             <include refid="selectFields" />
 		FROM
 		    app_project_media_info
-		WHERE  sourceCode = #{sourceCode,jdbcType=VARCHAR}
+		WHERE  sourceCode = #{sourceCode,jdbcType=VARCHAR} and type = #{type,jdbcType=VARCHAR}
 	</select>
 			
 	<select id="selectByType" resultMap="BaseResultMap">

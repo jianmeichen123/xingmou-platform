@@ -31,7 +31,7 @@
 
 
 	<sql id="selectFields">
-	    mergerEvent,eventId,code,industryName,mergeType,mergeState,equityRate,currencyType,projTitle,amountStr,mergeSideJson,mergeDate,isCross,valuation,desc,industrySubname,industryIds,districtSubName,equityrateRange,sourceId,sourceCode,logo,bodyRole,sourcetype,isClick
+	    mergerEvent,eventId,code,industryName,mergeType,mergeState,equityRate,currencyType,projTitle,amountStr,mergeSideJson,mergeDate,isCross,valuation,industrySubname,industryIds,districtSubName,equityrateRange,sourceId,sourceCode,logo,bodyRole,sourcetype,isClick
 	</sql>
 	
 			

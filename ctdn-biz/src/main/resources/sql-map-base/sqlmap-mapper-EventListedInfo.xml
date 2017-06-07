@@ -44,7 +44,7 @@
 
 
 	<sql id="selectFields">
-	    listedEvent,eventId,code,industry,type,stockExchange,transferType,marketLayer,company,stockCode,listedDate,amountNum,amountStr,issuePrice,district,circulation,stockValue,peRatio,netRate,isVcPe,salesSum,accountFirms,lawFirms,desc,prospectus,fiscaleReport,articles,sourceId,sourceCode,logo,industryName,industrySubName,industryGrandsonName,industryIds,bodyRole,sourceType,isClick
+	    listedEvent,eventId,code,industry,type,stockExchange,transferType,marketLayer,company,stockCode,listedDate,amountNum,amountStr,issuePrice,district,circulation,stockValue,peRatio,netRate,isVcPe,salesSum,accountFirms,lawFirms,prospectus,fiscaleReport,articles,sourceId,sourceCode,logo,industryName,industrySubName,industryGrandsonName,industryIds,bodyRole,sourceType,isClick
 	</sql>
 	
 			

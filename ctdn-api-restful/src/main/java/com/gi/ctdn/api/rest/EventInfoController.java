@@ -31,15 +31,15 @@ public class EventInfoController {
 		return messageInfo;
 	}
 
-	/**
-	 * 根据项目code查询列表
-	 * @param sourceCode
-	 * @return
-	 */
-	@RequestMapping("getListBySourceCode/{sourceCode}")
-	@ResponseBody
-	public MessageInfo<List<EventInfo>> getListBySourceCode(@PathVariable  String sourceCode){
-		MessageInfo<List<EventInfo>> messageInfo = eventInfoBiz.getListBySourceCode(sourceCode);
-		return messageInfo;
-	}
+//	/**
+//	 * 根据项目code查询列表
+//	 * @param sourceCode
+//	 * @return
+//	 */
+//	@RequestMapping("getListBySourceCode/{sourceCode}")
+//	@ResponseBody
+//	public MessageInfo<List<EventInfo>> getListBySourceCode(@PathVariable  String sourceCode){
+//		MessageInfo<List<EventInfo>> messageInfo = eventInfoBiz.getListBySourceCode(sourceCode);
+//		return messageInfo;
+//	}
 }

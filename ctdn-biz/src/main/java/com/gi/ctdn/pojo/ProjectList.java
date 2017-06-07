@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
+
 import com.gi.xm.platform.view.common.PojoInfo;
 
 public class ProjectList extends PojoInfo {
@@ -167,6 +169,48 @@ public class ProjectList extends PojoInfo {
 	 * @Fields loadDate : 录入时间
 	 */
 	private Long loadDate;
+
+	/**
+	 * 冗余 事件列表
+	 * @return
+	 */
+	private List<EventInfo> EventInfoList ;
+
+	/**
+	 * 冗余 并购事件列表
+	 * @return
+	 */
+	private List<EventMergerInfo> eventMergerInfoList;
+
+	/**
+	 * 冗余 团队列表
+	 * @return
+	 */
+	private List<ProjectTeam> projectTeamList;
+
+	/**
+	 * 上市挂牌
+	 * @return
+	 */
+	private List<EventListedInfo> eventListedInfoList;
+
+	/**
+	 * 联系方式
+	 * @return
+	 */
+	private List<ProjectContact> projectContactList;
+
+	/**
+	 * 相关新闻
+	 * @return
+	 */
+	private List<ProjectMediaInfo> newsList;
+
+	/**
+	 * 发展历史
+	 * @return
+	 */
+	private List<ProjectMediaInfo> historyList;
     
 	public Integer getId(){
 		return id;
@@ -423,4 +467,61 @@ public class ProjectList extends PojoInfo {
 	public void setLoadDate(Long loadDate){
 		this.loadDate = loadDate;
 	}
+
+	public List<EventInfo> getEventInfoList() {
+		return EventInfoList;
+	}
+
+	public void setEventInfoList(List<EventInfo> eventInfoList) {
+		EventInfoList = eventInfoList;
+	}
+
+	public List<EventMergerInfo> getEventMergerInfoList() {
+		return eventMergerInfoList;
+	}
+
+	public void setEventMergerInfoList(List<EventMergerInfo> eventMergerInfoList) {
+		this.eventMergerInfoList = eventMergerInfoList;
+	}
+
+	public List<ProjectTeam> getProjectTeamList() {
+		return projectTeamList;
+	}
+
+	public void setProjectTeamList(List<ProjectTeam> projectTeamList) {
+		this.projectTeamList = projectTeamList;
+	}
+
+	public List<EventListedInfo> getEventListedInfoList() {
+		return eventListedInfoList;
+	}
+
+	public void setEventListedInfoList(List<EventListedInfo> eventListedInfoList) {
+		this.eventListedInfoList = eventListedInfoList;
+	}
+
+	public List<ProjectContact> getProjectContactList() {
+		return projectContactList;
+	}
+
+	public void setProjectContactList(List<ProjectContact> projectContactList) {
+		this.projectContactList = projectContactList;
+	}
+
+	public List<ProjectMediaInfo> getNewsList() {
+		return newsList;
+	}
+
+	public void setNewsList(List<ProjectMediaInfo> newsList) {
+		this.newsList = newsList;
+	}
+
+	public List<ProjectMediaInfo> getHistoryList() {
+		return historyList;
+	}
+
+	public void setHistoryList(List<ProjectMediaInfo> historyList) {
+		this.historyList = historyList;
+	}
+
     }

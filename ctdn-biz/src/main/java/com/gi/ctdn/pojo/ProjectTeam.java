@@ -8,18 +8,6 @@ import com.gi.xm.platform.view.common.PojoInfo;
 
 public class ProjectTeam extends PojoInfo {
 
-        public static final String PROJECTID = "项目ID";
-        public static final String CODE = "code";
-        public static final String PROJTITLE = "项目名称";
-        public static final String NAME = "姓名";
-        public static final String JOB = "职务";
-        public static final String STATE = "状态";
-        public static final String COLLEGE = "大学";
-        public static final String EDU = "学历";
-        public static final String INTRODUCTION = "简介";
-        public static final String SOURCECODE = "project code";
-    
-	
 	/**
 	 * @Fields projectId : 项目ID
 	 */

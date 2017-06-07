@@ -8,39 +8,6 @@ import com.gi.xm.platform.view.common.PojoInfo;
 
 public class EventInfo extends PojoInfo {
 
-        public static final String INVESTEVENT = "投资事件";
-        public static final String EVENTID = "事件ID";
-        public static final String CODE = "事件code";
-        public static final String ROUND = "轮次";
-        public static final String DISTRICTNAME = "一级地区";
-        public static final String DISTRICTSUBNAME = "二级地区";
-        public static final String INVESTDATE = "时间";
-        public static final String COMPANY = "融资公司";
-        public static final String STAGE = "投资阶段";
-        public static final String VALUATION = "企业估值";
-        public static final String STOCK = "股权";
-        public static final String MODE = "融资方式";
-        public static final String DESC = "描述";
-        public static final String SOURCEID = "项目/投资机构 id";
-        public static final String SOURCECODE = "项目/投资机构 code";
-        public static final String LOGO = "列表项logo";
-        public static final String INDUSTRYNAME = "一级行业";
-        public static final String INDUSTRYSUBNAME = "二级行业";
-        public static final String INDUSTRYGRANDSONNAME = "三级行业";
-        public static final String INDUSTRYIDS = "行业ids,各级行业逗号分隔";
-        public static final String DISTRICTID = "一级地区id";
-        public static final String DISTRICTSUBID = "二级地区id";
-        public static final String AMOUNTNUM = "投资金额 确切数字";
-        public static final String AMOUNTSTR = "投资额字面量";
-        public static final String CURRENCYTYPE = "currencyType";
-        public static final String INVESTSIDEJSON = "投资方包含未收录 {"investSideJson":[{"type":"0","code":199,"title":"红杉资本","isClick":"0"}]}";
-        public static final String BODYROLE = "投资事件主体";
-        public static final String SOURCETYPE = "预留 类型:指定是项目或投资机构";
-        public static final String ISCLICK = "预留 是否可点击";
-        public static final String INVSTORGIDS = "投资事件对应投资机构ids";
-        public static final String INVSTORGNAMES = "投资事件对应投资机构names";
-    
-	
 	/**
 	 * @Fields investevent : 投资事件
 	 */

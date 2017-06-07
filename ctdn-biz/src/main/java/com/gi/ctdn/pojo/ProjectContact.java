@@ -4,22 +4,12 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
+
 import com.gi.xm.platform.view.common.PojoInfo;
 
 public class ProjectContact extends PojoInfo {
-
-        public static final String PROJECTID = "项目ID";
-        public static final String CODE = "code";
-        public static final String PROJTITLE = "项目名称";
-        public static final String CITY = "城市";
-        public static final String ADDR = "地址";
-        public static final String ZIPCODE = "邮编";
-        public static final String TEL = "公司电话";
-        public static final String MAIL = "公司邮箱";
-        public static final String FAX = "传真";
-        public static final String SOURCECODE = "project code";
     
-	
 	/**
 	 * @Fields projectId : 项目ID
 	 */
@@ -69,8 +59,7 @@ public class ProjectContact extends PojoInfo {
 	 * @Fields sourceCode : project code
 	 */
 	private String sourceCode;
-	
-    
+
 	public Integer getProjectId(){
 		return projectId;
 	}
@@ -150,4 +139,5 @@ public class ProjectContact extends PojoInfo {
 	public void setSourceCode(String sourceCode){
 		this.sourceCode = sourceCode;
 	}
-    }
+
+}

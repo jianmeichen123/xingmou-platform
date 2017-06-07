@@ -25,17 +25,17 @@ public class ProjectMediaInfoBiz  {
     @Autowired
 	ProjectMediaInfoDAO projectMediaInfoDAO;
 
-	public MessageInfo<List<ProjectMediaInfo>> queryMediaInfoList(String sourceCode,String type){
-
-		MessageInfo<List<ProjectMediaInfo>> messageInfo = new MessageInfo<List<ProjectMediaInfo>>();
-		try {
-			List<ProjectMediaInfo> projectMediaInfoList = projectMediaInfoDAO.selectBySourceCodeAndType(sourceCode,type);
-			messageInfo.setData(projectMediaInfoList);
-		} catch (Exception e) {
-			LOGGER.error("getListBySourceCode","查询ProjectMediaInfo失败", e);
-			messageInfo.setStatus(MessageStatus.ERROR_CODE);
-		}
-		return messageInfo;
-	}
+//	public MessageInfo<List<ProjectMediaInfo>> queryMediaInfoList(String sourceCode,String type){
+//
+//		MessageInfo<List<ProjectMediaInfo>> messageInfo = new MessageInfo<List<ProjectMediaInfo>>();
+//		try {
+//			List<ProjectMediaInfo> projectMediaInfoList = projectMediaInfoDAO.selectBySourceCodeAndType(sourceCode,type);
+//			messageInfo.setData(projectMediaInfoList);
+//		} catch (Exception e) {
+//			LOGGER.error("getListBySourceCode","查询ProjectMediaInfo失败", e);
+//			messageInfo.setStatus(MessageStatus.ERROR_CODE);
+//		}
+//		return messageInfo;
+//	}
 
 }

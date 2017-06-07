@@ -37,16 +37,16 @@
 
 
 	<sql id="selectFields">
-	    investevent,eventId,code,round,districtName,districtSubName,investDate,company,stage,valuation,stock,mode,desc,sourceId,sourceCode,logo,industryName,industrySubName,industryGrandsonName,industryIds,districtId,districtSubId,amountNum,amountStr,currencyType,investSideJson,bodyRole,sourceType,isClick,invstorgids,invstorgnames
+	    investevent,eventId,code,round,districtName,districtSubName,investDate,company,stage,valuation,stock,mode,sourceId,sourceCode,logo,industryName,industrySubName,industryIds,districtId,districtSubId,amountNum,amountStr,currencyType,investSideJson,bodyRole,sourceType,isClick,invstorgids,invstorgnames
 	</sql>
 	
 			
-	<select id="selectBySourceCode" resultMap="BaseResultMap">
+	<select id="selectBySourceCode" resultMap="BaseResultMap" parameterType="java.lang.String">
 		SELECT
             <include refid="selectFields" />
 		FROM
 		    app_event_info
-		WHERE  sourceCode = #{sourceCode,jdbcType=INTEGER}
+		WHERE  sourceCode = #{sourceCode,jdbcType=VARCHAR}
 	</select>
 			
 	<select id="selectByEventId" resultMap="BaseResultMap"  parameterType="java.lang.Integer">

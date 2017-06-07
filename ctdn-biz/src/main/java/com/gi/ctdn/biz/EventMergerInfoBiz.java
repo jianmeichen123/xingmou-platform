@@ -25,33 +25,17 @@ public class EventMergerInfoBiz  {
     @Autowired
 	EventMergerInfoDAO eventMergerInfoDAO;
 
+//	public MessageInfo<List<EventMergerInfo>> getListBySourceCode(String sourceCode){
+//
+//		MessageInfo<List<EventMergerInfo>> messageInfo = new MessageInfo<List<EventMergerInfo>>();
+//		try {
+//			List<EventMergerInfo> eventMergerInfoList = eventMergerInfoDAO.selectBySourceCode(sourceCode);
+//			messageInfo.setData(eventMergerInfoList);
+//		} catch (Exception e) {
+//			LOGGER.error("getListBySourceCode","查询EventMergerInfo失败", e);
+//			messageInfo.setStatus(MessageStatus.ERROR_CODE);
+//		}
+//		return messageInfo;
+//	}
 
-		
-	public MessageInfo<List<EventMergerInfo>> getListBySourceCode(String sourceCode){
-
-		MessageInfo<List<EventMergerInfo>> messageInfo = new MessageInfo<List<EventMergerInfo>>();
-		try {
-			List<EventMergerInfo> eventMergerInfoList = eventMergerInfoDAO.selectBySourceCode(sourceCode);
-			messageInfo.setData(eventMergerInfoList);
-		} catch (Exception e) {
-			LOGGER.error("getListBySourceCode","查询EventMergerInfo失败", e);
-			messageInfo.setStatus(MessageStatus.ERROR_CODE);
-		}
-		return messageInfo;
-	}
-		
-
-
-    public MessageInfo<List<EventMergerInfo>> getAllEventMergerInfo(){
-
-		MessageInfo<List<EventMergerInfo>> messageInfo = new MessageInfo<List<EventMergerInfo>>();
-		try {
-			List<EventMergerInfo> eventMergerInfoList = eventMergerInfoDAO.selectAll();
-			messageInfo.setData( eventMergerInfoList);
-		} catch (Exception e) {
-			LOGGER.error("getAllEventMergerInfo","查询全部EventMergerInfo失败", e);
-			messageInfo.setStatus(10001);
-		}
-		return messageInfo;
-	}
 }

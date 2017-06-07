@@ -9,7 +9,7 @@ import com.gi.ctdn.pojo.ProjectList;
 
 public interface ProjectListDAO {
 
-	List<ProjectList> selectByCode(@Param("code") String code);
+	ProjectList selectByCode(@Param("code") String code);
 
 	List<ProjectList> queryCompetationlist(ProjectList projectQuery);
 

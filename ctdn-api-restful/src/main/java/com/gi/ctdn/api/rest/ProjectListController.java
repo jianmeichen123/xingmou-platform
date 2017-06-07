@@ -36,6 +36,16 @@ public class ProjectListController {
 	private ProjectContactBiz projectContactBiz;
 
 	/**
+	 * 根据code查询项目
+	 */
+	@RequestMapping("queryProjectByCode/{sourceCode}")
+	@ResponseBody
+	public MessageInfo<ProjectList> queryProjectByCode(@PathVariable String  sourceCode){
+		MessageInfo<ProjectList> resultMessageInfo = projectListBiz.getOneByCode(sourceCode);
+		return resultMessageInfo;
+	}
+
+	/**
 	 * 查询竞争对手列表
 	 * @param project
 	 * @return
@@ -44,40 +54,6 @@ public class ProjectListController {
 	@ResponseBody
 	public MessageInfo<QueryResultInfo<ProjectList>>  queryCompetationlist (@RequestBody ProjectList project) {
 		MessageInfo<QueryResultInfo<ProjectList>> resultMessageInfo = projectListBiz.queryCompetationlist(project);
-		return resultMessageInfo;
-	}
-
-	/**
-	 * 根据项目code 查询团队成员
-	 * @param sourceCode
-	 * @return
-	 */
-	@RequestMapping("queryCompetationlist/{sourceCode}")
-	@ResponseBody
-	public MessageInfo<List<ProjectTeam>>  queryCompetationlist (@PathVariable String  sourceCode) {
-		MessageInfo<List<ProjectTeam>> resultMessageInfo = projectTeamBiz.getListBySourcecode(sourceCode);
-		return resultMessageInfo;
-	}
-
-	/**
-	 * 根据项目code 查询发展历史,相关新闻,子公司列表
-	 */
-	@RequestMapping("queryProjectMediaInfo/{sourceCode}/{type}")
-	@ResponseBody
-	public MessageInfo<List<ProjectMediaInfo>> queryProjectMediaInfo(@PathVariable String sourceCode,String type){
-		MessageInfo<List<ProjectMediaInfo>> resultMessageInfo = projectMediaInfoBiz.queryMediaInfoList(sourceCode,type);
-		return resultMessageInfo;
-	}
-
-	/**
-	 * 根据项目code 查询项目联系方式
-	 * @param sourceCode
-	 * @return
-	 */
-	@RequestMapping("queryProjectContact/{sourceCode}")
-	@ResponseBody
-	public MessageInfo<List<ProjectContact>> queryProjectMediaInfo(@PathVariable String sourceCode){
-		MessageInfo<List<ProjectContact>> resultMessageInfo = projectContactBiz.getListBySourceCode(sourceCode);
 		return resultMessageInfo;
 	}
 }

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.EventListedInfoDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.EventListedInfo">
+
+            <id column="eventId" property="eventId" jdbcType="INTEGER" />
+            <result column="listedEvent" property="listedEvent" jdbcType="VARCHAR" />
+            <result column="code" property="code" jdbcType="VARCHAR" />
+            <result column="industry" property="industry" jdbcType="VARCHAR" />
+            <result column="type" property="type" jdbcType="VARCHAR" />
+            <result column="stockExchange" property="stockExchange" jdbcType="VARCHAR" />
+            <result column="transferType" property="transferType" jdbcType="VARCHAR" />
+            <result column="marketLayer" property="marketLayer" jdbcType="VARCHAR" />
+            <result column="company" property="company" jdbcType="VARCHAR" />
+            <result column="stockCode" property="stockCode" jdbcType="VARCHAR" />
+            <result column="listedDate" property="listedDate" jdbcType="DATE" />
+            <result column="amountNum" property="amountNum" jdbcType="INTEGER" />
+            <result column="amountStr" property="amountStr" jdbcType="VARCHAR" />
+            <result column="issuePrice" property="issuePrice" jdbcType="INTEGER" />
+            <result column="district" property="district" jdbcType="VARCHAR" />
+            <result column="circulation" property="circulation" jdbcType="INTEGER" />
+            <result column="stockValue" property="stockValue" jdbcType="VARCHAR" />
+            <result column="peRatio" property="peRatio" jdbcType="INTEGER" />
+            <result column="netRate" property="netRate" jdbcType="INTEGER" />
+            <result column="isVcPe" property="isVcPe" jdbcType="CHAR" />
+            <result column="salesSum" property="salesSum" jdbcType="INTEGER" />
+            <result column="accountFirms" property="accountFirms" jdbcType="VARCHAR" />
+            <result column="lawFirms" property="lawFirms" jdbcType="VARCHAR" />
+            <result column="desc" property="desc" jdbcType="LONGVARCHAR" />
+            <result column="prospectus" property="prospectus" jdbcType="VARCHAR" />
+            <result column="fiscaleReport" property="fiscaleReport" jdbcType="VARCHAR" />
+            <result column="articles" property="articles" jdbcType="VARCHAR" />
+            <result column="sourceId" property="sourceId" jdbcType="INTEGER" />
+            <result column="sourceCode" property="sourceCode" jdbcType="VARCHAR" />
+            <result column="logo" property="logo" jdbcType="VARCHAR" />
+            <result column="industryName" property="industryName" jdbcType="VARCHAR" />
+            <result column="industrySubName" property="industrySubName" jdbcType="VARCHAR" />
+            <result column="industryGrandsonName" property="industryGrandsonName" jdbcType="VARCHAR" />
+            <result column="industryIds" property="industryIds" jdbcType="VARCHAR" />
+            <result column="bodyRole" property="bodyRole" jdbcType="VARCHAR" />
+            <result column="sourceType" property="sourceType" jdbcType="VARCHAR" />
+            <result column="isClick" property="isClick" jdbcType="VARCHAR" />
+    </resultMap>
+
+
+	<sql id="selectFields">
+	    listedEvent,eventId,code,industry,type,stockExchange,transferType,marketLayer,company,stockCode,listedDate,amountNum,amountStr,issuePrice,district,circulation,stockValue,peRatio,netRate,isVcPe,salesSum,accountFirms,lawFirms,desc,prospectus,fiscaleReport,articles,sourceId,sourceCode,logo,industryName,industrySubName,industryGrandsonName,industryIds,bodyRole,sourceType,isClick
+	</sql>
+	
+			
+	<select id="selectByEventId" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_event_listed_info
+		WHERE  eventId = #{eventId,jdbcType=INTEGER}
+	</select>
+			
+	<select id="selectBySourceCode" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_event_listed_info
+		WHERE  sourceCode = #{sourceCode,jdbcType=VARCHAR}
+	</select>
+	
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_event_listed_info
+	</select>
+
+</mapper>

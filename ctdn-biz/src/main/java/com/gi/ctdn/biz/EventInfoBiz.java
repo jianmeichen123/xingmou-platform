@@ -4,6 +4,8 @@ package com.gi.ctdn.biz;
 
 import java.util.List;
 
+import com.gi.ctdn.pojo.ProjectList;
+import com.gi.xm.platform.view.common.QueryResultInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,19 +28,19 @@ public class EventInfoBiz  {
 	EventInfoDAO eventInfoDAO;
 
 
-		
-	public MessageInfo<List<EventInfo>> getListBySourceCode(Integer sourceCode){
-
-		MessageInfo<List<EventInfo>> messageInfo = new MessageInfo<List<EventInfo>>();
-		try {
-			List<EventInfo> eventInfoList = eventInfoDAO.selectBySourceCode(sourceCode);
-			messageInfo.setData(eventInfoList);
-		} catch (Exception e) {
-			LOGGER.error("getListBySourceCode","查询EventInfo失败", e);
-			messageInfo.setStatus(MessageStatus.ERROR_CODE);
-		}
-		return messageInfo;
-	}
+//
+//	public MessageInfo<List<EventInfo>> getListBySourceCode(String sourceCode){
+//
+//		MessageInfo<List<EventInfo>> messageInfo = new MessageInfo<List<EventInfo>>();
+//		try {
+//			List<EventInfo> eventInfoList = eventInfoDAO.selectBySourceCode(sourceCode);
+//			messageInfo.setData(eventInfoList);
+//		} catch (Exception e) {
+//			LOGGER.error("getListBySourceCode","查询EventInfo失败", e);
+//			messageInfo.setStatus(MessageStatus.ERROR_CODE);
+//		}
+//		return messageInfo;
+//	}
 			
 	public MessageInfo<EventInfo> getByEventId(Integer eventId){
 
@@ -52,19 +54,5 @@ public class EventInfoBiz  {
 		}
 		return messageInfo;
 	}
-		
 
-
-    public MessageInfo<List<EventInfo>> getAllEventInfo(){
-
-		MessageInfo<List<EventInfo>> messageInfo = new MessageInfo<List<EventInfo>>();
-		try {
-			List<EventInfo> eventInfoList = eventInfoDAO.selectAll();
-			messageInfo.setData( eventInfoList);
-		} catch (Exception e) {
-			LOGGER.error("getAllEventInfo","查询全部EventInfo失败", e);
-			messageInfo.setStatus(10001);
-		}
-		return messageInfo;
-	}
 }

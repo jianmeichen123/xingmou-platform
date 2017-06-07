@@ -10,9 +10,7 @@ import com.gi.ctdn.pojo.EventInfo;
 public interface EventInfoDAO {
 	
 			
-	List<EventInfo> selectBySourceCode(@Param("sourceCode") Integer sourceCode);
+	List<EventInfo> selectBySourceCode(@Param("sourceCode") String sourceCode);
 				
 	EventInfo selectByEventId(@Param("eventId") Integer eventId);
-		
-	List<EventInfo> selectAll();
 }

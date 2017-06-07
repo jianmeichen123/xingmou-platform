@@ -25,17 +25,17 @@ public class ProjectContactBiz  {
     @Autowired
 	ProjectContactDAO projectContactDAO;
 
-	public MessageInfo<List<ProjectContact>> getListBySourceCode(String sourceCode){
-
-		MessageInfo<List<ProjectContact>> messageInfo = new MessageInfo<List<ProjectContact>>();
-		try {
-			List<ProjectContact> projectContactList = projectContactDAO.selectBySourceCode(sourceCode);
-			messageInfo.setData(projectContactList);
-		} catch (Exception e) {
-			LOGGER.error("getListBySourceCode","查询ProjectContact失败", e);
-			messageInfo.setStatus(MessageStatus.ERROR_CODE);
-		}
-		return messageInfo;
-	}
+//	public MessageInfo<List<ProjectContact>> getListBySourceCode(String sourceCode){
+//
+//		MessageInfo<List<ProjectContact>> messageInfo = new MessageInfo<List<ProjectContact>>();
+//		try {
+//			List<ProjectContact> projectContactList = projectContactDAO.selectBySourceCode(sourceCode);
+//			messageInfo.setData(projectContactList);
+//		} catch (Exception e) {
+//			LOGGER.error("getListBySourceCode","查询ProjectContact失败", e);
+//			messageInfo.setStatus(MessageStatus.ERROR_CODE);
+//		}
+//		return messageInfo;
+//	}
 
 }

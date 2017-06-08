@@ -10,4 +10,8 @@ import com.gi.ctdn.pojo.EventMergerInfo;
 public interface EventMergerInfoDAO {
 	
 	List<EventMergerInfo> selectBySourceCode(@Param("sourceCode") String sourceCode);
+
+	List<EventMergerInfo> selectByEventId(@Param("eventId") Integer eventId);
+
+
 }

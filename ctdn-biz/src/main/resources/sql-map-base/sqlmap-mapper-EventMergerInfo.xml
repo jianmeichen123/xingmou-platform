@@ -42,7 +42,14 @@
 		    app_event_merger_info
 		WHERE  sourceCode = #{sourceCode,jdbcType=VARCHAR}
 	</select>
-	
+
+    <select id="selectByEventId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="selectFields" />
+        FROM
+        app_event_merger_info
+        WHERE  eventId = #{eventId,jdbcType=INTEGER}
+    </select>
 
 	<select id="selectAll" resultMap="BaseResultMap">
 		SELECT

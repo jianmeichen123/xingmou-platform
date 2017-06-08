@@ -9,6 +9,7 @@ import com.gi.ctdn.biz.EventMergerInfoBiz;
 import com.gi.ctdn.pojo.EventMergerInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,4 +35,11 @@ public class EventMergerInfoController {
 //		MessageInfo<List<EventMergerInfo>> messageInfo = eventMergerInfoBiz.getListBySourceCode(sourceCode);
 //		return messageInfo;
 //	}
+
+    @RequestMapping("getListByEventId/{eventId}")
+    @ResponseBody
+    public MessageInfo<List<EventMergerInfo>> getListByEventId(@PathVariable Integer eventId){
+        MessageInfo<List<EventMergerInfo>> messageInfo = eventMergerInfoBiz.getListByEventId(eventId);
+        return messageInfo;
+    }
 }

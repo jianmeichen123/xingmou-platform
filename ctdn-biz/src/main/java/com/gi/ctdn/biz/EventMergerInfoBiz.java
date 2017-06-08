@@ -38,4 +38,17 @@ public class EventMergerInfoBiz  {
 //		return messageInfo;
 //	}
 
+
+	public MessageInfo<List<EventMergerInfo>> getListByEventId(Integer eventId){
+
+		MessageInfo<List<EventMergerInfo>> messageInfo = new MessageInfo<List<EventMergerInfo>>();
+		try {
+			List<EventMergerInfo> eventMergerInfoList = eventMergerInfoDAO.selectByEventId(eventId);
+			messageInfo.setData(eventMergerInfoList);
+		} catch (Exception e) {
+			LOGGER.error("getListByEventId","查询EventMergerInfo失败", e);
+			messageInfo.setStatus(MessageStatus.ERROR_CODE);
+		}
+		return messageInfo;
+	}
 }

@@ -4,7 +4,6 @@
 	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.EventMergerInfo">
             <id column="eventId" property="eventId" jdbcType="INTEGER" />
             <result column="mergerEvent" property="mergerEvent" jdbcType="VARCHAR" />
-            <result column="code" property="code" jdbcType="VARCHAR" />
             <result column="industryName" property="industryName" jdbcType="VARCHAR" />
             <result column="mergeType" property="mergeType" jdbcType="VARCHAR" />
             <result column="mergeState" property="mergeState" jdbcType="VARCHAR" />
@@ -31,7 +30,7 @@
 
 
 	<sql id="selectFields">
-	    mergerEvent,eventId,code,industryName,mergeType,mergeState,equityRate,currencyType,projTitle,amountStr,mergeSideJson,mergeDate,isCross,valuation,industrySubname,industryIds,districtSubName,equityrateRange,sourceId,sourceCode,logo,bodyRole,sourcetype,isClick
+	    mergerEvent,eventId,industryName,mergeType,mergeState,equityRate,currencyType,projTitle,amountStr,mergeSideJson,mergeDate,isCross,valuation,industrySubname,industryIds,districtSubName,equityrateRange,sourceId,sourceCode,logo,bodyRole,sourcetype,isClick
 	</sql>
 	
 			

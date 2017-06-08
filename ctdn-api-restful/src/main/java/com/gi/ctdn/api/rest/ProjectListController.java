@@ -4,10 +4,7 @@ import com.gi.ctdn.biz.ProjectContactBiz;
 import com.gi.ctdn.biz.ProjectListBiz;
 import com.gi.ctdn.biz.ProjectMediaInfoBiz;
 import com.gi.ctdn.biz.ProjectTeamBiz;
-import com.gi.ctdn.pojo.ProjectContact;
-import com.gi.ctdn.pojo.ProjectList;
-import com.gi.ctdn.pojo.ProjectMediaInfo;
-import com.gi.ctdn.pojo.ProjectTeam;
+import com.gi.ctdn.pojo.*;
 import com.gi.xm.platform.view.common.MessageInfo;
 import com.gi.xm.platform.view.common.QueryResultInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,20 +37,19 @@ public class ProjectListController {
 	 */
 	@RequestMapping("queryProjectByCode/{sourceCode}")
 	@ResponseBody
-	public MessageInfo<ProjectList> queryProjectByCode(@PathVariable String  sourceCode){
-		MessageInfo<ProjectList> resultMessageInfo = projectListBiz.getOneByCode(sourceCode);
+	public MessageInfo<ProjectListInfo> queryProjectByCode(@PathVariable String  sourceCode){
+		MessageInfo<ProjectListInfo> resultMessageInfo = projectListBiz.getOneByCode(sourceCode);
 		return resultMessageInfo;
 	}
 
 	/**
 	 * 查询竞争对手列表
-	 * @param project
 	 * @return
 	 */
-	@RequestMapping("queryCompetationlist")
+	@RequestMapping("queryCompetationlist/{sourceCode}")
 	@ResponseBody
-	public MessageInfo<QueryResultInfo<ProjectList>>  queryCompetationlist (@RequestBody ProjectList project) {
-		MessageInfo<QueryResultInfo<ProjectList>> resultMessageInfo = projectListBiz.queryCompetationlist(project);
+	public MessageInfo<ProjectListInfo>  queryCompetationlist (@PathVariable String  sourceCode) {
+		MessageInfo<ProjectListInfo> resultMessageInfo = projectListBiz.queryCompetationlist(sourceCode);
 		return resultMessageInfo;
 	}
 }

@@ -5,7 +5,6 @@
 
             <id column="eventId" property="eventId" jdbcType="INTEGER" />
             <result column="listedEvent" property="listedEvent" jdbcType="VARCHAR" />
-            <result column="code" property="code" jdbcType="VARCHAR" />
             <result column="industry" property="industry" jdbcType="VARCHAR" />
             <result column="type" property="type" jdbcType="VARCHAR" />
             <result column="stockExchange" property="stockExchange" jdbcType="VARCHAR" />
@@ -44,7 +43,7 @@
 
 
 	<sql id="selectFields">
-	    listedEvent,eventId,code,industry,type,stockExchange,transferType,marketLayer,company,stockCode,listedDate,amountNum,amountStr,issuePrice,district,circulation,stockValue,peRatio,netRate,isVcPe,salesSum,accountFirms,lawFirms,prospectus,fiscaleReport,articles,sourceId,sourceCode,logo,industryName,industrySubName,industryGrandsonName,industryIds,bodyRole,sourceType,isClick
+	    listedEvent,eventId,industry,type,stockExchange,transferType,marketLayer,company,stockCode,listedDate,amountNum,amountStr,issuePrice,district,circulation,stockValue,peRatio,netRate,isVcPe,salesSum,accountFirms,lawFirms,prospectus,fiscaleReport,articles,sourceId,sourceCode,logo,industryName,industrySubName,industryGrandsonName,industryIds,bodyRole,sourceType,isClick
 	</sql>
 	
 			

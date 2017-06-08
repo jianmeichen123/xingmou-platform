@@ -2,8 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gi.ctdn.dao.ProjectMediaInfoDAO">
 	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.ProjectMediaInfo">
-            <id column="projectId" property="projectId" jdbcType="INTEGER" />
-                <result column="code" property="code" jdbcType="VARCHAR" />
+                <id column="projectId" property="projectId" jdbcType="INTEGER" />
                 <result column="projTitle" property="projTitle" jdbcType="VARCHAR" />
                 <result column="date" property="date" jdbcType="VARCHAR" />
                 <result column="source" property="source" jdbcType="VARCHAR" />
@@ -14,7 +13,7 @@
 
 
 	<sql id="selectFields">
-	    projectId,code,projTitle,date,source,content,type,sourceCode
+	    projectId,projTitle,date,source,content,type,sourceCode
 	</sql>
 	
 			

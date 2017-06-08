@@ -4,7 +4,6 @@
 	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.EventInfo">
             <id column="eventId" property="eventId" jdbcType="INTEGER" />
             <result column="investevent" property="investevent" jdbcType="VARCHAR" />
-            <result column="code" property="code" jdbcType="VARCHAR" />
             <result column="round" property="round" jdbcType="VARCHAR" />
             <result column="districtName" property="districtName" jdbcType="VARCHAR" />
             <result column="districtSubName" property="districtSubName" jdbcType="VARCHAR" />
@@ -37,7 +36,7 @@
 
 
 	<sql id="selectFields">
-	    investevent,eventId,code,round,districtName,districtSubName,investDate,company,stage,valuation,stock,mode,sourceId,sourceCode,logo,industryName,industrySubName,industryIds,districtId,districtSubId,amountNum,amountStr,currencyType,investSideJson,bodyRole,sourceType,isClick,invstorgids,invstorgnames
+	    investevent,eventId,round,districtName,districtSubName,investDate,company,stage,valuation,stock,mode,sourceId,sourceCode,logo,industryName,industrySubName,industryIds,districtId,districtSubId,amountNum,amountStr,currencyType,investSideJson,bodyRole,sourceType,isClick,invstorgids,invstorgnames
 	</sql>
 	
 			

@@ -560,7 +560,7 @@ public class CommonRest {
         //上市挂牌
 
         MessageInfo<List<ListingType>> listingTypeMessageInfo = listingType();
-        map.put("listingType",listingTypeMessageInfo.getData());
+        map.put("type",listingTypeMessageInfo.getData());
         listingTypeMessageInfo.setMessage(listingTypeMessageInfo.getMessage());
         listingTypeMessageInfo.setStatus(listingTypeMessageInfo.getStatus());
 

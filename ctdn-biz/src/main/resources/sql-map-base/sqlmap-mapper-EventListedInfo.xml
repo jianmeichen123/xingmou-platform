@@ -10,7 +10,7 @@
             <result column="stockExchange" property="stockExchange" jdbcType="VARCHAR" />
             <result column="transferType" property="transferType" jdbcType="VARCHAR" />
             <result column="marketLayer" property="marketLayer" jdbcType="VARCHAR" />
-            <result column="company" property="company" jdbcType="VARCHAR" />
+            <result column="company" property="projTitle" jdbcType="VARCHAR" />
             <result column="stockCode" property="stockCode" jdbcType="VARCHAR" />
             <result column="listedDate" property="listedDate" jdbcType="DATE" />
             <result column="amountNum" property="amountNum" jdbcType="INTEGER" />

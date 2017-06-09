@@ -24,9 +24,9 @@ public class EventInfoController {
 	 * @param eventId
 	 * @return
 	 */
-	@RequestMapping("getById")
+	@RequestMapping("getById/{eventId}")
 	@ResponseBody
-	public MessageInfo<EventInfo> getEventInfo( Integer eventId ){
+	public MessageInfo<EventInfo> getEventInfo(@PathVariable Integer eventId ){
 		MessageInfo<EventInfo> messageInfo =  eventInfoBiz.getByEventId(eventId);
 		return messageInfo;
 	}

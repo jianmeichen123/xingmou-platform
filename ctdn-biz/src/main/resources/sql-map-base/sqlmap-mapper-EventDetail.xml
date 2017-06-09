@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.EventDetailDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.EventDetail">
+            <result column="investEvent" property="investEvent" jdbcType="VARCHAR" />
+                <result column="eventId" property="eventId" jdbcType="INTEGER" />
+                <result column="code" property="code" jdbcType="VARCHAR" />
+                <result column="org" property="org" jdbcType="VARCHAR" />
+                <result column="fund" property="fund" jdbcType="VARCHAR" />
+                <result column="investor" property="investor" jdbcType="VARCHAR" />
+                <result column="investtime" property="investtime" jdbcType="VARCHAR" />
+                <result column="role" property="role" jdbcType="VARCHAR" />
+                <result column="amount" property="amount" jdbcType="VARCHAR" />
+                <result column="stock" property="stock" jdbcType="DECIMAL" />
+                <result column="orgType" property="orgType" jdbcType="VARCHAR" />
+                <result column="quitTime" property="quitTime" jdbcType="DATE" />
+                <result column="quitType" property="quitType" jdbcType="VARCHAR" />
+                <result column="returnAmount" property="returnAmount" jdbcType="VARCHAR" />
+                <result column="returnMulti" property="returnMulti" jdbcType="DECIMAL" />
+                <result column="invested" property="invested" jdbcType="VARCHAR" />
+                <result column="round" property="round" jdbcType="VARCHAR" />
+                <result column="commitAmount" property="commitAmount" jdbcType="VARCHAR" />
+    	</resultMap>
+
+
+	<sql id="selectFields">
+	    investEvent,eventId,code,org,fund,investor,investtime,role,amount,stock,orgType,quitTime,quitType,returnAmount,returnMulti,invested,round,commitAmount
+	</sql>
+	
+			
+	<select id="selectByEventId" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_event_detail
+		WHERE  eventId = #{eventId,jdbcType=INTEGER}
+	</select>
+
+    <select id="selectByProjTitle" resultMap="BaseResultMap">
+        SELECT
+        <include refid="selectFields" />
+        FROM
+        app_event_detail
+        WHERE  projTitle = #{projTitle,jdbcType=INTEGER}
+    </select>
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_event_detail
+	</select>
+
+</mapper>

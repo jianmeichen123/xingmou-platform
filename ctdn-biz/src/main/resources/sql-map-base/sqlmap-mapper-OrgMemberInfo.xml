@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.OrgMemberInfoDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.OrgMemberInfo">
+            <result column="investOrg" property="investOrg" jdbcType="VARCHAR" />
+                <result column="orgId" property="orgId" jdbcType="INTEGER" />
+                <result column="code" property="code" jdbcType="VARCHAR" />
+                <result column="fund" property="fund" jdbcType="VARCHAR" />
+                <result column="adminOrg" property="adminOrg" jdbcType="VARCHAR" />
+                <result column="foundDate" property="foundDate" jdbcType="DATE" />
+                <result column="fundType" property="fundType" jdbcType="VARCHAR" />
+                <result column="investDate" property="investDate" jdbcType="DATE" />
+                <result column="commitAmount" property="commitAmount" jdbcType="VARCHAR" />
+    	</resultMap>
+
+
+	<sql id="selectFields">
+	    investOrg,orgId,code,fund,adminOrg,foundDate,fundType,investDate,commitAmount
+	</sql>
+	
+			
+	<select id="selectByOrgId" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_org_member_info
+		WHERE  orgId = #{orgId,jdbcType=INTEGER}
+	</select>
+	
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_org_member_info
+	</select>
+
+</mapper>

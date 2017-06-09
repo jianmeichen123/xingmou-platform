@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.EventListedDetailDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.EventListedDetail">
+            <result column="listedEvent" property="listedEvent" jdbcType="VARCHAR" />
+                <result column="eventId" property="eventId" jdbcType="INTEGER" />
+                <result column="code" property="code" jdbcType="VARCHAR" />
+                <result column="investParty" property="investParty" jdbcType="VARCHAR" />
+                <result column="fund" property="fund" jdbcType="VARCHAR" />
+                <result column="quitTime" property="quitTime" jdbcType="VARCHAR" />
+                <result column="quitType" property="quitType" jdbcType="VARCHAR" />
+                <result column="quitReturn" property="quitReturn" jdbcType="VARCHAR" />
+                <result column="returnMulti" property="returnMulti" jdbcType="DECIMAL" />
+    	</resultMap>
+
+
+	<sql id="selectFields">
+	    listedEvent,eventId,code,investParty,fund,quitTime,quitType,quitReturn,returnMulti
+	</sql>
+	
+			
+	<select id="selectByEventId" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_event_listed_detail
+		WHERE  eventId = #{eventId,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectByProjTitle" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM
+		app_event_listed_detail
+		WHERE  projTitle = #{projTitle,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_event_listed_detail
+	</select>
+
+</mapper>

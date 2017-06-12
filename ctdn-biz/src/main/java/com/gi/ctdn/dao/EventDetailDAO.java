@@ -12,7 +12,5 @@ public interface EventDetailDAO {
 			
 	List<EventDetail> selectByEventId(@Param("eventId") Integer eventId);
 
-	List<EventDetail> selectByProjTitle(@Param("projTitle") String projTitle);
-		
 	List<EventDetail> selectAll();
 }

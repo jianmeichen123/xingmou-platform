@@ -16,7 +16,7 @@
             <result column="amountNum" property="amountNum" jdbcType="INTEGER" />
             <result column="amountStr" property="amountStr" jdbcType="VARCHAR" />
             <result column="issuePrice" property="issuePrice" jdbcType="INTEGER" />
-            <result column="district" property="district" jdbcType="VARCHAR" />
+            <result column="districtSubName" property="districtSubName" jdbcType="VARCHAR" />
             <result column="circulation" property="circulation" jdbcType="INTEGER" />
             <result column="stockValue" property="stockValue" jdbcType="VARCHAR" />
             <result column="peRatio" property="peRatio" jdbcType="INTEGER" />
@@ -43,7 +43,7 @@
 
 
 	<sql id="selectFields">
-	    listedEvent,eventId,industry,type,stockExchange,transferType,marketLayer,company,stockCode,listedDate,amountNum,amountStr,issuePrice,district,circulation,stockValue,peRatio,netRate,isVcPe,salesSum,accountFirms,lawFirms,prospectus,fiscaleReport,articles,sourceId,sourceCode,logo,industryName,industrySubName,industryGrandsonName,industryIds,bodyRole,sourceType,isClick
+	    listedEvent,eventId,industry,type,stockExchange,transferType,marketLayer,company,stockCode,listedDate,amountNum,amountStr,issuePrice,districtSubName,circulation,stockValue,peRatio,netRate,isVcPe,salesSum,accountFirms,lawFirms,prospectus,fiscaleReport,articles,sourceId,sourceCode,logo,industryName,industrySubName,industryGrandsonName,industryIds,bodyRole,sourceType,isClick
 	</sql>
 	
 			

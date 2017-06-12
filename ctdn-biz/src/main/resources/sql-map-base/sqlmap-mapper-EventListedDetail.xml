@@ -27,14 +27,6 @@
 		WHERE  eventId = #{eventId,jdbcType=INTEGER}
 	</select>
 
-	<select id="selectByProjTitle" resultMap="BaseResultMap">
-		SELECT
-		<include refid="selectFields" />
-		FROM
-		app_event_listed_detail
-		WHERE  projTitle = #{projTitle,jdbcType=VARCHAR}
-	</select>
-
 	<select id="selectAll" resultMap="BaseResultMap">
 		SELECT
             <include refid="selectFields" />

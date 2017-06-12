@@ -47,11 +47,4 @@ public class EventListedDetailController {
 		return messageInfo;
 	}
 
-	@RequestMapping("getListByProjTitle")
-	@ResponseBody
-	public MessageInfo<List<EventListedDetail>> getListByProjTitle(String projTitle){
-		MessageInfo<List<EventListedDetail>> messageInfo = eventListedDetailBiz.getListByProjTitle(projTitle);
-		return messageInfo;
-	}
-
 }

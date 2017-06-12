@@ -40,13 +40,4 @@
         eventId = #{eventId,jdbcType=INTEGER}
     </select>
 
-    <select id="getEventMergerDetailByProjTitle" resultMap="BaseResultMap">
-        SELECT
-        <include refid="selectFields" />
-        FROM
-        app_event_merger_detail
-        WHERE
-        projTitle = #{projTitle,jdbcType=VARCHAR}
-    </select>
-
 </mapper>

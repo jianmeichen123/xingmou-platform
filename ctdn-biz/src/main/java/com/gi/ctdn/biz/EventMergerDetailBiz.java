@@ -52,17 +52,5 @@ public class EventMergerDetailBiz  {
 		return messageInfo;
 	}
 
-	public MessageInfo<List<EventMergerDetail>> getEventMergerDetailByProjTitle(String projTitle){
-
-		MessageInfo<List<EventMergerDetail>> messageInfo = new MessageInfo<List<EventMergerDetail>>();
-		try {
-			List<EventMergerDetail> eventMergerDetailList = eventMergerDetailDAO.getEventMergerDetailByProjTitle(projTitle);
-			messageInfo.setData( eventMergerDetailList);
-		} catch (Exception e) {
-			LOGGER.error("getEventMergerDetailByProjTitle","查询全部getEventMergerDetailByEventId失败", e);
-			messageInfo.setStatus(10001);
-		}
-		return messageInfo;
-	}
 
 }

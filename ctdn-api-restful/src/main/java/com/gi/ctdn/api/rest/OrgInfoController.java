@@ -41,10 +41,4 @@ public class OrgInfoController {
 		return messageInfo;
 	}
 
-	@RequestMapping("getListByProjTitle")
-	@ResponseBody
-	public MessageInfo<List<OrgInfo>> getListByProjTitle(String projTitle){
-		MessageInfo<List<OrgInfo>> messageInfo = orgInfoBiz.getListByProjTitle(projTitle);
-		return messageInfo;
-	}
 }

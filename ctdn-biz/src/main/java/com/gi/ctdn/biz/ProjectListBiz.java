@@ -94,10 +94,10 @@ public class ProjectListBiz {
 		if (pList != null && !pList.isEmpty()) {
 			List<ProjectList> cList = projectListDAO.queryCompetitiveSimilar(sourceCode, isSame);
 			for (ProjectList s : cList) {
-				String code = s.getCode();
+				String code = s.getSourceCode();
 				Double similar = s.getSimilarity();
 				for (ProjectList p : pList) {
-					if (code.equals(p.getCode())) {
+					if (code.equals(p.getSourceCode())) {
 						p.setSimilarity(similar);
 						newList.add(p);
 					}

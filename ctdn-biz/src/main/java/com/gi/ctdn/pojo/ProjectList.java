@@ -15,7 +15,7 @@ public class ProjectList extends PojoInfo {
 	/**
 	 * @Fields code : 
 	 */
-	private String code;
+	private String sourceCode;
 	
 	/**
 	 * @Fields projTitle : 项目名称
@@ -174,15 +174,15 @@ public class ProjectList extends PojoInfo {
 	public void setId(Integer id){
 		this.id = id;
 	}
-    
-	public String getCode(){
-		return code;
+
+	public String getSourceCode() {
+		return sourceCode;
 	}
 
-	public void setCode(String code){
-		this.code = code;
+	public void setSourceCode(String sourceCode) {
+		this.sourceCode = sourceCode;
 	}
-    
+
 	public String getProjTitle(){
 		return projTitle;
 	}

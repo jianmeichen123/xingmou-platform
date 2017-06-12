@@ -54,7 +54,7 @@ public class EventListedInfo extends PojoInfo {
 	/**
 	 * @Fields company : 公司
 	 */
-	private String company;
+	private String projTitle;
 	
 	/**
 	 * @Fields stockCode : 股票代码
@@ -260,15 +260,15 @@ public class EventListedInfo extends PojoInfo {
 	public void setMarketLayer(String marketLayer){
 		this.marketLayer = marketLayer;
 	}
-    
-	public String getCompany(){
-		return company;
+
+	public String getProjTitle() {
+		return projTitle;
 	}
 
-	public void setCompany(String company){
-		this.company = company;
+	public void setProjTitle(String projTitle) {
+		this.projTitle = projTitle;
 	}
-    
+
 	public String getStockCode(){
 		return stockCode;
 	}

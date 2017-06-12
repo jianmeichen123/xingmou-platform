@@ -14,5 +14,4 @@ public interface EventMergerDetailDAO {
 
 	List<EventMergerDetail> getEventMergerDetailByEventId(@Param("eventId") Integer eventId);
 
-	List<EventMergerDetail> getEventMergerDetailByProjTitle(@Param("projTitle") String projTitle);
 }

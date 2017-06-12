@@ -40,18 +40,6 @@ public class EventDetailBiz  {
 		return messageInfo;
 	}
 
-	public MessageInfo<List<EventDetail>> getListByProjTitle(String projTitle){
-
-		MessageInfo<List<EventDetail>> messageInfo = new MessageInfo<List<EventDetail>>();
-		try {
-			List<EventDetail> eventDetailList = eventDetailDAO.selectByProjTitle(projTitle);
-			messageInfo.setData(eventDetailList);
-		} catch (Exception e) {
-			LOGGER.error("getListByProjTitle","查询EventDetail失败", e);
-			messageInfo.setStatus(MessageStatus.ERROR_CODE);
-		}
-		return messageInfo;
-	}
 
     public MessageInfo<List<EventDetail>> getAllEventDetail(){
 

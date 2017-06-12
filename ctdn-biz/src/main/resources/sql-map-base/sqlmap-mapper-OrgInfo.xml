@@ -60,14 +60,6 @@
 		WHERE  orgId = #{orgId,jdbcType=INTEGER}
 	</select>
 
-    <select id="selectByProjTitle" resultMap="BaseResultMap">
-        SELECT
-        <include refid="selectFields" />
-        FROM
-        app_org_info
-        WHERE  projTitle = #{projTitle,jdbcType=VARCHAR}
-    </select>
-
 	<select id="selectAll" resultMap="BaseResultMap">
 		SELECT
             <include refid="selectFields" />

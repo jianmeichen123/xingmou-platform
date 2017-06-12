@@ -40,18 +40,6 @@ public class OrgInfoBiz  {
 		return messageInfo;
 	}
 
-	public MessageInfo<List<OrgInfo>> getListByProjTitle(String projTitle){
-
-		MessageInfo<List<OrgInfo>> messageInfo = new MessageInfo<List<OrgInfo>>();
-		try {
-			List<OrgInfo> orgInfoList = orgInfoDAO.selectByProjTitle(projTitle);
-			messageInfo.setData(orgInfoList);
-		} catch (Exception e) {
-			LOGGER.error("getListByProjTitle","查询OrgInfo失败", e);
-			messageInfo.setStatus(MessageStatus.ERROR_CODE);
-		}
-		return messageInfo;
-	}
 
     public MessageInfo<List<OrgInfo>> getAllOrgInfo(){
 

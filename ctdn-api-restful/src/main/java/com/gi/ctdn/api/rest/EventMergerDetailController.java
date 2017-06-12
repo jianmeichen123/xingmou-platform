@@ -38,10 +38,4 @@ public class EventMergerDetailController {
         return messageInfo;
     }
 
-    @RequestMapping("getEventMergerDetailByProjTitle")
-    @ResponseBody
-    public MessageInfo<List<EventMergerDetail>> getEventMergerDetailByProjTitle(String projTitle){
-        MessageInfo<List<EventMergerDetail>>  messageInfo = eventMergerDetailBiz.getEventMergerDetailByProjTitle(projTitle);
-        return messageInfo;
-    }
 }

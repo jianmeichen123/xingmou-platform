@@ -12,7 +12,5 @@ public interface OrgInfoDAO {
 			
 	List<OrgInfo> selectByOrgId(@Param("orgId") Integer orgId);
 
-	List<OrgInfo> selectByProjTitle(@Param("projTitle") String projTitle);
-		
 	List<OrgInfo> selectAll();
 }

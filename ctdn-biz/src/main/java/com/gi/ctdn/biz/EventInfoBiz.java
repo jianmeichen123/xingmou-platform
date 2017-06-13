@@ -2,10 +2,8 @@
 
 package com.gi.ctdn.biz;
 
-import java.util.List;
-
-import com.gi.ctdn.pojo.ProjectList;
-import com.gi.xm.platform.view.common.QueryResultInfo;
+import com.gi.ctdn.dao.OrgInfoDAO;
+import com.gi.ctdn.pojo.EventInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,8 +14,6 @@ import com.gi.ctdn.dao.EventInfoDAO;
 import com.gi.xm.platform.view.common.MessageStatus;
 import com.gi.xm.platform.view.common.MessageInfo;
 
-import com.gi.ctdn.pojo.EventInfo;
-
 @Service("eventInfoBiz")
 public class EventInfoBiz  {
 
@@ -26,6 +22,9 @@ public class EventInfoBiz  {
 
     @Autowired
 	EventInfoDAO eventInfoDAO;
+
+    @Autowired
+	OrgInfoDAO orgInfoDAO;
 
 
 //
@@ -43,16 +42,17 @@ public class EventInfoBiz  {
 //	}
 			
 	public MessageInfo<EventInfo> getByEventId(Integer eventId){
+		MessageInfo<EventInfo> messageInfo = new MessageInfo<>();
 
-		MessageInfo<EventInfo> messageInfo = new MessageInfo<EventInfo>();
 		try {
 			EventInfo eventInfo = eventInfoDAO.selectByEventId(eventId);
 			messageInfo.setData(eventInfo);
 		} catch (Exception e) {
-			LOGGER.error("getListByEventId","查询EventInfo失败", e);
+			LOGGER.error("getByEventId","查询EventInfo失败", e);
 			messageInfo.setStatus(MessageStatus.ERROR_CODE);
 		}
 		return messageInfo;
 	}
+
 
 }

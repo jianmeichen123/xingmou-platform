@@ -43,21 +43,8 @@ public class EventMergerInfoController {
 
     @RequestMapping("getListByEventId/{eventId}")
     @ResponseBody
-    public MessageInfo<Map<String,Object>> getListByEventId(@PathVariable Integer eventId){
-        MessageInfo<Map<String,Object>> messageInfo = new MessageInfo<>();
-        Map<String,Object> map = new HashMap<>();
-
-        MessageInfo<List<EventMergerInfo>> eventMergerInfoMessageInfo = eventMergerInfoBiz.getListByEventId(eventId);
-        map.put("eventMergerInfoMessageInfo",eventMergerInfoMessageInfo);
-        eventMergerInfoMessageInfo.setMessage(eventMergerInfoMessageInfo.getMessage());
-        eventMergerInfoMessageInfo.setStatus(eventMergerInfoMessageInfo.getStatus());
-
-        MessageInfo<List<EventMergerDetail>> eventMergerDetailInfoMessageInfo = eventMergerDetailBiz.getEventMergerDetailByEventId(eventId);
-        map.put("eventMergerDetailInfoMessageInfo",eventMergerDetailInfoMessageInfo);
-        eventMergerDetailInfoMessageInfo.setMessage(eventMergerDetailInfoMessageInfo.getMessage());
-        eventMergerDetailInfoMessageInfo.setStatus(eventMergerDetailInfoMessageInfo.getStatus());
-
-        messageInfo.setData(map);
+    public MessageInfo<List<EventMergerInfo>> getListByEventId(@PathVariable Integer eventId){
+        MessageInfo<List<EventMergerInfo>> messageInfo = eventMergerInfoBiz.getListByEventId(eventId);
         return messageInfo;
     }
 }

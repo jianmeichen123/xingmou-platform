@@ -47,26 +47,8 @@ public class OrgInfoController {
 		
     @RequestMapping("getListByOrgId/{orgId}")
     @ResponseBody
-	public MessageInfo<Map<String,Object>> getListByOrgId(@PathVariable Integer orgId){
-    	MessageInfo<Map<String,Object>> messageInfo = new MessageInfo<>();
-    	Map<String,Object> map = new HashMap<>();
-
-		MessageInfo<List<OrgInfo>> orgInfoMessageInfo = orgInfoBiz.getListByOrgId(orgId);
-		map.put("orgInfoMessageInfo",orgInfoMessageInfo);
-		orgInfoMessageInfo.setMessage(orgInfoMessageInfo.getMessage());
-		orgInfoMessageInfo.setStatus(orgInfoMessageInfo.getStatus());
-
-		MessageInfo<List<OrgMediaInfo>> orgMediaInfoMessageInfo = orgMediaInfoBiz.getListByOrgId(orgId);
-		map.put("orgMediaInfoMessageInfo",orgMediaInfoMessageInfo);
-		orgMediaInfoMessageInfo.setMessage(orgMediaInfoMessageInfo.getMessage());
-		orgMediaInfoMessageInfo.setStatus(orgMediaInfoMessageInfo.getStatus());
-
-		MessageInfo<List<OrgMemberInfo>> orgMemberInfoMessageInfo = orgMemberInfoBiz.getListByOrgId(orgId);
-		map.put("orgMemberInfoMessageInfo",orgMemberInfoMessageInfo);
-		orgMemberInfoMessageInfo.setMessage(orgMemberInfoMessageInfo.getMessage());
-		orgMemberInfoMessageInfo.setStatus(orgMemberInfoMessageInfo.getStatus());
-
-		messageInfo.setData(map);
+	public MessageInfo<List<OrgInfo>> getListByOrgId(@PathVariable Integer orgId){
+		MessageInfo<List<OrgInfo>> messageInfo = orgInfoBiz.getListByOrgId(orgId);
 		return messageInfo;
 	}
 

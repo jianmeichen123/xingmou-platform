@@ -10,6 +10,7 @@ import com.gi.ctdn.biz.OrgInfoBiz;
 import com.gi.ctdn.biz.OrgMediaInfoBiz;
 import com.gi.ctdn.biz.OrgMemberInfoBiz;
 import com.gi.ctdn.pojo.OrgInfo;
+import com.gi.ctdn.pojo.OrgListInfo;
 import com.gi.ctdn.pojo.OrgMediaInfo;
 import com.gi.ctdn.pojo.OrgMemberInfo;
 import com.gi.xm.platform.view.common.MessageInfo;
@@ -47,8 +48,9 @@ public class OrgInfoController {
 		
     @RequestMapping("getListByOrgId/{orgId}")
     @ResponseBody
-	public MessageInfo<List<OrgInfo>> getListByOrgId(@PathVariable Integer orgId){
-		MessageInfo<List<OrgInfo>> messageInfo = orgInfoBiz.getListByOrgId(orgId);
+	public MessageInfo<OrgListInfo> getListByOrgId(@PathVariable Integer orgId){
+//		MessageInfo<List<OrgInfo>> messageInfo = orgInfoBiz.getListByOrgId(orgId);
+		MessageInfo<OrgListInfo> messageInfo = orgInfoBiz.getBaseInfoByOrgId(orgId);
 		return messageInfo;
 	}
 

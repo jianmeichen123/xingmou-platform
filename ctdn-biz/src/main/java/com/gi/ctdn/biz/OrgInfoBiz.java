@@ -4,17 +4,16 @@ package com.gi.ctdn.biz;
 
 import java.util.List;
 
+import com.gi.ctdn.dao.*;
+import com.gi.ctdn.pojo.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gi.ctdn.dao.OrgInfoDAO;
 import com.gi.xm.platform.view.common.MessageStatus;
 import com.gi.xm.platform.view.common.MessageInfo;
-
-import com.gi.ctdn.pojo.OrgInfo;
 
 @Service("orgInfoBiz")
 public class OrgInfoBiz  {
@@ -25,7 +24,39 @@ public class OrgInfoBiz  {
     @Autowired
 	OrgInfoDAO orgInfoDAO;
 
+    @Autowired
+	OrgMediaInfoDAO orgMediaInfoDAO;
 
+    @Autowired
+	OrgMemberInfoDAO orgMemberInfoDAO;
+
+    @Autowired
+	EventInfoDAO eventInfoDAO;
+
+    @Autowired
+	ProjectContactDAO projectContactDAO;
+
+    public  MessageInfo<OrgListInfo> getBaseInfoByOrgId(Integer orgId){
+
+    	MessageInfo<OrgListInfo> messageInfo = new MessageInfo<>();
+    	try{
+    		OrgListInfo orgListInfo = orgInfoDAO.selectById(orgId);
+    		if (orgListInfo != null){
+    			List<OrgMediaInfo> orgMediaInfoList = orgMediaInfoDAO.selectByOrgId(orgId);
+    			List<OrgMemberInfo> orgMemberInfoList = orgMemberInfoDAO.selectByOrgId(orgId);
+				List<EventInfo> eventInfoList = eventInfoDAO.selectBySourceId(orgId);
+
+				orgListInfo.setOrgMediaInfoList(orgMediaInfoList);
+				orgListInfo.setOrgMemberInfoList(orgMemberInfoList);
+				orgListInfo.setEventInfoList(eventInfoList);
+			}
+			messageInfo.setData(orgListInfo);
+		}catch (Exception e) {
+			LOGGER.error("getBaseInfoByOrgId","查询OrgListInfo失败", e);
+			messageInfo.setStatus(MessageStatus.ERROR_CODE);
+		}
+		return messageInfo;
+	}
 		
 	public MessageInfo<List<OrgInfo>> getListByOrgId(Integer orgId){
 
@@ -52,5 +83,9 @@ public class OrgInfoBiz  {
 			messageInfo.setStatus(10001);
 		}
 		return messageInfo;
+	}
+
+	public OrgListInfo getOrgListInfoById(Integer id){
+    	return orgInfoDAO.selectById(id);
 	}
 }

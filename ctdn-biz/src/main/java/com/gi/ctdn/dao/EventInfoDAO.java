@@ -15,4 +15,6 @@ public interface EventInfoDAO {
 
 	List<EventInfo> selectBySourceId(@Param("sourceId") Integer sourceId);
 
+	List<EventInfo> selectByName(@Param("company") String name);
+
 }

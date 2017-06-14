@@ -14,6 +14,8 @@ import com.gi.ctdn.dao.EventInfoDAO;
 import com.gi.xm.platform.view.common.MessageStatus;
 import com.gi.xm.platform.view.common.MessageInfo;
 
+import java.util.List;
+
 @Service("eventInfoBiz")
 public class EventInfoBiz  {
 
@@ -54,5 +56,15 @@ public class EventInfoBiz  {
 		return messageInfo;
 	}
 
-
+	public MessageInfo<List<EventInfo>> getListByName(String name) {
+		MessageInfo<List<EventInfo>> messageInfo = new MessageInfo<List<EventInfo>>();
+		try {
+			List<EventInfo> eventInfo = eventInfoDAO.selectByName(name);
+			messageInfo.setData(eventInfo);
+		} catch (Exception e) {
+			LOGGER.error("getListByName","查询EventInfo失败", e);
+			messageInfo.setStatus(MessageStatus.ERROR_CODE);
+		}
+		return messageInfo;
+	}
 }

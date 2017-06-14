@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("eventInfo")
 public class EventInfoController {
@@ -29,6 +31,13 @@ public class EventInfoController {
 	@ResponseBody
 	public MessageInfo<EventInfo> getEventInfo(@PathVariable Integer eventId ){
 		MessageInfo<EventInfo> messageInfo = eventInfoBiz.getByEventId(eventId);
+		return messageInfo;
+	}
+
+	@RequestMapping("getListByName/{name}")
+	@ResponseBody
+	public MessageInfo<List<EventInfo>> getListByName(String name){
+		MessageInfo<List<EventInfo>> messageInfo = eventInfoBiz.getListByName(name);
 		return messageInfo;
 	}
 

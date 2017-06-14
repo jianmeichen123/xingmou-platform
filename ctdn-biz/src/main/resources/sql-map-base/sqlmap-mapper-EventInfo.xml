@@ -64,6 +64,13 @@
         WHERE  sourceId = #{sourceId,jdbcType=INTEGER}
     </select>
 
+    <select id="selectByName" resultMap="BaseResultMap"  parameterType="java.lang.String">
+        SELECT
+        <include refid="selectFields" />
+        FROM
+        app_event_info
+        WHERE  investSideJson like CONCAT('%', #{company,jdbcType=VARCHAR}, '%')
+    </select>
 
 	<select id="selectAll" resultMap="BaseResultMap">
 		SELECT

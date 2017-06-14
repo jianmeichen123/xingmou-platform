@@ -55,7 +55,15 @@
 		    app_event_info
 		WHERE  eventId = #{eventId,jdbcType=INTEGER}
 	</select>
-	
+
+    <select id="selectBySourceId" resultMap="BaseResultMap"  parameterType="java.lang.Integer">
+        SELECT
+        <include refid="selectFields" />
+        FROM
+        app_event_info
+        WHERE  sourceId = #{sourceId,jdbcType=INTEGER}
+    </select>
+
 
 	<select id="selectAll" resultMap="BaseResultMap">
 		SELECT

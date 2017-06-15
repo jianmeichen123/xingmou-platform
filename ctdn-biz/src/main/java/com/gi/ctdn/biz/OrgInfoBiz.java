@@ -45,10 +45,12 @@ public class OrgInfoBiz  {
     			List<OrgMediaInfo> orgMediaInfoList = orgMediaInfoDAO.selectByOrgId(orgId);
     			List<OrgMemberInfo> orgMemberInfoList = orgMemberInfoDAO.selectByOrgId(orgId);
 				List<EventInfo> eventInfoList = eventInfoDAO.selectBySourceId(orgId);
+				List<ProjectContact> projectContactList = projectContactDAO.selectById(orgId);
 
 				orgListInfo.setOrgMediaInfoList(orgMediaInfoList);
 				orgListInfo.setOrgMemberInfoList(orgMemberInfoList);
 				orgListInfo.setEventInfoList(eventInfoList);
+				orgListInfo.setProjectContactList(projectContactList);
 			}
 			messageInfo.setData(orgListInfo);
 		}catch (Exception e) {

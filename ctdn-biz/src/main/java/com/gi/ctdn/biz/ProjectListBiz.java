@@ -75,10 +75,12 @@ public class ProjectListBiz {
 		MessageInfo<ProjectListInfo> message = new MessageInfo<ProjectListInfo>();
 		try {
 			ProjectListInfo projectListInfo = selectByCode(sourceCode);
-			List<ProjectList> directCompetationlist = getNewsList(sourceCode,1);
-			List<ProjectList> indirectCompetationlist = getNewsList(sourceCode,0);
-			projectListInfo.setDirectCompetationlist(directCompetationlist);
-			projectListInfo.setIndirectCompetationlist(indirectCompetationlist);
+			if(projectListInfo != null){
+				List<ProjectList> directCompetationlist = getNewsList(sourceCode,1);
+				List<ProjectList> indirectCompetationlist = getNewsList(sourceCode,0);
+				projectListInfo.setDirectCompetationlist(directCompetationlist);
+				projectListInfo.setIndirectCompetationlist(indirectCompetationlist);
+			}
 			message.setData(projectListInfo);
 		} catch (Exception e) {
 			LOGGER.error("queryCompetationlist", "查询竞争对手失败", e);

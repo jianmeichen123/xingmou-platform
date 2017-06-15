@@ -32,12 +32,15 @@
                 <result column="logoSmall" property="logoSmall" jdbcType="VARCHAR" />
                 <result column="logoBig" property="logoBig" jdbcType="VARCHAR" />
                 <result column="currencyType" property="currencyType" jdbcType="VARCHAR" />
+                <result column="bp" property="bp" jdbcType="VARCHAR" />
+                <result column="hqEmail" property="hqEmail" jdbcType="VARCHAR" />
+                <result column="hqTel" property="hqTel" jdbcType="VARCHAR" />
                 <result column="loadDate" property="loadDate" jdbcType="BIGINT" />
     	</resultMap>
 
 
 	<sql id="selectFields">
-	    id,code,projTitle,runState,needFinance,addr,setupDT,labels,introduce,latestFinanceDT,latestFinanceRound,latestFinanceAmountNum,latestFinanceAmountStr,investSideJson,firmDesc,firmPos,persona,prodSrv,bizModel,industryName,industrySubName,industryIds,districtId,districtSubId,districtName,districtSubName,logoSmall,logoBig,currencyType,loadDate
+	    id,code,projTitle,runState,needFinance,addr,setupDT,labels,introduce,latestFinanceDT,latestFinanceRound,latestFinanceAmountNum,latestFinanceAmountStr,investSideJson,firmDesc,firmPos,persona,prodSrv,bizModel,industryName,industrySubName,industryIds,districtId,districtSubId,districtName,districtSubName,logoSmall,logoBig,currencyType,bp,hqEmail,hqTel,loadDate
 	</sql>
 	
 			

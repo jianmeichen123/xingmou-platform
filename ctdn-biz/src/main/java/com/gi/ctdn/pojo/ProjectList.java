@@ -161,6 +161,24 @@ public class ProjectList extends PojoInfo {
 	 * @Fields currencyType : 币种
 	 */
 	private String currencyType;
+
+
+	/**
+	 * 商业计划书
+	 */
+	private String bp;
+
+	/**
+	 * 企业总部邮箱
+	 */
+	private String hqEmail;
+
+	/**
+	 * 企业电话
+	 */
+	private String hqTel;
+
+
 	
 	/**
 	 * @Fields loadDate : 录入时间
@@ -414,7 +432,31 @@ public class ProjectList extends PojoInfo {
 	public void setCurrencyType(String currencyType){
 		this.currencyType = currencyType;
 	}
-    
+
+	public String getBp() {
+		return bp;
+	}
+
+	public void setBp(String bp) {
+		this.bp = bp;
+	}
+
+	public String getHqEmail() {
+		return hqEmail;
+	}
+
+	public void setHqEmail(String hqEmail) {
+		this.hqEmail = hqEmail;
+	}
+
+	public String getHqTel() {
+		return hqTel;
+	}
+
+	public void setHqTel(String hqTel) {
+		this.hqTel = hqTel;
+	}
+
 	public Long getLoadDate(){
 		return loadDate;
 	}

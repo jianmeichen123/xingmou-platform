@@ -7,6 +7,7 @@ import com.gi.xm.platform.view.common.MessageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -34,22 +35,10 @@ public class EventInfoController {
 		return messageInfo;
 	}
 
-	@RequestMapping("getListByName/{name}")
+	@RequestMapping("getListByName")
 	@ResponseBody
-	public MessageInfo<List<EventInfo>> getListByName(String name){
-		MessageInfo<List<EventInfo>> messageInfo = eventInfoBiz.getListByName(name);
+	public MessageInfo<List<EventInfo>> getListByName(@RequestBody EventInfo eventInfo){
+		MessageInfo<List<EventInfo>> messageInfo = eventInfoBiz.getListByName(eventInfo.getCompany());
 		return messageInfo;
 	}
-
-//	/**
-//	 * 根据项目code查询列表
-//	 * @param sourceCode
-//	 * @return
-//	 */
-//	@RequestMapping("getListBySourceCode/{sourceCode}")
-//	@ResponseBody
-//	public MessageInfo<List<EventInfo>> getListBySourceCode(@PathVariable  String sourceCode){
-//		MessageInfo<List<EventInfo>> messageInfo = eventInfoBiz.getListBySourceCode(sourceCode);
-//		return messageInfo;
-//	}
 }

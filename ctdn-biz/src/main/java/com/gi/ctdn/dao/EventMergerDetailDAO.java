@@ -14,4 +14,9 @@ public interface EventMergerDetailDAO {
 
 	List<EventMergerDetail> getEventMergerDetailByEventId(@Param("eventId") Integer eventId);
 
+	List<EventMergerDetail> selectEventMergerDetailByEventIdAndPartyB(@Param("eventId") Integer eventId);
+
+	List<EventMergerDetail> selectEventMergerDetailByEventIdAndPartyC(@Param("eventId") Integer eventId);
+
+
 }

@@ -2,8 +2,11 @@
 
 package com.gi.ctdn.biz;
 
+import com.gi.ctdn.dao.EventDetailDAO;
 import com.gi.ctdn.dao.OrgInfoDAO;
+import com.gi.ctdn.pojo.EventDetail;
 import com.gi.ctdn.pojo.EventInfo;
+import com.gi.ctdn.pojo.EventInfoList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,6 +31,9 @@ public class EventInfoBiz  {
     @Autowired
 	OrgInfoDAO orgInfoDAO;
 
+    @Autowired
+	EventDetailDAO eventDetailDAO;
+
 
 //
 //	public MessageInfo<List<EventInfo>> getListBySourceCode(String sourceCode){
@@ -43,12 +49,16 @@ public class EventInfoBiz  {
 //		return messageInfo;
 //	}
 			
-	public MessageInfo<EventInfo> getByEventId(Integer eventId){
-		MessageInfo<EventInfo> messageInfo = new MessageInfo<>();
+	public MessageInfo<EventInfoList> getByEventId(Integer eventId){
+		MessageInfo<EventInfoList> messageInfo = new MessageInfo<>();
 
 		try {
-			EventInfo eventInfo = eventInfoDAO.selectByEventId(eventId);
-			messageInfo.setData(eventInfo);
+			EventInfoList eventInfoList = eventInfoDAO.selectByEventId(eventId);
+			if(eventInfoList!=null){
+				List<EventDetail> eventDetailList = eventDetailDAO.selectByEventId(eventId);
+				eventInfoList.setEventDetailList(eventDetailList);
+			}
+			messageInfo.setData(eventInfoList);
 		} catch (Exception e) {
 			LOGGER.error("getByEventId","查询EventInfo失败", e);
 			messageInfo.setStatus(MessageStatus.ERROR_CODE);

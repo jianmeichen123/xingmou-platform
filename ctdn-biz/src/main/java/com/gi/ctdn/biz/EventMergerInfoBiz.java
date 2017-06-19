@@ -4,6 +4,9 @@ package com.gi.ctdn.biz;
 
 import java.util.List;
 
+import com.gi.ctdn.dao.EventMergerDetailDAO;
+import com.gi.ctdn.pojo.EventMergerDetail;
+import com.gi.ctdn.pojo.EventMergerInfoSon;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,6 +28,9 @@ public class EventMergerInfoBiz  {
     @Autowired
 	EventMergerInfoDAO eventMergerInfoDAO;
 
+    @Autowired
+	EventMergerDetailDAO eventMergerDetailDAO;
+
 //	public MessageInfo<List<EventMergerInfo>> getListBySourceCode(String sourceCode){
 //
 //		MessageInfo<List<EventMergerInfo>> messageInfo = new MessageInfo<List<EventMergerInfo>>();
@@ -39,12 +45,21 @@ public class EventMergerInfoBiz  {
 //	}
 
 
-	public MessageInfo<List<EventMergerInfo>> getListByEventId(Integer eventId){
+	public MessageInfo<EventMergerInfoSon> getListByEventId(Integer eventId){
 
-		MessageInfo<List<EventMergerInfo>> messageInfo = new MessageInfo<List<EventMergerInfo>>();
+		MessageInfo<EventMergerInfoSon> messageInfo = new MessageInfo<EventMergerInfoSon>();
 		try {
-			List<EventMergerInfo> eventMergerInfoList = eventMergerInfoDAO.selectByEventId(eventId);
-			messageInfo.setData(eventMergerInfoList);
+			EventMergerInfoSon eventMergerInfoSon = eventMergerInfoDAO.selectByEventId(eventId);
+			if(eventMergerInfoSon!=null){
+
+				List<EventMergerDetail> mergerSideList = eventMergerDetailDAO.selectEventMergerDetailByEventIdAndPartyB(eventId);
+				List<EventMergerDetail> beenMergerSideList = eventMergerDetailDAO.selectEventMergerDetailByEventIdAndPartyC(eventId);
+
+				eventMergerInfoSon.setMergeSideList(mergerSideList);
+				eventMergerInfoSon.setBeenMergeSideList(beenMergerSideList);
+
+			}
+			messageInfo.setData(eventMergerInfoSon);
 		} catch (Exception e) {
 			LOGGER.error("getListByEventId","查询EventMergerInfo失败", e);
 			messageInfo.setStatus(MessageStatus.ERROR_CODE);

@@ -3,6 +3,7 @@ package com.gi.ctdn.api.rest;
 import com.gi.ctdn.biz.EventDetailBiz;
 import com.gi.ctdn.biz.EventInfoBiz;
 import com.gi.ctdn.pojo.EventInfo;
+import com.gi.ctdn.pojo.EventInfoList;
 import com.gi.xm.platform.view.common.MessageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,8 +31,8 @@ public class EventInfoController {
 	 */
 	@RequestMapping("getById/{eventId}")
 	@ResponseBody
-	public MessageInfo<EventInfo> getEventInfo(@PathVariable Integer eventId ){
-		MessageInfo<EventInfo> messageInfo = eventInfoBiz.getByEventId(eventId);
+	public MessageInfo<EventInfoList> getEventInfo(@PathVariable Integer eventId ){
+		MessageInfo<EventInfoList> messageInfo = eventInfoBiz.getByEventId(eventId);
 		return messageInfo;
 	}
 

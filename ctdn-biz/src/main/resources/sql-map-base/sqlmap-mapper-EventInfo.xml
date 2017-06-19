@@ -46,7 +46,8 @@
 		FROM
 		    app_event_info
 		WHERE  sourceCode = #{sourceCode,jdbcType=VARCHAR}
-	</select>
+        order by investDate desc
+    </select>
 			
 	<select id="selectByEventId" resultMap="BaseResultMap"  parameterType="java.lang.Integer">
 		SELECT
@@ -70,6 +71,7 @@
         FROM
         app_event_info
         WHERE  investSideJson like CONCAT('%', #{company,jdbcType=VARCHAR}, '%')
+        order by investDate desc
     </select>
 
 	<select id="selectAll" resultMap="BaseResultMap">

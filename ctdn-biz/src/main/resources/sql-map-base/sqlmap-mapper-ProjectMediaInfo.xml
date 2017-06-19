@@ -23,6 +23,7 @@
 		FROM
 		    app_project_media_info
 		WHERE  sourceCode = #{sourceCode,jdbcType=VARCHAR} and type = #{type,jdbcType=VARCHAR}
+		order by date desc
 	</select>
 			
 	<select id="selectByType" resultMap="BaseResultMap">

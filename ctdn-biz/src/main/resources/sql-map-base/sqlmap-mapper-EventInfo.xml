@@ -61,7 +61,7 @@
         <include refid="selectFields" />
         FROM
         app_event_info
-        WHERE  sourceId = #{sourceId,jdbcType=INTEGER}
+        WHERE  invstorgids = #{sourceId,jdbcType=INTEGER}
     </select>
 
     <select id="selectByName" resultMap="BaseResultMap"  parameterType="java.lang.String">

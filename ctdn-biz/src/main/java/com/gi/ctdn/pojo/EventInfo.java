@@ -81,7 +81,7 @@ public class EventInfo extends PojoInfo {
 	/**
 	 * @Fields sourceCode : 项目/投资机构 code
 	 */
-	private Integer sourceCode;
+	private String sourceCode;
 	
 	/**
 	 * @Fields logo : 列表项logo
@@ -275,15 +275,15 @@ public class EventInfo extends PojoInfo {
 	public void setSourceId(Integer sourceId){
 		this.sourceId = sourceId;
 	}
-    
-	public Integer getSourceCode(){
+
+	public String getSourceCode() {
 		return sourceCode;
 	}
 
-	public void setSourceCode(Integer sourceCode){
+	public void setSourceCode(String sourceCode) {
 		this.sourceCode = sourceCode;
 	}
-    
+
 	public String getLogo(){
 		return logo;
 	}
@@ -291,7 +291,7 @@ public class EventInfo extends PojoInfo {
 	public void setLogo(String logo){
 		this.logo = logo;
 	}
-    
+
 	public String getIndustryName(){
 		return industryName;
 	}

@@ -15,7 +15,7 @@
             <result column="mode" property="mode" jdbcType="VARCHAR" />
             <result column="desc" property="desc" jdbcType="LONGVARCHAR" />
             <result column="sourceId" property="sourceId" jdbcType="INTEGER" />
-            <result column="sourceCode" property="sourceCode" jdbcType="INTEGER" />
+            <result column="sourceCode" property="sourceCode" jdbcType="VARCHAR" />
             <result column="logo" property="logo" jdbcType="VARCHAR" />
             <result column="industryName" property="industryName" jdbcType="VARCHAR" />
             <result column="industrySubName" property="industrySubName" jdbcType="VARCHAR" />

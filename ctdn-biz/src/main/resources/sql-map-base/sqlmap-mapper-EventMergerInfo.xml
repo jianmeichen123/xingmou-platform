@@ -40,6 +40,7 @@
 		FROM
 		    app_event_merger_info
 		WHERE  sourceCode = #{sourceCode,jdbcType=VARCHAR}
+        order by mergeDate desc
 	</select>
 
     <select id="selectByEventId" resultMap="BaseResultMap">

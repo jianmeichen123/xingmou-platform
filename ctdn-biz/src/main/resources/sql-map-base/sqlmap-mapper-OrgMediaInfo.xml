@@ -9,7 +9,7 @@
                 <result column="eventDate" property="eventDate" jdbcType="DATE" />
                 <result column="source" property="source" jdbcType="VARCHAR" />
                 <result column="content" property="content" jdbcType="LONGVARCHAR" />
-                <result column="link" property="rank" jdbcType="INTEGER" />
+                <result column="link" property="rank" jdbcType="VARCHAR" />
                 <result column="type" property="type" jdbcType="VARCHAR" />
     	</resultMap>
 

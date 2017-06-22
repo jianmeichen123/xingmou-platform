@@ -9,13 +9,13 @@
                 <result column="eventDate" property="eventDate" jdbcType="DATE" />
                 <result column="source" property="source" jdbcType="VARCHAR" />
                 <result column="content" property="content" jdbcType="LONGVARCHAR" />
-                <result column="rank" property="rank" jdbcType="INTEGER" />
+                <result column="link" property="rank" jdbcType="INTEGER" />
                 <result column="type" property="type" jdbcType="VARCHAR" />
     	</resultMap>
 
 
 	<sql id="selectFields">
-	    investOrg,orgId,code,title,eventDate,source,content,rank,type
+	    investOrg,orgId,code,title,eventDate,source,content,link,type
 	</sql>
 	
 			

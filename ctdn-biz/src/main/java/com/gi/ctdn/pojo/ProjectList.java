@@ -183,8 +183,18 @@ public class ProjectList extends PojoInfo {
 	 */
 	private String hqTel;
 
-
-	
+	/**
+	 * 微博
+	 */
+	private String weibo;
+	/**
+	 * 微博
+	 */
+	private String weixin;
+	/**
+	 * 微博
+	 */
+	private String webUrl;
 	/**
 	 * @Fields loadDate : 录入时间
 	 */
@@ -476,5 +486,29 @@ public class ProjectList extends PojoInfo {
 
 	public void setDistrictGrandsonName(String districtGrandsonName) {
 		this.districtGrandsonName = districtGrandsonName;
+	}
+
+	public String getWeibo() {
+		return weibo;
+	}
+
+	public void setWeibo(String weibo) {
+		this.weibo = weibo;
+	}
+
+	public String getWeixin() {
+		return weixin;
+	}
+
+	public void setWeixin(String weixin) {
+		this.weixin = weixin;
+	}
+
+	public String getWebUrl() {
+		return webUrl;
+	}
+
+	public void setWebUrl(String webUrl) {
+		this.webUrl = webUrl;
 	}
 }

@@ -146,7 +146,12 @@ public class ProjectList extends PojoInfo {
 	 * @Fields districtSubName : 二级地区
 	 */
 	private String districtSubName;
-	
+
+	/**
+	 * @Fields districtGrandsonName :三级地区
+	 */
+	private String districtGrandsonName;
+
 	/**
 	 * @Fields logoSmall : 列表项logo
 	 */
@@ -465,4 +470,11 @@ public class ProjectList extends PojoInfo {
 		this.loadDate = loadDate;
 	}
 
-    }
+	public String getDistrictGrandsonName() {
+		return districtGrandsonName;
+	}
+
+	public void setDistrictGrandsonName(String districtGrandsonName) {
+		this.districtGrandsonName = districtGrandsonName;
+	}
+}

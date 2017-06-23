@@ -29,6 +29,7 @@
                 <result column="districtSubId" property="districtSubId" jdbcType="INTEGER" />
                 <result column="districtName" property="districtName" jdbcType="VARCHAR" />
                 <result column="districtSubName" property="districtSubName" jdbcType="VARCHAR" />
+                <result column="districtGrandsonName" property="districtGrandsonName" jdbcType="VARCHAR" />
                 <result column="logoSmall" property="logoSmall" jdbcType="VARCHAR" />
                 <result column="logoBig" property="logoBig" jdbcType="VARCHAR" />
                 <result column="currencyType" property="currencyType" jdbcType="VARCHAR" />
@@ -40,7 +41,7 @@
 
 
 	<sql id="selectFields">
-	    id,code,projTitle,runState,needFinance,addr,setupDT,labels,introduce,latestFinanceDT,latestFinanceRound,latestFinanceAmountNum,latestFinanceAmountStr,investSideJson,firmDesc,firmPos,persona,prodSrv,bizModel,industryName,industrySubName,industryIds,districtId,districtSubId,districtName,districtSubName,logoSmall,logoBig,currencyType,bp,hqEmail,hqTel,loadDate
+	    id,code,projTitle,runState,needFinance,addr,setupDT,labels,introduce,latestFinanceDT,latestFinanceRound,latestFinanceAmountNum,latestFinanceAmountStr,investSideJson,firmDesc,firmPos,persona,prodSrv,bizModel,industryName,industrySubName,industryIds,districtId,districtSubId,districtName,districtSubName,districtGrandsonName,logoSmall,logoBig,currencyType,bp,hqEmail,hqTel,loadDate
 	</sql>
 	
 			

@@ -57,8 +57,12 @@ public class ProjectMediaInfo extends PojoInfo {
 	 * @Fields sourceCode : project code
 	 */
 	private String sourceCode;
-	
-    
+
+	/**
+	 * @Fields link :link
+	 */
+	private String link;
+
 	public Integer getProjectId(){
 		return projectId;
 	}
@@ -122,4 +126,12 @@ public class ProjectMediaInfo extends PojoInfo {
 	public void setSourceCode(String sourceCode){
 		this.sourceCode = sourceCode;
 	}
-    }
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+}

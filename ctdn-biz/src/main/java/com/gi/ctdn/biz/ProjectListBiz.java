@@ -42,10 +42,10 @@ public class ProjectListBiz {
 	ProjectTeamDAO projectTeamDAO;
 
 
-	public MessageInfo<ProjectListInfo> getOneByCode(String code) {
+	public MessageInfo<ProjectListInfo> getRelativeListByCode(String code) {
 		MessageInfo<ProjectListInfo> messageInfo = new MessageInfo<ProjectListInfo>();
 		try {
-			ProjectListInfo projectListInfo = selectByCode(code);
+			ProjectListInfo projectListInfo = getOneByCode(code);
 			if (projectListInfo != null) {
 				List<EventInfo> eventInfoList = eventInfoDAO.selectBySourceCode(code);
 				List<ProjectTeam> projectTeamList = projectTeamDAO.selectBySourcecode(code);
@@ -74,7 +74,7 @@ public class ProjectListBiz {
 	public MessageInfo<ProjectListInfo> queryCompetationlist(String sourceCode) {
 		MessageInfo<ProjectListInfo> message = new MessageInfo<ProjectListInfo>();
 		try {
-			ProjectListInfo projectListInfo = selectByCode(sourceCode);
+			ProjectListInfo projectListInfo = getOneByCode(sourceCode);
 			if(projectListInfo != null){
 				List<ProjectList> directCompetationlist = getNewsList(sourceCode,1);
 				List<ProjectList> indirectCompetationlist = getNewsList(sourceCode,0);
@@ -109,7 +109,7 @@ public class ProjectListBiz {
 		return newList;
 	}
 
-	private ProjectListInfo selectByCode(String code){
+	public ProjectListInfo getOneByCode(String code){
 		ProjectListInfo projectListInfo = projectListDAO.selectByCode(code);
 		return projectListInfo;
 	}

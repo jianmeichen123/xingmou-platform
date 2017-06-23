@@ -35,10 +35,22 @@ public class ProjectListController {
 	/**
 	 * 根据code查询项目
 	 */
+	@RequestMapping("queryRelativeListByCode/{sourceCode}")
+	@ResponseBody
+	public MessageInfo<ProjectListInfo> queryRelativeByCode(@PathVariable String  sourceCode){
+		MessageInfo<ProjectListInfo> resultMessageInfo = projectListBiz.getRelativeListByCode(sourceCode);
+		return resultMessageInfo;
+	}
+
+	/**
+	 * 根据code查询项目
+	 */
 	@RequestMapping("queryProjectByCode/{sourceCode}")
 	@ResponseBody
 	public MessageInfo<ProjectListInfo> queryProjectByCode(@PathVariable String  sourceCode){
-		MessageInfo<ProjectListInfo> resultMessageInfo = projectListBiz.getOneByCode(sourceCode);
+		ProjectListInfo projectListInfo =  projectListBiz.getOneByCode(sourceCode);
+		MessageInfo<ProjectListInfo> resultMessageInfo = new MessageInfo<ProjectListInfo>();
+		resultMessageInfo.setData(projectListInfo);
 		return resultMessageInfo;
 	}
 

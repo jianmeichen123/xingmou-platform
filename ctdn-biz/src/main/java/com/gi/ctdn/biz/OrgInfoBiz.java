@@ -45,7 +45,7 @@ public class OrgInfoBiz  {
     			List<OrgMediaInfo> orgMediaInfoList = orgMediaInfoDAO.selectByOrgId(orgId);
     			List<OrgMemberInfo> orgMemberInfoList = orgMemberInfoDAO.selectByOrgId(orgId);
 				List<EventInfo> eventInfoList = eventInfoDAO.selectBySourceId(orgId);
-				List<ProjectContact> projectContactList = projectContactDAO.selectById(orgId);
+				List<ProjectContact> projectContactList = projectContactDAO.selectByOrgId(orgId);
 
 				orgListInfo.setOrgMediaInfoList(orgMediaInfoList);
 				orgListInfo.setOrgMemberInfoList(orgMemberInfoList);

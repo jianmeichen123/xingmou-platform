@@ -12,4 +12,6 @@ public interface ProjectContactDAO {
 	List<ProjectContact> selectBySourceCode(@Param("sourceCode") String sourceCode);
 
 	List<ProjectContact> selectById(@Param("projectId") Integer projectId);
+
+	List<ProjectContact> selectByOrgId(@Param("orgId") Integer orgId);
 }

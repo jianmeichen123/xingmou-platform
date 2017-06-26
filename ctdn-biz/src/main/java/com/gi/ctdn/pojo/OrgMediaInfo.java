@@ -121,7 +121,7 @@ public class OrgMediaInfo extends PojoInfo {
 		this.content = content;
 	}
 
-	public String getRank(){
+	public String getLink(){
 		return link;
 	}
 

@@ -44,7 +44,7 @@
 
 
 	<sql id="selectFields">
-	    id,code,projTitle,runState,needFinance,addr,setupDT,labels,introduce,latestFinanceDT,latestFinanceRound,latestFinanceAmountNum,latestFinanceAmountStr,investSideJson,firmDesc,firmPos,persona,prodSrv,bizModel,industryName,industrySubName,industryIds,districtId,districtSubId,districtName,districtSubName,districtGrandsonName,logoSmall,logoBig,currencyType,bp,hqEmail,hqTel,weibo,webUrl,webUrl,loadDate
+	    id,code,projTitle,runState,needFinance,addr,setupDT,labels,introduce,latestFinanceDT,latestFinanceRound,latestFinanceAmountNum,latestFinanceAmountStr,investSideJson,firmDesc,firmPos,persona,prodSrv,bizModel,industryName,industrySubName,industryIds,districtId,districtSubId,districtName,districtSubName,districtGrandsonName,logoSmall,logoBig,currencyType,bp,hqEmail,hqTel,weibo,weixin,webUrl,loadDate
 	</sql>
 	
 			

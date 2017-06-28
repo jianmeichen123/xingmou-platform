@@ -56,7 +56,7 @@ public class ProjectTeam extends PojoInfo {
 	/**
 	 * @Fields sourcecode : project code
 	 */
-	private String sourcecode;
+	private String sourceCode;
 	
     
 	public Integer getProjectId(){
@@ -130,12 +130,12 @@ public class ProjectTeam extends PojoInfo {
 	public void setIntroduction(String introduction){
 		this.introduction = introduction;
 	}
-    
-	public String getSourcecode(){
-		return sourcecode;
+
+	public String getSourceCode() {
+		return sourceCode;
 	}
 
-	public void setSourcecode(String sourcecode){
-		this.sourcecode = sourcecode;
+	public void setSourceCode(String sourceCode) {
+		this.sourceCode = sourceCode;
 	}
-    }
+}

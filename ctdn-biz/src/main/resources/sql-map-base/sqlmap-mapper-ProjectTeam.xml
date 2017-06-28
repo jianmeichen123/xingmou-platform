@@ -10,12 +10,12 @@
                 <result column="college" property="college" jdbcType="VARCHAR" />
                 <result column="edu" property="edu" jdbcType="VARCHAR" />
                 <result column="introduction" property="introduction" jdbcType="LONGVARCHAR" />
-                <result column="sourcecode" property="sourcecode" jdbcType="VARCHAR" />
+                <result column="sourceCode" property="sourceCode" jdbcType="VARCHAR" />
 	</resultMap>
 
 
 	<sql id="selectFields">
-	    projectId,projTitle,name,job,state,college,edu,introduction,sourcecode
+	    projectId,projTitle,name,job,state,college,edu,introduction,sourceCode
 	</sql>
 	
 			
@@ -24,7 +24,7 @@
             <include refid="selectFields" />
 		FROM
 		    app_project_team
-		WHERE  sourcecode = #{sourcecode,jdbcType=VARCHAR}
+		WHERE  sourceCode = #{sourceCode,jdbcType=VARCHAR}
 	</select>
 	
 

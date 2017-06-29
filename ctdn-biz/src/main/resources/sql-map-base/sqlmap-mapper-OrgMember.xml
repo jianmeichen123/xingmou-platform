@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.OrgMemberDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.OrgMember">
+            <id column="invstId" property="invstId" jdbcType="TIMESTAMP" />
+                <result column="perId" property="perId" jdbcType="TIMESTAMP" />
+                <result column="name" property="name" jdbcType="TIMESTAMP" />
+                <result column="positions" property="positions" jdbcType="TIMESTAMP" />
+                <result column="status" property="status" jdbcType="TIMESTAMP" />
+                <result column="phoneNum" property="phoneNum" jdbcType="TIMESTAMP" />
+                <result column="email" property="email" jdbcType="TIMESTAMP" />
+    	</resultMap>
+
+
+	<sql id="selectFields">
+	    invstId,perId,name,positions,status,phoneNum,email
+	</sql>
+	
+	
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_org_member
+	</select>
+
+</mapper>

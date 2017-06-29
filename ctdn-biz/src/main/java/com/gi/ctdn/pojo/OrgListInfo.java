@@ -34,6 +34,20 @@ public class OrgListInfo extends OrgInfo {
     private List<OrgMediaInfo> orgHistoryInfoList;
 
 
+    public List<OrgMember> getOrgMemberList() {
+        return orgMemberList;
+    }
+
+    public void setOrgMemberList(List<OrgMember> orgMemberList) {
+        this.orgMemberList = orgMemberList;
+    }
+
+    /**
+     * @Fields orgMemberList : 机构成员
+
+     */
+    private List<OrgMember> orgMemberList;
+
     public List<OrgMediaInfo> getOrgHistoryInfoList() {
         return orgHistoryInfoList;
     }

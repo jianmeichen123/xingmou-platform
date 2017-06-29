@@ -28,7 +28,19 @@ public class OrgListInfo extends OrgInfo {
      */
     private List<ProjectContact> projectContactList;
 
+    /**
+     * @Fields orgHistoryInfoList : 发展历史
+     */
+    private List<OrgMediaInfo> orgHistoryInfoList;
 
+
+    public List<OrgMediaInfo> getOrgHistoryInfoList() {
+        return orgHistoryInfoList;
+    }
+
+    public void setOrgHistoryInfoList(List<OrgMediaInfo> orgHistoryInfoList) {
+        this.orgHistoryInfoList = orgHistoryInfoList;
+    }
 
     public List<EventInfo> getEventInfoList() {
         return eventInfoList;

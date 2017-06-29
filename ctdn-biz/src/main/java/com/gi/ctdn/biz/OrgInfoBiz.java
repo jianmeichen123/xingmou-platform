@@ -34,6 +34,9 @@ public class OrgInfoBiz  {
 	EventInfoDAO eventInfoDAO;
 
     @Autowired
+	OrgMemberDAO orgMemberDAO;
+
+    @Autowired
 	ProjectContactDAO projectContactDAO;
 
     public  MessageInfo<OrgListInfo> getBaseInfoByOrgId(Integer orgId){
@@ -44,13 +47,13 @@ public class OrgInfoBiz  {
     		if (orgListInfo != null){
     			List<OrgMediaInfo> orgMediaInfoList = orgMediaInfoDAO.selectByOrgId(orgId);
 				List<OrgMediaInfo> orgHistoryInfoList = orgMediaInfoDAO.selectByOrgIdForHistroy(orgId);
-    			List<OrgMemberInfo> orgMemberInfoList = orgMemberInfoDAO.selectByOrgId(orgId);
+				List<OrgMember> orgMemberList = orgMemberDAO.selectOrgMemberById(orgId);
 				List<EventInfo> eventInfoList = eventInfoDAO.selectBySourceId(orgId);
 				List<ProjectContact> projectContactList = projectContactDAO.selectByOrgId(orgId);
 
 				orgListInfo.setOrgMediaInfoList(orgMediaInfoList);
 				orgListInfo.setOrgHistoryInfoList(orgHistoryInfoList);
-				orgListInfo.setOrgMemberInfoList(orgMemberInfoList);
+				orgListInfo.setOrgMemberList(orgMemberList);
 				orgListInfo.setEventInfoList(eventInfoList);
 				orgListInfo.setProjectContactList(projectContactList);
 			}

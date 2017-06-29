@@ -11,6 +11,8 @@ public interface OrgMediaInfoDAO {
 	
 			
 	List<OrgMediaInfo> selectByOrgId(@Param("orgId") Integer orgId);
-		
+
+	List<OrgMediaInfo> selectByOrgIdForHistroy(@Param("orgId") Integer orgId);
+
 	List<OrgMediaInfo> selectAll();
 }

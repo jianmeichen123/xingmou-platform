@@ -43,11 +43,13 @@ public class OrgInfoBiz  {
     		OrgListInfo orgListInfo = orgInfoDAO.selectById(orgId);
     		if (orgListInfo != null){
     			List<OrgMediaInfo> orgMediaInfoList = orgMediaInfoDAO.selectByOrgId(orgId);
+				List<OrgMediaInfo> orgHistoryInfoList = orgMediaInfoDAO.selectByOrgIdForHistroy(orgId);
     			List<OrgMemberInfo> orgMemberInfoList = orgMemberInfoDAO.selectByOrgId(orgId);
 				List<EventInfo> eventInfoList = eventInfoDAO.selectBySourceId(orgId);
 				List<ProjectContact> projectContactList = projectContactDAO.selectByOrgId(orgId);
 
 				orgListInfo.setOrgMediaInfoList(orgMediaInfoList);
+				orgListInfo.setOrgHistoryInfoList(orgHistoryInfoList);
 				orgListInfo.setOrgMemberInfoList(orgMemberInfoList);
 				orgListInfo.setEventInfoList(eventInfoList);
 				orgListInfo.setProjectContactList(projectContactList);

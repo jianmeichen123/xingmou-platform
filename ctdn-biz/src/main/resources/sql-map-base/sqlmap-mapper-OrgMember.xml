@@ -15,8 +15,14 @@
 	<sql id="selectFields">
 	    invstId,perId,name,positions,status,phoneNum,email
 	</sql>
-	
-	
+
+	<select id="selectOrgMemberById" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM
+		app_org_member
+		WHERE invstId=#{orgId,jdbcType=INTEGER}
+	</select>
 
 	<select id="selectAll" resultMap="BaseResultMap">
 		SELECT

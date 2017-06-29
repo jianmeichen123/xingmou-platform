@@ -24,7 +24,15 @@
             <include refid="selectFields" />
 		FROM
 		    app_org_media_info
-		WHERE  orgId = #{orgId,jdbcType=INTEGER}
+		WHERE  orgId = #{orgId,jdbcType=INTEGER} and type = 'N'
+	</select>
+
+	<select id="selectByOrgIdForHistroy" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM
+		app_org_media_info
+		WHERE  orgId = #{orgId,jdbcType=INTEGER} and type = 'H'
 	</select>
 	
 

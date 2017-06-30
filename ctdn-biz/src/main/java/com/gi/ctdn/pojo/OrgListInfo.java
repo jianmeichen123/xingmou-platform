@@ -21,7 +21,15 @@ public class OrgListInfo extends OrgInfo {
     /**
      * @Fields eventInfoList : 投资事件
      */
-    private List<EventInfo> eventInfoList;
+    private List<EventInfoExt> eventInfoExtList;
+
+    public List<EventInfoExt> getEventInfoExtList() {
+        return eventInfoExtList;
+    }
+
+    public void setEventInfoExtList(List<EventInfoExt> eventInfoExtList) {
+        this.eventInfoExtList = eventInfoExtList;
+    }
 
     /**
      * @Fields projectContactList : 联系方式
@@ -54,14 +62,6 @@ public class OrgListInfo extends OrgInfo {
 
     public void setOrgHistoryInfoList(List<OrgMediaInfo> orgHistoryInfoList) {
         this.orgHistoryInfoList = orgHistoryInfoList;
-    }
-
-    public List<EventInfo> getEventInfoList() {
-        return eventInfoList;
-    }
-
-    public void setEventInfoList(List<EventInfo> eventInfoList) {
-        this.eventInfoList = eventInfoList;
     }
 
     public List<OrgMemberInfo> getOrgMemberInfoList() {

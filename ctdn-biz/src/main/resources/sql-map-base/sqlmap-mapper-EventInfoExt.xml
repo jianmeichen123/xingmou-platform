@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.EventInfoExtDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.EventInfoExt">
+            <id column="id" property="id" jdbcType="INTEGER" />
+                <result column="eventId" property="eventId" jdbcType="INTEGER" />
+                <result column="round" property="round" jdbcType="VARCHAR" />
+                <result column="investDate" property="investDate" jdbcType="DATE" />
+                <result column="company" property="company" jdbcType="VARCHAR" />
+                <result column="amountStr" property="amountStr" jdbcType="VARCHAR" />
+                <result column="investSideJson" property="investSideJson" jdbcType="VARCHAR" />
+                <result column="invstorid" property="invstorid" jdbcType="INTEGER" />
+                <result column="sourceCode" property="sourceCode" jdbcType="VARCHAR" />
+                <result column="type" property="type" jdbcType="VARCHAR" />
+    	</resultMap>
+
+
+	<sql id="selectFields">
+	    id,eventId,round,investDate,company,amountStr,investSideJson,invstorid,sourceCode,type
+	</sql>
+	
+			
+	<select id="selectByInvstoridType" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_event_info_ext
+		WHERE  invstorid = #{invstorid,jdbcType=INTEGER}
+	</select>
+	
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_event_info_ext
+	</select>
+
+</mapper>

@@ -162,6 +162,20 @@ public class EventInfo extends PojoInfo {
 	 * @Fields invstorgnames : 投资事件对应投资机构names
 	 */
 	private String invstorgnames;
+
+	public String getDistrictGrandsonName() {
+		return districtGrandsonName;
+	}
+
+	public void setDistrictGrandsonName(String districtGrandsonName) {
+		this.districtGrandsonName = districtGrandsonName;
+	}
+
+	/**
+	 * @Fields districtGrandsonName : 三级地区
+
+	 */
+	private String districtGrandsonName;
 	
     
 	public String getInvestevent(){

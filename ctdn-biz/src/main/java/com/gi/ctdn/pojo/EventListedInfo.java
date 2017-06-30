@@ -195,7 +195,7 @@ public class EventListedInfo extends PojoInfo {
 	 * @Fields isClick : 预留 是否可点击
 	 */
 	private String isClick;
-	
+
     
 	public String getListedEvent(){
 		return listedEvent;

@@ -1,9 +1,5 @@
 package com.gi.ctdn.pojo;
 
-import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.sql.Timestamp;
-import java.util.Date;
 import com.gi.xm.platform.view.common.PojoInfo;
 
 public class OrgMember extends PojoInfo {
@@ -20,92 +16,92 @@ public class OrgMember extends PojoInfo {
 	/**
 	 * @Fields invstId : 机构ID
 	 */
-	private Timestamp invstId;
+	private Integer invstId;
 	
 	/**
 	 * @Fields perId : 成员ID
 	 */
-	private Timestamp perId;
+	private Integer perId;
 	
 	/**
 	 * @Fields name : 成员名字
 	 */
-	private Timestamp name;
+	private String name;
 	
 	/**
 	 * @Fields positions : 成员职位
 	 */
-	private Timestamp positions;
+	private String positions;
 	
 	/**
 	 * @Fields status : 成员状态
 	 */
-	private Timestamp status;
+	private String status;
 	
 	/**
 	 * @Fields phoneNum : 电话号码
 	 */
-	private Timestamp phoneNum;
+	private String phoneNum;
 	
 	/**
 	 * @Fields email : 邮箱
 	 */
-	private Timestamp email;
+	private String email;
 	
     
-	public Timestamp getInvstId(){
+	public Integer getInvstId(){
 		return invstId;
 	}
 
-	public void setInvstId(Timestamp invstId){
+	public void setInvstId(Integer invstId){
 		this.invstId = invstId;
 	}
     
-	public Timestamp getPerId(){
+	public Integer getPerId(){
 		return perId;
 	}
 
-	public void setPerId(Timestamp perId){
+	public void setPerId(Integer perId){
 		this.perId = perId;
 	}
     
-	public Timestamp getName(){
+	public String getName(){
 		return name;
 	}
 
-	public void setName(Timestamp name){
+	public void setName(String name){
 		this.name = name;
 	}
     
-	public Timestamp getPositions(){
+	public String getPositions(){
 		return positions;
 	}
 
-	public void setPositions(Timestamp positions){
+	public void setPositions(String positions){
 		this.positions = positions;
 	}
     
-	public Timestamp getStatus(){
+	public String getStatus(){
 		return status;
 	}
 
-	public void setStatus(Timestamp status){
+	public void setStatus(String status){
 		this.status = status;
 	}
     
-	public Timestamp getPhoneNum(){
+	public String getPhoneNum(){
 		return phoneNum;
 	}
 
-	public void setPhoneNum(Timestamp phoneNum){
+	public void setPhoneNum(String phoneNum){
 		this.phoneNum = phoneNum;
 	}
     
-	public Timestamp getEmail(){
+	public String getEmail(){
 		return email;
 	}
 
-	public void setEmail(Timestamp email){
+	public void setEmail(String email){
 		this.email = email;
 	}
     }

@@ -32,11 +32,12 @@
             <result column="isClick" property="isClick" jdbcType="VARCHAR" />
             <result column="invstorgids" property="invstorgids" jdbcType="VARCHAR" />
             <result column="invstorgnames" property="invstorgnames" jdbcType="VARCHAR" />
+            <result column="districtGrandsonName" property="districtGrandsonName" jdbcType="VARCHAR" />
     </resultMap>
 
 
 	<sql id="selectFields">
-	    investevent,eventId,round,districtName,districtSubName,investDate,company,stage,valuation,stock,mode,sourceId,sourceCode,logo,industryName,industrySubName,industryIds,districtId,districtSubId,amountNum,amountStr,currencyType,investSideJson,bodyRole,sourceType,isClick,invstorgids,invstorgnames
+	    investevent,eventId,round,districtName,districtSubName,investDate,company,stage,valuation,stock,mode,sourceId,sourceCode,logo,industryName,industrySubName,industryIds,districtId,districtSubId,amountNum,amountStr,currencyType,investSideJson,bodyRole,sourceType,isClick,invstorgids,invstorgnames,districtGrandsonName
 	</sql>
 	
 			

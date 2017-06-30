@@ -37,6 +37,11 @@ public class EventInfo extends PojoInfo {
 	 * @Fields districtSubName : 二级地区
 	 */
 	private String districtSubName;
+
+	/**
+	 * @Fields districtGrandsonName :三级地区
+	 */
+	private String districtGrandsonName;
 	
 	/**
 	 * @Fields investDate : 时间
@@ -411,4 +416,12 @@ public class EventInfo extends PojoInfo {
 	public void setInvstorgnames(String invstorgnames){
 		this.invstorgnames = invstorgnames;
 	}
-    }
+
+	public String getDistrictGrandsonName() {
+		return districtGrandsonName;
+	}
+
+	public void setDistrictGrandsonName(String districtGrandsonName) {
+		this.districtGrandsonName = districtGrandsonName;
+	}
+}

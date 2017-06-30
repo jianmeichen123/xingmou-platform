@@ -32,6 +32,7 @@
             <result column="sourceId" property="sourceId" jdbcType="INTEGER" />
             <result column="sourceCode" property="sourceCode" jdbcType="VARCHAR" />
             <result column="logo" property="logo" jdbcType="VARCHAR" />
+            <result column="desc" property="desc" jdbcType="VARCHAR" />
             <result column="industryName" property="industryName" jdbcType="VARCHAR" />
             <result column="industrySubName" property="industrySubName" jdbcType="VARCHAR" />
             <result column="industryGrandsonName" property="industryGrandsonName" jdbcType="VARCHAR" />
@@ -43,7 +44,7 @@
 
 
 	<sql id="selectFields">
-	    listedEvent,eventId,industry,type,stockExchange,transferType,marketLayer,company,stockCode,listedDate,amountNum,amountStr,issuePrice,districtSubName,circulation,stockValue,peRatio,netRate,isVcPe,salesSum,accountFirms,lawFirms,prospectus,fiscaleReport,articles,sourceId,sourceCode,logo,industryName,industrySubName,industryGrandsonName,industryIds,bodyRole,sourceType,isClick
+	    listedEvent,eventId,industry,`desc`,type,stockExchange,transferType,marketLayer,company,stockCode,listedDate,amountNum,amountStr,issuePrice,districtSubName,circulation,stockValue,peRatio,netRate,isVcPe,salesSum,accountFirms,lawFirms,prospectus,fiscaleReport,articles,sourceId,sourceCode,logo,industryName,industrySubName,industryGrandsonName,industryIds,bodyRole,sourceType,isClick
 	</sql>
 	
 			

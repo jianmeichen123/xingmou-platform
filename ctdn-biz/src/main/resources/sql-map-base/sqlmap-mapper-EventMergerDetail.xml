@@ -7,7 +7,7 @@
                 <result column="code" property="code" jdbcType="VARCHAR" />
                 <result column="party" property="party" jdbcType="VARCHAR" />
                 <result column="partyName" property="partyName" jdbcType="VARCHAR" />
-                <result column="industryName" property="industry" jdbcType="VARCHAR" />
+                <result column="industryName" property="industryName" jdbcType="VARCHAR" />
                 <result column="district" property="district" jdbcType="VARCHAR" />
                 <result column="isVcFe" property="isVcFe" jdbcType="CHAR" />
                 <result column="isStock" property="isStock" jdbcType="CHAR" />
@@ -15,11 +15,12 @@
                 <result column="lawFirms" property="lawFirms" jdbcType="VARCHAR" />
                 <result column="accountFirms" property="accountFirms" jdbcType="VARCHAR" />
                 <result column="financeConsult" property="financeConsult" jdbcType="VARCHAR" />
+                <result column="industrySubName" property="industrySubName" jdbcType="VARCHAR" />
     	</resultMap>
 
 
 	<sql id="selectFields">
-	    mergerEvent,eventId,code,party,partyName,industryName,district,isVcFe,isStock,isNation,lawFirms,accountFirms,financeConsult
+	    mergerEvent,eventId,code,party,partyName,industryName,district,isVcFe,isStock,isNation,lawFirms,accountFirms,financeConsult,industrySubName
 	</sql>
 	
 	

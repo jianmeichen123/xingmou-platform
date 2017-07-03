@@ -25,6 +25,7 @@
 		FROM
 		    app_org_media_info
 		WHERE  orgId = #{orgId,jdbcType=INTEGER} and type = 'N'
+			order by eventDate desc
 	</select>
 
 	<select id="selectByOrgIdForHistroy" resultMap="BaseResultMap">

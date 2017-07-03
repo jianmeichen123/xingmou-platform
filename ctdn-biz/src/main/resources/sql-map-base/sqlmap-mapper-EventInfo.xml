@@ -37,7 +37,7 @@
 
 
 	<sql id="selectFields">
-	    investevent,eventId,round,districtName,districtSubName,investDate,company,stage,valuation,stock,mode,sourceId,sourceCode,logo,industryName,industrySubName,industryIds,districtId,districtSubId,amountNum,amountStr,currencyType,investSideJson,bodyRole,sourceType,isClick,invstorgids,invstorgnames,districtGrandsonName
+	    investevent,eventId,`desc`,round,districtName,districtSubName,investDate,company,stage,valuation,stock,mode,sourceId,sourceCode,logo,industryName,industrySubName,industryIds,districtId,districtSubId,amountNum,amountStr,currencyType,investSideJson,bodyRole,sourceType,isClick,invstorgids,invstorgnames,districtGrandsonName
 	</sql>
 	
 			

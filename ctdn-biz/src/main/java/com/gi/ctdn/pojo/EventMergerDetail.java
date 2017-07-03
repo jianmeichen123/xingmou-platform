@@ -49,10 +49,14 @@ public class EventMergerDetail extends PojoInfo {
 	private String partyName;
 	
 	/**
-	 * @Fields industry : 行业
+	 * @Fields industry : 一级行业
 	 */
-	private String industry;
-	
+	private String industryName;
+
+	/**
+	 * @Fields industry : 二级行业
+	 */
+	private String industrySubName;
 	/**
 	 * @Fields district : 地区
 	 */
@@ -128,15 +132,23 @@ public class EventMergerDetail extends PojoInfo {
 	public void setPartyName(String partyName){
 		this.partyName = partyName;
 	}
-    
-	public String getIndustry(){
-		return industry;
+
+	public String getIndustryName() {
+		return industryName;
 	}
 
-	public void setIndustry(String industry){
-		this.industry = industry;
+	public void setIndustryName(String industryName) {
+		this.industryName = industryName;
 	}
-    
+
+	public String getIndustrySubName() {
+		return industrySubName;
+	}
+
+	public void setIndustrySubName(String industrySubName) {
+		this.industrySubName = industrySubName;
+	}
+
 	public String getDistrict(){
 		return district;
 	}

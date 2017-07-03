@@ -13,7 +13,7 @@ public class EventMergerDetail extends PojoInfo {
         public static final String CODE = "事件code";
         public static final String PARTY = "主体[并购方：B，被并购方：C，卖方：S]";
         public static final String PARTYNAME = "主体公司名称";
-        public static final String INDUSTRY = "行业";
+        public static final String INDUSTRYNAME = "一级行业";
         public static final String DISTRICT = "地区";
         public static final String ISVCFE = "是否VC/PE支持";
         public static final String ISSTOCK = "是否上市";

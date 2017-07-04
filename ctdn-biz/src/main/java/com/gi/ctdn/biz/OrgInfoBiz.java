@@ -54,7 +54,7 @@ public class OrgInfoBiz  {
 				List<OrgMediaInfo> orgHistoryInfoList = orgMediaInfoDAO.selectByOrgIdForHistroy(orgId);
 				List<OrgMember> orgMemberList = orgMemberDAO.selectOrgMemberById(orgId);
 				List<EventInfoExt> eventInfoExtList = eventInfoExtDAO.selectByInvstoridType(orgId);
-				eventInfoExtList = sortList(eventInfoExtList,orgListInfo.getOrgName());
+				eventInfoExtList = sortList(eventInfoExtList,orgListInfo.getInvestOrg());
 				List<ProjectContact> projectContactList = projectContactDAO.selectByOrgId(orgId);
 				orgListInfo.setOrgMediaInfoList(orgMediaInfoList);
 				orgListInfo.setOrgHistoryInfoList(orgHistoryInfoList);

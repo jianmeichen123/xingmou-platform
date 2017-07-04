@@ -1,36 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gi.ctdn.dao.EventMergerDetailDAO">
-	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.EventMergerDetail">
-            <result column="mergerEvent" property="mergerEvent" jdbcType="VARCHAR" />
-                <result column="eventId" property="eventId" jdbcType="INTEGER" />
-                <result column="code" property="code" jdbcType="VARCHAR" />
-                <result column="party" property="party" jdbcType="VARCHAR" />
-                <result column="partyName" property="partyName" jdbcType="VARCHAR" />
-                <result column="industryName" property="industryName" jdbcType="VARCHAR" />
-                <result column="districtSubName" property="districtSubName" jdbcType="VARCHAR" />
-                <result column="isVcFe" property="isVcFe" jdbcType="CHAR" />
-                <result column="isStock" property="isStock" jdbcType="CHAR" />
-                <result column="isNation" property="isNation" jdbcType="CHAR" />
-                <result column="lawFirms" property="lawFirms" jdbcType="VARCHAR" />
-                <result column="accountFirms" property="accountFirms" jdbcType="VARCHAR" />
-                <result column="financeConsult" property="financeConsult" jdbcType="VARCHAR" />
-                <result column="industrySubName" property="industrySubName" jdbcType="VARCHAR" />
-    	</resultMap>
+    <resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.EventMergerDetail">
+        <result column="mergerEvent" property="mergerEvent" jdbcType="VARCHAR" />
+        <result column="eventId" property="eventId" jdbcType="INTEGER" />
+        <result column="code" property="code" jdbcType="VARCHAR" />
+        <result column="party" property="party" jdbcType="VARCHAR" />
+        <result column="partyName" property="partyName" jdbcType="VARCHAR" />
+        <result column="industryName" property="industryName" jdbcType="VARCHAR" />
+        <result column="districtSubName" property="districtSubName" jdbcType="VARCHAR" />
+        <result column="districtGrandsonName" property="districtGrandsonName" jdbcType="VARCHAR" />
+        <result column="isVcFe" property="isVcFe" jdbcType="CHAR" />
+        <result column="isStock" property="isStock" jdbcType="CHAR" />
+        <result column="isNation" property="isNation" jdbcType="CHAR" />
+        <result column="lawFirms" property="lawFirms" jdbcType="VARCHAR" />
+        <result column="accountFirms" property="accountFirms" jdbcType="VARCHAR" />
+        <result column="financeConsult" property="financeConsult" jdbcType="VARCHAR" />
+        <result column="industrySubName" property="industrySubName" jdbcType="VARCHAR" />
+    </resultMap>
 
 
-	<sql id="selectFields">
-	    mergerEvent,eventId,code,party,partyName,industryName,districtSubName,isVcFe,isStock,isNation,lawFirms,accountFirms,financeConsult,industrySubName
-	</sql>
-	
-	
+    <sql id="selectFields">
+        mergerEvent,eventId,code,party,partyName,industryName,districtSubName,districtGrandsonName,isVcFe,isStock,isNation,lawFirms,accountFirms,financeConsult,industrySubName
+    </sql>
 
-	<select id="selectAll" resultMap="BaseResultMap">
-		SELECT
-            <include refid="selectFields" />
-		FROM
-		    app_event_merger_detail
-	</select>
+
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="selectFields" />
+        FROM
+        app_event_merger_detail
+    </select>
 
     <select id="getEventMergerDetailByEventId" resultMap="BaseResultMap">
         SELECT

@@ -86,8 +86,6 @@ public class EventListedInfo extends PojoInfo {
 	 */
 	private String districtSubName;
 
-
-
 	/**
 	 * @Fields districtgrandsonname : 三级地区
 	 */

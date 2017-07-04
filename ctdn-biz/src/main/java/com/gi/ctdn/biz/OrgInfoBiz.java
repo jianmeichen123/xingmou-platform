@@ -4,6 +4,8 @@ package com.gi.ctdn.biz;
 
 import java.util.List;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.gi.ctdn.dao.*;
 import com.gi.ctdn.pojo.*;
 import org.slf4j.Logger;
@@ -52,8 +54,8 @@ public class OrgInfoBiz  {
 				List<OrgMediaInfo> orgHistoryInfoList = orgMediaInfoDAO.selectByOrgIdForHistroy(orgId);
 				List<OrgMember> orgMemberList = orgMemberDAO.selectOrgMemberById(orgId);
 				List<EventInfoExt> eventInfoExtList = eventInfoExtDAO.selectByInvstoridType(orgId);
+				eventInfoExtList = sortList(eventInfoExtList,orgListInfo.getOrgName());
 				List<ProjectContact> projectContactList = projectContactDAO.selectByOrgId(orgId);
-
 				orgListInfo.setOrgMediaInfoList(orgMediaInfoList);
 				orgListInfo.setOrgHistoryInfoList(orgHistoryInfoList);
 				orgListInfo.setOrgMemberList(orgMemberList);
@@ -95,6 +97,32 @@ public class OrgInfoBiz  {
 		return messageInfo;
 	}
 
+	public List<EventInfoExt> sortList(List<EventInfoExt> eventInfoExtList,String orgName){
+		if(eventInfoExtList.size()>0){
+			JSONObject temp = null;
+			JSONObject jsonObject = null;
+			List<JSONObject> ls = null;
+			for(EventInfoExt info:eventInfoExtList){
+				String json = info.getInvestSideJson();
+				JSONObject obj = JSON.parseObject(json);
+				ls =(List<JSONObject>) obj.get("investSideJson");
+				if(ls.size()>0){
+					//遍历集合中的json.找到后,与集合第一个交换位置
+					for(int i = 0;i<ls.size();i++){
+						jsonObject = ls.get(i);
+						if(jsonObject.get("invstor").equals(orgName)){
+							temp= ls.get(0);
+							ls.set(0,jsonObject);
+							ls.set(i,temp);
+						}
+					}
+				}
+				json = obj.toJSONString();
+				info.setInvestSideJson(json);
+			}
+		}
+    	return eventInfoExtList;
+	}
 	public OrgListInfo getOrgListInfoById(Integer id){
     	return orgInfoDAO.selectById(id);
 	}

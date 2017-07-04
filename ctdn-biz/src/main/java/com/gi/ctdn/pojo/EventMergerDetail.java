@@ -60,12 +60,12 @@ public class EventMergerDetail extends PojoInfo {
 	/**
 	 * @Fields district : 二级地区
 	 */
-	private String districtName;
+	private String districtSubName;
 
 	/**
 	 * @Fields district : 三级地区
 	 */
-	private String districtSubName;
+	private String districtGrandsonName;
 	
 	/**
 	 * @Fields isVcFe : 是否VC/PE支持
@@ -154,12 +154,12 @@ public class EventMergerDetail extends PojoInfo {
 		this.industrySubName = industrySubName;
 	}
 
-	public String getDistrictName() {
-		return districtName;
+	public String getDistrictGrandsonName() {
+		return districtGrandsonName;
 	}
 
-	public void setDistrictName(String districtName) {
-		this.districtName = districtName;
+	public void setDistrictGrandsonName(String districtGrandsonName) {
+		this.districtGrandsonName = districtGrandsonName;
 	}
 
 	public String getDistrictSubName() {

@@ -40,11 +40,12 @@
             <result column="bodyRole" property="bodyRole" jdbcType="VARCHAR" />
             <result column="sourceType" property="sourceType" jdbcType="VARCHAR" />
             <result column="isClick" property="isClick" jdbcType="VARCHAR" />
+            <result column="districtgrandsonname" property="districtgrandsonname" jdbcType="VARCHAR" />
     </resultMap>
 
 
 	<sql id="selectFields">
-	    listedEvent,eventId,industry,`desc`,type,stockExchange,transferType,marketLayer,company,stockCode,listedDate,amountNum,amountStr,issuePrice,districtSubName,circulation,stockValue,peRatio,netRate,isVcPe,salesSum,accountFirms,lawFirms,prospectus,fiscaleReport,articles,sourceId,sourceCode,logo,industryName,industrySubName,industryGrandsonName,industryIds,bodyRole,sourceType,isClick
+	    listedEvent,eventId,industry,`desc`,type,stockExchange,transferType,marketLayer,company,stockCode,listedDate,amountNum,amountStr,issuePrice,districtSubName,circulation,stockValue,peRatio,netRate,isVcPe,salesSum,accountFirms,lawFirms,prospectus,fiscaleReport,articles,sourceId,sourceCode,logo,industryName,industrySubName,industryGrandsonName,industryIds,bodyRole,sourceType,isClick,districtgrandsonname
 	</sql>
 	
 			

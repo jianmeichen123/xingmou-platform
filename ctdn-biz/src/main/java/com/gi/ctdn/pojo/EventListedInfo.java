@@ -82,9 +82,16 @@ public class EventListedInfo extends PojoInfo {
 	private Integer issuePrice;
 	
 	/**
-	 * @Fields districtSubName : 地区
+	 * @Fields districtSubName : 二级地区
 	 */
 	private String districtSubName;
+
+
+
+	/**
+	 * @Fields districtgrandsonname : 三级地区
+	 */
+	private String districtgrandsonname;
 	
 	/**
 	 * @Fields circulation : 发行量
@@ -491,5 +498,12 @@ public class EventListedInfo extends PojoInfo {
 
 	public void setIsClick(String isClick){
 		this.isClick = isClick;
+	}
+	public String getDistrictgrandsonname() {
+		return districtgrandsonname;
+	}
+
+	public void setDistrictgrandsonname(String districtgrandsonname) {
+		this.districtgrandsonname = districtgrandsonname;
 	}
     }

@@ -2,6 +2,8 @@
 
 package com.gi.ctdn.biz;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.gi.ctdn.dao.EventDetailDAO;
 import com.gi.ctdn.dao.OrgInfoDAO;
 import com.gi.ctdn.pojo.EventDetail;
@@ -70,6 +72,30 @@ public class EventInfoBiz  {
 		MessageInfo<List<EventInfo>> messageInfo = new MessageInfo<List<EventInfo>>();
 		try {
 			List<EventInfo> eventInfo = eventInfoDAO.selectByName(name);
+			if(eventInfo.size()>0){
+				JSONObject temp = null;
+				JSONObject jsonObject = null;
+				List<JSONObject> ls = null;
+				for(EventInfo info:eventInfo){
+					String json = info.getInvestSideJson();
+					JSONObject obj = JSON.parseObject(json);
+					//{"investSideJson":[{"code":"","id":"8","invstor":"蓝驰创投","isClick":1,"isLeader":0,"type":"invst"}]}
+					ls =(List<JSONObject>) obj.get("investSideJson");
+					if(ls.size()>0){
+						//遍历集合中的json.找到后,与集合第一个交换位置
+						for(int i = 0;i<ls.size();i++){
+							jsonObject = ls.get(i);
+							if(jsonObject.get("invstor").equals(name)){
+								temp= ls.get(0);
+								ls.set(0,jsonObject);
+								ls.set(i,temp);
+							}
+						}
+					}
+					json = obj.toJSONString();
+					info.setInvestSideJson(json);
+				}
+			}
 			messageInfo.setData(eventInfo);
 		} catch (Exception e) {
 			LOGGER.error("getListByName","查询EventInfo失败", e);

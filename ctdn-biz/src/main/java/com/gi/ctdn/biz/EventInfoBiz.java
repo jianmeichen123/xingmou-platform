@@ -19,6 +19,7 @@ import com.gi.ctdn.dao.EventInfoDAO;
 import com.gi.xm.platform.view.common.MessageStatus;
 import com.gi.xm.platform.view.common.MessageInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("eventInfoBiz")
@@ -72,11 +73,13 @@ public class EventInfoBiz  {
 		MessageInfo<List<EventInfo>> messageInfo = new MessageInfo<List<EventInfo>>();
 		try {
 			List<EventInfo> eventInfo = eventInfoDAO.selectByName(name);
+			List<EventInfo> newList = new ArrayList<EventInfo>();
 			if(eventInfo.size()>0){
 				JSONObject temp = null;
 				JSONObject jsonObject = null;
 				List<JSONObject> ls = null;
 				for(EventInfo info:eventInfo){
+					boolean flag = false;
 					String json = info.getInvestSideJson();
 					JSONObject obj = JSON.parseObject(json);
 					//{"investSideJson":[{"code":"","id":"8","invstor":"蓝驰创投","isClick":1,"isLeader":0,"type":"invst"}]}
@@ -85,18 +88,25 @@ public class EventInfoBiz  {
 						//遍历集合中的json.找到后,与集合第一个交换位置
 						for(int i = 0;i<ls.size();i++){
 							jsonObject = ls.get(i);
-							if(jsonObject.get("invstor").equals(name)){
-								temp= ls.get(0);
-								ls.set(0,jsonObject);
-								ls.set(i,temp);
+							if(jsonObject.containsValue(name)){
+							 	if(jsonObject.get("type").equals("com")){
+									flag = true;
+									temp= ls.get(0);
+									ls.set(0,jsonObject);
+									ls.set(i,temp);
+								}
 							}
 						}
 					}
-					json = obj.toJSONString();
-					info.setInvestSideJson(json);
+					//如果有符合 名称匹配和类型匹配的数据,放入集合
+					if(flag){
+						json = obj.toJSONString();
+						info.setInvestSideJson(json);
+						newList.add(info);
+					}
 				}
 			}
-			messageInfo.setData(eventInfo);
+			messageInfo.setData(newList);
 		} catch (Exception e) {
 			LOGGER.error("getListByName","查询EventInfo失败", e);
 			messageInfo.setStatus(MessageStatus.ERROR_CODE);

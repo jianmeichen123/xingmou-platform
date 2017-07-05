@@ -71,7 +71,7 @@
         <include refid="selectFields" />
         FROM
         app_event_info
-        WHERE  investSideJson like CONCAT('%', #{company,jdbcType=VARCHAR}, '%') and investSideJson like '%"type":"com"%'
+        WHERE  investSideJson like CONCAT('%', #{company,jdbcType=VARCHAR}, '%')
         order by investDate desc
     </select>
 

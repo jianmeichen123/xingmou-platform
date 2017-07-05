@@ -26,7 +26,7 @@
         FROM
         app_invest_round
         WHERE status = #{status,jdbcType=BIGINT}
-        and id not in (50,51)
+        and id not in (50,51,54)
     </select>
 
 </mapper>

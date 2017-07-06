@@ -57,7 +57,7 @@ public class EventInfo extends PojoInfo {
 	/**
 	 * @Fields valuation : 企业估值
 	 */
-	private Integer valuation;
+	private String valuation;
 	
 	/**
 	 * @Fields stock : 股权
@@ -251,11 +251,11 @@ public class EventInfo extends PojoInfo {
 		this.stage = stage;
 	}
     
-	public Integer getValuation(){
+	public String getValuation(){
 		return valuation;
 	}
 
-	public void setValuation(Integer valuation){
+	public void setValuation(String valuation){
 		this.valuation = valuation;
 	}
     

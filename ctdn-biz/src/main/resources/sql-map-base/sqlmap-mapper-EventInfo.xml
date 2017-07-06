@@ -11,7 +11,7 @@
             <result column="company" property="company" jdbcType="VARCHAR" />
             <result column="stage" property="stage" jdbcType="VARCHAR" />
             <result column="valuation" property="valuation" jdbcType="VARCHAR" />
-            <result column="stock" property="stock" jdbcType="INTEGER" />
+            <result column="stock" property="stock" jdbcType="VARCHAR" />
             <result column="mode" property="mode" jdbcType="VARCHAR" />
             <result column="desc" property="desc" jdbcType="LONGVARCHAR" />
             <result column="sourceId" property="sourceId" jdbcType="INTEGER" />

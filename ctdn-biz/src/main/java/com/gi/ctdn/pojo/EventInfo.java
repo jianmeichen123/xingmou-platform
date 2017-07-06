@@ -62,7 +62,7 @@ public class EventInfo extends PojoInfo {
 	/**
 	 * @Fields stock : 股权
 	 */
-	private Integer stock;
+	private String stock;
 	
 	/**
 	 * @Fields mode : 融资方式
@@ -259,11 +259,11 @@ public class EventInfo extends PojoInfo {
 		this.valuation = valuation;
 	}
     
-	public Integer getStock(){
+	public String getStock(){
 		return stock;
 	}
 
-	public void setStock(Integer stock){
+	public void setStock(String stock){
 		this.stock = stock;
 	}
     

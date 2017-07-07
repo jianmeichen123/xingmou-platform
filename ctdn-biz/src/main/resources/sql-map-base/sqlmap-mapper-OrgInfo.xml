@@ -16,7 +16,6 @@
                 <result column="investAmountNum" property="investAmountNum" jdbcType="INTEGER" />
                 <result column="investAmountStr" property="investAmountStr" jdbcType="VARCHAR" />
                 <result column="amountRatio" property="amountRatio" jdbcType="INTEGER" />
-                <result column="orgProjJson" property="orgProjJson" jdbcType="VARCHAR" />
                 <result column="webUrl" property="webUrl" jdbcType="VARCHAR" />
                 <result column="logo" property="logo" jdbcType="VARCHAR" />
                 <result column="orgName" property="orgName" jdbcType="VARCHAR" />
@@ -43,13 +42,12 @@
                 <result column="districtId" property="districtId" jdbcType="INTEGER" />
                 <result column="districtSubId" property="districtSubId" jdbcType="INTEGER" />
                 <result column="newestInvestDate" property="newestInvestDate" jdbcType="DATE" />
-                <result column="investProjJson" property="investProjJson" jdbcType="VARCHAR" />
+                <result column="orgProjJson" property="orgProjJson" jdbcType="VARCHAR" />
                 <result column="foundDateStr" property="foundDateStr" jdbcType="VARCHAR" />
     	</resultMap>
 
-
 	<sql id="selectFields">
-	    investOrg,orgId,code,investStage,district,industryIds,capitalType,currencyType,orgType,investTotal,totalRatio,investAmountNum,investAmountStr,amountRatio,investProj,webUrl,logo,orgName,orgNameEn,foundDate,orgForm,registArea,isBack,backDate,registNo,manageCapital,isNation,orgDesc,propSatge,propDomain,propDist,investStand,addedService,remark,castStage,castIndustry,castDistrict,logoSmall,districtId,districtSubId,newestInvestDate,orgProjJson,foundDateStr
+	    investOrg,orgId,code,investStage,district,industryIds,capitalType,currencyType,orgType,investTotal,totalRatio,investAmountNum,investAmountStr,amountRatio,webUrl,logo,orgName,orgNameEn,foundDate,orgForm,registArea,isBack,backDate,registNo,manageCapital,isNation,orgDesc,propSatge,propDomain,propDist,investStand,addedService,remark,castStage,castIndustry,castDistrict,logoSmall,districtId,districtSubId,newestInvestDate,orgProjJson,foundDateStr
 	</sql>
 	
 			

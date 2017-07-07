@@ -99,7 +99,14 @@ public class EventMergerInfo extends PojoInfo {
 	 * @Fields districtSubName : 二级地区
 	 */
 	private String districtSubName;
-	
+
+
+
+	/**
+	 * @Fields districtGrandsonName : 三级地区
+	 */
+	private String districtGrandsonName;
+
 	/**
 	 * @Fields equityrateRange : 股权比例范围   0-10%  :0   10%-30%  :1     30%-50%   :2    50%以上 :3
 	 */
@@ -334,5 +341,13 @@ public class EventMergerInfo extends PojoInfo {
 
 	public void setIsClick(String isClick){
 		this.isClick = isClick;
+	}
+
+	public String getDistrictGrandsonName() {
+		return districtGrandsonName;
+	}
+
+	public void setDistrictGrandsonName(String districtGrandsonName) {
+		this.districtGrandsonName = districtGrandsonName;
 	}
     }

@@ -49,8 +49,9 @@ public class OrgInfo extends PojoInfo {
         public static final String DISTRICTID = "一级地区id";
         public static final String DISTRICTSUBID = "二级地区id";
         public static final String NEWESTINVESTDATE = "最新融资日期";
-        public static final String INVESTPROJJSON = "最近投资项目";
-    
+        public static final String ORGPROJJSON = "最近投资项目";
+        public static final String FOUNDDATESTR = "投资时间字符串";
+
 	
 	/**
 	 * @Fields investOrg : 投资机构
@@ -151,6 +152,12 @@ public class OrgInfo extends PojoInfo {
 	 * @Fields foundDate : 成立时间
 	 */
 	private Date foundDate;
+
+	/**
+	 * @Fields foundDateStr : 成立时间
+
+	 */
+	 private String foundDateStr;
 	
 	/**
 	 * @Fields orgForm : 组织形式
@@ -260,7 +267,7 @@ public class OrgInfo extends PojoInfo {
 	/**
 	 * @Fields investProjJson : 最近投资项目 {"investProjJson":[{"type":"0","code":199,"title":"红杉资本","isClick":"0"}]}
 	 */
-	private String investProjJson;
+	private String orgProjJson;
 	
     
 	public String getInvestOrg(){
@@ -591,11 +598,18 @@ public class OrgInfo extends PojoInfo {
 		this.newestInvestDate = newestInvestDate;
 	}
     
-	public String getInvestProjJson(){
-		return investProjJson;
+	public String getOrgProjJson(){
+		return orgProjJson;
 	}
 
-	public void setInvestProjJson(String investProjJson){
-		this.investProjJson = investProjJson;
+	public void setOrgProjJson(String orgProjJson){
+		this.orgProjJson = orgProjJson;
+	}
+	public String getFoundDateStr() {
+		return foundDateStr;
+	}
+
+	public void setFoundDateStr(String foundDateStr) {
+		this.foundDateStr = foundDateStr;
 	}
     }

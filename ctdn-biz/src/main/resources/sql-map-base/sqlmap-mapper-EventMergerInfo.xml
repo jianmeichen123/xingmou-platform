@@ -26,11 +26,12 @@
             <result column="bodyRole" property="bodyRole" jdbcType="VARCHAR" />
             <result column="sourcetype" property="sourcetype" jdbcType="VARCHAR" />
             <result column="isClick" property="isClick" jdbcType="VARCHAR" />
+            <result column="districtGrandsonName" property="districtGrandsonName" jdbcType="VARCHAR" />
     </resultMap>
 
 
 	<sql id="selectFields">
-	    mergerEvent,eventId,industryName,mergeType,`desc`,mergeState,equityRate,currencyType,projTitle,amountStr,mergeSideJson,mergeDate,isCross,valuation,industrySubname,industryIds,districtSubName,equityrateRange,sourceId,sourceCode,logo,bodyRole,sourcetype,isClick
+	    mergerEvent,eventId,industryName,mergeType,`desc`,mergeState,equityRate,currencyType,projTitle,amountStr,mergeSideJson,mergeDate,isCross,valuation,industrySubname,industryIds,districtSubName,equityrateRange,sourceId,sourceCode,logo,bodyRole,sourcetype,isClick,districtGrandsonName
 	</sql>
 	
 			

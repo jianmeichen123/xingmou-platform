@@ -9,9 +9,8 @@ import org.springframework.context.annotation.ComponentScan;
  */
 
 @SpringBootApplication
-@ComponentScan(basePackages={"com.gi"})
+@ComponentScan(basePackages={"com.gi.ctdn"})
 public class ApiRestApp {
-
 
     public static void main(String[] args) {
         SpringApplication.run(ApiRestApp.class, args);

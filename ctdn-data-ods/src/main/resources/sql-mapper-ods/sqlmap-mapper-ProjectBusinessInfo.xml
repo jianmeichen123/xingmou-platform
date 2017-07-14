@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.ProjectBusinessInfoDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.ods.pojo.ProjectBusinessInfo">
+            <id column="projectId" property="projectId" jdbcType="INTEGER" />
+                <result column="sourceCode" property="sourceCode" jdbcType="VARCHAR" />
+                <result column="projTitle" property="projTitle" jdbcType="VARCHAR" />
+                <result column="company" property="company" jdbcType="VARCHAR" />
+                <result column="companyEng" property="companyEng" jdbcType="VARCHAR" />
+                <result column="uniformSocialCreditCode" property="uniformSocialCreditCode" jdbcType="VARCHAR" />
+                <result column="registrationCode" property="registrationCode" jdbcType="VARCHAR" />
+                <result column="organizationCode" property="organizationCode" jdbcType="VARCHAR" />
+                <result column="organizationForm" property="organizationForm" jdbcType="VARCHAR" />
+                <result column="legalPerson" property="legalPerson" jdbcType="VARCHAR" />
+                <result column="businessTerm" property="businessTerm" jdbcType="VARCHAR" />
+                <result column="issuingDate" property="issuingDate" jdbcType="VARCHAR" />
+                <result column="industry" property="industry" jdbcType="VARCHAR" />
+                <result column="registeredAddress" property="registeredAddress" jdbcType="VARCHAR" />
+                <result column="managementStatus" property="managementStatus" jdbcType="VARCHAR" />
+                <result column="foundDate" property="foundDate" jdbcType="VARCHAR" />
+                <result column="registeredCapital" property="registeredCapital" jdbcType="VARCHAR" />
+                <result column="registrationAuthority" property="registrationAuthority" jdbcType="VARCHAR" />
+                <result column="companySize" property="companySize" jdbcType="VARCHAR" />
+                <result column="registrationType" property="registrationType" jdbcType="VARCHAR" />
+                <result column="businessScope" property="businessScope" jdbcType="VARCHAR" />
+    	</resultMap>
+
+
+	<sql id="selectFields">
+	    projectId,sourceCode,projTitle,company,companyEng,uniformSocialCreditCode,registrationCode,organizationCode,organizationForm,legalPerson,businessTerm,issuingDate,industry,registeredAddress,managementStatus,foundDate,registeredCapital,registrationAuthority,companySize,registrationType,businessScope
+	</sql>
+	
+			
+	<select id="selectBySourceCode" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_project_business_info
+		WHERE  sourceCode = #{sourceCode,jdbcType=VARCHAR}
+	</select>
+	
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_project_business_info
+	</select>
+
+</mapper>

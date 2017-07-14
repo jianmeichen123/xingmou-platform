@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.ProjectMarkInfoDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.ods.pojo.ProjectMarkInfo">
+            <id column="projectId" property="projectId" jdbcType="INTEGER" />
+                <result column="sourceCode" property="sourceCode" jdbcType="VARCHAR" />
+                <result column="projTitle" property="projTitle" jdbcType="VARCHAR" />
+                <result column="trademark" property="trademark" jdbcType="VARCHAR" />
+                <result column="markType" property="markType" jdbcType="VARCHAR" />
+                <result column="state" property="state" jdbcType="VARCHAR" />
+                <result column="term" property="term" jdbcType="VARCHAR" />
+    	</resultMap>
+
+
+	<sql id="selectFields">
+	    projectId,sourceCode,projTitle,trademark,markType,state,term
+	</sql>
+	
+			
+	<select id="selectBySourceCode" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_project_mark_info
+		WHERE  sourceCode = #{sourceCode,jdbcType=VARCHAR}
+	</select>
+	
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_project_mark_info
+	</select>
+
+</mapper>

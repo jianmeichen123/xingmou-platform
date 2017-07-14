@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.ProjectPatentInfoDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.ods.pojo.ProjectPatentInfo">
+            <id column="projectId" property="projectId" jdbcType="INTEGER" />
+                <result column="sourceCode" property="sourceCode" jdbcType="VARCHAR" />
+                <result column="projTitle" property="projTitle" jdbcType="VARCHAR" />
+                <result column="patent" property="patent" jdbcType="VARCHAR" />
+                <result column="applyNum" property="applyNum" jdbcType="VARCHAR" />
+                <result column="applyPubNum" property="applyPubNum" jdbcType="VARCHAR" />
+                <result column="applyDate" property="applyDate" jdbcType="VARCHAR" />
+                <result column="applyPubDate" property="applyPubDate" jdbcType="VARCHAR" />
+                <result column="inventor" property="inventor" jdbcType="VARCHAR" />
+                <result column="patentType" property="patentType" jdbcType="VARCHAR" />
+                <result column="agency" property="agency" jdbcType="VARCHAR" />
+                <result column="legalStatus" property="legalStatus" jdbcType="VARCHAR" />
+                <result column="summary" property="summary" jdbcType="LONGVARCHAR" />
+                <result column="link" property="link" jdbcType="LONGVARCHAR" />
+    	</resultMap>
+
+
+	<sql id="selectFields">
+	    projectId,sourceCode,projTitle,patent,applyNum,applyPubNum,applyDate,applyPubDate,inventor,patentType,agency,legalStatus,summary,link
+	</sql>
+	
+			
+	<select id="selectBySourceCode" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_project_patent_info
+		WHERE  sourceCode = #{sourceCode,jdbcType=VARCHAR}
+	</select>
+	
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_project_patent_info
+	</select>
+
+</mapper>

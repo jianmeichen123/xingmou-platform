@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.ProjectShareholderInfoDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.ods.pojo.ProjectShareholderInfo">
+            <id column="projectId" property="projectId" jdbcType="INTEGER" />
+                <result column="sourceCode" property="sourceCode" jdbcType="VARCHAR" />
+                <result column="projTitle" property="projTitle" jdbcType="VARCHAR" />
+                <result column="shareholderType" property="shareholderType" jdbcType="VARCHAR" />
+                <result column="shareholder" property="shareholder" jdbcType="VARCHAR" />
+                <result column="prePayDate" property="prePayDate" jdbcType="VARCHAR" />
+                <result column="prePayAmountStr" property="prePayAmountStr" jdbcType="VARCHAR" />
+                <result column="paidDate" property="paidDate" jdbcType="VARCHAR" />
+                <result column="paidPayAmountStr" property="paidPayAmountStr" jdbcType="VARCHAR" />
+                <result column="payType" property="payType" jdbcType="VARCHAR" />
+                <result column="equityRate" property="equityRate" jdbcType="VARCHAR" />
+    	</resultMap>
+
+
+	<sql id="selectFields">
+	    projectId,sourceCode,projTitle,shareholderType,shareholder,prePayDate,prePayAmountStr,paidDate,paidPayAmountStr,payType,equityRate
+	</sql>
+	
+			
+	<select id="selectBySourceCode" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_project_shareholder_info
+		WHERE  sourceCode = #{sourceCode,jdbcType=VARCHAR}
+	</select>
+	
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_project_shareholder_info
+	</select>
+
+</mapper>

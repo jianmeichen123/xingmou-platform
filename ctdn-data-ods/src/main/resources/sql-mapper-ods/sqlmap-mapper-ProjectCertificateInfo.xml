@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.ods.dao.ProjectCertificateInfoDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.ods.pojo.ProjectCertificateInfo">
+            <id column="projectId" property="projectId" jdbcType="INTEGER" />
+                <result column="sourceCode" property="sourceCode" jdbcType="VARCHAR" />
+                <result column="projTitle" property="projTitle" jdbcType="VARCHAR" />
+                <result column="enclosure" property="enclosure" jdbcType="VARCHAR" />
+                <result column="reason" property="reason" jdbcType="VARCHAR" />
+                <result column="endDate" property="endDate" jdbcType="VARCHAR" />
+                <result column="firstDate" property="firstDate" jdbcType="VARCHAR" />
+                <result column="standard" property="standard" jdbcType="VARCHAR" />
+                <result column="prodName" property="prodName" jdbcType="VARCHAR" />
+                <result column="date" property="date" jdbcType="VARCHAR" />
+                <result column="manufacturer" property="manufacturer" jdbcType="VARCHAR" />
+                <result column="state" property="state" jdbcType="VARCHAR" />
+                <result column="producter" property="producter" jdbcType="VARCHAR" />
+                <result column="number" property="number" jdbcType="VARCHAR" />
+                <result column="model" property="model" jdbcType="VARCHAR" />
+                <result column="changeDate" property="changeDate" jdbcType="VARCHAR" />
+                <result column="applicant" property="applicant" jdbcType="VARCHAR" />
+    	</resultMap>
+
+
+	<sql id="selectFields">
+	    projectId,sourceCode,projTitle,enclosure,reason,endDate,firstDate,standard,prodName,date,manufacturer,state,producter,number,model,changeDate,applicant
+	</sql>
+	
+			
+	<select id="selectBySourceCode" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_project_certificate_info
+		WHERE  sourceCode = #{sourceCode,jdbcType=VARCHAR}
+	</select>
+	
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_project_certificate_info
+	</select>
+
+</mapper>

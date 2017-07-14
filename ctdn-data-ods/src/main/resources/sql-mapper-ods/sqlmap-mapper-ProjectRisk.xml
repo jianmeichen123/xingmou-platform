@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.ods.dao.ProjectRiskDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.ods.pojo.ProjectRisk">
+            <id column="projectId" property="projectId" jdbcType="INTEGER" />
+                <result column="code" property="code" jdbcType="VARCHAR" />
+                <result column="projTitle" property="projTitle" jdbcType="VARCHAR" />
+                <result column="type" property="type" jdbcType="VARCHAR" />
+                <result column="publishDT" property="publishDT" jdbcType="DATE" />
+                <result column="eventTitle" property="eventTitle" jdbcType="VARCHAR" />
+                <result column="content" property="content" jdbcType="LONGVARCHAR" />
+                <result column="decidedOrg" property="decidedOrg" jdbcType="VARCHAR" />
+                <result column="caseNO" property="caseNO" jdbcType="VARCHAR" />
+                <result column="relatedFirm" property="relatedFirm" jdbcType="VARCHAR" />
+                <result column="photo" property="photo" jdbcType="VARCHAR" />
+    	</resultMap>
+
+
+	<sql id="selectFields">
+	    projectId,code,projTitle,type,publishDT,eventTitle,content,decidedOrg,caseNO,relatedFirm,photo
+	</sql>
+	
+	
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_project_risk
+	</select>
+
+</mapper>

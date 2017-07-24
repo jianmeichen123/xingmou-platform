@@ -4,6 +4,11 @@ package com.gi.ctdn.ods.biz;
 
 import java.util.List;
 
+import com.gi.ctdn.ods.dao.ProjectBusinessChangeDAO;
+import com.gi.ctdn.ods.dao.ProjectShareholderInfoDAO;
+import com.gi.ctdn.ods.pojo.ProjectBusinessChange;
+import com.gi.ctdn.ods.pojo.ProjectBusinessListInfo;
+import com.gi.ctdn.ods.pojo.ProjectShareholderInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,6 +30,32 @@ public class ProjectBusinessInfoBiz  {
     @Autowired
 	ProjectBusinessInfoDAO projectBusinessInfoDAO;
 
+    @Autowired
+	ProjectBusinessChangeDAO projectBusinessChangeDAO;
+
+    @Autowired
+	ProjectShareholderInfoDAO projectShareholderInfoDAO;
+
+
+    public MessageInfo<ProjectBusinessListInfo> getProjectBusinessListInfoBySourceCode(String sourceCode){
+    	MessageInfo<ProjectBusinessListInfo> messageInfo = new MessageInfo<>();
+		try {
+			ProjectBusinessListInfo projectBusinessListInfo = projectBusinessInfoDAO.selectProjectBusinessInfoBySourceCode(sourceCode);
+			if(projectBusinessListInfo!=null){
+				List<ProjectShareholderInfo> projectShareholderInfoList = projectShareholderInfoDAO.selectBySourceCode(sourceCode);
+				List<ProjectBusinessChange> projectBusinessChangeList = projectBusinessChangeDAO.selectBySourceCode(sourceCode);
+
+				projectBusinessListInfo.setProjectShareholderInfoList(projectShareholderInfoList);
+				projectBusinessListInfo.setProjectBusinessChangeList(projectBusinessChangeList);
+			}
+			messageInfo.setData(projectBusinessListInfo);
+			System.out.println(messageInfo);
+		} catch (Exception e) {
+			LOGGER.error("getProjectBusinessListInfoBySourceCode","查询ProjectBusinessListInfo失败", e);
+			messageInfo.setStatus(MessageStatus.ERROR_CODE);
+		}
+		return messageInfo;
+	}
 
 		
 	public MessageInfo<List<ProjectBusinessInfo>> getListBySourceCode(String sourceCode){

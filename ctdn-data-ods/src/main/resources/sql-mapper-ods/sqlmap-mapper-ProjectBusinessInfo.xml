@@ -35,7 +35,7 @@
 		SELECT
             <include refid="selectFields" />
 		FROM
-		    app_project_business_info
+		    project_business_info
 		WHERE  sourceCode = #{sourceCode,jdbcType=VARCHAR}
 	</select>
 
@@ -44,7 +44,7 @@
 		SELECT
             <include refid="selectFields" />
 		FROM
-		    app_project_business_info
+		    project_business_info
 		WHERE  sourceCode = #{sourceCode,jdbcType=VARCHAR}
 	</select>
 	
@@ -53,7 +53,7 @@
 		SELECT
             <include refid="selectFields" />
 		FROM
-		    app_project_business_info
+		    project_business_info
 	</select>
 
 </mapper>

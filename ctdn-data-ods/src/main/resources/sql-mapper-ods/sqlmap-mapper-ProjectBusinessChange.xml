@@ -21,7 +21,7 @@
 		SELECT
             <include refid="selectFields" />
 		FROM
-		    app_project_business_change
+		    project_business_change
 		WHERE  sourceCode = #{sourceCode,jdbcType=VARCHAR}
 	</select>
 	
@@ -30,7 +30,7 @@
 		SELECT
             <include refid="selectFields" />
 		FROM
-		    app_project_business_change
+		    project_business_change
 	</select>
 
 </mapper>

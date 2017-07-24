@@ -26,7 +26,7 @@
 		SELECT
             <include refid="selectFields" />
 		FROM
-		    app_project_risk
+		    project_risk
 	</select>
 
 </mapper>

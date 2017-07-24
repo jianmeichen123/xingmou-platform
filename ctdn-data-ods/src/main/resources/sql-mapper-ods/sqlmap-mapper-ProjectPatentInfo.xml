@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.gi.ctdn.dao.ProjectPatentInfoDAO">
+<mapper namespace="com.gi.ctdn.ods.dao.ProjectPatentInfoDAO">
 	<resultMap id="BaseResultMap" type="com.gi.ctdn.ods.pojo.ProjectPatentInfo">
             <id column="projectId" property="projectId" jdbcType="INTEGER" />
                 <result column="sourceCode" property="sourceCode" jdbcType="VARCHAR" />

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.gi.ctdn.dao.ProjectBusinessInfoDAO">
-	<resultMap id="BaseResultMap" type="com.gi.ctdn.ods.pojo.ProjectBusinessInfo">
+<mapper namespace="com.gi.ctdn.ods.dao.ProjectBusinessInfoDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.ods.pojo.ProjectBusinessListInfo">
             <id column="projectId" property="projectId" jdbcType="INTEGER" />
                 <result column="sourceCode" property="sourceCode" jdbcType="VARCHAR" />
                 <result column="projTitle" property="projTitle" jdbcType="VARCHAR" />
@@ -31,7 +31,16 @@
 	</sql>
 	
 			
-	<select id="selectBySourceCode" resultMap="BaseResultMap">
+	<select id="selectProjectBusinessInfoBySourceCode" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_project_business_info
+		WHERE  sourceCode = #{sourceCode,jdbcType=VARCHAR}
+	</select>
+
+
+    <select id="selectBySourceCode" resultMap="BaseResultMap">
 		SELECT
             <include refid="selectFields" />
 		FROM

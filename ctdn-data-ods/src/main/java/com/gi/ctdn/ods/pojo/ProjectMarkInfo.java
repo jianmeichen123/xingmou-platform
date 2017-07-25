@@ -51,8 +51,12 @@ public class ProjectMarkInfo extends PojoInfo {
 	 * @Fields term : 期限
 	 */
 	private String term;
-	
-    
+
+	/**
+	 * @Fields picUrl : 图片链接
+	 */
+	private String picUrl;
+
 	public Integer getProjectId(){
 		return projectId;
 	}
@@ -108,4 +112,12 @@ public class ProjectMarkInfo extends PojoInfo {
 	public void setTerm(String term){
 		this.term = term;
 	}
-    }
+
+	public String getPicUrl() {
+		return picUrl;
+	}
+
+	public void setPicUrl(String picUrl) {
+		this.picUrl = picUrl;
+	}
+}

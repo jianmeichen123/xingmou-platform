@@ -10,6 +10,7 @@ import com.gi.ctdn.ods.pojo.ProjectMarkInfo;
 import com.gi.xm.platform.view.common.MessageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,10 +34,10 @@ public class ProjectMarkInfoController {
 
 
 		
-    @RequestMapping("getListBySourceCode")
+    @RequestMapping("getListBySourceCode/{sourceCode}")
     @ResponseBody
-	public MessageInfo<List<ProjectMarkInfo>> getListBySourceCode(String sourceCode){
-		MessageInfo<List<ProjectMarkInfo>> messageInfo = projectMarkInfoBiz.getListBySourceCode(sourceCode);
+	public MessageInfo<Map> getListBySourceCode(@PathVariable String sourceCode){
+		MessageInfo<Map> messageInfo = projectMarkInfoBiz.getListBySourceCode(sourceCode);
 		return messageInfo;
 	}
 		

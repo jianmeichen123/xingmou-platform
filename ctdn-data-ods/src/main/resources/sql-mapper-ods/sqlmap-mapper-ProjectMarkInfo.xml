@@ -9,11 +9,12 @@
                 <result column="markType" property="markType" jdbcType="VARCHAR" />
                 <result column="state" property="state" jdbcType="VARCHAR" />
                 <result column="term" property="term" jdbcType="VARCHAR" />
+                <result column="picUrl" property="picUrl" jdbcType="VARCHAR" />
     	</resultMap>
 
 
 	<sql id="selectFields">
-	    projectId,sourceCode,projTitle,trademark,markType,state,term
+	    projectId,sourceCode,projTitle,trademark,markType,state,term,picUrl
 	</sql>
 	
 			

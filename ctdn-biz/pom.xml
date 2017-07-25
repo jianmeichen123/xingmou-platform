@@ -109,12 +109,12 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <basePackage>com.gi.ctdn</basePackage>
-                    <prefix>app_,</prefix>
-                    <url>jdbc:mysql://10.9.130.142:3306/app?zeroDateTimeBehavior=convertToNull&amp;useUnicode=true&amp;characterEncoding=utf-8</url>
-                    <username>root</username>
-                    <password>IhNtPz6E2V34</password>
-                    <tables>app_event_listed_info</tables>
+                    <basePackage>com.gi.ctdn.ods</basePackage>
+                    <prefix></prefix>
+                    <url>jdbc:mysql://10.10.1.169/ods?zeroDateTimeBehavior=convertToNull&amp;useUnicode=true&amp;characterEncoding=utf-8</url>
+                    <username>ctdnop</username>
+                    <password>C20t1d7n3@op!data</password>
+                    <tables>risk_dishonesty_excuted,risk_court_announcement,risk_excuted,risk_judgment_document,risk_operation_exception</tables>
                     <output_root_dir>/home/zcy/template/</output_root_dir>
                     <templates_dir>/home/zcy/IdeaProjects/ctdn-project/xingmou-platform/templates/single/query/</templates_dir>
                 </configuration>

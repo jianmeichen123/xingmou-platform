@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.ods.dao.RiskOperationExceptionDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.ods.pojo.RiskOperationException">
+            <id column="id" property="id" jdbcType="BIGINT" />
+                <result column="sourceCode" property="sourceCode" jdbcType="VARCHAR" />
+                <result column="sourceId" property="sourceId" jdbcType="BIGINT" />
+                <result column="recordDate" property="recordDate" jdbcType="VARCHAR" />
+                <result column="excuteOrgans" property="excuteOrgans" jdbcType="VARCHAR" />
+                <result column="excuteReason" property="excuteReason" jdbcType="VARCHAR" />
+    	</resultMap>
+
+
+	<sql id="selectFields">
+	    id,sourceCode,sourceId,recordDate,excuteOrgans,excuteReason
+	</sql>
+	
+			
+	<select id="selectBySourceCode" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    risk_operation_exception
+		WHERE  sourceCode = #{sourceCode,jdbcType=VARCHAR}
+	</select>
+	
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    risk_operation_exception
+	</select>
+
+</mapper>

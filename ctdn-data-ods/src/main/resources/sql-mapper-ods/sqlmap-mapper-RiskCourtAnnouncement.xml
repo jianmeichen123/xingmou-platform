@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.ods.dao.RiskCourtAnnouncementDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.ods.pojo.RiskCourtAnnouncement">
+            <id column="id" property="id" jdbcType="BIGINT" />
+                <result column="sourceCode" property="sourceCode" jdbcType="VARCHAR" />
+                <result column="sourceId" property="sourceId" jdbcType="BIGINT" />
+                <result column="distributeDate" property="distributeDate" jdbcType="VARCHAR" />
+                <result column="sortment" property="sortment" jdbcType="VARCHAR" />
+                <result column="litigant" property="litigant" jdbcType="VARCHAR" />
+                <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    	</resultMap>
+
+
+	<sql id="selectFields">
+	    id,sourceCode,sourceId,distributeDate,sortment,litigant,content
+	</sql>
+	
+			
+	<select id="selectBySourceCode" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    risk_court_announcement
+		WHERE  sourceCode = #{sourceCode,jdbcType=VARCHAR}
+	</select>
+	
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    risk_court_announcement
+	</select>
+
+</mapper>

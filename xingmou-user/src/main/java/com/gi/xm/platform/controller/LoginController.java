@@ -127,9 +127,13 @@ public class LoginController extends BaseControllerImpl<User, User> {
 
             String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
             setCacheSessionId("ctdn", user, sessionId,notAuto);
+            String key = "ctdn-firstLogin:"+user.getId();         //判断用户是否第一次登录创投大脑
+            if(cache.getValue(key) == null){
+                cache.setValue(key,"true");
+            }else{
+                cache.setValue(key,"false");
+            }
             responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "登录成功！"));
-
-
             setCookie(response,sessionId,"ctdn",notAuto);
             logger.info(user.getEmail()+" login_success ctdn");
         }
@@ -146,6 +150,9 @@ public class LoginController extends BaseControllerImpl<User, User> {
         u.setEmail(user.getEmail());
         u.setRoleId(user.getRoleId());
         u.setRealName(user.getRealName());
+        //是否是第一次登录
+        String status =  cache.getValue("ctdn-firstLogin:"+user.getId());
+        u.setStatus(status);
         String json = null;
         try {
             json = URLEncoder.encode(JSON.toJSONString(u),"UTF-8");

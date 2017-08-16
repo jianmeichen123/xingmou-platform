@@ -12,12 +12,12 @@
                 <result column="decidedOrg" property="decidedOrg" jdbcType="VARCHAR" />
                 <result column="caseNO" property="caseNO" jdbcType="VARCHAR" />
                 <result column="relatedFirm" property="relatedFirm" jdbcType="VARCHAR" />
-                <result column="photo" property="photo" jdbcType="VARCHAR" />
+                <result column="detailId" property="detailId" jdbcType="VARCHAR" />
     	</resultMap>
 
 
 	<sql id="selectFields">
-	    projectId,code,projTitle,type,publishDT,eventTitle,content,decidedOrg,caseNO,relatedFirm,photo
+	    projectId,code,projTitle,type,publishDT,eventTitle,content,decidedOrg,caseNO,relatedFirm,detailId
 	</sql>
 	
 	

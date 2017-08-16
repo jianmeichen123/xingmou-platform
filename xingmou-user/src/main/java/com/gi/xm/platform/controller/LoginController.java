@@ -10,14 +10,16 @@ import com.galaxyinternet.framework.core.service.BaseService;
 import com.galaxyinternet.framework.core.utils.SessionUtils;
 import com.galaxyinternet.model.user.User;
 import com.galaxyinternet.service.UserService;
+import com.gi.xm.platform.utils.AuthRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
+import com.gi.xm.platform.pojo.auth.UserResult;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,14 +37,19 @@ public class LoginController extends BaseControllerImpl<User, User> {
     @Autowired
     com.galaxyinternet.framework.cache.Cache cache;
 
+    @Autowired
+    private AuthRequest authReq;
+
     @Override
     protected BaseService<User> getBaseService() {
         return this.userService;
     }
 
-    private String ctdnIndex = "http://ctdndev.gi.com/list_page_com.html";
+    @Value("${ctdnIndex}")
+    private String ctdnIndex ;
 
-    private String domain = "ctdndev.gi.com";
+    @Value("${domain}")
+    private String domain ;
 
 
     /**
@@ -92,7 +99,6 @@ public class LoginController extends BaseControllerImpl<User, User> {
         cookie.setDomain(domain);
         cookie.setPath("/");
         response.addCookie(cookie);
-
     }
     @RequestMapping(value = "/me")
     @ResponseBody
@@ -117,22 +123,36 @@ public class LoginController extends BaseControllerImpl<User, User> {
             responsebody.setResult(new Result(Status.ERROR, Constants.IS_UP_EMPTY, "用户名或密码不能为空！"));
             return responsebody;
         }
-        user.setNickName(null);
-        user.setEmail(nickName);
-        user = userService.queryUserByUP(user);
-
-        if (user == null) {
-            responsebody.setResult(new Result(Status.ERROR, Constants.IS_UP_WRONG, "用户名或密码错误！"));
-        } else {
-
-            String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
-            setCacheSessionId("ctdn", user, sessionId,notAuto);
-            responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "登录成功！"));
-
-
-            setCookie(response,sessionId,"ctdn",notAuto);
-            logger.info(user.getEmail()+" login_success ctdn");
+//        user.setNickName(null);
+//        user.setEmail(nickName);
+//        user = userService.queryUserByUP(user);
+        UserResult rtn = authReq.login(nickName, password);
+        if(rtn == null || rtn.isSuccess() == false)
+        {
+            String msg = "";
+            if(rtn.getMessage() != null)
+            {
+                msg = rtn.getMessage();
+            }
+            else
+            {
+                msg = "用户名或密码错误！";
+            }
+            responsebody.setResult(new Result(Status.ERROR, Constants.IS_UP_WRONG, msg));
+            return responsebody;
         }
+        user = rtn.getValue();
+        String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
+        setCacheSessionId("ctdn", user, sessionId,notAuto);
+        String key = "ctdn-firstLogin:"+user.getId();         //判断用户是否第一次登录创投大脑
+        if(cache.getValue(key) == null){
+            cache.setValue(key,"true");
+        }else{
+            cache.setValue(key,"false");
+        }
+        responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "登录成功！"));
+        setCookie(response,sessionId,"ctdn",notAuto);
+        logger.info(user.getEmail()+" login_success ctdn");
         return responsebody;
     }
 
@@ -146,6 +166,12 @@ public class LoginController extends BaseControllerImpl<User, User> {
         u.setEmail(user.getEmail());
         u.setRoleId(user.getRoleId());
         u.setRealName(user.getRealName());
+        //是否是第一次登录
+        String status =  cache.getValue("ctdn-firstLogin:"+user.getId());
+        u.setStatus(status);
+        //部门信息,用于关联行业
+        u.setDepartmentId(user.getDepartmentId());
+        u.setDepartmentName(user.getDepartmentName());
         String json = null;
         try {
             json = URLEncoder.encode(JSON.toJSONString(u),"UTF-8");

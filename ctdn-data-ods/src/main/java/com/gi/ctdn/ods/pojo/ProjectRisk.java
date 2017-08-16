@@ -18,7 +18,7 @@ public class ProjectRisk extends PojoInfo {
         public static final String DECIDEDORG = "法院/决定机关[A,J,P,E]";
         public static final String CASENO = "案号[J,P,D]";
         public static final String RELATEDFIRM = "相关企业[A,J,E]";
-        public static final String PHOTO = "photo";
+        public static final String DETAILID = "detailId";
     
 	
 	/**
@@ -72,9 +72,9 @@ public class ProjectRisk extends PojoInfo {
 	private String relatedFirm;
 	
 	/**
-	 * @Fields photo : 
+	 * @Fields detailId :
 	 */
-	private String photo;
+	private String detailId;
 	
     
 	public Integer getProjectId(){
@@ -157,11 +157,11 @@ public class ProjectRisk extends PojoInfo {
 		this.relatedFirm = relatedFirm;
 	}
     
-	public String getPhoto(){
-		return photo;
+	public String getDetailId(){
+		return detailId;
 	}
 
-	public void setPhoto(String photo){
-		this.photo = photo;
+	public void setDetailId(String detailId){
+		this.detailId = detailId;
 	}
     }

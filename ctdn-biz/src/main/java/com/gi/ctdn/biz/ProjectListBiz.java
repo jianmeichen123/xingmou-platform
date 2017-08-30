@@ -61,7 +61,12 @@ public class ProjectListBiz {
 				projectListInfo.setEventListedInfoList(eventListedInfoList);
 				projectListInfo.setEventMergerInfoList(eventMergerInfoList);
 				projectListInfo.setProjectContactList(projectContactList);
-				projectListInfo.setNewsList(newsList);
+				if(newsList.size()>10){
+					List<ProjectMediaInfo> limitNewsList =new ArrayList<>(newsList.subList(0,10));
+					projectListInfo.setNewsList(limitNewsList);
+				}else{
+					projectListInfo.setNewsList(newsList);
+				}
 			}
 			messageInfo.setData(projectListInfo);
 		} catch (Exception e) {

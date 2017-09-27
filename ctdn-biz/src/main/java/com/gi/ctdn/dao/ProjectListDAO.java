@@ -16,5 +16,7 @@ public interface ProjectListDAO {
 	List<ProjectList> queryCompetationlist(@Param("sourceCode") String sourceCode ,@Param("isSame") Integer isSame);
 
 	List<ProjectList> queryCompetitiveSimilar(@Param("sourceCode") String sourceCode ,@Param("isSame") Integer isSame);
+
+	List<ProjectList> selectByFinanceDate();
 		
 }

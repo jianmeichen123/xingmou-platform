@@ -18,4 +18,6 @@ public interface EventInfoDAO {
 
 	List<EventInfo> selectByName(@Param("company") String name);
 
+	List<EventInfo> selectByInvestDate();
+
 }

@@ -8,6 +8,7 @@ import com.galaxyinternet.framework.core.model.Result;
 import com.galaxyinternet.framework.core.model.Result.Status;
 import com.galaxyinternet.framework.core.service.BaseService;
 import com.galaxyinternet.framework.core.utils.SessionUtils;
+import com.galaxyinternet.model.auth.UserResult;
 import com.galaxyinternet.model.user.User;
 import com.galaxyinternet.service.UserService;
 import com.gi.xm.platform.utils.AuthRequest;
@@ -15,11 +16,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import com.gi.xm.platform.pojo.auth.UserResult;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,18 +38,16 @@ public class LoginController extends BaseControllerImpl<User, User> {
     com.galaxyinternet.framework.cache.Cache cache;
 
     @Autowired
-    private AuthRequest authReq;
+    AuthRequest authReq;
 
     @Override
     protected BaseService<User> getBaseService() {
         return this.userService;
     }
 
-    @Value("${ctdnIndex}")
-    private String ctdnIndex ;
+    private String ctdnIndex ="http://ctdndev.gi.com/list_page_com.html";
 
-    @Value("${domain}")
-    private String domain ;
+    private String domain ="ctdndev.gi.com";
 
 
     /**

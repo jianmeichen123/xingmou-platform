@@ -43,7 +43,7 @@
 			
 	<select id="selectBySourceCode" resultMap="BaseResultMap" parameterType="java.lang.String">
 		SELECT
-            <include refid="selectFields" />
+            investDate,round,amountStr,valuation,stock,investSideJson,eventId
 		FROM
 		    app_event_info
 		WHERE  sourceCode = #{sourceCode,jdbcType=VARCHAR}

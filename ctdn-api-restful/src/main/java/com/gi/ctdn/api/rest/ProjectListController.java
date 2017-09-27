@@ -64,4 +64,17 @@ public class ProjectListController {
 		MessageInfo<ProjectListInfo> resultMessageInfo = projectListBiz.queryCompetationlist(sourceCode);
 		return resultMessageInfo;
 	}
+
+	/**
+	 * 查询最新项目
+	 * @return
+	 */
+	@RequestMapping("queryLatestProjects")
+	@ResponseBody
+	public MessageInfo<List>  queryLatestProjects () {
+		MessageInfo<List> resultMessageInfo = new MessageInfo<>();
+		List<ProjectList> projectLists = projectListBiz.getByFinanceDate();
+		resultMessageInfo.setData(projectLists);
+		return resultMessageInfo;
+	}
 }

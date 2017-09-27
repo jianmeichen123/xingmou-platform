@@ -42,4 +42,16 @@ public class EventInfoController {
 		MessageInfo<List<EventInfo>> messageInfo = eventInfoBiz.getListByName(eventInfo.getCompany());
 		return messageInfo;
 	}
+
+	/**
+	 * 根据id查询详情
+	 * @param
+	 * @return
+	 */
+	@RequestMapping("getLatestEventInfo")
+	@ResponseBody
+	public MessageInfo<List<EventInfo>> getLatestEventInfo(){
+		MessageInfo<List<EventInfo>> messageInfo = eventInfoBiz.getByInvestDate();
+		return messageInfo;
+	}
 }

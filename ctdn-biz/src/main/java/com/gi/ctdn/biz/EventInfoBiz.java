@@ -113,4 +113,19 @@ public class EventInfoBiz  {
 		}
 		return messageInfo;
 	}
+
+	public MessageInfo<List<EventInfo>> getByInvestDate() {
+		MessageInfo<List<EventInfo>> messageInfo = new MessageInfo<List<EventInfo>>();
+		try {
+			List<EventInfo> eventInfo = eventInfoDAO.selectByInvestDate();
+			messageInfo.setData(eventInfo);
+		} catch (Exception e) {
+			LOGGER.error("getListByName","查询EventInfo失败", e);
+			messageInfo.setStatus(MessageStatus.ERROR_CODE);
+		}
+		return messageInfo;
+	}
+
+
+
 }

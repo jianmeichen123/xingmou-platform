@@ -113,4 +113,12 @@ public class ProjectListBiz {
 		ProjectListInfo projectListInfo = projectListDAO.selectByCode(code);
 		return projectListInfo;
 	}
+
+	public List<ProjectList> getByFinanceDate(){
+
+		List<ProjectList> projectLists = projectListDAO.selectByFinanceDate();
+		return projectLists;
+	}
+
+
 }

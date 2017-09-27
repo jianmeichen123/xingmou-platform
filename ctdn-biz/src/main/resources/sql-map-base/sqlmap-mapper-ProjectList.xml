@@ -77,4 +77,12 @@
         </where>
     </select>
 
+    <select id="selectByFinanceDate" resultMap="BaseResultMap" >
+        SELECT
+        <include refid="selectFields" />
+        FROM
+        app_project_list
+        ORDER BY latestFinanceDT DESC LIMIT 4
+    </select>
+
 </mapper>

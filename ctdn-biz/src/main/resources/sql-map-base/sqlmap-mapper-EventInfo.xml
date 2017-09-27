@@ -82,4 +82,11 @@
 		    app_event_info
 	</select>
 
+    <select id="selectByInvestDate" resultMap="BaseResultMap">
+        SELECT
+        <include refid="selectFields" />
+        FROM
+        app_event_info
+        ORDER BY investDate DESC limit 6
+    </select>
 </mapper>

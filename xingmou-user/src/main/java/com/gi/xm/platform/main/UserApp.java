@@ -11,8 +11,9 @@ import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.gi.xm.platform"})
-@ImportResource(value = {"classpath*:application-bean.xml","classpath*:applicationContext-cache.xml","classpath*:dubbo/spring-consumer.xml"})//启动加在dubbo配置文件
+@ImportResource(value = {"classpath*:applicationContext-cache.xml","classpath*:dubbo/spring-consumer.xml"})//启动加在dubbo配置文件
 public class UserApp {
+
     public static void main(String[] args) {
         SpringApplication.run(UserApp.class, args);
     }

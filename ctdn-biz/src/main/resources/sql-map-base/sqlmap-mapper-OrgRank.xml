@@ -30,14 +30,16 @@
         SELECT
         orgid,orgname,total as times
         FROM
-        (select orgid,orgname,sum(times) as total from app_org_rank where `type`=3 group by orgid) t order by t.total desc LIMIT 7
+        (select orgid,orgname,sum(times) as total from app_org_rank where `type`=3
+		group by orgid) t order by t.total desc LIMIT 10
 	</select>
 
 	<select id="selectByAllTimes" resultMap="BaseResultMap">
 		SELECT
         orgid,orgname,total as times
 		FROM
-        (select orgid,orgname,sum(times) as total from app_org_rank where `type`=1 group by orgid) t order by t.total desc LIMIT 7
+        (select orgid,orgname,sum(times) as total from app_org_rank where `type`=1
+		group by orgid) t order by t.total desc LIMIT 10
 	</select>
 
 </mapper>

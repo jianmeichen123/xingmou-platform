@@ -37,9 +37,7 @@
 				<if test="year !=null">
 					year = #{year,jdbcType=INTEGER}
 				</if>
-				<if test="month !=null">
-					month = #{month,jdbcType=INTEGER}
-				</if>
+				month in(7,8,9)
 			</where>
 			GROUP BY industryid
 			) t

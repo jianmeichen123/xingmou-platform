@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.IndexHeaderStatDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.IndexHeaderStat">
+            <id column="id" property="id" jdbcType="INTEGER" />
+                <result column="projectNum" property="projectNum" jdbcType="INTEGER" />
+                <result column="orgNum" property="orgNum" jdbcType="INTEGER" />
+                <result column="eventNum" property="eventNum" jdbcType="INTEGER" />
+    	</resultMap>
+
+
+	<sql id="selectFields">
+	    id,projectNum,orgNum,eventNum
+	</sql>
+	
+	
+
+	<select id="select" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_index_header_stat
+	</select>
+
+</mapper>

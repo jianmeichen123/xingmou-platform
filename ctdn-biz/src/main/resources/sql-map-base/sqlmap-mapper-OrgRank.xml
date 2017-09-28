@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.OrgRankDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.OrgRank">
+            <id column="id" property="id" jdbcType="INTEGER" />
+                <result column="orgid" property="orgid" jdbcType="INTEGER" />
+                <result column="orgname" property="orgname" jdbcType="VARCHAR" />
+                <result column="industryid" property="industryid" jdbcType="INTEGER" />
+                <result column="industryname" property="industryname" jdbcType="VARCHAR" />
+                <result column="times" property="times" jdbcType="INTEGER" />
+                <result column="type" property="type" jdbcType="INTEGER" />
+                <result column="createdtime" property="createdtime" jdbcType="TIMESTAMP" />
+    	</resultMap>
+
+
+	<sql id="selectFields">
+	    id,orgid,orgname,industryid,industryname,times,type,createdtime
+	</sql>
+	
+	
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_org_rank
+	</select>
+
+	<select id="selectBytimes" resultMap="BaseResultMap">
+        SELECT
+        orgid,orgname,total as times
+        FROM
+        (select orgid,orgname,sum(times) as total from app_org_rank where `type`=3 group by orgid) t order by t.total desc LIMIT 7
+	</select>
+
+	<select id="selectByAllTimes" resultMap="BaseResultMap">
+		SELECT
+        orgid,orgname,total as times
+		FROM
+        (select orgid,orgname,sum(times) as total from app_org_rank group by orgid) t order by t.total desc LIMIT 7
+	</select>
+
+</mapper>

@@ -37,7 +37,7 @@
 		SELECT
         orgid,orgname,total as times
 		FROM
-        (select orgid,orgname,sum(times) as total from app_org_rank group by orgid) t order by t.total desc LIMIT 7
+        (select orgid,orgname,sum(times) as total from app_org_rank where `type`=1 group by orgid) t order by t.total desc LIMIT 7
 	</select>
 
 </mapper>

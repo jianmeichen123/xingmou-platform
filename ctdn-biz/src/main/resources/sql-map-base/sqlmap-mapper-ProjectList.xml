@@ -82,7 +82,7 @@
         <include refid="selectFields" />
         FROM
         app_project_list
-        ORDER BY latestFinanceDT DESC LIMIT 4
+        ORDER BY showOrder DESC LIMIT 4
     </select>
 
 </mapper>

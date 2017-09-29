@@ -144,7 +144,7 @@ public class CommonRest {
     @ResponseBody
     @Cacheable(value = "orgIndustry",keyGenerator = "baseKG")
     public MessageInfo<List<Industry>> orgIndustry() {
-        MessageInfo<List<Industry>> industryMessageInfo = industryBiz.getIndustrysByStatus(2);
+        MessageInfo<List<Industry>> industryMessageInfo = industryBiz.selectOrgindustrystatus();
         return industryMessageInfo;
     }
 

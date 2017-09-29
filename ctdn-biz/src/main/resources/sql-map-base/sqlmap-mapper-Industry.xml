@@ -29,4 +29,12 @@
         app_industry
         WHERE status = #{status,jdbcType=BIGINT}
     </select>
+
+    <select id="selectOrgindustrystatus" resultMap="BaseResultMap">
+        SELECT
+        id,industryId,name
+        FROM
+        app_industry_org
+    </select>
+
 </mapper>

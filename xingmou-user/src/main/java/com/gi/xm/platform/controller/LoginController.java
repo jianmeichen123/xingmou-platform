@@ -45,6 +45,7 @@ public class LoginController extends BaseControllerImpl<User, User> {
     private String domain = "ctdndev.gi.com";
 
 
+
     /**
      * 跳转登录
      */

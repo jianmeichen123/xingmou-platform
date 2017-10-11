@@ -28,11 +28,8 @@ import java.net.URLEncoder;
 
 @Controller
 @RequestMapping("/userlogin")
-public class LoginController extends BaseControllerImpl<User, User> {
+public class LoginController {
     final Logger logger = LoggerFactory.getLogger(LoginController.class);
-
-    @Autowired
-    private UserService userService;
 
     @Autowired
     com.galaxyinternet.framework.cache.Cache cache;
@@ -40,10 +37,6 @@ public class LoginController extends BaseControllerImpl<User, User> {
     @Autowired
     AuthRequest authReq;
 
-    @Override
-    protected BaseService<User> getBaseService() {
-        return this.userService;
-    }
 
     private String ctdnIndex ="http://ctdndev.gi.com/index.html";
 

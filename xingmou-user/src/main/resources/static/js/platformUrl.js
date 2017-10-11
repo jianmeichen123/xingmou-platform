@@ -43,6 +43,8 @@ var platformUrl = {
 	updatePwd : Constants.platformContentURL + "user/user/updatePwd",
 
 	ctdncx : Constants.htmlContentUrl + "list_page_com.html",
+
+	index : Constants.htmlContentUrl + "index.html",
 }
 
 

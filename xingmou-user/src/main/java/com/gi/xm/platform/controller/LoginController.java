@@ -10,7 +10,6 @@ import com.galaxyinternet.framework.core.service.BaseService;
 import com.galaxyinternet.framework.core.utils.SessionUtils;
 import com.galaxyinternet.model.auth.UserResult;
 import com.galaxyinternet.model.user.User;
-import com.galaxyinternet.service.UserService;
 import com.gi.xm.platform.utils.AuthRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

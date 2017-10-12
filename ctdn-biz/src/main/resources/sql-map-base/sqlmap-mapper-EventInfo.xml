@@ -87,6 +87,6 @@
         <include refid="selectFields" />
         FROM
         app_event_info
-        ORDER BY investDate DESC limit 6
+        ORDER BY investDate DESC limit 8
     </select>
 </mapper>

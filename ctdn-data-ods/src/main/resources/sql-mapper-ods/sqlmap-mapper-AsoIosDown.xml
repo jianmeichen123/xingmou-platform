@@ -23,6 +23,7 @@
 			aso_ios_down
 		WHERE
 			appid = #{appid,jdbcType=BIGINT}
+		order by id desc limit 90
 	</select>
 	
 </mapper>

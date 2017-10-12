@@ -26,6 +26,7 @@
             weibo_indice
         WHERE
             wbid = #{wbid,jdbcType=BIGINT}
+        order by id desc limit 90
     </select>
 
 </mapper>

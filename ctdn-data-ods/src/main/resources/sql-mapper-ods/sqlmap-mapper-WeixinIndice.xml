@@ -28,6 +28,7 @@
 			weixin_indice
 		WHERE
 			wxid = #{wxid,jdbcType=VARCHAR}
+		order by id desc limit 90
 	</select>
 	
 </mapper>

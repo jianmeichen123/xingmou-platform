@@ -23,6 +23,7 @@
 			qq_android_rate_daily
 		WHERE
 			appid = #{appid,jdbcType=BIGINT}
+		order by id desc limit 90
 	</select>
 	
 </mapper>

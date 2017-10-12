@@ -51,12 +51,12 @@ public class OpIndiceSummary extends PojoInfo {
 	/**
 	 * @Fields index1 : 
 	 */
-	private Long index1;
+	private String index1;
 	
 	/**
 	 * @Fields index2 : 
 	 */
-	private Long index2;
+	private String index2;
 	
 	/**
 	 * @Fields avgScore : APP评分
@@ -108,23 +108,23 @@ public class OpIndiceSummary extends PojoInfo {
 	public void setAppid(String appid){
 		this.appid = appid;
 	}
-    
-	public Long getIndex1(){
+
+	public String getIndex1() {
 		return index1;
 	}
 
-	public void setIndex1(Long index1){
+	public void setIndex1(String index1) {
 		this.index1 = index1;
 	}
-    
-	public Long getIndex2(){
+
+	public String getIndex2() {
 		return index2;
 	}
 
-	public void setIndex2(Long index2){
+	public void setIndex2(String index2) {
 		this.index2 = index2;
 	}
-    
+
 	public Integer getAvgScore(){
 		return avgScore;
 	}

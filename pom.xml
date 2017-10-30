@@ -18,17 +18,7 @@
 
    <modules>
         <module>xingmou-assembly</module>
-        <module>xingmou-logback</module>
-        <module>xingmou-redis</module>
-        <module>xingmou-dal</module>
-        <module>xingmou-common</module>
         <module>xingmou-api-common</module>
-        <module>xingmou-biz</module>
-        <module>xingmou-mongodb</module>
-
-        <module>xingmou-user</module>
-
-        <module>xingmou-doc</module>
         <module>xingmou-data-rest</module>
         <module>ctdn-data-ods</module>
         <module>ctdn-biz</module>

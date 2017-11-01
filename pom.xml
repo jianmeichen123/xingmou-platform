@@ -22,6 +22,8 @@
         <module>xingmou-data-rest</module>
         <module>ctdn-data-ods</module>
         <module>ctdn-biz</module>
+        <module>xingmou-mongodb</module>
+        <module>xingmou-redis</module>
         <module>ctdn-api-restful</module>
     </modules>
 

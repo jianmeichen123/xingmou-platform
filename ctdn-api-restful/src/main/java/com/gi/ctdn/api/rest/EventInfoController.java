@@ -4,7 +4,7 @@ import com.gi.ctdn.biz.EventDetailBiz;
 import com.gi.ctdn.biz.EventInfoBiz;
 import com.gi.ctdn.pojo.EventInfo;
 import com.gi.ctdn.pojo.EventInfoList;
-import com.gi.xm.platform.view.common.MessageInfo;
+import com.gi.ctdn.view.common.MessageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;

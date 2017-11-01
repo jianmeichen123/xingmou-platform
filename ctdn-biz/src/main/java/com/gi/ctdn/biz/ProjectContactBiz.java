@@ -2,8 +2,6 @@
 
 package com.gi.ctdn.biz;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,10 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gi.ctdn.dao.ProjectContactDAO;
-import com.gi.xm.platform.view.common.MessageStatus;
-import com.gi.xm.platform.view.common.MessageInfo;
-
-import com.gi.ctdn.pojo.ProjectContact;
 
 @Service("projectContactBiz")
 public class ProjectContactBiz  {

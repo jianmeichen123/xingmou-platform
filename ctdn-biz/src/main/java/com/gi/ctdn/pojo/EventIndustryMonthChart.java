@@ -1,8 +1,5 @@
 package com.gi.ctdn.pojo;
 
-import com.gi.xm.platform.view.common.PojoInfo;
-
-import java.sql.Timestamp;
 import java.util.List;
 
 public class EventIndustryMonthChart  {

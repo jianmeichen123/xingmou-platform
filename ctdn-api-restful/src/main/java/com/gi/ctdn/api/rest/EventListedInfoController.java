@@ -2,7 +2,7 @@ package com.gi.ctdn.api.rest;
 
 import com.gi.ctdn.biz.EventListedInfoBiz;
 import com.gi.ctdn.pojo.EventListedInfo;
-import com.gi.xm.platform.view.common.MessageInfo;
+import com.gi.ctdn.view.common.MessageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;

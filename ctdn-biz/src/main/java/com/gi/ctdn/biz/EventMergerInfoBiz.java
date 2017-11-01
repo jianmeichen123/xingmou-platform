@@ -14,10 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gi.ctdn.dao.EventMergerInfoDAO;
-import com.gi.xm.platform.view.common.MessageStatus;
-import com.gi.xm.platform.view.common.MessageInfo;
-
-import com.gi.ctdn.pojo.EventMergerInfo;
+import com.gi.ctdn.view.common.MessageStatus;
+import com.gi.ctdn.view.common.MessageInfo;
 
 @Service("eventMergerInfoBiz")
 public class EventMergerInfoBiz  {

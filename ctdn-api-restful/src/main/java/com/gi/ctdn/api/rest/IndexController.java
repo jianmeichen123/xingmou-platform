@@ -1,10 +1,8 @@
 package com.gi.ctdn.api.rest;
 
 import com.gi.ctdn.biz.IndexHeaderStatBiz;
-import com.gi.ctdn.biz.UserIndustryBiz;
 import com.gi.ctdn.pojo.IndexHeaderStat;
-import com.gi.ctdn.pojo.UserIndustry;
-import com.gi.xm.platform.view.common.MessageInfo;
+import com.gi.ctdn.view.common.MessageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

@@ -5,12 +5,10 @@ import com.gi.ctdn.biz.ProjectListBiz;
 import com.gi.ctdn.biz.ProjectMediaInfoBiz;
 import com.gi.ctdn.biz.ProjectTeamBiz;
 import com.gi.ctdn.pojo.*;
-import com.gi.xm.platform.view.common.MessageInfo;
-import com.gi.xm.platform.view.common.QueryResultInfo;
+import com.gi.ctdn.view.common.MessageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 

@@ -4,8 +4,8 @@ package com.gi.ctdn.ods.biz;
 
 import com.gi.ctdn.ods.dao.RiskOperationExceptionDAO;
 import com.gi.ctdn.ods.pojo.RiskOperationException;
-import com.gi.xm.platform.view.common.MessageInfo;
-import com.gi.xm.platform.view.common.MessageStatus;
+import com.gi.ctdn.view.common.MessageInfo;
+import com.gi.ctdn.view.common.MessageStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

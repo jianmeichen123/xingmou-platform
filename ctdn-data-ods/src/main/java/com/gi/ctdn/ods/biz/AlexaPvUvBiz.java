@@ -4,7 +4,6 @@ package com.gi.ctdn.ods.biz;
 
 import java.util.List;
 
-import com.gi.ctdn.ods.pojo.OpIndiceSummary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gi.ctdn.ods.dao.AlexaPvUvDAO;
-import com.gi.xm.platform.view.common.MessageStatus;
-import com.gi.xm.platform.view.common.MessageInfo;
+import com.gi.ctdn.view.common.MessageStatus;
+import com.gi.ctdn.view.common.MessageInfo;
 
 import com.gi.ctdn.ods.pojo.AlexaPvUv;
 

@@ -14,8 +14,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gi.xm.platform.view.common.MessageStatus;
-import com.gi.xm.platform.view.common.MessageInfo;
+import com.gi.ctdn.view.common.MessageStatus;
+import com.gi.ctdn.view.common.MessageInfo;
 
 @Service("projectMarkInfoBiz")
 public class ProjectMarkInfoBiz  {

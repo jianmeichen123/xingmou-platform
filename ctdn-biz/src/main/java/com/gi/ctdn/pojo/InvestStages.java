@@ -1,7 +1,7 @@
 package com.gi.ctdn.pojo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.gi.xm.platform.view.common.PojoInfo;
+import com.gi.ctdn.view.common.PojoInfo;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class InvestStages extends PojoInfo {

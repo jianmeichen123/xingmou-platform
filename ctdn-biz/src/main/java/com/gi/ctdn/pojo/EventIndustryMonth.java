@@ -1,12 +1,8 @@
 package com.gi.ctdn.pojo;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.sql.Timestamp;
-import java.util.Date;
-import java.util.List;
 
-import com.gi.xm.platform.view.common.PojoInfo;
+import com.gi.ctdn.view.common.PojoInfo;
 
 public class EventIndustryMonth extends PojoInfo {
 

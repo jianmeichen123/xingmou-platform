@@ -2,7 +2,7 @@ package com.gi.ctdn.ods.pojo;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.gi.xm.platform.view.common.PojoInfo;
+import com.gi.ctdn.view.common.PojoInfo;
 
 public class QqAndroidRate extends PojoInfo {
 

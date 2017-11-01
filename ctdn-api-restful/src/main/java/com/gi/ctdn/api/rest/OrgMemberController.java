@@ -7,7 +7,7 @@ import java.util.Map;
 
 import com.gi.ctdn.biz.OrgMemberBiz;
 import com.gi.ctdn.pojo.OrgMember;
-import com.gi.xm.platform.view.common.MessageInfo;
+import com.gi.ctdn.view.common.MessageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

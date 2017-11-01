@@ -4,9 +4,9 @@ package com.gi.ctdn.ods.biz;
 
 import com.gi.ctdn.ods.dao.RiskExcutedDAO;
 import com.gi.ctdn.ods.pojo.RiskExcuted;
-import com.gi.xm.platform.view.common.MessageInfo;
-import com.gi.xm.platform.view.common.MessageStatus;
-import com.gi.xm.platform.view.common.QueryResultInfo;
+import com.gi.ctdn.view.common.MessageInfo;
+import com.gi.ctdn.view.common.MessageStatus;
+import com.gi.ctdn.view.common.QueryResultInfo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;

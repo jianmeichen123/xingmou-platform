@@ -1,9 +1,8 @@
 package com.gi.ctdn.pojo;
 
-import com.gi.xm.platform.view.common.PojoInfo;
+import com.gi.ctdn.view.common.PojoInfo;
 
 import java.util.Date;
-import java.util.List;
 
 public class ProjectList extends PojoInfo {
 

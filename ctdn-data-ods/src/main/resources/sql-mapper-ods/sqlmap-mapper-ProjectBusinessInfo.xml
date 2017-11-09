@@ -3,7 +3,6 @@
 <mapper namespace="com.gi.ctdn.ods.dao.ProjectBusinessInfoDAO">
 	<resultMap id="BaseResultMap" type="com.gi.ctdn.ods.pojo.ProjectBusinessListInfo">
 
-                <id column="id" property="id" jdbcType="INTEGER" />
                 <result column="projectId" property="projectId" jdbcType="INTEGER" />
                 <result column="sourceCode" property="sourceCode" jdbcType="VARCHAR" />
                 <result column="projTitle" property="projTitle" jdbcType="VARCHAR" />
@@ -29,7 +28,7 @@
 
 
 	<sql id="selectFields">
-	    id,projectId,sourceCode,projTitle,company,companyEng,uniformSocialCreditCode,registrationCode,organizationCode,organizationForm,legalPerson,businessTerm,issuingDate,industry,registeredAddress,managementStatus,foundDate,registeredCapital,registrationAuthority,companySize,registrationType,businessScope
+	    projectId,sourceCode,projTitle,company,companyEng,uniformSocialCreditCode,registrationCode,organizationCode,organizationForm,legalPerson,businessTerm,issuingDate,industry,registeredAddress,managementStatus,foundDate,registeredCapital,registrationAuthority,companySize,registrationType,businessScope
 	</sql>
 	
 			

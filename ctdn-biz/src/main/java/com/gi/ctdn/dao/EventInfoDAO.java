@@ -20,4 +20,6 @@ public interface EventInfoDAO {
 
 	List<EventInfo> selectByInvestDate();
 
+	List<EventInfo> selectFromCtdn();
+
 }

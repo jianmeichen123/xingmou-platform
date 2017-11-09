@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gi.ctdn.dao.EventInfoDAO">
 	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.EventInfoList">
-            <id column="eventId" property="eventId" jdbcType="INTEGER" />
             <result column="investevent" property="investevent" jdbcType="VARCHAR" />
             <result column="round" property="round" jdbcType="VARCHAR" />
             <result column="districtName" property="districtName" jdbcType="VARCHAR" />
@@ -37,7 +36,7 @@
 
 
 	<sql id="selectFields">
-	    investevent,eventId,`desc`,round,districtName,districtSubName,investDate,company,stage,valuation,stock,mode,sourceId,sourceCode,logo,industryName,industrySubName,industryIds,districtId,districtSubId,amountNum,amountStr,currencyType,investSideJson,bodyRole,sourceType,isClick,invstorgids,invstorgnames,districtGrandsonName
+	    investevent,`desc`,round,districtName,districtSubName,investDate,company,stage,valuation,stock,mode,sourceId,sourceCode,logo,industryName,industrySubName,industryIds,districtId,districtSubId,amountNum,amountStr,currencyType,investSideJson,bodyRole,sourceType,isClick,invstorgids,invstorgnames,districtGrandsonName
 	</sql>
 	
 			
@@ -88,5 +87,13 @@
         FROM
         app_event_info
         ORDER BY investDate DESC limit 8
+    </select>
+
+    <select id="selectFromCtdn" resultMap="BaseResultMap">
+        SELECT
+        <include refid="selectFields" />
+        FROM
+        ctdn.app_event_info
+        ORDER BY investDate DESC limit 5
     </select>
 </mapper>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.NewsDao">
+    <resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.News">
+        <result column="objCode" property="objCode" jdbcType="VARCHAR"/>
+        <result column="objType" property="objType" jdbcType="VARCHAR"/>
+        <result column="newsReportDate" property="newsReportDate" jdbcType="VARCHAR"/>
+        <result column="newsTitle" property="newsTitle" jdbcType="VARCHAR"/>
+        <result column="newsOverview" property="newsOverview" jdbcType="VARCHAR"/>
+        <result column="labels" property="labels" jdbcType="VARCHAR"/>
+        <result column="newsContent" property="newsContent" jdbcType="VARCHAR"/>
+        <result column="newsListPics" property="newsListPics" jdbcType="VARCHAR"/>
+        <result column="newsSource" property="newsSource" jdbcType="VARCHAR"/>
+        <result column="newsAddress" property="newsAddress" jdbcType="VARCHAR"/>
+        <result column="newsType" property="newsType" jdbcType="TINYINT"/>
+        <result column="newsTypeName" property="newsTypeName" jdbcType="VARCHAR"/>
+        <result column="newsColumns" property="newsColumns" jdbcType="TINYINT"/>
+    </resultMap>
+
+
+    <sql id="selectFields">
+        objCode,objType,newsReportDate,newsTitle,newsOverview,labels,newsContent,newsListPics,
+        newsSource,newsAddress,newsType,newsTypeName,newsColumns
+    </sql>
+
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="selectFields"/>
+        FROM
+        ctdn.app_news
+        order by newsReportDate desc limit 6
+    </select>
+
+    <select id="selectByNewsType" resultMap="BaseResultMap">
+        SELECT
+        <include refid="selectFields"/>
+        FROM
+        ctdn.app_news
+        where newsTypeName = #{newsTypeName,jdbcType=VARCHAR}
+        order by newsReportDate desc limit 6
+    </select>
+
+    <select id="selectBylabels" resultMap="BaseResultMap">
+        SELECT
+        labels,count(labels) as total
+        FROM
+        ctdn.app_news
+        group by labels order by total desc
+    </select>
+
+    <select id="selectNewsByLabel" resultMap="BaseResultMap">
+        SELECT
+        <include refid="selectFields"/>
+        FROM
+        ctdn.app_news
+        where labels = #{label,jdbcType=VARCHAR}
+        order by newsReportDate desc
+    </select>
+
+</mapper>

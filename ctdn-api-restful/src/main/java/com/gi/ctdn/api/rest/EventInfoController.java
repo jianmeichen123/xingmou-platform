@@ -54,4 +54,15 @@ public class EventInfoController {
 		MessageInfo<List<EventInfo>> messageInfo = eventInfoBiz.getByInvestDate();
 		return messageInfo;
 	}
+
+	/**
+	 *
+	 */
+	@RequestMapping("getCtdnEventInfo")
+	@ResponseBody
+	public MessageInfo<List<EventInfo>> getCtdnEventInfo(){
+		MessageInfo<List<EventInfo>> messageInfo = eventInfoBiz.getFromCtdnEventInfo();
+		return messageInfo;
+
+	}
 }

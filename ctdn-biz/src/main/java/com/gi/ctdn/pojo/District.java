@@ -1,12 +1,12 @@
 package com.gi.ctdn.pojo;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.gi.ctdn.view.common.Pagination;
+
 import java.util.List;
 
-import com.gi.ctdn.view.common.PojoInfo;
-import com.fasterxml.jackson.annotation.JsonInclude;
-
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class District extends PojoInfo {
+public class District extends Pagination {
 
         public static final String ID = "id";
         public static final String NAME = "name";

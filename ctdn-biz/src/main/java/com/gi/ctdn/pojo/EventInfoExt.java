@@ -1,9 +1,10 @@
 package com.gi.ctdn.pojo;
 
-import java.util.Date;
-import com.gi.ctdn.view.common.PojoInfo;
+import com.gi.ctdn.view.common.Pagination;
 
-public class EventInfoExt extends PojoInfo {
+import java.util.Date;
+
+public class EventInfoExt extends Pagination {
 
         public static final String ID = "id";
         public static final String EVENTID = "事件ID";

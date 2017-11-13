@@ -9,7 +9,7 @@ import com.gi.ctdn.pojo.ProjectContact;
 
 public interface ProjectContactDAO {
 
-	List<ProjectContact> selectBySourceCode(@Param("sourceCode") String sourceCode);
+	List<ProjectContact> selectByProjectCode(@Param("projectCode") String sourceCode);
 
 	List<ProjectContact> selectById(@Param("projectId") Integer projectId);
 

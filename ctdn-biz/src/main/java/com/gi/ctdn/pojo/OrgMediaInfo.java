@@ -1,9 +1,10 @@
 package com.gi.ctdn.pojo;
 
-import java.util.Date;
-import com.gi.ctdn.view.common.PojoInfo;
+import com.gi.ctdn.view.common.Pagination;
 
-public class OrgMediaInfo extends PojoInfo {
+import java.util.Date;
+
+public class OrgMediaInfo extends Pagination {
 
         public static final String INVESTORG = "投资机构";
         public static final String ORGID = "机构ID";

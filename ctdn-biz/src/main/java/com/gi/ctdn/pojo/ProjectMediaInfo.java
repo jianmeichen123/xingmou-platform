@@ -1,10 +1,9 @@
 package com.gi.ctdn.pojo;
 
-import com.gi.ctdn.view.common.PojoInfo;
+import com.gi.ctdn.view.common.Pagination;
 
-public class ProjectMediaInfo extends PojoInfo {
+public class ProjectMediaInfo extends Pagination {
 
-        public static final String PROJECTID = "项目ID";
         public static final String CODE = "code";
         public static final String PROJTITLE = "项目名称";
         public static final String DATE = "日期[H、N:必须，P：为空]";
@@ -17,7 +16,7 @@ public class ProjectMediaInfo extends PojoInfo {
 	/**
 	 * @Fields projectId : 项目ID
 	 */
-	private Integer projectId;
+	private String projectCode;
 	
 	/**
 	 * @Fields code : code
@@ -48,25 +47,13 @@ public class ProjectMediaInfo extends PojoInfo {
 	 * @Fields type : 类型[H:历史，N：相关新闻，P：子公司]
 	 */
 	private String type;
-	
-	/**
-	 * @Fields sourceCode : project code
-	 */
-	private String sourceCode;
+
 
 	/**
 	 * @Fields link :link
 	 */
 	private String link;
 
-	public Integer getProjectId(){
-		return projectId;
-	}
-
-	public void setProjectId(Integer projectId){
-		this.projectId = projectId;
-	}
-    
 	public String getCode(){
 		return code;
 	}
@@ -114,14 +101,6 @@ public class ProjectMediaInfo extends PojoInfo {
 	public void setType(String type){
 		this.type = type;
 	}
-    
-	public String getSourceCode(){
-		return sourceCode;
-	}
-
-	public void setSourceCode(String sourceCode){
-		this.sourceCode = sourceCode;
-	}
 
 	public String getLink() {
 		return link;
@@ -129,5 +108,13 @@ public class ProjectMediaInfo extends PojoInfo {
 
 	public void setLink(String link) {
 		this.link = link;
+	}
+
+	public String getProjectCode() {
+		return projectCode;
+	}
+
+	public void setProjectCode(String projectCode) {
+		this.projectCode = projectCode;
 	}
 }

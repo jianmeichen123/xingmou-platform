@@ -48,15 +48,13 @@ public class ProjectListBiz {
 			ProjectListInfo projectListInfo = getOneByCode(code);
 			if (projectListInfo != null) {
 				List<EventInfo> eventInfoList = eventInfoDAO.selectBySourceCode(code);
-				List<ProjectTeam> projectTeamList = projectTeamDAO.selectBySourcecode(code);
 				List<ProjectMediaInfo> historyList = projectMediaInfoDAO.selectBySourceCodeAndType(code, "H");
 				List<EventMergerInfo> eventMergerInfoList = eventMergerInfoDAO.selectBySourceCode(code);
-				List<ProjectContact> projectContactList = projectContactDAO.selectBySourceCode(code);
+				List<ProjectContact> projectContactList = projectContactDAO.selectByProjectCode(code);
 				List<EventListedInfo> eventListedInfoList = eventListedInfoDAO.selectBySourceCode(code);
 				List<ProjectMediaInfo> newsList = projectMediaInfoDAO.selectBySourceCodeAndType(code, "N");
 
 				projectListInfo.setEventInfoList(eventInfoList);
-				projectListInfo.setProjectTeamList(projectTeamList);
 				projectListInfo.setHistoryList(historyList);
 				projectListInfo.setEventListedInfoList(eventListedInfoList);
 				projectListInfo.setEventMergerInfoList(eventMergerInfoList);

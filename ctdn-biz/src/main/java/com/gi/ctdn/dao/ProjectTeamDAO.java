@@ -10,7 +10,6 @@ import com.gi.ctdn.pojo.ProjectTeam;
 public interface ProjectTeamDAO {
 	
 			
-	List<ProjectTeam> selectBySourcecode(@Param("sourceCode") String sourcecode);
-		
+	List<ProjectTeam> selectByProjectCode(@Param("projectCode") String projectCode);
 	List<ProjectTeam> selectAll();
 }

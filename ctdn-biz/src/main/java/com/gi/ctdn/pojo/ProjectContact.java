@@ -1,14 +1,12 @@
 package com.gi.ctdn.pojo;
 
-import com.gi.ctdn.view.common.PojoInfo;
+public class ProjectContact {
 
-public class ProjectContact extends PojoInfo {
-    
 	/**
-	 * @Fields projectId : 项目ID
+	 * @Fields projectCode : 项目code
 	 */
-	private Integer projectId;
-	
+	private String projectCode;
+
 	/**
 	 * @Fields code : code
 	 */
@@ -48,20 +46,15 @@ public class ProjectContact extends PojoInfo {
 	 * @Fields fax : 传真
 	 */
 	private String fax;
-	
-	/**
-	 * @Fields sourceCode : project code
-	 */
-	private String sourceCode;
 
-	public Integer getProjectId(){
-		return projectId;
+	public String getProjectCode() {
+		return projectCode;
 	}
 
-	public void setProjectId(Integer projectId){
-		this.projectId = projectId;
+	public void setProjectCode(String projectCode) {
+		this.projectCode = projectCode;
 	}
-    
+
 	public String getCode(){
 		return code;
 	}
@@ -124,14 +117,6 @@ public class ProjectContact extends PojoInfo {
 
 	public void setFax(String fax){
 		this.fax = fax;
-	}
-    
-	public String getSourceCode(){
-		return sourceCode;
-	}
-
-	public void setSourceCode(String sourceCode){
-		this.sourceCode = sourceCode;
 	}
 
 }

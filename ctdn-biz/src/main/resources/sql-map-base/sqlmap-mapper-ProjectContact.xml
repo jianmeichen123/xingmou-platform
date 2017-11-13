@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gi.ctdn.dao.ProjectContactDAO">
 	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.ProjectContact">
-                <id column="projectId" property="projectId" jdbcType="INTEGER" />
                 <result column="projTitle" property="projTitle" jdbcType="VARCHAR" />
                 <result column="city" property="city" jdbcType="VARCHAR" />
                 <result column="addr" property="addr" jdbcType="VARCHAR" />
@@ -10,38 +9,31 @@
                 <result column="tel" property="tel" jdbcType="VARCHAR" />
                 <result column="mail" property="mail" jdbcType="VARCHAR" />
                 <result column="fax" property="fax" jdbcType="VARCHAR" />
-                <result column="sourceCode" property="sourceCode" jdbcType="VARCHAR" />
+                <result column="projectCode" property="projectCode" jdbcType="VARCHAR" />
     	</resultMap>
 
 
 	<sql id="selectFields">
-	    projectId,projTitle,city,addr,zipCode,tel,mail,fax,sourceCode
+	    projTitle,city,addr,zipCode,tel,mail,fax,projectCode
 	</sql>
 	
 			
-	<select id="selectBySourceCode" resultMap="BaseResultMap">
+	<select id="selectByProjectCode" resultMap="BaseResultMap">
 		SELECT
             <include refid="selectFields" />
 		FROM
 		    app_project_contact
-		WHERE  sourceCode = #{sourceCode,jdbcType=VARCHAR}
+		WHERE  projectCode = #{projectCode,jdbcType=VARCHAR}
 	</select>
 
-	<select id="selectById" resultMap="BaseResultMap">
-		SELECT
-		<include refid="selectFields" />
-		FROM
-		app_project_contact
-		WHERE  projectId = #{projectId,jdbcType=INTEGER}
-	</select>
 
-	<select id="selectByOrgId" resultMap="BaseResultMap">
-		SELECT
-		<include refid="selectFields" />
-		FROM
-		app_project_contact
-		WHERE  projectId = #{orgId,jdbcType=INTEGER} and type="I"
-	</select>
+	<!--<select id="selectByOrgId" resultMap="BaseResultMap">-->
+		<!--SELECT-->
+		<!--<include refid="selectFields" />-->
+		<!--FROM-->
+		<!--app_project_contact-->
+		<!--WHERE  projectId = #{orgId,jdbcType=INTEGER} and type="I"-->
+	<!--</select>-->
 
 	<select id="selectAll" resultMap="BaseResultMap">
 		SELECT

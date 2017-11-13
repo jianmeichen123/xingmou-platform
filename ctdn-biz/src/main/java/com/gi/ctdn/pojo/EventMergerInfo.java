@@ -1,9 +1,10 @@
 package com.gi.ctdn.pojo;
 
-import java.util.Date;
-import com.gi.ctdn.view.common.PojoInfo;
+import com.gi.ctdn.view.common.Pagination;
 
-public class EventMergerInfo extends PojoInfo {
+import java.util.Date;
+
+public class EventMergerInfo extends Pagination {
 
     
 	

@@ -1,11 +1,11 @@
 package com.gi.ctdn.pojo;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.gi.ctdn.view.common.PojoInfo;
+import com.gi.ctdn.view.common.Pagination;
+
+import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Industry extends PojoInfo {
+public class Industry extends Pagination {
 
         public static final String ID = "id";
         public static final String INDUSTRYID = "industryId";

@@ -9,6 +9,10 @@ import com.gi.ctdn.dao.OrgInfoDAO;
 import com.gi.ctdn.pojo.EventDetail;
 import com.gi.ctdn.pojo.EventInfo;
 import com.gi.ctdn.pojo.EventInfoList;
+import com.gi.ctdn.view.common.Pagination;
+import com.gi.ctdn.view.common.Result;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,19 +42,18 @@ public class EventInfoBiz  {
 	EventDetailDAO eventDetailDAO;
 
 
-//
-//	public MessageInfo<List<EventInfo>> getListBySourceCode(String sourceCode){
-//
-//		MessageInfo<List<EventInfo>> messageInfo = new MessageInfo<List<EventInfo>>();
-//		try {
-//			List<EventInfo> eventInfoList = eventInfoDAO.selectBySourceCode(sourceCode);
-//			messageInfo.setData(eventInfoList);
-//		} catch (Exception e) {
-//			LOGGER.error("getListBySourceCode","查询EventInfo失败", e);
-//			messageInfo.setStatus(MessageStatus.ERROR_CODE);
-//		}
-//		return messageInfo;
-//	}
+	public MessageInfo<List<EventInfo>> getListBySourceCode(EventInfo eventInfo){
+
+		MessageInfo<List<EventInfo>> messageInfo = new MessageInfo<List<EventInfo>>();
+		try {
+			List<EventInfo> eventInfoList = eventInfoDAO.selectBySourceCode(eventInfo.getSourceCode());
+			messageInfo.setData(eventInfoList);
+		} catch (Exception e) {
+			LOGGER.error("getListBySourceCode","查询EventInfo失败", e);
+			messageInfo.setStatus(MessageStatus.ERROR_CODE);
+		}
+		return messageInfo;
+	}
 			
 	public MessageInfo<EventInfoList> getByEventId(Integer eventId){
 		MessageInfo<EventInfoList> messageInfo = new MessageInfo<>();

@@ -1,10 +1,10 @@
 package com.gi.ctdn.pojo;
 
+import com.gi.ctdn.view.common.Pagination;
+
 import java.math.BigDecimal;
 
-import com.gi.ctdn.view.common.PojoInfo;
-
-public class EventListedDetail extends PojoInfo {
+public class EventListedDetail extends Pagination {
 
         public static final String LISTEDEVENT = "上市挂牌事件";
         public static final String EVENTID = "事件ID";

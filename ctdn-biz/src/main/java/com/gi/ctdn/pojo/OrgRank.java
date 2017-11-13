@@ -1,10 +1,10 @@
 package com.gi.ctdn.pojo;
 
+import com.gi.ctdn.view.common.Pagination;
+
 import java.sql.Timestamp;
 
-import com.gi.ctdn.view.common.PojoInfo;
-
-public class OrgRank extends PojoInfo {
+public class OrgRank  {
 
         public static final String ID = "id";
         public static final String ORGID = "机构id";

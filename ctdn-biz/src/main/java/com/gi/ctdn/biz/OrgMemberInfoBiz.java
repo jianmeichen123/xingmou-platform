@@ -2,19 +2,16 @@
 
 package com.gi.ctdn.biz;
 
-import java.util.List;
-
+import com.gi.ctdn.dao.OrgMemberInfoDAO;
+import com.gi.ctdn.pojo.OrgMemberInfo;
+import com.gi.ctdn.view.common.MessageInfo;
+import com.gi.ctdn.view.common.MessageStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gi.ctdn.dao.OrgMemberInfoDAO;
-import com.gi.ctdn.view.common.MessageStatus;
-import com.gi.ctdn.view.common.MessageInfo;
-
-import com.gi.ctdn.pojo.OrgMemberInfo;
+import java.util.List;
 
 @Service("orgMemberInfoBiz")
 public class OrgMemberInfoBiz  {

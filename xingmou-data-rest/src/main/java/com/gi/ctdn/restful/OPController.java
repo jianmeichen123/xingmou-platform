@@ -6,6 +6,7 @@ import com.gi.ctdn.view.common.MessageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -115,10 +116,10 @@ public class OPController {
 
 
 
-        @RequestMapping("is/{code}")
+        @RequestMapping("is")
         @ResponseBody
-        public MessageInfo<List<OpIndiceSummary>> opIndiceSummary(@PathVariable String code){
-            MessageInfo<List<OpIndiceSummary>> messageInfo = opIndiceSummaryBiz.getListByCode(code);
+        public MessageInfo<List<OpIndiceSummary>> opIndiceSummary(@RequestBody OpIndiceSummary opIndiceSummary){
+            MessageInfo<List<OpIndiceSummary>> messageInfo = opIndiceSummaryBiz.getListByCode(opIndiceSummary.getCode());
             return messageInfo;
         }
 

@@ -39,12 +39,15 @@
                 <result column="weibo" property="weibo" jdbcType="VARCHAR" />
                 <result column="weixin" property="weixin" jdbcType="VARCHAR" />
                 <result column="webUrl" property="webUrl" jdbcType="VARCHAR" />
+                <result column="teamTags" property="teamTags" jdbcType="VARCHAR" />
+                <result column="teamSuper" property="teamSuper" jdbcType="VARCHAR" />
+                <result column="userMarket" property="userMarket" jdbcType="VARCHAR" />
                 <result column="loadDate" property="loadDate" jdbcType="BIGINT" />
     	</resultMap>
 
 
 	<sql id="selectFields">
-	    id,code,projTitle,runState,needFinance,addr,setupDT,labels,introduce,latestFinanceDT,latestFinanceRound,latestFinanceAmountNum,latestFinanceAmountStr,investSideJson,firmDesc,firmPos,persona,prodSrv,bizModel,industryName,industrySubName,industryIds,districtId,districtSubId,districtName,districtSubName,districtGrandsonName,logoSmall,logoBig,currencyType,bp,hqEmail,hqTel,weibo,weixin,webUrl,loadDate
+	    id,code,projTitle,runState,needFinance,addr,setupDT,labels,introduce,latestFinanceDT,latestFinanceRound,latestFinanceAmountNum,latestFinanceAmountStr,investSideJson,firmDesc,firmPos,persona,prodSrv,bizModel,industryName,industrySubName,industryIds,districtId,districtSubId,districtName,districtSubName,districtGrandsonName,logoSmall,logoBig,currencyType,bp,hqEmail,hqTel,weibo,weixin,webUrl,teamTags,teamSuper,userMarket,loadDate
 	</sql>
 	
 			

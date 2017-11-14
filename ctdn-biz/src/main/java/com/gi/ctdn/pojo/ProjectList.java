@@ -194,6 +194,19 @@ public class ProjectList extends Pagination {
 	 * 微博
 	 */
 	private String webUrl;
+
+	/**
+	 * 团队关键字
+	 */
+	private String teamTags;
+	/**
+	 * 团队优势
+	 */
+	private String teamSuper;
+	/**
+	 * 用户市场
+	 */
+	private String userMarket;
 	/**
 	 * @Fields loadDate : 录入时间
 	 */
@@ -509,5 +522,29 @@ public class ProjectList extends Pagination {
 
 	public void setWebUrl(String webUrl) {
 		this.webUrl = webUrl;
+	}
+
+	public String getTeamTags() {
+		return teamTags;
+	}
+
+	public void setTeamTags(String teamTags) {
+		this.teamTags = teamTags;
+	}
+
+	public String getTeamSuper() {
+		return teamSuper;
+	}
+
+	public void setTeamSuper(String teamSuper) {
+		this.teamSuper = teamSuper;
+	}
+
+	public String getUserMarket() {
+		return userMarket;
+	}
+
+	public void setUserMarket(String userMarket) {
+		this.userMarket = userMarket;
 	}
 }

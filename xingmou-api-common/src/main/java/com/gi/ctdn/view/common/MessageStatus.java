@@ -12,4 +12,11 @@ package com.gi.ctdn.view.common;
 public class MessageStatus {
 
     public static final int  ERROR_CODE=10001;
+
+    public static final int  OK_CODE=10000;
+
+    public static final String ERROR_MESSAGE="请求失败";
+
+    public static final String  OK_MESSAGE="请求成功";
+
 }

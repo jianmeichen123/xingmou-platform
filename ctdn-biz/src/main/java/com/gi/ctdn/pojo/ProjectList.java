@@ -1,10 +1,10 @@
 package com.gi.ctdn.pojo;
 
-import com.gi.ctdn.view.common.PojoInfo;
+import com.gi.ctdn.view.common.Pagination;
 
 import java.util.Date;
 
-public class ProjectList extends PojoInfo {
+public class ProjectList extends Pagination {
 
 	/**
 	 * @Fields id : 项目ID

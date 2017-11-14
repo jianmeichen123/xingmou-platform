@@ -1,8 +1,8 @@
 package com.gi.ctdn.pojo;
 
-import com.gi.ctdn.view.common.PojoInfo;
+import com.gi.ctdn.view.common.Pagination;
 
-public class EventMergerDetail extends PojoInfo {
+public class EventMergerDetail extends Pagination {
 
 	public static final String MERGEREVENT = "并购事件";
 	public static final String EVENTID = "事件ID";

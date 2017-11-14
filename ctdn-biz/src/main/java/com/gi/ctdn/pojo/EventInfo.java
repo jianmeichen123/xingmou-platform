@@ -1,9 +1,10 @@
 package com.gi.ctdn.pojo;
 
-import java.util.Date;
-import com.gi.ctdn.view.common.PojoInfo;
+import com.gi.ctdn.view.common.Pagination;
 
-public class EventInfo extends PojoInfo {
+import java.util.Date;
+
+public class EventInfo extends Pagination {
 
 	/**
 	 * @Fields investevent : 投资事件

@@ -10,6 +10,6 @@ import com.gi.ctdn.pojo.ProjectMediaInfo;
 public interface ProjectMediaInfoDAO {
 	
 			
-	List<ProjectMediaInfo> selectBySourceCodeAndType(@Param("sourceCode") String sourceCode, @Param("type") String type);
+	List<ProjectMediaInfo> selectBySourceCodeAndType(@Param("projectCode") String projectCode, @Param("type") String type);
 				
 }

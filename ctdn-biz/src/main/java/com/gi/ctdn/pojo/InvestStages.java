@@ -1,10 +1,10 @@
 package com.gi.ctdn.pojo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.gi.ctdn.view.common.PojoInfo;
+import com.gi.ctdn.view.common.Pagination;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class InvestStages extends PojoInfo {
+public class InvestStages extends Pagination {
 
         public static final String ID = "id";
         public static final String NAME = "name";

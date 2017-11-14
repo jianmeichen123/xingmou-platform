@@ -1,13 +1,13 @@
 package com.gi.ctdn.pojo;
 
-import com.gi.ctdn.view.common.PojoInfo;
+import com.gi.ctdn.view.common.Pagination;
 
-public class ProjectTeam extends PojoInfo {
+public class ProjectTeam extends Pagination {
 
 	/**
 	 * @Fields projectId : 项目ID
 	 */
-	private Integer projectId;
+	private String projectCode;
 	
 	/**
 	 * @Fields code : code
@@ -48,21 +48,15 @@ public class ProjectTeam extends PojoInfo {
 	 * @Fields introduction : 简介
 	 */
 	private String introduction;
-	
-	/**
-	 * @Fields sourcecode : project code
-	 */
-	private String sourceCode;
-	
-    
-	public Integer getProjectId(){
-		return projectId;
+
+	public void setProjectCode(String projectCode) {
+		this.projectCode = projectCode;
 	}
 
-	public void setProjectId(Integer projectId){
-		this.projectId = projectId;
+	public String getProjectCode() {
+		return projectCode;
 	}
-    
+
 	public String getCode(){
 		return code;
 	}
@@ -125,13 +119,5 @@ public class ProjectTeam extends PojoInfo {
 
 	public void setIntroduction(String introduction){
 		this.introduction = introduction;
-	}
-
-	public String getSourceCode() {
-		return sourceCode;
-	}
-
-	public void setSourceCode(String sourceCode) {
-		this.sourceCode = sourceCode;
 	}
 }

@@ -1,8 +1,8 @@
 package com.gi.ctdn.pojo;
 
-import com.gi.ctdn.view.common.PojoInfo;
+import com.gi.ctdn.view.common.Pagination;
 
-public class IndexHeaderStat extends PojoInfo {
+public class IndexHeaderStat extends Pagination {
 
         public static final String ID = "id";
         public static final String PROJECTNUM = "projectNum";

@@ -1,10 +1,10 @@
 package com.gi.ctdn.pojo;
 
+import com.gi.ctdn.view.common.Pagination;
+
 import java.sql.Timestamp;
 
-import com.gi.ctdn.view.common.PojoInfo;
-
-public class EventIndustryMonth extends PojoInfo {
+public class EventIndustryMonth extends Pagination {
 
 	/**
 	 * @Fields id : 

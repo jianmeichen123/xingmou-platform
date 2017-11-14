@@ -1,10 +1,9 @@
 package com.gi.ctdn.pojo;
 
-import com.gi.ctdn.view.common.PojoInfo;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class OrgType extends PojoInfo {
+public class OrgType {
 
         public static final String ID = "id";
         public static final String NAME = "name";

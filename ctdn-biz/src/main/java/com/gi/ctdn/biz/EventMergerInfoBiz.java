@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.gi.ctdn.dao.EventMergerDetailDAO;
 import com.gi.ctdn.pojo.EventMergerDetail;
+import com.gi.ctdn.pojo.EventMergerInfo;
 import com.gi.ctdn.pojo.EventMergerInfoSon;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,18 +30,18 @@ public class EventMergerInfoBiz  {
     @Autowired
 	EventMergerDetailDAO eventMergerDetailDAO;
 
-//	public MessageInfo<List<EventMergerInfo>> getListBySourceCode(String sourceCode){
-//
-//		MessageInfo<List<EventMergerInfo>> messageInfo = new MessageInfo<List<EventMergerInfo>>();
-//		try {
-//			List<EventMergerInfo> eventMergerInfoList = eventMergerInfoDAO.selectBySourceCode(sourceCode);
-//			messageInfo.setData(eventMergerInfoList);
-//		} catch (Exception e) {
-//			LOGGER.error("getListBySourceCode","查询EventMergerInfo失败", e);
-//			messageInfo.setStatus(MessageStatus.ERROR_CODE);
-//		}
-//		return messageInfo;
-//	}
+	public MessageInfo<List<EventMergerInfo>> getListBySourceCode(String sourceCode){
+
+		MessageInfo<List<EventMergerInfo>> messageInfo = new MessageInfo<List<EventMergerInfo>>();
+		try {
+			List<EventMergerInfo> eventMergerInfoList = eventMergerInfoDAO.selectBySourceCode(sourceCode);
+			messageInfo.setData(eventMergerInfoList);
+		} catch (Exception e) {
+			LOGGER.error("getListBySourceCode","查询EventMergerInfo失败", e);
+			messageInfo.setStatus(MessageStatus.ERROR_CODE);
+		}
+		return messageInfo;
+	}
 
 
 	public MessageInfo<EventMergerInfoSon> getListByEventId(Integer eventId){

@@ -123,17 +123,17 @@ public class ProjectListBiz {
 		return projectLists;
 	}
 
-	public MessageInfo<List> getByProjName(String projTitle){
-		MessageInfo<List> message = new MessageInfo();
-		try {
-			List<ProjectList> projectLists = projectListDAO.selectByName(projTitle);
-			message.setData(projectLists);
-		} catch (Exception e) {
-			LOGGER.error("getByProjName", "查询项目列表失败", e);
-			message.setStatus(MessageStatus.ERROR_CODE);
-		}
-		return message;
-	}
+//	public MessageInfo<List> getByProjName(String projTitle){
+//		MessageInfo<List> message = new MessageInfo();
+//		try {
+//			List<ProjectList> projectLists = projectListDAO.selectByName(projTitle);
+//			message.setData(projectLists);
+//		} catch (Exception e) {
+//			LOGGER.error("getByProjName", "查询项目列表失败", e);
+//			message.setStatus(MessageStatus.ERROR_CODE);
+//		}
+//		return message;
+//	}
 
 
 }

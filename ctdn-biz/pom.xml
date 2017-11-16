@@ -111,10 +111,10 @@
                 <configuration>
                     <basePackage>com.gi.ctdn.ods</basePackage>
                     <prefix></prefix>
-                    <url>jdbc:mysql://10.10.1.169/ods?zeroDateTimeBehavior=convertToNull&amp;useUnicode=true&amp;characterEncoding=utf-8</url>
-                    <username>ctdnop</username>
-                    <password>C20t1d7n3@op!data</password>
-                    <tables>risk_dishonesty_excuted,risk_court_announcement,risk_excuted,risk_judgment_document,risk_operation_exception</tables>
+                    <url>jdbc:mysql://10.9.130.142/ctdn?zeroDateTimeBehavior=convertToNull&amp;useUnicode=true&amp;characterEncoding=utf-8</url>
+                    <username>app</username>
+                    <password>QADZg(3I2rL-HLr7</password>
+                    <tables>app_project_demand_info</tables>
                     <output_root_dir>/home/zcy/template/</output_root_dir>
                     <templates_dir>/home/zcy/IdeaProjects/ctdn-project/xingmou-platform/templates/single/query/</templates_dir>
                 </configuration>

@@ -25,7 +25,7 @@ public class DistrictBiz  {
 	DistrictDAO districtDAO;
 
 
-	
+
 
 
     public MessageInfo<List<District>> getAllDistrict(){

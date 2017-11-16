@@ -257,13 +257,13 @@ public class CommonRest {
      *退出类型查询
      * @return messageInfo
      */
-    @RequestMapping("quitType")
-    @ResponseBody
-    @Cacheable(value = "quitType",keyGenerator = "baseKG")
-    public MessageInfo<List<QuitType>> quitType() {
-        MessageInfo<List<QuitType>> messageInfo = quitTypeBiz.getAllQuitType();
-        return messageInfo;
-    }
+//    @RequestMapping("quitType")
+//    @ResponseBody
+//    @Cacheable(value = "quitType",keyGenerator = "baseKG")
+//    public MessageInfo<List<QuitType>> quitType() {
+//        MessageInfo<List<QuitType>> messageInfo = quitTypeBiz.getAllQuitType();
+//        return messageInfo;
+//    }
 
 
     /**
@@ -572,10 +572,10 @@ public class CommonRest {
         messageInfo.setMessage(industriesMessageInfo.getMessage());
         messageInfo.setStatus(industriesMessageInfo.getStatus());
 
-        MessageInfo<List<QuitType>> quitTypeMessageInfo = quitType();
-        map.put("quitType",quitTypeMessageInfo.getData());
-        quitTypeMessageInfo.setMessage(quitTypeMessageInfo.getMessage());
-        quitTypeMessageInfo.setStatus(quitTypeMessageInfo.getStatus());
+//        MessageInfo<List<QuitType>> quitTypeMessageInfo = quitType();
+//        map.put("quitType",quitTypeMessageInfo.getData());
+//        quitTypeMessageInfo.setMessage(quitTypeMessageInfo.getMessage());
+//        quitTypeMessageInfo.setStatus(quitTypeMessageInfo.getStatus());
 
         //投资机构
 

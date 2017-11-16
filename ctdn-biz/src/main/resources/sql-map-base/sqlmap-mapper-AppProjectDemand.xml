@@ -43,7 +43,7 @@
 		    app_project_demand_info
 	</select>
 
-    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.galaxyinternet.model.hologram.InformationListdata">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.gi.ctdn.pojo.AppProjectDemand">
         <![CDATA[
 		insert into app_project_demand_info (
             projId,

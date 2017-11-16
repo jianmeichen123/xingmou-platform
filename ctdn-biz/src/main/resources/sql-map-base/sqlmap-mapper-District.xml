@@ -22,7 +22,7 @@
         FROM
             app_district
         WHERE
-            districtLevel &lt; 2
+            districtLevel &lt;=  2
         order by districtType,sort asc
 
     </select>

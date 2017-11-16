@@ -1,0 +1,56 @@
+package com.gi.ctdn.api.rest;
+
+import com.gi.ctdn.view.common.MessageInfo;
+import com.gi.ctdn.view.common.MessageStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileOutputStream;
+
+/**
+ * Created by zcy on 17-11-15.
+ */
+@Controller
+public class FileUploadController {
+
+    private static final Logger logger = LoggerFactory.getLogger(FileUploadController.class);
+
+    @Value("${rootPath}")
+    private  String rootPath;
+
+    @RequestMapping(value="/upload")
+    @ResponseBody
+    public MessageInfo<String> upload(@RequestParam(value="file") MultipartFile file, HttpServletRequest request) {
+            MessageInfo<String> messageInfo = new MessageInfo<String>();
+            String fileName = null;
+            try {
+                //上传文件
+                fileName = file.getOriginalFilename();
+                String dir = rootPath ;
+                File uploadDir = new File(dir);
+                File target = new File(dir+fileName);
+
+                FileOutputStream fops = new FileOutputStream(target);
+                // 将上传的文件信息保存到相应的文件目录里
+                fops.write(file.getBytes());
+                fops.close();
+                logger.info(String.format("上传文件[%s]成功", fileName));
+                messageInfo.setStatus(MessageStatus.OK_CODE);
+                messageInfo.setMessage(MessageStatus.OK_MESSAGE);
+            } catch (Exception e) {
+                messageInfo.setStatus(MessageStatus.ERROR_CODE);
+                messageInfo.setMessage(MessageStatus.ERROR_MESSAGE);
+                logger.error(String.format("上传文件[%s]失败", fileName), e);
+            }
+            messageInfo.setData(fileName);
+            return messageInfo;
+    }
+}

@@ -49,6 +49,17 @@ public class EventInfoController {
 		return messageInfo;
 	}
 
+	/**
+	 * @param company
+	 * @return
+	 */
+	@RequestMapping("getListByCompany/{company}")
+	@ResponseBody
+	public MessageInfo<List<EventInfo>> getListByCompany(@PathVariable String company){
+		MessageInfo<List<EventInfo>> messageInfo = eventInfoBiz.getListByName(company);
+		return messageInfo;
+	}
+
 	@RequestMapping("queryProjectEventList")
 	@ResponseBody
 	public MessageInfo<List<EventInfo>> getListBySourceCode(@RequestBody EventInfo eventInfo){

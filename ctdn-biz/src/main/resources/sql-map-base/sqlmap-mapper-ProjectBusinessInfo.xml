@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.ProjectBusinessInfoDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.ProjectBusinessListInfo">
+
+                <!--<result column="projCode" property="projectId" jdbcType="INTEGER" />-->
+                <result column="comp_code" property="sourceCode" jdbcType="VARCHAR" />
+                <!--<result column="projTitle" property="projTitle" jdbcType="VARCHAR" />-->
+                <result column="comp_fulltitle" property="company" jdbcType="VARCHAR" />
+                <result column="comp_fulltitle_en" property="companyEng" jdbcType="VARCHAR" />
+                <result column="comp_creditcode" property="uniformSocialCreditCode" jdbcType="VARCHAR" />
+                <result column="comp_regcode" property="registrationCode" jdbcType="VARCHAR" />
+                <result column="comp_orgcode" property="organizationCode" jdbcType="VARCHAR" />
+                <result column="comp_type" property="organizationForm" jdbcType="VARCHAR" />
+                <result column="comp_lawperson" property="legalPerson" jdbcType="VARCHAR" />
+                <result column="comp_runtimelimit" property="businessTerm" jdbcType="VARCHAR" />
+                <result column="comp_issuedate" property="issuingDate" jdbcType="VARCHAR" />
+                <!--<result column="industry" property="industry" jdbcType="VARCHAR" />-->
+                <result column="comp_regaddr" property="registeredAddress" jdbcType="VARCHAR" />
+                <result column="comp_status_name" property="managementStatus" jdbcType="VARCHAR" />
+                <result column="comp_setup" property="foundDate" jdbcType="VARCHAR" />
+                <result column="comp_regcapital" property="registeredCapital" jdbcType="VARCHAR" />
+                <result column="comp_regorg" property="registrationAuthority" jdbcType="VARCHAR" />
+                <result column="comp_scale" property="companySize" jdbcType="VARCHAR" />
+                <result column="comp_regtype_name" property="registrationType" jdbcType="VARCHAR" />
+                <result column="comp_bizscope" property="businessScope" jdbcType="VARCHAR" />
+    	</resultMap>
+
+
+	<sql id="selectFields">
+        comp_code,comp_fulltitle,comp_fulltitle_en,comp_creditcode,comp_regcode,comp_orgcode,comp_type,comp_lawperson,comp_runtimelimit,comp_issuedate,comp_regaddr,comp_status_name,comp_setup,comp_regcapital,comp_regorg,comp_scale,comp_regtype_name,comp_bizscope
+	</sql>
+	
+			
+	<select id="selectProjectBusinessInfoBySourceCode" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+        app_comp_basic
+		WHERE  comp_code = #{sourceCode,jdbcType=VARCHAR}
+	</select>
+
+
+    <select id="selectBySourceCode" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+        app_comp_basic
+		WHERE  comp_code = #{sourceCode,jdbcType=VARCHAR}
+	</select>
+	
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+        app_comp_basic
+	</select>
+
+    <select id="selectByRegName" resultMap="BaseResultMap">
+        SELECT
+        <include refid="selectFields" />
+        FROM
+        app_comp_basic
+        WHERE  comp_fulltitle = #{regName,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

@@ -12,7 +12,12 @@ public class ProjectList extends Pagination {
 	private Integer id;
 	
 	/**
-	 * @Fields code : 
+	 * @Fields compCode :
+	 */
+	private String compCode;
+
+	/**
+	 * @Fields code :
 	 */
 	private String sourceCode;
 	
@@ -211,6 +216,8 @@ public class ProjectList extends Pagination {
 	 * @Fields loadDate : 录入时间
 	 */
 	private Long loadDate;
+
+	private String regName;
 
 	public Integer getId(){
 		return id;
@@ -546,5 +553,21 @@ public class ProjectList extends Pagination {
 
 	public void setUserMarket(String userMarket) {
 		this.userMarket = userMarket;
+	}
+
+	public String getRegName() {
+		return regName;
+	}
+
+	public void setRegName(String regName) {
+		this.regName = regName;
+	}
+
+	public String getCompCode() {
+		return compCode;
+	}
+
+	public void setCompCode(String compCode) {
+		this.compCode = compCode;
 	}
 }

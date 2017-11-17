@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.CompSubDao">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.CompSub">
+                <result column="comp_code" property="compCode" jdbcType="VARCHAR" />
+                <result column="comp_fulltitle" property="compFulltitle" jdbcType="VARCHAR" />
+                <result column="comp_sub_fulltitle" property="compSubFulltitle" jdbcType="VARCHAR" />
+	</resultMap>
+
+
+	<sql id="selectFields">
+		comp_code,comp_fulltitle,comp_sub_fulltitle
+	</sql>
+	
+	<select id="selectCompSubs" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		app_comp_sub
+		where comp_code=#{compCode,jdbcType=VARCHAR}
+	</select>
+
+</mapper>

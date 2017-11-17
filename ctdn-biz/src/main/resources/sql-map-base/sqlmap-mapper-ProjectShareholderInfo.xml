@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.ProjectShareholderInfoDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.ProjectShareholderInfo">
+            <!--<id column="projectId" property="projectId" jdbcType="INTEGER" />-->
+                <result column="comp_code" property="sourceCode" jdbcType="VARCHAR" />
+                <!--<result column="projTitle" property="projTitle" jdbcType="VARCHAR" />-->
+                <result column="comp_shareholder_type_name" property="shareholderType" jdbcType="VARCHAR" />
+                <result column="comp_shareholder_name" property="shareholder" jdbcType="VARCHAR" />
+                <result column="comp_subscribe_date" property="prePayDate" jdbcType="VARCHAR" />
+                <result column="comp_subscribe_amount" property="prePayAmountStr" jdbcType="VARCHAR" />
+                <result column="comp_pay_date" property="paidDate" jdbcType="VARCHAR" />
+                <result column="comp_pay_amount" property="paidPayAmountStr" jdbcType="VARCHAR" />
+                <result column="comp_payway_name" property="payType" jdbcType="VARCHAR" />
+                <result column="comp_sharesheld" property="equityRate" jdbcType="VARCHAR" />
+    	</resultMap>
+
+
+	<sql id="selectFields">
+		comp_code,comp_shareholder_type_name,comp_shareholder_name,comp_subscribe_date,comp_subscribe_amount,comp_pay_date,comp_pay_amount,comp_payway_name,comp_sharesheld
+	</sql>
+	
+			
+	<select id="selectBySourceCode" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		app_comp_shareholder
+		WHERE  comp_code = #{sourceCode,jdbcType=VARCHAR}
+	</select>
+	
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		app_comp_shareholder
+	</select>
+
+</mapper>

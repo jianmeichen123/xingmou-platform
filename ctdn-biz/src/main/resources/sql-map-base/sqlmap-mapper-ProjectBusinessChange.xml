@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.ProjectBusinessChangeDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.ProjectBusinessChange">
+            <!--<id column="projectId" property="projectId" jdbcType="INTEGER" />-->
+                <result column="comp_code" property="sourceCode" jdbcType="VARCHAR" />
+                <!--<result column="projTitle" property="projTitle" jdbcType="VARCHAR" />-->
+                <result column="comp_item" property="changeItems" jdbcType="VARCHAR" />
+                <result column="comp_cont_previous" property="beforeContent" jdbcType="LONGVARCHAR" />
+                <result column="comp_cont_next" property="afterContent" jdbcType="LONGVARCHAR" />
+                <result column="comp_chenge_date" property="changeDate" jdbcType="VARCHAR" />
+    	</resultMap>
+
+
+	<sql id="selectFields">
+		comp_code,comp_item,comp_cont_previous,comp_cont_next,comp_chenge_date
+	</sql>
+	
+			
+	<select id="selectBySourceCode" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		app_comp_change
+		WHERE  comp_code = #{sourceCode,jdbcType=VARCHAR}
+	</select>
+	
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		app_comp_change
+	</select>
+
+</mapper>

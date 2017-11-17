@@ -3,7 +3,8 @@
 <mapper namespace="com.gi.ctdn.dao.ProjectListDAO">
 	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.ProjectListInfo">
             <id column="id" property="id" jdbcType="INTEGER" />
-                <result column="code" property="sourceCode" jdbcType="VARCHAR" />
+                <result column="projCode" property="sourceCode" jdbcType="VARCHAR" />
+                <result column="compCode" property="compCode" jdbcType="VARCHAR" />
                 <result column="projTitle" property="projTitle" jdbcType="VARCHAR" />
                 <result column="runState" property="runState" jdbcType="CHAR" />
                 <result column="needFinance" property="needFinance" jdbcType="CHAR" />
@@ -43,11 +44,12 @@
                 <result column="teamSuper" property="teamSuper" jdbcType="VARCHAR" />
                 <result column="userMarket" property="userMarket" jdbcType="VARCHAR" />
                 <result column="loadDate" property="loadDate" jdbcType="BIGINT" />
+                <result column="regName" property="regName" jdbcType="BIGINT" />
     	</resultMap>
 
 
 	<sql id="selectFields">
-	    id,code,projTitle,runState,needFinance,addr,setupDT,labels,introduce,latestFinanceDT,latestFinanceRound,latestFinanceAmountNum,latestFinanceAmountStr,investSideJson,firmDesc,firmPos,persona,prodSrv,bizModel,industryName,industrySubName,industryIds,districtId,districtSubId,districtName,districtSubName,districtGrandsonName,logoSmall,logoBig,currencyType,bp,hqEmail,hqTel,weibo,weixin,webUrl,teamTags,teamSuper,userMarket,loadDate
+	    id,projCode,compCode,projTitle,runState,needFinance,addr,setupDT,labels,introduce,latestFinanceDT,latestFinanceRound,latestFinanceAmountNum,latestFinanceAmountStr,investSideJson,firmDesc,firmPos,persona,prodSrv,bizModel,industryName,industrySubName,industryIds,districtId,districtSubId,districtName,districtSubName,districtGrandsonName,logoSmall,logoBig,currencyType,bp,hqEmail,hqTel,weibo,weixin,webUrl,teamTags,teamSuper,userMarket,loadDate,regName
 	</sql>
 	
 			
@@ -56,7 +58,7 @@
             <include refid="selectFields" />
 		FROM
 		    app_project_list
-		WHERE  code = #{code,jdbcType=VARCHAR}
+		WHERE  compCode = #{code,jdbcType=VARCHAR}
 	</select>
 
     <select id="queryCompetationlist" resultMap="BaseResultMap">
@@ -64,7 +66,7 @@
         <include refid="selectFields" />
         FROM
         app_project_list
-        <where> code in (
+        <where> compCode in (
             SELECT app_competitive_product.sim_prod_code FROM app_competitive_product WHERE app_competitive_product.base_prod_code =
            #{sourceCode,jdbcType=VARCHAR} and is_same = #{isSame,jdbcType=BIGINT}
             )
@@ -87,6 +89,14 @@
         FROM
         app_project_list
         ORDER BY showOrder asc LIMIT 4
+    </select>
+
+    <select id="selectByName" resultMap="BaseResultMap">
+        SELECT
+        <include refid="selectFields" />
+        FROM
+        app_project_list
+        WHERE  projTitle = #{projTitle,jdbcType=VARCHAR}
     </select>
 
 </mapper>

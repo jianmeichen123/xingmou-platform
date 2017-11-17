@@ -13,5 +13,5 @@ public interface ProjectContactDAO {
 
 	List<ProjectContact> selectById(@Param("projectId") Integer projectId);
 
-	List<ProjectContact> selectByOrgId(@Param("orgId") Integer orgId);
+	List<ProjectContact> selectByOrgId(@Param("projectCode") String projectCode);
 }

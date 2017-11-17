@@ -27,7 +27,7 @@ public class EventInfoExtBiz  {
 
 
 		
-	public MessageInfo<List<EventInfoExt>> getListByInvstoridType(Integer invstorid){
+	public MessageInfo<List<EventInfoExt>> getListByInvstoridType(String invstorid){
 
 		MessageInfo<List<EventInfoExt>> messageInfo = new MessageInfo<List<EventInfoExt>>();
 		try {

@@ -10,7 +10,7 @@ import com.gi.ctdn.pojo.EventInfoExt;
 public interface EventInfoExtDAO {
 	
 			
-	List<EventInfoExt> selectByInvstoridType(@Param("invstorid") Integer invstorid);
+	List<EventInfoExt> selectByInvstoridType(@Param("sourceCode") String sourceCode);
 		
 	List<EventInfoExt> selectAll();
 }

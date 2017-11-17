@@ -44,18 +44,18 @@ public class OrgInfoBiz  {
     @Autowired
 	EventInfoExtDAO eventInfoExtDAO;
 
-    public  MessageInfo<OrgListInfo> getBaseInfoByOrgId(Integer orgId){
+    public  MessageInfo<OrgListInfo> getBaseInfoByOrgId(String orgCode){
 
     	MessageInfo<OrgListInfo> messageInfo = new MessageInfo<>();
     	try{
-    		OrgListInfo orgListInfo = orgInfoDAO.selectById(orgId);
+    		OrgListInfo orgListInfo = orgInfoDAO.selectById(orgCode);
     		if (orgListInfo != null){
-    			List<OrgMediaInfo> orgMediaInfoList = orgMediaInfoDAO.selectByOrgId(orgId);
-				List<OrgMediaInfo> orgHistoryInfoList = orgMediaInfoDAO.selectByOrgIdForHistroy(orgId);
-				List<OrgMember> orgMemberList = orgMemberDAO.selectOrgMemberById(orgId);
-				List<EventInfoExt> eventInfoExtList = eventInfoExtDAO.selectByInvstoridType(orgId);
+    			List<OrgMediaInfo> orgMediaInfoList = orgMediaInfoDAO.selectByOrgId(orgCode);
+				List<OrgMediaInfo> orgHistoryInfoList = orgMediaInfoDAO.selectByOrgIdForHistroy(orgCode);
+				List<OrgMember> orgMemberList = orgMemberDAO.selectOrgMemberById(orgCode);
+				List<EventInfoExt> eventInfoExtList = eventInfoExtDAO.selectByInvstoridType(orgCode);
 				eventInfoExtList = sortList(eventInfoExtList,orgListInfo.getInvestOrg());
-				List<ProjectContact> projectContactList = projectContactDAO.selectByOrgId(orgId);
+				List<ProjectContact> projectContactList = projectContactDAO.selectByOrgId(orgCode);
 				orgListInfo.setOrgMediaInfoList(orgMediaInfoList);
 				orgListInfo.setOrgHistoryInfoList(orgHistoryInfoList);
 				orgListInfo.setOrgMemberList(orgMemberList);
@@ -70,7 +70,7 @@ public class OrgInfoBiz  {
 		return messageInfo;
 	}
 		
-	public MessageInfo<List<OrgInfo>> getListByOrgId(Integer orgId){
+	public MessageInfo<List<OrgInfo>> getListByOrgId(String orgId){
 
 		MessageInfo<List<OrgInfo>> messageInfo = new MessageInfo<List<OrgInfo>>();
 		try {
@@ -123,7 +123,7 @@ public class OrgInfoBiz  {
 		}
     	return eventInfoExtList;
 	}
-	public OrgListInfo getOrgListInfoById(Integer id){
+	public OrgListInfo getOrgListInfoById(String id){
     	return orgInfoDAO.selectById(id);
 	}
 }

@@ -25,7 +25,7 @@
             <include refid="selectFields" />
 		FROM
 		    app_event_info_ext
-		WHERE  invstorid = #{invstorid,jdbcType=INTEGER}
+		WHERE  sourceCode = #{sourceCode,jdbcType=VARCHAR}
 		order by investDate desc
 	</select>
 	

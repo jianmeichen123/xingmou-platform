@@ -14,14 +14,14 @@ public class OrgMember extends Pagination {
     
 	
 	/**
-	 * @Fields invstId : 机构ID
+	 * @Fields invstCode : 机构code
 	 */
-	private Integer invstId;
+	private String invstCode;
 	
 	/**
-	 * @Fields perId : 成员ID
+	 * @Fields personCode : 成员ID
 	 */
-	private Integer perId;
+	private String personCode;
 	
 	/**
 	 * @Fields name : 成员名字
@@ -47,24 +47,24 @@ public class OrgMember extends Pagination {
 	 * @Fields email : 邮箱
 	 */
 	private String email;
-	
-    
-	public Integer getInvstId(){
-		return invstId;
+
+
+	public String getInvstCode() {
+		return invstCode;
 	}
 
-	public void setInvstId(Integer invstId){
-		this.invstId = invstId;
-	}
-    
-	public Integer getPerId(){
-		return perId;
+	public void setInvstCode(String invstCode) {
+		this.invstCode = invstCode;
 	}
 
-	public void setPerId(Integer perId){
-		this.perId = perId;
+	public String getPersonCode() {
+		return personCode;
 	}
-    
+
+	public void setPersonCode(String personCode) {
+		this.personCode = personCode;
+	}
+
 	public String getName(){
 		return name;
 	}

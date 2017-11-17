@@ -27,7 +27,7 @@ public class OrgMediaInfoBiz  {
 
 
 		
-	public MessageInfo<List<OrgMediaInfo>> getListByOrgId(Integer orgId){
+	public MessageInfo<List<OrgMediaInfo>> getListByOrgId(String orgId){
 
 		MessageInfo<List<OrgMediaInfo>> messageInfo = new MessageInfo<List<OrgMediaInfo>>();
 		try {

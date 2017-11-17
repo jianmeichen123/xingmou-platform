@@ -9,7 +9,7 @@ import com.gi.ctdn.pojo.OrgMember;
 
 public interface OrgMemberDAO {
 	
-	List<OrgMember> selectOrgMemberById(@Param("orgId") Integer orgId);
+	List<OrgMember> selectOrgMemberById(@Param("invstCode") String invstCode);
 
 	List<OrgMember> selectAll();
 }

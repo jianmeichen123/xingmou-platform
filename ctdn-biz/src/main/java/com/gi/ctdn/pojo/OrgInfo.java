@@ -8,7 +8,7 @@ public class OrgInfo extends Pagination {
 
         public static final String INVESTORG = "投资机构";
         public static final String ORGID = "机构ID";
-        public static final String CODE = "投资机构code";
+        public static final String ORGCODE = "投资机构code";
         public static final String INVESTSTAGE = "投资阶段";
         public static final String DISTRICT = "地区";
         public static final String INDUSTRYIDS = "industryIds";
@@ -62,9 +62,9 @@ public class OrgInfo extends Pagination {
 	private Integer orgId;
 	
 	/**
-	 * @Fields code : 投资机构code
+	 * @Fields orgCode : 投资机构code
 	 */
-	private String code;
+	private String orgCode;
 	
 	/**
 	 * @Fields investStage : 投资阶段
@@ -283,15 +283,15 @@ public class OrgInfo extends Pagination {
 	public void setOrgId(Integer orgId){
 		this.orgId = orgId;
 	}
-    
-	public String getCode(){
-		return code;
+
+	public String getOrgCode() {
+		return orgCode;
 	}
 
-	public void setCode(String code){
-		this.code = code;
+	public void setOrgCode(String orgCode) {
+		this.orgCode = orgCode;
 	}
-    
+
 	public String getInvestStage(){
 		return investStage;
 	}

@@ -10,9 +10,9 @@ import com.gi.ctdn.pojo.OrgMediaInfo;
 public interface OrgMediaInfoDAO {
 	
 			
-	List<OrgMediaInfo> selectByOrgId(@Param("orgId") Integer orgId);
+	List<OrgMediaInfo> selectByOrgId(@Param("orgCode") String orgCode);
 
-	List<OrgMediaInfo> selectByOrgIdForHistroy(@Param("orgId") Integer orgId);
+	List<OrgMediaInfo> selectByOrgIdForHistroy(@Param("orgCode") String orgCode);
 
 	List<OrgMediaInfo> selectAll();
 }

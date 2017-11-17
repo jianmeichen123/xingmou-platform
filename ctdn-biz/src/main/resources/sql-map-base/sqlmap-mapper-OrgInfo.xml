@@ -2,9 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gi.ctdn.dao.OrgInfoDAO">
 	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.OrgListInfo">
-            <result column="investOrg" property="investOrg" jdbcType="VARCHAR" />
-                <result column="orgId" property="orgId" jdbcType="INTEGER" />
-                <result column="code" property="code" jdbcType="VARCHAR" />
+                <result column="investOrg" property="investOrg" jdbcType="VARCHAR" />
+                <result column="orgCode" property="orgCode" jdbcType="VARCHAR" />
                 <result column="investStage" property="investStage" jdbcType="VARCHAR" />
                 <result column="district" property="district" jdbcType="VARCHAR" />
                 <result column="industryIds" property="industryIds" jdbcType="VARCHAR" />
@@ -47,7 +46,7 @@
     	</resultMap>
 
 	<sql id="selectFields">
-	    investOrg,orgId,code,investStage,district,industryIds,capitalType,currencyType,orgType,investTotal,totalRatio,investAmountNum,investAmountStr,amountRatio,webUrl,logo,orgName,orgNameEn,foundDate,orgForm,registArea,isBack,backDate,registNo,manageCapital,isNation,orgDesc,propSatge,propDomain,propDist,investStand,addedService,remark,castStage,castIndustry,castDistrict,logoSmall,districtId,districtSubId,newestInvestDate,orgProjJson,foundDateStr
+	    investOrg,orgCode,investStage,district,industryIds,capitalType,currencyType,orgType,investTotal,totalRatio,investAmountNum,investAmountStr,amountRatio,webUrl,logo,orgName,orgNameEn,foundDate,orgForm,registArea,isBack,backDate,registNo,manageCapital,isNation,orgDesc,propSatge,propDomain,propDist,investStand,addedService,remark,castStage,castIndustry,castDistrict,logoSmall,districtId,districtSubId,newestInvestDate,orgProjJson,foundDateStr
 	</sql>
 	
 			
@@ -56,7 +55,7 @@
             <include refid="selectFields" />
 		FROM
 		    app_org_info
-		WHERE  orgId = #{orgId,jdbcType=INTEGER}
+		WHERE  orgCode = #{orgCode,jdbcType=VARCHAR}
 	</select>
 
     <select id="selectById" resultMap="BaseResultMap">
@@ -64,7 +63,7 @@
         <include refid="selectFields" />
         FROM
         app_org_info
-        WHERE  orgId = #{orgId,jdbcType=INTEGER}
+        WHERE  orgCode = #{orgCode,jdbcType=VARCHAR}
     </select>
 
 	<select id="selectAll" resultMap="BaseResultMap">

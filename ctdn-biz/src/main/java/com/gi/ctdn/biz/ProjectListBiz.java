@@ -6,6 +6,10 @@ import com.gi.ctdn.dao.*;
 import com.gi.ctdn.pojo.*;
 import com.gi.ctdn.view.common.MessageInfo;
 import com.gi.ctdn.view.common.MessageStatus;
+import com.gi.ctdn.view.common.Pagination;
+import com.gi.ctdn.view.common.Result;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -135,5 +139,21 @@ public class ProjectListBiz {
 		return message;
 	}
 
+	public Result queryProjectLists(ProjectList projectList){
+		Result result;
+		try {
+			PageHelper.startPage(projectList.getPageNo(), projectList.getPageSize());
+			List<ProjectList> projectLists = projectListDAO.selectByName(projectList.getProjTitle());
+			PageInfo<ProjectList> pageInfo = new PageInfo<ProjectList>(projectLists);
+			Pagination page = new Pagination();
+			page.setTotal(pageInfo.getTotal());
+			page.setRecords(projectLists);
+			result = new Result(MessageStatus.OK_MESSAGE, MessageStatus.OK_CODE, page);
+		} catch (Exception e) {
+			LOGGER.error("querycompSubList","查询CompSub失败", e);
+			return Result.addError();
+		}
+		return result;
+	}
 
 }

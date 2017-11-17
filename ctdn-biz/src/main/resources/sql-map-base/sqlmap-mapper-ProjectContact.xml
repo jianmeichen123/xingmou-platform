@@ -27,13 +27,13 @@
 	</select>
 
 
-	<!--<select id="selectByOrgId" resultMap="BaseResultMap">-->
-		<!--SELECT-->
-		<!--<include refid="selectFields" />-->
-		<!--FROM-->
-		<!--app_project_contact-->
-		<!--WHERE  projectId = #{orgId,jdbcType=INTEGER} and type="I"-->
-	<!--</select>-->
+	<select id="selectByOrgId" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM
+		app_project_contact
+		WHERE  projectCode = #{projectCode,jdbcType=VARCHAR} and type="I"
+	</select>
 
 	<select id="selectAll" resultMap="BaseResultMap">
 		SELECT

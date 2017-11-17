@@ -3,8 +3,7 @@
 <mapper namespace="com.gi.ctdn.dao.OrgMediaInfoDAO">
 	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.OrgMediaInfo">
             <result column="investOrg" property="investOrg" jdbcType="VARCHAR" />
-                <result column="orgId" property="orgId" jdbcType="INTEGER" />
-                <result column="code" property="code" jdbcType="VARCHAR" />
+                <result column="orgCode" property="code" jdbcType="VARCHAR" />
                 <result column="title" property="title" jdbcType="VARCHAR" />
                 <result column="eventDate" property="eventDate" jdbcType="DATE" />
                 <result column="source" property="source" jdbcType="VARCHAR" />
@@ -15,7 +14,7 @@
 
 
 	<sql id="selectFields">
-	    investOrg,orgId,code,title,eventDate,source,content,link,type
+	    investOrg,orgCode,title,eventDate,source,content,link,type
 	</sql>
 	
 			
@@ -24,7 +23,7 @@
             <include refid="selectFields" />
 		FROM
 		    app_org_media_info
-		WHERE  orgId = #{orgId,jdbcType=INTEGER} and type = 'N'
+		WHERE  orgCode = #{orgCode,jdbcType=VARCHAR} and type = 'N'
 			order by eventDate desc
 	</select>
 
@@ -33,7 +32,7 @@
 		<include refid="selectFields" />
 		FROM
 		app_org_media_info
-		WHERE  orgId = #{orgId,jdbcType=INTEGER} and type = 'H'
+		WHERE  orgCode = #{orgCode,jdbcType=VARCHAR} and type = 'H'
 		order by eventDate desc
 	</select>
 	

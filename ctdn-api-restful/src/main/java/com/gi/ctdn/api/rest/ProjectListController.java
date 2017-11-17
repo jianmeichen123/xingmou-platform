@@ -112,4 +112,15 @@ public class ProjectListController {
 		resultMessageInfo.setData(projectLists);
 		return resultMessageInfo;
 	}
+
+	/**
+	 * 根据公司名字查询项目
+	 *
+	 */
+	@RequestMapping("queryByProjTitle/{projTitle}")
+	@ResponseBody
+	public MessageInfo<List>  queryByProjTitle (@PathVariable String projTitle) {
+		MessageInfo<List> resultMessageInfo = projectListBiz.getByProjName(projTitle);
+		return resultMessageInfo;
+	}
 }

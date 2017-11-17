@@ -133,10 +133,10 @@ public class EventInfoBiz  {
 		MessageInfo<List<EventInfo>> messageInfo = new MessageInfo<List<EventInfo>>();
 		try {
 			List<EventInfo> eventInfo = eventInfoDAO.selectFromCtdn();
-			LOGGER.info("***************getCtdnEventInfo请求结果------"+eventInfo.size());
+			LOGGER.debug("***************getCtdnEventInfo请求结果------"+eventInfo.size());
 			messageInfo.setData(eventInfo);
 		} catch (Exception e) {
-			LOGGER.error("getFromCtdnEventInfo","查询EventInfo失败", e);
+			LOGGER.debug("getFromCtdnEventInfo","查询EventInfo失败", e);
 			messageInfo.setStatus(MessageStatus.ERROR_CODE);
 		}
 		return messageInfo;

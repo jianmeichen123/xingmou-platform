@@ -4,6 +4,8 @@ import com.gi.ctdn.biz.*;
 import com.gi.ctdn.pojo.*;
 import com.gi.ctdn.view.common.MessageInfo;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,8 @@ import java.util.*;
 @Controller
 @RequestMapping("common")
 public class CommonRest {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CommonRest.class);
 
     @Autowired
     private CapitalTypeBiz capitalTypeBiz;
@@ -510,6 +514,7 @@ public class CommonRest {
     @ResponseBody
 //    @Cacheable(value = "allQuery",keyGenerator = "baseKG")
     public MessageInfo<Map> allQuery(){
+        LOGGER.debug("***************************************************进入allQuery");
         //企业
         MessageInfo<Map> messageInfo = new MessageInfo<>();
         Map<String,Object> map = new HashMap<>();

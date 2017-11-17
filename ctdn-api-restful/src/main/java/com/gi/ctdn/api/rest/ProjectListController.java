@@ -117,10 +117,17 @@ public class ProjectListController {
 	 * 根据公司名字查询项目
 	 *
 	 */
-	@RequestMapping("queryByProjTitle/{projTitle}")
+//	@RequestMapping("queryByProjTitle/{projTitle}")
+//	@ResponseBody
+//	public MessageInfo<List>  queryByProjTitle (@PathVariable String projTitle) {
+//		MessageInfo<List> resultMessageInfo = projectListBiz.getByProjName(projTitle);
+//		return resultMessageInfo;
+//	}
+
+	@RequestMapping("queryByProjTitle")
 	@ResponseBody
-	public MessageInfo<List>  queryByProjTitle (@PathVariable String projTitle) {
-		MessageInfo<List> resultMessageInfo = projectListBiz.getByProjName(projTitle);
-		return resultMessageInfo;
+	public Result queryByProjTitle(@RequestBody ProjectList projectList){
+		Result result = projectListBiz.queryProjectLists(projectList);
+		return result;
 	}
 }

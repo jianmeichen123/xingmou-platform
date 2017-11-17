@@ -31,7 +31,7 @@ public class OrgMediaInfoController {
 		
     @RequestMapping("getListByOrgId")
     @ResponseBody
-	public MessageInfo<List<OrgMediaInfo>> getListByOrgId(Integer orgId){
+	public MessageInfo<List<OrgMediaInfo>> getListByOrgId(String orgId){
 		MessageInfo<List<OrgMediaInfo>> messageInfo = orgMediaInfoBiz.getListByOrgId(orgId);
 		return messageInfo;
 	}

@@ -31,7 +31,7 @@ public class EventInfoExtController {
 		
     @RequestMapping("getListByInvstoridType")
     @ResponseBody
-	public MessageInfo<List<EventInfoExt>> getListByInvstoridType(Integer invstorid){
+	public MessageInfo<List<EventInfoExt>> getListByInvstoridType(String invstorid){
 		MessageInfo<List<EventInfoExt>> messageInfo = eventInfoExtBiz.getListByInvstoridType(invstorid);
 		return messageInfo;
 	}

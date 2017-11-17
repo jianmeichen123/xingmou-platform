@@ -39,11 +39,10 @@ public class OrgInfoController {
 
 
 		
-    @RequestMapping("getListByOrgId/{orgId}")
+    @RequestMapping("getListByOrgId/{orgCode}")
     @ResponseBody
-	public MessageInfo<OrgListInfo> getListByOrgId(@PathVariable Integer orgId){
-//		MessageInfo<List<OrgInfo>> messageInfo = orgInfoBiz.getListByOrgId(orgId);
-		MessageInfo<OrgListInfo> messageInfo = orgInfoBiz.getBaseInfoByOrgId(orgId);
+	public MessageInfo<OrgListInfo> getListByOrgId(@PathVariable String orgCode){
+		MessageInfo<OrgListInfo> messageInfo = orgInfoBiz.getBaseInfoByOrgId(orgCode);
 		return messageInfo;
 	}
 

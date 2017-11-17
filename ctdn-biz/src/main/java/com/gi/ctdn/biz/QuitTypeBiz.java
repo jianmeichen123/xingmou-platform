@@ -19,25 +19,25 @@ import com.gi.ctdn.pojo.QuitType;
 public class QuitTypeBiz  {
 
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(QuitTypeBiz.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(QuitTypeBiz.class);
 
     @Autowired
-	QuitTypeDAO quitTypeDAO;
+    QuitTypeDAO quitTypeDAO;
 
 
-	
+
 
 
     public MessageInfo<List<QuitType>> getAllQuitType(){
 
-		MessageInfo<List<QuitType>> messageInfo = new MessageInfo<List<QuitType>>();
-		try {
-			List<QuitType> quitTypeList = quitTypeDAO.selectAll();
-			messageInfo.setData( quitTypeList);
-		} catch (Exception e) {
-			LOGGER.error("getAllQuitType","查询全部QuitType失败", e);
-			messageInfo.setStatus(10001);
-		}
-		return messageInfo;
-	}
+        MessageInfo<List<QuitType>> messageInfo = new MessageInfo<List<QuitType>>();
+        try {
+            List<QuitType> quitTypeList = quitTypeDAO.selectAll();
+            messageInfo.setData( quitTypeList);
+        } catch (Exception e) {
+            LOGGER.error("getAllQuitType","查询全部QuitType失败", e);
+            messageInfo.setStatus(10001);
+        }
+        return messageInfo;
+    }
 }

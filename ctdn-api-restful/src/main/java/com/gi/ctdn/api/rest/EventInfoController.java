@@ -75,9 +75,7 @@ public class EventInfoController {
 	@RequestMapping("getCtdnEventInfo")
 	@ResponseBody
 	public MessageInfo<List<EventInfo>> getCtdnEventInfo(){
-		LOGGER.debug("***************getCtdnEventInfo开始**************");
 		MessageInfo<List<EventInfo>> messageInfo = eventInfoBiz.getFromCtdnEventInfo();
-		LOGGER.debug("***************getCtdnEventInfo结束*************");
 		return messageInfo;
 
 	}

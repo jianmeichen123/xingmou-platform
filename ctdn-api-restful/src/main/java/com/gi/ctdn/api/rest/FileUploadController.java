@@ -14,6 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by zcy on 17-11-15.
@@ -33,8 +36,13 @@ public class FileUploadController {
             String fileName = null;
             try {
                 //上传文件
+                Date d = new Date();
+                System.out.println(d);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String dateNowStr = sdf.format(d);
+
                 fileName = file.getOriginalFilename();
-                String dir = rootPath ;
+                String dir =rootPath + "/" + dateNowStr +"/";
                 File uploadDir = new File(dir);
                 File target = new File(dir+fileName);
 
@@ -42,9 +50,10 @@ public class FileUploadController {
                 // 将上传的文件信息保存到相应的文件目录里
                 fops.write(file.getBytes());
                 fops.close();
-                logger.info(String.format("上传文件[%s]成功", fileName));
+
                 messageInfo.setStatus(MessageStatus.OK_CODE);
                 messageInfo.setMessage(MessageStatus.OK_MESSAGE);
+                logger.info(String.format("上传文件[%s]成功", fileName));
             } catch (Exception e) {
                 messageInfo.setStatus(MessageStatus.ERROR_CODE);
                 messageInfo.setMessage(MessageStatus.ERROR_MESSAGE);

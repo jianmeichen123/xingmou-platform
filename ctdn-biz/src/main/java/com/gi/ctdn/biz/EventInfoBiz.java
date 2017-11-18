@@ -129,10 +129,10 @@ public class EventInfoBiz  {
 		return messageInfo;
 	}
 
-	public MessageInfo<List<EventInfo>> getFromCtdnEventInfo() {
+	public MessageInfo<List<EventInfo>> getFromCtdnEventInfo( EventInfo EventInfo) {
 		MessageInfo<List<EventInfo>> messageInfo = new MessageInfo<List<EventInfo>>();
 		try {
-			List<EventInfo> eventInfo = eventInfoDAO.selectFromCtdn();
+			List<EventInfo> eventInfo = eventInfoDAO.selectFromCtdn(EventInfo.getPageSize());
 			messageInfo.setData(eventInfo);
 		} catch (Exception e) {
 			LOGGER.info("getFromCtdnEventInfo","查询EventInfo失败", e);

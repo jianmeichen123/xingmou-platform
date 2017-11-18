@@ -94,6 +94,6 @@
         <include refid="selectFields" />
         FROM
         ctdn.app_event_info
-        ORDER BY investDate DESC limit 5
+        ORDER BY investDate DESC limit  #{pageSize,jdbcType=INTEGER}
     </select>
 </mapper>

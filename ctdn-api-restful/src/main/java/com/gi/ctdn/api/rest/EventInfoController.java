@@ -85,8 +85,8 @@ public class EventInfoController {
 	 */
 	@RequestMapping("getCtdnEventInfo")
 	@ResponseBody
-	public MessageInfo<List<EventInfo>> getCtdnEventInfo(){
-		MessageInfo<List<EventInfo>> messageInfo = eventInfoBiz.getFromCtdnEventInfo();
+	public MessageInfo<List<EventInfo>> getCtdnEventInfo(@RequestBody EventInfo EventInfo){
+		MessageInfo<List<EventInfo>> messageInfo = eventInfoBiz.getFromCtdnEventInfo(EventInfo);
 		return messageInfo;
 
 	}

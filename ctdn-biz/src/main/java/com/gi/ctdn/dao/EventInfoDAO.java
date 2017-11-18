@@ -20,6 +20,6 @@ public interface EventInfoDAO {
 
 	List<EventInfo> selectByInvestDate();
 
-	List<EventInfo> selectFromCtdn();
+	List<EventInfo> selectFromCtdn(@Param("pageSize") Integer pageSize);
 
 }

@@ -16,6 +16,8 @@ public class ProjectList extends Pagination {
 	 */
 	private String compCode;
 
+	private String projCode;
+
 	/**
 	 * @Fields code :
 	 */
@@ -212,6 +214,8 @@ public class ProjectList extends Pagination {
 	 * 用户市场
 	 */
 	private String userMarket;
+
+	private String photos;
 	/**
 	 * @Fields loadDate : 录入时间
 	 */
@@ -569,5 +573,21 @@ public class ProjectList extends Pagination {
 
 	public void setCompCode(String compCode) {
 		this.compCode = compCode;
+	}
+
+	public String getProjCode() {
+		return projCode;
+	}
+
+	public void setProjCode(String projCode) {
+		this.projCode = projCode;
+	}
+
+	public void setPhotos(String photos) {
+		this.photos = photos;
+	}
+
+	public String getPhotos() {
+		return photos;
 	}
 }

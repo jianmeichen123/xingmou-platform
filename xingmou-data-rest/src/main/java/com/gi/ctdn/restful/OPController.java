@@ -3,6 +3,8 @@ package com.gi.ctdn.restful;
 import com.gi.ctdn.ods.biz.*;
 import com.gi.ctdn.ods.pojo.*;
 import com.gi.ctdn.view.common.MessageInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,6 +42,7 @@ public class OPController {
     @Autowired
     private WeiboIndiceBiz weiboIndiceBiz;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(OPController.class);
 
     @RequestMapping("pvuv/{code}")
     @ResponseBody
@@ -119,6 +122,7 @@ public class OPController {
         @RequestMapping("is")
         @ResponseBody
         public MessageInfo<List<OpIndiceSummary>> opIndiceSummary(@RequestBody OpIndiceSummary opIndiceSummary){
+            LOGGER.info("**************************is**************"+opIndiceSummary.getCode());
             MessageInfo<List<OpIndiceSummary>> messageInfo = opIndiceSummaryBiz.getListByCode(opIndiceSummary.getCode());
             return messageInfo;
         }

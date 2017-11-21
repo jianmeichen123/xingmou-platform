@@ -67,7 +67,8 @@ public class EventInfoExt extends Pagination {
 	 * @Fields type : 投资方类型【invst/com/person】
 	 */
 	private String type;
-	
+
+	private String invstorCode;
     
 	public Integer getId(){
 		return id;
@@ -148,4 +149,12 @@ public class EventInfoExt extends Pagination {
 	public void setType(String type){
 		this.type = type;
 	}
-    }
+
+	public String getInvstorCode() {
+		return invstorCode;
+	}
+
+	public void setInvstorCode(String invstorCode) {
+		this.invstorCode = invstorCode;
+	}
+}

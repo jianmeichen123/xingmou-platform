@@ -32,7 +32,7 @@
 		<include refid="selectFields" />
 		FROM
 		app_project_contact
-		WHERE  projectCode = #{projectCode,jdbcType=VARCHAR} and type="I"
+		WHERE  projectCode = #{projectCode,jdbcType=VARCHAR} and type="O"
 	</select>
 
 	<select id="selectAll" resultMap="BaseResultMap">

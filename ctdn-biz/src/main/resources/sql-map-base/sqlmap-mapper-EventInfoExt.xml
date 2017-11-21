@@ -10,13 +10,14 @@
                 <result column="amountStr" property="amountStr" jdbcType="VARCHAR" />
                 <result column="investSideJson" property="investSideJson" jdbcType="VARCHAR" />
                 <result column="invstorid" property="invstorid" jdbcType="INTEGER" />
+                <result column="invstorCode" property="invstorCode" jdbcType="VARCHAR" />
                 <result column="sourceCode" property="sourceCode" jdbcType="VARCHAR" />
                 <result column="type" property="type" jdbcType="VARCHAR" />
     	</resultMap>
 
 
 	<sql id="selectFields">
-	    id,eventId,round,investDate,company,amountStr,investSideJson,invstorid,sourceCode,type
+	    id,eventId,round,investDate,invstorCode,company,amountStr,investSideJson,invstorid,sourceCode,type
 	</sql>
 	
 			
@@ -25,7 +26,7 @@
             <include refid="selectFields" />
 		FROM
 		    app_event_info_ext
-		WHERE  sourceCode = #{sourceCode,jdbcType=VARCHAR}
+		WHERE  invstorCode = #{sourceCode,jdbcType=VARCHAR}
 		order by investDate desc
 	</select>
 	

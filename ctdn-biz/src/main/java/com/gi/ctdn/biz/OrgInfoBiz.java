@@ -104,21 +104,23 @@ public class OrgInfoBiz  {
 			List<JSONObject> ls = null;
 			for(EventInfoExt info:eventInfoExtList){
 				String json = info.getInvestSideJson();
-				JSONObject obj = JSON.parseObject(json);
-				ls =(List<JSONObject>) obj.get("investSideJson");
-				if(ls.size()>0){
-					//遍历集合中的json.找到后,与集合第一个交换位置
-					for(int i = 0;i<ls.size();i++){
-						jsonObject = ls.get(i);
-						if(jsonObject.get("invstor").equals(orgName)){
-							temp= ls.get(0);
-							ls.set(0,jsonObject);
-							ls.set(i,temp);
+				if(json!=null){
+					JSONObject obj = JSON.parseObject(json);
+					ls =(List<JSONObject>) obj.get("investSideJson");
+					if(ls.size()>0){
+						//遍历集合中的json.找到后,与集合第一个交换位置
+						for(int i = 0;i<ls.size();i++){
+							jsonObject = ls.get(i);
+							if(jsonObject.get("invstor").equals(orgName)){
+								temp= ls.get(0);
+								ls.set(0,jsonObject);
+								ls.set(i,temp);
+							}
 						}
 					}
+					json = obj.toJSONString();
+					info.setInvestSideJson(json);
 				}
-				json = obj.toJSONString();
-				info.setInvestSideJson(json);
 			}
 		}
     	return eventInfoExtList;

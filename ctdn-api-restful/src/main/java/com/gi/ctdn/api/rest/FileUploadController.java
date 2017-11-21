@@ -36,13 +36,13 @@ public class FileUploadController {
             String fileName = null;
             try {
                 //上传文件
-                Date d = new Date();
-                System.out.println(d);
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                String dateNowStr = sdf.format(d);
+//                Date d = new Date();
+//                System.out.println(d);
+//                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//                String dateNowStr = sdf.format(d);
 
                 fileName = file.getOriginalFilename();
-                String dir =rootPath + "/" + dateNowStr +"/";
+                String dir =rootPath + "/";
                 File uploadDir = new File(dir);
                 File target = new File(dir+fileName);
 

@@ -15,7 +15,7 @@
                 <result column="comp_lawperson" property="legalPerson" jdbcType="VARCHAR" />
                 <result column="comp_runtimelimit" property="businessTerm" jdbcType="VARCHAR" />
                 <result column="comp_issuedate" property="issuingDate" jdbcType="VARCHAR" />
-                <!--<result column="industry" property="industry" jdbcType="VARCHAR" />-->
+                <result column="comp_industry" property="industry" jdbcType="VARCHAR" />
                 <result column="comp_regaddr" property="registeredAddress" jdbcType="VARCHAR" />
                 <result column="comp_status_name" property="managementStatus" jdbcType="VARCHAR" />
                 <result column="comp_setup" property="foundDate" jdbcType="VARCHAR" />
@@ -28,7 +28,7 @@
 
 
 	<sql id="selectFields">
-        comp_code,comp_fulltitle,comp_fulltitle_en,comp_creditcode,comp_regcode,comp_orgcode,comp_type,comp_lawperson,comp_runtimelimit,comp_issuedate,comp_regaddr,comp_status_name,comp_setup,comp_regcapital,comp_regorg,comp_scale,comp_regtype_name,comp_bizscope
+        comp_code,comp_fulltitle,comp_industry,comp_fulltitle_en,comp_creditcode,comp_regcode,comp_orgcode,comp_type,comp_lawperson,comp_runtimelimit,comp_issuedate,comp_regaddr,comp_status_name,comp_setup,comp_regcapital,comp_regorg,comp_scale,comp_regtype_name,comp_bizscope
 	</sql>
 	
 			

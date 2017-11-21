@@ -42,11 +42,10 @@ public class FileUploadController {
                 String dateNowStr = sdf.format(d);
 
                 fileName = file.getOriginalFilename();
-                String dir =rootPath + "/";
+                String dir =rootPath + "/" + dateNowStr;
                 File uploadDir = new File(dir);
-                if(!uploadDir.exists())
-                {
-                    uploadDir.mkdirs();
+                if(!uploadDir.exists()) {
+                    uploadDir.mkdir();
                 }
                 File target = new File(dir+fileName);
                 FileOutputStream fops = new FileOutputStream(target);

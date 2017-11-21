@@ -42,7 +42,7 @@ public class FileUploadController {
                 String dateNowStr = sdf.format(d);
 
                 fileName = file.getOriginalFilename();
-                String dir =rootPath + "/" + dateNowStr +"/";
+                String dir =rootPath + "/";
                 File uploadDir = new File(dir);
                 if(!uploadDir.exists())
                 {

@@ -36,8 +36,7 @@ public class FileUploadController {
             String fileName = null;
             try {
                 //上传文件
-                Date d = new Date();
-                System.out.println(d);
+               // Date d = new Date();
 //                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 //                String dateNowStr = sdf.format(d);
 

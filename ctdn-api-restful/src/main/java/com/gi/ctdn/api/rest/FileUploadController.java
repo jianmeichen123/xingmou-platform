@@ -36,17 +36,16 @@ public class FileUploadController {
             String fileName = null;
             try {
                 //上传文件
-               // Date d = new Date();
+//                Date d = new Date();
+//                System.out.println(d);
 //                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 //                String dateNowStr = sdf.format(d);
 
                 fileName = file.getOriginalFilename();
-                String dir =rootPath + "/" ;
+                String dir =rootPath + "/";
                 File uploadDir = new File(dir);
-                if(!uploadDir.exists()) {
-                    uploadDir.mkdir();
-                }
                 File target = new File(dir+fileName);
+
                 FileOutputStream fops = new FileOutputStream(target);
                 // 将上传的文件信息保存到相应的文件目录里
                 fops.write(file.getBytes());

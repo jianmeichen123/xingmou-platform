@@ -38,8 +38,8 @@ public class FileUploadController {
                 //上传文件
                 Date d = new Date();
                 System.out.println(d);
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                String dateNowStr = sdf.format(d);
+//                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//                String dateNowStr = sdf.format(d);
 
                 fileName = file.getOriginalFilename();
                 String dir =rootPath + "/" ;

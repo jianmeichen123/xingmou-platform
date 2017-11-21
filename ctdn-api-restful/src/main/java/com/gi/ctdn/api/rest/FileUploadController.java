@@ -44,8 +44,11 @@ public class FileUploadController {
                 fileName = file.getOriginalFilename();
                 String dir =rootPath + "/" + dateNowStr +"/";
                 File uploadDir = new File(dir);
+                if(!uploadDir.exists())
+                {
+                    uploadDir.mkdirs();
+                }
                 File target = new File(dir+fileName);
-
                 FileOutputStream fops = new FileOutputStream(target);
                 // 将上传的文件信息保存到相应的文件目录里
                 fops.write(file.getBytes());

@@ -143,7 +143,7 @@ public class ProjectListBiz {
 		Result result;
 		try {
 			PageHelper.startPage(projectList.getPageNo(), projectList.getPageSize());
-			List<ProjectList> projectLists = projectListDAO.selectByName(projectList.getProjTitle());
+			List<ProjectList> projectLists = projectListDAO.selectListByCode(projectList.getCompCode());
 			PageInfo<ProjectList> pageInfo = new PageInfo<ProjectList>(projectLists);
 			Pagination page = new Pagination();
 			page.setTotal(pageInfo.getTotal());

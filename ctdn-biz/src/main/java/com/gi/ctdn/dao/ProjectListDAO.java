@@ -13,6 +13,8 @@ public interface ProjectListDAO {
 
 	ProjectListInfo selectByCode(@Param("code") String code);
 
+	List<ProjectList> selectListByCode(@Param("compCode") String code);
+
 	List<ProjectList> queryCompetationlist(@Param("sourceCode") String sourceCode ,@Param("isSame") Integer isSame);
 
 	List<ProjectList> queryCompetitiveSimilar(@Param("sourceCode") String sourceCode ,@Param("isSame") Integer isSame);

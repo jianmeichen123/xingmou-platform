@@ -91,10 +91,10 @@ public class ProjectListController {
 	 * 查询竞争对手列表
 	 * @return
 	 */
-	@RequestMapping("queryCompetationlist/{sourceCode}")
+	@RequestMapping("queryCompetationlist/{projCode}")
 	@ResponseBody
-	public MessageInfo<ProjectListInfo>  queryCompetationlist (@PathVariable String  sourceCode) {
-		MessageInfo<ProjectListInfo> resultMessageInfo = projectListBiz.queryCompetationlist(sourceCode);
+	public MessageInfo<ProjectListInfo>  queryCompetationlist (@PathVariable String  projCode) {
+		MessageInfo<ProjectListInfo> resultMessageInfo = projectListBiz.queryCompetationlist(projCode);
 		return resultMessageInfo;
 	}
 

@@ -79,6 +79,7 @@ public class ProjectListBiz {
 	}
 
 	public MessageInfo<ProjectListInfo> queryCompetationlist(String sourceCode) {
+
 		MessageInfo<ProjectListInfo> message = new MessageInfo<ProjectListInfo>();
 		try {
 			ProjectListInfo projectListInfo = getOneByCode(sourceCode);
@@ -96,6 +97,7 @@ public class ProjectListBiz {
 		return message;
 	}
 
+
 	private List<ProjectList> getNewsList(String sourceCode, Integer isSame) {
 		List<ProjectList> newList = new ArrayList<>();
 		//查询竞品列表
@@ -103,10 +105,10 @@ public class ProjectListBiz {
 		if (pList != null && !pList.isEmpty()) {
 			List<ProjectList> cList = projectListDAO.queryCompetitiveSimilar(sourceCode, isSame);
 			for (ProjectList s : cList) {
-				String code = s.getSourceCode();
+				String code = s.getProjCode();
 				Double similar = s.getSimilarity();
 				for (ProjectList p : pList) {
-					if (code.equals(p.getSourceCode())) {
+					if (code.equals(p.getProjCode())) {
 						p.setSimilarity(similar);
 						newList.add(p);
 					}

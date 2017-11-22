@@ -590,4 +590,5 @@ public class ProjectList extends Pagination {
 	public String getPhotos() {
 		return photos;
 	}
+
 }

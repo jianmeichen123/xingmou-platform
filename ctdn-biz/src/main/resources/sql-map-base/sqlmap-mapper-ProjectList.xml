@@ -75,7 +75,7 @@
     </select>
     <select id="queryCompetitiveSimilar" resultMap="BaseResultMap" >
         SELECT
-        sim_prod_code as code, app_competitive_product.similarity as similarity
+        sim_prod_code as projCode, app_competitive_product.similarity as similarity
         FROM
         app_competitive_product
         <where>

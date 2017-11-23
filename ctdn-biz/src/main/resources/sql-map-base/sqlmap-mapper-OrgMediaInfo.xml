@@ -5,7 +5,7 @@
             <result column="investOrg" property="investOrg" jdbcType="VARCHAR" />
                 <result column="orgCode" property="code" jdbcType="VARCHAR" />
                 <result column="title" property="title" jdbcType="VARCHAR" />
-                <result column="eventDate" property="eventDate" jdbcType="DATE" />
+                <result column="eventDate" property="eventDate" jdbcType="VARCHAR" />
                 <result column="source" property="source" jdbcType="VARCHAR" />
                 <result column="content" property="content" jdbcType="LONGVARCHAR" />
                 <result column="link" property="link" jdbcType="VARCHAR" />

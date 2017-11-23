@@ -40,7 +40,7 @@ public class OrgMediaInfo extends Pagination {
 	/**
 	 * @Fields eventDate : 日期[H、N、L:必须]
 	 */
-	private Date eventDate;
+	private String eventDate;
 
 	/**
 	 * @Fields source : 来源[N、L:必须，H：为空]
@@ -95,11 +95,11 @@ public class OrgMediaInfo extends Pagination {
 		this.title = title;
 	}
 
-	public Date getEventDate(){
+	public String getEventDate(){
 		return eventDate;
 	}
 
-	public void setEventDate(Date eventDate){
+	public void setEventDate(String eventDate){
 		this.eventDate = eventDate;
 	}
 

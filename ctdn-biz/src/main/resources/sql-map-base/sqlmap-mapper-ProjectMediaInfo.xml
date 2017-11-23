@@ -23,6 +23,8 @@
 		FROM
 		    app_project_media_info
 		WHERE  projectCode = #{projectCode,jdbcType=VARCHAR} and type = #{type,jdbcType=VARCHAR}
+
+		ORDER BY  date desc
 	</select>
 			
 	<select id="selectByType" resultMap="BaseResultMap">

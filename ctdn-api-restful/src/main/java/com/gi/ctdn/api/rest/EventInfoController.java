@@ -42,22 +42,21 @@ public class EventInfoController {
 		return messageInfo;
 	}
 
-	@RequestMapping("getListByName")
-	@ResponseBody
-	public MessageInfo<List<EventInfo>> getListByName(@RequestBody EventInfo eventInfo){
-		MessageInfo<List<EventInfo>> messageInfo = eventInfoBiz.getListByName(eventInfo.getCompany());
-		return messageInfo;
-	}
+//	@RequestMapping("getListByName")
+//	@ResponseBody
+//	public MessageInfo<List<EventInfo>> getListByName(@RequestBody EventInfo eventInfo){
+//		MessageInfo<List<EventInfo>> messageInfo = eventInfoBiz.getListByName(eventInfo.getCompany());
+//		return messageInfo;
+//	}
 
 	/**
-	 * @param company
 	 * @return
 	 */
-	@RequestMapping("getListByCompany/{company}")
+	@RequestMapping("getListByCompany")
 	@ResponseBody
-	public MessageInfo<List<EventInfo>> getListByCompany(@PathVariable String company){
-		MessageInfo<List<EventInfo>> messageInfo = eventInfoBiz.getListByName(company);
-		return messageInfo;
+	public Result getListByCompany(@RequestBody EventInfo eventInfo){
+		Result ret = eventInfoBiz.getListByName(eventInfo);
+		return ret;
 	}
 
 	@RequestMapping("queryProjectEventList")

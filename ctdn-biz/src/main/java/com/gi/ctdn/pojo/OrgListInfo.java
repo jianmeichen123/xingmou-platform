@@ -23,6 +23,8 @@ public class OrgListInfo extends OrgInfo {
      */
     private List<EventInfoExt> eventInfoExtList;
 
+    private List<News> orgNewsList;
+
     public List<EventInfoExt> getEventInfoExtList() {
         return eventInfoExtList;
     }
@@ -88,5 +90,13 @@ public class OrgListInfo extends OrgInfo {
 
     public void setProjectContactList(List<ProjectContact> projectContactList) {
         this.projectContactList = projectContactList;
+    }
+
+    public List<News> getOrgNewsList() {
+        return orgNewsList;
+    }
+
+    public void setOrgNewsList(List<News> orgNewsList) {
+        this.orgNewsList = orgNewsList;
     }
 }

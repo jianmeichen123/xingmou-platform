@@ -4,8 +4,6 @@ package com.gi.ctdn.biz;
 
 import com.gi.ctdn.pojo.EventInfo;
 import com.gi.ctdn.pojo.ProjectMediaInfo;
-import com.gi.ctdn.pojo.ProjectTeam;
-import com.gi.ctdn.view.common.MessageInfo;
 import com.gi.ctdn.view.common.MessageStatus;
 import com.gi.ctdn.view.common.Pagination;
 import com.gi.ctdn.view.common.Result;
@@ -31,17 +29,22 @@ public class ProjectMediaInfoBiz  {
     @Autowired
 	ProjectMediaInfoDAO projectMediaInfoDAO;
 
-	public MessageInfo<List<ProjectMediaInfo>> queryMediaInfoList(ProjectMediaInfo projectMediaInfo){
+	public Result queryMediaInfoList(ProjectMediaInfo projectMediaInfo){
 
-		MessageInfo<List<ProjectMediaInfo>> messageInfo = new MessageInfo<List<ProjectMediaInfo>>();
+		Result result;
 		try {
+			PageHelper.startPage(projectMediaInfo.getPageNo(), projectMediaInfo.getPageSize());
 			List<ProjectMediaInfo> projectMediaInfoList = projectMediaInfoDAO.selectBySourceCodeAndType(projectMediaInfo.getProjectCode(),projectMediaInfo.getType());
-			messageInfo.setData(projectMediaInfoList);
+			PageInfo<ProjectMediaInfo> pageInfo = new PageInfo<ProjectMediaInfo>(projectMediaInfoList);
+			Pagination page = new Pagination();
+			page.setTotal(pageInfo.getTotal());
+			page.setRecords(projectMediaInfoList);
+			result = new Result(MessageStatus.OK_MESSAGE, MessageStatus.OK_CODE, page);
 		} catch (Exception e) {
-			LOGGER.error("getListBySourcecode","查询ProjectTeam失败", e);
-			messageInfo.setStatus(MessageStatus.ERROR_CODE);
+			LOGGER.error("getListByProjectCode","查询ProjectMediaInfo失败", e);
+			return Result.addError();
 		}
-		return messageInfo;
+		return result;
 	}
 
 }

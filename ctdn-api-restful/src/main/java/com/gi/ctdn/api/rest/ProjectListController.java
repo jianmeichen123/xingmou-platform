@@ -50,9 +50,9 @@ public class ProjectListController {
 	 */
 	@RequestMapping("queryMediaInfoByCode")
 	@ResponseBody
-	public MessageInfo<List<ProjectMediaInfo>> queryProjectByCode(@RequestBody ProjectMediaInfo projectMediaInfo){
-		MessageInfo<List<ProjectMediaInfo>> messageInfo = projectMediaInfoBiz.queryMediaInfoList(projectMediaInfo);
-		return messageInfo;
+	public Result queryProjectByCode(@RequestBody ProjectMediaInfo projectMediaInfo){
+		Result result = projectMediaInfoBiz.queryMediaInfoList(projectMediaInfo);
+		return result;
 	}
 
 	/**

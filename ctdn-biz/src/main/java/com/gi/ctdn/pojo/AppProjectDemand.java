@@ -114,12 +114,12 @@ public class AppProjectDemand implements Serializable {
 	/**
 	 * @Fields projMoney : 融资金额
 	 */
-	private Integer projMoney;
+	private Double projMoney;
 	
 	/**
 	 * @Fields projStock : 出让股份
 	 */
-	private Integer projStock;
+	private Double projStock;
 	
 	/**
 	 * @Fields projAddTime : 项目添加时间
@@ -300,22 +300,22 @@ public class AppProjectDemand implements Serializable {
 		this.projRound = projRound;
 	}
 
-	public Integer getProjMoney(){
+	public void setProjMoney(Double projMoney) {
+		this.projMoney = projMoney;
+	}
+
+	public Double getProjMoney() {
 		return projMoney;
 	}
 
-	public void setProjMoney(Integer projMoney){
-		this.projMoney = projMoney;
+	public void setProjStock(Double projStock) {
+		this.projStock = projStock;
 	}
-    
-	public Integer getProjStock(){
+
+	public Double getProjStock() {
 		return projStock;
 	}
 
-	public void setProjStock(Integer projStock){
-		this.projStock = projStock;
-	}
-    
 	public Timestamp getProjAddTime(){
 		return projAddTime;
 	}

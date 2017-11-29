@@ -18,4 +18,6 @@ public interface NewsDao {
 
     List<News> selectNewsByLabel(@Param("label") String label);
 
+    List<News> selectNewsByOrgCode(@Param("orgCode") String orgCode);
+
 }

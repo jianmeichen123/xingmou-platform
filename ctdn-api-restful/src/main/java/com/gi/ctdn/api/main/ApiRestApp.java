@@ -2,7 +2,9 @@ package com.gi.ctdn.api.main;
 
 import com.gi.ctdn.config.SwaggerConfiguration;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 
@@ -12,6 +14,7 @@ import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
 @ComponentScan(basePackages={"com.gi.ctdn"})
+@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 @Import(SwaggerConfiguration.class)
 public class ApiRestApp {
 

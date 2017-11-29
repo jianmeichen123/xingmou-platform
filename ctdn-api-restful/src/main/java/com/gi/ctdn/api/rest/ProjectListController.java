@@ -32,15 +32,6 @@ public class ProjectListController {
 	@Autowired
 	private ProjectContactBiz projectContactBiz;
 
-	/**
-	 * 根据code查询项目
-	 */
-//	@RequestMapping("queryRelativeListByCode/{sourceCode}")
-//	@ResponseBody
-//	public MessageInfo<ProjectListInfo> queryRelativeByCode(@PathVariable String  sourceCode){
-//		MessageInfo<ProjectListInfo> resultMessageInfo = projectListBiz.getRelativeListByCode(sourceCode);
-//		return resultMessageInfo;
-//	}
 
 	/**
 	 * 根据code查询项目
@@ -49,9 +40,9 @@ public class ProjectListController {
 	@ResponseBody
 	public MessageInfo<ProjectListInfo> queryProjectByCode(@PathVariable String  projectCode){
 		ProjectListInfo projectListInfo =  projectListBiz.getOneByCode(projectCode);
-		MessageInfo<ProjectListInfo> resultMessageInfo = new MessageInfo<ProjectListInfo>();
-		resultMessageInfo.setData(projectListInfo);
-		return resultMessageInfo;
+		MessageInfo<ProjectListInfo> messageInfo = new MessageInfo<ProjectListInfo>();
+		messageInfo.setData(projectListInfo);
+		return messageInfo;
 	}
 
 	/**
@@ -70,10 +61,9 @@ public class ProjectListController {
 	@RequestMapping("queryProjectTeamByCode")
 	@ResponseBody
 	public MessageInfo<List<ProjectTeam>> queryProjectByCode(@RequestBody ProjectTeam team){
-		MessageInfo<List<ProjectTeam>> resultMessageInfo =  projectTeamBiz.getListByProjectCode(team.getProjectCode());
-		return resultMessageInfo;
+		MessageInfo<List<ProjectTeam>> messageInfo =  projectTeamBiz.getListByProjectCode(team.getProjectCode());
+		return messageInfo;
 	}
-
 
 	/**
 	 * 根据projectCode查询联系方式列表
@@ -86,7 +76,6 @@ public class ProjectListController {
 		return messageInfo;
 	}
 
-
 	/**
 	 * 查询竞争对手列表
 	 * @return
@@ -97,8 +86,6 @@ public class ProjectListController {
 		MessageInfo<ProjectListInfo> resultMessageInfo = projectListBiz.queryCompetationlist(projCode);
 		return resultMessageInfo;
 	}
-
-
 
 	/**
 	 * 查询最新项目
@@ -112,17 +99,6 @@ public class ProjectListController {
 		resultMessageInfo.setData(projectLists);
 		return resultMessageInfo;
 	}
-
-	/**
-	 * 根据公司名字查询项目
-	 *
-	 */
-//	@RequestMapping("queryByProjTitle/{projTitle}")
-//	@ResponseBody
-//	public MessageInfo<List>  queryByProjTitle (@PathVariable String projTitle) {
-//		MessageInfo<List> resultMessageInfo = projectListBiz.getByProjName(projTitle);
-//		return resultMessageInfo;
-//	}
 
 	@RequestMapping("queryByProjTitle")
 	@ResponseBody

@@ -31,8 +31,8 @@
                 <result column="districtName" property="districtName" jdbcType="VARCHAR" />
                 <result column="districtSubName" property="districtSubName" jdbcType="VARCHAR" />
                 <result column="districtGrandsonName" property="districtGrandsonName" jdbcType="VARCHAR" />
-                <result column="logoSmall" property="logoSmall" jdbcType="VARCHAR" />
-                <result column="logoBig" property="logoBig" jdbcType="VARCHAR" />
+                <!--<result column="logoSmall" property="logoSmall" jdbcType="VARCHAR" />-->
+                <!--<result column="logoBig" property="logoBig" jdbcType="VARCHAR" />-->
                 <result column="currencyType" property="currencyType" jdbcType="VARCHAR" />
                 <result column="bp" property="bp" jdbcType="VARCHAR" />
                 <result column="hqEmail" property="hqEmail" jdbcType="VARCHAR" />
@@ -50,7 +50,7 @@
 
 
 	<sql id="selectFields">
-	    id,projCode,compCode,projTitle,runState,needFinance,addr,setupDT,labels,introduce,latestFinanceDT,latestFinanceRound,latestFinanceAmountNum,latestFinanceAmountStr,investSideJson,firmDesc,firmPos,persona,prodSrv,bizModel,industryName,industrySubName,industryIds,districtId,districtSubId,districtName,districtSubName,districtGrandsonName,logoSmall,logoBig,currencyType,bp,hqEmail,hqTel,weibo,weixin,webUrl,teamTags,teamSuper,userMarket,loadDate,photos,regName
+	    id,projCode,compCode,projTitle,runState,needFinance,addr,setupDT,labels,introduce,latestFinanceDT,latestFinanceRound,latestFinanceAmountNum,latestFinanceAmountStr,investSideJson,firmDesc,firmPos,persona,prodSrv,bizModel,industryName,industrySubName,industryIds,districtId,districtSubId,districtName,districtSubName,districtGrandsonName,currencyType,bp,hqEmail,hqTel,weibo,weixin,webUrl,teamTags,teamSuper,userMarket,loadDate,photos,regName
 	</sql>
 	
 			
@@ -105,7 +105,7 @@
         <include refid="selectFields" />
         FROM
         app_project_list
-        WHERE  compCode = #{compCode,jdbcType=VARCHAR}
+        WHERE  compCode = #{compCode,jdbcType=VARCHAR} and compCode!=''
     </select>
 
 </mapper>

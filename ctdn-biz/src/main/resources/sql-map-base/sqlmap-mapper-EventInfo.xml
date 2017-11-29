@@ -16,7 +16,7 @@
             <result column="desc" property="desc" jdbcType="LONGVARCHAR" />
             <result column="sourceId" property="sourceId" jdbcType="INTEGER" />
             <result column="sourceCode" property="sourceCode" jdbcType="VARCHAR" />
-            <result column="logo" property="logo" jdbcType="VARCHAR" />
+            <!--<result column="logo" property="logo" jdbcType="VARCHAR" />-->
             <result column="industryName" property="industryName" jdbcType="VARCHAR" />
             <result column="industrySubName" property="industrySubName" jdbcType="VARCHAR" />
             <result column="industryGrandsonName" property="industryGrandsonName" jdbcType="VARCHAR" />
@@ -37,7 +37,7 @@
 
 
 	<sql id="selectFields">
-	    investevent,eventId,`desc`,round,districtName,districtSubName,investDate,company,stage,valuation,stock,mode,sourceId,sourceCode,logo,industryName,industrySubName,industryIds,districtId,districtSubId,amountNum,amountStr,currencyType,investSideJson,bodyRole,sourceType,isClick,invstorgids,invstorgnames,districtGrandsonName
+	    investevent,eventId,`desc`,round,districtName,districtSubName,investDate,company,stage,valuation,stock,mode,sourceId,sourceCode,industryName,industrySubName,industryIds,districtId,districtSubId,amountNum,amountStr,currencyType,investSideJson,bodyRole,sourceType,isClick,invstorgids,invstorgnames,districtGrandsonName
 	</sql>
 	
 			

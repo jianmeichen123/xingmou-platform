@@ -23,8 +23,8 @@
                 <result column="projCompAddr" property="projCompAddr" jdbcType="VARCHAR" />
                 <result column="projRoundId" property="projRoundId" jdbcType="INTEGER" />
                 <result column="projRound" property="projRound" jdbcType="VARCHAR" />
-                <result column="projMoney" property="projMoney" jdbcType="INTEGER" />
-                <result column="projStock" property="projStock" jdbcType="INTEGER" />
+                <result column="projMoney" property="projMoney" jdbcType="DOUBLE" />
+                <result column="projStock" property="projStock" jdbcType="DOUBLE" />
                 <result column="projAddTime" property="projAddTime" jdbcType="TIMESTAMP" />
                 <result column="projUpdateTime" property="projUpdateTime" jdbcType="TIMESTAMP" />
     	</resultMap>
@@ -94,8 +94,8 @@
 		#{projCompAddr,jdbcType=VARCHAR},
 		#{projRoundId,jdbcType=INTEGER},
 		#{projRound,jdbcType=VARCHAR},
-		#{projMoney,jdbcType=INTEGER},
-		#{projStock,jdbcType=INTEGER},
+		#{projMoney,jdbcType=DOUBLE},
+		#{projStock,jdbcType=DOUBLE},
 		#{projAddTime,jdbcType=TIMESTAMP},
 		#{projUpdateTime,jdbcType=TIMESTAMP}
 		)

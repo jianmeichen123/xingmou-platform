@@ -512,9 +512,8 @@ public class CommonRest {
      */
     @RequestMapping("allQuery")
     @ResponseBody
-//    @Cacheable(value = "allQuery",keyGenerator = "baseKG")
+    @Cacheable(value = "allQuery",keyGenerator = "baseKG")
     public MessageInfo<Map> allQuery(){
-        LOGGER.debug("***************************************************进入allQuery");
         //企业
         MessageInfo<Map> messageInfo = new MessageInfo<>();
         Map<String,Object> map = new HashMap<>();

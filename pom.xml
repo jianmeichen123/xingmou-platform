@@ -23,7 +23,6 @@
         <module>ctdn-data-ods</module>
         <module>ctdn-biz</module>
         <module>xingmou-mongodb</module>
-        <module>xingmou-redis</module>
         <module>ctdn-api-restful</module>
     </modules>
 
@@ -44,23 +43,12 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- require dependency:begin -->
-            <!-- 自身模块 start-->
-            <!--<dependency>-->
-                <!--<groupId>com.gi</groupId>-->
-                <!--<artifactId>xingmou-common</artifactId>-->
-                <!--<version>${xingmou.version}</version>-->
-            <!--</dependency>-->
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-assembly</artifactId>
                 <version>${xingmou.version}</version>
             </dependency>
-            <!--<dependency>-->
-                <!--<groupId>com.gi</groupId>-->
-                <!--<artifactId>xingmou-dal</artifactId>-->
-                <!--<version>${xingmou.version}</version>-->
-            <!--</dependency>-->
+
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-mongodb</artifactId>
@@ -68,59 +56,19 @@
             </dependency>
             <dependency>
                 <groupId>com.gi</groupId>
-                <artifactId>xingmou-redis</artifactId>
-                <version>${xingmou.version}</version>
-            </dependency>
-            <!--<dependency>-->
-                <!--<groupId>com.gi</groupId>-->
-                <!--<artifactId>xingmou-service-facede</artifactId>-->
-                <!--<version>${xingmou.version}</version>-->
-            <!--</dependency>-->
-            <!--<dependency>-->
-                <!--<groupId>com.gi</groupId>-->
-                <!--<artifactId>xingmou-service</artifactId>-->
-                <!--<version>${xingmou.version}</version>-->
-            <!--</dependency>-->
-            <dependency>
-                <groupId>com.gi</groupId>
                 <artifactId>ctdn-biz</artifactId>
                 <version>${xingmou.version}</version>
             </dependency>
-            <!--<dependency>-->
-                <!--<groupId>com.gi</groupId>-->
-                <!--<artifactId>xingmou-biz</artifactId>-->
-                <!--<version>${xingmou.version}</version>-->
-            <!--</dependency>-->
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-api-common</artifactId>
                 <version>${xingmou.version}</version>
             </dependency>
-            <!--<dependency>-->
-                <!--<groupId>com.gi</groupId>-->
-                <!--<artifactId>xingmou-service-report</artifactId>-->
-                <!--<version>${xingmou.version}</version>-->
-            <!--</dependency>-->
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>ctdn-data-ods</artifactId>
                 <version>${xingmou.version}</version>
             </dependency>
-            <!--<dependency>-->
-                <!--<groupId>com.gi</groupId>-->
-                <!--<artifactId>xingmou-logback</artifactId>-->
-                <!--<version>${xingmou.version}</version>-->
-            <!--</dependency>-->
-            <!--<dependency>-->
-                <!--<groupId>com.gi</groupId>-->
-                <!--<artifactId>xingmou-mail</artifactId>-->
-                <!--<version>${xingmou.version}</version>-->
-            <!--</dependency>-->
-            <!--<dependency>-->
-                <!--<groupId>com.gi</groupId>-->
-                <!--<artifactId>xingmou-doc</artifactId>-->
-                <!--<version>${xingmou.version}</version>-->
-            <!--</dependency>-->
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-data-rest</artifactId>

@@ -105,7 +105,7 @@
         <include refid="selectFields" />
         FROM
         app_project_list
-        WHERE  compCode = #{compCode,jdbcType=VARCHAR}
+        WHERE  compCode = #{compCode,jdbcType=VARCHAR} and compCode!=''
     </select>
 
 </mapper>

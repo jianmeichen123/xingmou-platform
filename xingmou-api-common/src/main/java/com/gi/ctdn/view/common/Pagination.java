@@ -17,7 +17,7 @@ public class Pagination implements Serializable {
 
     private Integer pageNo =0;
   
-    private Long total;
+    private Long total = 0l;
 
     private List records;
 

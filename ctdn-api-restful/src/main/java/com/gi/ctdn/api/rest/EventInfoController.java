@@ -52,12 +52,6 @@ public class EventInfoController {
 	/**
 	 * @return
 	 */
-	@RequestMapping("getListByCompany")
-	@ResponseBody
-	public Result getListByCompany(@RequestBody EventInfo eventInfo){
-		Result ret = eventInfoBiz.getListByName(eventInfo);
-		return ret;
-	}
 
 	@RequestMapping("queryProjectEventList")
 	@ResponseBody

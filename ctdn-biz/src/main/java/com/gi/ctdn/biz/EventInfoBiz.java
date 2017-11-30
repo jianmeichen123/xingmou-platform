@@ -76,9 +76,7 @@ public class EventInfoBiz  {
 
 		Result result;
 		try {
-			PageHelper.startPage(eventInfo.getPageNo(), eventInfo.getPageSize());
 			List<EventInfo> eventInfoList = eventInfoDAO.selectByName(eventInfo.getCompany());
-			PageInfo<EventInfo> pageInfo = new PageInfo<EventInfo>(eventInfoList);
 			List<EventInfo> newList = new ArrayList<EventInfo>();
 			if(eventInfoList.size()>0){
 				JSONObject temp = null;
@@ -112,6 +110,10 @@ public class EventInfoBiz  {
 					}
 				}
 			}
+			//分页插件分页
+			PageHelper.startPage(eventInfo.getPageNo(), eventInfo.getPageSize());
+			PageInfo<EventInfo> pageInfo = new PageInfo<EventInfo>(newList);
+			//返回结果
 			Pagination page = new Pagination();
 			page.setTotal(pageInfo.getTotal());
 			page.setRecords(newList);
@@ -121,51 +123,6 @@ public class EventInfoBiz  {
 			return Result.addError();
 		}
 		return result;
-
-
-
-//		MessageInfo<List<EventInfo>> messageInfo = new MessageInfo<List<EventInfo>>();
-//		try {
-//			List<EventInfo> eventInfo = eventInfoDAO.selectByName(name);
-//			List<EventInfo> newList = new ArrayList<EventInfo>();
-//			if(eventInfo.size()>0){
-//				JSONObject temp = null;
-//				JSONObject jsonObject = null;
-//				List<JSONObject> ls = null;
-//				for(EventInfo info:eventInfo){
-//					boolean flag = false;
-//					String json = info.getInvestSideJson();
-//					JSONObject obj = JSON.parseObject(json);
-//					//{"investSideJson":[{"code":"","id":"8","invstor":"蓝驰创投","isClick":1,"isLeader":0,"type":"invst"}]}
-//					ls =(List<JSONObject>) obj.get("investSideJson");
-//					if(ls.size()>0){
-//						//遍历集合中的json.找到后,与集合第一个交换位置
-//						for(int i = 0;i<ls.size();i++){
-//							jsonObject = ls.get(i);
-//							if(jsonObject.containsValue(name)){
-//							 	if(jsonObject.get("type").equals("com")){
-//									flag = true;
-//									temp= ls.get(0);
-//									ls.set(0,jsonObject);
-//									ls.set(i,temp);
-//								}
-//							}
-//						}
-//					}
-//					//如果有符合 名称匹配和类型匹配的数据,放入集合
-//					if(flag){
-//						json = obj.toJSONString();
-//						info.setInvestSideJson(json);
-//						newList.add(info);
-//					}
-//				}
-//			}
-//			messageInfo.setData(newList);
-//		} catch (Exception e) {
-//			LOGGER.error("getListByName","查询EventInfo失败", e);
-//			messageInfo.setStatus(MessageStatus.ERROR_CODE);
-//		}
-//		return messageInfo;
 	}
 
 	public MessageInfo<List<EventInfo>> getByInvestDate() {

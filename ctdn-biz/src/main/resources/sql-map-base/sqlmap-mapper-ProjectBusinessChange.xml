@@ -23,6 +23,7 @@
 		FROM
 		app_comp_change
 		WHERE  comp_code = #{sourceCode,jdbcType=VARCHAR}
+		order by comp_item,comp_chenge_date desc
 	</select>
 	
 

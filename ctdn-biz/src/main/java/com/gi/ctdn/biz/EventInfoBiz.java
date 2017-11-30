@@ -110,13 +110,29 @@ public class EventInfoBiz  {
 					}
 				}
 			}
-			//分页插件分页
-			PageHelper.startPage(eventInfo.getPageNo(), eventInfo.getPageSize());
-			PageInfo<EventInfo> pageInfo = new PageInfo<EventInfo>(newList);
 			//返回结果
 			Pagination page = new Pagination();
-			page.setTotal(pageInfo.getTotal());
-			page.setRecords(newList);
+			if(newList != null && ! newList.isEmpty()){
+				if(newList.size() > eventInfo.getPageSize()){
+					page.setTotal(Long.valueOf(newList.size()));
+					int fromIndex = eventInfo.getPageNo();
+					if(fromIndex >1){
+						fromIndex = (fromIndex-1)*eventInfo.getPageSize()+1;
+					}
+					int toIndex = fromIndex+eventInfo.getPageSize();
+					if(toIndex <= (newList.size())){
+						newList = newList.subList(fromIndex,toIndex);
+						page.setRecords(newList);
+					}else{
+						toIndex = fromIndex+(toIndex-newList.size()-1);
+						newList = newList.subList(fromIndex,toIndex);
+						page.setRecords(newList);
+					}
+				}else{
+					page.setTotal(Long.valueOf(newList.size()));
+					page.setRecords(newList);
+				}
+			}
 			result = new Result(MessageStatus.OK_MESSAGE, MessageStatus.OK_CODE, page);
 		} catch (Exception e) {
 			LOGGER.error("getListByProjectCode","查询ProjectMediaInfo失败", e);

@@ -37,11 +37,11 @@ public class OdsDBConf {
 
     protected String name;
 
-    @Value("${spring.datasource.username.ods}")
+    @Value("${spring.datasource.username.base}")
     protected volatile String username;
-    @Value("${spring.datasource.password.ods}")
+    @Value("${spring.datasource.password.base}")
     protected volatile String password;
-    @Value("${spring.datasource.url.ods}")
+    @Value("${spring.datasource.url.base}")
     protected volatile String jdbcUrl;
     @Value("${spring.datasource.driver-class-name}")
     protected volatile String driverClass;

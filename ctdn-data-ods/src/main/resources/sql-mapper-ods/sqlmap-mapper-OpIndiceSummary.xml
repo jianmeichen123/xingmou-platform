@@ -26,12 +26,12 @@
         SELECT
         *
         FROM
-        ods.op_indice_summary a
+        op_indice_summary a
         LEFT JOIN
         (SELECT
         code, type, MAX(update_date) AS update_date
         FROM
-        ods.op_indice_summary
+        op_indice_summary
         WHERE
         code = #{code,jdbcType=CHAR}
         GROUP BY type) b ON a.code = b.code AND a.type = b.type

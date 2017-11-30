@@ -4,6 +4,7 @@ import com.gi.ctdn.biz.IndexHeaderStatBiz;
 import com.gi.ctdn.pojo.IndexHeaderStat;
 import com.gi.ctdn.view.common.MessageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,6 +45,7 @@ public class IndexController {
 
     @RequestMapping("queryIndexHeaderStat")
     @ResponseBody
+    @Cacheable(value = "queryIndexHeaderStat",keyGenerator = "baseKG")
     public MessageInfo<IndexHeaderStat> queryIndexHeaderStat (){
         MessageInfo messageInfo = indexHeaderStatBiz.getIndexHeaderStat();
         return messageInfo;

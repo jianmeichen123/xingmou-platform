@@ -43,7 +43,7 @@ public class FileUploadController {
 
                 fileName = file.getOriginalFilename();
                 String dir =rootPath + "/";
-                File uploadDir = new File(dir);
+                //File uploadDir = new File(dir);
                 File target = new File(dir+fileName);
 
                 FileOutputStream fops = new FileOutputStream(target);

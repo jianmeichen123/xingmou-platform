@@ -20,7 +20,7 @@
         SELECT
         <include refid="selectFields"/>
         FROM
-        ctdn.app_news
+        app_news
         order by ctime desc limit 6
     </select>
 
@@ -29,7 +29,7 @@
         SELECT
         <include refid="selectFields"/>
         FROM
-        ctdn.app_news
+        app_news
         where code = #{orgCode,jdbcType=VARCHAR}
         order by ctime desc
     </select>

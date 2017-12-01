@@ -24,6 +24,7 @@
         <module>ctdn-biz</module>
         <module>xingmou-mongodb</module>
         <module>ctdn-api-restful</module>
+        <module>xingmou-user</module>
     </modules>
 
     <properties>
@@ -72,6 +73,11 @@
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-data-rest</artifactId>
+                <version>${xingmou.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.gi</groupId>
+                <artifactId>xingmou-user</artifactId>
                 <version>${xingmou.version}</version>
             </dependency>
             <!---->

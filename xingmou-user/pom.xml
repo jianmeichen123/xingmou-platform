@@ -85,95 +85,94 @@
                     <artifactId>log4j</artifactId>
                 </exclusion>
             </exclusions>
-
+        </dependency>
+        <dependency>
+            <groupId>com.galaxyinternet</groupId>
+            <artifactId>galaxy-cache</artifactId>
+            <version>1.0.5.20-xingmou-qa-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.galaxyinternet</groupId>
             <artifactId>galaxy-platform-api</artifactId>
             <version>${fx.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.session</groupId>
-                    <artifactId>spring-session-data-redis</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework.data</groupId>
-                    <artifactId>spring-data-monogdb</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.mongodb</groupId>
-                    <artifactId>mongo-java-driver</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>mysql</groupId>
-                    <artifactId>mysql-connector-java</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.mybatis</groupId>
-                    <artifactId>mybatis</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.mybatis</groupId>
-                    <artifactId>mybatis-spring</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.mybatis</groupId>
-                    <artifactId>mybatis-ehcache</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>javax.servlet</groupId>
-                    <artifactId>javax.servlet-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>log4j</groupId>
-                    <artifactId>log4j</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.google.code.gson</groupId>
-                    <artifactId>gson</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>ch.qos.logback</groupId>
-                    <artifactId>logback-access</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.aliyun.oss</groupId>
-                    <artifactId>aliyun-sdk-oss</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>commons-dbcp</groupId>
-                    <artifactId>commons-dbcp</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>commons-io</groupId>
-                    <artifactId>commons-io</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>commons-fileupload</groupId>
-                    <artifactId>commons-fileupload</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.apache.shiro</groupId>
-                    <artifactId>shiro-core</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>*</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.sun.mail</groupId>
-                    <artifactId>*</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>com.galaxyinternet</groupId>
-                    <artifactId>galaxy-cache</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>com.galaxyinternet</groupId>
-            <artifactId>galaxy-cache</artifactId>
-            <version>1.0.5.20-xingmou-rc-SNAPSHOT</version>
+            <!--<exclusions>-->
+                <!--<exclusion>-->
+                    <!--<groupId>org.springframework.session</groupId>-->
+                    <!--<artifactId>spring-session-data-redis</artifactId>-->
+                <!--</exclusion>-->
+                <!--<exclusion>-->
+                    <!--<groupId>org.springframework.data</groupId>-->
+                    <!--<artifactId>spring-data-monogdb</artifactId>-->
+                <!--</exclusion>-->
+                <!--<exclusion>-->
+                    <!--<groupId>org.mongodb</groupId>-->
+                    <!--<artifactId>mongo-java-driver</artifactId>-->
+                <!--</exclusion>-->
+                <!--<exclusion>-->
+                    <!--<groupId>mysql</groupId>-->
+                    <!--<artifactId>mysql-connector-java</artifactId>-->
+                <!--</exclusion>-->
+                <!--<exclusion>-->
+                    <!--<groupId>org.mybatis</groupId>-->
+                    <!--<artifactId>mybatis</artifactId>-->
+                <!--</exclusion>-->
+                <!--<exclusion>-->
+                    <!--<groupId>org.mybatis</groupId>-->
+                    <!--<artifactId>mybatis-spring</artifactId>-->
+                <!--</exclusion>-->
+                <!--<exclusion>-->
+                    <!--<groupId>org.mybatis</groupId>-->
+                    <!--<artifactId>mybatis-ehcache</artifactId>-->
+                <!--</exclusion>-->
+                <!--<exclusion>-->
+                    <!--<groupId>javax.servlet</groupId>-->
+                    <!--<artifactId>javax.servlet-api</artifactId>-->
+                <!--</exclusion>-->
+                <!--<exclusion>-->
+                    <!--<groupId>log4j</groupId>-->
+                    <!--<artifactId>log4j</artifactId>-->
+                <!--</exclusion>-->
+                <!--<exclusion>-->
+                    <!--<groupId>com.google.code.gson</groupId>-->
+                    <!--<artifactId>gson</artifactId>-->
+                <!--</exclusion>-->
+                <!--<exclusion>-->
+                    <!--<groupId>ch.qos.logback</groupId>-->
+                    <!--<artifactId>logback-access</artifactId>-->
+                <!--</exclusion>-->
+                <!--<exclusion>-->
+                    <!--<groupId>com.aliyun.oss</groupId>-->
+                    <!--<artifactId>aliyun-sdk-oss</artifactId>-->
+                <!--</exclusion>-->
+                <!--<exclusion>-->
+                    <!--<groupId>commons-dbcp</groupId>-->
+                    <!--<artifactId>commons-dbcp</artifactId>-->
+                <!--</exclusion>-->
+                <!--<exclusion>-->
+                    <!--<groupId>commons-io</groupId>-->
+                    <!--<artifactId>commons-io</artifactId>-->
+                <!--</exclusion>-->
+                <!--<exclusion>-->
+                    <!--<groupId>commons-fileupload</groupId>-->
+                    <!--<artifactId>commons-fileupload</artifactId>-->
+                <!--</exclusion>-->
+                <!--<exclusion>-->
+                    <!--<groupId>org.apache.shiro</groupId>-->
+                    <!--<artifactId>shiro-core</artifactId>-->
+                <!--</exclusion>-->
+                <!--<exclusion>-->
+                    <!--<groupId>org.springframework</groupId>-->
+                    <!--<artifactId>*</artifactId>-->
+                <!--</exclusion>-->
+                <!--<exclusion>-->
+                    <!--<groupId>com.sun.mail</groupId>-->
+                    <!--<artifactId>*</artifactId>-->
+                <!--</exclusion>-->
+                <!--<exclusion>-->
+                    <!--<groupId>com.galaxyinternet</groupId>-->
+                    <!--<artifactId>galaxy-cache</artifactId>-->
+                <!--</exclusion>-->
+            <!--</exclusions>-->
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -194,7 +193,24 @@
             <artifactId>spring-boot-starter-jetty</artifactId>
         </dependency>
     </dependencies>
-
+    <!-- 如有Nexus私服, 取消注释并指向正确的服务器地址. -->
+    <repositories>
+        <repository>
+            <id>nexus</id>
+            <name>Team Nexus Repository</name>
+            <url>http://nexus.gi.com/content/groups/public/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>ignore</checksumPolicy>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>ignore</checksumPolicy>
+            </releases>
+        </repository>
+    </repositories>
     <build>
         <plugins>
             <plugin>

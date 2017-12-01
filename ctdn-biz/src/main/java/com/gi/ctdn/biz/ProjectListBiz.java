@@ -85,7 +85,7 @@ public class ProjectListBiz {
 			ProjectListInfo projectListInfo = getOneByCode(sourceCode);
 			if(projectListInfo != null){
 				List<ProjectList> directCompetationlist = getNewsList(sourceCode,1);
-				List<ProjectList> indirectCompetationlist = getNewsList(sourceCode,0);
+				List<ProjectList> indirectCompetationlist = getNewsList(sourceCode,2);
 				projectListInfo.setDirectCompetationlist(directCompetationlist);
 				projectListInfo.setIndirectCompetationlist(indirectCompetationlist);
 			}

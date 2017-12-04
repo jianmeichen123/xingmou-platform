@@ -9,21 +9,31 @@ public class MessageInfo<E> implements Serializable {
 	 * @Fields serialVersionUID : TODO 
 	 */ 
 	private static final long serialVersionUID = -7122226153545621086L;
-	
 	private String message;
 	private int status;
 	private E data;
+	/**
+	 * 返回分页数据
+	 */
+	Pagination page;
+
 	private boolean success;
 
 	public MessageInfo()
 	{
-		this.setStatus(10000);
+		this.setStatus(MessageStatus.OK_CODE);
 		this.setMessage("成功");
 	}
 
 	public MessageInfo(int status2, String message2) {
 		this.setStatus(status2);
 		this.setMessage(message2);
+	}
+
+	public MessageInfo(int status2, String message2,Pagination page) {
+		this.setStatus(status2);
+		this.setMessage(message2);
+		this.setPage(page);
 	}
 
 	public String getMessage() {
@@ -39,6 +49,14 @@ public class MessageInfo<E> implements Serializable {
 
 	}
 
+	public void setPage(Pagination page) {
+		this.page = page;
+	}
+
+	public Pagination getPage() {
+		return page;
+	}
+
 	public void setStatus(int status) {
 		this.status = status;
 	}
@@ -52,7 +70,7 @@ public class MessageInfo<E> implements Serializable {
 	}
 
 	public boolean isSuccess() {
-		return status == 10000;
+		return status == MessageStatus.OK_CODE;
 	}
 
 

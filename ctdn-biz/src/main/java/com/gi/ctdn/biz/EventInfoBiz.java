@@ -10,9 +10,6 @@ import com.gi.ctdn.pojo.EventDetail;
 import com.gi.ctdn.pojo.EventInfo;
 import com.gi.ctdn.pojo.EventInfoList;
 import com.gi.ctdn.view.common.Pagination;
-import com.gi.ctdn.view.common.Result;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -72,9 +69,9 @@ public class EventInfoBiz  {
 		return messageInfo;
 	}
 
-	public Result getListByName(EventInfo eventInfo) {
+	public MessageInfo<EventInfo> getListByName(EventInfo eventInfo) {
 
-		Result result;
+		MessageInfo<EventInfo> messageInfo;
 		try {
 			List<EventInfo> eventInfoList = eventInfoDAO.selectByName(eventInfo.getCompany());
 			List<EventInfo> newList = new ArrayList<EventInfo>();
@@ -133,12 +130,12 @@ public class EventInfoBiz  {
 					page.setRecords(newList);
 				}
 			}
-			result = new Result(MessageStatus.OK_MESSAGE, MessageStatus.OK_CODE, page);
+			messageInfo = new MessageInfo( MessageStatus.OK_CODE, MessageStatus.OK_MESSAGE,page);
 		} catch (Exception e) {
 			LOGGER.error("getListByProjectCode","查询ProjectMediaInfo失败", e);
-			return Result.addError();
+			messageInfo = new MessageInfo(MessageStatus.ERROR_CODE,e.getMessage());
 		}
-		return result;
+		return messageInfo;
 	}
 
 	public MessageInfo<List<EventInfo>> getByInvestDate() {

@@ -3,7 +3,6 @@ package com.gi.ctdn.restful;
 import com.gi.ctdn.ods.biz.*;
 import com.gi.ctdn.ods.pojo.*;
 import com.gi.ctdn.view.common.MessageInfo;
-import com.gi.ctdn.view.common.QueryResultInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,12 +32,12 @@ public class RiskExcutedController {
     @Autowired
 	private RiskOperationExceptionBiz riskOperationExceptionBiz;
 
-	@RequestMapping("queryExcutedByPage")
-	@ResponseBody
-	public MessageInfo<QueryResultInfo<RiskExcuted>> queryExcutedByPage (@RequestBody RiskExcuted riskExcuted) {
-		MessageInfo<QueryResultInfo<RiskExcuted>> resultMessageInfo = riskExcutedBiz.queryByPage(riskExcuted);
-		return resultMessageInfo;
-	}
+//	@RequestMapping("queryExcutedByPage")
+//	@ResponseBody
+//	public MessageInfo<QueryResultInfo<RiskExcuted>> queryExcutedByPage (@RequestBody RiskExcuted riskExcuted) {
+//		MessageInfo<QueryResultInfo<RiskExcuted>> resultMessageInfo = riskExcutedBiz.queryByPage(riskExcuted);
+//		return resultMessageInfo;
+//	}
 
 	@RequestMapping("queryCourtAnnouncement/{sourceCode}")
 	@ResponseBody

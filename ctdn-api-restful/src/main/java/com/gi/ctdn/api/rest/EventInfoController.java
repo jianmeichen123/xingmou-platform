@@ -1,12 +1,10 @@
 package com.gi.ctdn.api.rest;
 
-import com.gi.ctdn.biz.CurrencyTypeBiz;
 import com.gi.ctdn.biz.EventDetailBiz;
 import com.gi.ctdn.biz.EventInfoBiz;
 import com.gi.ctdn.pojo.EventInfo;
 import com.gi.ctdn.pojo.EventInfoList;
 import com.gi.ctdn.view.common.MessageInfo;
-import com.gi.ctdn.view.common.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,9 +50,9 @@ public class EventInfoController {
 
 	@RequestMapping("getListByCompany")
 	@ResponseBody
-	public Result getListByCompany(@RequestBody EventInfo eventInfo){
-		Result ret = eventInfoBiz.getListByName(eventInfo);
-		return ret;
+	public MessageInfo<EventInfo> getListByCompany(@RequestBody EventInfo eventInfo){
+		MessageInfo<EventInfo>  messageInfo = eventInfoBiz.getListByName(eventInfo);
+		return messageInfo;
 	}
 
 	@RequestMapping("queryProjectEventList")

@@ -122,7 +122,6 @@ public class OPController {
         @RequestMapping("is")
         @ResponseBody
         public MessageInfo<List<OpIndiceSummary>> opIndiceSummary(@RequestBody OpIndiceSummary opIndiceSummary){
-            LOGGER.info("**************************is**************"+opIndiceSummary.getCode());
             MessageInfo<List<OpIndiceSummary>> messageInfo = opIndiceSummaryBiz.getListByCode(opIndiceSummary.getCode());
             return messageInfo;
         }

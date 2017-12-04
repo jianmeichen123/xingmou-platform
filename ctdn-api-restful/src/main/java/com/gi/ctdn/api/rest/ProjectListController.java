@@ -6,7 +6,6 @@ import com.gi.ctdn.biz.ProjectMediaInfoBiz;
 import com.gi.ctdn.biz.ProjectTeamBiz;
 import com.gi.ctdn.pojo.*;
 import com.gi.ctdn.view.common.MessageInfo;
-import com.gi.ctdn.view.common.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,9 +49,9 @@ public class ProjectListController {
 	 */
 	@RequestMapping("queryMediaInfoByCode")
 	@ResponseBody
-	public Result queryProjectByCode(@RequestBody ProjectMediaInfo projectMediaInfo){
-		Result result = projectMediaInfoBiz.queryMediaInfoList(projectMediaInfo);
-		return result;
+	public MessageInfo<ProjectMediaInfo> queryProjectByCode(@RequestBody ProjectMediaInfo projectMediaInfo){
+		MessageInfo<ProjectMediaInfo> messageInfo = projectMediaInfoBiz.queryMediaInfoList(projectMediaInfo);
+		return messageInfo;
 	}
 
 	/**
@@ -102,8 +101,8 @@ public class ProjectListController {
 
 	@RequestMapping("queryByProjTitle")
 	@ResponseBody
-	public Result queryByProjTitle(@RequestBody ProjectList projectList){
-		Result result = projectListBiz.queryProjectLists(projectList);
-		return result;
+	public  MessageInfo<ProjectList> queryByProjTitle(@RequestBody ProjectList projectList){
+		MessageInfo<ProjectList> messageInfo = projectListBiz.queryProjectLists(projectList);
+		return messageInfo;
 	}
 }

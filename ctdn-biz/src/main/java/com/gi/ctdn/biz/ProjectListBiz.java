@@ -7,7 +7,6 @@ import com.gi.ctdn.pojo.*;
 import com.gi.ctdn.view.common.MessageInfo;
 import com.gi.ctdn.view.common.MessageStatus;
 import com.gi.ctdn.view.common.Pagination;
-import com.gi.ctdn.view.common.Result;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
@@ -141,8 +140,8 @@ public class ProjectListBiz {
 		return message;
 	}
 
-	public Result queryProjectLists(ProjectList projectList){
-		Result result;
+	public MessageInfo<ProjectList> queryProjectLists(ProjectList projectList){
+		MessageInfo<ProjectList> messageInfo;
 		try {
 			PageHelper.startPage(projectList.getPageNo(), projectList.getPageSize());
 			List<ProjectList> projectLists = projectListDAO.selectListByCode(projectList.getCompCode());
@@ -150,12 +149,12 @@ public class ProjectListBiz {
 			Pagination page = new Pagination();
 			page.setTotal(pageInfo.getTotal());
 			page.setRecords(projectLists);
-			result = new Result(MessageStatus.OK_MESSAGE, MessageStatus.OK_CODE, page);
+			messageInfo = new MessageInfo( MessageStatus.OK_CODE,MessageStatus.OK_MESSAGE,page);
 		} catch (Exception e) {
 			LOGGER.error("querycompSubList","查询CompSub失败", e);
-			return Result.addError();
+			messageInfo = new MessageInfo(MessageStatus.ERROR_CODE,e.getMessage());
 		}
-		return result;
+		return messageInfo;
 	}
 
 }

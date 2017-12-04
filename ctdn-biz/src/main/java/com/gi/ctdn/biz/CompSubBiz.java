@@ -5,7 +5,6 @@ import com.gi.ctdn.pojo.CompSub;
 import com.gi.ctdn.view.common.MessageInfo;
 import com.gi.ctdn.view.common.MessageStatus;
 import com.gi.ctdn.view.common.Pagination;
-import com.gi.ctdn.view.common.Result;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
@@ -40,8 +39,8 @@ public class CompSubBiz {
     }
 
 
-    public Result querycompSubList(CompSub compSub){
-        Result result;
+    public MessageInfo<CompSub> querycompSubList(CompSub compSub){
+        MessageInfo<CompSub> messageInfo;
         try {
             PageHelper.startPage(compSub.getPageNo(), compSub.getPageSize());
             List<CompSub> compSubList = compSubDao.selectCompSubs(compSub.getCompCode());
@@ -49,11 +48,11 @@ public class CompSubBiz {
             Pagination page = new Pagination();
             page.setTotal(pageInfo.getTotal());
             page.setRecords(compSubList);
-            result = new Result(MessageStatus.OK_MESSAGE, MessageStatus.OK_CODE, page);
+            messageInfo = new MessageInfo(MessageStatus.OK_CODE,MessageStatus.OK_MESSAGE,page);
         } catch (Exception e) {
             LOGGER.error("querycompSubList","查询CompSub失败", e);
-            return Result.addError();
+            messageInfo = new MessageInfo(MessageStatus.ERROR_CODE,e.getMessage());
         }
-        return result;
+        return messageInfo;
     }
 }

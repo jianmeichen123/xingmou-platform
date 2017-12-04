@@ -22,7 +22,7 @@
         <module>xingmou-data-rest</module>
         <module>ctdn-data-ods</module>
         <module>ctdn-biz</module>
-        <module>xingmou-mongodb</module>
+        <!--<module>xingmou-mongodb</module>-->
         <module>ctdn-api-restful</module>
         <module>xingmou-user</module>
     </modules>
@@ -50,11 +50,11 @@
                 <version>${xingmou.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>com.gi</groupId>
-                <artifactId>xingmou-mongodb</artifactId>
-                <version>${xingmou.version}</version>
-            </dependency>
+            <!--<dependency>-->
+                <!--<groupId>com.gi</groupId>-->
+                <!--<artifactId>xingmou-mongodb</artifactId>-->
+                <!--<version>${xingmou.version}</version>-->
+            <!--</dependency>-->
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>ctdn-biz</artifactId>

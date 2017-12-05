@@ -114,14 +114,14 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <basePackage>com.gi.ctdn.ods</basePackage>
+                    <basePackage>com.gi.ctdn</basePackage>
                     <prefix></prefix>
                     <url>jdbc:mysql://10.9.130.142/ctdn?zeroDateTimeBehavior=convertToNull&amp;useUnicode=true&amp;characterEncoding=utf-8</url>
                     <username>app</username>
                     <password>QADZg(3I2rL-HLr7</password>
-                    <tables>app_project_demand_info</tables>
+                    <tables>app_project_list</tables>
                     <output_root_dir>/home/zcy/template/</output_root_dir>
-                    <templates_dir>/home/zcy/IdeaProjects/ctdn-project/xingmou-platform/templates/single/query/</templates_dir>
+                    <templates_dir>x</templates_dir>
                 </configuration>
             </plugin>
             <!--  mvn com.v4java:maven-mybatis-gen-plugin:gen -s ~/etc/settings-xhhl.xml -->

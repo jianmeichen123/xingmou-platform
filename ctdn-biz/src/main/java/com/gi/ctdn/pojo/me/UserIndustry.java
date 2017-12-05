@@ -1,4 +1,4 @@
-package com.gi.ctdn.pojo;
+package com.gi.ctdn.pojo.me;
 
 import java.util.List;
 
@@ -36,8 +36,8 @@ public class UserIndustry  {
 	private String industryIds;
 
 	private List<Integer> industryIdList;
-	
-    
+
+
 	public Long getId(){
 		return id;
 	}

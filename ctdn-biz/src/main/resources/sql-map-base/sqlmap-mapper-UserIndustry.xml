@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gi.ctdn.dao.UserIndustryDAO">
-	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.UserIndustry">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.me.UserIndustry">
 			<id column="id" property="id" jdbcType="BIGINT" />
 			<result column="userId" property="userId" jdbcType="INTEGER" />
 			<result column="industryNames" property="industryNames" jdbcType="VARCHAR" />
@@ -26,7 +26,7 @@
 	</select>
 	
 
-	<update id="updateUserIndustry" parameterType="com.gi.ctdn.pojo.UserIndustry">
+	<update id="updateUserIndustry" parameterType="com.gi.ctdn.pojo.me.UserIndustry">
 		UPDATE
 			app_user_industry
 		SET

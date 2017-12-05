@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import com.gi.ctdn.dao.UserIndustryDAO;
 import com.gi.ctdn.view.common.MessageInfo;
 
-import com.gi.ctdn.pojo.UserIndustry;
+import com.gi.ctdn.pojo.me.UserIndustry;
 
 @Service("userIndustryBiz")
 public class UserIndustryBiz  {

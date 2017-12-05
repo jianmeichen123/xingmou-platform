@@ -2,6 +2,7 @@
 
 package com.gi.ctdn.biz;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.alibaba.fastjson.JSON;
@@ -30,12 +31,6 @@ public class OrgInfoBiz  {
 	OrgMediaInfoDAO orgMediaInfoDAO;
 
     @Autowired
-	OrgMemberInfoDAO orgMemberInfoDAO;
-
-    @Autowired
-	EventInfoDAO eventInfoDAO;
-
-    @Autowired
 	OrgMemberDAO orgMemberDAO;
 
     @Autowired
@@ -47,7 +42,7 @@ public class OrgInfoBiz  {
     @Autowired
 	NewsDao newsDao;
 
-    public  MessageInfo<OrgListInfo> getBaseInfoByOrgId(String orgCode){
+    public  MessageInfo<OrgListInfo> getBaseInfoByOrgCode(String orgCode){
 
     	MessageInfo<OrgListInfo> messageInfo = new MessageInfo<>();
     	try{
@@ -73,31 +68,29 @@ public class OrgInfoBiz  {
 		return messageInfo;
 	}
 		
-	public MessageInfo<List<OrgInfo>> getListByOrgId(String orgId){
+//	public MessageInfo<List<OrgInfo>> getListByOrgId(String orgId){
+//
+//		MessageInfo<List<OrgInfo>> messageInfo = new MessageInfo<List<OrgInfo>>();
+//		try {
+//			List<OrgInfo> orgInfoList = orgInfoDAO.selectByOrgId(orgId);
+//			messageInfo.setData(orgInfoList);
+//		} catch (Exception e) {
+//			LOGGER.error("getListByOrgId","查询OrgInfo失败", e);
+//			messageInfo.setStatus(MessageStatus.ERROR_CODE);
+//		}
+//		return messageInfo;
+//	}
 
-		MessageInfo<List<OrgInfo>> messageInfo = new MessageInfo<List<OrgInfo>>();
+
+    public List<OrgInfo> getListByCodes(List<String> orgCodes){
+
+		List<OrgInfo> orgInfoList = new ArrayList<OrgInfo>();
 		try {
-			List<OrgInfo> orgInfoList = orgInfoDAO.selectByOrgId(orgId);
-			messageInfo.setData(orgInfoList);
+			orgInfoList = orgInfoDAO.selectByCodes(orgCodes);
 		} catch (Exception e) {
-			LOGGER.error("getListByOrgId","查询OrgInfo失败", e);
-			messageInfo.setStatus(MessageStatus.ERROR_CODE);
+			LOGGER.error("getListByOrgCodes","查询全部OrgInfo失败", e);
 		}
-		return messageInfo;
-	}
-
-
-    public MessageInfo<List<OrgInfo>> getAllOrgInfo(){
-
-		MessageInfo<List<OrgInfo>> messageInfo = new MessageInfo<List<OrgInfo>>();
-		try {
-			List<OrgInfo> orgInfoList = orgInfoDAO.selectAll();
-			messageInfo.setData( orgInfoList);
-		} catch (Exception e) {
-			LOGGER.error("getAllOrgInfo","查询全部OrgInfo失败", e);
-			messageInfo.setStatus(10001);
-		}
-		return messageInfo;
+		return orgInfoList;
 	}
 
 	public List<EventInfoExt> sortList(List<EventInfoExt> eventInfoExtList,String orgName){

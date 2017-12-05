@@ -1,7 +1,7 @@
 package com.gi.ctdn.api.rest;
 
 import com.gi.ctdn.biz.IndexHeaderStatBiz;
-import com.gi.ctdn.biz.UserIndustryBiz;
+import com.gi.ctdn.biz.me.UserIndustryBiz;
 import com.gi.ctdn.pojo.IndexHeaderStat;
 import com.gi.ctdn.pojo.me.UserIndustry;
 import com.gi.ctdn.view.common.MessageInfo;

@@ -1,6 +1,6 @@
 
 
-package com.gi.ctdn.biz;
+package com.gi.ctdn.biz.me;
 
 import java.util.ArrayList;
 import java.util.Arrays;

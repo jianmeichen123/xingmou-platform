@@ -29,20 +29,20 @@ public class OrgInfoController {
     @Autowired
 	private OrgMemberInfoBiz orgMemberInfoBiz;
 
-
-    @RequestMapping("getAll")
-    @ResponseBody
-    public MessageInfo<List<OrgInfo>> getAllOrgInfo(){
-		MessageInfo<List<OrgInfo>>  messageInfo = orgInfoBiz.getAllOrgInfo();
-		return messageInfo;
-	}
+//
+//    @RequestMapping("getAll")
+//    @ResponseBody
+//    public MessageInfo<List<OrgInfo>> getAllOrgInfo(){
+//		MessageInfo<List<OrgInfo>>  messageInfo = orgInfoBiz.getAllOrgInfo();
+//		return messageInfo;
+//	}
 
 
 		
-    @RequestMapping("getListByOrgId/{orgCode}")
+    @RequestMapping("getListByOrgCode/{orgCode}")
     @ResponseBody
-	public MessageInfo<OrgListInfo> getListByOrgId(@PathVariable String orgCode){
-		MessageInfo<OrgListInfo> messageInfo = orgInfoBiz.getBaseInfoByOrgId(orgCode);
+	public MessageInfo<OrgListInfo> getListByOrgCode(@PathVariable String orgCode){
+		MessageInfo<OrgListInfo> messageInfo = orgInfoBiz.getBaseInfoByOrgCode(orgCode);
 		return messageInfo;
 	}
 

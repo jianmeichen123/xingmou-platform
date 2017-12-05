@@ -99,10 +99,17 @@ public class ProjectListController {
 		return resultMessageInfo;
 	}
 
-	@RequestMapping("queryByProjTitle")
+	/**
+	 * 查询公司下的企业项目
+	 * @param projectList
+	 * @return
+	 */
+	@RequestMapping("queryByCompCode")
 	@ResponseBody
 	public  MessageInfo<ProjectList> queryByProjTitle(@RequestBody ProjectList projectList){
-		MessageInfo<ProjectList> messageInfo = projectListBiz.queryProjectLists(projectList);
+		MessageInfo<ProjectList> messageInfo = projectListBiz.queryByCompCode(projectList);
 		return messageInfo;
 	}
+
+
 }

@@ -62,22 +62,22 @@
 		WHERE  projCode = #{code,jdbcType=VARCHAR}
 	</select>
 
-    <select id="queryCompetationlist" resultMap="BaseResultMap">
+    <select id="selectCompetationlist" resultMap="BaseResultMap">
         SELECT
-        <include refid="selectFields" />
+            <include refid="selectFields" />
         FROM
-        app_project_list
+            app_project_list
         <where> projCode in (
             SELECT app_competitive_product.sim_prod_code FROM app_competitive_product WHERE app_competitive_product.base_prod_code =
            #{sourceCode,jdbcType=VARCHAR} and is_same = #{isSame,jdbcType=BIGINT}
             )
         </where>
     </select>
-    <select id="queryCompetitiveSimilar" resultMap="BaseResultMap" >
+    <select id="selectCompetitiveSimilar" resultMap="BaseResultMap" >
         SELECT
-        sim_prod_code as projCode, app_competitive_product.similarity as similarity
+            sim_prod_code as projCode, app_competitive_product.similarity as similarity
         FROM
-        app_competitive_product
+            app_competitive_product
         <where>
             base_prod_code =  #{sourceCode,jdbcType=BIGINT} and is_same = #{isSame,jdbcType=BIGINT}
         </where>
@@ -86,26 +86,41 @@
 
     <select id="selectByFinanceDate" resultMap="BaseResultMap" >
         SELECT
-        <include refid="selectFields" />
+            <include refid="selectFields" />
         FROM
-        app_project_list
+            app_project_list
         ORDER BY showOrder asc LIMIT 4
     </select>
 
     <select id="selectByName" resultMap="BaseResultMap">
         SELECT
-        <include refid="selectFields" />
+            <include refid="selectFields" />
         FROM
-        app_project_list
-        WHERE  projTitle = #{projTitle,jdbcType=VARCHAR}
+            app_project_list
+        <where>
+            projTitle = #{projTitle,jdbcType=VARCHAR}
+        </where>
     </select>
 
     <select id="selectListByCode" resultMap="BaseResultMap">
         SELECT
-        <include refid="selectFields" />
+            <include refid="selectFields" />
         FROM
-        app_project_list
-        WHERE  compCode = #{compCode,jdbcType=VARCHAR} and compCode!=''
+            app_project_list
+        <where>
+            compCode = #{compCode,jdbcType=VARCHAR} and compCode!=''
+        </where>
     </select>
 
+    <select id="selectListByCodes" parameterType="java.util.List" resultMap="BaseResultMap">
+        SELECT
+            <include refid="selectFields" />
+        FROM
+            app_project_list
+        <where> where projCode in
+                <foreach collection="codes" index="index" item="item" open="(" separator="," close=")">
+                   #{item}
+                </foreach>
+        </where>
+    </select>
 </mapper>

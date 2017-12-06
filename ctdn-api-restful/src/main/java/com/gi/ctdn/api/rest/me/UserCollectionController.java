@@ -1,11 +1,6 @@
 package com.gi.ctdn.api.rest.me;
 
-import com.gi.ctdn.api.rest.AppProjectDemandInfoController;
-import com.gi.ctdn.biz.AppProjectDemandBiz;
 import com.gi.ctdn.biz.me.UserCollectionBiz;
-import com.gi.ctdn.biz.me.UserIndustryBiz;
-import com.gi.ctdn.dao.UserIndustryDAO;
-import com.gi.ctdn.dao.me.UserCollectionDAO;
 import com.gi.ctdn.pojo.me.UserCollection;
 import com.gi.ctdn.view.common.MessageInfo;
 import org.slf4j.Logger;

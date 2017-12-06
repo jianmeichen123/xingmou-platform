@@ -2,20 +2,17 @@
 
 package com.gi.ctdn.biz.me;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
+import com.gi.ctdn.dao.me.UserIndustryDAO;
+import com.gi.ctdn.pojo.me.UserIndustry;
+import com.gi.ctdn.view.common.MessageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gi.ctdn.dao.UserIndustryDAO;
-import com.gi.ctdn.view.common.MessageInfo;
-
-import com.gi.ctdn.pojo.me.UserIndustry;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Service("userIndustryBiz")
 public class UserIndustryBiz  {

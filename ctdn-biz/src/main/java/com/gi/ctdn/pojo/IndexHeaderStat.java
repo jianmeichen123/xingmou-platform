@@ -4,33 +4,52 @@ import com.gi.ctdn.view.common.Pagination;
 
 public class IndexHeaderStat extends Pagination {
 
-        public static final String ID = "id";
-        public static final String PROJECTNUM = "projectNum";
-        public static final String ORGNUM = "orgNum";
-        public static final String EVENTNUM = "eventNum";
-    
-	
+	public static final String ID = "id";
+	public static final String PROJECTNUM = "projectNum";
+	public static final String ORGNUM = "orgNum";
+	public static final String EVENTNUM = "eventNum";
+
+
 	/**
-	 * @Fields id : 
+	 * @Fields id :
 	 */
 	private Integer id;
-	
+
 	/**
-	 * @Fields projectNum : 
+	 * @Fields projectNum :
 	 */
 	private Integer projectNum;
-	
+
 	/**
-	 * @Fields orgNum : 
+	 * @Fields orgNum :
 	 */
 	private Integer orgNum;
-	
+
 	/**
-	 * @Fields eventNum : 
+	 * @Fields eventNum :
 	 */
 	private Integer eventNum;
-	
-    
+
+	private Integer startUpNum;
+
+	private Integer investorNum;
+
+	public Integer getStartUpNum() {
+		return startUpNum;
+	}
+
+	public void setStartUpNum(Integer startUpNum) {
+		this.startUpNum = startUpNum;
+	}
+
+	public Integer getInvestorNum() {
+		return investorNum;
+	}
+
+	public void setInvestorNum(Integer investorNum) {
+		this.investorNum = investorNum;
+	}
+
 	public Integer getId(){
 		return id;
 	}
@@ -38,7 +57,7 @@ public class IndexHeaderStat extends Pagination {
 	public void setId(Integer id){
 		this.id = id;
 	}
-    
+
 	public Integer getProjectNum(){
 		return projectNum;
 	}
@@ -46,7 +65,7 @@ public class IndexHeaderStat extends Pagination {
 	public void setProjectNum(Integer projectNum){
 		this.projectNum = projectNum;
 	}
-    
+
 	public Integer getOrgNum(){
 		return orgNum;
 	}
@@ -54,7 +73,7 @@ public class IndexHeaderStat extends Pagination {
 	public void setOrgNum(Integer orgNum){
 		this.orgNum = orgNum;
 	}
-    
+
 	public Integer getEventNum(){
 		return eventNum;
 	}
@@ -62,4 +81,4 @@ public class IndexHeaderStat extends Pagination {
 	public void setEventNum(Integer eventNum){
 		this.eventNum = eventNum;
 	}
-    }
+}

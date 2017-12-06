@@ -13,7 +13,7 @@ public interface UserCollectionDAO {
 
     public int insert(UserCollection userCollection);
 
-    public int deleteByUT(@Param("userId") Integer userId,@Param("type") Integer type);
+    public int deleteByUTC(@Param("userId") Integer userId,@Param("type") Integer type,@Param("code") String code);
 
     public List<UserCollection> selectByUserId(Integer userId);
 

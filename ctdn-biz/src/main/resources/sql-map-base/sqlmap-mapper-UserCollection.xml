@@ -38,17 +38,18 @@
 		INSERT
 			app_user_collection
 		SET
-			code = #{code,jdbcType=VARCHAR},
+			userId = #{userId,jdbcType=INTEGER},
 			type = #{type,jdbcType=INTEGER},
-			userId = #{userId,jdbcType=VARCHAR}
+			code = #{code,jdbcType=VARCHAR}
 	</insert>
 
-	<delete id="deleteByUT">
+	<delete id="deleteByUTC">
 		DELETE FROM
 			app_user_collection
 		<where>
 			userId = #{userId,jdbcType=INTEGER} AND
-			type = #{type,jdbcType=INTEGER}
+			type = #{type,jdbcType=INTEGER} AND
+			code = #{type,jdbcType=VARCHAR}
 		</where>
 	</delete>
 

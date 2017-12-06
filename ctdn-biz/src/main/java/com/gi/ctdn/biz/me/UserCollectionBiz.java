@@ -39,10 +39,7 @@ public class UserCollectionBiz {
     public MessageInfo insertCollection(UserCollection userCollection){
         MessageInfo messageInfo = new MessageInfo();
         try{
-            int deleteRet =  userCollectionDAO.deleteByUT(userCollection.getUserId(),userCollection.getType());
-            if(deleteRet>0){
-                 userCollectionDAO.insert(userCollection);
-            }
+            userCollectionDAO.insert(userCollection);
         }catch (Exception e){
             LOGGER.info("收藏失败",e.getMessage());
             messageInfo.setStatus(MessageStatus.ERROR_CODE);
@@ -50,6 +47,21 @@ public class UserCollectionBiz {
         }
         return messageInfo;
     }
+
+    @Transactional
+    public MessageInfo deleteOneCollection(UserCollection userCollection){
+        MessageInfo messageInfo = new MessageInfo();
+        try{
+            int deleteRet =  userCollectionDAO.deleteByUTC(userCollection.getUserId(),userCollection.getType(),userCollection.getCode());
+        }catch (Exception e){
+            LOGGER.info("取消删除失败",e.getMessage());
+            messageInfo.setStatus(MessageStatus.ERROR_CODE);
+            messageInfo.setMessage(e.getMessage());
+        }
+        return messageInfo;
+    }
+
+
 
     public MessageInfo<List<String>> getCodeListByUT(Integer userId,Integer type){
         MessageInfo<List<String>> messageInfo = new MessageInfo<List<String>>();

@@ -4,6 +4,7 @@ package com.gi.ctdn.biz;
 
 import java.util.List;
 
+import com.gi.ctdn.view.common.MessageStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,7 +37,7 @@ public class OrgRankBiz  {
 			messageInfo.setData( orgRankList);
 		} catch (Exception e) {
 			LOGGER.error("getAllOrgRank","查询全部OrgRank失败", e);
-			messageInfo.setStatus(10001);
+			messageInfo.setStatus(MessageStatus.ERROR_CODE);
 		}
 		return messageInfo;
 	}
@@ -49,7 +50,7 @@ public class OrgRankBiz  {
 			messageInfo.setData( orgRankList);
 		} catch (Exception e) {
 			LOGGER.error("getByTimes","查询OrgRankByTimes失败", e);
-			messageInfo.setStatus(10001);
+			messageInfo.setStatus(MessageStatus.ERROR_CODE);
 		}
 		return messageInfo;
 	}
@@ -62,7 +63,7 @@ public class OrgRankBiz  {
 			messageInfo.setData( orgRankList);
 		} catch (Exception e) {
 			LOGGER.error("getByAllTimes","查询OrgRankByTimes失败", e);
-			messageInfo.setStatus(10001);
+			messageInfo.setStatus(MessageStatus.ERROR_CODE);
 		}
 		return messageInfo;
 	}

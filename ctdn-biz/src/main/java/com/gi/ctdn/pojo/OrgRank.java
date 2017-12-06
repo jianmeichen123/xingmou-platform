@@ -24,7 +24,7 @@ public class OrgRank  {
 	/**
 	 * @Fields orgid : 机构id
 	 */
-	private Integer orgid;
+	private String orgCode;
 	
 	/**
 	 * @Fields orgname : 机构名称
@@ -64,15 +64,15 @@ public class OrgRank  {
 	public void setId(Integer id){
 		this.id = id;
 	}
-    
-	public Integer getOrgid(){
-		return orgid;
+
+	public String getOrgCode() {
+		return orgCode;
 	}
 
-	public void setOrgid(Integer orgid){
-		this.orgid = orgid;
+	public void setOrgCode(String orgCode) {
+		this.orgCode = orgCode;
 	}
-    
+
 	public String getOrgname(){
 		return orgname;
 	}

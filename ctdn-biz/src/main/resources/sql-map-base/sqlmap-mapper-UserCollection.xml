@@ -13,7 +13,7 @@
 		id, code, `type`, userId
 	</sql>
 
-	<select id="selectCodesByUT" resultMap="java.lang.String">
+	<select id="selectCodesByUT" resultType="java.lang.String">
 		SELECT
 			code
 		FROM

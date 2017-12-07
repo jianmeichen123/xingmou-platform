@@ -11,9 +11,9 @@ import java.util.List;
 
 public interface UserCollectionDAO {
 
-    public int insert(UserCollection userCollection);
+    public int insertOne(UserCollection userCollection);
 
-    public int deleteByUTC(@Param("userId") Integer userId,@Param("type") Integer type,@Param("code") String code);
+    public int deleteOne(UserCollection userCollection);
 
     public List<UserCollection> selectByUserId(Integer userId);
 

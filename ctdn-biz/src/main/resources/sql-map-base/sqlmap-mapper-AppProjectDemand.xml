@@ -25,8 +25,8 @@
                 <result column="projRound" property="projRound" jdbcType="VARCHAR" />
                 <result column="projMoney" property="projMoney" jdbcType="DOUBLE" />
                 <result column="projStock" property="projStock" jdbcType="DOUBLE" />
-                <result column="projAddTime" property="projAddTime" jdbcType="TIMESTAMP" />
-                <result column="projUpdateTime" property="projUpdateTime" jdbcType="TIMESTAMP" />
+                <result column="projAddTime" property="projAddTime" jdbcType="BIGINT" />
+                <result column="projUpdateTime" property="projUpdateTime" jdbcType="BIGINT" />
     	</resultMap>
 
 
@@ -96,8 +96,8 @@
 		#{projRound,jdbcType=VARCHAR},
 		#{projMoney,jdbcType=DOUBLE},
 		#{projStock,jdbcType=DOUBLE},
-		#{projAddTime,jdbcType=TIMESTAMP},
-		#{projUpdateTime,jdbcType=TIMESTAMP}
+		#{projAddTime,jdbcType=BIGINT},
+		#{projUpdateTime,jdbcType=BIGINT}
 		)
 		]]>
     </insert>

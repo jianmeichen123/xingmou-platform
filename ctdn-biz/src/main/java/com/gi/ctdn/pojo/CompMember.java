@@ -1,9 +1,11 @@
 package com.gi.ctdn.pojo;
 
+import com.gi.ctdn.view.common.PojoInfo;
+
 /**
  * Created by wanghao on 17-11-15.
  */
-public class CompMember {
+public class CompMember extends PojoInfo{
     public static final String COMPCODE = "公司唯一标识";
     public static final String COMPJOB = "任职职务";
     public static final String MEMBERNAME = "姓名";

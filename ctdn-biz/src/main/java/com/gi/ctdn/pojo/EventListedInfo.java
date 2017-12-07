@@ -1,10 +1,11 @@
 package com.gi.ctdn.pojo;
 
 import com.gi.ctdn.view.common.Pagination;
+import com.gi.ctdn.view.common.Query;
 
 import java.util.Date;
 
-public class EventListedInfo extends Pagination {
+public class EventListedInfo extends Query {
 
 
     

@@ -1,14 +1,18 @@
 package com.gi.ctdn.pojo;
 
 import com.gi.ctdn.view.common.Pagination;
+import com.gi.ctdn.view.common.Query;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Date;
-
-public class EventInfo extends Pagination {
+@ApiModel
+public class EventInfo extends Query {
 
 	/**
 	 * @Fields investevent : 投资事件
 	 */
+	@ApiModelProperty(value="investevent" )
 	private String investevent;
 	
 	/**

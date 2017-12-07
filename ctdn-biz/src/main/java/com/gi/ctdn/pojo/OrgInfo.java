@@ -1,10 +1,11 @@
 package com.gi.ctdn.pojo;
 
 import com.gi.ctdn.view.common.Pagination;
+import com.gi.ctdn.view.common.Query;
 
 import java.util.Date;
 
-public class OrgInfo extends Pagination {
+public class OrgInfo extends Query {
 
         public static final String INVESTORG = "投资机构";
         public static final String ORGID = "机构ID";

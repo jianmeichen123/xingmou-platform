@@ -1,11 +1,12 @@
 package com.gi.ctdn.pojo;
 
 import com.gi.ctdn.view.common.Pagination;
+import com.gi.ctdn.view.common.Query;
 
 /**
  * Created by wanghao on 17-11-3.
  */
-public class News extends Pagination {
+public class News extends Query {
 
     public static final String OBJCODE = "主体唯一标识";
     public static final String OBJTYPE = "主体类型";

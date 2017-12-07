@@ -1,10 +1,11 @@
 package com.gi.ctdn.pojo;
 
 import com.gi.ctdn.view.common.Pagination;
+import com.gi.ctdn.view.common.PojoInfo;
 
 import java.util.List;
 
-public class ListingType extends Pagination {
+public class ListingType extends PojoInfo {
 
         public static final String ID = "id";
         public static final String NAME = "name";

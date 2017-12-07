@@ -1,8 +1,9 @@
 package com.gi.ctdn.pojo;
 
 import com.gi.ctdn.view.common.Pagination;
+import com.gi.ctdn.view.common.Query;
 
-public class OrgMember extends Pagination {
+public class OrgMember extends Query {
 
         public static final String INVSTID = "机构ID";
         public static final String PERID = "成员ID";

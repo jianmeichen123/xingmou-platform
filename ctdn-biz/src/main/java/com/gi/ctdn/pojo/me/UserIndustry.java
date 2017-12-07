@@ -1,8 +1,10 @@
 package com.gi.ctdn.pojo.me;
 
+import com.gi.ctdn.view.common.PojoInfo;
+
 import java.util.List;
 
-public class UserIndustry  {
+public class UserIndustry  extends PojoInfo{
 
 	/**
 	 * @Fields id : 

@@ -1,8 +1,9 @@
 package com.gi.ctdn.pojo;
 
 import com.gi.ctdn.view.common.Pagination;
+import com.gi.ctdn.view.common.Query;
 
-public class ProjectMediaInfo extends Pagination {
+public class ProjectMediaInfo extends Query {
 
         public static final String CODE = "code";
         public static final String PROJTITLE = "项目名称";

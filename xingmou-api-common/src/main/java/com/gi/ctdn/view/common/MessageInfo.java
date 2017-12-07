@@ -1,6 +1,8 @@
 package com.gi.ctdn.view.common;
 
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 
 public class MessageInfo<E> implements Serializable {
@@ -9,14 +11,23 @@ public class MessageInfo<E> implements Serializable {
 	 * @Fields serialVersionUID : TODO 
 	 */ 
 	private static final long serialVersionUID = -7122226153545621086L;
+
+	@ApiModelProperty(value = "OK/ERROR")
 	private String message;
+
+	@ApiModelProperty(value = "成功:10000 失败:10001")
 	private int status;
+
+	@ApiModelProperty(value = "非分页数据")
 	private E data;
+
 	/**
 	 * 返回分页数据
 	 */
+	@ApiModelProperty(value = "分页数据")
 	Pagination page;
 
+	@ApiModelProperty(value = "true/false")
 	private boolean success;
 
 	public MessageInfo()

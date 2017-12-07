@@ -1,6 +1,8 @@
 package com.gi.ctdn.pojo;
 
-public class ProjectContact {
+import com.gi.ctdn.view.common.PojoInfo;
+
+public class ProjectContact extends PojoInfo {
 
 	/**
 	 * @Fields projectCode : 项目code

@@ -6,6 +6,9 @@ import com.gi.ctdn.biz.ProjectMediaInfoBiz;
 import com.gi.ctdn.biz.ProjectTeamBiz;
 import com.gi.ctdn.pojo.*;
 import com.gi.ctdn.view.common.MessageInfo;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -57,6 +60,8 @@ public class ProjectListController {
 	/**
 	 * 根据code查询团队成员
 	 */
+	@ApiOperation("查询项目成员 列表图片地址:http://static.galaxyinternet.com/img/project/+projCode+'.png'")
+	@ApiImplicitParams(@ApiImplicitParam(paramType = "body", dataType = "ProjectTeam", name = "team", value = "只传projectCode", required = true))
 	@RequestMapping("queryProjectTeamByCode")
 	@ResponseBody
 	public MessageInfo<List<ProjectTeam>> queryProjectByCode(@RequestBody ProjectTeam team){

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by zcy on 17-12-5.
@@ -54,4 +55,10 @@ public class UserCollectionController {
         return messageInfo;
     }
 
+//    @RequestMapping("countNum/{userId}")
+//    @ResponseBody
+//    public MessageInfo<Map<String,Integer>>  countNum(@RequestBody UserCollection userCollection){
+//        MessageInfo<List<String>> messageInfo = userCollectionBiz.countNum(userCollection);
+//        return messageInfo;
+//    }
 }

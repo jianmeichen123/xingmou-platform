@@ -34,7 +34,7 @@
 		</where>
 	</select>
 
-	<insert id="insert" parameterType="com.gi.ctdn.pojo.me.UserCollection">
+	<insert id="insertOne" parameterType="com.gi.ctdn.pojo.me.UserCollection">
 		INSERT
 			app_user_collection
 		SET
@@ -43,13 +43,13 @@
 			code = #{code,jdbcType=VARCHAR}
 	</insert>
 
-	<delete id="deleteByUTC">
+	<delete id="deleteOne" parameterType="com.gi.ctdn.pojo.me.UserCollection">
 		DELETE FROM
 			app_user_collection
 		<where>
 			userId = #{userId,jdbcType=INTEGER} AND
 			type = #{type,jdbcType=INTEGER} AND
-			code = #{type,jdbcType=VARCHAR}
+			code = #{code,jdbcType=VARCHAR}
 		</where>
 	</delete>
 

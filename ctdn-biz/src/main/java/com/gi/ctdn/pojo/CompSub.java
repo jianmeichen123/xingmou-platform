@@ -1,11 +1,12 @@
 package com.gi.ctdn.pojo;
 
 import com.gi.ctdn.view.common.Pagination;
+import com.gi.ctdn.view.common.Query;
 
 /**
  * Created by wanghao on 17-11-15.
  */
-public class CompSub extends Pagination {
+public class CompSub extends Query {
     public static final String COMPCODE = "公司唯一标识";
     public static final String COMPFULLTITLE = "公司全称";
     public static final String COMPSUBFULLTITLE = "子公司全称";

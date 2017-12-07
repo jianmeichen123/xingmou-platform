@@ -2,9 +2,10 @@ package com.gi.ctdn.pojo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.gi.ctdn.view.common.Pagination;
+import com.gi.ctdn.view.common.PojoInfo;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class MergeStatus extends Pagination {
+public class MergeStatus extends PojoInfo {
 
         public static final String ID = "id";
         public static final String NAME = "name";

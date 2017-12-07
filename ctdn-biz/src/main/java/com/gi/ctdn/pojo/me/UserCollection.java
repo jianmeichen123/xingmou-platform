@@ -2,13 +2,14 @@ package com.gi.ctdn.pojo.me;
 
 import com.gi.ctdn.pojo.OrgInfo;
 import com.gi.ctdn.pojo.ProjectList;
+import com.gi.ctdn.view.common.PojoInfo;
 
 import java.util.List;
 
 /**
  * Created by zcy on 17-12-5.
  */
-public class UserCollection {
+public class UserCollection extends PojoInfo {
 
     private Integer userId;
 

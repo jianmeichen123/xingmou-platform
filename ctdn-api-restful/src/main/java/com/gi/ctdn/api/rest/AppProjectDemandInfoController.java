@@ -3,6 +3,9 @@ package com.gi.ctdn.api.rest;
 import com.gi.ctdn.biz.AppProjectDemandBiz;
 import com.gi.ctdn.pojo.AppProjectDemand;
 import com.gi.ctdn.view.common.MessageInfo;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.slf4j.Logger;
@@ -29,7 +32,12 @@ public class AppProjectDemandInfoController {
 
 	private static final Logger logger = LoggerFactory.getLogger(AppProjectDemandInfoController.class);
 
-    @RequestMapping("insert")
+    @ApiOperation(value = "添加项目")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "projName", value = "项目名称", required = true, dataType = "String"),
+    })
+
+    @RequestMapping(value="insert",method = RequestMethod.POST)
     @ResponseBody
     public MessageInfo<Integer> createAppProjectDemandInfo(@RequestBody  AppProjectDemand appProjectDemand){
 		MessageInfo<Integer> messageInfo =  appProjectDemandBiz.createAppProjectDemand(appProjectDemand);

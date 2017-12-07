@@ -1,9 +1,11 @@
 package com.gi.ctdn.pojo;
 
+import com.gi.ctdn.view.common.PojoInfo;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class AppProjectDemand implements Serializable {
+public class AppProjectDemand extends PojoInfo {
 
 
 	/**
@@ -124,12 +126,12 @@ public class AppProjectDemand implements Serializable {
 	/**
 	 * @Fields projAddTime : 项目添加时间
 	 */
-	private Timestamp projAddTime;
+	private Long projAddTime;
 	
 	/**
 	 * @Fields projUpdateTime : 项目更新时间
 	 */
-	private Timestamp projUpdateTime;
+	private Long projUpdateTime;
 	
     
 	public Long getProjId(){
@@ -316,19 +318,19 @@ public class AppProjectDemand implements Serializable {
 		return projStock;
 	}
 
-	public Timestamp getProjAddTime(){
+	public Long getProjAddTime() {
 		return projAddTime;
 	}
 
-	public void setProjAddTime(Timestamp projAddTime){
+	public void setProjAddTime(Long projAddTime) {
 		this.projAddTime = projAddTime;
 	}
-    
-	public Timestamp getProjUpdateTime(){
+
+	public Long getProjUpdateTime() {
 		return projUpdateTime;
 	}
 
-	public void setProjUpdateTime(Timestamp projUpdateTime){
+	public void setProjUpdateTime(Long projUpdateTime) {
 		this.projUpdateTime = projUpdateTime;
 	}
-    }
+}

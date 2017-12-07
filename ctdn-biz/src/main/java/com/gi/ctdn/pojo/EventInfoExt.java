@@ -1,10 +1,11 @@
 package com.gi.ctdn.pojo;
 
 import com.gi.ctdn.view.common.Pagination;
+import com.gi.ctdn.view.common.Query;
 
 import java.util.Date;
 
-public class EventInfoExt extends Pagination {
+public class EventInfoExt extends Query {
 
         public static final String ID = "id";
         public static final String EVENTID = "事件ID";

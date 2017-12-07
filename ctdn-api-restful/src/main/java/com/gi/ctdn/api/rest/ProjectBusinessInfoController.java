@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -20,17 +21,17 @@ public class ProjectBusinessInfoController {
     @Autowired
 	private ProjectBusinessInfoBiz projectBusinessInfoBiz;
 
-
-    @RequestMapping("getAll")
-    @ResponseBody
-    public MessageInfo<List<ProjectBusinessInfo>> getAllProjectBusinessInfo(){
-		MessageInfo<List<ProjectBusinessInfo>>  messageInfo = projectBusinessInfoBiz.getAllProjectBusinessInfo();
-		return messageInfo;
-	}
+//
+//    @RequestMapping("getAll")
+//    @ResponseBody
+//    public MessageInfo<List<ProjectBusinessInfo>> getAllProjectBusinessInfo(){
+//		MessageInfo<List<ProjectBusinessInfo>>  messageInfo = projectBusinessInfoBiz.getAllProjectBusinessInfo();
+//		return messageInfo;
+//	}
 
 
 		
-    @RequestMapping("getListBySourceCode/{sourceCode}")
+    @RequestMapping(value = "getListBySourceCode/{sourceCode}",method = RequestMethod.GET)
     @ResponseBody
 	public MessageInfo<ProjectBusinessListInfo> getListBySourceCode(@PathVariable String sourceCode){
 		MessageInfo<ProjectBusinessListInfo> messageInfo = projectBusinessInfoBiz.getProjectBusinessListInfoBySourceCode(sourceCode);

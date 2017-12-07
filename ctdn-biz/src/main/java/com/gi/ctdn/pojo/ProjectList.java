@@ -2,224 +2,244 @@ package com.gi.ctdn.pojo;
 
 import com.gi.ctdn.view.common.Pagination;
 import com.gi.ctdn.view.common.Query;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import jdk.internal.org.objectweb.asm.tree.analysis.Value;
 
 import java.util.Date;
 
+@ApiModel
 public class ProjectList extends Query {
 
 	/**
 	 * @Fields id : 项目ID
 	 */
+	@ApiModelProperty(value = "项目id")
 	private Integer id;
 	
 	/**
 	 * @Fields compCode :
 	 */
+	@ApiModelProperty(value = "所属公司code")
 	private String compCode;
 
+	@ApiModelProperty(value = "项目code")
 	private String projCode;
 
 	/**
-	 * @Fields code :
-	 */
-	private String sourceCode;
-	
-	/**
 	 * @Fields projTitle : 项目名称
 	 */
+	@ApiModelProperty(value = "项目名称")
 	private String projTitle;
 	
 	/**
-	 * @Fields runState : 运营状态[Y:运营中]
+	 * @Fields runState : 运营状态
 	 */
+	@ApiModelProperty(value = "运营状态")
 	private String runState;
-	
+
 	/**
-	 * @Fields needFinance : 是否需融资[Y:需要，N:不需要]
+	 * @Fields needFinance : 是否需融资
 	 */
+	@ApiModelProperty(value = "是否需融资")
 	private String needFinance;
 	
 	/**
 	 * @Fields addr : 地点
 	 */
+	@ApiModelProperty(value = "地点")
 	private String addr;
 	
 	/**
 	 * @Fields setupDT : 成立时间
 	 */
+	@ApiModelProperty(value = "成立时间")
 	private String setupDT;
 	
 	/**
 	 * @Fields labels : 标签
 	 */
+	@ApiModelProperty(value = "标签 用逗号隔开")
 	private String labels;
 	
 	/**
-	 * @Fields introduce : 项目简短介绍
+	 * @Fields introduce : 项目slogan
 	 */
+	@ApiModelProperty(value = "项目slogan")
 	private String introduce;
 	
 	/**
 	 * @Fields latestFinanceDT : 最新融资时间
 	 */
+	@ApiModelProperty(value = "最新融资时间")
 	private Date latestFinanceDT;
 	
 	/**
 	 * @Fields latestFinanceRound : 最新融资轮次
 	 */
+	@ApiModelProperty(value = "最新融资轮次")
 	private String latestFinanceRound;
 	
 	/**
-	 * @Fields latestFinanceAmountNum : 最新融资金额
+	 * @Fields latestFinanceAmountStr : 最新融资金额
 	 */
-	private Integer latestFinanceAmountNum;
-	
-	/**
-	 * @Fields latestFinanceAmountStr : 最新融资金额字面量
-	 */
+
+	@ApiModelProperty(value = "最新融资金额")
 	private String latestFinanceAmountStr;
 
 	/**
 	 * similar 竞品相似度
 	 */
+	@ApiModelProperty(value = "竞品相似度")
 	private  Double similarity ;
 
 	/**
 	 * 直接间接
 	 */
+	@ApiModelProperty(value = "查询竞品 0直接 1直接")
 	private Integer isSame;
 	
 	/**
 	 * @Fields investSideJson : {"investSideJson":[{"title":"红杉资本","id":2,"isleader":"0"}]}
 	 */
+	@ApiModelProperty(value = "投资方 暂无用")
 	private String investSideJson;
 	
 	/**
 	 * @Fields firmDesc : 公司描述
 	 */
+	@ApiModelProperty(value = "项目描述")
 	private String firmDesc;
 	
 	/**
 	 * @Fields firmPos : 公司定位
 	 */
+	@ApiModelProperty(value = "公司定位")
 	private String firmPos;
 	
 	/**
 	 * @Fields persona : 用户画像
 	 */
+	@ApiModelProperty(value = "用户画像")
 	private String persona;
 	
 	/**
 	 * @Fields prodSrv : 产品服务
 	 */
+	@ApiModelProperty(value = "产品服务")
 	private String prodSrv;
 	
 	/**
 	 * @Fields bizModel : 商业模式
 	 */
+	@ApiModelProperty(value = "商业模式")
 	private String bizModel;
 	
 	/**
 	 * @Fields industryName : 一级行业
 	 */
+	@ApiModelProperty(value = "一级行业")
 	private String industryName;
 	
 	/**
 	 * @Fields industrySubName : 二级行业
 	 */
+	@ApiModelProperty(value = "二级行业")
 	private String industrySubName;
 	
 	/**
 	 * @Fields industryIds : 行业ids,各级行业逗号分隔
 	 */
+	@ApiModelProperty(value = "行业ids,各级行业逗号分隔")
 	private String industryIds;
 	
 	/**
 	 * @Fields districtId : 一级地区id
 	 */
+	@ApiModelProperty(value = "一级地区id")
 	private Integer districtId;
 	
 	/**
 	 * @Fields districtSubId : 二级地区id
 	 */
+	@ApiModelProperty(value = "二级地区id")
 	private Integer districtSubId;
 	
 	/**
 	 * @Fields districtName : 一级地区
 	 */
+	@ApiModelProperty(value = "一级地区")
 	private String districtName;
 	
 	/**
 	 * @Fields districtSubName : 二级地区
 	 */
+	@ApiModelProperty(value = "二级地区")
 	private String districtSubName;
 
 	/**
 	 * @Fields districtGrandsonName :三级地区
 	 */
+	@ApiModelProperty(value = "三级地区")
 	private String districtGrandsonName;
-
-	/**
-	 * @Fields logoSmall : 列表项logo
-	 */
-	private String logoSmall;
-	
-	/**
-	 * @Fields logoBig : 列表项logo
-	 */
-	private String logoBig;
-	
-	/**
-	 * @Fields currencyType : 币种
-	 */
-	private String currencyType;
-
 
 	/**
 	 * 商业计划书
 	 */
+	@ApiModelProperty(value = "商业计划书")
 	private String bp;
 
 	/**
 	 * 企业总部邮箱
 	 */
+	@ApiModelProperty(value = "企业总部邮箱")
 	private String hqEmail;
 
 	/**
 	 * 企业电话
 	 */
+	@ApiModelProperty(value = "企业电话")
 	private String hqTel;
 
 	/**
 	 * 微博
 	 */
+	@ApiModelProperty(value = "微博")
 	private String weibo;
 	/**
-	 * 微博
+	 * 微信
 	 */
+	@ApiModelProperty(value = "微信")
 	private String weixin;
+
 	/**
-	 * 微博
+	 * 官网地址
 	 */
+	@ApiModelProperty(value = "官网地址")
 	private String webUrl;
 
 	/**
 	 * 团队关键字
 	 */
+	@ApiModelProperty(value = "团队关键字")
 	private String teamTags;
 	/**
 	 * 团队优势
 	 */
+	@ApiModelProperty(value = "团队优势")
 	private String teamSuper;
 	/**
 	 * 用户市场
 	 */
+	@ApiModelProperty(value = "用户市场")
 	private String userMarket;
 
+	@ApiModelProperty(value = "产品图片 code  用^$^分割")
 	private String photos;
 	/**
 	 * @Fields loadDate : 录入时间
 	 */
+	@ApiModelProperty(value = "录入时间")
 	private Long loadDate;
 
 	private String regName;
@@ -230,14 +250,6 @@ public class ProjectList extends Query {
 
 	public void setId(Integer id){
 		this.id = id;
-	}
-
-	public String getSourceCode() {
-		return sourceCode;
-	}
-
-	public void setSourceCode(String sourceCode) {
-		this.sourceCode = sourceCode;
 	}
 
 	public String getProjTitle(){
@@ -311,15 +323,7 @@ public class ProjectList extends Query {
 	public void setLatestFinanceRound(String latestFinanceRound){
 		this.latestFinanceRound = latestFinanceRound;
 	}
-    
-	public Integer getLatestFinanceAmountNum(){
-		return latestFinanceAmountNum;
-	}
 
-	public void setLatestFinanceAmountNum(Integer latestFinanceAmountNum){
-		this.latestFinanceAmountNum = latestFinanceAmountNum;
-	}
-    
 	public String getLatestFinanceAmountStr(){
 		return latestFinanceAmountStr;
 	}
@@ -446,30 +450,6 @@ public class ProjectList extends Query {
 
 	public void setDistrictSubName(String districtSubName){
 		this.districtSubName = districtSubName;
-	}
-    
-	public String getLogoSmall(){
-		return logoSmall;
-	}
-
-	public void setLogoSmall(String logoSmall){
-		this.logoSmall = logoSmall;
-	}
-    
-	public String getLogoBig(){
-		return logoBig;
-	}
-
-	public void setLogoBig(String logoBig){
-		this.logoBig = logoBig;
-	}
-    
-	public String getCurrencyType(){
-		return currencyType;
-	}
-
-	public void setCurrencyType(String currencyType){
-		this.currencyType = currencyType;
 	}
 
 	public String getBp() {

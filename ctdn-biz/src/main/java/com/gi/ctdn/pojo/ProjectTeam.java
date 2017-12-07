@@ -16,7 +16,7 @@ public class ProjectTeam  {
     /**
      * @Fields code : code
      */
-    @ApiModelProperty(value = "人员code,用于拼接头像地址")
+    @ApiModelProperty(value = "人员code,用于拼接头像地址:http://static.galaxyinternet.com/img/person/+personCode+'.png'")
     private String personCode;
 
     /**

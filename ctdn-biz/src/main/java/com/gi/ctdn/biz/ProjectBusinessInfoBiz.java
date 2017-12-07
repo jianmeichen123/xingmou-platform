@@ -41,11 +41,8 @@ public class ProjectBusinessInfoBiz  {
 			if(projectBusinessListInfo!=null){
 				List<ProjectShareholderInfo> projectShareholderInfoList = projectShareholderInfoDAO.selectBySourceCode(sourceCode);
 				List<ProjectBusinessChange> projectBusinessChangeList = projectBusinessChangeDAO.selectBySourceCode(sourceCode);
-//				List<ProjectContact> projectContactList = projectContactDAO.selectByProjectCode(sourceCode);
-
 				projectBusinessListInfo.setProjectShareholderInfoList(projectShareholderInfoList);
 				projectBusinessListInfo.setProjectBusinessChangeList(projectBusinessChangeList);
-//				projectBusinessListInfo.setProjectContactList(projectContactList);
 			}
 			messageInfo.setData(projectBusinessListInfo);
 			System.out.println(messageInfo);

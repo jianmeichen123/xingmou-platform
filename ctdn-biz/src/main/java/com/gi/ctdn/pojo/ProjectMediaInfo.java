@@ -2,57 +2,58 @@ package com.gi.ctdn.pojo;
 
 import com.gi.ctdn.view.common.Pagination;
 import com.gi.ctdn.view.common.Query;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
+@ApiModel
 public class ProjectMediaInfo extends Query {
-
-        public static final String CODE = "code";
-        public static final String PROJTITLE = "项目名称";
-        public static final String DATE = "日期[H、N:必须，P：为空]";
-        public static final String SOURCE = "来源[N:必须，H、P：为空]";
-        public static final String CONTENT = "内容";
-        public static final String TYPE = "类型[H:历史，N：相关新闻，P：子公司]";
-        public static final String SOURCECODE = "project code";
-    
-	
 	/**
-	 * @Fields projectId : 项目ID
+	 * @Fields projectId : 项目code
 	 */
+	@ApiModelProperty(value = "项目code")
 	private String projectCode;
 	
 	/**
 	 * @Fields code : code
 	 */
+	@ApiModelProperty(value = "code")
 	private String code;
 	
 	/**
 	 * @Fields projTitle : 项目名称
 	 */
+	@ApiModelProperty(value = "项目名称")
 	private String projTitle;
 	
 	/**
-	 * @Fields date : 日期[H、N:必须，P：为空]
+	 * @Fields date : 日期
 	 */
+	@ApiModelProperty(value = " 日期")
 	private String date;
 	
 	/**
-	 * @Fields source : 来源[N:必须，H、P：为空]
+	 * @Fields source : 来源
 	 */
+	@ApiModelProperty(value = "来源")
 	private String source;
 	
 	/**
 	 * @Fields content : 内容
 	 */
+	@ApiModelProperty(value = "内容")
 	private String content;
 	
 	/**
-	 * @Fields type : 类型[H:历史，N：相关新闻，P：子公司]
+	 * @Fields type : 类型[H:历史]
 	 */
+	@ApiModelProperty(value = "type : 类型[H:历史]")
 	private String type;
 
 
 	/**
 	 * @Fields link :link
 	 */
+	@ApiModelProperty(value = "点击链接")
 	private String link;
 
 	public String getCode(){

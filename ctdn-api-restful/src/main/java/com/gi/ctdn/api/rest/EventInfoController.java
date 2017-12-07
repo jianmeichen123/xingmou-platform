@@ -5,6 +5,9 @@ import com.gi.ctdn.biz.EventInfoBiz;
 import com.gi.ctdn.pojo.EventInfo;
 import com.gi.ctdn.pojo.EventInfoList;
 import com.gi.ctdn.view.common.MessageInfo;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,14 +43,6 @@ public class EventInfoController {
 		return messageInfo;
 	}
 
-//	@RequestMapping("getListByName")
-//	@ResponseBody
-//	public MessageInfo<List<EventInfo>> getListByName(@RequestBody EventInfo eventInfo){
-//		MessageInfo<List<EventInfo>> messageInfo = eventInfoBiz.getListByName(eventInfo.getCompany());
-//		return messageInfo;
-//	}
-
-
 	@RequestMapping("getListByCompany")
 	@ResponseBody
 	public MessageInfo<EventInfo> getListByCompany(@RequestBody EventInfo eventInfo){
@@ -55,6 +50,11 @@ public class EventInfoController {
 		return messageInfo;
 	}
 
+	@ApiOperation(value = "查找项目融资事件")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "pageNo", value = "从0开始", required = true, paramType="query"),
+			@ApiImplicitParam(name = "pageSize", value ="pageSize", required = true, paramType="query")
+	})
 	@RequestMapping("queryProjectEventList")
 	@ResponseBody
 	public MessageInfo<List<EventInfo>> getListBySourceCode(@RequestBody EventInfo eventInfo){

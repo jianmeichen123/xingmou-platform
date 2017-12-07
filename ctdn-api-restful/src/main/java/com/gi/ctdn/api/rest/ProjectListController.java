@@ -38,18 +38,27 @@ public class ProjectListController {
 	/**
 	 * 根据code查询项目
 	 */
+	@ApiOperation("根据code查项目'")
+	@ApiImplicitParams(@ApiImplicitParam(paramType = "query", dataType = "String", name = "projectCode", value = "项目code", required = true))
 	@RequestMapping("queryProjectByCode/{projectCode}")
 	@ResponseBody
-	public MessageInfo<ProjectListInfo> queryProjectByCode(@PathVariable String  projectCode){
-		ProjectListInfo projectListInfo =  projectListBiz.getOneByCode(projectCode);
-		MessageInfo<ProjectListInfo> messageInfo = new MessageInfo<ProjectListInfo>();
-		messageInfo.setData(projectListInfo);
+	public MessageInfo<ProjectList> queryProjectByCode(@PathVariable String  projectCode){
+		ProjectList projectList =  projectListBiz.getOneByCode(projectCode);
+		MessageInfo<ProjectList> messageInfo = new MessageInfo<ProjectList>();
+		messageInfo.setData(projectList);
 		return messageInfo;
 	}
 
 	/**
 	 * 根据code查询发展历史
 	 */
+	@ApiOperation("查询项目发展历史")
+	@ApiImplicitParams({
+			@ApiImplicitParam(paramType = "query", dataType = "String", name = "projectCode", value = "项目code", required = true),
+			@ApiImplicitParam(paramType = "query", dataType = "Integer", name = "pageNo", value = "pageNo:1开始", required = true),
+			@ApiImplicitParam(paramType = "query", dataType = "Integer", name = "pageSize", value = "pageSize", required = true),
+			@ApiImplicitParam(paramType = "query", dataType = "String", name = "type", value = "发展历史:N", required = true)
+	})
 	@RequestMapping("queryMediaInfoByCode")
 	@ResponseBody
 	public MessageInfo<ProjectMediaInfo> queryProjectByCode(@RequestBody ProjectMediaInfo projectMediaInfo){
@@ -60,7 +69,7 @@ public class ProjectListController {
 	/**
 	 * 根据code查询团队成员
 	 */
-	@ApiOperation("查询项目成员 列表图片地址:http://static.galaxyinternet.com/img/project/+projCode+'.png'")
+	@ApiOperation("查询项目成员 ")
 	@ApiImplicitParams(@ApiImplicitParam(paramType = "body", dataType = "ProjectTeam", name = "team", value = "只传projectCode", required = true))
 	@RequestMapping("queryProjectTeamByCode")
 	@ResponseBody
@@ -84,6 +93,8 @@ public class ProjectListController {
 	 * 查询竞争对手列表
 	 * @return
 	 */
+	@ApiOperation("查询竞争对手 不分页")
+	@ApiImplicitParam(paramType = "query", dataType = "String", name = "projCode", value = "项目code", required = true)
 	@RequestMapping("queryCompetationlist/{projCode}")
 	@ResponseBody
 	public MessageInfo<ProjectListInfo>  queryCompetationlist (@PathVariable String  projCode) {

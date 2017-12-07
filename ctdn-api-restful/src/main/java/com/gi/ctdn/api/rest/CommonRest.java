@@ -3,6 +3,8 @@ package com.gi.ctdn.api.rest;
 import com.gi.ctdn.biz.*;
 import com.gi.ctdn.pojo.*;
 import com.gi.ctdn.view.common.MessageInfo;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,7 +66,7 @@ public class CommonRest {
      *资本类型查询
      * @return messageInfo
      */
-    @RequestMapping("capitalType")
+    @RequestMapping(value = "capitalType",method = RequestMethod.GET)
     @ResponseBody
     @Cacheable(value = "capitalType",keyGenerator = "baseKG")
     @ApiOperation(value = "资本类型查询")
@@ -91,6 +93,7 @@ public class CommonRest {
      *地区查询
      * @return messageInfo
      */
+    @ApiOperation("地区查询")
     @RequestMapping("district")
     @ResponseBody
     @Cacheable(value = "district",keyGenerator = "baseKG")
@@ -119,6 +122,7 @@ public class CommonRest {
      *行业查询
      * @return messageInfo
      */
+    @ApiOperation("企业行业查询")
     @RequestMapping("industry")
     @ResponseBody
     @Cacheable(value = "industry",keyGenerator = "baseKG")
@@ -187,6 +191,7 @@ public class CommonRest {
      *轮次查询(包含尚未获投)
      * @return messageInfo
      */
+    @ApiOperation("轮次查询")
     @RequestMapping("round")
     @ResponseBody
     @Cacheable(value = "investRound",keyGenerator = "baseKG")

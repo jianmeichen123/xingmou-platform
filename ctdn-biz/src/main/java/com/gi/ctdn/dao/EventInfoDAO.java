@@ -14,8 +14,6 @@ public interface EventInfoDAO {
 				
 	EventInfoList selectByEventId(@Param("eventId") Integer eventId);
 
-	List<EventInfo> selectBySourceId(@Param("sourceId") Integer sourceId);
-
 	List<EventInfo> selectByName(@Param("company") String name);
 
 	List<EventInfo> selectByInvestDate();

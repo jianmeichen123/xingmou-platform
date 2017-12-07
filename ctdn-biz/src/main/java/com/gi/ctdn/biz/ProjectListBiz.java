@@ -25,52 +25,20 @@ public class ProjectListBiz {
 
 	@Autowired
 	ProjectListDAO projectListDAO;
-//
-//
-//	public MessageInfo<ProjectListInfo> getRelativeListByCode(String code) {
-//		MessageInfo<ProjectListInfo> messageInfo = new MessageInfo<ProjectListInfo>();
-//		try {
-//			ProjectListInfo projectListInfo = getOneByCode(code);
-//			if (projectListInfo != null) {
-//				List<EventInfo> eventInfoList = eventInfoDAO.selectBySourceCode(code);
-//				List<ProjectMediaInfo> historyList = projectMediaInfoDAO.selectBySourceCodeAndType(code, "H");
-//				List<EventMergerInfo> eventMergerInfoList = eventMergerInfoDAO.selectBySourceCode(code);
-//				List<ProjectContact> projectContactList = projectContactDAO.selectByProjectCode(code);
-//				List<EventListedInfo> eventListedInfoList = eventListedInfoDAO.selectBySourceCode(code);
-//				List<ProjectMediaInfo> newsList = projectMediaInfoDAO.selectBySourceCodeAndType(code, "N");
-//
-//				projectListInfo.setEventInfoList(eventInfoList);
-//				projectListInfo.setHistoryList(historyList);
-//				projectListInfo.setEventListedInfoList(eventListedInfoList);
-//				projectListInfo.setEventMergerInfoList(eventMergerInfoList);
-//				projectListInfo.setProjectContactList(projectContactList);
-//				if(newsList.size()>10){
-//					List<ProjectMediaInfo> limitNewsList =new ArrayList<>(newsList.subList(0,10));
-//					projectListInfo.setNewsList(limitNewsList);
-//				}else{
-//					projectListInfo.setNewsList(newsList);
-//				}
-//			}
-//			messageInfo.setData(projectListInfo);
-//		} catch (Exception e) {
-//			LOGGER.error("getListByCode", "查询ProjectList失败", e);
-//			messageInfo.setStatus(MessageStatus.ERROR_CODE);
-//		}
-//		return messageInfo;
-//	}
 
 	public MessageInfo<ProjectListInfo> queryCompetationlist(String sourceCode) {
 
 		MessageInfo<ProjectListInfo> message = new MessageInfo<ProjectListInfo>();
 		try {
-			ProjectListInfo projectListInfo = getOneByCode(sourceCode);
-			if(projectListInfo != null){
-				List<ProjectList> directCompetationlist = getNewList(sourceCode,1);
-				List<ProjectList> indirectCompetationlist = getNewList(sourceCode,2);
+			ProjectList projectList = getOneByCode(sourceCode);
+			if(projectList != null){
+				ProjectListInfo projectListInfo = new ProjectListInfo();
+				List<ProjectList> directCompetationlist = getNewList(sourceCode,0);
+				List<ProjectList> indirectCompetationlist = getNewList(sourceCode,1);
 				projectListInfo.setDirectCompetationlist(directCompetationlist);
 				projectListInfo.setIndirectCompetationlist(indirectCompetationlist);
+				message.setData(projectListInfo);
 			}
-			message.setData(projectListInfo);
 		} catch (Exception e) {
 			LOGGER.error("queryCompetationlist", "查询竞争对手失败", e);
 			message.setStatus(MessageStatus.ERROR_CODE);
@@ -98,9 +66,9 @@ public class ProjectListBiz {
 		return newList;
 	}
 
-	public ProjectListInfo getOneByCode(String code){
-		ProjectListInfo projectListInfo = projectListDAO.selectByCode(code);
-		return projectListInfo;
+	public ProjectList getOneByCode(String code){
+		ProjectList projectList = projectListDAO.selectByCode(code);
+		return projectList;
 	}
 
 	public List<ProjectList> getByFinanceDate(){

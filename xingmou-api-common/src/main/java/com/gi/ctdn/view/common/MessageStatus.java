@@ -15,8 +15,11 @@ public class MessageStatus {
 
     public static final int  OK_CODE=10000;
 
+    public static final int  MISS_PARAMETER_CODE = 10002;
+
     public static final String ERROR_MESSAGE="ERROR";
 
     public static final String  OK_MESSAGE="OK";
 
+    public static final String  MISS_PARAMETER_MESSAGE= "缺少参数";
 }

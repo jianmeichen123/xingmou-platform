@@ -6,15 +6,14 @@ import com.gi.ctdn.biz.ProjectMediaInfoBiz;
 import com.gi.ctdn.biz.ProjectTeamBiz;
 import com.gi.ctdn.pojo.*;
 import com.gi.ctdn.view.common.MessageInfo;
+import com.gi.ctdn.view.common.MessageStatus;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,6 +33,7 @@ public class ProjectListController {
 	@Autowired
 	private ProjectContactBiz projectContactBiz;
 
+	private static MessageInfo errorRet = new MessageInfo(MessageStatus.MISS_PARAMETER_CODE,MessageStatus.MISS_PARAMETER_MESSAGE);
 
 	/**
 	 * 根据code查询项目
@@ -43,6 +43,9 @@ public class ProjectListController {
 	@RequestMapping("queryProjectByCode/{projectCode}")
 	@ResponseBody
 	public MessageInfo<ProjectList> queryProjectByCode(@PathVariable String  projectCode){
+		if(projectCode== null || StringUtils.isEmpty(projectCode)){
+			return errorRet;
+		}
 		ProjectList projectList =  projectListBiz.getOneByCode(projectCode);
 		MessageInfo<ProjectList> messageInfo = new MessageInfo<ProjectList>();
 		messageInfo.setData(projectList);
@@ -62,6 +65,9 @@ public class ProjectListController {
 	@RequestMapping("queryMediaInfoByCode")
 	@ResponseBody
 	public MessageInfo<ProjectMediaInfo> queryProjectByCode(@RequestBody ProjectMediaInfo projectMediaInfo){
+		if(projectMediaInfo.getProjectCode()== null || StringUtils.isEmpty(projectMediaInfo.getProjectCode())|| projectMediaInfo.getPageSize()==null ||projectMediaInfo.getPageNo()==null){
+			return errorRet;
+		}
 		MessageInfo<ProjectMediaInfo> messageInfo = projectMediaInfoBiz.queryMediaInfoList(projectMediaInfo);
 		return messageInfo;
 	}
@@ -70,10 +76,13 @@ public class ProjectListController {
 	 * 根据code查询团队成员
 	 */
 	@ApiOperation("查询项目成员 ")
-	@ApiImplicitParams(@ApiImplicitParam(paramType = "body", dataType = "ProjectTeam", name = "team", value = "只传projectCode", required = true))
-	@RequestMapping("queryProjectTeamByCode")
+	@ApiImplicitParams(@ApiImplicitParam(paramType = "query", dataType = "String", name = "projectCode", value = "项目code", required = true))
+	@RequestMapping(value = "queryProjectTeamByCode",method = RequestMethod.POST)
 	@ResponseBody
 	public MessageInfo<List<ProjectTeam>> queryProjectByCode(@RequestBody ProjectTeam team){
+		if(team.getProjectCode()== null || StringUtils.isEmpty(team.getProjectCode())){
+			return errorRet;
+		}
 		MessageInfo<List<ProjectTeam>> messageInfo =  projectTeamBiz.getListByProjectCode(team.getProjectCode());
 		return messageInfo;
 	}
@@ -85,6 +94,9 @@ public class ProjectListController {
 	@RequestMapping("queryProjectContactByCode")
 	@ResponseBody
 	public MessageInfo<List<ProjectContact>>  queryContactlist (@RequestBody ProjectContact  projectContact) {
+		if(projectContact.getProjectCode() == null || StringUtils.isEmpty(projectContact.getProjectCode())){
+			return errorRet;
+		}
 		MessageInfo<List<ProjectContact>> messageInfo = projectContactBiz.getListBySourceCode(projectContact.getProjectCode());
 		return messageInfo;
 	}
@@ -98,6 +110,9 @@ public class ProjectListController {
 	@RequestMapping("queryCompetationlist/{projCode}")
 	@ResponseBody
 	public MessageInfo<ProjectListInfo>  queryCompetationlist (@PathVariable String  projCode) {
+		if(projCode == null || StringUtils.isEmpty(projCode)){
+			return errorRet;
+		}
 		MessageInfo<ProjectListInfo> resultMessageInfo = projectListBiz.queryCompetationlist(projCode);
 		return resultMessageInfo;
 	}

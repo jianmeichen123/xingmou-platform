@@ -36,5 +36,13 @@
         FROM
         app_industry_org
     </select>
-
+    
+    <!-- 获取一级行业 -->
+    <select id="selectParentindustrys" resultMap="BaseResultMap">
+        SELECT
+        <include refid="selectFields"/>
+        FROM
+        app_industry
+        WHERE parentId = 0
+    </select>
 </mapper>

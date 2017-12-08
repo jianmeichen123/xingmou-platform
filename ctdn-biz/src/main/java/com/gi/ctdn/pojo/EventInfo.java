@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Date;
+import java.util.List;
 @ApiModel
 public class EventInfo extends Query {
 
@@ -367,6 +368,15 @@ public class EventInfo extends Query {
 	public void setInvstorgnames(String invstorgnames){
 		this.invstorgnames = invstorgnames;
 	}
+	
+	public List<String> getIndustryIdList() {
+		return industryIdList;
+	}
 
+	public void setIndustryIdList(List<String> industryIdList) {
+		this.industryIdList = industryIdList;
+	}
+
+	private List<String> industryIdList;
 
 }

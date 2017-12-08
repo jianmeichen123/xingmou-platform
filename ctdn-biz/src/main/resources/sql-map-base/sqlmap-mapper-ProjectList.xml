@@ -120,4 +120,51 @@
                 </foreach>
         </where>
     </select>
+    
+    <!-- 首页获取最新项目 -->
+     <select id="selectByLoadDate" resultMap="BaseResultMap" >
+        SELECT
+        <include refid="selectFields" />
+        FROM
+        app_project_list
+        <if test="industryIds != null">
+			where SUBSTRING_INDEX(industryIds,',',1)  in
+			<foreach collection="industryIds" item="item" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+        ORDER BY loadDate asc LIMIT 6
+    </select>
+    <!-- 最新获投的项目 -->
+     <select id="selectByLatestFinanceDate" resultMap="BaseResultMap" >
+        SELECT
+        <include refid="selectFields" />
+        FROM
+        app_project_list
+         <if test="industryIds != null">
+			where SUBSTRING_INDEX(industryIds,',',1)  in
+			<foreach collection="industryIds" item="item" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+        ORDER BY latestFinanceDT asc LIMIT 6
+    </select>
+    
+    <!-- 获取收录项目总数 -->
+    <select id="getProjCount" parameterType="integer">
+    	select count(1) from app_project_list
+    	<if test="currentMonth != null">
+    	 	where month = #{currentMonth}
+    	</if>
+    </select>
+     
+    <!-- 获投项目数 -->
+    <select id="getInvestProjCount" parameterType="integer">
+    	select count(DISTINCT b.projCode) from app_event_info a
+    	left join app_project_list b on a.sourceCode = b.projCode
+    	where b.projCode is not null
+    	<if test="currentMonth != null">
+    		and month(investDate) = currentMonth
+    	</if>
+    </select>
 </mapper>

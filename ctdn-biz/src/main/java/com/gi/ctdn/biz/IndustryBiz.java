@@ -2,6 +2,8 @@
 
 package com.gi.ctdn.biz;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -11,9 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gi.ctdn.dao.IndustryDAO;
+import com.gi.ctdn.dao.me.UserIndustryDAO;
 import com.gi.ctdn.view.common.MessageInfo;
 
 import com.gi.ctdn.pojo.Industry;
+import com.gi.ctdn.pojo.me.UserIndustry;
 
 @Service("industryBiz")
 public class IndustryBiz  {
@@ -23,6 +27,9 @@ public class IndustryBiz  {
 
     @Autowired
 	IndustryDAO industryDAO;
+    
+    @Autowired
+    private UserIndustryDAO userIndustryDAO;
 
 
 	
@@ -65,6 +72,23 @@ public class IndustryBiz  {
 			messageInfo.setStatus(10001);
 		}
 		return messageInfo;
+	}
+	
+	public List<Industry> getParentindustrys(){
+		UserIndustry userIndustry = userIndustryDAO.getUserIndustry(1);
+		List<String> industryIds = new ArrayList<String>();
+		if(userIndustry!=null && userIndustry.getIndustryIds()!= null && !userIndustry.getIndustryIds().equals("")){
+			industryIds = Arrays.asList(userIndustry.getIndustryIds().split(","));
+		}
+		List<Industry>  industryList = industryDAO.selectParentindustrys();
+		for(Industry industry : industryList){
+			if(industryIds.contains(industry.getId()+"")){
+				industry.setFlag("1");
+			}else{
+				industry.setFlag("0");
+			}
+		}
+		return  industryList;
 	}
 
 

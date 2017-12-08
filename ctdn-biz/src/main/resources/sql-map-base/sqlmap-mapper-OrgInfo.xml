@@ -72,5 +72,25 @@
 		FROM
 		    app_org_info
 	</select>
+	
+	<select id="getLatestOrg" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_org_info order by investTotal desc limit 6
+	</select>
+	
+	<select id="selectByOrgCodeList" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_org_info
+		 <if test="orgCodesList != null">
+			where orgCode  in
+			<foreach collection="orgCodesList" item="item" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+	</select>
 
 </mapper>

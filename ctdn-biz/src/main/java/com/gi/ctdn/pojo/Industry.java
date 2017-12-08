@@ -46,6 +46,8 @@ public class Industry extends PojoInfo {
 	 */
 	private Integer val;
 	
+	private String flag; //是否被选中 （0、未选中 1、选中）
+	
     
 	public Integer getId(){
 		return id;
@@ -93,5 +95,13 @@ public class Industry extends PojoInfo {
 
 	public void setChildren(List<Industry> children) {
 		this.children = children;
+	}
+
+	public String getFlag() {
+		return flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag;
 	}
 }

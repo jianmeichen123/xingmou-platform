@@ -20,4 +20,6 @@ public interface EventInfoDAO {
 
 	List<EventInfo> selectFromCtdn(@Param("pageSize") Integer pageSize);
 
+	List<EventInfo> selectFromCtdn(EventInfo info);
+
 }

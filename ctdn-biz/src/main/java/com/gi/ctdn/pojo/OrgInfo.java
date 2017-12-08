@@ -3,6 +3,7 @@ package com.gi.ctdn.pojo;
 import com.gi.ctdn.view.common.Query;
 
 import java.util.Date;
+import java.util.List;
 
 public class OrgInfo extends Query {
 
@@ -610,4 +611,16 @@ public class OrgInfo extends Query {
 	public void setFoundDateStr(String foundDateStr) {
 		this.foundDateStr = foundDateStr;
 	}
+	
+	public List<OrgMediaInfo> getOrgMediaInfos() {
+		return orgMediaInfos;
+	}
+
+	public void setOrgMediaInfos(List<OrgMediaInfo> orgMediaInfos) {
+		this.orgMediaInfos = orgMediaInfos;
+	}
+
+	private List<OrgMediaInfo> orgMediaInfos;
+	
+	
     }

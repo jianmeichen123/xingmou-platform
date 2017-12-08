@@ -6,9 +6,11 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.gi.ctdn.dao.EventDetailDAO;
 import com.gi.ctdn.dao.OrgInfoDAO;
+import com.gi.ctdn.dao.me.UserIndustryDAO;
 import com.gi.ctdn.pojo.EventDetail;
 import com.gi.ctdn.pojo.EventInfo;
 import com.gi.ctdn.pojo.EventInfoList;
+import com.gi.ctdn.pojo.me.UserIndustry;
 import com.gi.ctdn.view.common.Pagination;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +23,7 @@ import com.gi.ctdn.view.common.MessageStatus;
 import com.gi.ctdn.view.common.MessageInfo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service("eventInfoBiz")
@@ -37,6 +40,9 @@ public class EventInfoBiz  {
 
     @Autowired
 	EventDetailDAO eventDetailDAO;
+    
+    @Autowired
+    private UserIndustryDAO userIndustryDAO;
 
 
 	public MessageInfo<List<EventInfo>> getListBySourceCode(EventInfo eventInfo){
@@ -138,6 +144,24 @@ public class EventInfoBiz  {
 		return messageInfo;
 	}
 
+
+	public MessageInfo<List<EventInfo>> getFromCtdnEventInfo( EventInfo info) {
+		MessageInfo<List<EventInfo>> messageInfo = new MessageInfo<List<EventInfo>>();
+		try {
+			UserIndustry userIndustry = userIndustryDAO.getUserIndustry(1);
+			List<String> industryIds = null;
+			if(userIndustry!=null && userIndustry.getIndustryIds() !=null){
+				industryIds = Arrays.asList(userIndustry.getIndustryIds().split(","));
+			}
+			info.setIndustryIdList(industryIds);
+			List<EventInfo> eventInfo = eventInfoDAO.selectFromCtdn(info);
+			messageInfo.setData(eventInfo);
+		} catch (Exception e) {
+			LOGGER.info("getFromCtdnEventInfo","查询EventInfo失败", e);
+			messageInfo.setStatus(MessageStatus.ERROR_CODE);
+		}
+		return messageInfo;
+	}
 	public MessageInfo<List<EventInfo>> getByInvestDate() {
 		MessageInfo<List<EventInfo>> messageInfo = new MessageInfo<List<EventInfo>>();
 		try {
@@ -150,10 +174,16 @@ public class EventInfoBiz  {
 		return messageInfo;
 	}
 
-	public MessageInfo<List<EventInfo>> getFromCtdnEventInfo( EventInfo EventInfo) {
+	public MessageInfo<List<EventInfo>> getFromCtdnEventInfo1( EventInfo info) {
 		MessageInfo<List<EventInfo>> messageInfo = new MessageInfo<List<EventInfo>>();
 		try {
-			List<EventInfo> eventInfo = eventInfoDAO.selectFromCtdn(EventInfo.getPageSize());
+			UserIndustry userIndustry = userIndustryDAO.getUserIndustry(1);
+			List<String> industryIds = null;
+			if(userIndustry!=null && userIndustry.getIndustryIds() !=null){
+				industryIds = Arrays.asList(userIndustry.getIndustryIds().split(","));
+			}
+			info.setIndustryIdList(industryIds);
+			List<EventInfo> eventInfo = eventInfoDAO.selectFromCtdn(info);
 			messageInfo.setData(eventInfo);
 		} catch (Exception e) {
 			LOGGER.info("getFromCtdnEventInfo","查询EventInfo失败", e);
@@ -161,5 +191,4 @@ public class EventInfoBiz  {
 		}
 		return messageInfo;
 	}
-
 }

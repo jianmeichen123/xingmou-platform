@@ -3,7 +3,9 @@
 package com.gi.ctdn.biz;
 
 import com.gi.ctdn.dao.*;
+import com.gi.ctdn.dao.me.UserIndustryDAO;
 import com.gi.ctdn.pojo.*;
+import com.gi.ctdn.pojo.me.UserIndustry;
 import com.gi.ctdn.view.common.MessageInfo;
 import com.gi.ctdn.view.common.MessageStatus;
 import com.gi.ctdn.view.common.Pagination;
@@ -15,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service("projectListBiz")
@@ -25,6 +28,9 @@ public class ProjectListBiz {
 
 	@Autowired
 	ProjectListDAO projectListDAO;
+	
+	@Autowired
+	UserIndustryDAO userIndustryDAO;
 
 	public MessageInfo<ProjectListInfo> queryCompetationlist(String sourceCode) {
 
@@ -109,5 +115,25 @@ public class ProjectListBiz {
 		}
 		return messageInfo;
 	}
+
+	public List<ProjectList> selectByLoadDate() {
+		UserIndustry  userIndustry = userIndustryDAO.getUserIndustry(1);
+		List<String> industryIds = null;
+		if(userIndustry !=null && userIndustry.getIndustryIds()!=null  && !userIndustry.getIndustryIds().equals("")){
+			industryIds = Arrays.asList(userIndustry.getIndustryIds().split(","));
+		}
+		return projectListDAO.selectByLoadDate(industryIds);
+	}
+
+	@SuppressWarnings("null")
+	public List<ProjectList> queryLastestFinanceProject() {
+		UserIndustry  userIndustry = userIndustryDAO.getUserIndustry(1);
+		List<String> industryIds = null;
+		if(userIndustry !=null && userIndustry.getIndustryIds()!=null && !userIndustry.getIndustryIds().equals("")){
+			industryIds = Arrays.asList(userIndustry.getIndustryIds().split(","));
+		}
+		return projectListDAO.selectByLatestFinanceDate(industryIds);
+	}
+
 
 }

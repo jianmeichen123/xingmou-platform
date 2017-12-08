@@ -6,7 +6,6 @@ import com.gi.ctdn.pojo.OrgListInfo;
 import org.apache.ibatis.annotations.Param;
 
 import com.gi.ctdn.pojo.OrgInfo;
-import org.springframework.web.bind.annotation.PathVariable;
 
 public interface OrgInfoDAO {
 	
@@ -16,4 +15,9 @@ public interface OrgInfoDAO {
 	List<OrgInfo> selectByCodes(@Param("orgCodes") List<String> codeList);
 
 	OrgListInfo selectById(@Param("orgCode") String orgCode);
+
+	List<OrgInfo> getLatestOrg();
+	
+	List<OrgInfo> selectByOrgCodeList(@Param("orgCodesList")  List<String> orgCodesList);
+
 }

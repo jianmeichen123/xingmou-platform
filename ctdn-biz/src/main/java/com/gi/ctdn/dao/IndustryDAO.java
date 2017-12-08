@@ -15,4 +15,6 @@ public interface IndustryDAO {
 	List<Industry> selectindustrysByStatus(@Param("status") int status);
 
 	List<Industry> selectOrgindustrystatus();
+	
+	List<Industry> selectParentindustrys();
 }

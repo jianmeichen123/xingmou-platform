@@ -3,6 +3,7 @@
 package com.gi.ctdn.biz;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.alibaba.fastjson.JSON;
@@ -123,5 +124,18 @@ public class OrgInfoBiz  {
 	}
 	public OrgListInfo getOrgListInfoById(String id){
     	return orgInfoDAO.selectById(id);
+	}
+
+	public List<OrgInfo> getLatestOrg() {
+		return orgInfoDAO.getLatestOrg();
+	}
+	public List<OrgInfo> getCompeteInfo() {
+		String[] codes = "bbf61d59cf1ecc4aceadaa4a4060d623,40ea873f5b4f50a2d62dadea99799fa0".split(",");
+		List<String> orgCodesList = Arrays.asList(codes);
+		List<OrgInfo> orgList = orgInfoDAO.selectByOrgCodeList(orgCodesList);
+		for(OrgInfo org : orgList){
+			org.setOrgMediaInfos(orgMediaInfoDAO.selectByOrgId(org.getOrgCode()));
+		}
+		return orgList;
 	}
 }

@@ -9,4 +9,6 @@ public interface UserIndustryDAO {
 	UserIndustry getUserIndustry(@Param("userId") Integer userId);
 
 	int updateUserIndustry(UserIndustry userIndustry);
+
+	void insert(UserIndustry userIndustry);
 }

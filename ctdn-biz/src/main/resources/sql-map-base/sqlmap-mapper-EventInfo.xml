@@ -80,6 +80,39 @@
         <include refid="selectFields" />
         FROM
         app_event_info
+          <if test="industryIdList != null">
+			where SUBSTRING_INDEX(industryIds,',',1)  in
+			<foreach collection="industryIdList" item="item" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+	    </if>
         ORDER BY investDate DESC limit  #{pageSize,jdbcType=INTEGER}
+    </select>
+    
+    <!-- 获取融资笔数 -->
+    <select id="getCurrentMonthEventCount" parameterType="integer">
+    	SELECT COUNT(1)
+    	FROM 
+    	app_event_info
+    	<if test="currentMonth != null">
+    		where MONTH(investDate) = currentMonth
+    	</if>
+    </select>
+    <!--获取融资金额  -->
+    <select id="getCurrentMonthEventMoney" parameterType="integer">
+    	SELECT SUM(latestFinanceAmountNum)
+    	FROM 
+    	app_event_info
+    	<if test="currentMonth != null">
+    		where MONTH(investDate) = currentMonth
+    	</if>
+    </select>
+    
+    <!-- 获取机构上月投资笔数 -->
+    <select id="getLastMonthCountByOrgCode" >
+    	SELECT COUNT(1)
+    	FROM 
+    	app_event_info where DATE_FORMAT(investDate, '%Y-%m') =  DATE_FORMAT(CURDATE(), '%Y-%m')
+    	and orgCode = #{orgCode}
     </select>
 </mapper>

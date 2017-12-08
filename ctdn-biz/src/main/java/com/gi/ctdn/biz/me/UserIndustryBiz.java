@@ -60,4 +60,15 @@ public class UserIndustryBiz  {
 		}
 		return messageInfo;
 	}
+
+	public void saveOrUpdateUerIndustry(UserIndustry userIndustry) {
+		UserIndustry queryUserIndustry = userIndustryDAO.getUserIndustry(userIndustry.getUserId());
+		if(queryUserIndustry == null){
+			userIndustry.setFirstLogin(0);
+			userIndustryDAO.insert(userIndustry);
+		}else{
+			userIndustry.setFirstLogin(1);
+			userIndustryDAO.updateUserIndustry(userIndustry);
+		}
+	}
 }

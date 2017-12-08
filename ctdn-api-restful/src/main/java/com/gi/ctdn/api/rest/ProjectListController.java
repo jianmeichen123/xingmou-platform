@@ -40,7 +40,7 @@ public class ProjectListController {
 	 */
 	@ApiOperation("根据code查项目'")
 	@ApiImplicitParams(@ApiImplicitParam(paramType = "query", dataType = "String", name = "projectCode", value = "项目code", required = true))
-	@RequestMapping("queryProjectByCode/{projectCode}")
+	@RequestMapping(value = "queryProjectByCode/{projectCode}",method = RequestMethod.GET)
 	@ResponseBody
 	public MessageInfo<ProjectList> queryProjectByCode(@PathVariable String  projectCode){
 		if(projectCode== null || StringUtils.isEmpty(projectCode)){
@@ -62,7 +62,7 @@ public class ProjectListController {
 			@ApiImplicitParam(paramType = "query", dataType = "Integer", name = "pageSize", value = "pageSize", required = true),
 			@ApiImplicitParam(paramType = "query", dataType = "String", name = "type", value = "发展历史:N", required = true)
 	})
-	@RequestMapping("queryMediaInfoByCode")
+	@RequestMapping(value = "queryMediaInfoByCode",method = RequestMethod.POST)
 	@ResponseBody
 	public MessageInfo<ProjectMediaInfo> queryProjectByCode(@RequestBody ProjectMediaInfo projectMediaInfo){
 		if(projectMediaInfo.getProjectCode()== null || StringUtils.isEmpty(projectMediaInfo.getProjectCode())|| projectMediaInfo.getPageSize()==null ||projectMediaInfo.getPageNo()==null){
@@ -91,7 +91,7 @@ public class ProjectListController {
 	 * 根据projectCode查询联系方式列表
 	 * @return
 	 */
-	@RequestMapping("queryProjectContactByCode")
+	@RequestMapping(value = "queryProjectContactByCode",method = RequestMethod.POST)
 	@ResponseBody
 	public MessageInfo<List<ProjectContact>>  queryContactlist (@RequestBody ProjectContact  projectContact) {
 		if(projectContact.getProjectCode() == null || StringUtils.isEmpty(projectContact.getProjectCode())){
@@ -107,7 +107,7 @@ public class ProjectListController {
 	 */
 	@ApiOperation("查询竞争对手 不分页")
 	@ApiImplicitParam(paramType = "query", dataType = "String", name = "projCode", value = "项目code", required = true)
-	@RequestMapping("queryCompetationlist/{projCode}")
+	@RequestMapping(value = "queryCompetationlist/{projCode}",method = RequestMethod.GET)
 	@ResponseBody
 	public MessageInfo<ProjectListInfo>  queryCompetationlist (@PathVariable String  projCode) {
 		if(projCode == null || StringUtils.isEmpty(projCode)){
@@ -121,7 +121,7 @@ public class ProjectListController {
 	 * 查询最新项目
 	 * @return
 	 */
-	@RequestMapping("queryLatestProjects")
+	@RequestMapping(value = "queryLatestProjects",method = RequestMethod.GET)
 	@ResponseBody
 	public MessageInfo<List>  queryLatestProjects () {
 		MessageInfo<List> resultMessageInfo = new MessageInfo<>();
@@ -135,7 +135,7 @@ public class ProjectListController {
 	 * @param projectList
 	 * @return
 	 */
-	@RequestMapping("queryByCompCode")
+	@RequestMapping(value = "queryByCompCode",method = RequestMethod.POST)
 	@ResponseBody
 	public  MessageInfo<ProjectList> queryByProjTitle(@RequestBody ProjectList projectList){
 		MessageInfo<ProjectList> messageInfo = projectListBiz.queryByCompCode(projectList);

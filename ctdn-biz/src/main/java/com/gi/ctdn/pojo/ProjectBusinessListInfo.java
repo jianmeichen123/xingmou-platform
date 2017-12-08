@@ -1,26 +1,28 @@
 package com.gi.ctdn.pojo;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.List;
 
 /**
  * Created by wanghao on 17-7-17.
  */
+@ApiModel
 public class ProjectBusinessListInfo extends ProjectBusinessInfo{
 
     /**
      * projectBusinessChangeList 工商变更集合
      */
+    @ApiModelProperty("工商变更集合")
     private List<ProjectBusinessChange> projectBusinessChangeList;
 
     /**
      * projectShareholderInfoList 股东信息集合
      */
+    @ApiModelProperty("股东信息集合")
     private List<ProjectShareholderInfo> projectShareholderInfoList;
 
-    /**
-     * projectContactList 联系方式
-     */
-    private List<ProjectContact> projectContactList;
 
     public List<ProjectBusinessChange> getProjectBusinessChangeList() {
         return projectBusinessChangeList;
@@ -36,14 +38,6 @@ public class ProjectBusinessListInfo extends ProjectBusinessInfo{
 
     public void setProjectShareholderInfoList(List<ProjectShareholderInfo> projectShareholderInfoList) {
         this.projectShareholderInfoList = projectShareholderInfoList;
-    }
-
-    public List<ProjectContact> getProjectContactList() {
-        return projectContactList;
-    }
-
-    public void setProjectContactList(List<ProjectContact> projectContactList) {
-        this.projectContactList = projectContactList;
     }
 
 }

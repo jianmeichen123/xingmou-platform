@@ -1,145 +1,131 @@
 package com.gi.ctdn.pojo;
 
 import com.gi.ctdn.view.common.PojoInfo;
+import io.swagger.annotations.ApiModelProperty;
 
 public class ProjectBusinessInfo extends PojoInfo {
 
-        public static final String PROJECTID = "项目ID";
-        public static final String SOURCECODE = "sourceCode";
-        public static final String PROJTITLE = "项目名称";
-        public static final String COMPANY = "公司全称";
-        public static final String COMPANYENG = "英文全称";
-        public static final String UNIFORMSOCIALCREDITCODE = "统一社会信用代码";
-        public static final String REGISTRATIONCODE = "注册码";
-        public static final String ORGANIZATIONCODE = "组织机构代码";
-        public static final String ORGANIZATIONFORM = "组织形式";
-        public static final String LEGALPERSON = "法人代表";
-        public static final String BUSINESSTERM = "营业期限";
-        public static final String ISSUINGDATE = "发照日期";
-        public static final String INDUSTRY = "所属行业";
-        public static final String REGISTEREDADDRESS = "注册地址";
-        public static final String MANAGEMENTSTATUS = "经营状态";
-        public static final String FOUNDDATE = "成立日期";
-        public static final String REGISTEREDCAPITAL = "公司全称";
-        public static final String REGISTRATIONAUTHORITY = "登记机关";
-        public static final String COMPANYSIZE = "公司规模";
-        public static final String REGISTRATIONTYPE = "注册登记类型";
-        public static final String BUSINESSSCOPE = "经营范围";
-    
-	
-	/**
-	 * @Fields projectId : 项目ID
-	 */
-	private Integer projectId;
-	
+
 	/**
 	 * @Fields sourceCode : 
 	 */
+	@ApiModelProperty("公司code")
 	private String sourceCode;
 	
 	/**
 	 * @Fields projTitle : 项目名称
 	 */
+	@ApiModelProperty("项目名称")
 	private String projTitle;
 	
 	/**
 	 * @Fields company : 公司全称
 	 */
+	@ApiModelProperty(" 公司全称")
 	private String company;
 	
 	/**
 	 * @Fields companyEng : 英文全称
 	 */
+	@ApiModelProperty("英文全称")
 	private String companyEng;
 	
 	/**
 	 * @Fields uniformSocialCreditCode : 统一社会信用代码
 	 */
+	@ApiModelProperty(" 统一社会信用代码")
 	private String uniformSocialCreditCode;
 	
 	/**
 	 * @Fields registrationCode : 注册码
 	 */
+	@ApiModelProperty("注册码")
 	private String registrationCode;
 	
 	/**
 	 * @Fields organizationCode : 组织机构代码
 	 */
+	@ApiModelProperty("组织机构代码")
 	private String organizationCode;
 	
 	/**
 	 * @Fields organizationForm : 组织形式
 	 */
+	@ApiModelProperty("组织形式")
 	private String organizationForm;
 	
 	/**
 	 * @Fields legalPerson : 法人代表
 	 */
+	@ApiModelProperty("法人代表")
 	private String legalPerson;
 	
 	/**
 	 * @Fields businessTerm : 营业期限
 	 */
+	@ApiModelProperty("营业期限")
 	private String businessTerm;
 	
 	/**
 	 * @Fields issuingDate : 发照日期
 	 */
+	@ApiModelProperty("发照日期")
 	private String issuingDate;
 	
 	/**
 	 * @Fields industry : 所属行业
 	 */
+	@ApiModelProperty("所属行业")
 	private String industry;
 	
 	/**
 	 * @Fields registeredAddress : 注册地址
 	 */
+	@ApiModelProperty("注册地址")
 	private String registeredAddress;
 	
 	/**
 	 * @Fields managementStatus : 经营状态
 	 */
+	@ApiModelProperty("经营状态")
 	private String managementStatus;
 	
 	/**
 	 * @Fields foundDate : 成立日期
 	 */
+	@ApiModelProperty("成立日期")
 	private String foundDate;
 	
 	/**
 	 * @Fields registeredCapital : 公司全称
 	 */
+	@ApiModelProperty("公司全称")
 	private String registeredCapital;
 	
 	/**
 	 * @Fields registrationAuthority : 登记机关
 	 */
+	@ApiModelProperty("登记机关")
 	private String registrationAuthority;
 	
 	/**
 	 * @Fields companySize : 公司规模
 	 */
+	@ApiModelProperty("公司规模")
 	private String companySize;
 	
 	/**
 	 * @Fields registrationType : 注册登记类型
 	 */
+	@ApiModelProperty("注册登记类型")
 	private String registrationType;
 	
 	/**
 	 * @Fields businessScope : 经营范围
 	 */
+	@ApiModelProperty("经营范围")
 	private String businessScope;
 	
-    
-	public Integer getProjectId(){
-		return projectId;
-	}
-
-	public void setProjectId(Integer projectId){
-		this.projectId = projectId;
-	}
     
 	public String getSourceCode(){
 		return sourceCode;

@@ -4,6 +4,7 @@ import com.gi.ctdn.biz.ProjectBusinessInfoBiz;
 import com.gi.ctdn.pojo.ProjectBusinessInfo;
 import com.gi.ctdn.pojo.ProjectBusinessListInfo;
 import com.gi.ctdn.view.common.MessageInfo;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,16 +22,8 @@ public class ProjectBusinessInfoController {
     @Autowired
 	private ProjectBusinessInfoBiz projectBusinessInfoBiz;
 
-//
-//    @RequestMapping("getAll")
-//    @ResponseBody
-//    public MessageInfo<List<ProjectBusinessInfo>> getAllProjectBusinessInfo(){
-//		MessageInfo<List<ProjectBusinessInfo>>  messageInfo = projectBusinessInfoBiz.getAllProjectBusinessInfo();
-//		return messageInfo;
-//	}
-
-
-		
+	@ApiOperation("查询工商信息,股东信息,工商变更")
+	@ApiImplicitParam(paramType = "query", dataType = "String", name = "sourceCode", value = "公司code", required = true)
     @RequestMapping(value = "getListBySourceCode/{sourceCode}",method = RequestMethod.GET)
     @ResponseBody
 	public MessageInfo<ProjectBusinessListInfo> getListBySourceCode(@PathVariable String sourceCode){

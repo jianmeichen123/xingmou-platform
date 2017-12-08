@@ -66,10 +66,10 @@ public class CommonRest {
      *资本类型查询
      * @return messageInfo
      */
+    @ApiOperation(value = "资本类型查询")
     @RequestMapping(value = "capitalType",method = RequestMethod.GET)
     @ResponseBody
     @Cacheable(value = "capitalType",keyGenerator = "baseKG")
-    @ApiOperation(value = "资本类型查询")
     public MessageInfo<List<CapitalType>> capitalType(){
         MessageInfo<List<CapitalType>> messageInfo = capitalTypeBiz.getAllCapitalType();
         return messageInfo;
@@ -80,6 +80,7 @@ public class CommonRest {
      *货币类型查询
      * @return messageInfo
      */
+    @ApiOperation("货币类型查询")
     @RequestMapping(value="currencyType",method = RequestMethod.GET)
     @ResponseBody
     @Cacheable(value = "currencyType",keyGenerator = "baseKG")
@@ -94,7 +95,7 @@ public class CommonRest {
      * @return messageInfo
      */
     @ApiOperation("地区查询")
-    @RequestMapping("district")
+    @RequestMapping(value="district",method = RequestMethod.GET)
     @ResponseBody
     @Cacheable(value = "district",keyGenerator = "baseKG")
     public MessageInfo<List<District>> district() {
@@ -123,7 +124,7 @@ public class CommonRest {
      * @return messageInfo
      */
     @ApiOperation("企业行业查询")
-    @RequestMapping("industry")
+    @RequestMapping(value = "industry",method =RequestMethod.GET)
     @ResponseBody
     @Cacheable(value = "industry",keyGenerator = "baseKG")
     public MessageInfo<List<Industry>> industry() {
@@ -151,7 +152,8 @@ public class CommonRest {
      *行业查询
      * @return messageInfo
      */
-    @RequestMapping("orgIndustry")
+    @ApiOperation("机构行业查询")
+    @RequestMapping(value = "orgIndustry",method = RequestMethod.GET)
     @ResponseBody
     @Cacheable(value = "orgIndustry",keyGenerator = "baseKG")
     public MessageInfo<List<Industry>> orgIndustry() {
@@ -163,7 +165,8 @@ public class CommonRest {
      *上市类型查询
      * @return messageInfo
      */
-    @RequestMapping("listingType")
+    @ApiOperation("上市类型查询")
+    @RequestMapping(value = "listingType",method = RequestMethod.GET)
     @ResponseBody
     @Cacheable(value = "listingType",keyGenerator = "baseKG")
     public MessageInfo<List<ListingType>> listingType() {
@@ -191,8 +194,8 @@ public class CommonRest {
      *轮次查询(包含尚未获投)
      * @return messageInfo
      */
-    @ApiOperation("轮次查询")
-    @RequestMapping("round")
+    @ApiOperation("企业事件轮次查询")
+    @RequestMapping(value = "round",method = RequestMethod.GET)
     @ResponseBody
     @Cacheable(value = "investRound",keyGenerator = "baseKG")
     public MessageInfo<List<InvestRound>> round() {
@@ -204,7 +207,8 @@ public class CommonRest {
      *投资轮次查询(不包含尚未获投)
      * @return messageInfo
      */
-    @RequestMapping("investRound")
+    @ApiOperation("投资轮次查询")
+    @RequestMapping(value = "investRound",method = RequestMethod.GET)
     @ResponseBody
     @Cacheable(value = "investRound",keyGenerator = "baseKG")
     public MessageInfo<List<InvestRound>> investRound() {
@@ -213,10 +217,11 @@ public class CommonRest {
     }
 
     /**
-     *投资轮次查询(不包含尚未获投)
+     *投资机构轮次查询(不包含尚未获投)
      * @return messageInfo
      */
-    @RequestMapping("orgRound")
+    @ApiOperation("投资机构轮次查询")
+    @RequestMapping(value = "orgRound",method = RequestMethod.GET)
     @ResponseBody
     @Cacheable(value = "orgRound",keyGenerator = "baseKG")
     public MessageInfo<List<InvestRound>> orgRound() {
@@ -227,7 +232,8 @@ public class CommonRest {
      *合并状态查询
      * @return messageInfo
      */
-    @RequestMapping("mergeStatus")
+    @ApiOperation("合并状态查询")
+    @RequestMapping(value ="mergeStatus",method = RequestMethod.GET)
     @ResponseBody
     @Cacheable(value = "mergeStatus",keyGenerator = "baseKG")
     public MessageInfo<List<MergeStatus>> mergeStatus() {
@@ -240,7 +246,8 @@ public class CommonRest {
      *合并类型查询
      * @return messageInfo
      */
-    @RequestMapping("mergeType")
+    @ApiOperation("合并类型查询")
+    @RequestMapping(value = "mergeType",method = RequestMethod.GET)
     @ResponseBody
     @Cacheable(value = "mergeType",keyGenerator = "baseKG")
     public MessageInfo<List<MergeType>> mergeType() {
@@ -253,7 +260,8 @@ public class CommonRest {
      *机构类型查询
      * @return messageInfo
      */
-    @RequestMapping("orgType")
+    @ApiOperation("机构类型查询")
+    @RequestMapping(value = "orgType",method = RequestMethod.GET)
     @ResponseBody
     @Cacheable(value = "orgType",keyGenerator = "baseKG")
     public MessageInfo<List<OrgType>> orgType() {
@@ -279,7 +287,8 @@ public class CommonRest {
      *股权比例查询
      * @return messageInfo
      */
-    @RequestMapping("equityRate")
+    @ApiOperation("股权比例查询")
+    @RequestMapping(value = "equityRate",method = RequestMethod.GET)
     @ResponseBody
     @Cacheable(value = "equityRate",keyGenerator = "baseKG")
     public MessageInfo<List<EquityRate>> equityRate() {
@@ -292,7 +301,8 @@ public class CommonRest {
      *投资阶段
      * @return messageInfo
      */
-    @RequestMapping("investStages")
+    @ApiOperation("投资阶段")
+    @RequestMapping(value = "investStages",method = RequestMethod.GET)
     @ResponseBody
     @Cacheable(value = "investStages",keyGenerator = "baseKG")
     public MessageInfo<List<InvestStages>> investStages() {
@@ -304,7 +314,8 @@ public class CommonRest {
      * 企业项目综合查询
      * @return messageInfo
      */
-    @RequestMapping("comQuery")
+    @ApiOperation("企业项目综合查询")
+    @RequestMapping(value = "comQuery",method = RequestMethod.GET)
     @ResponseBody
     @Cacheable(value = "proQuery",keyGenerator = "baseKG")
     public MessageInfo<Map> proQuery(){
@@ -339,7 +350,8 @@ public class CommonRest {
      * 投资事件综合查询
      * @return messageInfo
      */
-    @RequestMapping("investEventQuery")
+    @ApiOperation("投资事件综合查询")
+    @RequestMapping(value = "investEventQuery",method = RequestMethod.GET)
     @ResponseBody
     @Cacheable(value = "investEventQuery",keyGenerator = "baseKG")
     public MessageInfo<Map> investEventQuery(){
@@ -372,7 +384,8 @@ public class CommonRest {
      * 并购事件综合查询
      * @return messageInfo
      */
-    @RequestMapping("mergeEventQuery")
+    @ApiOperation("并购事件综合查询")
+    @RequestMapping(value = "mergeEventQuery",method = RequestMethod.GET)
     @ResponseBody
     @Cacheable(value = "mergeEventQuery",keyGenerator = "baseKG")
     public MessageInfo<Map> mergeEventQuery(){
@@ -413,7 +426,8 @@ public class CommonRest {
      * 上市挂牌综合查询
      * @return messageInfo
      */
-    @RequestMapping("listingQuery")
+    @ApiOperation("上市挂牌综合查询")
+    @RequestMapping(value = "listingQuery",method = RequestMethod.GET)
     @ResponseBody
     @Cacheable(value = "listingQuery",keyGenerator = "baseKG")
     public MessageInfo<Map> listingQuery(){
@@ -437,42 +451,43 @@ public class CommonRest {
      * 退出事件综合查询
      * @return messageInfo
      */
-    @RequestMapping("quitEventQuery")
-    @ResponseBody
-    @Cacheable(value = "quitEventQuery",keyGenerator = "baseKG")
-    public MessageInfo<Map> quitEventQuery(){
-        MessageInfo<Map> messageInfo = new MessageInfo<>();
-        Map<String,Object> map = new HashMap<>();
-        MessageInfo<List<Industry>> industriesMessageInfo = industry();
-        map.put("industry",industriesMessageInfo.getData());
-        messageInfo.setMessage(industriesMessageInfo.getMessage());
-        messageInfo.setStatus(industriesMessageInfo.getStatus());
-
-        MessageInfo<List<QuitType>> quitTypeMessageInfo = quitTypeBiz.getAllQuitType();
-        map.put("quitType",quitTypeMessageInfo.getData());
-        quitTypeMessageInfo.setMessage(quitTypeMessageInfo.getMessage());
-        quitTypeMessageInfo.setStatus(quitTypeMessageInfo.getStatus());
-
-        MessageInfo<List<District>> districtsMessageInfo = district();
-        map.put("district",districtsMessageInfo.getData());
-        messageInfo.setMessage(districtsMessageInfo.getMessage());
-        messageInfo.setStatus(districtsMessageInfo.getStatus());
-
-        MessageInfo<List<CurrencyType>> currencyTypeMessageInfo = currencyTypeBiz.getAllCurrencyType();
-        map.put("currencyType",currencyTypeMessageInfo.getData());
-        currencyTypeMessageInfo.setMessage(currencyTypeMessageInfo.getMessage());
-        currencyTypeMessageInfo.setStatus(currencyTypeMessageInfo.getStatus());
-
-
-        messageInfo.setData(map);
-        return messageInfo;
-    }
+//    @RequestMapping("quitEventQuery")
+//    @ResponseBody
+//    @Cacheable(value = "quitEventQuery",keyGenerator = "baseKG")
+//    public MessageInfo<Map> quitEventQuery(){
+//        MessageInfo<Map> messageInfo = new MessageInfo<>();
+//        Map<String,Object> map = new HashMap<>();
+//        MessageInfo<List<Industry>> industriesMessageInfo = industry();
+//        map.put("industry",industriesMessageInfo.getData());
+//        messageInfo.setMessage(industriesMessageInfo.getMessage());
+//        messageInfo.setStatus(industriesMessageInfo.getStatus());
+//
+//        MessageInfo<List<QuitType>> quitTypeMessageInfo = quitTypeBiz.getAllQuitType();
+//        map.put("quitType",quitTypeMessageInfo.getData());
+//        quitTypeMessageInfo.setMessage(quitTypeMessageInfo.getMessage());
+//        quitTypeMessageInfo.setStatus(quitTypeMessageInfo.getStatus());
+//
+//        MessageInfo<List<District>> districtsMessageInfo = district();
+//        map.put("district",districtsMessageInfo.getData());
+//        messageInfo.setMessage(districtsMessageInfo.getMessage());
+//        messageInfo.setStatus(districtsMessageInfo.getStatus());
+//
+//        MessageInfo<List<CurrencyType>> currencyTypeMessageInfo = currencyTypeBiz.getAllCurrencyType();
+//        map.put("currencyType",currencyTypeMessageInfo.getData());
+//        currencyTypeMessageInfo.setMessage(currencyTypeMessageInfo.getMessage());
+//        currencyTypeMessageInfo.setStatus(currencyTypeMessageInfo.getStatus());
+//
+//
+//        messageInfo.setData(map);
+//        return messageInfo;
+//    }
 
     /**
      * 投资机构综合查询
      * @return messageInfo
      */
-    @RequestMapping("orgQuery")
+    @ApiOperation("投资机构综合查询")
+    @RequestMapping(value = "orgQuery",method = RequestMethod.GET)
     @ResponseBody
     @Cacheable(value = "orgQuery",keyGenerator = "baseKG")
     public MessageInfo<Map> orgQuery(){
@@ -515,7 +530,8 @@ public class CommonRest {
      *所有综合查询
      * @return messageInfo
      */
-    @RequestMapping("allQuery")
+    @ApiOperation("所有综合查询")
+    @RequestMapping(value = "allQuery",method = RequestMethod.GET)
     @ResponseBody
     @Cacheable(value = "allQuery",keyGenerator = "baseKG")
     public MessageInfo<Map> allQuery(){

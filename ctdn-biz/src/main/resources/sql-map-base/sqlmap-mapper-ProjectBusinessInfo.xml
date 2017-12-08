@@ -3,9 +3,7 @@
 <mapper namespace="com.gi.ctdn.dao.ProjectBusinessInfoDAO">
 	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.ProjectBusinessListInfo">
 
-                <!--<result column="projCode" property="projectId" jdbcType="INTEGER" />-->
                 <result column="comp_code" property="sourceCode" jdbcType="VARCHAR" />
-                <!--<result column="projTitle" property="projTitle" jdbcType="VARCHAR" />-->
                 <result column="comp_fulltitle" property="company" jdbcType="VARCHAR" />
                 <result column="comp_fulltitle_en" property="companyEng" jdbcType="VARCHAR" />
                 <result column="comp_creditcode" property="uniformSocialCreditCode" jdbcType="VARCHAR" />

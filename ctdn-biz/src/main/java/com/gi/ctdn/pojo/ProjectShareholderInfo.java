@@ -1,86 +1,67 @@
 package com.gi.ctdn.pojo;
 
 import com.gi.ctdn.view.common.PojoInfo;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
+@ApiModel
 public class ProjectShareholderInfo extends PojoInfo {
 
-        public static final String PROJECTID = "项目ID";
-        public static final String SOURCECODE = "项目code";
-        public static final String PROJTITLE = "项目名称";
-        public static final String SHAREHOLDERTYPE = "股东类型";
-        public static final String SHAREHOLDER = "股东";
-        public static final String PREPAYDATE = "认缴出资时间";
-        public static final String PREPAYAMOUNTSTR = "认缴出资金额";
-        public static final String PAIDDATE = "实缴出资时间";
-        public static final String PAIDPAYAMOUNTSTR = "实缴出资金额";
-        public static final String PAYTYPE = "出资方式";
-        public static final String EQUITYRATE = "所占股份";
-    
-	
-	/**
-	 * @Fields projectId : 项目ID
-	 */
-	private Integer projectId;
-	
 	/**
 	 * @Fields sourceCode : 项目code
 	 */
+	@ApiModelProperty("项目code")
 	private String sourceCode;
 	
-	/**
-	 * @Fields projTitle : 项目名称
-	 */
-	private String projTitle;
-	
+
 	/**
 	 * @Fields shareholderType : 股东类型
 	 */
+	@ApiModelProperty("股东类型")
 	private String shareholderType;
 	
 	/**
 	 * @Fields shareholder : 股东
 	 */
+	@ApiModelProperty("股东")
 	private String shareholder;
 	
 	/**
 	 * @Fields prePayDate : 认缴出资时间
 	 */
+	@ApiModelProperty(" 认缴出资时间")
 	private String prePayDate;
 	
 	/**
 	 * @Fields prePayAmountStr : 认缴出资金额
 	 */
+	@ApiModelProperty("认缴出资金额")
 	private String prePayAmountStr;
 	
 	/**
 	 * @Fields paidDate : 实缴出资时间
 	 */
+	@ApiModelProperty("实缴出资时间")
 	private String paidDate;
 	
 	/**
 	 * @Fields paidPayAmountStr : 实缴出资金额
 	 */
+	@ApiModelProperty("实缴出资金额")
 	private String paidPayAmountStr;
 	
 	/**
 	 * @Fields payType : 出资方式
 	 */
+	@ApiModelProperty("出资方式")
 	private String payType;
 	
 	/**
 	 * @Fields equityRate : 所占股份
 	 */
+	@ApiModelProperty("所占股份")
 	private String equityRate;
 	
-    
-	public Integer getProjectId(){
-		return projectId;
-	}
-
-	public void setProjectId(Integer projectId){
-		this.projectId = projectId;
-	}
-    
 	public String getSourceCode(){
 		return sourceCode;
 	}
@@ -88,15 +69,7 @@ public class ProjectShareholderInfo extends PojoInfo {
 	public void setSourceCode(String sourceCode){
 		this.sourceCode = sourceCode;
 	}
-    
-	public String getProjTitle(){
-		return projTitle;
-	}
 
-	public void setProjTitle(String projTitle){
-		this.projTitle = projTitle;
-	}
-    
 	public String getShareholderType(){
 		return shareholderType;
 	}

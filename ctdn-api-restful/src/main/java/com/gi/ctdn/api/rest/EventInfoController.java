@@ -12,10 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,14 +33,14 @@ public class EventInfoController {
 	 * @param eventId
 	 * @return
 	 */
-	@RequestMapping("getById/{eventId}")
+	@RequestMapping(value = "getById/{eventId}", method = RequestMethod.GET)
 	@ResponseBody
 	public MessageInfo<EventInfoList> getEventInfo(@PathVariable Integer eventId ){
 		MessageInfo<EventInfoList> messageInfo = eventInfoBiz.getByEventId(eventId);
 		return messageInfo;
 	}
 
-	@RequestMapping("getListByCompany")
+	@RequestMapping(value = "getListByCompany", method = RequestMethod.POST)
 	@ResponseBody
 	public MessageInfo<EventInfo> getListByCompany(@RequestBody EventInfo eventInfo){
 		MessageInfo<EventInfo>  messageInfo = eventInfoBiz.getListByName(eventInfo);
@@ -55,7 +52,7 @@ public class EventInfoController {
 			@ApiImplicitParam(name = "pageNo", value = "从0开始", required = true, paramType="query"),
 			@ApiImplicitParam(name = "pageSize", value ="pageSize", required = true, paramType="query")
 	})
-	@RequestMapping("queryProjectEventList")
+	@RequestMapping(value = "queryProjectEventList",method = RequestMethod.POST)
 	@ResponseBody
 	public MessageInfo<List<EventInfo>> getListBySourceCode(@RequestBody EventInfo eventInfo){
 		MessageInfo<List<EventInfo>> messageInfo  = eventInfoBiz.getListBySourceCode(eventInfo);
@@ -63,22 +60,14 @@ public class EventInfoController {
 	}
 
 
-	/**
-	 * 根据id查询详情
-	 * @param
-	 * @return
-	 */
-	@RequestMapping("getLatestEventInfo")
+	@RequestMapping(value = "getLatestEventInfo",method = RequestMethod.POST)
 	@ResponseBody
 	public MessageInfo<List<EventInfo>> getLatestEventInfo(){
 		MessageInfo<List<EventInfo>> messageInfo = eventInfoBiz.getByInvestDate();
 		return messageInfo;
 	}
 
-	/**
-	 *
-	 */
-	@RequestMapping("getCtdnEventInfo")
+	@RequestMapping(value = "getCtdnEventInfo",method = RequestMethod.POST)
 	@ResponseBody
 	public MessageInfo<List<EventInfo>> getCtdnEventInfo(@RequestBody EventInfo EventInfo){
 		MessageInfo<List<EventInfo>> messageInfo = eventInfoBiz.getFromCtdnEventInfo(EventInfo);

@@ -91,6 +91,7 @@ public class ProjectListController {
 	 * 根据projectCode查询联系方式列表
 	 * @return
 	 */
+	@ApiOperation("根据projectCode查询联系方式 ")
 	@RequestMapping(value = "queryProjectContactByCode",method = RequestMethod.POST)
 	@ResponseBody
 	public MessageInfo<List<ProjectContact>>  queryContactlist (@RequestBody ProjectContact  projectContact) {
@@ -121,6 +122,7 @@ public class ProjectListController {
 	 * 查询最新项目
 	 * @return
 	 */
+	@ApiOperation("查询最新项目")
 	@RequestMapping(value = "queryLatestProjects",method = RequestMethod.GET)
 	@ResponseBody
 	public MessageInfo<List>  queryLatestProjects () {
@@ -135,6 +137,7 @@ public class ProjectListController {
 	 * @param projectList
 	 * @return
 	 */
+	@ApiOperation("查询公司下的企业项目")
 	@RequestMapping(value = "queryByCompCode",method = RequestMethod.POST)
 	@ResponseBody
 	public  MessageInfo<ProjectList> queryByProjTitle(@RequestBody ProjectList projectList){

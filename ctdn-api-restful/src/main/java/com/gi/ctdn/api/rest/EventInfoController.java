@@ -48,10 +48,7 @@ public class EventInfoController {
 	}
 
 	@ApiOperation(value = "查找项目融资事件")
-	@ApiImplicitParams({
-			@ApiImplicitParam(name = "pageNo", value = "从0开始", required = true, paramType="query"),
-			@ApiImplicitParam(name = "pageSize", value ="pageSize", required = true, paramType="query")
-	})
+	@ApiImplicitParam(paramType = "body", dataType = "EventInfo", name = "eventInfo", value = "必填项:projectCode", required = true)
 	@RequestMapping(value = "queryProjectEventList",method = RequestMethod.POST)
 	@ResponseBody
 	public MessageInfo<List<EventInfo>> getListBySourceCode(@RequestBody EventInfo eventInfo){

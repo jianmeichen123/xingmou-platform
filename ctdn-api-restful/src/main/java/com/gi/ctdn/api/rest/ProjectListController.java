@@ -39,7 +39,7 @@ public class ProjectListController {
 	 * 根据code查询项目
 	 */
 	@ApiOperation("根据code查项目'")
-	@ApiImplicitParams(@ApiImplicitParam(paramType = "query", dataType = "String", name = "projectCode", value = "项目code", required = true))
+	@ApiImplicitParam(paramType = "query", dataType = "String", name = "projectCode", value = "项目code", required = true)
 	@RequestMapping(value = "queryProjectByCode/{projectCode}",method = RequestMethod.GET)
 	@ResponseBody
 	public MessageInfo<ProjectList> queryProjectByCode(@PathVariable String  projectCode){
@@ -56,12 +56,7 @@ public class ProjectListController {
 	 * 根据code查询发展历史
 	 */
 	@ApiOperation("查询项目发展历史")
-	@ApiImplicitParams({
-			@ApiImplicitParam(paramType = "query", dataType = "String", name = "projectCode", value = "项目code", required = true),
-			@ApiImplicitParam(paramType = "query", dataType = "Integer", name = "pageNo", value = "pageNo:1开始", required = true),
-			@ApiImplicitParam(paramType = "query", dataType = "Integer", name = "pageSize", value = "pageSize", required = true),
-			@ApiImplicitParam(paramType = "query", dataType = "String", name = "type", value = "发展历史:N", required = true)
-	})
+	@ApiImplicitParam(paramType = "body", dataType = "ProjectMediaInfo", name = "projectMediaInfo", value = "必填项:projectCode pageNo:0 开始 pageSize ", required = true)
 	@RequestMapping(value = "queryMediaInfoByCode",method = RequestMethod.POST)
 	@ResponseBody
 	public MessageInfo<ProjectMediaInfo> queryProjectByCode(@RequestBody ProjectMediaInfo projectMediaInfo){
@@ -76,7 +71,7 @@ public class ProjectListController {
 	 * 根据code查询团队成员
 	 */
 	@ApiOperation("查询项目成员 ")
-	@ApiImplicitParams(@ApiImplicitParam(paramType = "query", dataType = "String", name = "projectCode", value = "项目code", required = true))
+	@ApiImplicitParam(paramType = "body", dataType = "ProjectTeam", name = "team", value = "必填项:projectCode", required = true)
 	@RequestMapping(value = "queryProjectTeamByCode",method = RequestMethod.POST)
 	@ResponseBody
 	public MessageInfo<List<ProjectTeam>> queryProjectByCode(@RequestBody ProjectTeam team){

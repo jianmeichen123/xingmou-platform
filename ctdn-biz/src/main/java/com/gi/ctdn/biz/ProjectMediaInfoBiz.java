@@ -31,7 +31,7 @@ public class ProjectMediaInfoBiz  {
 
 		MessageInfo<ProjectMediaInfo> messageInfo;
 		try {
-			PageHelper.startPage(projectMediaInfo.getPageNo(), projectMediaInfo.getPageSize());
+			PageHelper.startPage(projectMediaInfo.getPageNo()+1, projectMediaInfo.getPageSize());
 			List<ProjectMediaInfo> projectMediaInfoList = projectMediaInfoDAO.selectBySourceCodeAndType(projectMediaInfo.getProjectCode(),projectMediaInfo.getType());
 			PageInfo<ProjectMediaInfo> pageInfo = new PageInfo<ProjectMediaInfo>(projectMediaInfoList);
 			Pagination page = new Pagination();

@@ -1,10 +1,21 @@
 package com.gi.ctdn.api.rest;
 
 import com.gi.ctdn.biz.IndexHeaderStatBiz;
+import com.gi.ctdn.biz.IndustryBiz;
+import com.gi.ctdn.biz.OrgInfoBiz;
+import com.gi.ctdn.biz.ProjectListBiz;
 import com.gi.ctdn.biz.me.UserIndustryBiz;
 import com.gi.ctdn.pojo.IndexHeaderStat;
+import com.gi.ctdn.pojo.Industry;
+import com.gi.ctdn.pojo.OrgInfo;
+import com.gi.ctdn.pojo.ProjectList;
 import com.gi.ctdn.pojo.me.UserIndustry;
 import com.gi.ctdn.view.common.MessageInfo;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
@@ -16,12 +27,24 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("index")
 public class IndexController {
+	
+	private Logger loger = LoggerFactory.getLogger(IndexController.class);
+
 
     @Autowired
     private UserIndustryBiz userIndustryBiz;
 
     @Autowired
     private IndexHeaderStatBiz indexHeaderStatBiz;
+    
+    @Autowired
+    private ProjectListBiz projectListBiz;
+    
+    @Autowired
+   	private OrgInfoBiz orgInfoBiz;
+    
+    @Autowired
+    private IndustryBiz industryBiz;
 
     /**
      *查询用户关注行业
@@ -52,4 +75,123 @@ public class IndexController {
         MessageInfo messageInfo = indexHeaderStatBiz.getIndexHeaderStat();
         return messageInfo;
     }
+    
+
+    /**
+     * 获取最新发现项目
+     * @param projectList
+     * @return
+     */
+    @RequestMapping("queryLastestLoadProject")
+    @ResponseBody
+    public MessageInfo<List<ProjectList>> queryLastestLoadProject (){
+		MessageInfo<List<ProjectList>> resultMessageInfo = new MessageInfo<List<ProjectList>>();
+		try {
+			List<ProjectList> projectLists  = projectListBiz.selectByLoadDate();
+			resultMessageInfo.setData(projectLists);
+		} catch (Exception e) {
+			loger.error(" 获取最新发现项目,error:" + e.getMessage());
+			resultMessageInfo.setStatus(0);
+		}
+		return resultMessageInfo;
+    }
+    
+    /**
+     * 获取最新获投项目
+     * @param projectList
+     * @return
+     */
+    @RequestMapping("queryLastestFinanceProject")
+    @ResponseBody
+    public MessageInfo<List<ProjectList>> queryLastestFinanceProject (){
+		MessageInfo<List<ProjectList>> resultMessageInfo = new MessageInfo<List<ProjectList>>();
+		try {
+			List<ProjectList> projectLists  = projectListBiz.queryLastestFinanceProject();
+			resultMessageInfo.setData(projectLists);
+		} catch (Exception e) {
+			e.printStackTrace();
+			loger.error("获取最新获投项目,error:" + e.getMessage());
+			resultMessageInfo.setStatus(0);
+		}
+		return resultMessageInfo;
+    }
+    
+    /**
+     * 获取上个月活跃机构
+     * @param projectList
+     * @return
+     */
+    @RequestMapping("queryLastestOrg")
+    @ResponseBody
+    public MessageInfo<List<OrgInfo>> getAllOrgInfo(){
+		MessageInfo<List<OrgInfo>>  messageInfo = new MessageInfo<List<OrgInfo>>();
+		try {
+			List<OrgInfo> orgList = orgInfoBiz.getLatestOrg();
+			messageInfo.setData(orgList);
+		} catch (Exception e) {
+			loger.error("获取上个月活跃机构,error:" + e.getMessage());
+			messageInfo.setStatus(0);
+		}
+		return messageInfo;
+	}
+    
+    
+    /**
+     * 获取一级行业机构
+     * @param projectList
+     * @return
+     */
+    @RequestMapping("getParentIndustrys")
+    @ResponseBody
+    public MessageInfo<List<Industry>> getParentIndustrys(){
+		MessageInfo<List<Industry>>  messageInfo = new MessageInfo<List<Industry>>();
+		try {
+			List<Industry> industryList = industryBiz.getParentindustrys();
+			messageInfo.setData(industryList);
+		} catch (Exception e) {
+			loger.error("获取一级行业机构失败,error:" + e.getMessage());
+			messageInfo.setStatus(0);
+		}
+		return messageInfo;
+	}
+    
+    /**
+     * 保存或更新用户关注行业
+     * @param projectList
+     * @return
+     */
+    @RequestMapping("saveOrUpdateUerIndustry")
+    @ResponseBody
+    public MessageInfo<UserIndustry> saveOrUpdateUerIndustry(@RequestBody UserIndustry userIndustry){
+		MessageInfo<UserIndustry>  messageInfo = new MessageInfo<UserIndustry>();
+		try {
+		    userIndustryBiz.saveOrUpdateUerIndustry(userIndustry);
+		} catch (Exception e) {
+			loger.error("保存或更新用户关注行业,error:" + e.getMessage());
+			messageInfo.setStatus(0);
+		}
+		return messageInfo;
+	}
+    
+    
+    //=========================================高管============================================================
+    
+    
+    /**
+     * 获取竞争动态
+     * @return
+     */
+    @RequestMapping("getCompeteInfo")
+    @ResponseBody
+    public MessageInfo<List<OrgInfo>> getCompeteInfo(){
+		MessageInfo<List<OrgInfo>>  messageInfo = new MessageInfo<List<OrgInfo>>();
+		try {
+			List<OrgInfo> orgInfoList = orgInfoBiz.getCompeteInfo();
+			messageInfo.setData(orgInfoList);
+		} catch (Exception e) {
+			loger.error("获取高管数据模块,error:" + e.getMessage());
+			messageInfo.setStatus(0);
+		}
+		return messageInfo;
+	}
 }

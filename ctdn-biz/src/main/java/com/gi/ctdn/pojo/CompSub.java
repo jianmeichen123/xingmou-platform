@@ -1,6 +1,5 @@
 package com.gi.ctdn.pojo;
 
-import com.gi.ctdn.view.common.Pagination;
 import com.gi.ctdn.view.common.Query;
 
 /**

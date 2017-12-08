@@ -1,9 +1,6 @@
 package com.gi.ctdn.pojo;
 
-import com.gi.ctdn.view.common.Pagination;
 import com.gi.ctdn.view.common.Query;
-
-import java.util.Date;
 
 public class OrgMediaInfo extends Query {
 

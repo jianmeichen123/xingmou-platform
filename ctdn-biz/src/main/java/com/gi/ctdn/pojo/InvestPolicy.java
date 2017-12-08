@@ -1,7 +1,6 @@
 package com.gi.ctdn.pojo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.gi.ctdn.view.common.Pagination;
 import com.gi.ctdn.view.common.PojoInfo;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)

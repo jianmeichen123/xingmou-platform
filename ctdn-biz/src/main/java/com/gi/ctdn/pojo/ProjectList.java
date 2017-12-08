@@ -1,10 +1,8 @@
 package com.gi.ctdn.pojo;
 
-import com.gi.ctdn.view.common.Pagination;
 import com.gi.ctdn.view.common.Query;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import jdk.internal.org.objectweb.asm.tree.analysis.Value;
 
 import java.util.Date;
 

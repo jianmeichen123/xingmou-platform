@@ -2,9 +2,6 @@ package com.gi.ctdn.pojo;
 
 import com.gi.ctdn.view.common.PojoInfo;
 
-import java.io.Serializable;
-import java.sql.Timestamp;
-
 public class AppProjectDemand extends PojoInfo {
 
 

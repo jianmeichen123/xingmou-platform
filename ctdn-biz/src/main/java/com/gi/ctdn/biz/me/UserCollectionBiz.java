@@ -5,9 +5,13 @@ import com.gi.ctdn.biz.ProjectListBiz;
 import com.gi.ctdn.dao.me.UserCollectionDAO;
 import com.gi.ctdn.pojo.OrgInfo;
 import com.gi.ctdn.pojo.ProjectList;
+import com.gi.ctdn.pojo.ProjectMediaInfo;
 import com.gi.ctdn.pojo.me.UserCollection;
 import com.gi.ctdn.view.common.MessageInfo;
 import com.gi.ctdn.view.common.MessageStatus;
+import com.gi.ctdn.view.common.Pagination;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import io.swagger.models.auth.In;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,7 +72,7 @@ public class UserCollectionBiz {
     public MessageInfo<List<String>> getCodeListByUT(Integer userId,Integer type){
         MessageInfo<List<String>> messageInfo = new MessageInfo<List<String>>();
         try{
-            List<String> codeList = userCollectionDAO.selectCodesByUT(userId,type);
+            List<String> codeList = countCodeList(userId,type);
             messageInfo.setData(codeList);
         }catch (Exception e){
             LOGGER.info("用户查询收藏失败",e.getMessage());
@@ -78,79 +82,76 @@ public class UserCollectionBiz {
         return messageInfo;
     }
 
-    /**
-     * 用户各个栏目收藏总数
-     * @param userId
-     * @return
-     */
-    public MessageInfo<Map<String,Integer>> countNum(Integer userId){
-        MessageInfo<Map<String,Integer>> messageInfo = new MessageInfo<Map<String,Integer>>();
+    private List<String> countCodeList(Integer userId,Integer type){
+        List<String> codeList = userCollectionDAO.selectCodesByUT(userId,type);
+        return codeList;
+    }
+
+    public MessageInfo<UserCollection> getColListByUT(UserCollection userCollection){
+        MessageInfo<UserCollection> messageInfo = new MessageInfo<UserCollection>();
+        //查询code集合
+        List<String> codeList  = countCodeList(userCollection.getUserId(),userCollection.getType());
+        //查询分页数据
+        List resultList = new ArrayList();
+        PageHelper.startPage(userCollection.getPageNo()+1, userCollection.getPageSize());
         try{
-            Map<String,Integer> map = new HashMap<String,Integer>();
-            messageInfo.setData(map);
+            switch (userCollection.getType()){
+                case 0:{
+                    //查询项目
+                    resultList = projectListBiz.getListByCodes(codeList);
+                    break;
+                }
+                case 1:{
+                    //查询机构
+                    resultList = orgInfoBiz.getListByCodes(codeList);
+                    break;
+                }
+                case 2:{
+                    //查询投资人
+                    //break;
+                }
+                case 3:{
+                    //查询创业者
+                    //break;
+                }
+                case 4:{
+                    //查询报告
+                    //break;
+                }
+            }
+            PageInfo<ProjectMediaInfo> pageInfo = new PageInfo<ProjectMediaInfo>(resultList);
+            Pagination page = new Pagination();
+            page.setTotal(pageInfo.getTotal());
+            page.setRecords(resultList);
+            messageInfo = new MessageInfo(MessageStatus.OK_CODE,MessageStatus.OK_MESSAGE,  page);
         }catch (Exception e){
-            LOGGER.info("查询总数失败",e.getMessage());
+            LOGGER.info("用户查询收藏失败",e.getMessage());
             messageInfo.setStatus(MessageStatus.ERROR_CODE);
             messageInfo.setMessage(MessageStatus.ERROR_MESSAGE);
         }
         return messageInfo;
     }
-//
-//    private Map<String,Integer> hh(Integer userId){
-//        LinkedHashMap<String,Long> totalNumMap = new LinkedHashMap<String,Long>();
-//        totalNumMap.put("project",projectNum);
-//        totalNumMap.put("investfirms",investfirmsNum);
-//        totalNumMap.put("investEvent",investEventNum);
-//        totalNumMap.put("mergeEvent",mergeEventNum);
-//        totalNumMap.put("launchEvent",launchEventNum);
-//        return totalNumMap;
-//    }
-    public MessageInfo<UserCollection> selectAllCollection(Integer userId){
-        MessageInfo<UserCollection> messageInfo = new MessageInfo<UserCollection>();
-        UserCollection userCollection = new UserCollection();
-        List<UserCollection> list = userCollectionDAO.selectByUserId(userId);
-        List<String> pCodes = new ArrayList<String>();
-        List<String> oCodes = new ArrayList<String>();
-        List<String> iCodes = new ArrayList<String>();
-        List<String> sCodes = new ArrayList<String>();
-        List<String> rCodes = new ArrayList<String>();
-        Map<String,Integer> map = new HashMap<String,Integer>();
-        for(UserCollection u :list){
-            switch (u.getType()){
-                case 0:{
-                    pCodes.add(u.getCode());
-                }
-                case 1:{
-                    oCodes.add(u.getCode());
-                }
-                case 2:{
-                    iCodes.add(u.getCode());
-                }
-                case 3:{
-                    sCodes.add(u.getCode());
-                }
-                case 4:{
-                    rCodes.add(u.getCode());
-                }
-            }
-        }
+
+
+    /**
+     * 用户各个栏目收藏总数
+     * @param userId
+     * @return
+     */
+    public MessageInfo<Map<Integer,Integer>> countNum(Integer userId){
+        MessageInfo<Map<Integer,Integer>> messageInfo = new MessageInfo<Map<Integer,Integer>>();
+        Map<Integer,Integer> map = new LinkedHashMap<Integer,Integer>();
         try{
-            if(pCodes.isEmpty()){
-                List<ProjectList> projectList = projectListBiz.getListByCodes(pCodes);
-                userCollection.setProjectList(projectList);
+            List<UserCollection> userCollectionList = userCollectionDAO.selectCountByUserId(userId);
+            for(UserCollection userCollection:userCollectionList){
+                map.put(userCollection.getType(),userCollection.getTypeNum());
             }
-            if(oCodes.isEmpty()) {
-                List<OrgInfo> orgInfoList = orgInfoBiz.getListByCodes(oCodes);
-                userCollection.setOrgInfoList(orgInfoList);
-            }
-            messageInfo.setData(userCollection);
-            messageInfo.setMessage(MessageStatus.OK_MESSAGE);
+            messageInfo.setData(map);
         }catch (Exception e){
-            LOGGER.info("用户查询收藏失败",e.getMessage());
+            LOGGER.info("查询 用户各个栏目收藏总数失败",e.getMessage());
             messageInfo.setStatus(MessageStatus.ERROR_CODE);
-            messageInfo.setMessage(e.getMessage());
+            messageInfo.setMessage(MessageStatus.ERROR_MESSAGE);
         }
         return messageInfo;
     }
-
 }

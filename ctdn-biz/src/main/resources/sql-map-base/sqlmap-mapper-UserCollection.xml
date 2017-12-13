@@ -5,6 +5,7 @@
 			<id column="id" property="id" jdbcType="BIGINT" />
 			<result column="code" property="code" jdbcType="VARCHAR" />
 			<result column="type" property="type" jdbcType="INTEGER" />
+			<result column="typeNum" property="typeNum" jdbcType="INTEGER" />
 			<result column="userId" property="userId" jdbcType="INTEGER" />
 	</resultMap>
 
@@ -32,6 +33,17 @@
 		<where>
 			userId = #{userId,jdbcType=INTEGER}
 		</where>
+	</select>
+
+	<select id="selectCountByUserId" resultMap="BaseResultMap">
+		SELECT
+			type,count(1) as typeNum
+		FROM
+			app_user_collection
+		<where>
+			userId = #{userId,jdbcType=INTEGER}
+		</where>
+		group by type
 	</select>
 
 	<insert id="insertOne" parameterType="com.gi.ctdn.pojo.me.UserCollection">

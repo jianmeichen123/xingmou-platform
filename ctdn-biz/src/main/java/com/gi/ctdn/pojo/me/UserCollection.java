@@ -3,13 +3,14 @@ package com.gi.ctdn.pojo.me;
 import com.gi.ctdn.pojo.OrgInfo;
 import com.gi.ctdn.pojo.ProjectList;
 import com.gi.ctdn.view.common.PojoInfo;
+import com.gi.ctdn.view.common.Query;
 
 import java.util.List;
 
 /**
  * Created by zcy on 17-12-5.
  */
-public class UserCollection extends PojoInfo {
+public class UserCollection extends Query {
 
     private Integer userId;
 
@@ -19,9 +20,15 @@ public class UserCollection extends PojoInfo {
 
     private  Integer id;
 
-    private List<ProjectList> projectList;
+    private Integer typeNum;
 
-    private List<OrgInfo> orgInfoList;
+    public Integer getTypeNum() {
+        return typeNum;
+    }
+
+    public void setTypeNum(Integer typeNum) {
+        this.typeNum = typeNum;
+    }
 
     public Integer getUserId() {
         return userId;
@@ -53,21 +60,5 @@ public class UserCollection extends PojoInfo {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public List<ProjectList> getProjectList() {
-        return projectList;
-    }
-
-    public void setProjectList(List<ProjectList> projectList) {
-        this.projectList = projectList;
-    }
-
-    public List<OrgInfo> getOrgInfoList() {
-        return orgInfoList;
-    }
-
-    public void setOrgInfoList(List<OrgInfo> orgInfoList) {
-        this.orgInfoList = orgInfoList;
     }
 }

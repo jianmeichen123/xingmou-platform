@@ -15,7 +15,7 @@ public interface UserCollectionDAO {
 
     public int deleteOne(UserCollection userCollection);
 
-    public List<UserCollection> selectByUserId(Integer userId);
+    public List<UserCollection> selectCountByUserId(Integer userId);
 
     public List<String> selectCodesByUT (@Param("userId") Integer userId,@Param("type") Integer type);
 

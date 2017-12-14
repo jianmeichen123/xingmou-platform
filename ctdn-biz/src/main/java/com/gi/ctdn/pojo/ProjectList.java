@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Date;
+import java.util.List;
 
 @ApiModel
 public class ProjectList extends Query {
@@ -569,5 +570,4 @@ public class ProjectList extends Query {
 	public String getPhotos() {
 		return photos;
 	}
-
 }

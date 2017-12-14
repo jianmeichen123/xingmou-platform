@@ -11,7 +11,7 @@
 
 
 	<sql id="selectFields">
-		id, code, `type`, userId
+		id, code, type, userId
 	</sql>
 
 	<select id="selectCodesByUT" resultType="java.lang.String">

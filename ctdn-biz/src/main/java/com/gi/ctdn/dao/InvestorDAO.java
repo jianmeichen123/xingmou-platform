@@ -9,4 +9,6 @@ import java.util.List;
 
 public interface InvestorDAO {
 	Investor selectEntityByCode(@Param("code") String code);
+
+	List<Investor> selectListByCodes (@Param("codes") List<String> cods);
 }

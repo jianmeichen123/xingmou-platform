@@ -1,11 +1,15 @@
 package com.gi.ctdn.biz.me;
 
 import com.gi.ctdn.biz.OrgInfoBiz;
+import com.gi.ctdn.biz.PersonBiz;
 import com.gi.ctdn.biz.ProjectListBiz;
+import com.gi.ctdn.dao.InvestorDAO;
+import com.gi.ctdn.dao.ReportDAO;
 import com.gi.ctdn.dao.me.UserCollectionDAO;
 import com.gi.ctdn.pojo.OrgInfo;
 import com.gi.ctdn.pojo.ProjectList;
 import com.gi.ctdn.pojo.ProjectMediaInfo;
+import com.gi.ctdn.pojo.Report;
 import com.gi.ctdn.pojo.me.UserCollection;
 import com.gi.ctdn.view.common.MessageInfo;
 import com.gi.ctdn.view.common.MessageStatus;
@@ -35,6 +39,13 @@ public class UserCollectionBiz {
 
     @Autowired
     private OrgInfoBiz orgInfoBiz;
+
+    @Autowired
+    private PersonBiz personBiz;
+
+    @Autowired
+    ReportDAO reportDAO;
+
 
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserCollectionBiz.class);
@@ -75,7 +86,7 @@ public class UserCollectionBiz {
             List<String> codeList = countCodeList(userId,type);
             messageInfo.setData(codeList);
         }catch (Exception e){
-            LOGGER.info("用户查询收藏失败",e.getMessage());
+            LOGGER.info("用户查询收藏codeList失败",e.getMessage());
             messageInfo.setStatus(MessageStatus.ERROR_CODE);
             messageInfo.setMessage(MessageStatus.ERROR_MESSAGE);
         }
@@ -109,23 +120,27 @@ public class UserCollectionBiz {
                 case 2:{
                     //查询投资人
                     //break;
+                    resultList = personBiz.getInvestorListByCodes(codeList);
+                    break;
                 }
                 case 3:{
                     //查询创业者
-                    //break;
+                    resultList = personBiz.getInvestorListByCodes(codeList);
+                    break;
                 }
                 case 4:{
                     //查询报告
-                    //break;
+                    resultList = reportDAO.selectByIds(codeList);
+                    break;
                 }
             }
-            PageInfo<ProjectMediaInfo> pageInfo = new PageInfo<ProjectMediaInfo>(resultList);
+            PageInfo pageInfo = new PageInfo(resultList);
             Pagination page = new Pagination();
             page.setTotal(pageInfo.getTotal());
             page.setRecords(resultList);
             messageInfo = new MessageInfo(MessageStatus.OK_CODE,MessageStatus.OK_MESSAGE,  page);
         }catch (Exception e){
-            LOGGER.info("用户查询收藏失败",e.getMessage());
+            LOGGER.info("用户查询收藏列表失败",e.getMessage());
             messageInfo.setStatus(MessageStatus.ERROR_CODE);
             messageInfo.setMessage(MessageStatus.ERROR_MESSAGE);
         }

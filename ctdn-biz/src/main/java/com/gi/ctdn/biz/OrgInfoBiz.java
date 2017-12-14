@@ -87,7 +87,7 @@ public class OrgInfoBiz  {
 
 		List<OrgInfo> orgInfoList = new ArrayList<OrgInfo>();
 		try {
-			orgInfoList = orgInfoDAO.selectByCodes(orgCodes);
+			orgInfoList = orgInfoDAO.selectByOrgCodeList(orgCodes);
 		} catch (Exception e) {
 			LOGGER.error("getListByOrgCodes","查询全部OrgInfo失败", e);
 		}
@@ -132,7 +132,7 @@ public class OrgInfoBiz  {
 	public List<OrgInfo> getCompeteInfo() {
 		String[] codes = "bbf61d59cf1ecc4aceadaa4a4060d623,40ea873f5b4f50a2d62dadea99799fa0".split(",");
 		List<String> orgCodesList = Arrays.asList(codes);
-		List<OrgInfo> orgList = orgInfoDAO.selectByOrgCodeList(orgCodesList);
+		List<OrgInfo> orgList = getListByCodes(orgCodesList);
 		for(OrgInfo org : orgList){
 			org.setOrgMediaInfos(orgMediaInfoDAO.selectByOrgId(org.getOrgCode()));
 		}

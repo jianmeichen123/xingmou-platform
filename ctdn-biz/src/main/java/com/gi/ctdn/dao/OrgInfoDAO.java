@@ -12,8 +12,6 @@ public interface OrgInfoDAO {
 			
 	List<OrgInfo> selectByOrgId(@Param("orgCode") String orgCode);
 
-	List<OrgInfo> selectByCodes(@Param("orgCodes") List<String> codeList);
-
 	OrgListInfo selectById(@Param("orgCode") String orgCode);
 
 	List<OrgInfo> getLatestOrg();

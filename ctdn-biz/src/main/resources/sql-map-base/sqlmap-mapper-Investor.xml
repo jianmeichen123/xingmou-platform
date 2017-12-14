@@ -40,4 +40,17 @@
 		    app_investor
 		WHERE  code = #{code,jdbcType=VARCHAR}
 	</select>
+
+    <select id="selectByCodeList" parameterType="java.util.List">
+        select
+        <include refid="BaseColumns"/>
+        from  app_investor
+        <where>
+            code in
+            <foreach collection="codes" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </where>
+    </select>
+
 </mapper>

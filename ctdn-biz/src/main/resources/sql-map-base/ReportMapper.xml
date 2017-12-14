@@ -19,14 +19,14 @@
 		<result column="type" 	property="type" jdbcType="INTEGER"/>
 		<result column="state" 		property="state" jdbcType="INTEGER"/>
 	</resultMap>
-	<sql id="BaseColumns">
+	<sql id="selectFields">
 		id,title,publishDate,source,authorName,authorAvatar,authorDesc,listPic,reportBody,pageNum,coverPic,reportDesc,
 		fileUrl,type,state
 	</sql>
 
 	<select id="selectReports" resultMap="ReportMap" parameterType="com.gi.ctdn.pojo.Report">
 		select
-		<include refid="BaseColumns"/>
+		<include refid="selectFields"/>
 		from app_report
 	</select>
 
@@ -44,7 +44,7 @@
 
 	<select id="selectByIds" parameterType="java.util.List">
 		select
-		<include refid="BaseColumns"/>
+		<include refid="selectFields"/>
 		from  app_report
 		<where>
 			id in

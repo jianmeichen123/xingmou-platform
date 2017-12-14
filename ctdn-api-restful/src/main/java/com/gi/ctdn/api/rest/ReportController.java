@@ -8,10 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @Validated
+@RequestMapping("report")
 public class ReportController {
 
     @Autowired
@@ -27,7 +29,7 @@ public class ReportController {
      * 报告列表
      * @return
      */
-    @RequestMapping(value = "/reports")
+    @RequestMapping(value = "/queryReportByPage",method = RequestMethod.POST)
     @ResponseBody
     public MessageInfo<Report> reports(@RequestBody Report report){
         MessageInfo<Report> messageInfo = new MessageInfo<>();

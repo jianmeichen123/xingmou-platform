@@ -113,16 +113,16 @@
                     <!--<artifactId>mysql-connector-java</artifactId>-->
                 <!--</exclusion>-->
                 <!--<exclusion>-->
-                    <!--<groupId>org.mybatis</groupId>-->
-                    <!--<artifactId>mybatis</artifactId>-->
+                    <!--<groupId>org.dao</groupId>-->
+                    <!--<artifactId>dao</artifactId>-->
                 <!--</exclusion>-->
                 <!--<exclusion>-->
-                    <!--<groupId>org.mybatis</groupId>-->
-                    <!--<artifactId>mybatis-spring</artifactId>-->
+                    <!--<groupId>org.dao</groupId>-->
+                    <!--<artifactId>dao-spring</artifactId>-->
                 <!--</exclusion>-->
                 <!--<exclusion>-->
-                    <!--<groupId>org.mybatis</groupId>-->
-                    <!--<artifactId>mybatis-ehcache</artifactId>-->
+                    <!--<groupId>org.dao</groupId>-->
+                    <!--<artifactId>dao-ehcache</artifactId>-->
                 <!--</exclusion>-->
                 <!--<exclusion>-->
                     <!--<groupId>javax.servlet</groupId>-->

@@ -43,7 +43,7 @@
 
     <select id="selectByCodeList" parameterType="java.util.List">
         select
-        <include refid="BaseColumns"/>
+        <include refid="selectFields"/>
         from  app_investor
         <where>
             code in

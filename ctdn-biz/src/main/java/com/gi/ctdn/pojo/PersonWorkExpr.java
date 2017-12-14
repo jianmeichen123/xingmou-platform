@@ -5,32 +5,33 @@ import com.gi.ctdn.view.common.PojoInfo;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 /**
- * 创业者教育经历
+ * 工作经历
  */
-public class StartUpEduExpr extends PojoInfo {
+public class PersonWorkExpr extends PojoInfo {
+
 	private Long id;
 	/**
-	 * 创业者/投资人code
+	 * 创业者/投资人 code
 	 */
 	private String code;
 	/**
-	 * 时间段
+	 * 任职时间
 	 */
 	private String period;
 	/**
-	 * 大学
+	 * 所在项目名
 	 */
-	private String colleage;
+	private String projTitle;
 	/**
-	 * 专业
+	 * 项目code
 	 */
-	private String major;
+	private String projCode;
 	/**
-	 * 学位
+	 * 所属职位
 	 */
-	private String degree;
+	private String job;
 	/**
-	 * 创业者/投资人(S/I)
+	 * 创业者/投资人 S/I
 	 */
 	private String type;
 
@@ -58,28 +59,28 @@ public class StartUpEduExpr extends PojoInfo {
 		this.period = period;
 	}
 
-	public String getColleage() {
-		return colleage;
+	public String getProjTitle() {
+		return projTitle;
 	}
 
-	public void setColleage(String colleage) {
-		this.colleage = colleage;
+	public void setProjTitle(String projTitle) {
+		this.projTitle = projTitle;
 	}
 
-	public String getMajor() {
-		return major;
+	public String getProjCode() {
+		return projCode;
 	}
 
-	public void setMajor(String major) {
-		this.major = major;
+	public void setProjCode(String projCode) {
+		this.projCode = projCode;
 	}
 
-	public String getDegree() {
-		return degree;
+	public String getJob() {
+		return job;
 	}
 
-	public void setDegree(String degree) {
-		this.degree = degree;
+	public void setJob(String job) {
+		this.job = job;
 	}
 
 	public String getType() {

@@ -7,7 +7,7 @@ import com.gi.ctdn.view.common.PojoInfo;
 /**
  * 创业经历
  */
-public class StartUpExpr extends PojoInfo {
+public class PersonComExpr extends PojoInfo {
 	private Long id;
 	/**
 	 * 创业者/投资人code

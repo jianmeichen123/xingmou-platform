@@ -26,7 +26,7 @@ public class ReportBiz {
     public MessageInfo<Report> getReportList(Report report){
         MessageInfo<Report> messageInfo;
         try {
-            PageHelper.startPage(report.getPageNum(),report.getPageSize());
+            PageHelper.startPage(report.getPageNo(),report.getPageSize());
             List<Report> reportList = reportDAO.selectReports();
             Pagination page = new Pagination();
             if(reportList!=null){

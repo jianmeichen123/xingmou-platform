@@ -533,7 +533,7 @@ public class CommonRest {
     @ApiOperation("所有综合查询")
     @RequestMapping(value = "allQuery",method = RequestMethod.GET)
     @ResponseBody
-    @Cacheable(value = "allQuery",keyGenerator = "baseKG")
+    //@Cacheable(value = "allQuery",keyGenerator = "baseKG")
     public MessageInfo<Map> allQuery(){
         //企业
         MessageInfo<Map> messageInfo = new MessageInfo<>();

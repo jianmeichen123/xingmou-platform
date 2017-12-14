@@ -70,7 +70,7 @@ public class IndexController {
 
     @RequestMapping("queryIndexHeaderStat")
     @ResponseBody
-    @Cacheable(value = "queryIndexHeaderStat",keyGenerator = "baseKG")
+   // @Cacheable(value = "queryIndexHeaderStat",keyGenerator = "baseKG")
     public MessageInfo<IndexHeaderStat> queryIndexHeaderStat (){
         MessageInfo messageInfo = indexHeaderStatBiz.getIndexHeaderStat();
         return messageInfo;
@@ -79,7 +79,6 @@ public class IndexController {
 
     /**
      * 获取最新发现项目
-     * @param projectList
      * @return
      */
     @RequestMapping("queryLastestLoadProject")
@@ -98,7 +97,6 @@ public class IndexController {
     
     /**
      * 获取最新获投项目
-     * @param projectList
      * @return
      */
     @RequestMapping("queryLastestFinanceProject")

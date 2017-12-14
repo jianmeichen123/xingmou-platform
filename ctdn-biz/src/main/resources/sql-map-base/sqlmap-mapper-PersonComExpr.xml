@@ -4,24 +4,34 @@
 	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.PersonComExpr">
         <id column="id" property="id" jdbcType="INTEGER" />
         <result column="code"  property="code"   jdbcType="VARCHAR" />
-        <result column="period"  property="period"   jdbcType="VARCHAR" />
-        <result column="colleage"  property="colleage"   jdbcType="VARCHAR" />
-        <result column="major"  property="major"   jdbcType="VARCHAR" />
-        <result column="degree"  property="degree"   jdbcType="VARCHAR" />
+        <result column="projCode"  property="projCode"   jdbcType="CHAR" />
+        <result column="projSetUpDT"  property="projSetUpDT"   jdbcType="VARCHAR" />
+        <result column="projTitle"  property="projTitle"   jdbcType="VARCHAR" />
+        <result column="projUrl"  property="projUrl"   jdbcType="VARCHAR" />
+        <result column="industryName"  property="industryName"   jdbcType="VARCHAR" />
+        <result column="industrySubName"  property="industrySubName"   jdbcType="VARCHAR" />
+        <result column="districtName"  property="districtName"   jdbcType="VARCHAR" />
+        <result column="districtSubName"  property="districtSubName"   jdbcType="VARCHAR" />
+        <result column="districtGrandsonName"  property="districtGrandsonName"   jdbcType="VARCHAR" />
+        <result column="latestFinanceRound"  property="latestFinanceRound"   jdbcType="VARCHAR" />
+        <result column="latestFinanceAmountStr"  property="latestFinanceAmountStr"   jdbcType="VARCHAR" />
+        <result column="projIntroduce"  property="projIntroduce"   jdbcType="VARCHAR" />
+        <result column="jobPeriod"  property="jobPeriod"   jdbcType="VARCHAR" />
+        <result column="job"  property="job"   jdbcType="VARCHAR" />
         <result column="type"  property="type"   jdbcType="CHAR" />
     	</resultMap>
 
 
 	<sql id="selectFields">
-        id,code,period,colleage,major,degree,type
+        id,code,projCode,projSetUpDT,projTitle,projUrl,industryName,industrySubName,districtName,districtSubName,districtGrandsonName,latestFinanceRound,latestFinanceAmountStr,projIntroduce,jobPeriod,job,type
     </sql>
 	
 			
-	<select id="selectEduList" resultMap="BaseResultMap">
+	<select id="selectPersonComList" resultMap="BaseResultMap">
 		SELECT
             <include refid="selectFields" />
 		FROM
-            app_person_edu_expr
+            app_person_com_expr
 		WHERE  code = #{code,jdbcType=VARCHAR} and type=#{type,jdbcType=CHAR}
 	</select>
 </mapper>

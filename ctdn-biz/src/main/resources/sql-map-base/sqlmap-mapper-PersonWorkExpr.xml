@@ -21,7 +21,7 @@
 		SELECT
             <include refid="selectFields" />
 		FROM
-            app_person_edu_expr
+            app_person_work_expr
 		WHERE  code = #{code,jdbcType=VARCHAR} and type=#{type,jdbcType=CHAR}
 	</select>
 </mapper>

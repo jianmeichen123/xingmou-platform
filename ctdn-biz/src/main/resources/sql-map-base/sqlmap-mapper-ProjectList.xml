@@ -114,7 +114,7 @@
             <include refid="selectFields" />
         FROM
             app_project_list
-        <where> where projCode in
+        <where> projCode in
                 <foreach collection="codes" index="index" item="item" open="(" separator="," close=")">
                    #{item}
                 </foreach>

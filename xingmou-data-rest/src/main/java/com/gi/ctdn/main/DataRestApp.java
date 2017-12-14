@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
  * Created by vincent on 16-9-9.
  */
 
-@EnableEurekaClient
+//@EnableEurekaClient
 @SpringBootApplication
 @ComponentScan(basePackages={"com.gi.ctdn"})
 @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})

@@ -10,11 +10,14 @@ import com.gi.ctdn.view.common.MessageStatus;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -140,5 +143,21 @@ public class ProjectListController {
 		return messageInfo;
 	}
 
+	/**
+	 * 根据code查询项目
+	 */
 
+	@ApiOperation("根据codes查询项目里贝奥")
+	@RequestMapping(value = "queryByCodeList/{codes}",method = RequestMethod.GET)
+	@ResponseBody
+	public  MessageInfo<List<ProjectList>> queryByCodeList(@PathVariable String codes){
+		if(StringUtils.isEmpty(codes)){
+			return errorRet;
+		}
+		MessageInfo<List<ProjectList>> messageInfo = new MessageInfo<>();
+		List<String> codeList =  Arrays.asList(codes.split(","));
+		List<ProjectList> projectList = projectListBiz.getListByCodes(codeList);
+		messageInfo.setData(projectList);
+		return messageInfo;
+	}
 }

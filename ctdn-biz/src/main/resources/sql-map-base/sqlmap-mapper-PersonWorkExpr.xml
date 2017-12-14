@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.PersonWorkExprDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.PersonWorkExpr">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="code"  property="code"   jdbcType="VARCHAR" />
+        <result column="period"  property="period"   jdbcType="VARCHAR" />
+        <result column="projTitle"  property="projTitle"   jdbcType="VARCHAR" />
+        <result column="projCode"  property="projCode"   jdbcType="VARCHAR" />
+        <result column="job"  property="job"   jdbcType="VARCHAR" />
+        <result column="type"  property="type"   jdbcType="CHAR" />
+    	</resultMap>
+
+
+	<sql id="selectFields">
+        id,code,period,projTitle,projCode,job,type
+    </sql>
+	
+			
+	<select id="selectWorkList" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+            app_person_edu_expr
+		WHERE  code = #{code,jdbcType=VARCHAR} and type=#{type,jdbcType=CHAR}
+	</select>
+</mapper>

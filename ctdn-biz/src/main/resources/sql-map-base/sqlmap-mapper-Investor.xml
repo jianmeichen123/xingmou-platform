@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.InvestorDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.Investor">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="code"  property="code"   jdbcType="VARCHAR" />
+        <result column="zhName"  property="zhName"   jdbcType="VARCHAR" />
+        <result column="enName"  property="enName"   jdbcType="VARCHAR" />
+        <result column="age"  property="age"   jdbcType="INTEGER" />
+        <result column="gender"  property="gender"   jdbcType="CHAR" />
+        <result column="workLife"  property="workLife"   jdbcType="VARCHAR" />
+        <result column="projCode"  property="projCode"   jdbcType="CHAR" />
+        <result column="projTitle"  property="projTitle"   jdbcType="VARCHAR" />
+        <result column="introduce"  property="introduce"   jdbcType="VARCHAR" />
+        <result column="job"  property="job"   jdbcType="VARCHAR" />
+        <result column="indsutryIds"  property="indsutryIds"   jdbcType="VARCHAR" />
+        <result column="fields"  property="fields"   jdbcType="VARCHAR" />
+        <result column="rounds"  property="rounds"   jdbcType="VARCHAR" />
+        <result column="districtId"  property="districtId"   jdbcType="INTEGER" />
+        <result column="districtName"  property="districtName"   jdbcType="VARCHAR" />
+        <result column="districtSubId"  property="districtSubId"   jdbcType="INTEGER" />
+        <result column="districtSubName"  property="districtSubName"   jdbcType="VARCHAR" />
+        <result column="districtGrandsonName"  property="districtGrandsonName"   jdbcType="VARCHAR" />
+        <result column="districtGrandsonId"  property="districtGrandsonId"   jdbcType="INTEGER" />
+        <result column="colleage"  property="colleage"   jdbcType="VARCHAR" />
+        <result column="degree"  property="degree"   jdbcType="VARCHAR" />
+        <result column="url"  property="url"   jdbcType="VARCHAR" />
+    	</resultMap>
+
+
+	<sql id="selectFields">
+        id,code,zhName,enName,age,gender,workLife,projCode,projTitle,introduce,job,indsutryIds,fields,rounds,districtId,districtName,districtSubId,districtSubName,districtGrandsonName,districtGrandsonId,colleage,degree,url
+    </sql>
+	
+			
+	<select id="selectEntityByCode" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_investor
+		WHERE  code = #{code,jdbcType=VARCHAR}
+	</select>
+</mapper>

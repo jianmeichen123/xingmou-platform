@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.InvestPolicyDAO">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.InvestPolicy">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="code"  property="code"   jdbcType="VARCHAR" />
+        <result column="fields"  property="fields"   jdbcType="VARCHAR" />
+        <result column="rounds"  property="rounds"   jdbcType="VARCHAR" />
+        <result column="plan"  property="plan"   jdbcType="VARCHAR" />
+        <result column="singleStroke"  property="singleStroke"   jdbcType="VARCHAR" />
+    	</resultMap>
+
+
+	<sql id="selectFields">
+        id,code,fields,rounds,plan,singleStroke
+    </sql>
+	
+			
+	<select id="selectEntityByCode" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+            app_invest_policy
+		WHERE  code = #{code,jdbcType=VARCHAR}
+	</select>
+</mapper>

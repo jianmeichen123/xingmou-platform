@@ -42,7 +42,7 @@
 		where id=#{id}
 	</update>
 
-	<select id="selectByIds" parameterType="java.util.List">
+	<select id="selectByIds"  resultMap="ReportMap" parameterType="java.util.List">
 		select
 		<include refid="selectFields"/>
 		from  app_report

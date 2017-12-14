@@ -3,6 +3,7 @@ package com.gi.ctdn.biz.me;
 import com.gi.ctdn.biz.OrgInfoBiz;
 import com.gi.ctdn.biz.PersonBiz;
 import com.gi.ctdn.biz.ProjectListBiz;
+import com.gi.ctdn.biz.ReportBiz;
 import com.gi.ctdn.dao.InvestorDAO;
 import com.gi.ctdn.dao.ReportDAO;
 import com.gi.ctdn.dao.me.UserCollectionDAO;
@@ -11,6 +12,7 @@ import com.gi.ctdn.pojo.ProjectList;
 import com.gi.ctdn.pojo.ProjectMediaInfo;
 import com.gi.ctdn.pojo.Report;
 import com.gi.ctdn.pojo.me.UserCollection;
+import com.gi.ctdn.view.common.ListUtil;
 import com.gi.ctdn.view.common.MessageInfo;
 import com.gi.ctdn.view.common.MessageStatus;
 import com.gi.ctdn.view.common.Pagination;
@@ -44,7 +46,7 @@ public class UserCollectionBiz {
     private PersonBiz personBiz;
 
     @Autowired
-    ReportDAO reportDAO;
+    ReportBiz reportBiz;
 
 
 
@@ -109,28 +111,37 @@ public class UserCollectionBiz {
             switch (userCollection.getType()){
                 case 0:{
                     //查询项目
-                    resultList = projectListBiz.getListByCodes(codeList);
+                    if(ListUtil.isNotEmpty(codeList)) {
+                        resultList = projectListBiz.getListByCodes(codeList);
+                    }
                     break;
                 }
                 case 1:{
                     //查询机构
-                    resultList = orgInfoBiz.getListByCodes(codeList);
+                    if(ListUtil.isNotEmpty(codeList)) {
+                        resultList = orgInfoBiz.getListByCodes(codeList);
+                    }
                     break;
                 }
                 case 2:{
-                    //查询投资人
-                    //break;
-                    resultList = personBiz.getInvestorListByCodes(codeList);
+                    //查询创业者
+                    if(ListUtil.isNotEmpty(codeList)) {
+                        resultList = personBiz.getStartUpListByCodes(codeList);
+                    }
                     break;
                 }
                 case 3:{
-                    //查询创业者
-                    resultList = personBiz.getInvestorListByCodes(codeList);
+                    //查询投资人
+                    if(ListUtil.isNotEmpty(codeList)){
+                        resultList = personBiz.getInvestorListByCodes(codeList);
+                    }
                     break;
                 }
                 case 4:{
                     //查询报告
-                    resultList = reportDAO.selectByIds(codeList);
+                    if(ListUtil.isNotEmpty(codeList)) {
+                        resultList = reportBiz.selectByIds(codeList);
+                    }
                     break;
                 }
             }
@@ -140,13 +151,13 @@ public class UserCollectionBiz {
             page.setRecords(resultList);
             messageInfo = new MessageInfo(MessageStatus.OK_CODE,MessageStatus.OK_MESSAGE,  page);
         }catch (Exception e){
+            e.printStackTrace();
             LOGGER.info("用户查询收藏列表失败",e.getMessage());
             messageInfo.setStatus(MessageStatus.ERROR_CODE);
             messageInfo.setMessage(MessageStatus.ERROR_MESSAGE);
         }
         return messageInfo;
     }
-
 
     /**
      * 用户各个栏目收藏总数

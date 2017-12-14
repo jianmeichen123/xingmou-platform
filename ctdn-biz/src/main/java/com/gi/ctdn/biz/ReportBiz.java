@@ -7,9 +7,12 @@ import com.gi.ctdn.view.common.MessageStatus;
 import com.gi.ctdn.view.common.Pagination;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +20,8 @@ import java.util.Map;
 public class ReportBiz {
     @Autowired
     ReportDAO reportDAO;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReportBiz.class);
 
     public Integer getReportNum(){
         return reportDAO.selectReportNum();

@@ -41,7 +41,7 @@
 		WHERE  code = #{code,jdbcType=VARCHAR}
 	</select>
 
-    <select id="selectByCodeList" parameterType="java.util.List">
+    <select id="selectByCodeList" parameterType="java.util.List"  resultMap="BaseResultMap">
         select
         <include refid="selectFields"/>
         from  app_investor

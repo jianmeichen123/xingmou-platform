@@ -48,7 +48,7 @@ public class PersonBiz {
 	 * @return
 	 */
 	public List<StartUp> getStartUpListByCodes(List<String> codes){
-		List<StartUp> projectLists = startUpDAO.selectListByCodes(codes);
+		List<StartUp> projectLists = startUpDAO.selectByCodeList(codes);
 		return projectLists;
 	}
 
@@ -58,7 +58,7 @@ public class PersonBiz {
 	 * @return
 	 */
 	public List<Investor> getInvestorListByCodes(List<String> codes){
-		List<Investor> projectLists = investorDAO.selectListByCodes(codes);
+		List<Investor> projectLists = investorDAO.selectByCodeList(codes);
 		return projectLists;
 	}
 }

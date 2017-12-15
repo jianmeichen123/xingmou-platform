@@ -22,6 +22,9 @@
 		<include refid="selectFields" />
 		FROM
 		app_index_header_stat
+		<where>
+			type=1
+		</where>
 	</select>
 
 </mapper>

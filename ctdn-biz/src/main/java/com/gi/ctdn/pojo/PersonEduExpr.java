@@ -89,4 +89,5 @@ public class PersonEduExpr extends PojoInfo {
 	public void setType(String type) {
 		this.type = type;
 	}
+
 }

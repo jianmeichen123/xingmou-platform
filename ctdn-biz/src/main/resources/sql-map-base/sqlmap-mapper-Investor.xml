@@ -13,7 +13,7 @@
         <result column="projTitle"  property="projTitle"   jdbcType="VARCHAR" />
         <result column="introduce"  property="introduce"   jdbcType="VARCHAR" />
         <result column="job"  property="job"   jdbcType="VARCHAR" />
-        <result column="industryIds"  property="indsutryIds"   jdbcType="VARCHAR" />
+        <result column="industryIds"  property="industryIds"   jdbcType="VARCHAR" />
         <result column="fields"  property="fields"   jdbcType="VARCHAR" />
         <result column="rounds"  property="rounds"   jdbcType="VARCHAR" />
         <result column="districtId"  property="districtId"   jdbcType="INTEGER" />

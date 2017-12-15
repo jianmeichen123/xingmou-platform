@@ -9,5 +9,5 @@ public interface StartUpDAO {
 	//创业者
 	StartUp selectEntityByCode(@Param("code") String code);
 
-	List<StartUp> selectListByCodes (@Param("codes") List<String> cods);
+	List<StartUp> selectByCodeList (@Param("codes") List<String> cods);
 }

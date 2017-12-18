@@ -39,10 +39,16 @@ public class CommonRest {
     private IndustryBiz industryBiz;
 
     @Autowired
+    private InvestorIndustryBiz investorIndustryBiz;
+
+    @Autowired
     private ListingTypeBiz listingTypeBiz;
 
     @Autowired
     private InvestRoundBiz investRoundBiz;
+
+    @Autowired
+    private InvestorRoundBiz investorRoundBiz;
 
     @Autowired
     private MergeStatusBiz mergeStatusBiz;
@@ -161,6 +167,22 @@ public class CommonRest {
         return industryMessageInfo;
     }
 
+
+    /**
+     *投资人/创业者行业查询
+     * @return messageInfo
+     */
+    @ApiOperation("投资人/创业者行业查询")
+    @RequestMapping(value = "investorIndustry",method = RequestMethod.GET)
+    @ResponseBody
+    @Cacheable(value = "investorIndustry",keyGenerator = "baseKG")
+    public MessageInfo<List<InvestorIndustry>> investorIndustry() {
+        MessageInfo<List<InvestorIndustry>> industryMessageInfo = investorIndustryBiz.getAllIndustry();
+        return industryMessageInfo;
+    }
+
+
+
     /**
      *上市类型查询
      * @return messageInfo
@@ -228,6 +250,22 @@ public class CommonRest {
         MessageInfo<List<InvestRound>> messageInfo = investRoundBiz.getInvestRoundsByStatus(3);
         return messageInfo;
     }
+
+    /**
+     *投资人/创业者轮次
+     * @return messageInfo
+     */
+    @ApiOperation("投资人/创业者轮次查询")
+    @RequestMapping(value = "investorRound",method = RequestMethod.GET)
+    @ResponseBody
+    @Cacheable(value = "investorRound",keyGenerator = "baseKG")
+    public MessageInfo<List<InvestorRound>> investorRound() {
+
+        MessageInfo<List<InvestorRound>> messageInfo = investorRoundBiz.getAllRound();
+        return messageInfo;
+    }
+
+
     /**
      *合并状态查询
      * @return messageInfo
@@ -629,6 +667,18 @@ public class CommonRest {
         map.put("orgRound",orgRoundsMessageInfo.getData());
         messageInfo.setMessage(orgRoundsMessageInfo.getMessage());
         messageInfo.setStatus(orgRoundsMessageInfo.getStatus());
+
+        MessageInfo<List<InvestorRound>> investorRoundMessageInfo = investorRound();
+        map.put("investorRound",investorRoundMessageInfo.getData());
+        messageInfo.setMessage(investorRoundMessageInfo.getMessage());
+        messageInfo.setStatus(investorRoundMessageInfo.getStatus());
+
+
+        MessageInfo<List<InvestorIndustry>> investorIndustryMessageInfo = investorIndustry();
+        map.put("investorIndustry",investorIndustryMessageInfo.getData());
+        messageInfo.setMessage(investorIndustryMessageInfo.getMessage());
+        messageInfo.setStatus(investorIndustryMessageInfo.getStatus());
+
 
         messageInfo.setData(map);
         return messageInfo;

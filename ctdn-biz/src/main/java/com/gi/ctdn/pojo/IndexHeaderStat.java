@@ -30,9 +30,56 @@ public class IndexHeaderStat extends PojoInfo {
 	 */
 	private Integer eventNum;
 
+	private Integer investedProjNum;
+	public Integer getInvestedProjNum() {
+		return investedProjNum;
+	}
+
+	public void setInvestedProjNum(Integer investedProjNum) {
+		this.investedProjNum = investedProjNum;
+	}
+
+	public Integer getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
+
+	public Integer getYear() {
+		return year;
+	}
+
+	public void setYear(Integer year) {
+		this.year = year;
+	}
+
+	public Integer getMonth() {
+		return month;
+	}
+
+	public void setMonth(Integer month) {
+		this.month = month;
+	}
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
+	private Integer amount;
+	
 	private Integer startUpNum;
 
 	private Integer investorNum;
+	
+	private Integer year;
+	private Integer month;
+	private Integer type;
 
 	public Integer getStartUpNum() {
 		return startUpNum;

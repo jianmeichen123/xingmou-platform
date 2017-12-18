@@ -15,4 +15,6 @@ public interface OrgMediaInfoDAO {
 	List<OrgMediaInfo> selectByOrgIdForHistroy(@Param("orgCode") String orgCode);
 
 	List<OrgMediaInfo> selectAll();
+
+	List<OrgMediaInfo> selectMediaInfoByOrgCode(@Param("orgCode") String orgCode);
 }

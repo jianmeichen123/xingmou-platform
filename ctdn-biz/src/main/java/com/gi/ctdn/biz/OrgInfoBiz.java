@@ -129,12 +129,15 @@ public class OrgInfoBiz  {
 	public List<OrgInfo> getLatestOrg() {
 		return orgInfoDAO.getLatestOrg();
 	}
-	public List<OrgInfo> getCompeteInfo() {
-		String[] codes = "bbf61d59cf1ecc4aceadaa4a4060d623,40ea873f5b4f50a2d62dadea99799fa0".split(",");
-		List<String> orgCodesList = Arrays.asList(codes);
-		List<OrgInfo> orgList = getListByCodes(orgCodesList);
+	public List<OrgInfo> getCompeteInfo(String orgCodes) {
+		List<String> orgCodesList = null;
+		if(orgCodes != null &&orgCodes.length()!=0){
+			String[] codes = orgCodes.split(",");
+			orgCodesList = Arrays.asList(codes);
+		}
+		List<OrgInfo> orgList = orgInfoDAO.selectByOrgCodeList(orgCodesList);
 		for(OrgInfo org : orgList){
-			org.setOrgMediaInfos(orgMediaInfoDAO.selectByOrgId(org.getOrgCode()));
+			org.setOrgMediaInfos(orgMediaInfoDAO.selectMediaInfoByOrgCode(org.getOrgCode()));
 		}
 		return orgList;
 	}

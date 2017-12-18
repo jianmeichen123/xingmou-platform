@@ -214,14 +214,14 @@
              <version>${mapper.version}</version>
         </dependency>
         <dependency>
-			<groupId>com.aliyun.sms</groupId>
-			<artifactId>sms-api</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<groupId>com.github.1991wangliang</groupId>
+			<artifactId>aliyun-java-sdk-dysmsapi</artifactId>
+			<version>1.0.0</version>
 		</dependency>
-		<dependency>
-			<groupId>com.aliyun.sms</groupId>
-			<artifactId>sms-core</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+	 	<dependency>
+	  		<groupId>com.aliyun</groupId>
+	  		<artifactId>aliyun-java-sdk-core</artifactId>
+	  		<version>3.3.1</version>
 		</dependency>
     </dependencies>
     <!-- 如有Nexus私服, 取消注释并指向正确的服务器地址. -->

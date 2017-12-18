@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.BusinessLineMappingIndustryDao">
+    <resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.BusinessLineMappingIndustry">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="industryIds" property="industryIds" jdbcType="VARCHAR"/>
+        <result column="industryNames" property="industryNames" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <sql id="selectFields">
+        id,name,industryIds,industryNames
+    </sql>
+
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="selectFields"/>
+        FROM
+        app_business_line_mapping_industry
+    </select>
+
+</mapper>

@@ -2,6 +2,8 @@
 
 package com.gi.ctdn.biz;
 
+import java.util.Calendar;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,6 +32,40 @@ public class IndexHeaderStatBiz  {
 			messageInfo.setData( indexHeaderStat);
 		} catch (Exception e) {
 			LOGGER.error("getAllIndexHeaderStat","查询全部IndexHeaderStat失败", e);
+			messageInfo.setStatus(10001);
+		}
+		return messageInfo;
+	}
+    
+    
+    public MessageInfo<IndexHeaderStat> getGGTotalHeaderStat(){
+
+		MessageInfo<IndexHeaderStat> messageInfo = new MessageInfo<IndexHeaderStat>();
+		try {
+			IndexHeaderStat query = new IndexHeaderStat();
+			query.setType(1);
+			IndexHeaderStat indexHeaderStat = indexHeaderStatDAO.selectByTypeOrDate(query);
+			messageInfo.setData( indexHeaderStat);
+		} catch (Exception e) {
+			LOGGER.error("getAllIndexHeaderStat","查询GGIndexHeaderStat失败", e);
+			messageInfo.setStatus(10001);
+		}
+		return messageInfo;
+	}
+
+
+	public MessageInfo<IndexHeaderStat> getGGCurMonthHeaderStat() {
+		MessageInfo<IndexHeaderStat> messageInfo = new MessageInfo<IndexHeaderStat>();
+		try {
+			Calendar cal = Calendar.getInstance();
+			IndexHeaderStat query = new IndexHeaderStat();
+			query.setType(2);
+			query.setYear(cal.get(Calendar.YEAR));
+			query.setMonth(cal.get(Calendar.MONTH)+1);
+			IndexHeaderStat indexHeaderStat = indexHeaderStatDAO.selectByTypeOrDate(query);
+			messageInfo.setData( indexHeaderStat);
+		} catch (Exception e) {
+			LOGGER.error("getAllIndexHeaderStat","查询GGIndexHeaderStat失败", e);
 			messageInfo.setStatus(10001);
 		}
 		return messageInfo;

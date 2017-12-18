@@ -36,5 +36,30 @@
 			userId = #{userId,jdbcType=INTEGER}
 		</where>
 	</update>
+	 <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.gi.ctdn.pojo.me.UserIndustry">
+        <![CDATA[
+		insert into app_user_industry (
+            id,
+            userId,
+            industryNames,
+            firstLogin,
+            departmentId,
+            industryIds
+		)
+		values (
+		#{id,jdbcType=BIGINT},
+		#{userId,jdbcType=INTEGER},
+		#{industryNames,jdbcType=VARCHAR},
+		#{firstLogin,jdbcType=INTEGER},
+		#{departmentId,jdbcType=INTEGER},
+		#{industryIds,jdbcType=VARCHAR}
+		)
+		]]>
+    </insert>
+    
+       
+    <delete id="delete" parameterType="integer">
+    	delete from app_user_industry where userId = #{userId}
+    </delete>
 
 </mapper>

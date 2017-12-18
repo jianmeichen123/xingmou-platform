@@ -10,4 +10,6 @@ import com.gi.ctdn.pojo.IndexHeaderStat;
 public interface IndexHeaderStatDAO {
 
 	IndexHeaderStat select();
+
+	IndexHeaderStat selectByTypeOrDate(IndexHeaderStat query);
 }

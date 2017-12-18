@@ -6,13 +6,18 @@
 		<result column="projectNum" property="projectNum" jdbcType="INTEGER" />
 		<result column="orgNum" property="orgNum" jdbcType="INTEGER" />
 		<result column="eventNum" property="eventNum" jdbcType="INTEGER" />
+		<result column="investedProjNum" property="investedProjNum" jdbcType="INTEGER" />
+		<result column="amount" property="amount" jdbcType="INTEGER" />
 		<result column="startUpNum" property="startUpNum" jdbcType="INTEGER" />
 		<result column="investorNum" property="investorNum" jdbcType="INTEGER" />
+		<result column="year" property="year" jdbcType="INTEGER" />
+		<result column="month" property="month" jdbcType="INTEGER" />
+		<result column="type" property="type" jdbcType="INTEGER" />
 	</resultMap>
 
 
 	<sql id="selectFields">
-		id,projectNum,orgNum,eventNum,startUpNum,investorNum
+		id,projectNum,orgNum,eventNum,investedProjNum,amount,startUpNum,investorNum,year,month,type
 	</sql>
 
 
@@ -26,5 +31,23 @@
 			type=1
 		</where>
 	</select>
-
+	<select id="selectByTypeOrDate" resultMap="BaseResultMap" parameterType="com.gi.ctdn.pojo.IndexHeaderStat"> 
+		SELECT
+		<include refid="selectFields" />
+		FROM
+		app_index_header_stat
+		<where>
+			<trim prefixOverrides="and">
+				<if test="type !=null">
+					and type = #{type}
+				</if>
+				<if test="month !=null">
+					and month = #{month}
+				</if>
+				<if test="year !=null">
+					and year = #{year}
+				</if>
+			</trim>
+		</where>
+	</select>
 </mapper>

@@ -43,5 +43,15 @@
 		FROM
 		    app_org_media_info
 	</select>
-
+	
+	
+	<!-- 高管 竞争状态-->
+	<select id="selectMediaInfoByOrgCode" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		    app_org_media_info
+		WHERE  orgCode = #{orgCode,jdbcType=VARCHAR} and type = 'H'
+			order by eventDate desc limit 3
+	</select>
 </mapper>

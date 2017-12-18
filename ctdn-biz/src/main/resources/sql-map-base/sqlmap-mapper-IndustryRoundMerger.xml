@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.IndustryRoundMergerDao">
+    <resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.IndustryRoundMerger">
+        <result column="industryId" property="industryId" jdbcType="BIGINT"/>
+        <result column="industryName" property="industryName" jdbcType="VARCHAR"/>
+        <result column="roundId" property="roundId" jdbcType="INTEGER"/>
+        <result column="roundName" property="roundName" jdbcType="VARCHAR"/>
+        <result column="investedNum" property="investedNum" jdbcType="BIGINT"/>
+        <result column="investedAmount" property="investedAmount" jdbcType="BIGINT"/>
+    </resultMap>
+
+
+    <sql id="selectFields">
+        industryId,industryName,roundId,roundName,investedNum,investedAmount
+    </sql>
+
+	<resultMap type="com.gi.ctdn.pojo.IndustryRoundMerger" id="ForEchartsResultMap">
+		<result column="roundName" property="roundName" jdbcType="VARCHAR"/>
+        <result column="investedAmountStr" property="investedAmountStr" jdbcType="VARCHAR"/>
+        <result column="industryNameStr" property="industryNameStr" jdbcType="VARCHAR"/>
+        <result column="investedNumStr" property="investedNumStr" jdbcType="VARCHAR"/>
+	</resultMap>
+    <select id="getIndustryRoundMergerForEcharts" resultMap="ForEchartsResultMap">
+		select round_name as roundName,GROUP_CONCAT(investedAmount ORDER BY industryId asc ) as investedAmountStr,
+		GROUP_CONCAT(name ORDER BY industryId asc ) as industryNameStr,
+		GROUP_CONCAT(investedNum ORDER BY industryId asc ) as investedNumStr from (
+		select cc.industryId,round_name,name,if(investedAmount is null,0,investedAmount) as investedAmount,
+		if(investedNum is null,0,investedNum) as investedNum,cc.id  from
+		 (SELECT * from (SELECT id as industryId,name FROM app_industry where parentId=0) as a
+		join app_industry_round b) as cc
+		left join app_industry_round_merger as dd
+		on cc.industryId= dd.industryId and cc.id = dd.roundId) ee  GROUP BY  round_name ORDER BY id asc
+    </select>
+
+</mapper>

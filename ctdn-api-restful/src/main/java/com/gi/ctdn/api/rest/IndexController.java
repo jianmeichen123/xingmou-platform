@@ -1,12 +1,16 @@
 package com.gi.ctdn.api.rest;
 
+import com.gi.ctdn.biz.EchartsBiz;
 import com.gi.ctdn.biz.IndexHeaderStatBiz;
 import com.gi.ctdn.biz.IndustryBiz;
 import com.gi.ctdn.biz.OrgInfoBiz;
 import com.gi.ctdn.biz.ProjectListBiz;
 import com.gi.ctdn.biz.me.UserIndustryBiz;
+import com.gi.ctdn.pojo.EchartsData;
 import com.gi.ctdn.pojo.IndexHeaderStat;
 import com.gi.ctdn.pojo.Industry;
+import com.gi.ctdn.pojo.IndustryMonth;
+import com.gi.ctdn.pojo.IndustryRoundMerger;
 import com.gi.ctdn.pojo.OrgInfo;
 import com.gi.ctdn.pojo.ProjectList;
 import com.gi.ctdn.pojo.me.UserIndustry;
@@ -18,6 +22,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.EnvironmentAware;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +32,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 @RequestMapping("index")
-public class IndexController {
+public class IndexController implements EnvironmentAware{
 	
 	private Logger loger = LoggerFactory.getLogger(IndexController.class);
 
@@ -46,6 +52,12 @@ public class IndexController {
     @Autowired
     private IndustryBiz industryBiz;
 
+    
+	private String orgCodes = null;
+	
+	 @Autowired
+	private EchartsBiz echartsBiz;
+	
     /**
      *查询用户关注行业
      * @return messageInfo
@@ -172,7 +184,7 @@ public class IndexController {
 	}
     
     
-    //=========================================高管============================================================
+//=========================================高管============================================================
     
     
     /**
@@ -184,12 +196,67 @@ public class IndexController {
     public MessageInfo<List<OrgInfo>> getCompeteInfo(){
 		MessageInfo<List<OrgInfo>>  messageInfo = new MessageInfo<List<OrgInfo>>();
 		try {
-			List<OrgInfo> orgInfoList = orgInfoBiz.getCompeteInfo();
+			List<OrgInfo> orgInfoList = orgInfoBiz.getCompeteInfo(orgCodes);
 			messageInfo.setData(orgInfoList);
 		} catch (Exception e) {
 			loger.error("获取高管数据模块,error:" + e.getMessage());
 			messageInfo.setStatus(0);
 		}
 		return messageInfo;
+	}
+    
+    
+    @RequestMapping("queryGGTotalHeaderStat")
+    @ResponseBody
+    public MessageInfo<IndexHeaderStat> queryGGTotalHeaderStat (){
+        MessageInfo<IndexHeaderStat> messageInfo = indexHeaderStatBiz.getGGTotalHeaderStat();
+        return messageInfo;
+    }
+    
+    @RequestMapping("queryGGCurMonthHeaderStat")
+    @ResponseBody
+    public MessageInfo<IndexHeaderStat> queryGGHeaderStat (){
+        MessageInfo<IndexHeaderStat> messageInfo = indexHeaderStatBiz.getGGCurMonthHeaderStat();
+        return messageInfo;
+    }
+    
+    @RequestMapping("queryIndustryMonthForEchart")
+    @ResponseBody
+    public MessageInfo<EchartsData<IndustryMonth>> queryIndustryMonthForEchart (){
+    	MessageInfo<EchartsData<IndustryMonth>> messageInfo = new MessageInfo<EchartsData<IndustryMonth>>();
+		try {
+			messageInfo = echartsBiz.getIndustryMonthForEchart();
+		} catch (Exception e) {
+			e.printStackTrace();
+			loger.error("获取高管行业投资趋势,error:" + e.getMessage());
+			messageInfo.setStatus(9999);
+		}
+        return messageInfo;
+    }
+    
+    /**
+     * 高管首页 ---行业融资对比
+     * @return
+     */
+    @RequestMapping("queryIndustryMonthMergerForEchart")
+    @ResponseBody
+    public MessageInfo<EchartsData<IndustryRoundMerger>> queryIndustryMonthMergerForEchart (){
+    	MessageInfo<EchartsData<IndustryRoundMerger>> messageInfo = new MessageInfo<EchartsData<IndustryRoundMerger>>();
+		try {
+			messageInfo = echartsBiz.getIndustryRoundMergerForEcharts();
+		} catch (Exception e) {
+			e.printStackTrace();
+			loger.error("获取高管行业融资对比,error:" + e.getMessage());
+			messageInfo.setStatus(9999);
+		}
+        return messageInfo;
+    }
+    
+    
+    
+
+	@Override
+	public void setEnvironment(Environment environment) {
+		orgCodes = environment.getProperty("fixed_orgCode");
 	}
 }

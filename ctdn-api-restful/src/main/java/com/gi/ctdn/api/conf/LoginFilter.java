@@ -1,26 +1,16 @@
 package com.gi.ctdn.api.conf;
 
-import java.io.IOException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.galaxyinternet.model.user.User;
+import com.gi.ctdn.utils.BeanContextUtils;
+import com.gi.ctdn.view.common.MessageInfo;
+import redis.clients.jedis.ShardedJedis;
 
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.gi.ctdn.pojo.User;
-import com.gi.ctdn.utils.BeanContextUtils;
-import com.gi.ctdn.view.common.MessageInfo;
-
-import redis.clients.jedis.ShardedJedis;
-import redis.clients.jedis.ShardedJedisPool;
+import java.io.IOException;
 
 public class LoginFilter implements  Filter{
 

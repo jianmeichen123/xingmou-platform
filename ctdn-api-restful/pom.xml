@@ -41,6 +41,10 @@
             <groupId>com.gi</groupId>
             <artifactId>xingmou-api-common</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.gi</groupId>
+            <artifactId>xingmou-user</artifactId>
+        </dependency>
 
         <!--自身依赖 end-->
         <dependency>

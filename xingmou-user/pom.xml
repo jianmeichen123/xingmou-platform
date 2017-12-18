@@ -95,19 +95,19 @@
             <groupId>com.galaxyinternet</groupId>
             <artifactId>galaxy-platform-api</artifactId>
             <version>${fx.version}</version>
-            <!--<exclusions>-->
-                <!--<exclusion>-->
-                    <!--<groupId>org.springframework.session</groupId>-->
-                    <!--<artifactId>spring-session-data-redis</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>org.springframework.data</groupId>-->
-                    <!--<artifactId>spring-data-monogdb</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>org.mongodb</groupId>-->
-                    <!--<artifactId>mongo-java-driver</artifactId>-->
-                <!--</exclusion>-->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.session</groupId>
+                    <artifactId>spring-session-data-redis</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework.data</groupId>
+                    <artifactId>spring-data-monogdb</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.mongodb</groupId>
+                    <artifactId>mongo-java-driver</artifactId>
+                </exclusion>
                 <!--<exclusion>-->
                     <!--<groupId>mysql</groupId>-->
                     <!--<artifactId>mysql-connector-java</artifactId>-->
@@ -172,8 +172,17 @@
                     <!--<groupId>com.galaxyinternet</groupId>-->
                     <!--<artifactId>galaxy-cache</artifactId>-->
                 <!--</exclusion>-->
-            <!--</exclusions>-->
+            </exclusions>
         </dependency>
+         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+        </dependency>
+         <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>1.0.11</version>
+            </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -192,6 +201,28 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jetty</artifactId>
         </dependency>
+             <!--分页插件-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>${pagehelper.version}</version>
+        </dependency>
+            <!--通用Mapper-->
+        <dependency>
+             <groupId>tk.mybatis</groupId>
+             <artifactId>mapper</artifactId>
+             <version>${mapper.version}</version>
+        </dependency>
+        <dependency>
+			<groupId>com.aliyun.sms</groupId>
+			<artifactId>sms-api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.aliyun.sms</groupId>
+			<artifactId>sms-core</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
     </dependencies>
     <!-- 如有Nexus私服, 取消注释并指向正确的服务器地址. -->
     <repositories>

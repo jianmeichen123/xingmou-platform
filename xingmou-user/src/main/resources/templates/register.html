@@ -1,0 +1,234 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8"></meta>
+	<title>注册</title>
+	<!--basis-->
+		<link rel="shortcut icon" th:href="@{/img/favicon.ico}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/revision.css}"></link>
+<link rel="stylesheet" type="text/css" th:href="@{/css/dn.css}"></link>
+<link rel="stylesheet" type="text/css" th:href="@{/css/dn2.css}"></link>
+<link rel="stylesheet" type="text/css" th:href="@{/css/basis.css}"></link>
+<link rel="stylesheet" type="text/css" th:href="@{/bootstrap-3.3.7/dist/css/bootstrap.css}"></link>
+<link rel="stylesheet" type="text/css" th:href="@{/bootstrap-datetimepicker/bootstrap-datetimepicker.css}"></link>
+<link rel="stylesheet" type="text/css" th:href="@{/bootstrap-table-develop/dist/bootstrap-table.css}"></link>
+
+
+<script th:src="@{/js/jquery-1.12.3.min.js}"></script>
+<script th:src="@{/bootstrap-3.3.7/dist/js/bootstrap.js}"></script>
+<script th:src="@{/js/platformUrl.js?t=20170523}"></script>
+<script th:src="@{/js/common.js}"></script>
+
+<script th:src="@{/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js}"></script>
+<script th:src="@{/bootstrap-datetimepicker/bootstrap-datetimepicker.zh-CN.js}"></script>
+
+<script th:src="@{/bootstrap-table-develop/dist/bootstrap-table.js}"></script>
+<script th:src="@{/bootstrap-table-develop/dist/locale/bootstrap-table-zh-CN.js}"></script>
+
+
+
+	<link rel='style/sheet'></link>
+</head>
+<style>
+
+</style>
+<body>
+<div class="nav_bj">
+
+	<div class="container nav_all">
+		<span class="logo"><img src="../img/dn/logo.png"></img></span>
+		<ul>
+			<li page_tab="index"><a href="javascript:void(0);" onclick="index_head();" >首页</a></li>
+			<li page_tab="ctsj" class="nav_list_data_all">
+				<a href="list_page_com.html" >创投数据库</a>
+				<!-- 数据库list -->
+				<div class="nav_list_data">
+					<ul>
+						<a href="javascript:void(0);" onclick="com();"><li page_tab="qyxm"  tab="com">项目</li></a>
+						<a href="javascript:void(0);" onclick="tz();"><li  page_tab="rzdt" tab="trdt">投融动态</li></a>
+						<a href="javascript:void(0);" onclick="org();"><li page_tab="tzjg" tab="org">投资机构</li></a>
+						<a href="javascript:void(0);" onclick="startup();"><li page_tab="cyz" tab="startUp">创业者</li></a>
+						<a href="javascript:void(0);" onclick="investor();"><li page_tab="tzr" tab="investor">投资人</li></a>
+					</ul>
+				</div>
+			</li>
+			<li page_tab="trkx"><a href="javascript:void(0);"  onclick="news_head();">投融快讯</a></li>
+			<li page_tab="hybg"><a href="javascript:void(0);" onclick="report();">行研报告</a></li>
+			<li page_tab="xmcp"><a href="javascript:void(0);" onclick="evaluating()">项目评测</a></li>
+			<!--<li page_tab="sydc">商业洞察</li>-->
+		</ul>
+		<div class="nav_all_seek">
+			<a href="javascript:void(0);" target="_blank" onclick="search_head();"><div class="seek_all"  id="seek"><span class="dn_ico dn_ico_seek"></span>寻求融资</div></a>
+			<div  class="dn_ico dn_ico_search"></div>
+		</div>
+
+		<div class="nav_all_input" id="nav_all_input_all">
+            <input type="text" class="" id="nav_all_input" data-search="globalsearch_index"  placeholder="请输入关键搜索词"/>
+            <span class="brain_ico brain_ico_seek"  id="globalsearch_index"></span>
+            <div style="height:18px;width:100%;position: absolute;    top: 30px; overflow:hidden;"></div>
+            <!-- 热词 -->
+			<div class="hot_speech">
+				<div class="hot_speech_all">
+					<ul class="hotKeyword">
+					<div class="tit">热门搜索</div>
+						<li>区块链</li>
+						<li>乐视</li>
+						<li>共享经济</li>
+						<li>消费升级</li>
+						<li>机器人</li>
+						<li>VR</li>
+					</ul>
+				</div>
+			</div>
+        </div>
+        <div class="head_login_all">
+			<div class="dn_ico dn_ico_loginimg"></div>
+	        <div class="head_login">
+				<ul>
+					<li class="head_login_border"><a href="javascript:void(0);" onclick="login_page()"><span>登录</span></a></li>
+					<li><a href="javascript:void(0);" onclick="register_page()"><span>注册</span></a></li>
+				</ul>
+			</div>
+<!-- 			 <div class="nav_all_name"> -->
+<!-- 				<span id="id_name"></span> -->
+<!-- 				<span class="brain_ico brain_ico_name "></span> -->
+<!-- 				<ul class="list_click_ul"> -->
+<!-- 					<li><a href="javascript:void(0);" onclick="logout()">退出</a></li> -->
+<!-- 				</ul> -->
+<!-- 			</div>  -->
+        </div>
+        
+		
+	</div>
+
+</div>
+
+<div class="block nav_nav">
+	<div class="container">
+		<ul tab="header" class="nav_two">
+			<!--<a href="list_page_com.html" >-->
+			<!--<li page_tab="yl"  tab="">-->
+			<!--<div class="nav_nav_name">概览</div>-->
+			<!--&lt;!&ndash;<div class="nav_nav_name_x"></div>&ndash;&gt;-->
+			<!--</li>-->
+			<!--</a>-->
+			<a href="list_page_com.html" >
+				<li page_tab="qyxm"  tab="com">
+					<div class="nav_nav_name">项目</div>
+					<div class="nav_nav_name_x total-project"></div>
+				</li>
+			</a>
+			<a href="list_page_rz.html" >
+				<li page_tab="rzdt" tab="trdt">
+					<div class="nav_nav_name">投融动态</div>
+					<div class="nav_nav_name_x total-investevent"></div>
+				</li>
+			</a>
+			<a href="list_page_org.html" >
+				<li page_tab="tzjg" tab="org">
+					<div class="nav_nav_name">投资机构</div>
+					<div class="nav_nav_name_x total-org"></div>
+				</li>
+			</a>
+			<!--<a href="####" >-->
+			<!--<li page_tab="jj">-->
+			<!--<div class="nav_nav_name">基金</div>-->
+			<!--&lt;!&ndash;<div class="nav_nav_name_x"></div>&ndash;&gt;-->
+			<!--</li>-->
+			<!--</a>-->
+			<!--<a href="####" >-->
+			<!--<li page_tab="ctrw">-->
+			<!--<div class="nav_nav_name">创投人物</div>-->
+			<!--&lt;!&ndash;<div class="nav_nav_name_x"></div>&ndash;&gt;-->
+			<!--</li>-->
+			<!--</a>-->
+			<!--<a href="####" >-->
+			<!--<li page_tab="rck">-->
+			<!--<div class="nav_nav_name">人才库</div>-->
+			<!--&lt;!&ndash;<div class="nav_nav_name_x"></div>&ndash;&gt;-->
+			<!--</li>-->
+			<!--</a>-->
+		</ul>
+	</div>
+</div>
+<script>
+<!--$("#seek").click(function(){-->
+		<!--location.href="seek_financing.html"-->
+<!--})-->
+</script>
+<div class='login'>
+<div class='login-left'><img src='../img/login/login_03.jpg'/></div>
+	<!-- 密码登录 -->
+	<div class='login-right'>
+		<!--找回密码  -->
+		
+		<!--注册  -->
+		<div class='login-right-content register-content'>
+		<ul class='find-pass-title register-title'>
+			<span>账号注册</span>
+		</ul>
+			<input class='login-input input-first telphone' type='text' placeholder='请输入登录手机号' name="mobile" maxlength="11" id="mobile" onblur="func_blur(this)" onfocus="func_focus(this)"/><label class='login-tips' id="mobile_tip">*请输入登录手机号</label>
+			<input class='login-input input-code' type='text' placeholder='请输入验证码' name="code" id="code" onblur="func_blur(this)" onfocus="func_focus(this)" maxlength="6"/><label class='login-tips' id="code_tip" >*请输入验证码</label><span class='login-send-code' id="send-code-btn" onclick="send_code(this,'3')">发送验证码</span>
+			<span class='eye-box'><input class='login-input input-last' type='password' placeholder='请输入登录密码' id="password" maxlength="14" onblur="func_blur(this)" onfocus="func_focus(this)"/><label class='login-tips' id="password_tip">*请输入登录密码</label><span class='login-eye' id="password_eye"></span></span>
+			<span class='eye-box'><input class='login-input input-last' type='password' placeholder='请再次输入登录密码' id="confirmPassword" maxlength="14" onblur="func_blur(this)" onfocus="func_focus(this)"/><label class='login-tips' id="confirmPassword_tip">*请再次输入登录密码</label><span class='login-eye' id="confirmpassword_eye"></span></span>
+			<span class='to-login' onclick="register()">重置密码</span>
+			<p class='to-register'>已有账号？<a class='register-to-login' href='javascript:void(0);' onclick="login_page()">登录<span><img src='../img/login/to-register_03.jpg'/></span></a></p>
+		</div>	
+	</div>
+</div>
+
+
+
+
+
+
+<!-- {(dn_foot.html)} -->
+</body>
+<script>
+$('.password').hide();
+$('.register-content').show();
+$('.login-click').hide();
+// function register(){
+// 	var mobile = $('#mobile').val()
+// 	if(!mobile){
+// 		return
+// 	}
+// 	var validateCode = $('#code').val()
+// 	if(!validateCode){
+// 		return
+// 	}
+// 	var password= $('#password').val()
+// 	var confirmPassword= $('#confirmPassword').val()
+// 	if(!password){
+// 		return
+// 	}
+// 	if(!confirmPassword){
+// 	 	return
+// 	}
+// 	if(password != confirmPassword ){
+// 		return
+// 	}
+// 	// /^1[0-9]{10}$/.test(val);
+// 	var json = {
+// 			"mobile":mobile,
+// 			"validateCode" : validateCode,
+// 			"password" : password,
+// 			"confirmPassword":confirmPassword
+			
+// 	}
+// 	sendPostRequestByJsonObj(detail.saveOrUpdateUerIndustry,json,function(data){
+// 		if(data.success){
+// 			window.location.href = '/login.html'
+// 		}
+// 	 });
+// }
+</script>
+<script th:src="@{/js/platformUrl.js?t=20170523}"></script>
+<script th:src="@{/js/common.js}"></script>
+<script th:src="@{/js/formatter_common.js}"></script>
+<script th:src="@{/js/search_index.js}"></script>
+<script th:src="@{/js/base64.js}"></script>
+<script th:src="@{/js/layer/layer.js}"></script>
+<script th:src="@{/js/find_password.js}"></script>
+<script th:src="@{/js/register.js}"></script>
+</html>

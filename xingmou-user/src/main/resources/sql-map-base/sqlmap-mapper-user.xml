@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.xm.platform.dao.ExternalUserDao">
+	<resultMap id="BaseResultMap" type="com.gi.xm.platform.pojo.ExternalUser">
+			<id column="id" property="id" jdbcType="BIGINT" />
+			<result column="password" property="password" jdbcType="VARCHAR" />
+			<result column="role_type" property="roleType" jdbcType="VARCHAR" />
+			<result column="mobile" property="mobile" jdbcType="VARCHAR" />
+			<result column="status" property="status" jdbcType="VARCHAR" />
+	</resultMap>
+
+
+	<sql id="selectFields">
+	    id,password,role_type,mobile,status
+	</sql>
+	<select id="getUser" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM
+		app_user
+		<where>
+			<trim prefixOverrides="and">
+				<if test="mobile!=null">
+					and mobile = #{mobile}
+				</if>
+			</trim>
+		</where>
+	</select>
+
+	 <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.gi.xm.platform.pojo.ExternalUser">
+        <![CDATA[
+		insert into app_user (
+            id,
+            password,
+            role_type,
+            mobile
+		)
+		values (
+		#{id,jdbcType=BIGINT},
+		#{password,jdbcType=VARCHAR},
+		#{roleType,jdbcType=VARCHAR},
+		#{mobile,jdbcType=VARCHAR}
+		)
+		]]>
+    </insert>
+    
+    <update id="update" parameterType="com.gi.xm.platform.pojo.ExternalUser">
+    	update app_user set status = #{status} where id = #{id}
+    </update>
+
+</mapper>

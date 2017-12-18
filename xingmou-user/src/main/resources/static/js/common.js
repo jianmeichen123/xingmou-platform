@@ -352,3 +352,140 @@ function sendLuaRequest(reqUrl, callbackFun) {
 		}
 	});
 }
+function getHrefParamter(name){
+    var url=decodeURI(location.search);
+    var q = url.substr(1);
+    var qs = q.split("&");
+    if (qs) {
+        for (var i = 0; i < qs.length; i++) {
+            if (qs[i].substring(0, qs[i].indexOf("=")) == name) {
+                var ss = qs[i].substring(qs[i].indexOf("=") + 1)
+                return ss;
+            }
+        }
+    }
+}
+//导航位置定位
+function nav_locaton(first_level,second_level,three_level,four_level){
+	 $('.nav_all [page_tab='+first_level+']').addClass("nav_on");
+	 $('.nav_two [page_tab='+second_level+']').addClass("nav_on");
+	 $('.nav_list_data [page_tab='+second_level+']').addClass("nav_on");
+	 if(three_level !=''){
+		 $('.column_ul [page_tab='+three_level+']').addClass("nav_on");
+	 }
+	 if(four_level !=''){
+		 $('.project_nav [page_tab='+four_level+']').addClass("nav_on");
+	 }
+}
+//创投数据库
+$('body').delegate('.nav_list_data_all','mouseenter mouseleave', function(event){
+	event.stopPropagation();
+	if(event.type == "mouseenter"){
+		$('.nav_list_data_all .nav_list_data').addClass("nav_list_data_on");
+	}else if(event.type == "mouseleave" ){
+		$('.nav_list_data_all .nav_list_data').removeClass("nav_list_data_on");
+	}
+})
+//名字事件
+$('body').delegate('.nav_all_name','mouseenter mouseleave', function(event){
+	event.stopPropagation();
+	if(event.type == "mouseenter"){
+		$('.nav_all_name .brain_ico_name').addClass("brain_ico_name_on");
+		$('.list_click_ul').show();		
+	}else if(event.type == "mouseleave" ){
+		$('.nav_all_name .brain_ico_name').removeClass("brain_ico_name_on");
+		$('.list_click_ul').hide();
+	}
+})
+
+//导航搜索相关
+$('body').delegate('.dn_ico_search','click', function(event){
+	event.stopPropagation();
+	$(".info-search .hot_speech").hide(); 
+	$('.nav_all_seek').hide();
+	$('.nav_all_input').show();
+	$('#nav_all_input').focus();
+	$("#executive_pop").hide();
+	$("#trade_pop").hide();
+})
+function com(){
+  location.href= htmlPlatformUrl.com						
+}
+function tz(){
+	  location.href=htmlPlatformUrl.tz						
+}
+function org(){
+	  location.href=htmlPlatformUrl.org
+}
+function startup(){
+	  location.href= htmlPlatformUrl.startup						
+}
+function investor(){
+	  location.href= htmlPlatformUrl.investor					
+}
+function register_page(){
+	location.href= platformUrl.toRegister
+}
+function login_page(){
+	location.href= platformUrl.toLoginPage
+}
+function news_head(){
+	location.href= htmlPlatformUrl.news_head
+}
+function report(){
+	location.href= htmlPlatformUrl.report
+}
+function evaluating(){
+	location.href= htmlPlatformUrl.evaluating
+}
+function search_head(){
+	window.open(htmlPlatformUrl.search_finance, "_blank"); 
+}
+function index_head(){
+	location.href=htmlPlatformUrl.index_head
+}
+function logout(){
+	location.href=platformUrl.logout
+}
+function find_password_page(){
+	location.href=platformUrl.forgetPassword
+}
+//密码遮罩
+$('#password_eye').click(function(){
+	 $(this).toggleClass('login-eye-abled')
+	 if($(this).hasClass('login-eye-abled')){
+		 $('#password').attr('type','text')
+	 }else{
+		 $('#password').attr('type','password')
+	 }
+})
+$('#confirmpassword_eye').click(function(){
+	 $(this).toggleClass('login-eye-abled')
+	 if($(this).hasClass('login-eye-abled')){
+		 $('#confirmPassword').attr('type','text')
+	 }else{
+		 $('#confirmPassword').attr('type','password')
+	 }
+})
+ $("#globalsearch_index").on("click",function(){
+           var value = $("input[data-search='globalsearch_index']").val()
+           if(value.trim() != ""){
+              location.href = htmlPlatformUrl.search+"?keyword="+value
+           }
+
+ })
+ $("input[data-search='globalsearch_index']").bind('keypress',function(event){
+          var value =  $("input[data-search='globalsearch_index']").val()
+               if(value.trim() != "") {
+                 if(event.keyCode == '13'){
+                      location.href =  htmlPlatformUrl.search+"?keyword="+value
+                 }
+               }
+ });
+
+ $(".hotKeyword").delegate("li","click",function(){
+  	var value = $(this).text();
+	   if(value.trim() != "") {
+			  location.href =  htmlPlatformUrl.search+"?keyword="+value
+	   }
+});

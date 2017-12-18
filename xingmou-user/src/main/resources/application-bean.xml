@@ -16,5 +16,5 @@
            http://www.springframework.org/schema/mvc
 		   http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
-    <bean class="com.gi.xm.platform.utils.AuthRequest" p:authURI="http://fx.dev.galaxyinternet.com/authority_service"/>
+    <bean class="com.gi.xm.platform.utils.AuthRequest" p:authURI="http://fx.qa.galaxyinternet.com/authority_service"/>
 </beans>

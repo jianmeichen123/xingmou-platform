@@ -39,6 +39,7 @@ import java.util.Set;
 @Controller
 @RequestMapping("/userlogin")
 public class LoginController extends BaseControllerImpl<User, User> implements EnvironmentAware{
+	
     final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @Autowired
@@ -157,16 +158,16 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
         }
         user = rtn.getValue();
         String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
-        setCacheSessionId("ctdn", user, sessionId,notAuto);
-        String key = "ctdn-firstLogin:"+user.getId();         //判断用户是否第一次登录创投大脑
-        if(cache.getValue(key) == null){
-            cache.setValue(key,"true");
+        setCacheSessionId("internal", user, sessionId,notAuto);
+        String key = "ctdn-firstLogin:internal:"+user.getId();         //判断用户是否第一次登录创投大脑
+        if(cache.getByRedis(key) == null){
+            cache.setByRedis(key,"true",0);
         }else{
-            cache.setValue(key,"false");
+            cache.setByRedis(key,"false",0);
         }
         responsebody.setEntity(user);
         responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "登录成功！"));
-        setCookie(response,sessionId,"ctdn",notAuto);
+        setCookie(response,sessionId,"internal",notAuto);
         logger.info(user.getEmail()+" login_success ctdn");
         return responsebody;
     }
@@ -182,7 +183,7 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
         u.setRoleId(user.getRoleId());
         u.setRealName(user.getRealName());
         //是否是第一次登录
-        String status =  cache.getValue("ctdn-firstLogin:"+user.getId());
+        String status =  cache.getValue("ctdn-firstLogin:" + from + ":"+user.getId());
         u.setStatus(status);
         //部门信息,用于关联行业
         u.setDepartmentId(user.getDepartmentId());
@@ -313,20 +314,17 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
 			messageInfo.setResult(new Result(Status.ERROR, "0","您的账号与密码不匹配~"));
 			return messageInfo;
 		}
-		if(StringUtils.isBlank(query.getStatus())){
-			query.setStatus("1");
-			userBiz.update(query);
+		String key = "ctdn-firstLogin:external:"+query.getId();
+		if(cache.getByRedis(key) == null){
+			cache.setByRedis(key, "true",0);
 		}else{
-			if("1".equals(query.getStatus())){
-				query.setStatus("0");
-				userBiz.update(query);
-			}
+			cache.setByRedis(key, "false",0);
 		}
 		String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
-		setCacheSessionId(query,"ctdn", sessionId,notAuto);
+		setCacheSessionId(query,"external", sessionId,notAuto);
 		messageInfo.setEntity(query);
 		messageInfo.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "登录成功！"));
-		setCookie(response,sessionId,"ctdn",notAuto);
+		setCookie(response,sessionId,"external",notAuto);
 		
 		return messageInfo;
 	}
@@ -360,21 +358,23 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
 			ExternalUser rtn = userBiz.getUser(mobile);
 			if(rtn == null)
 			{
-				user.setStatus("1");
 				userBiz.insert(user);
 			    responsebody.setResult(new Result(Status.OK, Constants.IS_UP_WRONG, "此手机号未曾注册"));//1
 			    return responsebody;
-			}else{
-				if("1".equals(rtn.getStatus())){ //修改成不是第一次登录
-					rtn.setStatus("0");
-					userBiz.update(rtn);
-				}
 			}
+			
+			String firstLoginKey = "ctdn-firstLogin:external:"+rtn.getId();
+			if(cache.getByRedis(firstLoginKey) == null){
+				cache.setByRedis(firstLoginKey, "true",0);
+			}else{
+				cache.setByRedis(firstLoginKey, "false",0);
+			}
+			
 			String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
-			setCacheSessionId(rtn,"ctdn", sessionId,isAuto);
+			setCacheSessionId(rtn,"external", sessionId,isAuto);
 			responsebody.setEntity(rtn);
 			responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "登录成功！"));
-			setCookie(response,sessionId,"ctdn",isAuto);
+			setCookie(response,sessionId,"external",isAuto);
 			cache.remove(key);
 			logger.info(user.getMobile()+"external user login success ctdn");
 		} catch (Exception e) {
@@ -386,6 +386,8 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
 	 
 	 private void setCacheSessionId(ExternalUser user,String from,  String sessionId,boolean notAuto) {
 	        String json = null;
+	        String status =  cache.getValue("ctdn-firstLogin:" + from + ":"+user.getId());
+	        user.setStatus(status);
 	        try {
 	            json = URLEncoder.encode(JSON.toJSONString(user),"UTF-8");
 	        } catch (UnsupportedEncodingException e) {

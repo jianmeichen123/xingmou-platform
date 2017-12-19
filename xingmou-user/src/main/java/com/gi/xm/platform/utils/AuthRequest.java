@@ -7,7 +7,11 @@ import com.galaxyinternet.model.resource.PlatformResource;
 import com.galaxyinternet.model.user.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.EnvironmentAware;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.core.env.Environment;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,9 +20,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AuthRequest {
+@Configuration
+public class AuthRequest implements EnvironmentAware {
 	private static final Logger logger = LoggerFactory.getLogger(AuthRequest.class);
+
 	private String authURI;
+
 	private RestTemplate template = new RestTemplate();
 	
 	public UserResult login(String userName, String password)
@@ -109,7 +116,13 @@ public class AuthRequest {
 		ResponseEntity<ArrayList<Long>> rtn = template.exchange(uri, HttpMethod.GET, new HttpEntity<>(null), ref);
 		return rtn.getBody();
 	}
-	
+
+	public Long selectDepIdByUserId (Long userId){
+		String uri = authURI + "/brain/selectDepIdByUserId?userId="+userId;
+		ParameterizedTypeReference<Long> ref = new ParameterizedTypeReference<Long>() {};
+		ResponseEntity<Long> rtn = template.exchange(uri, HttpMethod.GET, new HttpEntity<>(null), ref);
+		return rtn.getBody();
+	}
 
 	public String getAuthURI() {
 		return authURI;
@@ -118,7 +131,12 @@ public class AuthRequest {
 	public void setAuthURI(String authURI) {
 		this.authURI = authURI;
 	}
-	
+
+	@Override
+	public void setEnvironment(Environment environment) {
+		authURI = environment.getProperty("authURI");
+		System.out.println("authURI:" + authURI );
+	}
 	
 
 }

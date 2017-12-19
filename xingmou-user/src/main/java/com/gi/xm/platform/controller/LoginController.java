@@ -33,6 +33,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -62,6 +63,11 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
     private String ctdn_index ="";
 
     private String ctdn_domain ="";
+
+	private static final Long  TZJL_ROLECODE = 10000l;
+
+    private static final Long  GG_ROLECODE = 20000l;
+
 
 
 
@@ -133,14 +139,10 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
         ResponseData<User> responsebody = new ResponseData<User>();
         String nickName= user.getNickName();
         String password = user.getPassword();
-
         if (StringUtils.isBlank(nickName) || StringUtils.isBlank(password)) {
             responsebody.setResult(new Result(Status.ERROR, Constants.IS_UP_EMPTY, "用户名或密码不能为空！"));
             return responsebody;
         }
-//        user.setNickName(null);
-//        user.setEmail(nickName);
-//        user = userService.queryUserByUP(user);
         UserResult rtn = authReq.login(nickName, password);
         if(rtn == null || rtn.isSuccess() == false)
         {
@@ -157,6 +159,18 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
             return responsebody;
         }
         user = rtn.getValue();
+
+        //内部用户查询departmentId
+		Long departmentId = authReq.selectDepIdByUserId(user.getId());
+		user.setDepartmentId(departmentId);
+
+		//内部用户查询roleCode 用roleId字段存值
+		List<Long> roleCodes = authReq.selectRoleCodeByUserId(user.getId());
+		if(roleCodes.indexOf(GG_ROLECODE)>-1){
+			user.setRoleId(GG_ROLECODE);
+		}else if(roleCodes.indexOf(TZJL_ROLECODE)>-1){
+			user.setRoleId(TZJL_ROLECODE);
+		}
         String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
         setCacheSessionId("internal", user, sessionId,notAuto);
         String key = "ctdn-firstLogin:internal:"+user.getId();         //判断用户是否第一次登录创投大脑
@@ -187,7 +201,7 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
         u.setStatus(status);
         //部门信息,用于关联行业
         u.setDepartmentId(user.getDepartmentId());
-        u.setDepartmentName(user.getDepartmentName());
+        u.setRoleId(user.getRoleId());
         String json = null;
         try {
             json = URLEncoder.encode(JSON.toJSONString(u),"UTF-8");
@@ -196,7 +210,6 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
         }
         if (json!=null){
         	cache.setByRedis("ctdn:"+from+":"+sessionId, json, notAutoLogin(notAuto));
-//            cache.setValue("ctdn:"+from+":"+sessionId, json,notAutoLogin(notAuto)); // 将sessionId存入cache
             logger.info(sessionId+" "+json);
         }
     }

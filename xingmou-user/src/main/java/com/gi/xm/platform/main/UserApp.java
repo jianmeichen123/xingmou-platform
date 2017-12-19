@@ -5,6 +5,7 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import com.gi.xm.platform.utils.AuthRequest;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -18,6 +19,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
@@ -34,8 +36,9 @@ import com.github.pagehelper.PageHelper;
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.gi.xm.platform"})
 @MapperScan("com.gi.xm.platform.dao")
+@Import(AuthRequest.class)
 //@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
-@ImportResource(value = {"classpath*:application-bean.xml","classpath*:applicationContext-cache.xml","classpath*:dubbo/spring-consumer.xml"})//启动加在dubbo配置文件
+@ImportResource(value = {"classpath*:applicationContext-cache.xml","classpath*:dubbo/spring-consumer.xml"})//启动加在dubbo配置文件
 public class UserApp {
     public static void main(String[] args) {
         SpringApplication.run(UserApp.class, args);

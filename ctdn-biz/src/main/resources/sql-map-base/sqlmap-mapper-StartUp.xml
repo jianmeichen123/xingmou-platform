@@ -38,6 +38,7 @@
 		FROM
 		    app_startup
 		WHERE  code = #{code,jdbcType=VARCHAR}
+        limit 1
 	</select>
 
     <select id="selectByCodeList" parameterType="java.util.List"  resultMap="BaseResultMap">

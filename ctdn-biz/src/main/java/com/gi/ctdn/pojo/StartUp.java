@@ -12,7 +12,7 @@ public class StartUp {
     private String projTitle;
     private String introduce;
     private String job;
-    private String indsutryIds;
+    private String industryIds;
     private String fields;
     private Integer districtId;
     private String districtName;
@@ -112,12 +112,12 @@ public class StartUp {
         this.job = job;
     }
 
-    public String getIndsutryIds() {
-        return indsutryIds;
+    public String getIndustryIds() {
+        return industryIds;
     }
 
-    public void setIndsutryIds(String indsutryIds) {
-        this.indsutryIds = indsutryIds;
+    public void setIndustryIds(String industryIds) {
+        this.industryIds = industryIds;
     }
 
     public String getFields() {
@@ -200,11 +200,4 @@ public class StartUp {
         this.url = url;
     }
 
-    @Override
-    public String toString() {
-        return "StartUp{" +
-                "id=" + id +
-                ", code='" + code + '\'' +
-                '}';
-    }
 }

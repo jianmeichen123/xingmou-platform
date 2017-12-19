@@ -13,7 +13,7 @@
         <result column="projTitle"  property="projTitle"   jdbcType="VARCHAR" />
         <result column="introduce"  property="introduce"   jdbcType="VARCHAR" />
         <result column="job"  property="job"   jdbcType="VARCHAR" />
-        <result column="indsutryIds"  property="indsutryIds"   jdbcType="VARCHAR" />
+        <result column="industryIds"  property="industryIds"   jdbcType="VARCHAR" />
         <result column="fields"  property="fields"   jdbcType="VARCHAR" />
         <result column="districtId"  property="districtId"   jdbcType="INTEGER" />
         <result column="districtName"  property="districtName"   jdbcType="VARCHAR" />
@@ -28,7 +28,7 @@
 
 
 	<sql id="selectFields">
-        id,code,zhName,enName,age,gender,workLife,projCode,projTitle,introduce,job,indsutryIds,fields,districtId,districtName,districtSubId,districtSubName,districtGrandsonName,districtGrandsonId,colleage,degree,url
+        id,code,zhName,enName,age,gender,workLife,projCode,projTitle,introduce,job,industryIds,fields,districtId,districtName,districtSubId,districtSubName,districtGrandsonName,districtGrandsonId,colleage,degree,url
     </sql>
 	
 			

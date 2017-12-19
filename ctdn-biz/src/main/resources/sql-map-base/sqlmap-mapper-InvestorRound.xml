@@ -4,6 +4,7 @@
     <resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.InvestorRound">
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="round_name" property="name" jdbcType="VARCHAR"/>
+        <result column="show_order" property="showOrder" jdbcType="INTEGER"/>
     </resultMap>
 
 
@@ -17,6 +18,7 @@
         <include refid="selectFields"/>
         FROM
         app_investor_round
+        order by show_order
     </select>
 
 </mapper>

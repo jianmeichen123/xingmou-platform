@@ -9,6 +9,8 @@ public class InvestorRound {
 
 	private String name;
 
+	private Integer showOrder;
+
 	public Integer getId() {
 		return id;
 	}
@@ -23,5 +25,13 @@ public class InvestorRound {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Integer getShowOrder() {
+		return showOrder;
+	}
+
+	public void setShowOrder(Integer showOrder) {
+		this.showOrder = showOrder;
 	}
 }

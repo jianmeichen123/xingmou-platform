@@ -6,12 +6,12 @@
 			<result column="code" property="code" jdbcType="VARCHAR" />
 			<result column="type" property="type" jdbcType="INTEGER" />
 			<result column="typeNum" property="typeNum" jdbcType="INTEGER" />
-			<result column="userId" property="userId" jdbcType="INTEGER" />
+			<result column="userCode" property="userCode" jdbcType="VARCHAR" />
 	</resultMap>
 
 
 	<sql id="selectFields">
-		id, code, type, userId
+		id, code, type, userCode
 	</sql>
 
 	<select id="selectCodesByUT" resultType="java.lang.String">
@@ -20,7 +20,7 @@
 		FROM
 			app_user_collection
 		<where>
-			userId = #{userId,jdbcType=INTEGER} AND
+			userCode = #{userCode,jdbcType=VARCHAR} AND
 			type = #{type,jdbcType=INTEGER}
 		</where>
 	</select>
@@ -31,17 +31,17 @@
 		FROM
 			app_user_collection
 		<where>
-			userId = #{userId,jdbcType=INTEGER}
+			userCode = #{userCode,jdbcType=VARCHAR}
 		</where>
 	</select>
 
-	<select id="selectCountByUserId" resultMap="BaseResultMap">
+	<select id="selectCountByUserCode" resultMap="BaseResultMap">
 		SELECT
 			type,count(1) as typeNum
 		FROM
 			app_user_collection
 		<where>
-			userId = #{userId,jdbcType=INTEGER}
+			userCode = #{userCode,jdbcType=VARCHAR}
 		</where>
 		group by type
 	</select>
@@ -50,7 +50,7 @@
 		INSERT
 			app_user_collection
 		SET
-			userId = #{userId,jdbcType=INTEGER},
+			userCode = #{userCode,jdbcType=VARCHAR},
 			type = #{type,jdbcType=INTEGER},
 			code = #{code,jdbcType=VARCHAR}
 	</insert>
@@ -59,7 +59,7 @@
 		DELETE FROM
 			app_user_collection
 		<where>
-			userId = #{userId,jdbcType=INTEGER} AND
+			userCode = #{userCode,jdbcType=VARCHAR} AND
 			type = #{type,jdbcType=INTEGER} AND
 			code = #{code,jdbcType=VARCHAR}
 		</where>

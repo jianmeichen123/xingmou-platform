@@ -13,8 +13,10 @@ public class ExternalUser extends BaseEntity{
 	
 	private String code; //验证码
 	private String type; //验证码类型（1、登录2、找回验证码3、注册）
-	
+
 	private boolean exists;
+
+	private String userCode;//id+from encodeBase64
 	
 	public Long getId() {
 		return id;
@@ -70,6 +72,12 @@ public class ExternalUser extends BaseEntity{
 	public void setType(String type) {
 		this.type = type;
 	}
-	
-	
+
+	public void setUserCode(String userCode) {
+		this.userCode = userCode;
+	}
+
+	public String getUserCode() {
+		return userCode;
+	}
 }

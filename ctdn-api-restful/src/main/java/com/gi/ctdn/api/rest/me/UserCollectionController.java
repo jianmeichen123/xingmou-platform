@@ -32,14 +32,14 @@ public class UserCollectionController {
 
     /**
      * 查询用户每种收藏codeList
-     * @param userId
+     * @param userCode
      * @param type
      * @return
      */
-    @RequestMapping(value = "getCodeList/{userId}/{type}")
+    @RequestMapping(value = "getCodeList/{userCode}/{type}")
     @ResponseBody
-    public MessageInfo<List<String>>  getCodeList(@PathVariable("userId")Integer userId, @PathVariable("type")Integer type){
-        MessageInfo<List<String>> messageInfo = userCollectionBiz.getCodeListByUT(userId,type);
+    public MessageInfo<List<String>>  getCodeList(@PathVariable("userCode")String userCode, @PathVariable("type")Integer type){
+        MessageInfo<List<String>> messageInfo = userCollectionBiz.getCodeListByUT(userCode,type);
         return messageInfo;
     }
 
@@ -72,10 +72,10 @@ public class UserCollectionController {
         return messageInfo;
     }
 
-    @RequestMapping("countNum/{userId}")
+    @RequestMapping("countNum/{userCode}")
     @ResponseBody
-    public MessageInfo<Map<Integer,Integer>>  countNum(@PathVariable("userId")Integer userId){
-        MessageInfo<Map<Integer,Integer>> messageInfo = userCollectionBiz.countNum(userId);
+    public MessageInfo<Map<Integer,Integer>>  countNum(@PathVariable("userCode") String userCode){
+        MessageInfo<Map<Integer,Integer>> messageInfo = userCollectionBiz.countNum(userCode);
         return messageInfo;
     }
 }

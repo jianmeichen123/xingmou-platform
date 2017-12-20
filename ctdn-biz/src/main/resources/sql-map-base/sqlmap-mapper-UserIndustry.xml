@@ -3,16 +3,15 @@
 <mapper namespace="com.gi.ctdn.dao.me.UserIndustryDAO">
 	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.me.UserIndustry">
 			<id column="id" property="id" jdbcType="BIGINT" />
-			<result column="userId" property="userId" jdbcType="INTEGER" />
-			<result column="industryNames" property="industryNames" jdbcType="VARCHAR" />
-			<result column="firstLogin" property="firstLogin" jdbcType="INTEGER" />
-			<result column="departmentId" property="departmentId" jdbcType="INTEGER" />
-			<result column="industryIds" property="industryIds" jdbcType="VARCHAR" />
+			<result column="userCode" property="userCode" jdbcType="VARCHAR" />
+			<result column="industryName" property="industryName" jdbcType="VARCHAR" />
+			<result column="industryId" property="industryId" jdbcType="INTEGER" />
+			<result column="isdel" property="isdel" jdbcType="INTEGER" />
 	</resultMap>
 
 
 	<sql id="selectFields">
-	    id,userId,industryNames,firstLogin,departmentId,industryIds
+	    id,userCode,industryName,industryId,isdel
 	</sql>
 
 	<select id="getUserIndustry" resultMap="BaseResultMap">
@@ -21,45 +20,64 @@
 		FROM
 		app_user_industry
 		<where>
-			userId = #{userId,jdbcType=INTEGER}
+			userCode = #{userCode,jdbcType=VARCHAR}
+			and isdel = 1
 		</where>
 	</select>
-	
 
-	<update id="updateUserIndustry" parameterType="com.gi.ctdn.pojo.me.UserIndustry">
+	<delete id="deleteByUserId" parameterType="java.lang.String">
 		UPDATE
 			app_user_industry
 		SET
-			industryNames = #{industryNames,jdbcType=VARCHAR},
-			industryIds = #{industryIds,jdbcType=VARCHAR}
+			isdel = 0
 		<where>
-			userId = #{userId,jdbcType=INTEGER}
+			userCode = #{userCode,jdbcType=VARCHAR}
 		</where>
-	</update>
-	 <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.gi.ctdn.pojo.me.UserIndustry">
-        <![CDATA[
-		insert into app_user_industry (
-            id,
-            userId,
-            industryNames,
-            firstLogin,
-            departmentId,
-            industryIds
-		)
-		values (
-		#{id,jdbcType=BIGINT},
-		#{userId,jdbcType=INTEGER},
-		#{industryNames,jdbcType=VARCHAR},
-		#{firstLogin,jdbcType=INTEGER},
-		#{departmentId,jdbcType=INTEGER},
-		#{industryIds,jdbcType=VARCHAR}
-		)
-		]]>
-    </insert>
-    
-       
-    <delete id="delete" parameterType="integer">
-    	delete from app_user_industry where userId = #{userId}
-    </delete>
+	</delete>
 
+	<!--<update id="updateUserIndustry" parameterType="com.gi.ctdn.pojo.me.UserIndustry">-->
+		<!--UPDATE-->
+			<!--app_user_industry-->
+		<!--SET-->
+			<!--industryNames = #{industryNames,jdbcType=VARCHAR},-->
+			<!--industryIds = #{industryIds,jdbcType=VARCHAR}-->
+		<!--<where>-->
+			<!--userId = #{userId,jdbcType=BIGINT}-->
+		<!--</where>-->
+	<!--</update>-->
+
+	 <!--<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.gi.ctdn.pojo.me.UserIndustry">-->
+        <!--<![CDATA[-->
+		<!--insert into app_user_industry (-->
+            <!--id,-->
+            <!--userId,-->
+            <!--industryName,-->
+            <!--industryId,-->
+            <!--isdel-->
+		<!--)-->
+		<!--values (-->
+		<!--#{id,jdbcType=BIGINT},-->
+		<!--#{userId,jdbcType=INTEGER},-->
+		<!--#{industryName,jdbcType=VARCHAR},-->
+		<!--#{industryId,jdbcType=INTEGER},-->
+		<!--1-->
+		<!--)-->
+		<!--]]>-->
+    <!--</insert>-->
+
+	<insert id="insert">
+		insert into app_user_industry(userCode,industryId,isdel)
+		values
+		<foreach item="item" index="index" collection="focusList" separator=",">
+			(#{item.userCode},#{item.industryId},1)
+		</foreach>
+	</insert>
+
+	<select id="selectDefaultIds" parameterType="java.lang.Long" resultType="java.lang.Integer">
+		select
+			industryId from app_dep_industry
+		where
+			departmentId = #{departmentId}
+	</select>
+       
 </mapper>

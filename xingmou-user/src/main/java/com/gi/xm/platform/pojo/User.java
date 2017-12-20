@@ -31,6 +31,7 @@ public class User extends BaseEntity{
 	private String password;
 	private long id;
 	private Long roleCode;
+	private String userCode;
 	public User() {
 	}
 
@@ -117,5 +118,13 @@ public class User extends BaseEntity{
 
 	public void setRoleCode(Long roleCode) {
 		this.roleCode = roleCode;
+	}
+
+	public String getUserCode() {
+		return userCode;
+	}
+
+	public void setUserCode(String userCode) {
+		this.userCode = userCode;
 	}
 }

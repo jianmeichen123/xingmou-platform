@@ -4,13 +4,7 @@ import com.gi.ctdn.biz.OrgInfoBiz;
 import com.gi.ctdn.biz.PersonBiz;
 import com.gi.ctdn.biz.ProjectListBiz;
 import com.gi.ctdn.biz.ReportBiz;
-import com.gi.ctdn.dao.InvestorDAO;
-import com.gi.ctdn.dao.ReportDAO;
 import com.gi.ctdn.dao.me.UserCollectionDAO;
-import com.gi.ctdn.pojo.OrgInfo;
-import com.gi.ctdn.pojo.ProjectList;
-import com.gi.ctdn.pojo.ProjectMediaInfo;
-import com.gi.ctdn.pojo.Report;
 import com.gi.ctdn.pojo.me.UserCollection;
 import com.gi.ctdn.view.common.ListUtil;
 import com.gi.ctdn.view.common.MessageInfo;
@@ -18,14 +12,16 @@ import com.gi.ctdn.view.common.MessageStatus;
 import com.gi.ctdn.view.common.Pagination;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import io.swagger.models.auth.In;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by zcy on 17-12-5.
@@ -82,10 +78,10 @@ public class UserCollectionBiz {
 
 
 
-    public MessageInfo<List<String>> getCodeListByUT(Integer userId,Integer type){
+    public MessageInfo<List<String>> getCodeListByUT(String userCode,Integer type){
         MessageInfo<List<String>> messageInfo = new MessageInfo<List<String>>();
         try{
-            List<String> codeList = countCodeList(userId,type);
+            List<String> codeList = countCodeList(userCode,type);
             messageInfo.setData(codeList);
         }catch (Exception e){
             LOGGER.info("用户查询收藏codeList失败",e.getMessage());
@@ -95,15 +91,15 @@ public class UserCollectionBiz {
         return messageInfo;
     }
 
-    private List<String> countCodeList(Integer userId,Integer type){
-        List<String> codeList = userCollectionDAO.selectCodesByUT(userId,type);
+    private List<String> countCodeList(String userCode,Integer type){
+        List<String> codeList = userCollectionDAO.selectCodesByUT(userCode,type);
         return codeList;
     }
 
     public MessageInfo<UserCollection> getColListByUT(UserCollection userCollection){
         MessageInfo<UserCollection> messageInfo = new MessageInfo<UserCollection>();
         //查询code集合
-        List<String> codeList  = countCodeList(userCollection.getUserId(),userCollection.getType());
+        List<String> codeList  = countCodeList(userCollection.getUserCode(),userCollection.getType());
         //查询分页数据
         List resultList = new ArrayList();
         PageHelper.startPage(userCollection.getPageNo()+1, userCollection.getPageSize());
@@ -161,14 +157,14 @@ public class UserCollectionBiz {
 
     /**
      * 用户各个栏目收藏总数
-     * @param userId
+     * @param userCode
      * @return
      */
-    public MessageInfo<Map<Integer,Integer>> countNum(Integer userId){
+    public MessageInfo<Map<Integer,Integer>> countNum(String userCode){
         MessageInfo<Map<Integer,Integer>> messageInfo = new MessageInfo<Map<Integer,Integer>>();
         Map<Integer,Integer> map = new LinkedHashMap<Integer,Integer>();
         try{
-            List<UserCollection> userCollectionList = userCollectionDAO.selectCountByUserId(userId);
+            List<UserCollection> userCollectionList = userCollectionDAO.selectCountByUserCode(userCode);
             for(UserCollection userCollection:userCollectionList){
                 map.put(userCollection.getType(),userCollection.getTypeNum());
             }

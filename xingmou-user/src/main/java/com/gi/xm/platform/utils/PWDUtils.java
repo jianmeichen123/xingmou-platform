@@ -40,7 +40,10 @@ public class PWDUtils {
 	public static String genernateNewPasswordByBase64(String password) {
 		return EncodeUtils.encodeBase64(password.getBytes());
 	}
-//
+
+	public static String generateUserCode(Long id,String from) {
+		return EncodeUtils.encodeBase64((id+":"+from).getBytes());
+	}
 	public static String decodePasswordByBase64(String password) {
 		return new String(EncodeUtils.decodeBase64(password));
 	}

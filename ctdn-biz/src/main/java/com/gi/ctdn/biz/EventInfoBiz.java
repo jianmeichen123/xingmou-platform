@@ -145,23 +145,23 @@ public class EventInfoBiz  {
 	}
 
 
-	public MessageInfo<List<EventInfo>> getFromCtdnEventInfo( EventInfo info) {
-		MessageInfo<List<EventInfo>> messageInfo = new MessageInfo<List<EventInfo>>();
-		try {
-			UserIndustry userIndustry = userIndustryDAO.getUserIndustry(1);
-			List<String> industryIds = null;
-			if(userIndustry!=null && userIndustry.getIndustryIds() !=null){
-				industryIds = Arrays.asList(userIndustry.getIndustryIds().split(","));
-			}
-			info.setIndustryIdList(industryIds);
-			List<EventInfo> eventInfo = eventInfoDAO.selectFromCtdn(info);
-			messageInfo.setData(eventInfo);
-		} catch (Exception e) {
-			LOGGER.info("getFromCtdnEventInfo","查询EventInfo失败", e);
-			messageInfo.setStatus(MessageStatus.ERROR_CODE);
-		}
-		return messageInfo;
-	}
+//	public MessageInfo<List<EventInfo>> getFromCtdnEventInfo( EventInfo info) {
+//		MessageInfo<List<EventInfo>> messageInfo = new MessageInfo<List<EventInfo>>();
+//		try {
+//			UserIndustry userIndustry = userIndustryDAO.getUserIndustry(1l);
+//			List<String> industryIds = null;
+//			if(userIndustry!=null && userIndustry.getIndustryIds() !=null){
+//				industryIds = Arrays.asList(userIndustry.getIndustryIds().split(","));
+//			}
+//			info.setIndustryIdList(industryIds);
+//			List<EventInfo> eventInfo = eventInfoDAO.selectFromCtdn(info);
+//			messageInfo.setData(eventInfo);
+//		} catch (Exception e) {
+//			LOGGER.info("getFromCtdnEventInfo","查询EventInfo失败", e);
+//			messageInfo.setStatus(MessageStatus.ERROR_CODE);
+//		}
+//		return messageInfo;
+//	}
 	public MessageInfo<List<EventInfo>> getByInvestDate() {
 		MessageInfo<List<EventInfo>> messageInfo = new MessageInfo<List<EventInfo>>();
 		try {
@@ -173,22 +173,22 @@ public class EventInfoBiz  {
 		}
 		return messageInfo;
 	}
-
-	public MessageInfo<List<EventInfo>> getFromCtdnEventInfo1( EventInfo info) {
-		MessageInfo<List<EventInfo>> messageInfo = new MessageInfo<List<EventInfo>>();
-		try {
-			UserIndustry userIndustry = userIndustryDAO.getUserIndustry(1);
-			List<String> industryIds = null;
-			if(userIndustry!=null && userIndustry.getIndustryIds() !=null){
-				industryIds = Arrays.asList(userIndustry.getIndustryIds().split(","));
-			}
-			info.setIndustryIdList(industryIds);
-			List<EventInfo> eventInfo = eventInfoDAO.selectFromCtdn(info);
-			messageInfo.setData(eventInfo);
-		} catch (Exception e) {
-			LOGGER.info("getFromCtdnEventInfo","查询EventInfo失败", e);
-			messageInfo.setStatus(MessageStatus.ERROR_CODE);
-		}
-		return messageInfo;
-	}
+//
+//	public MessageInfo<List<EventInfo>> getFromCtdnEventInfo1( EventInfo info) {
+//		MessageInfo<List<EventInfo>> messageInfo = new MessageInfo<List<EventInfo>>();
+//		try {
+//			UserIndustry userIndustry = userIndustryDAO.getUserIndustry(1l);
+//			List<String> industryIds = null;
+//			if(userIndustry!=null && userIndustry.getIndustryIds() !=null){
+//				industryIds = Arrays.asList(userIndustry.getIndustryIds().split(","));
+//			}
+//			info.setIndustryIdList(industryIds);
+//			List<EventInfo> eventInfo = eventInfoDAO.selectFromCtdn(info);
+//			messageInfo.setData(eventInfo);
+//		} catch (Exception e) {
+//			LOGGER.info("getFromCtdnEventInfo","查询EventInfo失败", e);
+//			messageInfo.setStatus(MessageStatus.ERROR_CODE);
+//		}
+//		return messageInfo;
+//	}
 }

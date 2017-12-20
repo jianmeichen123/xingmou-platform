@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class UserCollection extends Query {
 
-    private Integer userId;
+    private String userCode;
 
     private Integer type;
 
@@ -30,12 +30,12 @@ public class UserCollection extends Query {
         this.typeNum = typeNum;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public String getUserCode() {
+        return userCode;
     }
 
     public Integer getType() {

@@ -12,10 +12,13 @@ public class UserIndustry  extends PojoInfo{
 	private Long id;
 	
 	/**
-	 * @Fields userId : 登录用户id
+	 * @Fields userId : 登录用户code
 	 */
-	private Integer userId;
-	
+	private String userCode;
+
+	private Integer industryId;
+
+	private String industryName;
 	/**
 	 * @Fields industryNames : 行业名称,用","分隔
 	 */
@@ -23,21 +26,16 @@ public class UserIndustry  extends PojoInfo{
 
 	private List<String> industryNameList;
 	/**
-	 * @Fields firstLogin : 0第一次登录 1不是第一次登录
-	 */
-	private Integer firstLogin;
-	
-	/**
-	 * @Fields departmentId : 登录用户部门id
-	 */
-	private Integer departmentId;
-	
-	/**
 	 * @Fields industryIds : 行业id,用","分隔
 	 */
 	private String industryIds;
 
 	private List<Integer> industryIdList;
+
+	/**
+	 * 1使用 0删除
+	 */
+	private Integer isdel;
 
 
 	public Long getId(){
@@ -47,15 +45,15 @@ public class UserIndustry  extends PojoInfo{
 	public void setId(Long id){
 		this.id = id;
 	}
-    
-	public Integer getUserId(){
-		return userId;
+
+	public void setUserCode(String userCode) {
+		this.userCode = userCode;
 	}
 
-	public void setUserId(Integer userId){
-		this.userId = userId;
+	public String getUserCode() {
+		return userCode;
 	}
-    
+
 	public String getIndustryNames(){
 		return industryNames;
 	}
@@ -63,23 +61,7 @@ public class UserIndustry  extends PojoInfo{
 	public void setIndustryNames(String industryNames){
 		this.industryNames = industryNames;
 	}
-    
-	public Integer getFirstLogin(){
-		return firstLogin;
-	}
 
-	public void setFirstLogin(Integer firstLogin){
-		this.firstLogin = firstLogin;
-	}
-    
-	public Integer getDepartmentId(){
-		return departmentId;
-	}
-
-	public void setDepartmentId(Integer departmentId){
-		this.departmentId = departmentId;
-	}
-    
 	public String getIndustryIds(){
 		return industryIds;
 	}
@@ -102,5 +84,29 @@ public class UserIndustry  extends PojoInfo{
 
 	public void setIndustryIdList(List<Integer> industryIdList) {
 		this.industryIdList = industryIdList;
+	}
+
+	public void setIsdel(Integer isdel) {
+		this.isdel = isdel;
+	}
+
+	public Integer getIsdel() {
+		return isdel;
+	}
+
+	public void setIndustryId(Integer industryId) {
+		this.industryId = industryId;
+	}
+
+	public Integer getIndustryId() {
+		return industryId;
+	}
+
+	public void setIndustryName(String industryName) {
+		this.industryName = industryName;
+	}
+
+	public String getIndustryName() {
+		return industryName;
 	}
 }

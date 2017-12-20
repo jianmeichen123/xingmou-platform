@@ -1,5 +1,8 @@
 package com.gi.ctdn.api.rest;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.galaxyinternet.framework.core.model.User;
 import com.gi.ctdn.biz.EchartsBiz;
 import com.gi.ctdn.biz.IndexHeaderStatBiz;
 import com.gi.ctdn.biz.IndustryBiz;
@@ -16,16 +19,25 @@ import com.gi.ctdn.pojo.ProjectList;
 import com.gi.ctdn.pojo.me.UserIndustry;
 import com.gi.ctdn.view.common.MessageInfo;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.List;
 
+import com.gi.ctdn.view.common.MessageStatus;
+import io.swagger.models.auth.In;
+import jdk.nashorn.api.scripting.JSObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.core.env.Environment;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by zcy on 17-9-5.
@@ -55,28 +67,78 @@ public class IndexController implements EnvironmentAware{
     
 	private String orgCodes = null;
 	
-	 @Autowired
+	@Autowired
 	private EchartsBiz echartsBiz;
-	
-    /**
+
+	@Autowired
+	private StringRedisTemplate stringRedisTemplate;
+
+	/**
      *查询用户关注行业
      * @return messageInfo
      */
-    @RequestMapping("userIndustry/{userId}")
+    @RequestMapping("queryUserIndustry/{userCode}")
     @ResponseBody
-    public MessageInfo<UserIndustry> getUserIndustry (@PathVariable("userId") Integer userId){
-        MessageInfo<UserIndustry> messageInfo = userIndustryBiz.getUserIndustry(userId);
+    public MessageInfo<List<Integer>> getUserIndustry (@PathVariable("userCode")String userCode, HttpServletResponse response, @CookieValue(name = "_uid_")String uid, @CookieValue(name = "s_")String s){
+		MessageInfo<List<Integer>> messageInfo = new MessageInfo<>();
+		//查询redis中的用户
+		String key = "ctdn:"+s+":"+uid;
+		String userJson = (String)stringRedisTemplate.opsForValue().get(key);
+		if(userJson != null){
+			try {
+				JSONObject jsonObject = (JSONObject) JSONObject.parse(URLDecoder.decode(userJson,"UTF-8"));
+				Long  departmentId =null;
+				if(jsonObject.containsKey("departmentId")){
+					 departmentId = jsonObject.getLong("departmentId");
+				}
+				messageInfo = userIndustryBiz.getUserIndustry(userCode,departmentId);
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+				messageInfo = new MessageInfo<>(MessageStatus.ERROR_CODE,MessageStatus.ERROR_MESSAGE);
+			}
+		}else{
+			messageInfo =  new MessageInfo<>(MessageStatus.NO_LOGIN,MessageStatus.NO_LOGIN_MESSAGE);
+		}
         return messageInfo;
     }
 
-    /**
+	/**
+	 * 重置关注行业
+	 */
+	@RequestMapping("resetUserIndustry/{userCode}")
+	@ResponseBody
+	public MessageInfo<List<Integer>> resetUserIndustry (@PathVariable("userCode")String userCode, HttpServletResponse response, @CookieValue(name = "_uid_")String uid, @CookieValue(name = "s_")String s){
+		MessageInfo<List<Integer>> messageInfo = new MessageInfo<>();
+		//查询redis中的用户
+		String key = "ctdn:"+s+":"+uid;
+		String userJson = (String)stringRedisTemplate.opsForValue().get(key);
+		if(userJson != null){
+			try {
+				JSONObject jsonObject = (JSONObject) JSONObject.parse(URLDecoder.decode(userJson,"UTF-8"));
+				Long  departmentId =null;
+				if(jsonObject.containsKey("departmentId")){
+					departmentId = jsonObject.getLong("departmentId");
+					List<Integer> idList = userIndustryBiz.getDefaultIndustry(departmentId);
+					messageInfo.setData(idList);
+				}
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+				messageInfo = new MessageInfo<>(MessageStatus.ERROR_CODE,MessageStatus.ERROR_MESSAGE);
+			}
+		}else{
+			messageInfo =  new MessageInfo<>(MessageStatus.NO_LOGIN,MessageStatus.NO_LOGIN_MESSAGE);
+		}
+		return messageInfo;
+	}
+
+	/**
      *设置用户关注行业
      * @return messageInfo
      */
-    @RequestMapping("updateUserIndustry")
+    @RequestMapping("saveUserIndustry")
     @ResponseBody
     public MessageInfo<UserIndustry> updateUserIndustry (@RequestBody UserIndustry userIndustry){
-        MessageInfo messageInfo = userIndustryBiz.updateUserIndustry(userIndustry);
+        MessageInfo messageInfo = userIndustryBiz.saveOrUpdateUerIndustry(userIndustry);
         return messageInfo;
     }
 
@@ -93,42 +155,41 @@ public class IndexController implements EnvironmentAware{
      * 获取最新发现项目
      * @return
      */
-    @RequestMapping("queryLastestLoadProject")
-    @ResponseBody
-    public MessageInfo<List<ProjectList>> queryLastestLoadProject (){
-		MessageInfo<List<ProjectList>> resultMessageInfo = new MessageInfo<List<ProjectList>>();
-		try {
-			List<ProjectList> projectLists  = projectListBiz.selectByLoadDate();
-			resultMessageInfo.setData(projectLists);
-		} catch (Exception e) {
-			loger.error(" 获取最新发现项目,error:" + e.getMessage());
-			resultMessageInfo.setStatus(0);
-		}
-		return resultMessageInfo;
-    }
+//    @RequestMapping("queryLastestLoadProject")
+//    @ResponseBody
+//    public MessageInfo<List<ProjectList>> queryLastestLoadProject (){
+//		MessageInfo<List<ProjectList>> resultMessageInfo = new MessageInfo<List<ProjectList>>();
+//		try {
+//			List<ProjectList> projectLists  = projectListBiz.selectByLoadDate();
+//			resultMessageInfo.setData(projectLists);
+//		} catch (Exception e) {
+//			loger.error(" 获取最新发现项目,error:" + e.getMessage());
+//			resultMessageInfo.setStatus(0);
+//		}
+//		return resultMessageInfo;
+//    }
     
     /**
      * 获取最新获投项目
      * @return
      */
-    @RequestMapping("queryLastestFinanceProject")
-    @ResponseBody
-    public MessageInfo<List<ProjectList>> queryLastestFinanceProject (){
-		MessageInfo<List<ProjectList>> resultMessageInfo = new MessageInfo<List<ProjectList>>();
-		try {
-			List<ProjectList> projectLists  = projectListBiz.queryLastestFinanceProject();
-			resultMessageInfo.setData(projectLists);
-		} catch (Exception e) {
-			e.printStackTrace();
-			loger.error("获取最新获投项目,error:" + e.getMessage());
-			resultMessageInfo.setStatus(0);
-		}
-		return resultMessageInfo;
-    }
+//    @RequestMapping("queryLastestFinanceProject")
+//    @ResponseBody
+//    public MessageInfo<List<ProjectList>> queryLastestFinanceProject (){
+//		MessageInfo<List<ProjectList>> resultMessageInfo = new MessageInfo<List<ProjectList>>();
+//		try {
+//			List<ProjectList> projectLists  = projectListBiz.queryLastestFinanceProject();
+//			resultMessageInfo.setData(projectLists);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			loger.error("获取最新获投项目,error:" + e.getMessage());
+//			resultMessageInfo.setStatus(0);
+//		}
+//		return resultMessageInfo;
+//    }
     
     /**
      * 获取上个月活跃机构
-     * @param projectList
      * @return
      */
     @RequestMapping("queryLastestOrg")
@@ -148,26 +209,24 @@ public class IndexController implements EnvironmentAware{
     
     /**
      * 获取一级行业机构
-     * @param projectList
      * @return
      */
-    @RequestMapping("getParentIndustrys")
-    @ResponseBody
-    public MessageInfo<List<Industry>> getParentIndustrys(){
-		MessageInfo<List<Industry>>  messageInfo = new MessageInfo<List<Industry>>();
-		try {
-			List<Industry> industryList = industryBiz.getParentindustrys();
-			messageInfo.setData(industryList);
-		} catch (Exception e) {
-			loger.error("获取一级行业机构失败,error:" + e.getMessage());
-			messageInfo.setStatus(0);
-		}
-		return messageInfo;
-	}
+//    @RequestMapping("getParentIndustrys")
+//    @ResponseBody
+//    public MessageInfo<List<Industry>> getParentIndustrys(){
+//		MessageInfo<List<Industry>>  messageInfo = new MessageInfo<List<Industry>>();
+//		try {
+//			List<Industry> industryList = industryBiz.getParentindustrys();
+//			messageInfo.setData(industryList);
+//		} catch (Exception e) {
+//			loger.error("获取一级行业机构失败,error:" + e.getMessage());
+//			messageInfo.setStatus(0);
+//		}
+//		return messageInfo;
+//	}
     
     /**
      * 保存或更新用户关注行业
-     * @param projectList
      * @return
      */
     @RequestMapping("saveOrUpdateUerIndustry")

@@ -64,11 +64,11 @@ public class EventInfoController {
 		return messageInfo;
 	}
 
-	@RequestMapping(value = "getCtdnEventInfo",method = RequestMethod.POST)
-	@ResponseBody
-	public MessageInfo<List<EventInfo>> getCtdnEventInfo(@RequestBody EventInfo EventInfo){
-		MessageInfo<List<EventInfo>> messageInfo = eventInfoBiz.getFromCtdnEventInfo(EventInfo);
-		return messageInfo;
-
-	}
+//	@RequestMapping(value = "getCtdnEventInfo",method = RequestMethod.POST)
+//	@ResponseBody
+//	public MessageInfo<List<EventInfo>> getCtdnEventInfo(@RequestBody EventInfo EventInfo){
+//		MessageInfo<List<EventInfo>> messageInfo = eventInfoBiz.getFromCtdnEventInfo(EventInfo);
+//		return messageInfo;
+//
+//	}
 }

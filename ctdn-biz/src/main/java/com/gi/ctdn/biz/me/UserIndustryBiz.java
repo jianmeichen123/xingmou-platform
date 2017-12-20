@@ -4,71 +4,109 @@ package com.gi.ctdn.biz.me;
 
 import com.gi.ctdn.dao.me.UserIndustryDAO;
 import com.gi.ctdn.pojo.me.UserIndustry;
+import com.gi.ctdn.view.common.ListUtil;
 import com.gi.ctdn.view.common.MessageInfo;
+import com.gi.ctdn.view.common.MessageStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 @Service("userIndustryBiz")
-public class UserIndustryBiz  {
+public class UserIndustryBiz {
 
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserIndustryBiz.class);
 
-    @Autowired
+	@Autowired
 	UserIndustryDAO userIndustryDAO;
 
-    public MessageInfo<UserIndustry> getUserIndustry(Integer userId){
-
-		MessageInfo<UserIndustry> messageInfo = new MessageInfo<UserIndustry>();
+	/**
+	 * 查询用户关注行业idlist
+	 * @param userCode
+	 * @param deparmentId
+	 * @return
+	 */
+	public MessageInfo<List<Integer>> getUserIndustry(String userCode,Long deparmentId) {
+		MessageInfo<List<Integer>> messageInfo = new MessageInfo<List<Integer>>();
+		List<Integer> industryIdList = new ArrayList<Integer>();
 		try {
-			UserIndustry userIndustry = userIndustryDAO.getUserIndustry(userId);
-			if(userIndustry != null && userIndustry.getIndustryIds() != null && userIndustry.getIndustryNames()!=null){
-				//字符串转换成List
-				String[] idArray =  userIndustry.getIndustryIds().split(",");
-				String[] nameArray = userIndustry.getIndustryNames().split(",");
-				List<Integer> industryIdList = new ArrayList<Integer>();
-				for(int i =0 ;i<idArray.length;i++){
-					industryIdList.add(Integer.parseInt(idArray[i]));
+			//查已关注
+			List<UserIndustry> list = selectUserIndustry(userCode);
+			if(ListUtil.isNotEmpty(list)) {
+				for (UserIndustry userIndustry : list) {
+					industryIdList.add(userIndustry.getIndustryId());
 				}
-				List<String> industryNameList= Arrays.asList(nameArray);
-				userIndustry.setIndustryNameList(industryNameList);
-				userIndustry.setIndustryIdList(industryIdList);
+			}else{
+				//查默认关注
+				if(deparmentId != null){
+					industryIdList = getDefaultIndustry(deparmentId);
+				}
 			}
-			messageInfo.setData( userIndustry);
+			messageInfo.setData(industryIdList);
 		} catch (Exception e) {
-			LOGGER.error("getUserIndustry","查询用户关注行业失败!", e);
-			messageInfo.setStatus(10001);
+			LOGGER.error("getUserIndustry", "查询用户关注行业失败!", e);
+			messageInfo.setStatus(MessageStatus.ERROR_CODE);
 		}
 		return messageInfo;
 	}
 
-	public MessageInfo updateUserIndustry(UserIndustry userIndustry){
-
+	/**
+	 * 增加,修改用户关注行业
+	 * @param userIndustry
+	 * @return
+	 */
+	@Transient
+	public MessageInfo saveOrUpdateUerIndustry(UserIndustry userIndustry) {
 		MessageInfo messageInfo = new MessageInfo();
 		try {
-			int ret = userIndustryDAO.updateUserIndustry(userIndustry);
-			messageInfo.setData(ret);
+			String userCode = userIndustry.getUserCode();
+			if(ListUtil.isNotEmpty(selectUserIndustry(userCode))){
+				userIndustryDAO.deleteByUserId(userCode);
+			}
+			List<UserIndustry> focusList = new ArrayList<>();
+			if(ListUtil.isNotEmpty(userIndustry.getIndustryIdList())){
+				UserIndustry temp = null;
+				for(Integer id: userIndustry.getIndustryIdList()){
+					temp = new UserIndustry();
+					temp.setIndustryId(id);
+					temp.setUserCode(userCode);
+					focusList.add(temp);
+				}
+			}
+			if(ListUtil.isNotEmpty(focusList)){
+				userIndustryDAO.insert(focusList);
+			}
 		} catch (Exception e) {
-			LOGGER.error("updateUserIndustry","设置用户关注行业失败!", e);
-			messageInfo.setStatus(10001);
+			e.printStackTrace();
+			LOGGER.error("updateUserIndustry", "设置用户关注行业失败!", e);
+			messageInfo = new MessageInfo<>(MessageStatus.ERROR_CODE,MessageStatus.ERROR_MESSAGE);
 		}
 		return messageInfo;
 	}
 
-	public void saveOrUpdateUerIndustry(UserIndustry userIndustry) {
-		UserIndustry queryUserIndustry = userIndustryDAO.getUserIndustry(userIndustry.getUserId());
-		if(queryUserIndustry == null){
-			userIndustry.setFirstLogin(0);
-			userIndustryDAO.insert(userIndustry);
-		}else{
-			userIndustry.setFirstLogin(1);
-			userIndustryDAO.updateUserIndustry(userIndustry);
-		}
+	/**
+	 * 查询内部用户默认关注:部门id关联行业id
+	 * @param departmentId
+	 * @return
+	 */
+	public List<Integer> getDefaultIndustry(Long departmentId) {
+		List<Integer> ids = userIndustryDAO.selectDefaultIds(departmentId);
+		return ids;
+	}
+
+	/**
+	 * 查询用户已关注行业
+	 * @param userCode
+	 * @return
+	 */
+	private List<UserIndustry> selectUserIndustry(String userCode) {
+		List<UserIndustry> list = userIndustryDAO.getUserIndustry(userCode);
+		return list;
 	}
 }

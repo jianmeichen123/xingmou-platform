@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.galaxyinternet.model.user.User;
 import com.gi.ctdn.utils.BeanContextUtils;
 import com.gi.ctdn.view.common.MessageInfo;
+import org.springframework.beans.factory.annotation.Value;
 import redis.clients.jedis.ShardedJedis;
 
 import javax.servlet.*;
@@ -14,7 +15,8 @@ import java.io.IOException;
 
 public class LoginFilter implements  Filter{
 
-	private static final String loginUrl  = "http://fx.local.galaxyinternet.com/user/userlogin/toLogin";
+	@Value("${loginUrl}")
+	private  String loginUrl;
 	
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {

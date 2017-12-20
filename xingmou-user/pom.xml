@@ -223,6 +223,10 @@
 	  		<artifactId>aliyun-java-sdk-core</artifactId>
 	  		<version>3.3.1</version>
 		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-redis</artifactId>
+        </dependency>
     </dependencies>
     <!-- 如有Nexus私服, 取消注释并指向正确的服务器地址. -->
     <repositories>

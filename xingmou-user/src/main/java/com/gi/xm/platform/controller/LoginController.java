@@ -2,28 +2,26 @@ package com.gi.xm.platform.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
-import com.galaxyinternet.common.controller.BaseControllerImpl;
 import com.galaxyinternet.framework.core.constants.Constants;
 import com.galaxyinternet.framework.core.model.ResponseData;
 import com.galaxyinternet.framework.core.model.Result;
 import com.galaxyinternet.framework.core.model.Result.Status;
-import com.galaxyinternet.framework.core.service.BaseService;
 import com.galaxyinternet.framework.core.utils.SessionUtils;
-import com.galaxyinternet.model.auth.UserResult;
-import com.galaxyinternet.model.user.User;
 import com.galaxyinternet.service.UserService;
 import com.gi.xm.platform.biz.UserBiz;
 import com.gi.xm.platform.pojo.ExternalUser;
+import com.gi.xm.platform.pojo.User;
+import com.gi.xm.platform.pojo.UserResult;
 import com.gi.xm.platform.utils.AuthRequest;
 import com.gi.xm.platform.utils.PWDUtils;
 import com.gi.xm.platform.utils.SmsUtils;
-
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.core.env.Environment;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +37,7 @@ import java.util.Set;
 
 @Controller
 @RequestMapping("/userlogin")
-public class LoginController extends BaseControllerImpl<User, User> implements EnvironmentAware{
+public class LoginController implements EnvironmentAware{
 	
     final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
@@ -55,11 +53,6 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
     @Autowired
     private UserBiz userBiz;
 
-    @Override
-    protected BaseService<User> getBaseService() {
-        return this.userService;
-    }
-
     private String ctdn_index ="";
 
     private String ctdn_domain ="";
@@ -69,6 +62,8 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
     private static final Long  GG_ROLECODE = 20000l;
 
 
+	@Autowired
+	private StringRedisTemplate stringRedisTemplate;
 
 
     /**
@@ -77,7 +72,8 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
     @RequestMapping(value = "/toLogin")	
     public String toLogin(HttpServletResponse response, @CookieValue(name = "_uid_",required = false)String uid,@CookieValue(name = "s_",required = false)String s) {
         String key = "ctdn:"+s+":"+uid;
-        String user = (String) cache.getByRedis(key);
+        //String user = (String) cache.getByRedis(key);
+		String user = (String)stringRedisTemplate.opsForValue().get(key);
         if(user!=null){
 //            setCookie(response,uid,s,false);
             return "redirect:"+ctdn_index;
@@ -85,21 +81,21 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
         return "login";
     }
 
-    @RequestMapping(value = "/auth")
-    public String auth(HttpServletResponse response,String uid) {
-        User u = (User) cache.get(uid);
-        if (u == null){
-            return "login";
-        }
-        String key = "ctdn:fx:"+uid;
-        String user = cache.getValue(key);
-        if(user!=null) {
-            return "redirect:" + ctdn_index;
-        }
-        setCacheSessionId("fx", u, uid,false);
-        setCookie(response,uid,"fx",false);
-        return "redirect:"+ctdn_index;
-    }
+//    @RequestMapping(value = "/auth")
+//    public String auth(HttpServletResponse response,String uid) {
+//        User u = (User) cache.get(uid);
+//        if (u == null){
+//            return "login";
+//        }
+//        String key = "ctdn:fx:"+uid;
+//        String user = cache.getValue(key);
+//        if(user!=null) {
+//            return "redirect:" + ctdn_index;
+//        }
+//        setCacheSessionId("fx", u, uid,false);
+//        setCookie(response,uid,"fx",false);
+//        return "redirect:"+ctdn_index;
+//    }
 
     /**
      *
@@ -123,7 +119,8 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
     @RequestMapping(value = "/me")
     @ResponseBody
     public String  me(HttpServletResponse response, @CookieValue(name = "_uid_")String uid,@CookieValue(name = "s_")String s) {
-        String userJson = (String) cache.getByRedis("ctdn:"+s+":"+uid);
+		String userJson = (String) stringRedisTemplate.opsForValue().get("ctdn:"+s+":"+uid);
+//        String userJson = (String) cache.getByRedis("ctdn:"+s+":"+uid);
         System.out.println(userJson);
         return userJson;
     }
@@ -135,7 +132,7 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
      */
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseData<User> login(boolean notAuto,@RequestBody User user, HttpServletRequest request,HttpServletResponse response) {
+    public ResponseData<User> login(boolean notAuto, @RequestBody User user, HttpServletRequest request, HttpServletResponse response) {
         ResponseData<User> responsebody = new ResponseData<User>();
         String nickName= user.getNickName();
         String password = user.getPassword();
@@ -159,30 +156,27 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
             return responsebody;
         }
         user = rtn.getValue();
-
-        //内部用户查询departmentId
-		Long departmentId = authReq.selectDepIdByUserId(user.getId());
-		user.setDepartmentId(departmentId);
-
 		//内部用户查询roleCode 用roleId字段存值
 		List<Long> roleCodes = authReq.selectRoleCodeByUserId(user.getId());
 		if(roleCodes.indexOf(GG_ROLECODE)>-1){
-			user.setRoleId(GG_ROLECODE);
+			user.setRoleCode(GG_ROLECODE);
 		}else if(roleCodes.indexOf(TZJL_ROLECODE)>-1){
-			user.setRoleId(TZJL_ROLECODE);
+			user.setRoleCode(TZJL_ROLECODE);
 		}
-        String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
+
+		String key = "ctdn-firstLogin:internal:"+user.getId();         //判断用户是否第一次登录创投大脑
+		if(stringRedisTemplate.opsForValue().get(key) == null){
+			stringRedisTemplate.opsForValue().set(key,"true",0);
+		}else{
+			stringRedisTemplate.opsForValue().set(key,"false",0);
+		}
+
+		String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
         setCacheSessionId("internal", user, sessionId,notAuto);
-        String key = "ctdn-firstLogin:internal:"+user.getId();         //判断用户是否第一次登录创投大脑
-        if(cache.getByRedis(key) == null){
-            cache.setByRedis(key,"true",0);
-        }else{
-            cache.setByRedis(key,"false",0);
-        }
         responsebody.setEntity(user);
         responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "登录成功！"));
         setCookie(response,sessionId,"internal",notAuto);
-        logger.info(user.getEmail()+" login_success ctdn");
+        logger.info(user.getRealName()+" login_success ctdn");
         return responsebody;
     }
 
@@ -192,16 +186,15 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
      * @param user
      */
     private void setCacheSessionId(String from, User user, String sessionId,boolean notAuto) {
-        User u = new User();
-        u.setEmail(user.getEmail());
-        u.setRoleId(user.getRoleId());
+		User u = new User();
         u.setRealName(user.getRealName());
         //是否是第一次登录
-        String status =  cache.getValue("ctdn-firstLogin:" + from + ":"+user.getId());
+        String status =  stringRedisTemplate.opsForValue().get("ctdn-firstLogin:" + from + ":"+user.getId());
+        System.out.println("status:"+status);
         u.setStatus(status);
         //部门信息,用于关联行业
         u.setDepartmentId(user.getDepartmentId());
-        u.setRoleId(user.getRoleId());
+        u.setRoleCode(user.getRoleCode());
         String json = null;
         try {
             json = URLEncoder.encode(JSON.toJSONString(u),"UTF-8");
@@ -209,7 +202,8 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
             logger.error("json utf8-8编码失败");
         }
         if (json!=null){
-        	cache.setByRedis("ctdn:"+from+":"+sessionId, json, notAutoLogin(notAuto));
+			stringRedisTemplate.boundValueOps("ctdn:"+from+":"+sessionId+":code").set(user.getEmail());
+			stringRedisTemplate.boundValueOps("ctdn:"+from+":"+sessionId).set(json);
             logger.info(sessionId+" "+json);
         }
     }
@@ -222,7 +216,8 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
     @RequestMapping(value = "/logout", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public String logout(HttpServletRequest request,HttpServletResponse response,@CookieValue(name = "_uid_",required = false)String uid,@CookieValue(name = "s_",required = false)String s) {
         ResponseData<User> responsebody = new ResponseData<User>();
-        cache.remove("ctdn:"+s+":"+uid);
+		//cache.remove("ctdn:"+s+":"+uid);
+		stringRedisTemplate.delete("ctdn:"+s+":"+uid);
         Cookie cookie = new Cookie("_uid_", null);
         cookie.setMaxAge(1);
         cookie.setDomain(ctdn_domain);
@@ -243,14 +238,16 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
      * @author zcy
      */
     private boolean removeSessionId(String sessionId, HttpServletRequest request) {
-        Object cahceUser = cache.get(sessionId);
+       // Object cahceUser = cache.get(sessionId);
+		Object cahceUser = stringRedisTemplate.opsForValue().get(sessionId);
         Object sessionUser = request.getSession().getAttribute(Constants.SESSION_USER_KEY);
 
         if (null == cahceUser || null == sessionUser) {
             return false;
         }
         request.getSession().removeAttribute(Constants.SESSION_USER_KEY); // 从本地session删除user
-        cache.remove(sessionId); // 从redis中删除sessionId
+        //cache.remove(sessionId); // 从redis中删除sessionId
+		stringRedisTemplate.delete(sessionId);
         return true;
     }
 
@@ -286,14 +283,16 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
 				return messageInfo;
 			}else{
 				String key = "user:register:" + user.getMobile();
-				String code = (String) cache.get(key);
+				//String code = (String) cache.get(key);
+				String code = (String)stringRedisTemplate.opsForValue().get(key);
 				if(!user.getCode().equals(code)){
 					messageInfo.setResult(new Result(Status.ERROR,"2", "验证码错误~"));
 				}else{
 					user.setPassword(PWDUtils.genernateNewPasswordByBase64(user.getPassword()));
 					userBiz.insert(user);
 					messageInfo.setResult(new Result(Status.OK, "注册成功"));
-					cache.remove(key);
+					//cache.remove(key);
+					stringRedisTemplate.delete(key);
 				}
 			}
 		}
@@ -328,11 +327,17 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
 			return messageInfo;
 		}
 		String key = "ctdn-firstLogin:external:"+query.getId();
-		if(cache.getByRedis(key) == null){
-			cache.setByRedis(key, "true",0);
+
+		if(stringRedisTemplate.opsForValue().get(key) == null){
+			stringRedisTemplate.opsForValue().set(key, "true",0);
 		}else{
-			cache.setByRedis(key, "false",0);
+			stringRedisTemplate.opsForValue().set(key, "false",0);
 		}
+//		if(cache.getByRedis(key) == null){
+//			cache.setByRedis(key, "true",0);
+//		}else{
+//			cache.setByRedis(key, "false",0);
+//		}
 		String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
 		setCacheSessionId(query,"external", sessionId,notAuto);
 		messageInfo.setEntity(query);
@@ -362,7 +367,7 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
 			    return responsebody;
 			}
 			String key = "user:login:"+user.getMobile();
-			String codeFromRedis  = (String) cache.getByRedis(key);
+			String codeFromRedis  = (String) stringRedisTemplate.opsForValue().get(key);
 			System.out.println(codeFromRedis);
 			if(!code.equals(codeFromRedis)){
 				responsebody.setResult(new Result(Status.ERROR, Constants.IS_UP_WRONG, "验证码错误"));//1
@@ -377,18 +382,26 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
 			}
 			
 			String firstLoginKey = "ctdn-firstLogin:external:"+rtn.getId();
-			if(cache.getByRedis(firstLoginKey) == null){
-				cache.setByRedis(firstLoginKey, "true",0);
+
+			if(stringRedisTemplate.opsForValue().get(firstLoginKey) == null){
+				stringRedisTemplate.opsForValue().set(firstLoginKey, "true",0);
 			}else{
-				cache.setByRedis(firstLoginKey, "false",0);
+				stringRedisTemplate.opsForValue().set(firstLoginKey, "false",0);
 			}
+
+//			if(cache.getByRedis(firstLoginKey) == null){
+//				cache.setByRedis(firstLoginKey, "true",0);
+//			}else{
+//				cache.setByRedis(firstLoginKey, "false",0);
+//			}
 			
 			String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
 			setCacheSessionId(rtn,"external", sessionId,isAuto);
 			responsebody.setEntity(rtn);
 			responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "登录成功！"));
 			setCookie(response,sessionId,"external",isAuto);
-			cache.remove(key);
+			//cache.remove(key);
+			stringRedisTemplate.delete(key);
 			logger.info(user.getMobile()+"external user login success ctdn");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -399,15 +412,18 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
 	 
 	 private void setCacheSessionId(ExternalUser user,String from,  String sessionId,boolean notAuto) {
 	        String json = null;
-	        String status =  cache.getValue("ctdn-firstLogin:" + from + ":"+user.getId());
-	        user.setStatus(status);
+	        //String status =  cache.getValue("ctdn-firstLogin:" + from + ":"+user.getId());
+		 	String status = (String)stringRedisTemplate.opsForValue().get("ctdn-firstLogin:" + from + ":"+user.getId());
+			user.setStatus(status);
 	        try {
 	            json = URLEncoder.encode(JSON.toJSONString(user),"UTF-8");
 	        } catch (UnsupportedEncodingException e) {
 	            logger.error("json utf8-8编码失败");
 	        }
 	        if (json!=null){
-	            cache.setByRedis("ctdn:"+from+":"+sessionId, json,notAutoLogin(notAuto)); // 将sessionId存入cache
+	            //cache.setByRedis("ctdn:"+from+":"+sessionId, json,notAutoLogin(notAuto)); // 将sessionId存入cache
+				stringRedisTemplate.opsForValue().set("ctdn:"+from+":"+sessionId+":code", user.getMobile(),notAutoLogin(notAuto)); // 将sessionId存入cache
+				stringRedisTemplate.opsForValue().set("ctdn:"+from+":"+sessionId, json,notAutoLogin(notAuto)); // 将sessionId存入cache
 	            logger.info(sessionId+" "+json);
 	        }
 	    }
@@ -469,7 +485,8 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
 				 return res;
 			 }
 			 String key = "user:forget:"+user.getMobile();
-			 String codeFromRedis = (String) cache.getByRedis(key);
+			 //String codeFromRedis = (String) cache.getByRedis(key);
+			 String codeFromRedis = (String) (String)stringRedisTemplate.opsForValue().get(key);
 			 if(!user.getCode().equals(codeFromRedis)){
 				 res.setResult(new Result(Status.ERROR,"2","验证码错误"));
 				 return res;
@@ -480,7 +497,8 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
 			 }
 			 rtn.setPassword(PWDUtils.genernateNewPasswordByBase64(user.getPassword()));
 			 userBiz.update(rtn);
-			 cache.remove(key);
+			 //cache.remove(key);
+			stringRedisTemplate.delete(key);
 		}catch(Exception e){
 			e.printStackTrace();
 			res.setResult(new Result(Status.ERROR,"0", "找回密码失败"));
@@ -515,7 +533,7 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
 				}
 				key = "user:forget:"+query.getMobile();
 			}
-			
+
 			if("3".equals(user.getType())){//注册
 				if(query != null){
 					res.setResult(new Result(Status.ERROR, "1","您输入的手机号已被注册~"));
@@ -526,7 +544,8 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
 			String code = getShortCode();
 			SendSmsResponse response = SmsUtils.sendSms(code);
 			if(response!=null && "OK".equals(response.getCode())){
-				cache.setByRedis(key, code, 60*10);
+				//cache.setByRedis(key, code, 60*10);
+				stringRedisTemplate.opsForValue().set(key, code, 60*10);
 			}else{
 				logger.error("验证码发送失败,err_msg:" + response.getMessage());
 				res.setResult(new Result(Status.ERROR,"2", "验证码发送失败"));
@@ -537,7 +556,7 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
 		}
 		return res;
 	}
-	
+
 	public String getShortCode(){
 		Random rand = new Random();
     	StringBuilder sb = new StringBuilder();
@@ -558,15 +577,18 @@ public class LoginController extends BaseControllerImpl<User, User> implements E
 		long userId = 1l;
 		String sessionId = "";
 		String key = "session_user_prefix_" + userId;
-		Set<String> sIds = cache.getJedis().smembers(key);
+		//Set<String> sIds = cache.getJedis().smembers(key);
+		Set<String> sIds = stringRedisTemplate.opsForSet().members(key);
 		if(sIds != null && sIds.size()>0){
 			for(String sId : sIds){
-				cache.set("user_forced_online_"+sId, true);
+				//cache.set("user_forced_online_"+sId, true);
+				stringRedisTemplate.opsForValue().set("user_forced_online_"+sId, "true");
 			}
 		}
-		long rtn = cache.getJedis().sadd(key, sessionId);
+		long rtn = stringRedisTemplate.opsForSet().add(key, sessionId);
 		if(rtn == 0){
-			cache.remove("user_forced_online_" + sessionId);
+			//cache.remove("user_forced_online_" + sessionId);
+			stringRedisTemplate.delete("user_forced_online_" + sessionId);
 		}
 	}
 }

@@ -25,7 +25,8 @@
         <!--<module>xingmou-mongodb</module>-->
         <module>ctdn-api-restful</module>
         <module>xingmou-user</module>
-    </modules>
+       <module>rest-common</module>
+   </modules>
 
     <properties>
         <xingmou.version>1.1-SNAPSHOT</xingmou.version>
@@ -78,6 +79,11 @@
             <dependency>
                 <groupId>com.gi</groupId>
                 <artifactId>xingmou-user</artifactId>
+                <version>${xingmou.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.gi</groupId>
+                <artifactId>rest-common</artifactId>
                 <version>${xingmou.version}</version>
             </dependency>
             <!---->

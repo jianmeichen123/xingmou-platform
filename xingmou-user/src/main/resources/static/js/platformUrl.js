@@ -65,6 +65,9 @@ var htmlPlatformUrl = {
 		org:Constants.htmlContentUrl+"/list_page_org.html",
 		tz:Constants.htmlContentUrl+"/list_page_rz.html",
 		com:Constants.htmlContentUrl+"/list_page_com.html",
+		index_manager:Constants.htmlContentUrl+"/index_manager.html",
+		index_senior:Constants.htmlContentUrl+"/index_senior.html",
+		index_external:Constants.htmlContentUrl+"/index_external.html",
 	}
 
 

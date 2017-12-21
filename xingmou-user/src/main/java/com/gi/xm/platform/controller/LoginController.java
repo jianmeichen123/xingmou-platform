@@ -34,6 +34,7 @@ import java.net.URLEncoder;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 @Controller
 @RequestMapping("/userlogin")
@@ -168,9 +169,9 @@ public class LoginController implements EnvironmentAware{
 		user.setUserCode(PWDUtils.generateUserCode(user.getId(),"internal"));
 		String key = "ctdn-firstLogin:internal:"+user.getId();         //判断用户是否第一次登录创投大脑
 		if(stringRedisTemplate.opsForValue().get(key) == null){
-			stringRedisTemplate.opsForValue().set(key,"true",0);
+			stringRedisTemplate.opsForValue().set(key,"true");
 		}else{
-			stringRedisTemplate.opsForValue().set(key,"false",0);
+			stringRedisTemplate.opsForValue().set(key,"false");
 		}
 		String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
         setCacheSessionId("internal", user, sessionId,notAuto);
@@ -329,14 +330,14 @@ public class LoginController implements EnvironmentAware{
 		String key = "ctdn-firstLogin:external:"+query.getId();
 
 		if(stringRedisTemplate.opsForValue().get(key) == null){
-			stringRedisTemplate.opsForValue().set(key, "true",0);
+			stringRedisTemplate.opsForValue().set(key, "true");
 		}else{
-			stringRedisTemplate.opsForValue().set(key, "false",0);
+			stringRedisTemplate.opsForValue().set(key, "false");
 		}
 		//生成usercode
 		user.setUserCode(PWDUtils.generateUserCode(user.getId(),"external"));
 		String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
-		setCacheSessionId(query,"external", sessionId,notAuto);
+		setCacheSessionId(user,"external", sessionId,notAuto);
 		messageInfo.setEntity(query);
 		messageInfo.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "登录成功！"));
 		setCookie(response,user.getUserCode(),sessionId,"external",notAuto);
@@ -381,17 +382,11 @@ public class LoginController implements EnvironmentAware{
 			String firstLoginKey = "ctdn-firstLogin:external:"+rtn.getId();
 
 			if(stringRedisTemplate.opsForValue().get(firstLoginKey) == null){
-				stringRedisTemplate.opsForValue().set(firstLoginKey, "true",0);
+				stringRedisTemplate.opsForValue().set(firstLoginKey, "true");
 			}else{
-				stringRedisTemplate.opsForValue().set(firstLoginKey, "false",0);
+				stringRedisTemplate.opsForValue().set(firstLoginKey, "false");
 			}
 
-//			if(cache.getByRedis(firstLoginKey) == null){
-//				cache.setByRedis(firstLoginKey, "true",0);
-//			}else{
-//				cache.setByRedis(firstLoginKey, "false",0);
-//			}
-			
 			String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
 			setCacheSessionId(rtn,"external", sessionId,isAuto);
 			responsebody.setEntity(rtn);
@@ -409,9 +404,11 @@ public class LoginController implements EnvironmentAware{
 	 
 	 private void setCacheSessionId(ExternalUser user,String from,  String sessionId,boolean notAuto) {
 	        String json = null;
+	        ExternalUser externalUser = new ExternalUser();
 		 	String status = (String)stringRedisTemplate.opsForValue().get("ctdn-firstLogin:" + from + ":"+user.getId());
-			user.setStatus(status);
-
+		 	externalUser.setStatus(status);
+		 	externalUser.setMobile(user.getMobile());
+		 	externalUser.setUserCode(user.getUserCode());
 	        try {
 	            json = URLEncoder.encode(JSON.toJSONString(user),"UTF-8");
 	        } catch (UnsupportedEncodingException e) {
@@ -419,8 +416,8 @@ public class LoginController implements EnvironmentAware{
 	        }
 	        if (json!=null){
 	            //cache.setByRedis("ctdn:"+from+":"+sessionId, json,notAutoLogin(notAuto)); // 将sessionId存入cache
-				stringRedisTemplate.opsForValue().set("ctdn:"+from+":"+sessionId+":code", user.getUserCode(),notAutoLogin(notAuto)); // 将sessionId存入cache
-				stringRedisTemplate.opsForValue().set("ctdn:"+from+":"+sessionId, json,notAutoLogin(notAuto)); // 将sessionId存入cache
+				stringRedisTemplate.opsForValue().set("ctdn:"+from+":"+sessionId+":code", externalUser.getUserCode()); // 将sessionId存入cache
+				stringRedisTemplate.opsForValue().set("ctdn:"+from+":"+sessionId, json); // 将sessionId存入cache
 	            logger.info(sessionId+" "+json);
 	        }
 	    }
@@ -483,7 +480,7 @@ public class LoginController implements EnvironmentAware{
 			 }
 			 String key = "user:forget:"+user.getMobile();
 			 //String codeFromRedis = (String) cache.getByRedis(key);
-			 String codeFromRedis = (String) (String)stringRedisTemplate.opsForValue().get(key);
+			 String codeFromRedis = stringRedisTemplate.opsForValue().get(key);
 			 if(!user.getCode().equals(codeFromRedis)){
 				 res.setResult(new Result(Status.ERROR,"2","验证码错误"));
 				 return res;
@@ -541,8 +538,7 @@ public class LoginController implements EnvironmentAware{
 			String code = getShortCode();
 			SendSmsResponse response = SmsUtils.sendSms(code);
 			if(response!=null && "OK".equals(response.getCode())){
-				//cache.setByRedis(key, code, 60*10);
-				stringRedisTemplate.opsForValue().set(key, code, 60*10);
+				stringRedisTemplate.opsForValue().set(key, code, 60*10,TimeUnit.SECONDS);
 			}else{
 				logger.error("验证码发送失败,err_msg:" + response.getMessage());
 				res.setResult(new Result(Status.ERROR,"2", "验证码发送失败"));

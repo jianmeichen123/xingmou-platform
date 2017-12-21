@@ -58,7 +58,20 @@ function checkform(){
  
  function logincallback(data){
 	 if(data.result.status=="OK"){
-		 location.href = platformUrl.index
+		 var entity = data.entity
+		 if(entity.roleCode == 10000){ //投机经理
+			 location.href = htmlPlatformUrl.index_manager
+			 return
+		 }
+		 if(entity.roleCode == 20000){ //高管
+			 location.href = htmlPlatformUrl.index_senior
+			 return
+		 }
+		 if(!entity.roleCode){ //外部用户
+			 location.href = htmlPlatformUrl.index_external
+			 return
+		 }
+
 	 }else{
 	     layer.msg(data.result.message)
 	 }
@@ -76,8 +89,7 @@ function login_password(){
     var jsonData={"mobile":nickName,"password":password};
     var login_password_callback=function(data){
     	 if(data.result.status=="OK"){
-    		 console.log(data.entity.mobile)
-    		 location.href = platformUrl.index
+    			 location.href = htmlPlatformUrl.index_external
     	 }else{
     		 var error_code = data.result.errorCode
     		 if(error_code!=null && error_code=='1'){
@@ -169,9 +181,7 @@ function login_password(){
 	}
 	function loginByCodecallback(data){
 		if(data.result.status=="OK"){
-			var user = data.entity
-			var status = data.entity.status
-			window.location.href =platformUrl.index
+				location.href = htmlPlatformUrl.index_external
 		 }else{
 		     layer.msg(data.result.message)
 		 }

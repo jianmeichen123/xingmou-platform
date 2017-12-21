@@ -55,4 +55,39 @@ public class ReportBiz {
         List<Report> reportList= reportDAO.selectByIds(ids);
         return reportList;
     }
+
+    //详情报告列表，不分页
+    public MessageInfo<Report> getReports(){
+        MessageInfo<Report> messageInfo = new MessageInfo<>();
+        try {
+            List<Report> reports = reportDAO.selectReports();
+            Pagination page = new Pagination();
+            if(reports!=null){
+                page.setRecords(reports);
+                messageInfo.setPage(page);
+            }
+            messageInfo = new MessageInfo<>(MessageStatus.OK_CODE,MessageStatus.OK_MESSAGE,page);
+        }catch (Exception e){
+            messageInfo = new MessageInfo<>(MessageStatus.ERROR_CODE,MessageStatus.ERROR_MESSAGE);
+            LOGGER.error(e.getMessage());
+        }
+        return  messageInfo;
+    }
+
+    public MessageInfo<Report> getReportById(Integer id){
+        MessageInfo<Report> messageInfo = new MessageInfo<>();
+        try{
+            Report report = reportDAO.selectById(id);
+            if(report!=null){
+                messageInfo.setData(report);
+                messageInfo.setStatus(MessageStatus.OK_CODE);
+                messageInfo.setMessage(MessageStatus.OK_MESSAGE);
+            }
+        }catch (Exception e){
+            messageInfo.setStatus(MessageStatus.ERROR_CODE);
+            messageInfo.setMessage(MessageStatus.ERROR_MESSAGE);
+            LOGGER.error(e.getMessage());
+        }
+        return messageInfo;
+    }
 }

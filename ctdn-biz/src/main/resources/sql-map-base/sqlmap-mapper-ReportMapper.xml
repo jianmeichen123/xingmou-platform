@@ -28,6 +28,14 @@
 		select
 		<include refid="selectFields"/>
 		from app_report
+		order by publishDate desc
+	</select>
+
+	<select id="selectById" resultMap="ReportMap" parameterType="com.gi.ctdn.pojo.Report">
+		select
+		<include refid="selectFields"/>
+		from app_report
+		where id = #{id}
 	</select>
 
 	<select id="selectReportNum" resultMap="ReportMap" parameterType="com.gi.ctdn.pojo.Report">

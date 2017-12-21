@@ -13,4 +13,5 @@ public interface ReportDAO
     Integer selectReportNum();
     void updateReportState(@Param("id") Integer id);
     List<Report> selectByIds(@Param("ids") List<String> ids);
+    Report selectById(@Param("id") Integer id);
 }

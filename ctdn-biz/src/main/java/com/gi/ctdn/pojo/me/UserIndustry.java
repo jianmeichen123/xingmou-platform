@@ -109,4 +109,5 @@ public class UserIndustry  extends PojoInfo{
 	public String getIndustryName() {
 		return industryName;
 	}
+	
 }

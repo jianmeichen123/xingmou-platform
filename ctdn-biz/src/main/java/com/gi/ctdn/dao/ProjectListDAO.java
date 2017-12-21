@@ -25,8 +25,8 @@ public interface ProjectListDAO {
 
 	List<ProjectList> selectListByCodes(@Param("codes") List<String> codes);
 
-	List<ProjectList> selectByLoadDate(@Param("industryIds") List<String> industryIds);
+	List<ProjectList> selectByLoadDate(@Param("industryIds") List<Integer> industryIds);
 	
-	List<ProjectList> selectByLatestFinanceDate( @Param("industryIds")List<String> industryIds);
+	List<ProjectList> selectByLatestFinanceDate( @Param("industryIds")List<Integer> industryIds);
 		
 }

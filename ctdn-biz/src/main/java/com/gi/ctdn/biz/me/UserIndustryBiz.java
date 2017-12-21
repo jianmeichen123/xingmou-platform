@@ -2,7 +2,9 @@
 
 package com.gi.ctdn.biz.me;
 
+import com.gi.ctdn.dao.IndustryDAO;
 import com.gi.ctdn.dao.me.UserIndustryDAO;
+import com.gi.ctdn.pojo.Industry;
 import com.gi.ctdn.pojo.me.UserIndustry;
 import com.gi.ctdn.view.common.ListUtil;
 import com.gi.ctdn.view.common.MessageInfo;
@@ -25,6 +27,9 @@ public class UserIndustryBiz {
 
 	@Autowired
 	UserIndustryDAO userIndustryDAO;
+	
+	@Autowired
+	private IndustryDAO industryDAO;
 
 	/**
 	 * 查询用户关注行业idlist
@@ -108,5 +113,34 @@ public class UserIndustryBiz {
 	private List<UserIndustry> selectUserIndustry(String userCode) {
 		List<UserIndustry> list = userIndustryDAO.getUserIndustry(userCode);
 		return list;
+	}
+
+	public MessageInfo<UserIndustry> getUserIndustryIdsAndNames(UserIndustry userIndustry,Long departmentId) {
+		MessageInfo<UserIndustry> messageInfo = new MessageInfo<UserIndustry>();
+		List<UserIndustry> userIndustries = userIndustryDAO.getUserIndustry(userIndustry.getUserCode());
+		List<Integer> industryIds  = null;
+		if(userIndustries!=null && userIndustries.size()>0){
+			industryIds = new ArrayList<Integer>();
+			for(UserIndustry industry : userIndustries){
+				industryIds.add(industry.getIndustryId());
+			}
+		}else{
+			if(departmentId!=null){
+				industryIds = userIndustryDAO.selectDefaultIds(departmentId);
+			}
+		}
+		List<Industry> industries = industryDAO.getIndustryByIds(industryIds);
+		StringBuffer industryNames = new StringBuffer();
+		for(int i=0;i<industries.size();i++){
+			Industry industry = industries.get(i);
+			industryNames.append(industry.getName());
+			if(i != industries.size() - 1){
+				industryNames.append(",");
+			}
+		}
+		userIndustry.setIndustryIdList(industryIds);
+		userIndustry.setIndustryNames(industryNames.toString());
+		messageInfo.setData(userIndustry);
+		return messageInfo;
 	}
 }

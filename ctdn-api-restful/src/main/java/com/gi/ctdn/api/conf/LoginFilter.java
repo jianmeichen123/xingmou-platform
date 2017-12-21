@@ -5,7 +5,11 @@ import com.galaxyinternet.model.user.User;
 import com.gi.ctdn.utils.BeanContextUtils;
 import com.gi.ctdn.view.common.MessageInfo;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
+
 import redis.clients.jedis.ShardedJedis;
+import redis.clients.jedis.ShardedJedisPool;
 
 import javax.servlet.*;
 import javax.servlet.http.Cookie;
@@ -26,12 +30,13 @@ public class LoginFilter implements  Filter{
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException{
 		
 		
-		ShardedJedis shardedJedis = BeanContextUtils.getBean(ShardedJedis.class);
+		StringRedisTemplate redisTemplate = BeanContextUtils.getBean(StringRedisTemplate.class);
+		
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		String urlPatterns = BeanContextUtils.getUrlPatterns();
 		String reqUrl = req.getRequestURI();
-		System.out.println("filter = " + shardedJedis + " ,reqUrl = " +  reqUrl + " ,urlPatterns = " + urlPatterns);
+		System.out.println("filter = " + redisTemplate + " ,reqUrl = " +  reqUrl + " ,urlPatterns = " + urlPatterns);
 		if(urlPatterns !=null && urlPatterns.trim().length() !=0  && urlPatterns.indexOf(reqUrl) <0){
 			chain.doFilter(request, response);
 			return;
@@ -54,10 +59,10 @@ public class LoginFilter implements  Filter{
 				}
 			}
 		}
-		if(_uid_ != null && _uid_.trim().length()!=0  && s_ !=null && s_.trim().length()!=0  && "ctdn".equals(s_)){
-			String key = "ctdn:ctdn:" + _uid_; 
-			boolean exist = shardedJedis.exists(key);
-			if(!exist){
+		if(_uid_ != null && _uid_.trim().length()!=0  && s_ !=null && s_.trim().length()!=0 ){
+			String key = "ctdn:" + s_ + ":" + _uid_; 
+			boolean exists  = redisTemplate.getConnectionFactory().getConnection().exists(key.getBytes());
+			if(!exists){
 				//未登录
 				try {
 					writeLoginMsg(req, res, "用户未登录或已过期,请重新登录");

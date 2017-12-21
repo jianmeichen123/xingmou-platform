@@ -5,9 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
 import com.gi.ctdn.dao.IndustryMonthDao;
 import com.gi.ctdn.dao.IndustryRoundMergerDao;
 import com.gi.ctdn.pojo.EchartsData;
@@ -30,7 +32,7 @@ public class EchartsBiz {
 	
 	
 	@Autowired
-	private ShardedJedis shardedJedis;
+	private StringRedisTemplate redisTemplate;
 	
 	
 	
@@ -38,13 +40,13 @@ public class EchartsBiz {
 	 * 高管首页----行业融资趋势
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public MessageInfo<EchartsData<IndustryMonth>> getIndustryMonthForEchart() {
 		MessageInfo<EchartsData<IndustryMonth>> messageInfo = new MessageInfo<EchartsData<IndustryMonth>>();
-		String json = shardedJedis.get(Constants.INDUSTRY_INVESTED_TREND);
+		String json = redisTemplate.opsForValue().get(Constants.INDUSTRY_INVESTED_TREND);
 		List<IndustryMonth> industryMonthList  = new ArrayList<IndustryMonth>();
 		if(json == null || json.trim().length() ==0){
 			industryMonthList = industryMonthDao.getIndustryMonthForEcharts();
+			redisTemplate.opsForValue().set(Constants.INDUSTRY_INVESTED_TREND, JSONObject.toJSONString(industryMonthList));
 		}else{
 			industryMonthList = (List<IndustryMonth>) JSONObject.parseArray(json, IndustryMonth.class);
 		}
@@ -74,13 +76,13 @@ public class EchartsBiz {
      * 高管-融资对比
      * @return
      */
-	@SuppressWarnings("unchecked")
 	public MessageInfo<EchartsData<IndustryRoundMerger>> getIndustryRoundMergerForEcharts() {
 		MessageInfo<EchartsData<IndustryRoundMerger>>  messageInfo = new MessageInfo<EchartsData<IndustryRoundMerger>>();
-		String json = shardedJedis.get(Constants.INDUSTRY_INVESTED_COMPARE);
+		String json = redisTemplate.opsForValue().get(Constants.INDUSTRY_INVESTED_COMPARE);
 		List<IndustryRoundMerger> industryRoundMergerList = new ArrayList<IndustryRoundMerger>();
 		if(json == null || json.trim().length() == 0){
 			industryRoundMergerList = industryRoundMergerDao.getIndustryRoundMergerForEcharts();
+			redisTemplate.opsForValue().set(Constants.INDUSTRY_INVESTED_COMPARE, JSONObject.toJSONString(industryRoundMergerList));
 		}else{
 			industryRoundMergerList = (List<IndustryRoundMerger>) JSONObject.parseArray(json, IndustryRoundMerger.class);
 		}

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.gi.ctdn.view.common.MessageStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,7 +43,7 @@ public class IndustryBiz  {
 			messageInfo.setData( industryList);
 		} catch (Exception e) {
 			LOGGER.error("getAllIndustry","查询全部Industry失败", e);
-			messageInfo.setStatus(MessageStatus.ERROR_CODE);
+			messageInfo.setStatus(10001);
 		}
 		return messageInfo;
 	}
@@ -57,7 +56,7 @@ public class IndustryBiz  {
 			messageInfo.setData( industryList);
 		} catch (Exception e) {
 			LOGGER.error("getIndustrysByStatus","查询Industry失败", e);
-			messageInfo.setStatus(MessageStatus.ERROR_CODE);
+			messageInfo.setStatus(10001);
 		}
 		return messageInfo;
 	}
@@ -70,27 +69,33 @@ public class IndustryBiz  {
 			messageInfo.setData( industryList);
 		} catch (Exception e) {
 			LOGGER.error("getIndustrysByStatus","查询Industry失败", e);
-			messageInfo.setStatus(MessageStatus.ERROR_CODE);
+			messageInfo.setStatus(10001);
 		}
 		return messageInfo;
 	}
 	
-//	public List<Industry> getParentindustrys(){
-//		UserIndustry userIndustry = userIndustryDAO.getUserIndustry(1l);
-//		List<String> industryIds = new ArrayList<String>();
-//		if(userIndustry!=null && userIndustry.getIndustryIds()!= null && !userIndustry.getIndustryIds().equals("")){
-//			industryIds = Arrays.asList(userIndustry.getIndustryIds().split(","));
-//		}
-//		List<Industry>  industryList = industryDAO.selectParentindustrys();
-//		for(Industry industry : industryList){
-//			if(industryIds.contains(industry.getId()+"")){
-//				industry.setFlag("1");
-//			}else{
-//				industry.setFlag("0");
-//			}
-//		}
-//		return  industryList;
-//	}
+	public List<Industry> getParentindustrys( UserIndustry userIndustry,Long departmentId){
+		List<UserIndustry> userIndustryList = userIndustryDAO.getUserIndustry(userIndustry.getUserCode());
+		List<Integer> industryIds = new ArrayList<Integer>();
+		if(userIndustryList!=null && userIndustryList.size()>0){
+			for(UserIndustry uIndustry : userIndustryList){
+				industryIds.add(uIndustry.getIndustryId());
+			}
+		}else{
+			if(departmentId!=null){
+				industryIds = userIndustryDAO.selectDefaultIds(departmentId);
+			}
+		}
+		List<Industry>  industryList = industryDAO.selectParentindustrys();
+		for(Industry industry : industryList){
+			if(industryIds.contains(industry.getId())){
+				industry.setFlag("1");
+			}else{
+				industry.setFlag("0");
+			}
+		}
+		return  industryList;
+	}
 
 
 }

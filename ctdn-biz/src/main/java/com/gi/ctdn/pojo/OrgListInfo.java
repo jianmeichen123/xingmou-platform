@@ -57,6 +57,9 @@ public class OrgListInfo extends OrgInfo {
 
      */
     private List<OrgMember> orgMemberList;
+    
+    
+    private String lastMonthInvestNum;
 
     public List<OrgMediaInfo> getOrgHistoryInfoList() {
         return orgHistoryInfoList;
@@ -99,4 +102,12 @@ public class OrgListInfo extends OrgInfo {
     public void setOrgNewsList(List<News> orgNewsList) {
         this.orgNewsList = orgNewsList;
     }
+
+	public String getLastMonthInvestNum() {
+		return lastMonthInvestNum;
+	}
+
+	public void setLastMonthInvestNum(String lastMonthInvestNum) {
+		this.lastMonthInvestNum = lastMonthInvestNum;
+	}
 }

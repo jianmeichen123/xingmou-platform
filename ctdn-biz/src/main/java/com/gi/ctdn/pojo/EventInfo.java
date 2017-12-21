@@ -369,14 +369,24 @@ public class EventInfo extends Query {
 		this.invstorgnames = invstorgnames;
 	}
 	
-	public List<String> getIndustryIdList() {
+	public List<Integer> getIndustryIdList() {
 		return industryIdList;
 	}
 
-	public void setIndustryIdList(List<String> industryIdList) {
+	public void setIndustryIdList(List<Integer> industryIdList) {
 		this.industryIdList = industryIdList;
 	}
 
-	private List<String> industryIdList;
+	public String getUserCode() {
+		return userCode;
+	}
+
+	public void setUserCode(String userCode) {
+		this.userCode = userCode;
+	}
+
+	private List<Integer> industryIdList;
+	
+	private String userCode;
 
 }

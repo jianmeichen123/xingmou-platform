@@ -103,25 +103,26 @@ public class ProjectListBiz {
 		}
 		return messageInfo;
 	}
-//
-//	public List<ProjectList> selectByLoadDate() {
-//		UserIndustry  userIndustry = userIndustryDAO.getUserIndustry(1l);
-//		List<String> industryIds = null;
-//		if(userIndustry !=null && userIndustry.getIndustryIds()!=null  && !userIndustry.getIndustryIds().equals("")){
-//			industryIds = Arrays.asList(userIndustry.getIndustryIds().split(","));
-//		}
-//		return projectListDAO.selectByLoadDate(industryIds);
-//	}
-//
-//	@SuppressWarnings("null")
-//	public List<ProjectList> queryLastestFinanceProject() {
-//		UserIndustry  userIndustry = userIndustryDAO.getUserIndustry(1l);
-//		List<String> industryIds = null;
-//		if(userIndustry !=null && userIndustry.getIndustryIds()!=null && !userIndustry.getIndustryIds().equals("")){
-//			industryIds = Arrays.asList(userIndustry.getIndustryIds().split(","));
-//		}
-//		return projectListDAO.selectByLatestFinanceDate(industryIds);
-//	}
+
+	public List<ProjectList> selectByLoadDate(UserIndustry userIndustry) {
+		return projectListDAO.selectByLoadDate(getUserIndustryIds(userIndustry));
+	}
+
+	public List<Integer> getUserIndustryIds(UserIndustry userIndustry){
+		List<UserIndustry>  userIndustryList = userIndustryDAO.getUserIndustry(userIndustry.getUserCode());
+		List<Integer> industryIds = null;
+		if(userIndustryList != null && userIndustryList.size()>0){
+			industryIds = new ArrayList<Integer>();
+			for(UserIndustry ui : userIndustryList){
+				industryIds.add(ui.getIndustryId());
+			}
+		}
+		return industryIds;
+	}
+	@SuppressWarnings("null")
+	public List<ProjectList> queryLastestFinanceProject(UserIndustry userIndustry) {
+		return projectListDAO.selectByLatestFinanceDate(getUserIndustryIds(userIndustry));
+	}
 
 
 }

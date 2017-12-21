@@ -3,12 +3,14 @@ package com.gi.ctdn.api.rest;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.galaxyinternet.framework.core.model.User;
+import com.gi.ctdn.biz.BusinessLineMappingIndustryBiz;
 import com.gi.ctdn.biz.EchartsBiz;
 import com.gi.ctdn.biz.IndexHeaderStatBiz;
 import com.gi.ctdn.biz.IndustryBiz;
 import com.gi.ctdn.biz.OrgInfoBiz;
 import com.gi.ctdn.biz.ProjectListBiz;
 import com.gi.ctdn.biz.me.UserIndustryBiz;
+import com.gi.ctdn.pojo.BusinessLineMappingIndustry;
 import com.gi.ctdn.pojo.EchartsData;
 import com.gi.ctdn.pojo.IndexHeaderStat;
 import com.gi.ctdn.pojo.Industry;
@@ -27,6 +29,8 @@ import java.util.List;
 import com.gi.ctdn.view.common.MessageStatus;
 import io.swagger.models.auth.In;
 import jdk.nashorn.api.scripting.JSObject;
+
+import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +38,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.core.env.Environment;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -72,6 +77,9 @@ public class IndexController implements EnvironmentAware{
 
 	@Autowired
 	private StringRedisTemplate stringRedisTemplate;
+	
+	@Autowired
+	private BusinessLineMappingIndustryBiz businessLineMappingIndustryBiz;
 
 	/**
      *查询用户关注行业
@@ -83,6 +91,7 @@ public class IndexController implements EnvironmentAware{
 		MessageInfo<List<Integer>> messageInfo = new MessageInfo<>();
 		//查询redis中的用户
 		String key = "ctdn:"+s+":"+uid;
+		
 		String userJson = (String)stringRedisTemplate.opsForValue().get(key);
 		if(userJson != null){
 			try {
@@ -155,38 +164,38 @@ public class IndexController implements EnvironmentAware{
      * 获取最新发现项目
      * @return
      */
-//    @RequestMapping("queryLastestLoadProject")
-//    @ResponseBody
-//    public MessageInfo<List<ProjectList>> queryLastestLoadProject (){
-//		MessageInfo<List<ProjectList>> resultMessageInfo = new MessageInfo<List<ProjectList>>();
-//		try {
-//			List<ProjectList> projectLists  = projectListBiz.selectByLoadDate();
-//			resultMessageInfo.setData(projectLists);
-//		} catch (Exception e) {
-//			loger.error(" 获取最新发现项目,error:" + e.getMessage());
-//			resultMessageInfo.setStatus(0);
-//		}
-//		return resultMessageInfo;
-//    }
+    @RequestMapping("queryLastestLoadProject")
+    @ResponseBody
+    public MessageInfo<List<ProjectList>> queryLastestLoadProject (UserIndustry userIndustry){
+		MessageInfo<List<ProjectList>> resultMessageInfo = new MessageInfo<List<ProjectList>>();
+		try {
+			List<ProjectList> projectLists  = projectListBiz.selectByLoadDate(userIndustry);
+			resultMessageInfo.setData(projectLists);
+		} catch (Exception e) {
+			loger.error(" 获取最新发现项目,error:" + e.getMessage());
+			resultMessageInfo.setStatus(0);
+		}
+		return resultMessageInfo;
+    }
     
     /**
      * 获取最新获投项目
      * @return
      */
-//    @RequestMapping("queryLastestFinanceProject")
-//    @ResponseBody
-//    public MessageInfo<List<ProjectList>> queryLastestFinanceProject (){
-//		MessageInfo<List<ProjectList>> resultMessageInfo = new MessageInfo<List<ProjectList>>();
-//		try {
-//			List<ProjectList> projectLists  = projectListBiz.queryLastestFinanceProject();
-//			resultMessageInfo.setData(projectLists);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			loger.error("获取最新获投项目,error:" + e.getMessage());
-//			resultMessageInfo.setStatus(0);
-//		}
-//		return resultMessageInfo;
-//    }
+    @RequestMapping("queryLastestFinanceProject")
+    @ResponseBody
+    public MessageInfo<List<ProjectList>> queryLastestFinanceProject (UserIndustry userIndustry){
+		MessageInfo<List<ProjectList>> resultMessageInfo = new MessageInfo<List<ProjectList>>();
+		try {
+			List<ProjectList> projectLists  = projectListBiz.queryLastestFinanceProject(userIndustry);
+			resultMessageInfo.setData(projectLists);
+		} catch (Exception e) {
+			e.printStackTrace();
+			loger.error("获取最新获投项目,error:" + e.getMessage());
+			resultMessageInfo.setStatus(0);
+		}
+		return resultMessageInfo;
+    }
     
     /**
      * 获取上个月活跃机构
@@ -211,19 +220,32 @@ public class IndexController implements EnvironmentAware{
      * 获取一级行业机构
      * @return
      */
-//    @RequestMapping("getParentIndustrys")
-//    @ResponseBody
-//    public MessageInfo<List<Industry>> getParentIndustrys(){
-//		MessageInfo<List<Industry>>  messageInfo = new MessageInfo<List<Industry>>();
-//		try {
-//			List<Industry> industryList = industryBiz.getParentindustrys();
-//			messageInfo.setData(industryList);
-//		} catch (Exception e) {
-//			loger.error("获取一级行业机构失败,error:" + e.getMessage());
-//			messageInfo.setStatus(0);
-//		}
-//		return messageInfo;
-//	}
+    @RequestMapping("getParentIndustrys")
+    @ResponseBody
+    public MessageInfo<List<Industry>> getParentIndustrys(@CookieValue(name = "_uid_")String uid, @CookieValue(name = "s_")String s,@RequestBody UserIndustry userIndustry){
+		MessageInfo<List<Industry>>  messageInfo = new MessageInfo<List<Industry>>();
+		try {
+			String key = "ctdn:"+s+":"+uid;
+//			StringRedisTemplate  tempStringRedisTemplate= new StringRedisTemplate();
+//			BeanUtils.copyProperties(tempStringRedisTemplate, stringRedisTemplate);
+//			tempStringRedisTemplate.setValueSerializer(new StringRedisSerializer());
+//			tempStringRedisTemplate.afterPropertiesSet();
+			String userJson = stringRedisTemplate.opsForValue().get(key);
+			Long  departmentId =null;
+			if(userJson!=null){
+				JSONObject jsonObject = (JSONObject) JSONObject.parse(URLDecoder.decode(userJson,"UTF-8"));
+				if(jsonObject.containsKey("departmentId")){
+					 departmentId = jsonObject.getLong("departmentId");
+				}
+			}
+			List<Industry> industryList = industryBiz.getParentindustrys(userIndustry,departmentId);
+			messageInfo.setData(industryList);
+		} catch (Exception e) {
+			loger.error("获取投资经理首页一级行业失败,error:" + e.getMessage());
+			messageInfo.setStatus(0);
+		}
+		return messageInfo;
+	}
     
     /**
      * 保存或更新用户关注行业
@@ -318,4 +340,48 @@ public class IndexController implements EnvironmentAware{
 	public void setEnvironment(Environment environment) {
 		orgCodes = environment.getProperty("fixed_orgCode");
 	}
+	
+	@RequestMapping("getUserIndustry")
+	@ResponseBody
+    public MessageInfo<UserIndustry> getUserIndustry (@CookieValue(name = "_uid_")String uid, @CookieValue(name = "s_")String s,@RequestBody UserIndustry userIndustry){
+    	MessageInfo<UserIndustry> messageInfo = new MessageInfo<UserIndustry>();
+		try {
+			String key = "ctdn:"+s+":"+uid;
+//			StringRedisTemplate  tempStringRedisTemplate= new StringRedisTemplate();
+//			BeanUtils.copyProperties(tempStringRedisTemplate, stringRedisTemplate);
+//			tempStringRedisTemplate.setValueSerializer(new StringRedisSerializer());
+//			tempStringRedisTemplate.afterPropertiesSet();
+			String userJson = stringRedisTemplate.opsForValue().get(key);
+//			tempStringRedisTemplate = null;
+			Long  departmentId =null;
+			if(userJson!=null){
+				JSONObject jsonObject = (JSONObject) JSONObject.parse(URLDecoder.decode(userJson,"UTF-8"));
+				if(jsonObject.containsKey("departmentId")){
+					 departmentId = jsonObject.getLong("departmentId");
+				}
+			}
+			messageInfo = userIndustryBiz.getUserIndustryIdsAndNames(userIndustry,departmentId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			loger.error("获取高管行业融资对比,error:" + e.getMessage());
+			messageInfo.setStatus(9999);
+		}
+        return messageInfo;
+    }
+	
+	   
+    //获取高管事业线
+    @RequestMapping("getBusinessLineMappingIndustry")
+    @ResponseBody
+    public MessageInfo<List<BusinessLineMappingIndustry>> getBusinessLineMappingIndustry (){
+    	MessageInfo<List<BusinessLineMappingIndustry>> messageInfo = new MessageInfo<List<BusinessLineMappingIndustry>>();
+		try {
+			messageInfo = businessLineMappingIndustryBiz.getBusinessLineMappingIndustry();
+		} catch (Exception e) {
+			e.printStackTrace();
+			loger.error("获取高管事业线失败,error:" + e.getMessage());
+			messageInfo.setStatus(9999);
+		}
+        return messageInfo;
+    }
 }

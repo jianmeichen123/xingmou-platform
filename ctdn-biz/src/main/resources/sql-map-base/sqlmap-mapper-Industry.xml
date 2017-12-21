@@ -45,4 +45,16 @@
         app_industry
         WHERE parentId = 0
     </select>
+    <select id="getIndustryByIds" resultMap="BaseResultMap">
+  	  	SELECT
+        <include refid="selectFields"/>
+        FROM
+        app_industry
+       <if test="industryIds != null">
+			where id  in
+			<foreach collection="industryIds" item="item" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+    </select>
 </mapper>

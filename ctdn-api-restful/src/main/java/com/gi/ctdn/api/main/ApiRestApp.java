@@ -27,7 +27,7 @@ public class ApiRestApp {
 
     public static void main(String[] args) {
     	SpringApplication springApplication = new SpringApplication(ApiRestApp.class);
-    	springApplication.addListeners(new InitListener());
+//    	springApplication.addListeners(new InitListener());
     	springApplication.run(args);
     }
     @Bean

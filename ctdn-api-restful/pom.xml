@@ -45,7 +45,10 @@
             <groupId>com.gi</groupId>
             <artifactId>xingmou-user</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>com.gi</groupId>
+            <artifactId>rest-common</artifactId>
+        </dependency>
         <!--自身依赖 end-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

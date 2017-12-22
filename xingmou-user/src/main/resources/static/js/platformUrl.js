@@ -4,7 +4,7 @@ var Constants = {
 		//platformContentURL: "http://localhost:8080/user-xingmou-server/"
 		platformContentURL: "http://ctdnqa.gi.com/user/",
 
-		htmlContentUrl : "http://ctdnqa.gi.com.com"
+		htmlContentUrl : "http://ctdnqa.gi.com"
 
 		//platformContentURL: endpointObj["project.home.page.url"]
 }
@@ -56,7 +56,7 @@ var platformUrl = {
 var htmlPlatformUrl = {
 		search:Constants.htmlContentUrl + "/search_index.html",
 		search_finance:Constants.htmlContentUrl + "/seek_financing.html",
-		index_head:Constants.htmlContentUrl + "/index.html",
+		index_head:Constants.htmlContentUrl + "/index_normal.html",
 		evaluating:Constants.htmlContentUrl+"/project_evaluating.html",
 		report:Constants.htmlContentUrl+"/report_list.html",
 		news_head:Constants.htmlContentUrl+"/news.html",

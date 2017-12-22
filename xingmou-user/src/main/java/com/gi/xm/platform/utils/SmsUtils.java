@@ -33,7 +33,7 @@ public class SmsUtils {
     static final String accessKeyId = "LTAIzo4Ot89YMli8";
     static final String accessKeySecret = "tnqnMpS9ZzFdPXH29rYhw8YDu9wg1P";
 
-    public static SendSmsResponse sendSms(String code) throws ClientException {
+    public static SendSmsResponse sendSms(String code,String mobile) throws ClientException {
 
         //可自助调整超时时间
         System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
@@ -47,7 +47,7 @@ public class SmsUtils {
         //组装请求对象-具体描述见控制台-文档部分内容
         SendSmsRequest request = new SendSmsRequest();
         //必填:待发送手机号
-        request.setPhoneNumbers("13220116393");
+        request.setPhoneNumbers(mobile);
         //必填:短信签名-可在短信控制台中找到
         request.setSignName("创投大脑");
         //必填:短信模板-可在短信控制台中找到
@@ -109,12 +109,12 @@ public class SmsUtils {
     	System.out.println(sb.toString());
     	String code = sb.toString();
 //        //发短信
-        SendSmsResponse response = sendSms(code);
-        System.out.println("短信接口返回的数据----------------");
-        System.out.println("Code=" + response.getCode());
-        System.out.println("Message=" + response.getMessage());
-        System.out.println("RequestId=" + response.getRequestId());
-        System.out.println("BizId=" + response.getBizId());
+//        SendSmsResponse response = sendSms(code,"13220116393");
+//        System.out.println("短信接口返回的数据----------------");
+//        System.out.println("Code=" + response.getCode());
+//        System.out.println("Message=" + response.getMessage());
+//        System.out.println("RequestId=" + response.getRequestId());
+//        System.out.println("BizId=" + response.getBizId());
 //
 //        Thread.sleep(3000L);
 //

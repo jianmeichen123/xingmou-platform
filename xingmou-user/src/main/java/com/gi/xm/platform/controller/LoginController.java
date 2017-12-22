@@ -536,7 +536,7 @@ public class LoginController implements EnvironmentAware{
 				key = "user:register:"+user.getMobile();
 			}
 			String code = getShortCode();
-			SendSmsResponse response = SmsUtils.sendSms(code);
+			SendSmsResponse response = SmsUtils.sendSms(code,user.getMobile());
 			if(response!=null && "OK".equals(response.getCode())){
 				stringRedisTemplate.opsForValue().set(key, code, 60*10,TimeUnit.SECONDS);
 			}else{

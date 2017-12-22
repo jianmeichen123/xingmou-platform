@@ -327,7 +327,7 @@ public class LoginController implements EnvironmentAware{
 			messageInfo.setResult(new Result(Status.ERROR, "1","您输入的账号不存在~"));
 			return messageInfo;
 		}
-		if(!query.getPassword().equals(PWDUtils.genernateNewPasswordByBase64(user.getPassword()))){
+		if(!PWDUtils.genernateNewPasswordByBase64(user.getPassword()).equals(query.getPassword())){
 			messageInfo.setResult(new Result(Status.ERROR, "0","您的账号与密码不匹配~"));
 			return messageInfo;
 		}
@@ -339,9 +339,9 @@ public class LoginController implements EnvironmentAware{
 			stringRedisTemplate.opsForValue().set(key, "false");
 		}
 		//生成usercode
-		user.setUserCode(PWDUtils.generateUserCode(user.getId(),"external"));
+		query.setUserCode(PWDUtils.generateUserCode(query.getId(),"external"));
 		String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
-		setCacheSessionId(user,"external", sessionId,notAuto);
+		setCacheSessionId(query,"external", sessionId,notAuto);
 		messageInfo.setEntity(query);
 		messageInfo.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "登录成功！"));
 		setCookie(response,user.getUserCode(),sessionId,"external",notAuto);
@@ -362,25 +362,24 @@ public class LoginController implements EnvironmentAware{
      public ResponseData<ExternalUser> loginByCode(boolean isAuto,@RequestBody ExternalUser user, HttpServletRequest request,HttpServletResponse response) {
         ResponseData<ExternalUser> responsebody = new ResponseData<ExternalUser>();
         try {
-			String mobile= user.getMobile();
+        	String mobile= user.getMobile();
 			String code = user.getCode();
 			if (StringUtils.isBlank(mobile) || StringUtils.isBlank(code)) {
-			    responsebody.setResult(new Result(Status.ERROR, Constants.IS_UP_EMPTY, "手机号或验证码不能为空！"));
+			    responsebody.setResult(new Result(Status.ERROR, Constants.IS_UP_EMPTY, "手机号或验证码不能为空！")); //0
 			    return responsebody;
 			}
 			String key = "user:login:"+user.getMobile();
 			String codeFromRedis  = (String) stringRedisTemplate.opsForValue().get(key);
 			System.out.println(codeFromRedis);
 			if(!code.equals(codeFromRedis)){
-				responsebody.setResult(new Result(Status.ERROR, Constants.IS_UP_WRONG, "验证码错误"));//1
+				responsebody.setResult(new Result(Status.ERROR, "1", "验证码错误"));//1
 				return responsebody;
 			}
 			ExternalUser rtn = userBiz.getUser(mobile);
 			if(rtn == null)
 			{
 				userBiz.insert(user);
-			    responsebody.setResult(new Result(Status.OK, Constants.IS_UP_WRONG, "此手机号未曾注册"));//1
-			    return responsebody;
+				rtn = user;
 			}
 			
 			String firstLoginKey = "ctdn-firstLogin:external:"+rtn.getId();
@@ -390,7 +389,7 @@ public class LoginController implements EnvironmentAware{
 			}else{
 				stringRedisTemplate.opsForValue().set(firstLoginKey, "false");
 			}
-
+			rtn.setUserCode(PWDUtils.generateUserCode(rtn.getId(),"external"));
 			String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
 			setCacheSessionId(rtn,"external", sessionId,isAuto);
 			responsebody.setEntity(rtn);
@@ -413,8 +412,9 @@ public class LoginController implements EnvironmentAware{
 		 	externalUser.setStatus(status);
 		 	externalUser.setMobile(user.getMobile());
 		 	externalUser.setUserCode(user.getUserCode());
+		 	externalUser.setPassword(user.getPassword());
 	        try {
-	            json = URLEncoder.encode(JSON.toJSONString(user),"UTF-8");
+	            json = URLEncoder.encode(JSON.toJSONString(externalUser),"UTF-8");
 	        } catch (UnsupportedEncodingException e) {
 	            logger.error("json utf8-8编码失败");
 	        }
@@ -539,9 +539,17 @@ public class LoginController implements EnvironmentAware{
 				}
 				key = "user:register:"+user.getMobile();
 			}
+			//防止外部恶意刷验证码key=user:login|register|forget:mobile:
+			String brushSmsKey  = "user:code:" + user.getMobile();
+			String brushSmsValue = stringRedisTemplate.opsForValue().get(brushSmsKey);
+			if(brushSmsValue != null){
+				res.setResult(new Result(Status.ERROR,"3", "验证码已发送，请稍候重试"));
+				return res;
+			}
 			String code = getShortCode();
 			SendSmsResponse response = SmsUtils.sendSms(code,user.getMobile());
 			if(response!=null && "OK".equals(response.getCode())){
+				stringRedisTemplate.opsForValue().set(brushSmsKey, "exists", 60,TimeUnit.SECONDS); //
 				stringRedisTemplate.opsForValue().set(key, code, 60*10,TimeUnit.SECONDS);
 			}else{
 				logger.error("验证码发送失败,err_msg:" + response.getMessage());

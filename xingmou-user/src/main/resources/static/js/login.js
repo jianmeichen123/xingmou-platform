@@ -59,7 +59,7 @@ function checkform(){
  function logincallback(data){
 	 if(data.result.status=="OK"){
 		 var entity = data.entity
-		 if(entity.roleCode == 10000){ //投机经理
+		 if(entity.roleCode == 10000||entity.roleCode == 30000){ //投机经理
 			 location.href = htmlPlatformUrl.index_manager
 			 return
 		 }

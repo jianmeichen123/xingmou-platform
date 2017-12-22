@@ -58,9 +58,11 @@ public class LoginController implements EnvironmentAware{
 
     private String ctdn_domain ="";
 
-	private static final Long  TZJL_ROLECODE = 10000l;
+	private static final Long  TZJL_ROLECODE = 10000l;		//星河投内部用户 投资经理用户code
 
-    private static final Long  GG_ROLECODE = 20000l;
+    private static final Long  GG_ROLECODE = 20000l;		//星河投内部用户  高管用户code
+
+	private static final Long  VISITOR_ROLECODE = 30000l;	//星河投内部用户 无角色用户code
 
 
 	@Autowired
@@ -164,6 +166,8 @@ public class LoginController implements EnvironmentAware{
 			user.setRoleCode(GG_ROLECODE);
 		}else if(roleCodes.indexOf(TZJL_ROLECODE)>-1){
 			user.setRoleCode(TZJL_ROLECODE);
+		}else{
+			user.setRoleCode(VISITOR_ROLECODE);
 		}
 		//生成usercode
 		user.setUserCode(PWDUtils.generateUserCode(user.getId(),"internal"));

@@ -34,7 +34,7 @@ import com.github.pagehelper.PageHelper;
  */
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.gi.xm.platform"})
+@ComponentScan(basePackages = {"com.gi"})
 @MapperScan("com.gi.xm.platform.dao")
 @Import(AuthRequest.class)
 //@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})

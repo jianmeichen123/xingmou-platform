@@ -44,7 +44,7 @@ var platformUrl = {
 
 	ctdncx : Constants.htmlContentUrl + "list_page_com.html",
 
-	index : Constants.htmlContentUrl + "/index.html",
+	index : Constants.htmlContentUrl + "/index_normal.html",
 	loginByCode:Constants.platformContentURL + "userlogin/loginByCode",
 	toRegister:Constants.platformContentURL + "userlogin/toRegister",
 	register:Constants.platformContentURL + "userlogin/register",
@@ -56,7 +56,7 @@ var platformUrl = {
 var htmlPlatformUrl = {
 		search:Constants.htmlContentUrl + "/search_index.html",
 		search_finance:Constants.htmlContentUrl + "/seek_financing.html",
-		index_head:Constants.htmlContentUrl + "/index.html",
+		index_head:Constants.htmlContentUrl + "/index_normal.html",
 		evaluating:Constants.htmlContentUrl+"/project_evaluating.html",
 		report:Constants.htmlContentUrl+"/report_list.html",
 		news_head:Constants.htmlContentUrl+"/news.html",

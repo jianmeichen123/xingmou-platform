@@ -286,7 +286,7 @@ function login_password(){
 			$("#mobile_tip").css('display','inline').html('请输入登录手机号');
 			return;
 		}
-		if(!/^1[0-9]{10}$/.test(val)){
+		if(!/^1[0-9]{10}$/.test(val))
 		{
 			$("#mobile_tip").css('display','inline').html('请输入有效手机号码');
 			return;

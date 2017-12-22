@@ -27,10 +27,8 @@ function checkform(){
  }
 
  function login(){
-	$("#nickname").removeClass('inputDanger');
-	$("#nickname").removeClass('invalid');
-	$("#password").removeClass('inputDanger');
-	$("#password").removeClass('invalid');
+	$("input").removeClass('inputDanger');
+	$("input").removeClass('invalid');
 	$('.login-tips').css('display','none')
     if (!checkform()){return};
 	 
@@ -73,6 +71,17 @@ function checkform(){
 		 }
 
 	 }else{
+		 var errorcode = data.result.errorCode
+		 if(errorcode ==1){
+			 $("#nickName").addClass('inputDanger');
+			 $("#nickName").addClass('invalid');
+			 $("#password").addClass('inputDanger');
+			 $("#password").addClass('invalid');
+		 }
+		 if(errorcode == 2){
+			 $("#nickName").addClass('inputDanger');
+			 $("#nickName").addClass('invalid');
+		 }
 	     layer.msg(data.result.message)
 	 }
  }
@@ -84,6 +93,9 @@ function checkform(){
  }
  //外部用户密码登录u
 function login_password(){
+	$("input").removeClass('inputDanger');
+	$("input").removeClass('invalid');
+	$('.login-tips').css('display','none')
     var nickName = $("#nickName").val();
     var password = $("#password").val();
     var jsonData={"mobile":nickName,"password":password};
@@ -92,14 +104,17 @@ function login_password(){
     			 location.href = htmlPlatformUrl.index_external
     	 }else{
     		 var error_code = data.result.errorCode
-    		 if(error_code!=null && error_code=='1'){
+    		 var errorcode = data.result.errorCode
+    		 if(errorcode ==1){
     			 $("#nickName").addClass('inputDanger');
-				 $("#nickName").addClass('invalid');
+    			 $("#nickName").addClass('invalid');
+    			 $("#password").addClass('inputDanger');
+    			 $("#password").addClass('invalid');
     		 }
-    		 $("#nickName").addClass('inputDanger');
-    	     $("#nickName").addClass('invalid');
-    	     $("#password").addClass('inputDanger');
-    	     $("#password").addClass('invalid');
+    		 if(errorcode == 2){
+    			 $("#nickName").addClass('inputDanger');
+    			 $("#nickName").addClass('invalid');
+    		 }
     	     layer.msg(data.result.message)
     	 }
     }

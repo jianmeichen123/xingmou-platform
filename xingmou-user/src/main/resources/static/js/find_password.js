@@ -87,3 +87,22 @@ $("#mobile").change(function(){
 //	};
 //	$.ajaxPost(url,JSON.stringify(data),callback);
 });
+function func_blur(obj){
+	var _this = $(obj);
+	var val= $(obj).val()
+	if(_this.hasClass('valid')){
+		_this.removeClass('inputDanger');
+		_this.removeClass('invalid');
+	}
+	if(val == null || val.trim().length==0){
+		_this.addClass('inputDanger');
+		_this.addClass('invalid');
+	}
+}
+function func_focus(obj){
+	var _this = $(obj);
+	var id = _this.attr('id');
+	$("#"+id + "_tip").attr('style','none')
+	_this.removeClass('inputDanger');
+	_this.removeClass('invalid');
+}

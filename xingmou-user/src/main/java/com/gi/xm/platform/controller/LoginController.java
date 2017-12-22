@@ -324,11 +324,11 @@ public class LoginController implements EnvironmentAware{
 		}
 		ExternalUser query = userBiz.getUser(user.getMobile());
 		if(query == null){
-			messageInfo.setResult(new Result(Status.ERROR, "1","您输入的账号不存在~"));
+			messageInfo.setResult(new Result(Status.ERROR, "2","您输入的账号不存在~"));
 			return messageInfo;
 		}
 		if(!PWDUtils.genernateNewPasswordByBase64(user.getPassword()).equals(query.getPassword())){
-			messageInfo.setResult(new Result(Status.ERROR, "0","您的账号与密码不匹配~"));
+			messageInfo.setResult(new Result(Status.ERROR, "1","您的账号与密码不匹配~"));
 			return messageInfo;
 		}
 		String key = "ctdn-firstLogin:external:"+query.getId();

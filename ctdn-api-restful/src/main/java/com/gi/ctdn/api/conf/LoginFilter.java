@@ -21,17 +21,17 @@ public class LoginFilter implements  Filter{
 
 	@Value("${loginUrl}")
 	private  String loginUrl;
-	
+
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 	}
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException{
-		
-		
+
+
 		StringRedisTemplate redisTemplate = BeanContextUtils.getBean(StringRedisTemplate.class);
-		
+
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		String urlPatterns = BeanContextUtils.getUrlPatterns();
@@ -60,7 +60,7 @@ public class LoginFilter implements  Filter{
 			}
 		}
 		if(_uid_ != null && _uid_.trim().length()!=0  && s_ !=null && s_.trim().length()!=0 ){
-			String key = "ctdn:" + s_ + ":" + _uid_; 
+			String key = "ctdn:" + s_ + ":" + _uid_;
 			boolean exists  = redisTemplate.getConnectionFactory().getConnection().exists(key.getBytes());
 			if(!exists){
 				//未登录
@@ -83,10 +83,10 @@ public class LoginFilter implements  Filter{
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
 
-	
+
 
 	private void writeLoginMsg(HttpServletRequest req, HttpServletResponse res, String msg) throws Exception {
 		MessageInfo<User> data = new MessageInfo<>();
@@ -101,7 +101,7 @@ public class LoginFilter implements  Filter{
 
 	@Override
 	public void destroy() {
-		
+
 	}
 
 }

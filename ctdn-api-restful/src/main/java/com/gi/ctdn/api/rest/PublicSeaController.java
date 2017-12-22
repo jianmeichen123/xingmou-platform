@@ -31,7 +31,7 @@ import java.util.Map;
 @RequestMapping("/publicsea")
 public class PublicSeaController {
 
-    private static final Logger logger = LoggerFactory.getLogger(AppProjectDemandInfoController.class);
+    private static final Logger logger = LoggerFactory.getLogger(PublicSeaController.class);
 
     @Autowired
     private PublicSeaRequest publicSeaRequest;
@@ -205,7 +205,7 @@ public class PublicSeaController {
         if(!json.containsKey("projectDescription") || StringUtils.isEmpty(json.get("projectDescription"))){
             flag = false;
         }
-        if(!json.containsKey("linkMan") ||  StringUtils.isEmpty(json.get("linkMan"))){
+        if(!json.containsKey("linkName") ||  StringUtils.isEmpty(json.get("linkName"))){
             flag = false;
         }
         if(!json.containsKey("linkPhone1") || StringUtils.isEmpty(json.get("linkPhone1"))){

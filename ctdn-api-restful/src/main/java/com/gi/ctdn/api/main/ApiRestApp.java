@@ -37,7 +37,7 @@ public class ApiRestApp {
     	filterRegistrationBean.addUrlPatterns("/*");
     	return filterRegistrationBean;
     }
-    
+
     @Bean
     public BeanContextUtils beanContextUtils() {
         return new BeanContextUtils();

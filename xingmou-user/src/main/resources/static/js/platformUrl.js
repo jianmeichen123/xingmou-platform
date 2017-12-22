@@ -9,7 +9,6 @@ var Constants = {
 		//platformContentURL: endpointObj["project.home.page.url"]
 }
 
-
 var platformUrl = {
 
 	/**

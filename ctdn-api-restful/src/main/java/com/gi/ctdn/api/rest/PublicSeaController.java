@@ -191,6 +191,7 @@ public class PublicSeaController {
         return messageInfo;
     }
 
+
     private boolean checkJson(JSONObject json){
         boolean flag =true;
         if(!json.containsKey("projectName") || StringUtils.isEmpty(json.get("projectName"))){

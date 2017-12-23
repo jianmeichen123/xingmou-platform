@@ -141,8 +141,9 @@ var exists = false
 //});
 function register(){
 	$('.login-tips').css('display','none')
+	$('input').removeClass('inputDanger');
+	$('input').removeClass('invalid');
 	var mobile = $("#mobile").val();
-	$('#mobile_tip').css('display','none');
 	if(mobile== null || mobile.trim().length==0)
 	{
 		$("#mobile").addClass('inputDanger');
@@ -204,7 +205,7 @@ function register(){
 					$("#mobile").addClass('inputDanger');
 					$("#mobile").addClass('invalid');
 				}
-				if(code == '3'){
+				if(code == '2'){
 					$("#code").addClass('inputDanger');
 					$("#code").addClass('invalid');
 				}
@@ -225,6 +226,9 @@ var timer;
 var count;
 var $btn;
 function send_code(e,type){
+	$("input").removeClass('inputDanger');
+	$("input").removeClass('invalid');
+	$('.login-tips').css('display','none')
 	var val = $('#mobile').val()
 	if(val == null || val.trim().length == 0)
 	{
@@ -242,8 +246,8 @@ function send_code(e,type){
 	}
 	if(count<=0)
 	{	
-		e.setAttribute('onclick','send_code(this)')
-		$('#login_code').html("重新获取");
+		$(e).attr('onclick','send_code(this,3)')
+		$(e).text("重新获取");
         clearInterval(timer);
 	}else{
 		clearInterval(timer);
@@ -271,13 +275,13 @@ function send_code(e,type){
 function countDown()
 {
 	count--;
-	console.log(count);
 	$btn.html("验证码"+count+"s");
 //	$btn.addClass('disabled_btn')
 	if(count<=0)
 	{
-		$btn.removeClass("disabled");
-		$btn.text("重新获取");
+		count=60
+		$btn.attr('onclick','send_code(this,3)')
+		$btn.text("count");
         clearInterval(timer);
 	}
 }

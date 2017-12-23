@@ -7,14 +7,14 @@ var $btn;
 function countDown()
 {
 	count--;
-	console.log(count);
 	$btn.html("验证码"+count+"s");
 //	$btn.addClass('disabled_btn')
 	if(count<=0)
 	{
-		$btn.removeClass("disabled");
-		$btn.text("重新获取");
+		$btn.attr('onclick','send_code(this,2)')
+		$btn.text("发送验证码");
         clearInterval(timer);
+        count = 60
 	}
 }
 
@@ -40,8 +40,8 @@ function send_code(e,type){
 	}
 	if(count<=0)
 	{	
-		e.setAttribute('onclick','send_code(this)')
-		$('#find_code').html("重新获取");
+		$(e).attr('onclick','send_code(this,2)')
+		$(e).text("发送验证码");
         clearInterval(timer);
 	}else{
 		clearInterval(timer);
@@ -53,13 +53,10 @@ function send_code(e,type){
 				e.removeAttribute('onclick','')
 				timer = setInterval("countDown()",1000);
 			}else{
-				$("#mobile_tip").css('display','inline').html('您输入账号不存在~');
-				layer.msg('您输入账号不存在~')
+				layer.msg(data.result.message)
 			}
 		}
 		sendPostRequestByJsonObj(platformUrl.sendCode,jsonData,success);
-		
-		
 	}
 }
 
@@ -90,3 +87,22 @@ $("#mobile").change(function(){
 //	};
 //	$.ajaxPost(url,JSON.stringify(data),callback);
 });
+function func_blur(obj){
+	var _this = $(obj);
+	var val= $(obj).val()
+	if(_this.hasClass('valid')){
+		_this.removeClass('inputDanger');
+		_this.removeClass('invalid');
+	}
+	if(val == null || val.trim().length==0){
+		_this.addClass('inputDanger');
+		_this.addClass('invalid');
+	}
+}
+function func_focus(obj){
+	var _this = $(obj);
+	var id = _this.attr('id');
+	$("#"+id + "_tip").attr('style','none')
+	_this.removeClass('inputDanger');
+	_this.removeClass('invalid');
+}

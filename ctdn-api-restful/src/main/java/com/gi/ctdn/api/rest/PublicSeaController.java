@@ -3,6 +3,7 @@ package com.gi.ctdn.api.rest;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.gi.ctdn.api.util.PublicSeaRequest;
 import com.gi.ctdn.pojo.AppProjectDemand;
 import com.gi.ctdn.view.common.MessageInfo;
@@ -22,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import springfox.documentation.spring.web.json.Json;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -147,12 +150,17 @@ public class PublicSeaController {
                 logger.error("服务器返回正常,获取数据失败");
                 return  new MessageInfo(MessageStatus.ERROR_CODE,MessageStatus.ERROR_MESSAGE);
             }else{
-                JSONObject  resultObj = resultJson.getJSONObject("value");
-                Long total = resultObj.getLong("resultCount");
-                String array = resultObj.getString("beanList");
+                JSONObject  resultObj = resultJson.getJSONObject("result");
+                JSONArray array = resultObj.getJSONObject("value").getJSONArray("beanList");
+                String jsonString=JSONObject.toJSONString(array, SerializerFeature.WriteClassName);
+                List list = JSONObject.parseArray(jsonString,Object.class);
+                Long total = resultObj.getJSONObject("value").getLong("resultCount");
                 Pagination page = new Pagination();
                 page.setTotal(total);
-                page.setRecords(JSON.parseArray(array,Object.class));
+                if(list == null){
+                    list = new ArrayList();
+                }
+                page.setRecords(list);
                 messageInfo.setPage(page);
             }
         }

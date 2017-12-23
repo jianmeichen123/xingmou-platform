@@ -27,10 +27,8 @@ function checkform(){
  }
 
  function login(){
-	$("#nickname").removeClass('inputDanger');
-	$("#nickname").removeClass('invalid');
-	$("#password").removeClass('inputDanger');
-	$("#password").removeClass('invalid');
+	$("input").removeClass('inputDanger');
+	$("input").removeClass('invalid');
 	$('.login-tips').css('display','none')
     if (!checkform()){return};
 	 
@@ -59,7 +57,7 @@ function checkform(){
  function logincallback(data){
 	 if(data.result.status=="OK"){
 		 var entity = data.entity
-		 if(entity.roleCode == 10000||entity.roleCode == 30000){ //投机经理
+		 if(entity.roleCode == 10000 ||entity.roleCode == 30000){ //投机经理
 			 location.href = htmlPlatformUrl.index_manager
 			 return
 		 }
@@ -73,6 +71,17 @@ function checkform(){
 		 }
 
 	 }else{
+		 var errorcode = data.result.errorCode
+		 if(errorcode ==1){
+			 $("#nickName").addClass('inputDanger');
+			 $("#nickName").addClass('invalid');
+			 $("#password").addClass('inputDanger');
+			 $("#password").addClass('invalid');
+		 }
+		 if(errorcode == 2){
+			 $("#nickName").addClass('inputDanger');
+			 $("#nickName").addClass('invalid');
+		 }
 	     layer.msg(data.result.message)
 	 }
  }
@@ -84,6 +93,9 @@ function checkform(){
  }
  //外部用户密码登录u
 function login_password(){
+	$("input").removeClass('inputDanger');
+	$("input").removeClass('invalid');
+	$('.login-tips').css('display','none')
     var nickName = $("#nickName").val();
     var password = $("#password").val();
     var jsonData={"mobile":nickName,"password":password};
@@ -92,9 +104,16 @@ function login_password(){
     			 location.href = htmlPlatformUrl.index_external
     	 }else{
     		 var error_code = data.result.errorCode
-    		 if(error_code!=null && error_code=='1'){
+    		 var errorcode = data.result.errorCode
+    		 if(errorcode ==1){
     			 $("#nickName").addClass('inputDanger');
-				 $("#nickName").addClass('invalid');
+    			 $("#nickName").addClass('invalid');
+    			 $("#password").addClass('inputDanger');
+    			 $("#password").addClass('invalid');
+    		 }
+    		 if(errorcode == 2){
+    			 $("#nickName").addClass('inputDanger');
+    			 $("#nickName").addClass('invalid');
     		 }
     	     layer.msg(data.result.message)
     	 }
@@ -174,8 +193,34 @@ function login_password(){
 //		timer = setInterval("countDown()",1000);
 //	})
 	function login_bycode(){
+		$("input").removeClass('inputDanger');
+		$("input").removeClass('invalid');
+		$('.login-tips').css('display','none')
 		var mobile =$('#mobile').val()
+		if(mobile == null  || $.trim(mobile).length==0){
+			$('#mobile').addClass('inputDanger');
+			$('#mobile').addClass('invalid');
+			if($('#mobile').hasClass('valid')){
+				$('#mobile').removeClass('inputDanger');
+				$('#mobile').removeClass('invalid');
+			}
+			$("#mobile_tip").css('display','block').html("请输入登录用户名/手机号")
+			return;
+		}
+		if(!/^1[0-9]{10}$/.test(mobile)){
+			$("#mobile").addClass('inputDanger');
+			$("#mobile").addClass('invalid');
+			$('#mobile_tip').css('display','block').html('您输入的手机号格式不正确~');
+			layer.msg('您输入的手机号格式不正确~')
+			return
+		}
 		var code = $('#code').val()
+		if(code == null || $.trim(code).length == 0){
+			$("#code").addClass('inputDanger');
+			$("#code").addClass('invalid');
+			$('#code_tip').css('display','block').html('请输入验证码');
+			return
+		}
 		var jsonData = {"mobile" : mobile,"code":code}
 		sendPostRequestByJsonObj(platformUrl.loginByCode,jsonData,loginByCodecallback);
 	}
@@ -183,28 +228,41 @@ function login_password(){
 		if(data.result.status=="OK"){
 				location.href = htmlPlatformUrl.index_external
 		 }else{
+			 var errorCode = data.result.errorCode
+			 if(errorCode == '1'){
+				 $("#code").addClass('inputDanger');
+				 $("#code").addClass('invalid');
+				 $('#code_tip').css('display','block').html('验证码错误');
+			 }
 		     layer.msg(data.result.message)
 		 }
 	}
 	var timer;
-	var count;
+	var count=60;
 	var $btn;
 	function send_code(e,type){
+		$("input").removeClass('inputDanger');
+		$("input").removeClass('invalid');
+		$('.login-tips').css('display','none')
 		var val = $('#mobile').val()
 		if(val == null || val.trim().length == 0)
 		{
-			$("#mobile_tip").css('display','inline').html('请输入登录手机号');
+			$("#mobile").addClass('inputDanger');
+			$("#mobile").addClass('invalid');
+			$("#mobile_tip").css('display','block').html('请输入登录手机号');
 			return;
 		}
-		if(/^[0-9a-zA-Z]{6-14}$/.test(val))
-		{
-			$("#mobile_tip").css('display','inline').html('请输入有效手机号码');
-			return;
+		if(!/^1[0-9]{10}$/.test(val)){
+			$("#mobile").addClass('inputDanger');
+			$("#mobile").addClass('invalid');
+			$('#mobile_tip').css('display','block').html('您输入的手机号格式不正确~');
+			layer.msg('您输入的手机号格式不正确~')
+			return
 		}
 		if(count<=0)
 		{	
-			e.setAttribute('onclick','send_code(this)')
-			$('#login_code').html("重新获取");
+			$(e).attr('onclick','send_code(this,1)')
+			$(e).text("发送验证码");
 	        clearInterval(timer);
 		}else{
 			clearInterval(timer);
@@ -216,8 +274,7 @@ function login_password(){
 					e.removeAttribute('onclick','')
 					timer = setInterval("countDown()",1000);
 				}else{
-					$("#mobile_tip").css('display','inline').html('您输入账号不存在~');
-					layer.msg('您输入账号不存在~')
+					layer.msg(data.result.message)
 				}
 			}
 			sendPostRequestByJsonObj(platformUrl.sendCode,jsonData,success);
@@ -228,11 +285,11 @@ function login_password(){
 		count--;
 		console.log(count);
 		$btn.html("验证码"+count+"s");
-//		$btn.addClass('disabled_btn')
 		if(count<=0)
 		{
-			$btn.removeClass("disabled");
-			$btn.text("重新获取");
+			count=60
+			$btn.attr('onclick','send_code(this,1)')
+			$btn.text("发送验证码");
 	        clearInterval(timer);
 		}
 	}
@@ -241,10 +298,10 @@ function login_password(){
 		var val = $(this).val();
 		if(val == null || val.trim().length == 0)
 		{
-			$("#mobile_tip").css('display','inline').html('请输入登录手机号1');
+			$("#mobile_tip").css('display','inline').html('请输入登录手机号');
 			return;
 		}
-		if(/^[0-9a-zA-Z]{6-14}$/.test(val))
+		if(!/^1[0-9]{10}$/.test(val))
 		{
 			$("#mobile_tip").css('display','inline').html('请输入有效手机号码');
 			return;

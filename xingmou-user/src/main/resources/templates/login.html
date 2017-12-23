@@ -182,7 +182,7 @@
 		<!--验证码登录  -->
 		<div class='login-right-content vertifiaction-code'>
 			<input class='login-input input-first telphone' type='text' placeholder='请输入登录用户名/手机号' id="mobile" maxlength="11"/><label class='login-tips' id="mobile_tip">*你输入的手机号格式不正确</label>
-			<input class='login-input input-code' type='text' placeholder='请输入验证码' id="code"/><label class='login-tips' id="code_tip">*你输入的手机号格式不正确</label><span class='login-send-code' id="login_code" onclick="send_code(this,'1')">发送验证码</span>
+			<input class='login-input input-code' type='text' placeholder='请输入验证码' id="code" maxlength="6"/><label class='login-tips' id="code_tip">*你输入的手机号格式不正确</label><span class='login-send-code' id="login_code" onclick="send_code(this,'1')">发送验证码</span>
 			<p class='forgot'>
 				<input type='checkbox' /><span class='serven-day'>七天自动登录</span>
 				<a href='javascript:void(0);' class='forget-password' onclick="find_password_page()">忘记密码</a>

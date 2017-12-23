@@ -43,7 +43,7 @@ var platformUrl = {
 
 	ctdncx : Constants.htmlContentUrl + "list_page_com.html",
 
-	index : Constants.htmlContentUrl + "/index.html",
+	index : Constants.htmlContentUrl + "/index_normal.html",
 	loginByCode:Constants.platformContentURL + "userlogin/loginByCode",
 	toRegister:Constants.platformContentURL + "userlogin/toRegister",
 	register:Constants.platformContentURL + "userlogin/register",

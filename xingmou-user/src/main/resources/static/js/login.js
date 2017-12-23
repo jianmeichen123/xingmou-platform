@@ -1,4 +1,4 @@
-
+var exists_flag = false
 function checkform(){
 	  var nickName =$("#nickName").val();
 	  var password =$("#password").val();
@@ -12,7 +12,21 @@ function checkform(){
 			}
 			$("#nickname_tip").css('display','block').html("请输入登录用户名/手机号")
 	        return false;
-	    } 
+	    }
+	    
+	    sendPostRequestByJsonObj(platformUrl.checkUserExists,{"mobile":nickName},function(data){
+	    	if(data.result.status == 'OK'){
+	    		exists_flag= data.entity.exists
+	    	}else{
+	    		layer.msg(data.result.message)
+	    	}
+	    });
+	    if(!exists_flag){
+	    	$("#nickName").addClass('inputDanger');
+	    	$("#nickName").addClass('invalid');
+	    	layer.msg('您输入的账号不存在~')
+	    	return
+	    }
 	    if(password==""){
 	    	$("#password").addClass('inputDanger');
 	    	$("#password").addClass('invalid');

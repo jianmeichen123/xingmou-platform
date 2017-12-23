@@ -2,9 +2,9 @@ var Constants = {
 	//platformContentURL: "http://ctdn.dev.userinternet.com/"
 
 		//platformContentURL: "http://localhost:8080/user-xingmou-server/"
-		platformContentURL: "http://fx.local.galaxyinternet.com/user/",
+		platformContentURL: "http://ctdn.dev.userinternet.com/user/",
 
-		htmlContentUrl : "http://fx.local.galaxyinternet.com"
+		htmlContentUrl : "http://ctdn.dev.userinternet.com"
 
 		//platformContentURL: endpointObj["project.home.page.url"]
 }
@@ -54,7 +54,7 @@ var platformUrl = {
 	sendCode:Constants.platformContentURL + "userlogin/sendCode",
 	loginByPassword:Constants.platformContentURL + "userlogin/loginByPassword",
 	checkUserExists:Constants.platformContentURL + "userlogin/checkUserExists",
-	checkUserExists:Constants.platformContentURL + "userlogin/checkUserExists",
+	checkCode:Constants.platformContentURL + "userlogin/checkCode",
 }
 var htmlPlatformUrl = {
 		search:Constants.htmlContentUrl + "/search_index.html",

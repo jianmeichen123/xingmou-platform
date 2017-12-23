@@ -29,8 +29,8 @@ import java.util.List;
 /**
  * Created by vincent on 16-9-7.
  */
-@Configuration
-@EnableCaching
+//@Configuration
+//@EnableCaching
 public class RedisCacheConf {
 	
 	private static final int maxTotal = 2000;

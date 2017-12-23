@@ -49,7 +49,7 @@ public class UserApp {
         DruidDataSource dataSource = new DruidDataSource();
         return dataSource;
     }
-    
+
     @Bean(name = "sqlSessionFactoryBase")
     public SqlSessionFactory sqlSessionFactoryBean() throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();

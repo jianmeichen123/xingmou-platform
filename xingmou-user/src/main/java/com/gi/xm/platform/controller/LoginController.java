@@ -636,4 +636,23 @@ public class LoginController implements EnvironmentAware{
 		}
 		return messageInfo;
 	}
+
+
+	@ResponseBody
+	@RequestMapping(value = "/modifyPass", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseData<ExternalUser> modifyPass(@RequestBody ExternalUser user) {
+		ResponseData<ExternalUser> res = new ResponseData<ExternalUser>();
+		if(user == null || StringUtils.isEmpty(user.getMobile()) || StringUtils.isEmpty(user.getPassword()) || StringUtils.isEmpty(user.getConfirmPassword())){
+			res.setResult(new Result(Status.ERROR, "参数不全"));
+			return res;
+		}
+		if(!user.getPassword().equals(user.getConfirmPassword())){
+			res.setResult(new Result(Status.ERROR,"0", "密码不一致"));
+			return res;
+		}
+		ExternalUser rtn = userBiz.getUser(user.getMobile());
+		rtn.setPassword(PWDUtils.genernateNewPasswordByBase64(user.getPassword()));
+		userBiz.update(rtn);
+		return res;
+	}
 }

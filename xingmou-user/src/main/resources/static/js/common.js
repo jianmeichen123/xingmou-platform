@@ -1,3 +1,32 @@
+var index_href = htmlPlatformUrl.index_normal
+me()
+function me(){
+	$.ajax({
+        url : platformUrl.me,
+        type : "GET",
+        cache : false,
+        contentType : "application/json; charset=UTF-8",
+        async : false,
+        error : function(request) {
+        	index_href = htmlPlatformUrl.index_normal
+        },
+        success : function(data) {
+        	var entity = JSON.parse(decodeURIComponent(data))
+        	if(entity.roleCode ==10000 || entity.roleCode == 30000){
+        		index_href = htmlPlatformUrl.index_manager
+        		return
+        	}
+        	if(entity.roleCode == 20000){
+        		index_href = htmlPlatformUrl.index_senior
+        		return
+        	}
+        	if(!entity.roleCode){
+        		index_href = htmlPlatformUrl.index_external
+        		return
+        	}
+        }
+    });
+}
 /**
  * 发送post请求
  * 
@@ -442,7 +471,7 @@ function search_head(){
 	window.open(htmlPlatformUrl.search_finance, "_blank"); 
 }
 function index_head(){
-	location.href=htmlPlatformUrl.index_head
+	location.href=index_href
 }
 function logout(){
 	location.href=platformUrl.logout

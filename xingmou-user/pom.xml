@@ -230,6 +230,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-redis</artifactId>
+            <!--<exclusions>
+                <exclusion>
+                    <groupId>org.springframework.data</groupId>
+                    <artifactId>spring-data-redis</artifactId>
+                </exclusion>
+            </exclusions>-->
         </dependency>
     </dependencies>
     <!-- 如有Nexus私服, 取消注释并指向正确的服务器地址. -->

@@ -10,6 +10,7 @@ var Constants = {
 }
 
 var platformUrl = {
+		me:Constants.platformContentURL+ "/userlogin/me",
 
 	/**
 	 * 跳转登录页
@@ -51,6 +52,8 @@ var platformUrl = {
 	updatePassword:Constants.platformContentURL + "userlogin/updatePassword",
 	sendCode:Constants.platformContentURL + "userlogin/sendCode",
 	loginByPassword:Constants.platformContentURL + "userlogin/loginByPassword",
+	checkUserExists:Constants.platformContentURL + "userlogin/checkUserExists",
+	checkCode:Constants.platformContentURL + "userlogin/checkCode",
 }
 var htmlPlatformUrl = {
 		search:Constants.htmlContentUrl + "/search_index.html",
@@ -67,6 +70,7 @@ var htmlPlatformUrl = {
 		index_manager:Constants.htmlContentUrl+"/index_manager.html",
 		index_senior:Constants.htmlContentUrl+"/index_senior.html",
 		index_external:Constants.htmlContentUrl+"/index_external.html",
+		index_normal:Constants.htmlContentUrl+"/index_normal.html",
 	}
 
 

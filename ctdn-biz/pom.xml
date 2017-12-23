@@ -102,7 +102,7 @@
             </resource>
         </resources>
         <plugins>
-            <plugin>
+    <!--        <plugin>
                 <groupId>com.v4java</groupId>
                 <artifactId>maven-mybatis-gen-plugin</artifactId>
                 <version>1.2</version>
@@ -123,7 +123,7 @@
                     <output_root_dir>/home/zcy/template/</output_root_dir>
                     <templates_dir>/home/zcy/IdeaProjects/ctdn/xingmou-platform/templates/single/query/</templates_dir>
                 </configuration>
-            </plugin>
+            </plugin>-->
             <!--  mvn com.v4java:maven-mybatis-gen-plugin:gen -s ~/etc/settings-xhhl.xml -->
         </plugins>
     </build>

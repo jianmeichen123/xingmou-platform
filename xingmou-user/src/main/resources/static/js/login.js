@@ -1,4 +1,4 @@
-
+var exists_flag = false
 function checkform(){
 	  var nickName =$("#nickName").val();
 	  var password =$("#password").val();
@@ -10,9 +10,10 @@ function checkform(){
 				$("#nickname").removeClass('inputDanger');
 				$("#nickname").removeClass('invalid');
 			}
-			$("#nickname_tip").css('display','block').html("请输入登录用户名/手机号")
+			$("#nickName_tip").css('display','block').html("请输入登录用户名/手机号")
 	        return false;
-	    } 
+	    }
+	  
 	    if(password==""){
 	    	$("#password").addClass('inputDanger');
 	    	$("#password").addClass('invalid');
@@ -36,6 +37,19 @@ function checkform(){
    
     var nickName = $("#nickName").val();
     if(/^1[0-9]{10}$/.test(nickName)){
+    	  sendPostRequestByJsonObj(platformUrl.checkUserExists,{"mobile":nickName},function(data){
+  	    	if(data.result.status == 'OK'){
+  	    		exists_flag= data.entity.exists
+  	    	}else{
+  	    		layer.msg(data.result.message)
+  	    	}
+  	    });
+  	    if(!exists_flag){
+  	    	$("#nickName").addClass('inputDanger');
+  	    	$("#nickName").addClass('invalid');
+  	    	layer.msg('您输入的账号不存在~')
+  	    	return
+  	    }
     	login_password();
     	return
     }
@@ -134,42 +148,42 @@ function login_password(){
  })
 
 //单独进行验证，高亮
-	$('#nickName').blur(function(){
-		var _this = $(this);
-		var val= $(this).val()
-		if(val == null || val.trim().length==0){
-			_this.addClass('inputDanger');
-			_this.addClass('invalid');
-		}
-		if(_this.hasClass('valid')){
-			_this.removeClass('inputDanger');
-			_this.removeClass('invalid');
-		}
-	});
-	$('#nickName').focus(function(){
-		var _this = $(this);
-		$("#nickname_tip").attr('style','none')
-		_this.removeClass('inputDanger');
-		_this.removeClass('invalid');
-	});
-	$('#password').blur(function(){
-		var _this = $(this);
-		var val= $(this).val()
-		if(val == null || val.trim().length==0){
-			_this.addClass('inputDanger');
-			_this.addClass('invalid');
-		}
-		if(_this.hasClass('valid')){
-			_this.removeClass('inputDanger');
-			_this.removeClass('invalid');
-		}
-	});
-	$('#password').focus(function(){
-		var _this = $(this);
-		$("#password_tip").attr('style','none')
-		_this.removeClass('inputDanger');
-		_this.removeClass('invalid');
-	});
+//	$('#nickName').blur(function(){
+//		var _this = $(this);
+//		var val= $(this).val()
+//		if(val == null || val.trim().length==0){
+//			_this.addClass('inputDanger');
+//			_this.addClass('invalid');
+//		}
+//		if(_this.hasClass('valid')){
+//			_this.removeClass('inputDanger');
+//			_this.removeClass('invalid');
+//		}
+//	});
+//	$('#nickName').focus(function(){
+//		var _this = $(this);
+//		$("#nickname_tip").attr('style','none')
+//		_this.removeClass('inputDanger');
+//		_this.removeClass('invalid');
+//	});
+//	$('#password').blur(function(){
+//		var _this = $(this);
+//		var val= $(this).val()
+//		if(val == null || val.trim().length==0){
+//			_this.addClass('inputDanger');
+//			_this.addClass('invalid');
+//		}
+//		if(_this.hasClass('valid')){
+//			_this.removeClass('inputDanger');
+//			_this.removeClass('invalid');
+//		}
+//	});
+//	$('#password').focus(function(){
+//		var _this = $(this);
+//		$("#password_tip").attr('style','none')
+//		_this.removeClass('inputDanger');
+//		_this.removeClass('invalid');
+//	});
 //	var timer;
 //	var count;
 //	var $btn;
@@ -308,3 +322,22 @@ function login_password(){
 		}
 		$("#mobile_tip").css('display','none')
 	})
+	function func_blur(obj){
+	var _this = $(obj);
+	var val= $(obj).val()
+	if(_this.hasClass('valid')){
+		_this.removeClass('inputDanger');
+		_this.removeClass('invalid');
+	}
+	if(val == null || val.trim().length==0){
+		_this.addClass('inputDanger');
+		_this.addClass('invalid');
+	}
+}
+function func_focus(obj){
+	var _this = $(obj);
+	var id = _this.attr('id');
+	$("#"+id + "_tip").css('display','none')
+	_this.removeClass('inputDanger');
+	_this.removeClass('invalid');
+}

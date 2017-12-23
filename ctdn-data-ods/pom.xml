@@ -80,6 +80,7 @@
             <artifactId>mapper</artifactId>
         </dependency>
     </dependencies>
+<!--
 
     <build>
         <plugins>
@@ -106,9 +107,10 @@
                     </templates_dir>
                 </configuration>
             </plugin>
-            <!--  mvn com.v4java:maven-mybatis-gen-plugin:gen -s ~/etc/settings-ali.xml -->
+            &lt;!&ndash;  mvn com.v4java:maven-mybatis-gen-plugin:gen -s ~/etc/settings-ali.xml &ndash;&gt;
         </plugins>
     </build>
+-->
 
 
 </project>

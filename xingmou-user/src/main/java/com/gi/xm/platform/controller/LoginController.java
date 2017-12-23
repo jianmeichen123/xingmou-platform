@@ -42,11 +42,11 @@ public class LoginController implements EnvironmentAware{
 	
     final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    com.galaxyinternet.framework.cache.Cache cache;
+//    @Autowired
+//    private UserService userService;
+//
+//    @Autowired
+//    com.galaxyinternet.framework.cache.Cache cache;
 
     @Autowired
     AuthRequest authReq;

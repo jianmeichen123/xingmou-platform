@@ -485,6 +485,7 @@ public class LoginController implements EnvironmentAware{
 			 String key = "user:forget:"+user.getMobile();
 			 //String codeFromRedis = (String) cache.getByRedis(key);
 			 String codeFromRedis = stringRedisTemplate.opsForValue().get(key);
+//			 codeFromRedis = "1234";
 			 if(!user.getCode().equals(codeFromRedis)){
 				 res.setResult(new Result(Status.ERROR,"2","验证码错误"));
 				 return res;
@@ -497,9 +498,10 @@ public class LoginController implements EnvironmentAware{
 			 userBiz.update(rtn);
 			 //cache.remove(key);
 			stringRedisTemplate.delete(key);
+			res.setResult(new Result(Status.OK, "","密码重置成功"));
 		}catch(Exception e){
 			e.printStackTrace();
-			res.setResult(new Result(Status.ERROR,"0", "找回密码失败"));
+			res.setResult(new Result(Status.ERROR,"0", "密码重置失败，请稍后再试"));
 		}
 		
 		return res;
@@ -595,5 +597,43 @@ public class LoginController implements EnvironmentAware{
 			//cache.remove("user_forced_online_" + sessionId);
 			stringRedisTemplate.delete("user_forced_online_" + sessionId);
 		}
+	}
+	
+	/**
+	 * 测试验证码是或否正确
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping("/checkCode")
+	@ResponseBody
+	public ResponseData<ExternalUser> checkCode(@RequestBody ExternalUser user)
+	{
+		ResponseData<ExternalUser> messageInfo = new  ResponseData<ExternalUser>();
+		try {
+			if(user == null || StringUtils.isBlank(user.getMobile())
+					|| StringUtils.isBlank(user.getCode())
+					|| StringUtils.isBlank(user.getType())){
+				messageInfo.setResult(new Result(Status.ERROR, "0", "参数错误"));//1
+				return messageInfo;
+			}
+			String key = "";
+			if("2".equals(user.getType())){
+				key = "user:forget:"+user.getMobile();
+			}
+			if("3".equals(user.getType())){
+				key  = "user:register:"+user.getMobile();
+			}
+			String codeFromRedis  = (String) stringRedisTemplate.opsForValue().get(key);
+//			codeFromRedis = "1234";
+			System.out.println(codeFromRedis);
+			if(codeFromRedis == null || !user.getCode().equals(codeFromRedis)){
+				messageInfo.setResult(new Result(Status.ERROR, "1", "验证码错误"));//1
+				return messageInfo;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			messageInfo.setResult(new Result(Status.ERROR,"2" ,"系统繁忙"));
+		}
+		return messageInfo;
 	}
 }

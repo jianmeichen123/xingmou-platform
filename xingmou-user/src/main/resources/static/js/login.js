@@ -13,20 +13,7 @@ function checkform(){
 			$("#nickname_tip").css('display','block').html("请输入登录用户名/手机号")
 	        return false;
 	    }
-	    
-	    sendPostRequestByJsonObj(platformUrl.checkUserExists,{"mobile":nickName},function(data){
-	    	if(data.result.status == 'OK'){
-	    		exists_flag= data.entity.exists
-	    	}else{
-	    		layer.msg(data.result.message)
-	    	}
-	    });
-	    if(!exists_flag){
-	    	$("#nickName").addClass('inputDanger');
-	    	$("#nickName").addClass('invalid');
-	    	layer.msg('您输入的账号不存在~')
-	    	return
-	    }
+	  
 	    if(password==""){
 	    	$("#password").addClass('inputDanger');
 	    	$("#password").addClass('invalid');
@@ -50,6 +37,19 @@ function checkform(){
    
     var nickName = $("#nickName").val();
     if(/^1[0-9]{10}$/.test(nickName)){
+    	  sendPostRequestByJsonObj(platformUrl.checkUserExists,{"mobile":nickName},function(data){
+  	    	if(data.result.status == 'OK'){
+  	    		exists_flag= data.entity.exists
+  	    	}else{
+  	    		layer.msg(data.result.message)
+  	    	}
+  	    });
+  	    if(!exists_flag){
+  	    	$("#nickName").addClass('inputDanger');
+  	    	$("#nickName").addClass('invalid');
+  	    	layer.msg('您输入的账号不存在~')
+  	    	return
+  	    }
     	login_password();
     	return
     }
@@ -322,3 +322,22 @@ function login_password(){
 		}
 		$("#mobile_tip").css('display','none')
 	})
+	function func_blur(obj){
+	var _this = $(obj);
+	var val= $(obj).val()
+	if(_this.hasClass('valid')){
+		_this.removeClass('inputDanger');
+		_this.removeClass('invalid');
+	}
+	if(val == null || val.trim().length==0){
+		_this.addClass('inputDanger');
+		_this.addClass('invalid');
+	}
+}
+function func_focus(obj){
+	var _this = $(obj);
+	var id = _this.attr('id');
+	$("#"+id + "_tip").attr('style','none')
+	_this.removeClass('inputDanger');
+	_this.removeClass('invalid');
+}

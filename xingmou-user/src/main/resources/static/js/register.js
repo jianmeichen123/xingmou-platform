@@ -20,7 +20,7 @@ function func_focus(obj){
 	_this.removeClass('inputDanger');
 	_this.removeClass('invalid');
 }
-var exists = false
+var exists_flag = false
 
 //$('#mobile').blur(function(){
 //	var _this = $(this);
@@ -158,6 +158,19 @@ function register(){
 		layer.msg('您输入的手机号格式不正确~')
 		return
 	}
+    sendPostRequestByJsonObj(platformUrl.checkUserExists,{"mobile":mobile},function(data){
+    	if(data.result.status == 'OK'){
+    		exists_flag= data.entity.exists
+    	}else{
+    		layer.msg(data.result.message)
+    	}
+    });
+    if(exists_flag){
+    	$("#mobile").addClass('inputDanger');
+    	$("#mobile").addClass('invalid');
+    	layer.msg('您输入的手机号已被注册~')
+    	return
+    }
 	var code = $('#code').val()
 	if(!code){
 		$("#code").addClass('inputDanger');
@@ -165,6 +178,20 @@ function register(){
 		$('#code_tip').css('display','block').html('请输入验证码');
 		return
 	}
+    sendPostRequestByJsonObj(platformUrl.checkCode,{"mobile":mobile,"code":code,"type":"3"},function(data){
+    	if(data.result.status == 'OK'){
+    		exists_flag= true
+    	}else{
+    		exists_flag = false
+    		layer.msg(data.result.message)
+    	}
+    });
+    if(!exists_flag){
+    	$("#code").addClass('inputDanger');
+		$("#code").addClass('invalid');
+		layer.msg('验证码错误~')
+		return
+    }
 	var password = $('#password').val()
 	var confirmPassword = $('#confirmPassword').val()
 	if(password==null || password.trim().length==0){

@@ -4,6 +4,7 @@
 var timer;
 var count;
 var $btn;
+
 function countDown()
 {
 	count--;

@@ -45,7 +45,18 @@
     </insert>
     
     <update id="update" parameterType="com.gi.xm.platform.pojo.ExternalUser">
-    	update app_user set status = #{status} where id = #{id}
+    	update
+			app_user
+		set
+		<trim prefixOverrides="and">
+			<if test="password != null">
+				password = #{password}
+			</if>
+			<if test="status != null">
+				status = #{status}
+			</if>
+		</trim>
+		where id = #{id}
     </update>
 
 </mapper>

@@ -55,6 +55,8 @@ function send_code(e,type){
 				timer = setInterval("countDown()",1000);
 			}else{
 				layer.msg(data.result.message)
+				$("#mobile").addClass('inputDanger');
+				$("#mobile").addClass('invalid');
 			}
 		}
 		sendPostRequestByJsonObj(platformUrl.sendCode,jsonData,success);

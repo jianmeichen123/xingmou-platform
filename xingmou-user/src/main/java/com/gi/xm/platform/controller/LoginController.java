@@ -344,7 +344,7 @@ public class LoginController implements EnvironmentAware{
 		setCacheSessionId(query,"external", sessionId,notAuto);
 		messageInfo.setEntity(query);
 		messageInfo.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "登录成功！"));
-		setCookie(response,user.getUserCode(),sessionId,"external",notAuto);
+		setCookie(response,query.getUserCode(),sessionId,"external",notAuto);
 		
 		return messageInfo;
 	}

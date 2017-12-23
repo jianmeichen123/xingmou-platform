@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.galaxyinternet.model.user.User;
 import com.gi.ctdn.utils.BeanContextUtils;
 import com.gi.ctdn.view.common.MessageInfo;
+import com.gi.ctdn.view.common.MessageStatus;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;

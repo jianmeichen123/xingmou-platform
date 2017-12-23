@@ -32,6 +32,10 @@
             <include refid="selectFields" />
 		FROM
             app_person_com_expr
-		WHERE  code = #{code,jdbcType=VARCHAR} and type=#{type,jdbcType=CHAR}
+		WHERE  code = #{code,jdbcType=VARCHAR}
+        <if test="type != null and type != ''">
+            and type=#{type,jdbcType=CHAR}
+        </if>
+
 	</select>
 </mapper>

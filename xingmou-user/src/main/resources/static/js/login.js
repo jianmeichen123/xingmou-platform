@@ -10,7 +10,7 @@ function checkform(){
 				$("#nickname").removeClass('inputDanger');
 				$("#nickname").removeClass('invalid');
 			}
-			$("#nickname_tip").css('display','block').html("请输入登录用户名/手机号")
+			$("#nickName_tip").css('display','block').html("请输入登录用户名/手机号")
 	        return false;
 	    }
 	  
@@ -148,42 +148,42 @@ function login_password(){
  })
 
 //单独进行验证，高亮
-	$('#nickName').blur(function(){
-		var _this = $(this);
-		var val= $(this).val()
-		if(val == null || val.trim().length==0){
-			_this.addClass('inputDanger');
-			_this.addClass('invalid');
-		}
-		if(_this.hasClass('valid')){
-			_this.removeClass('inputDanger');
-			_this.removeClass('invalid');
-		}
-	});
-	$('#nickName').focus(function(){
-		var _this = $(this);
-		$("#nickname_tip").attr('style','none')
-		_this.removeClass('inputDanger');
-		_this.removeClass('invalid');
-	});
-	$('#password').blur(function(){
-		var _this = $(this);
-		var val= $(this).val()
-		if(val == null || val.trim().length==0){
-			_this.addClass('inputDanger');
-			_this.addClass('invalid');
-		}
-		if(_this.hasClass('valid')){
-			_this.removeClass('inputDanger');
-			_this.removeClass('invalid');
-		}
-	});
-	$('#password').focus(function(){
-		var _this = $(this);
-		$("#password_tip").attr('style','none')
-		_this.removeClass('inputDanger');
-		_this.removeClass('invalid');
-	});
+//	$('#nickName').blur(function(){
+//		var _this = $(this);
+//		var val= $(this).val()
+//		if(val == null || val.trim().length==0){
+//			_this.addClass('inputDanger');
+//			_this.addClass('invalid');
+//		}
+//		if(_this.hasClass('valid')){
+//			_this.removeClass('inputDanger');
+//			_this.removeClass('invalid');
+//		}
+//	});
+//	$('#nickName').focus(function(){
+//		var _this = $(this);
+//		$("#nickname_tip").attr('style','none')
+//		_this.removeClass('inputDanger');
+//		_this.removeClass('invalid');
+//	});
+//	$('#password').blur(function(){
+//		var _this = $(this);
+//		var val= $(this).val()
+//		if(val == null || val.trim().length==0){
+//			_this.addClass('inputDanger');
+//			_this.addClass('invalid');
+//		}
+//		if(_this.hasClass('valid')){
+//			_this.removeClass('inputDanger');
+//			_this.removeClass('invalid');
+//		}
+//	});
+//	$('#password').focus(function(){
+//		var _this = $(this);
+//		$("#password_tip").attr('style','none')
+//		_this.removeClass('inputDanger');
+//		_this.removeClass('invalid');
+//	});
 //	var timer;
 //	var count;
 //	var $btn;
@@ -337,7 +337,7 @@ function login_password(){
 function func_focus(obj){
 	var _this = $(obj);
 	var id = _this.attr('id');
-	$("#"+id + "_tip").attr('style','none')
+	$("#"+id + "_tip").css('display','none')
 	_this.removeClass('inputDanger');
 	_this.removeClass('invalid');
 }

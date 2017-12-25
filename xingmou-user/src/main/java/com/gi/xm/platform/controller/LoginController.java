@@ -31,6 +31,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -658,4 +659,25 @@ public class LoginController implements EnvironmentAware{
 		userBiz.update(rtn);
 		return res;
 	}
+	    @ResponseBody
+	  	@SuppressWarnings("unchecked")
+	    @RequestMapping(value = "/checkInternalUserExists", produces = MediaType.APPLICATION_JSON_VALUE)
+	    public ResponseData<User> checkInternalUserExists( @RequestBody User user) {
+	        ResponseData<User> responsebody = new ResponseData<User>();
+	        try {
+				if (user == null || StringUtils.isBlank(user.getNickName())) {
+				    responsebody.setResult(new Result(Status.ERROR, Constants.IS_UP_EMPTY, "用户名不能为空！"));
+				    return responsebody;
+				}
+				HashMap<String,Object> rtn = (HashMap<String, Object>) authReq.checkUserExists(user.getNickName());
+				int value =  (int) rtn.get("value");
+				user.setStatus(value +"");
+				responsebody.setEntity(user);
+				responsebody.setResult(new Result(Status.OK,"您输入的账号"));
+			} catch (Exception e) {
+				e.printStackTrace();
+				responsebody.setResult(new Result(Status.ERROR,"系统繁忙"));
+			}
+	        return responsebody;
+	    }
 }

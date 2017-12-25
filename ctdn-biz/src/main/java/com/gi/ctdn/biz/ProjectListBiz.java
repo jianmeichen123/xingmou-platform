@@ -104,8 +104,26 @@ public class ProjectListBiz {
 		return messageInfo;
 	}
 
-	public List<ProjectList> selectByLoadDate(UserIndustry userIndustry) {
-		return projectListDAO.selectByLoadDate(getUserIndustryIds(userIndustry));
+	public List<ProjectList> selectByLoadDate(String userCode,Long departmentId) {
+		List<UserIndustry> userIndustries = userIndustryDAO.getUserIndustry(userCode);
+		List<Integer> industryIds  = null;
+		if(userIndustries!=null && userIndustries.size()>0){
+			for(UserIndustry industry : userIndustries){
+				if(industryIds == null){
+					industryIds = new ArrayList<Integer>();
+				}
+				industryIds.add(industry.getIndustryId());
+			}
+		}else{
+			if(departmentId!=null){
+				List<Integer> ids = userIndustryDAO.selectDefaultIds(departmentId);
+				if(ids!=null && ids.size()>0){
+					industryIds = new ArrayList<Integer>();
+					industryIds.addAll(ids);
+				}
+			}
+		}
+		return projectListDAO.selectByLoadDate(industryIds);
 	}
 
 	public List<Integer> getUserIndustryIds(UserIndustry userIndustry){
@@ -119,9 +137,26 @@ public class ProjectListBiz {
 		}
 		return industryIds;
 	}
-	@SuppressWarnings("null")
-	public List<ProjectList> queryLastestFinanceProject(UserIndustry userIndustry) {
-		return projectListDAO.selectByLatestFinanceDate(getUserIndustryIds(userIndustry));
+	public List<ProjectList> queryLastestFinanceProject(String userCode,Long departmentId) {
+		List<UserIndustry> userIndustries = userIndustryDAO.getUserIndustry(userCode);
+		List<Integer> industryIds  = null;
+		if(userIndustries!=null && userIndustries.size()>0){
+			for(UserIndustry industry : userIndustries){
+				if(industryIds == null){
+					industryIds = new ArrayList<Integer>();
+				}
+				industryIds.add(industry.getIndustryId());
+			}
+		}else{
+			if(departmentId!=null){
+				List<Integer> ids = userIndustryDAO.selectDefaultIds(departmentId);
+				if(ids!=null && ids.size()>0){
+					industryIds = new ArrayList<Integer>();
+					industryIds.addAll(ids);
+				}
+			}
+		}
+		return projectListDAO.selectByLatestFinanceDate(industryIds);
 	}
 
 

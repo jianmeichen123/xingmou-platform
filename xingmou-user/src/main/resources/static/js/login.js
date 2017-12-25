@@ -31,11 +31,20 @@ function checkform(){
 	$("input").removeClass('inputDanger');
 	$("input").removeClass('invalid');
 	$('.login-tips').css('display','none')
-    if (!checkform()){return};
-	 
-     //判断是否勾选了自动登录
-   
-    var nickName = $("#nickName").val();
+	var nickName =$("#nickName").val();
+	var password =$("#password").val();
+	    
+    if(nickName==""){
+    	$("#nickName").addClass('inputDanger');
+    	$("#nickName").addClass('invalid');
+		if($("#nickName").hasClass('valid')){
+			$("#nickname").removeClass('inputDanger');
+			$("#nickname").removeClass('invalid');
+		}
+		$("#nickName_tip").css('display','block').html("请输入登录用户名/手机号")
+        return false;
+    } 
+    
     if(/^1[0-9]{10}$/.test(nickName)){
     	  sendPostRequestByJsonObj(platformUrl.checkUserExists,{"mobile":nickName},function(data){
   	    	if(data.result.status == 'OK'){
@@ -52,6 +61,36 @@ function checkform(){
   	    }
     	login_password();
     	return
+    }else{
+        var b = new Base64();
+  	  	sendPostRequestByJsonObj(platformUrl.checkInternalUserExists,{"nickName":b.encode($("#nickName").val())},function(data){
+	    	if(data.result.status == 'OK'){
+	    		var exists = data.entity.status
+	    		if(exists == 0){
+	    			exists_flag= false //不存在
+	    		}else{
+	    			exists_flag = true
+	    		}
+	    	}else{
+	    		layer.msg(data.result.message)
+	    	}
+	    });
+  	  	if(!exists_flag){
+	    	$("#nickName").addClass('inputDanger');
+	    	$("#nickName").addClass('invalid');
+	    	layer.msg('您输入的账号不存在~')
+	    	return
+	    }
+    }
+    if(password==""){
+    	$("#password").addClass('inputDanger');
+    	$("#password").addClass('invalid');
+		if($("#password").hasClass('valid')){
+			$("#password").removeClass('inputDanger');
+			$("#password").removeClass('invalid');
+		}
+		$("#password_tip").css('display','block').html("请输入登录密码")
+        return false;
     }
     var b = new Base64();
     var nickName = b.encode($("#nickName").val());
@@ -112,6 +151,16 @@ function login_password(){
 	$('.login-tips').css('display','none')
     var nickName = $("#nickName").val();
     var password = $("#password").val();
+    if(password == null || $.trim(password).length == 0){
+    	$("#password").addClass('inputDanger');
+    	$("#password").addClass('invalid');
+		if($("#password").hasClass('valid')){
+			$("#password").removeClass('inputDanger');
+			$("#password").removeClass('invalid');
+		}
+		$("#password_tip").css('display','block').html("请输入登录密码")
+    	return
+    }
     var jsonData={"mobile":nickName,"password":password};
     var login_password_callback=function(data){
     	 if(data.result.status=="OK"){

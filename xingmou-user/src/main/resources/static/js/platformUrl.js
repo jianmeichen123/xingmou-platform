@@ -54,6 +54,7 @@ var platformUrl = {
 	loginByPassword:Constants.platformContentURL + "userlogin/loginByPassword",
 	checkUserExists:Constants.platformContentURL + "userlogin/checkUserExists",
 	checkCode:Constants.platformContentURL + "userlogin/checkCode",
+	checkInternalUserExists:Constants.platformContentURL + "userlogin/checkInternalUserExists",
 }
 var htmlPlatformUrl = {
 		search:Constants.htmlContentUrl + "/search_index.html",

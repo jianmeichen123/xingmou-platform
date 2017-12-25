@@ -16,6 +16,8 @@ public class ExternalUser extends BaseEntity{
 
 	private boolean exists;
 
+	private Long rolecode;
+
 	private String userCode;//id+from encodeBase64
 	
 	public Long getId() {
@@ -79,5 +81,13 @@ public class ExternalUser extends BaseEntity{
 
 	public String getUserCode() {
 		return userCode;
+	}
+
+	public Long getRolecode() {
+		return rolecode;
+	}
+
+	public void setRolecode(Long rolecode) {
+		this.rolecode = rolecode;
 	}
 }

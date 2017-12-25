@@ -62,7 +62,7 @@ public class LoginController implements EnvironmentAware{
 
     private static final Long  GG_ROLECODE = 20000l;		//星河投内部用户  高管用户code
 
-	private static final Long  VISITOR_ROLECODE = 30000l;	//星河投内部用户 无角色用户code
+	private static final Long  VISITOR_ROLECODE = 30000l;	// 游客角色用户code
 
 
 	@Autowired
@@ -340,6 +340,7 @@ public class LoginController implements EnvironmentAware{
 		}
 		//生成usercode
 		query.setUserCode(PWDUtils.generateUserCode(query.getId(),"external"));
+		query.setRolecode(VISITOR_ROLECODE);
 		String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
 		setCacheSessionId(query,"external", sessionId,notAuto);
 		messageInfo.setEntity(query);
@@ -390,6 +391,7 @@ public class LoginController implements EnvironmentAware{
 				stringRedisTemplate.opsForValue().set(firstLoginKey, "false");
 			}
 			rtn.setUserCode(PWDUtils.generateUserCode(rtn.getId(),"external"));
+			rtn.setRolecode(VISITOR_ROLECODE);
 			String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
 			setCacheSessionId(rtn,"external", sessionId,isAuto);
 			responsebody.setEntity(rtn);
@@ -413,6 +415,7 @@ public class LoginController implements EnvironmentAware{
 		 	externalUser.setMobile(user.getMobile());
 		 	externalUser.setUserCode(user.getUserCode());
 		 	externalUser.setPassword(user.getPassword());
+		 	externalUser.setRolecode(user.getRolecode());
 	        try {
 	            json = URLEncoder.encode(JSON.toJSONString(externalUser),"UTF-8");
 	        } catch (UnsupportedEncodingException e) {

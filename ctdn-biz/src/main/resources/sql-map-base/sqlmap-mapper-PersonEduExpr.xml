@@ -23,5 +23,6 @@
 		FROM
             app_person_edu_expr
 		WHERE  code = #{code,jdbcType=VARCHAR} and type=#{type,jdbcType=CHAR}
+        order by period desc
 	</select>
 </mapper>

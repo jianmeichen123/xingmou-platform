@@ -105,7 +105,7 @@ function func_blur(obj){
 function func_focus(obj){
 	var _this = $(obj);
 	var id = _this.attr('id');
-	$("#"+id + "_tip").attr('style','none')
+	$("#"+id + "_tip").css('display','none')
 	_this.removeClass('inputDanger');
 	_this.removeClass('invalid');
 }

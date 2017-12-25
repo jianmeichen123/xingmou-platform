@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.galaxyinternet.model.user.User;
 import com.gi.ctdn.utils.BeanContextUtils;
 import com.gi.ctdn.view.common.MessageInfo;
+import com.gi.ctdn.view.common.MessageStatus;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -89,9 +90,9 @@ public class LoginFilter implements  Filter{
 
 
 	private void writeLoginMsg(HttpServletRequest req, HttpServletResponse res, String msg) throws Exception {
-		MessageInfo<User> data = new MessageInfo<>();
-		data.setStatus(0);
-		data.setMessage(msg);
+		MessageInfo data = new MessageInfo<>();
+		data.setStatus(MessageStatus.NO_LOGIN);
+		data.setMessage(MessageStatus.NO_LOGIN_MESSAGE);
 		ObjectMapper mapper = new ObjectMapper();
 		String result = mapper.writeValueAsString(data);
 		res.setHeader("Content-type", "application/json;charset=UTF-8");

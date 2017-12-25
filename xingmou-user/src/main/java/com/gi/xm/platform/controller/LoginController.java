@@ -62,7 +62,7 @@ public class LoginController implements EnvironmentAware{
 
     private static final Long  GG_ROLECODE = 20000l;		//星河投内部用户  高管用户code
 
-	private static final Long  VISITOR_ROLECODE = 30000l;	//星河投内部用户 无角色用户code
+	private static final Long  VISITOR_ROLECODE = 30000l;	// 游客角色用户code
 
 
 	@Autowired
@@ -108,17 +108,17 @@ public class LoginController implements EnvironmentAware{
 		Cookie cookie = new Cookie("_usercode_", userCode);
 		cookie.setMaxAge(notAutoLogin(notAuto));
 		cookie.setDomain(ctdn_domain);
-		cookie.setPath("/");
+		//cookie.setPath("/");
 		response.addCookie(cookie);
 		cookie = new Cookie("_uid_", uid);
         cookie.setMaxAge(notAutoLogin(notAuto));
         cookie.setDomain(ctdn_domain);
-        cookie.setPath("/");
+        //cookie.setPath("/");
         response.addCookie(cookie);
         cookie = new Cookie("s_", s);
         cookie.setMaxAge(notAutoLogin(notAuto));
         cookie.setDomain(ctdn_domain);
-        cookie.setPath("/");
+        //cookie.setPath("/");
         response.addCookie(cookie);
     }
     @RequestMapping(value = "/me")
@@ -221,17 +221,17 @@ public class LoginController implements EnvironmentAware{
         Cookie cookie = new Cookie("_uid_", null);
         cookie.setMaxAge(1);
         cookie.setDomain(ctdn_domain);
-        cookie.setPath("/");
+       // cookie.setPath("/");
         response.addCookie(cookie);
         cookie = new Cookie("s_", null);
         cookie.setMaxAge(1);
         cookie.setDomain(ctdn_domain);
-        cookie.setPath("/");
+        //cookie.setPath("/");
         response.addCookie(cookie);
 		cookie = new Cookie("_usercode_", null);
 		cookie.setMaxAge(1);
 		cookie.setDomain(ctdn_domain);
-		cookie.setPath("/");
+		//cookie.setPath("/");
 		response.addCookie(cookie);
         responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "退出登录"));
         return "login";
@@ -340,11 +340,12 @@ public class LoginController implements EnvironmentAware{
 		}
 		//生成usercode
 		query.setUserCode(PWDUtils.generateUserCode(query.getId(),"external"));
+		query.setRolecode(VISITOR_ROLECODE);
 		String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
 		setCacheSessionId(query,"external", sessionId,notAuto);
 		messageInfo.setEntity(query);
 		messageInfo.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "登录成功！"));
-		setCookie(response,user.getUserCode(),sessionId,"external",notAuto);
+		setCookie(response,query.getUserCode(),sessionId,"external",notAuto);
 		
 		return messageInfo;
 	}
@@ -390,6 +391,7 @@ public class LoginController implements EnvironmentAware{
 				stringRedisTemplate.opsForValue().set(firstLoginKey, "false");
 			}
 			rtn.setUserCode(PWDUtils.generateUserCode(rtn.getId(),"external"));
+			rtn.setRolecode(VISITOR_ROLECODE);
 			String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
 			setCacheSessionId(rtn,"external", sessionId,isAuto);
 			responsebody.setEntity(rtn);
@@ -413,6 +415,7 @@ public class LoginController implements EnvironmentAware{
 		 	externalUser.setMobile(user.getMobile());
 		 	externalUser.setUserCode(user.getUserCode());
 		 	externalUser.setPassword(user.getPassword());
+		 	externalUser.setRolecode(user.getRolecode());
 	        try {
 	            json = URLEncoder.encode(JSON.toJSONString(externalUser),"UTF-8");
 	        } catch (UnsupportedEncodingException e) {
@@ -635,5 +638,24 @@ public class LoginController implements EnvironmentAware{
 			messageInfo.setResult(new Result(Status.ERROR,"2" ,"系统繁忙"));
 		}
 		return messageInfo;
+	}
+
+
+	@ResponseBody
+	@RequestMapping(value = "/modifyPass", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseData<ExternalUser> modifyPass(@RequestBody ExternalUser user) {
+		ResponseData<ExternalUser> res = new ResponseData<ExternalUser>();
+		if(user == null || StringUtils.isEmpty(user.getMobile()) || StringUtils.isEmpty(user.getPassword()) || StringUtils.isEmpty(user.getConfirmPassword())){
+			res.setResult(new Result(Status.ERROR, "参数不全"));
+			return res;
+		}
+		if(!user.getPassword().equals(user.getConfirmPassword())){
+			res.setResult(new Result(Status.ERROR,"0", "密码不一致"));
+			return res;
+		}
+		ExternalUser rtn = userBiz.getUser(user.getMobile());
+		rtn.setPassword(PWDUtils.genernateNewPasswordByBase64(user.getPassword()));
+		userBiz.update(rtn);
+		return res;
 	}
 }

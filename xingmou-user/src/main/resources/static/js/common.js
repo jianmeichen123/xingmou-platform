@@ -1,5 +1,8 @@
 var index_href = htmlPlatformUrl.index_normal
-me()
+if(getCookie("_uid_")){
+    me()
+}
+
 function me(){
 	$.ajax({
         url : platformUrl.me,
@@ -12,7 +15,7 @@ function me(){
         },
         success : function(data) {
         	var entity = JSON.parse(decodeURIComponent(data))
-        	if(entity.roleCode ==10000 || entity.roleCode == 30000){
+        	if(entity.roleCode ==10000 ){
         		index_href = htmlPlatformUrl.index_manager
         		return
         	}
@@ -20,12 +23,39 @@ function me(){
         		index_href = htmlPlatformUrl.index_senior
         		return
         	}
-        	if(!entity.roleCode){
+        	if(entity.roleCode == 30000 ){
         		index_href = htmlPlatformUrl.index_external
         		return
         	}
         }
     });
+}
+function getCookie(c_name)
+{
+	if (document.cookie.length>0)
+	{
+		c_start=document.cookie.indexOf(c_name + "=")
+		if (c_start!=-1)
+		{
+            c_start=c_start + c_name.length+1
+            c_end=document.cookie.indexOf(";",c_start)
+            if (c_end==-1) c_end=document.cookie.length
+            return unescape(document.cookie.substring(c_start,c_end))
+        }
+	}
+	return ""
+}
+
+function setCookie(c_name,value,expiredays)
+{
+    var exdate=new Date()
+    exdate.setDate(exdate.getDate()+expiredays)
+    document.cookie=c_name+ "=" +escape(value)+
+    ((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+}
+
+function removeCookie(c_name){
+  setCookie(c_name, 1, -1);
 }
 /**
  * 发送post请求

@@ -82,7 +82,7 @@ public class PersonController {
 		try {
 			String code=personComExpr.getCode();
 			String type=personComExpr.getType();
-			if(StringUtils.isEmpty(code)||StringUtils.isEmpty(type)){
+			if(StringUtils.isEmpty(code)){
                 return errorRet;
             }
 			List<PersonComExpr> personComExprs = biz.queryPersonComExpr(code, type);

@@ -137,11 +137,11 @@ public class PublicSeaController {
         if(!jsonObject.containsKey("userId") || jsonObject.get("userId") .equals("")){
             return new MessageInfo(MessageStatus.NO_LOGIN,MessageStatus.NO_LOGIN_MESSAGE);
         }
-        if(!jsonObject.containsKey("isClaim") || jsonObject.get("isClaim") .equals("") ||
-                !jsonObject.containsKey("pageNo") || jsonObject.get("pageNo").equals("")||
-                !jsonObject.containsKey("pageSize") || jsonObject.get("pageSize").equals("")){
-            return new MessageInfo(MessageStatus.MISS_PARAMETER_CODE,MessageStatus.MISS_PARAMETER_MESSAGE);
-        }
+//        if(!jsonObject.containsKey("isClaim") || jsonObject.get("isClaim") .equals("") ||
+//                !jsonObject.containsKey("pageNo") || jsonObject.get("pageNo").equals("")||
+//                !jsonObject.containsKey("pageSize") || jsonObject.get("pageSize").equals("")){
+//            return new MessageInfo(MessageStatus.MISS_PARAMETER_CODE,MessageStatus.MISS_PARAMETER_MESSAGE);
+//        }
         String result = publicSeaRequest.getProject(jsonObject);
         JSONObject resultJson = JSONObject.parseObject(result);
         if(resultJson != null && resultJson.containsKey("connectSuccess")) {

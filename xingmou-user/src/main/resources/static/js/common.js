@@ -15,7 +15,7 @@ function me(){
         },
         success : function(data) {
         	var entity = JSON.parse(decodeURIComponent(data))
-        	if(entity.roleCode ==10000 || entity.roleCode == 30000){
+        	if(entity.roleCode ==10000 ){
         		index_href = htmlPlatformUrl.index_manager
         		return
         	}
@@ -23,7 +23,7 @@ function me(){
         		index_href = htmlPlatformUrl.index_senior
         		return
         	}
-        	if(!entity.roleCode){
+        	if(entity.roleCode == 30000 ){
         		index_href = htmlPlatformUrl.index_external
         		return
         	}

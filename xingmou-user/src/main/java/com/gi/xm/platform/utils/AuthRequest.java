@@ -138,5 +138,21 @@ public class AuthRequest implements EnvironmentAware {
 		System.out.println("authURI:" + authURI );
 	}
 	
+	public Object checkUserExists(String nickName) {
+		String uri = authURI + "/user/isExitUser";
+		Map<String, String> urlVariables = new HashMap<>();
+		nickName = PWDUtils.decodePasswordByBase64(nickName);
+		urlVariables.put("userName", nickName);
+		if(logger.isDebugEnabled())
+		{
+			logger.debug(String.format("Request URI:%s, Params:%s", uri, urlVariables));
+		}
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		HttpEntity<Map<String, String>> request = new HttpEntity<>(urlVariables, headers);
+		ResponseEntity<Object> rtn = template.postForEntity(uri, request, Object.class);
+		return rtn.getBody();
+	}
+	
 
 }

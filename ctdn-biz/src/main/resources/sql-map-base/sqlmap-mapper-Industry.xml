@@ -50,8 +50,9 @@
         <include refid="selectFields"/>
         FROM
         app_industry
+        where parentId = 0
        <if test="industryIds != null">
-			where id  in
+			and id  in
 			<foreach collection="industryIds" item="item" open="(" separator="," close=")">
 				#{item}
 			</foreach>

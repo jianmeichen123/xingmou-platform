@@ -126,7 +126,11 @@ public class UserIndustryBiz {
 			}
 		}else{
 			if(departmentId!=null){
-				industryIds = userIndustryDAO.selectDefaultIds(departmentId);
+				List<Integer> ids = userIndustryDAO.selectDefaultIds(departmentId);
+				if(ids!= null && ids.size()>0){
+					industryIds = new ArrayList<Integer>();
+					industryIds.addAll(ids);
+				}
 			}
 		}
 		List<Industry> industries = industryDAO.getIndustryByIds(industryIds);

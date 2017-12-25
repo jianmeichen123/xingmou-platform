@@ -164,12 +164,22 @@ public class IndexController implements EnvironmentAware{
      * 获取最新发现项目
      * @return
      */
-    @RequestMapping("queryLastestLoadProject")
+    @RequestMapping("queryLastestLoadProject/{userCode}")
     @ResponseBody
-    public MessageInfo<List<ProjectList>> queryLastestLoadProject (UserIndustry userIndustry){
+    public MessageInfo<List<ProjectList>> queryLastestLoadProject (@CookieValue(name = "_uid_")String uid, @CookieValue(name = "s_")String s,@PathVariable("userCode")String userCode){
 		MessageInfo<List<ProjectList>> resultMessageInfo = new MessageInfo<List<ProjectList>>();
 		try {
-			List<ProjectList> projectLists  = projectListBiz.selectByLoadDate(userIndustry);
+			//查询redis中的用户
+			String key = "ctdn:"+s+":"+uid;
+			String userJson = (String)stringRedisTemplate.opsForValue().get(key);
+			Long  departmentId =null;
+			if(userJson != null){
+				JSONObject jsonObject = (JSONObject) JSONObject.parse(URLDecoder.decode(userJson,"UTF-8"));
+				if(jsonObject.containsKey("departmentId")){
+					 departmentId = jsonObject.getLong("departmentId");
+				}
+			}
+			List<ProjectList> projectLists  = projectListBiz.selectByLoadDate(userCode,departmentId);
 			resultMessageInfo.setData(projectLists);
 		} catch (Exception e) {
 			loger.error(" 获取最新发现项目,error:" + e.getMessage());
@@ -182,12 +192,22 @@ public class IndexController implements EnvironmentAware{
      * 获取最新获投项目
      * @return
      */
-    @RequestMapping("queryLastestFinanceProject")
+    @RequestMapping("queryLastestFinanceProject/{userCode}")
     @ResponseBody
-    public MessageInfo<List<ProjectList>> queryLastestFinanceProject (UserIndustry userIndustry){
+    public MessageInfo<List<ProjectList>> queryLastestFinanceProject (@CookieValue(name = "_uid_")String uid, @CookieValue(name = "s_")String s,@PathVariable("userCode")String userCode){
 		MessageInfo<List<ProjectList>> resultMessageInfo = new MessageInfo<List<ProjectList>>();
 		try {
-			List<ProjectList> projectLists  = projectListBiz.queryLastestFinanceProject(userIndustry);
+			//查询redis中的用户
+			String key = "ctdn:"+s+":"+uid;
+			String userJson = (String)stringRedisTemplate.opsForValue().get(key);
+			Long  departmentId =null;
+			if(userJson != null){
+				JSONObject jsonObject = (JSONObject) JSONObject.parse(URLDecoder.decode(userJson,"UTF-8"));
+				if(jsonObject.containsKey("departmentId")){
+					 departmentId = jsonObject.getLong("departmentId");
+				}
+			}
+			List<ProjectList> projectLists  = projectListBiz.queryLastestFinanceProject(userCode,departmentId);
 			resultMessageInfo.setData(projectLists);
 		} catch (Exception e) {
 			e.printStackTrace();

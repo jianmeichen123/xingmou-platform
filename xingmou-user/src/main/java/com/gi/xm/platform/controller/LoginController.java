@@ -108,17 +108,17 @@ public class LoginController implements EnvironmentAware{
 		Cookie cookie = new Cookie("_usercode_", userCode);
 		cookie.setMaxAge(notAutoLogin(notAuto));
 //		cookie.setDomain(ctdn_domain);
-//		cookie.setPath("/");
+		cookie.setPath("/");
 		response.addCookie(cookie);
 		cookie = new Cookie("_uid_", uid);
         cookie.setMaxAge(notAutoLogin(notAuto));
         //cookie.setDomain(ctdn_domain);
-        //cookie.setPath("/");
+        cookie.setPath("/");
         response.addCookie(cookie);
         cookie = new Cookie("s_", s);
         cookie.setMaxAge(notAutoLogin(notAuto));
         //cookie.setDomain(ctdn_domain);
-        //cookie.setPath("/");
+        cookie.setPath("/");
         response.addCookie(cookie);
     }
     @RequestMapping(value = "/me")
@@ -221,17 +221,17 @@ public class LoginController implements EnvironmentAware{
         Cookie cookie = new Cookie("_uid_", null);
         cookie.setMaxAge(1);
         //cookie.setDomain(ctdn_domain);
-       // cookie.setPath("/");
+        cookie.setPath("/");
         response.addCookie(cookie);
         cookie = new Cookie("s_", null);
         cookie.setMaxAge(1);
         //cookie.setDomain(ctdn_domain);
-        //cookie.setPath("/");
+        cookie.setPath("/");
         response.addCookie(cookie);
 		cookie = new Cookie("_usercode_", null);
 		cookie.setMaxAge(1);
 		//cookie.setDomain(ctdn_domain);
-		//cookie.setPath("/");
+		cookie.setPath("/");
 		response.addCookie(cookie);
         responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "退出登录"));
         return "login";

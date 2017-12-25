@@ -28,6 +28,7 @@
 		select
 		<include refid="selectFields"/>
 		from app_report
+		where state=0
 		order by publishDate desc
 	</select>
 

@@ -4,7 +4,7 @@ var Constants = {
 		//platformContentURL: "http://localhost:8080/user-xingmou-server/"
 		platformContentURL: "http://ctdndev.gi.com/user/",
 
-		htmlContentUrl : "http://ctdndev.gi.com"
+		htmlContentUrl : "http://ctdndev.gi.com/"
 
 		//platformContentURL: endpointObj["project.home.page.url"]
 }

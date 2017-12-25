@@ -1,6 +1,7 @@
 package com.gi.xm.platform.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.galaxyinternet.framework.core.constants.Constants;
 import com.galaxyinternet.framework.core.model.ResponseData;
@@ -30,6 +31,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
@@ -55,7 +57,10 @@ public class LoginController implements EnvironmentAware{
     @Autowired
     private UserBiz userBiz;
 
-    private String ctdn_index ="";
+    private String ctdn_normal_index ="";
+    private String ctdn_external_index = "";
+    private String ctdn_senior_index = "";
+    private String ctdn_manager_index = "";
 
     private String ctdn_domain ="";
 
@@ -75,11 +80,25 @@ public class LoginController implements EnvironmentAware{
      */
     @RequestMapping(value = "/toLogin")	
     public String toLogin(HttpServletResponse response, @CookieValue(name = "_uid_",required = false)String uid,@CookieValue(name = "s_",required = false)String s) {
-        String key = "ctdn:"+s+":"+uid;
-		String user = (String)stringRedisTemplate.opsForValue().get(key);
-        if(user!=null){
-            return "redirect:"+ctdn_index;
-        }
+    	try {
+    		String key = "ctdn:"+s+":"+uid;
+    		String user = (String)stringRedisTemplate.opsForValue().get(key);
+    		String res_uir = ctdn_normal_index;
+    		if(user!=null){
+    			JSONObject jsonObject = (JSONObject) JSONObject.parse(URLDecoder.decode(user,"UTF-8"));
+    			long roleCode  = jsonObject.getLongValue("roleCode");
+    			if(roleCode == TZJL_ROLECODE){
+    				res_uir =ctdn_manager_index ;
+    			}else if(roleCode == GG_ROLECODE){
+    				res_uir = ctdn_senior_index;
+    			}else{
+    				res_uir = ctdn_external_index;
+    			}
+    			return "redirect:"+res_uir;
+    		}
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
         return "login";
     }
 
@@ -579,9 +598,13 @@ public class LoginController implements EnvironmentAware{
 
 	@Override
 	public void setEnvironment(Environment environment) {
-		ctdn_index = environment.getProperty("ctdn_index");
+		ctdn_normal_index = environment.getProperty("ctdn_normal_index");
 		ctdn_domain = environment.getProperty("ctdn_domain");
-		System.out.println("index:" + ctdn_index + "domain:"+ctdn_domain);
+		ctdn_manager_index = environment.getProperty("ctdn_manager_index");
+		ctdn_external_index = environment.getProperty("ctdn_external_index");
+		ctdn_senior_index = environment.getProperty("ctdn_senior_index");
+		System.out.println("ctdn_normal_index:" + ctdn_normal_index + "domain:"+ctdn_domain + ",ctdn_manager_index:"+ctdn_manager_index 
+				+",ctdn_external_index:" +ctdn_external_index +",ctdn_senior_index:"+ctdn_senior_index);
 	}
 	
 	public void afterLogin(){

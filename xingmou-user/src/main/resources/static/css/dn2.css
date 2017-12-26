@@ -87,6 +87,7 @@ select:focus { outline: none important; }
 .login-right-content{position:relative;}
 .login-eye-abled{background:url('../img/login/eye-blue_03.jpg')}
 .forget-password{float:right;color:#2393f7;margin-right:152px;}
+.login-right-content .find-pass-bottom{width:auto;}
 .serven-day{vertical-align:text-top;color:#666666;font-size:12px;margin-left:11px;}
 .forgot{margin-top:10px;}
 .to-login{width:298px;height:49px;margin-top:20px;text-align:center;cursor:pointer;border-radius:5px;line-height:49px;color:#fff;display:inline-block;background-color:#2393f7;font-family:'Microsoft YaHei';}

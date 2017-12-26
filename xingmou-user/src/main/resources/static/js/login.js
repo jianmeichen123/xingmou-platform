@@ -321,6 +321,7 @@ function login_password(){
 		{	
 			$(e).attr('onclick','send_code(this,1)')
 			$(e).text("发送验证码");
+			
 	        clearInterval(timer);
 		}else{
 			clearInterval(timer);
@@ -329,7 +330,8 @@ function login_password(){
 			var success=function(data){
 				if(data.result.status=="OK"){
 					count=60
-					e.removeAttribute('onclick','')
+					e.removeAttribute('onclick','');
+					$("#login_code").css('background',"#e6e6e6")
 					timer = setInterval("countDown()",1000);
 				}else{
 					layer.msg(data.result.message)
@@ -342,12 +344,15 @@ function login_password(){
 	{
 		count--;
 		console.log(count);
-		$btn.html("验证码"+count+"s");
+		$btn.addClass('send-code');
+		$btn.html("验证码已发送"+"<p>"+count+'s'+"</p>");
 		if(count<=0)
 		{
 			count=60
 			$btn.attr('onclick','send_code(this,1)')
 			$btn.text("发送验证码");
+			$("#login_code").addClass('hihglight');
+			$btn.removeClass('send-code');
 	        clearInterval(timer);
 		}
 	}

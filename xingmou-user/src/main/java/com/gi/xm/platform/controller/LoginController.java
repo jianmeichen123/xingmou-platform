@@ -680,6 +680,8 @@ public class LoginController implements EnvironmentAware{
 		ExternalUser rtn = userBiz.getUser(user.getMobile());
 		rtn.setPassword(PWDUtils.genernateNewPasswordByBase64(user.getPassword()));
 		userBiz.update(rtn);
+		String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
+		//setCacheSessionId( rtn,"external", sessionId,false);
 		return res;
 	}
 	    @ResponseBody

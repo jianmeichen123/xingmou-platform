@@ -235,6 +235,16 @@ public class ProjectList extends Query {
 
 	@ApiModelProperty(value = "产品图片 code  用^$^分割")
 	private String photos;
+
+	@ApiModelProperty(value = "融资总额")
+	private String invstAmount;
+
+	@ApiModelProperty(value = "compScale")
+	private String compScale;
+
+	@ApiModelProperty(value="企业估值")
+	private  String valuation;
+
 	/**
 	 * @Fields loadDate : 录入时间
 	 */
@@ -569,5 +579,29 @@ public class ProjectList extends Query {
 
 	public String getPhotos() {
 		return photos;
+	}
+
+	public String getInvstAmount() {
+		return invstAmount;
+	}
+
+	public void setInvstAmount(String invstAmount) {
+		this.invstAmount = invstAmount;
+	}
+
+	public String getCompScale() {
+		return compScale;
+	}
+
+	public void setCompScale(String compScale) {
+		this.compScale = compScale;
+	}
+
+	public String getValuation() {
+		return valuation;
+	}
+
+	public void setValuation(String valuation) {
+		this.valuation = valuation;
 	}
 }

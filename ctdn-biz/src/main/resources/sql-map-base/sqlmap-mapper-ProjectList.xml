@@ -43,11 +43,14 @@
                 <result column="photos" property="photos" jdbcType="VARCHAR" />
                 <result column="loadDate" property="loadDate" jdbcType="BIGINT" />
                 <result column="regName" property="regName" jdbcType="BIGINT" />
+                <result column="invstAmount" property="invstAmount" jdbcType="VARCHAR" />
+                <result column="compScale" property="compScale" jdbcType="VARCHAR" />
+                <result column="valuation" property="valuation" jdbcType="VARCHAR" />
     	</resultMap>
 
 
 	<sql id="selectFields">
-	    id,projCode,compCode,projTitle,runState,needFinance,addr,setupDT,labels,introduce,latestFinanceDT,latestFinanceRound,latestFinanceAmountNum,latestFinanceAmountStr,investSideJson,firmDesc,firmPos,persona,prodSrv,bizModel,industryName,industrySubName,industryIds,districtId,districtSubId,districtName,districtSubName,districtGrandsonName,bp,hqEmail,hqTel,weibo,weixin,webUrl,teamTags,teamSuper,userMarket,loadDate,photos,regName
+	    id,projCode,compCode,projTitle,runState,needFinance,addr,setupDT,labels,introduce,latestFinanceDT,latestFinanceRound,latestFinanceAmountNum,latestFinanceAmountStr,investSideJson,firmDesc,firmPos,persona,prodSrv,bizModel,industryName,industrySubName,industryIds,districtId,districtSubId,districtName,districtSubName,districtGrandsonName,bp,hqEmail,hqTel,weibo,weixin,webUrl,teamTags,teamSuper,userMarket,loadDate,photos,regName,invstAmount,compScale,valuation
 	</sql>
 	
 			

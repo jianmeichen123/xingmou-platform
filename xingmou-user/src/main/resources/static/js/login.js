@@ -362,7 +362,6 @@ function login_password(){
 		if(!/^1[0-9]{10}$/.test(val))
 		{
 			$("#mobile_tip").css('display','block').html('请输入有效手机号码');
-			$('.input-code').css('margin-top','0px');
 			return;
 		}
 		$("#mobile_tip").css('display','none')

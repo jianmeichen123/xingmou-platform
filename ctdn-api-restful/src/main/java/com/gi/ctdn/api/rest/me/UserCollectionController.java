@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,6 +62,12 @@ public class UserCollectionController {
     @RequestMapping("collectOne")
     @ResponseBody
     public MessageInfo<List<String>>  collectOne(@RequestBody UserCollection userCollection){
+        if(StringUtils.isEmpty(userCollection.getUserCode())){
+            return new MessageInfo<>(MessageStatus.NO_LOGIN,MessageStatus.NO_LOGIN_MESSAGE);
+        }
+        if(StringUtils.isEmpty(userCollection.getCode()) || StringUtils.isEmpty(userCollection.getType())){
+            return new MessageInfo<>(MessageStatus.MISS_PARAMETER_CODE,MessageStatus.MISS_PARAMETER_MESSAGE);
+        }
         MessageInfo<List<String>> messageInfo = userCollectionBiz.insertCollection(userCollection);
         return messageInfo;
     }
@@ -68,6 +75,12 @@ public class UserCollectionController {
     @RequestMapping("cancelOneCol")
     @ResponseBody
     public MessageInfo<List<String>>  cancelOneCol(@RequestBody UserCollection userCollection){
+        if(StringUtils.isEmpty(userCollection.getUserCode())){
+            return new MessageInfo<>(MessageStatus.NO_LOGIN,MessageStatus.NO_LOGIN_MESSAGE);
+        }
+        if(StringUtils.isEmpty(userCollection.getCode()) || StringUtils.isEmpty(userCollection.getType())){
+            return new MessageInfo<>(MessageStatus.MISS_PARAMETER_CODE,MessageStatus.MISS_PARAMETER_MESSAGE);
+        }
         MessageInfo<List<String>> messageInfo = userCollectionBiz.deleteOneCollection(userCollection);
         return messageInfo;
     }

@@ -83,7 +83,7 @@ select:focus { outline: none important; }
 .login-right-content input::-moz-input-placeholder { /* WebKit browsers */  color:#999999;font-size:14px;  }  
 .login-right-content input::-ms-input-placeholder { /* WebKit browsers */  color:#999999;font-size:14px;  } 
 .input-last{background-image:url('../img/login/login-icon_07.jpg');background-repeat:no-repeat;background-position:15px center;}
-.login-eye{display:inline-block;width:16px;cursor:pointer;height:13px;position:absolute;top: 2px;right:10px;background:url('../img/login/login-icon_10.jpg')}
+.login-eye{display:inline-block;width:16px;cursor:pointer;height:13px;position:absolute;top: 37px;right:10px;background:url('../img/login/login-icon_10.jpg')}
 .login-right-content{position:relative;}
 .login-eye-abled{background:url('../img/login/eye-blue_03.jpg')}
 .forget-password{float:right;color:#2393f7;margin-right:152px;}
@@ -106,7 +106,7 @@ select:focus { outline: none important; }
 .find-back-pass{display:none;}
 .find-pass-title{text-align:center;}
 .register-content{display:none;}
-.eye-box{position:relative;}
+.eye-box{position:relative;display: inline-block;}
 /*person center*/
 .person-center-container{width:1024px;height:auto;margin:20px auto;}
 .person-left{width:184px;height:700px;background:#555f7b;border-radius:5px;}

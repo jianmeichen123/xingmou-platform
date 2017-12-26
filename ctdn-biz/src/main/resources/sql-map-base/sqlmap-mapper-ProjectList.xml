@@ -136,7 +136,7 @@
 				#{item}
 			</foreach>
 		</if>
-        ORDER BY loadDate desc LIMIT 6
+        ORDER BY loadDate desc LIMIT 9
     </select>
     <!-- 最新获投的项目 -->
      <select id="selectByLatestFinanceDate" resultMap="BaseResultMap" >
@@ -150,7 +150,7 @@
 				#{item}
 			</foreach>
 		</if>
-        ORDER BY latestFinanceDT desc LIMIT 6
+        ORDER BY latestFinanceDT desc LIMIT 9
     </select>
     
     <!-- 获取收录项目总数 -->

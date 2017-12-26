@@ -1,6 +1,27 @@
-var index_href = htmlPlatformUrl.index_normal
+var index_href = htmlPlatformUrl.index_normal //首页默认跳转
 if(getCookie("_uid_")){
     me()
+}
+function setName(data){
+    if(!data&&data.length < 100){
+        $('#login_model').css('display','block')
+    	$('#logined_model').css('display','none')
+    }else{
+    	var obj = JSON.parse(data)
+    	console.log(obj)
+        if(obj['rolecode'] == 30000){
+        	var mobile = obj['mobile']
+        	$("span[name='id_name']").html(mobile.substring(0,5)+'******')
+        	 setCookie("realName",mobile)
+        }else{
+        	var name = obj['realName']
+        	$("span[name='id_name']").html(name)
+        	setCookie("realName",name)
+        }
+        $('#login_model').css('display','none')
+    	$('#logined_model').css('display','block')
+    	$("#seek").show()
+    }
 }
 
 function me(){
@@ -14,16 +35,17 @@ function me(){
         	index_href = htmlPlatformUrl.index_normal
         },
         success : function(data) {
+        	setName(decodeURIComponent(data))
         	var entity = JSON.parse(decodeURIComponent(data))
-        	if(entity.roleCode ==10000 ){
+        	if(entity['rolecode'] ==10000 ){
         		index_href = htmlPlatformUrl.index_manager
         		return
         	}
-        	if(entity.roleCode == 20000){
+        	if(entity['rolecode'] == 20000){
         		index_href = htmlPlatformUrl.index_senior
         		return
         	}
-        	if(entity.roleCode == 30000 ){
+        	if(entity['rolecode'] == 30000 ){
         		index_href = htmlPlatformUrl.index_external
         		return
         	}
@@ -508,6 +530,18 @@ function logout(){
 }
 function find_password_page(){
 	location.href=platformUrl.forgetPassword
+}
+function my_project(){
+	location.href=htmlPlatformUrl.person_center_myproject
+}
+function concern_industry(){
+	location.href=htmlPlatformUrl.concern_industry
+}
+function person_center_fonder(){
+	location.href=htmlPlatformUrl.person_center_fonder
+}
+function person_resetpassword(){
+	location.href=htmlPlatformUrl.person_resetpassword
 }
 //密码遮罩
 $('#password_eye').click(function(){

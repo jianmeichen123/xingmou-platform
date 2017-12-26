@@ -9,6 +9,7 @@ var Constants = {
 		//platformContentURL: endpointObj["project.home.page.url"]
 }
 
+
 var platformUrl = {
 		me:Constants.platformContentURL+ "/userlogin/me",
 
@@ -72,6 +73,10 @@ var htmlPlatformUrl = {
 		index_senior:Constants.htmlContentUrl+"/index_senior.html",
 		index_external:Constants.htmlContentUrl+"/index_external.html",
 		index_normal:Constants.htmlContentUrl+"/index_normal.html",
+		person_center_myproject:Constants.htmlContentUrl+"/person_center_myproject.html",
+		concern_industry:Constants.htmlContentUrl+"/concern_industry.html",
+		person_center_fonder:Constants.htmlContentUrl+"/person_center_fonder.html",
+		person_resetpassword:Constants.htmlContentUrl+"/person_resetpassword.html",
 	}
 
 

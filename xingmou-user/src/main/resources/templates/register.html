@@ -17,7 +17,7 @@
 <script th:src="@{/js/jquery-1.12.3.min.js}"></script>
 <script th:src="@{/bootstrap-3.3.7/dist/js/bootstrap.js}"></script>
 <script th:src="@{/js/platformUrl.js?t=20170523}"></script>
-<script th:src="@{/js/common.js}"></script>
+
 
 <script th:src="@{/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js}"></script>
 <script th:src="@{/bootstrap-datetimepicker/bootstrap-datetimepicker.zh-CN.js}"></script>
@@ -58,7 +58,7 @@
 			<!--<li page_tab="sydc">商业洞察</li>-->
 		</ul>
 		<div class="nav_all_seek">
-			<!--<a href="javascript:void(0);" target="_blank" onclick="search_head();"><div class="seek_all"  id="seek" ><span class="dn_ico dn_ico_seek"></span>寻求融资</div></a>-->
+			<a href="javascript:void(0);" target="_blank" onclick="search_head();"><div class="seek_all"  id="seek" style="display:none" ><span class="dn_ico dn_ico_seek"></span>寻求融资</div></a>
 			<div  class="dn_ico dn_ico_search"></div>
 		</div>
 
@@ -83,19 +83,22 @@
         </div>
         <div class="head_login_all">
 			<div class="dn_ico dn_ico_loginimg"></div>
-	        <div class="head_login">
-				<ul>
-					<li class="head_login_border"><a href="javascript:void(0);" onclick="login_page()"><span>登录</span></a></li>
-					<li><a href="javascript:void(0);" onclick="register_page()"><span>注册</span></a></li>
+	        <div class="head_login" id="login_model">
+	        	<ul>
+					<li class="head_login_border"><a href="javascript:void(0)" onclick="login_page()"><span>登录</span></a></li>
+					<li><a href="javascript:void(0)" onclick="register_page()"><span>注册</span></a></li>
+				</ul>
+			</div> 
+			<div class="nav_all_name none" id="logined_model">
+				<span name="id_name"></span>
+				<ul class="list_click_ul mymenu">
+					<li><a href="javascript:void(0)" onclick="my_project()">我的项目</a></li>
+					<li><a href="javascript:void(0)" onclick="concern_industry()">关注行业</a></li>
+					<li><a href="javascript:void(0)" onclick="person_center_fonder()">收藏夹</a></li>
+					<li class="none"><a href='javascript:void(0)' onclick="person_resetpassword()">修改密码</a></li>
+					<li><a href="javascript:void(0);" onclick="logout()">退出系统</a></li>
 				</ul>
 			</div>
-<!-- 			 <div class="nav_all_name"> -->
-<!-- 				<span id="id_name"></span> -->
-<!-- 				<span class="brain_ico brain_ico_name "></span> -->
-<!-- 				<ul class="list_click_ul"> -->
-<!-- 					<li><a href="javascript:void(0);" onclick="logout()">退出</a></li> -->
-<!-- 				</ul> -->
-<!-- 			</div>  -->
         </div>
         
 		

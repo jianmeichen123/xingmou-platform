@@ -253,6 +253,11 @@ public class LoginController implements EnvironmentAware{
 		cookie.setDomain(ctdn_domain);
 		cookie.setPath("/");
 		response.addCookie(cookie);
+		cookie = new Cookie("_realName_", null);
+		cookie.setMaxAge(1);
+		cookie.setDomain(ctdn_domain);
+		cookie.setPath("/");
+		response.addCookie(cookie);
         responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "退出登录"));
         return "login";
     }

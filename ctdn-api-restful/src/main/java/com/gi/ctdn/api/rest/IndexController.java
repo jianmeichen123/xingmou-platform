@@ -19,6 +19,7 @@ import com.gi.ctdn.pojo.IndustryRoundMerger;
 import com.gi.ctdn.pojo.OrgInfo;
 import com.gi.ctdn.pojo.ProjectList;
 import com.gi.ctdn.pojo.me.UserIndustry;
+import com.gi.ctdn.view.common.ListUtil;
 import com.gi.ctdn.view.common.MessageInfo;
 
 import java.io.UnsupportedEncodingException;
@@ -127,6 +128,9 @@ public class IndexController implements EnvironmentAware{
 				if(jsonObject.containsKey("departmentId")){
 					departmentId = jsonObject.getLong("departmentId");
 					List<Integer> idList = userIndustryBiz.getDefaultIndustry(departmentId);
+					if(userIndustryBiz.selectUserIndustry(userCode) != null && ListUtil.isNotEmpty(userIndustryBiz.selectUserIndustry(userCode))){
+						userIndustryBiz.deleteUserIndustry(userCode);
+					}
 					messageInfo.setData(idList);
 				}
 			} catch (UnsupportedEncodingException e) {

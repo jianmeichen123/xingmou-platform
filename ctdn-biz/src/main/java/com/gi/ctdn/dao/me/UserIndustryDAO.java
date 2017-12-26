@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UserIndustryDAO {
 
-	int deleteByUserId (@Param("userCode") String userCode);
+	int deleteByUserCode (@Param("userCode") String userCode);
 	
 	List<UserIndustry>  getUserIndustry(@Param("userCode") String userCode);
 

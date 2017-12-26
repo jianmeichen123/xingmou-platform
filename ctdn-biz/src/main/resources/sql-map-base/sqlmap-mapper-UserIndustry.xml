@@ -25,7 +25,7 @@
 		</where>
 	</select>
 
-	<delete id="deleteByUserId" parameterType="java.lang.String">
+	<delete id="deleteByUserCode" parameterType="java.lang.String">
 		UPDATE
 			app_user_industry
 		SET

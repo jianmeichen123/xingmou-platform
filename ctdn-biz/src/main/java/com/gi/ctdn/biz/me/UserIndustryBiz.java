@@ -9,6 +9,7 @@ import com.gi.ctdn.pojo.me.UserIndustry;
 import com.gi.ctdn.view.common.ListUtil;
 import com.gi.ctdn.view.common.MessageInfo;
 import com.gi.ctdn.view.common.MessageStatus;
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,7 +73,7 @@ public class UserIndustryBiz {
 		try {
 			String userCode = userIndustry.getUserCode();
 			if(ListUtil.isNotEmpty(selectUserIndustry(userCode))){
-				userIndustryDAO.deleteByUserId(userCode);
+				userIndustryDAO.deleteByUserCode(userCode);
 			}
 			List<UserIndustry> focusList = new ArrayList<>();
 			if(ListUtil.isNotEmpty(userIndustry.getIndustryIdList())){
@@ -101,8 +102,22 @@ public class UserIndustryBiz {
 	 * @return
 	 */
 	public List<Integer> getDefaultIndustry(Long departmentId) {
-		List<Integer> ids = userIndustryDAO.selectDefaultIds(departmentId);
+		List<Integer> ids = new ArrayList<>();
+		ids = userIndustryDAO.selectDefaultIds(departmentId);
 		return ids;
+	}
+
+	/**
+	 * 删除用户已关注行业
+	 */
+	public Integer deleteUserIndustry(String userCode) {
+		Integer ret = null;
+		try{
+			ret =  userIndustryDAO.deleteByUserCode (userCode);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return ret;
 	}
 
 	/**
@@ -110,7 +125,7 @@ public class UserIndustryBiz {
 	 * @param userCode
 	 * @return
 	 */
-	private List<UserIndustry> selectUserIndustry(String userCode) {
+	public List<UserIndustry> selectUserIndustry(String userCode) {
 		List<UserIndustry> list = userIndustryDAO.getUserIndustry(userCode);
 		return list;
 	}

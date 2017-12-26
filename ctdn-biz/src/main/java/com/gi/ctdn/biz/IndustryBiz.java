@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gi.ctdn.biz.me.UserIndustryBiz;
 import com.gi.ctdn.dao.IndustryDAO;
 import com.gi.ctdn.dao.me.UserIndustryDAO;
 import com.gi.ctdn.view.common.MessageInfo;
@@ -30,6 +31,9 @@ public class IndustryBiz  {
     
     @Autowired
     private UserIndustryDAO userIndustryDAO;
+    
+    @Autowired
+    private UserIndustryBiz userIndustryBiz;
 
 
 	
@@ -83,7 +87,7 @@ public class IndustryBiz  {
 			}
 		}else{
 			if(departmentId!=null){
-				industryIds = userIndustryDAO.selectDefaultIds(departmentId);
+				industryIds = userIndustryBiz.getDefaultIndustry(departmentId);
 			}
 		}
 		List<Industry>  industryList = industryDAO.selectParentindustrys();

@@ -2,6 +2,7 @@
 
 package com.gi.ctdn.biz;
 
+import com.gi.ctdn.biz.me.UserIndustryBiz;
 import com.gi.ctdn.dao.*;
 import com.gi.ctdn.dao.me.UserIndustryDAO;
 import com.gi.ctdn.pojo.*;
@@ -31,6 +32,9 @@ public class ProjectListBiz {
 	
 	@Autowired
 	UserIndustryDAO userIndustryDAO;
+	
+	@Autowired
+	UserIndustryBiz userIndustryBiz;
 
 	public MessageInfo<ProjectListInfo> queryCompetationlist(String sourceCode) {
 
@@ -116,7 +120,7 @@ public class ProjectListBiz {
 			}
 		}else{
 			if(departmentId!=null){
-				List<Integer> ids = userIndustryDAO.selectDefaultIds(departmentId);
+				List<Integer> ids = userIndustryBiz.getDefaultIndustry(departmentId);
 				if(ids!=null && ids.size()>0){
 					industryIds = new ArrayList<Integer>();
 					industryIds.addAll(ids);
@@ -149,7 +153,7 @@ public class ProjectListBiz {
 			}
 		}else{
 			if(departmentId!=null){
-				List<Integer> ids = userIndustryDAO.selectDefaultIds(departmentId);
+				List<Integer> ids = userIndustryBiz.getDefaultIndustry(departmentId);
 				if(ids!=null && ids.size()>0){
 					industryIds = new ArrayList<Integer>();
 					industryIds.addAll(ids);

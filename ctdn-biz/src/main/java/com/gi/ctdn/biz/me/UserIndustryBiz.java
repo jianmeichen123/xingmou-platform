@@ -101,11 +101,14 @@ public class UserIndustryBiz {
 	 * @param departmentId
 	 * @return
 	 */
-	public List getDefaultIndustry(Long departmentId) {
-		String ids = userIndustryDAO.selectDefaultIds(departmentId);
-		List idList =new ArrayList<>();
-		if(!StringUtils.isEmpty(ids)){
-			idList = Arrays.asList(",");
+	public List<Integer> getDefaultIndustry(Long departmentId) {
+		String idStr = userIndustryDAO.selectDefaultIds(departmentId);
+		List<Integer> idList =new ArrayList<Integer>();
+		if(!StringUtils.isEmpty(idStr)){
+			String[] ids = idStr.split(",");
+			for(String id : ids){
+				idList.add(Integer.parseInt(id));
+			}
 		}
 		return idList;
 	}
@@ -144,7 +147,7 @@ public class UserIndustryBiz {
 			}
 		}else{
 			if(departmentId!=null){
-				List ids = getDefaultIndustry(departmentId);
+				List<Integer> ids = getDefaultIndustry(departmentId);
 				if(ids!= null && ids.size()>0){
 					industryIds = new ArrayList<Integer>();
 					industryIds.addAll(ids);

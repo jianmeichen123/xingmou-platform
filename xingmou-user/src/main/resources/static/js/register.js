@@ -308,7 +308,7 @@ function countDown()
 	{
 		count=60
 		$btn.attr('onclick','send_code(this,3)')
-		$btn.text("count");
+		$btn.text("重新获取");
         clearInterval(timer);
 	}
 }

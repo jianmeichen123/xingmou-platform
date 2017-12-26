@@ -8,7 +8,6 @@ import com.galaxyinternet.framework.core.model.ResponseData;
 import com.galaxyinternet.framework.core.model.Result;
 import com.galaxyinternet.framework.core.model.Result.Status;
 import com.galaxyinternet.framework.core.utils.SessionUtils;
-import com.galaxyinternet.service.UserService;
 import com.gi.xm.platform.biz.UserBiz;
 import com.gi.xm.platform.pojo.ExternalUser;
 import com.gi.xm.platform.pojo.User;
@@ -117,40 +116,40 @@ public class LoginController implements EnvironmentAware{
 //        return "redirect:"+ctdn_index;
 //    }
 
-
-    @RequestMapping(value = "/auth")
-    public String auth(HttpServletResponse response,String uid) {
-		User u = (User) cache.get(uid);
-		if (u == null) {
-			return "login";
-		}
-		String key = "ctdn:internal:" + uid;
-		String user = cache.getValue(key);
-		String res_uir = ctdn_normal_index;
-		if (user != null) {
-			JSONObject jsonObject = null;
-			try {
-				jsonObject = (JSONObject) JSONObject.parse(URLDecoder.decode(user, "UTF-8"));
-				long roleCode = jsonObject.getLongValue("roleCode");
-				if (roleCode == TZJL_ROLECODE) {
-					res_uir = ctdn_manager_index;
-				} else if (roleCode == GG_ROLECODE) {
-					res_uir = ctdn_senior_index;
-				} else  {
-					res_uir = ctdn_external_index;
-				}
-			}catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
-
-		}
-		//如果创投大脑未登录,设置redis,设置cookie 跳转首页变为已登录状态
-		String userCode = PWDUtils.generateUserCode(u.getId(),"internal");
-		u.setUserCode(userCode);
-		setCacheSessionId("internal", u, uid,false);
-		setCookie(response,userCode,uid,"internal",false);
-		return "redirect:" + res_uir;
-    }
+//
+//    @RequestMapping(value = "/auth")
+//    public String auth(HttpServletResponse response,String uid) {
+//		User u = (User) cache.get(uid);
+//		if (u == null) {
+//			return "login";
+//		}
+//		String key = "ctdn:internal:" + uid;
+//		String user = cache.getValue(key);
+//		String res_uir = ctdn_normal_index;
+//		if (user != null) {
+//			JSONObject jsonObject = null;
+//			try {
+//				jsonObject = (JSONObject) JSONObject.parse(URLDecoder.decode(user, "UTF-8"));
+//				long roleCode = jsonObject.getLongValue("roleCode");
+//				if (roleCode == TZJL_ROLECODE) {
+//					res_uir = ctdn_manager_index;
+//				} else if (roleCode == GG_ROLECODE) {
+//					res_uir = ctdn_senior_index;
+//				} else  {
+//					res_uir = ctdn_external_index;
+//				}
+//			}catch (UnsupportedEncodingException e) {
+//				e.printStackTrace();
+//			}
+//
+//		}
+//		//如果创投大脑未登录,设置redis,设置cookie 跳转首页变为已登录状态
+//		String userCode = PWDUtils.generateUserCode(u.getId(),"internal");
+//		u.setUserCode(userCode);
+//		setCacheSessionId("internal", u, uid,false);
+//		setCookie(response,userCode,uid,"internal",false);
+//		return "redirect:" + res_uir;
+//    }
 
     /**
      *

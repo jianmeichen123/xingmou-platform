@@ -73,9 +73,9 @@
 		</foreach>
 	</insert>
 
-	<select id="selectDefaultIds" parameterType="java.lang.Long" resultType="java.lang.Integer">
+	<select id="selectDefaultIds" parameterType="java.lang.Long" resultType="java.lang.String">
 		select
-			industryId from app_dep_industry
+			industryIds from app_business_line_mapping_industry
 		where
 			departmentId = #{departmentId}
 	</select>

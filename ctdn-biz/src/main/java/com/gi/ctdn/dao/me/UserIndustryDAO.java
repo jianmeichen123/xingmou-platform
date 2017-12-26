@@ -13,5 +13,5 @@ public interface UserIndustryDAO {
 
 	int insert(@Param("focusList") List<UserIndustry> focusList);
 
-	List<Integer> selectDefaultIds (@Param("departmentId")Long departmentId );
+	String selectDefaultIds (@Param("departmentId")Long departmentId );
 }

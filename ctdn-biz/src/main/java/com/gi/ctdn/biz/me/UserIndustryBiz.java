@@ -9,11 +9,11 @@ import com.gi.ctdn.pojo.me.UserIndustry;
 import com.gi.ctdn.view.common.ListUtil;
 import com.gi.ctdn.view.common.MessageInfo;
 import com.gi.ctdn.view.common.MessageStatus;
-import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.Transient;
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class UserIndustryBiz {
 
 	@Autowired
 	UserIndustryDAO userIndustryDAO;
-	
+
 	@Autowired
 	private IndustryDAO industryDAO;
 
@@ -101,10 +101,13 @@ public class UserIndustryBiz {
 	 * @param departmentId
 	 * @return
 	 */
-	public List<Integer> getDefaultIndustry(Long departmentId) {
-		List<Integer> ids = new ArrayList<>();
-		ids = userIndustryDAO.selectDefaultIds(departmentId);
-		return ids;
+	public List getDefaultIndustry(Long departmentId) {
+		String ids = userIndustryDAO.selectDefaultIds(departmentId);
+		List idList =new ArrayList<>();
+		if(!StringUtils.isEmpty(ids)){
+			idList = Arrays.asList(",");
+		}
+		return idList;
 	}
 
 	/**
@@ -141,7 +144,7 @@ public class UserIndustryBiz {
 			}
 		}else{
 			if(departmentId!=null){
-				List<Integer> ids = userIndustryDAO.selectDefaultIds(departmentId);
+				List ids = getDefaultIndustry(departmentId);
 				if(ids!= null && ids.size()>0){
 					industryIds = new ArrayList<Integer>();
 					industryIds.addAll(ids);

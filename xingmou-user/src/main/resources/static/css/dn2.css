@@ -245,8 +245,8 @@ textarea.invalid::-ms-input-placeholder {
 }
 .inputDanger{border:1px solid #ff4e49; box-shadow:1px 1px 5px #fff2f2;color:red;}
 .disabled_btn{background-color:#e6e6e6;}
-.hihglight{background:#2393f7 !important;}
-.send-code{padding:3px 15px;position:relative;top:9px;}
+.send-code-content .hihglight{background:#2393f7;}
+.send-code{padding:3px 15px;position:relative;top:9px;background:#e6e6e6;}
 .send-code p{margin:0px !important;}
 
 

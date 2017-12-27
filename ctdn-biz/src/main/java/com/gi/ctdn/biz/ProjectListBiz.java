@@ -35,6 +35,9 @@ public class ProjectListBiz {
 	
 	@Autowired
 	UserIndustryBiz userIndustryBiz;
+	
+	@Autowired
+	private BusinessLineMappingIndustryDao  businessLineMappingIndustryDao;
 
 	public MessageInfo<ProjectListInfo> queryCompetationlist(String sourceCode) {
 
@@ -120,12 +123,18 @@ public class ProjectListBiz {
 			}
 		}else{
 			if(departmentId!=null){
-				List<Integer> ids = userIndustryBiz.getDefaultIndustry(departmentId);
-				if(ids!=null && ids.size()>0){
-					industryIds = new ArrayList<Integer>();
-					industryIds.addAll(ids);
+				String isEmpty = businessLineMappingIndustryDao.getByDepartmentId(departmentId);
+				if("0".equals(isEmpty)){ //重置状态
+					List<Integer> ids = userIndustryBiz.getDefaultIndustry(departmentId);
+					if(ids!=null && ids.size()>0){
+						industryIds = new ArrayList<Integer>();
+						industryIds.addAll(ids);
+					}
 				}
 			}
+		}
+		if(industryIds!=null && industryIds.size() == 29){
+			industryIds = null;
 		}
 		return projectListDAO.selectByLoadDate(industryIds);
 	}
@@ -153,12 +162,18 @@ public class ProjectListBiz {
 			}
 		}else{
 			if(departmentId!=null){
-				List<Integer> ids = userIndustryBiz.getDefaultIndustry(departmentId);
-				if(ids!=null && ids.size()>0){
-					industryIds = new ArrayList<Integer>();
-					industryIds.addAll(ids);
+				String isEmpty = businessLineMappingIndustryDao.getByDepartmentId(departmentId);
+				if("0".equals(isEmpty)){ //重置状态
+					List<Integer> ids = userIndustryBiz.getDefaultIndustry(departmentId);
+					if(ids!=null && ids.size()>0){
+						industryIds = new ArrayList<Integer>();
+						industryIds.addAll(ids);
+					}
 				}
 			}
+		}
+		if(industryIds!=null && industryIds.size() == 29){
+			industryIds = null;
 		}
 		return projectListDAO.selectByLatestFinanceDate(industryIds);
 	}

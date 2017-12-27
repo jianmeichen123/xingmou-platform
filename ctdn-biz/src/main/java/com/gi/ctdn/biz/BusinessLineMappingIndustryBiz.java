@@ -24,4 +24,8 @@ public class BusinessLineMappingIndustryBiz {
 		messageInfo.setData(list);
 		return messageInfo;
 	}
+
+	public void updateIsEmptyStatus(Long departmentId, String isEmpty) {
+		businessLineMappingIndustryDao.updateIsEmptyStatus(departmentId,isEmpty);
+	}
 }

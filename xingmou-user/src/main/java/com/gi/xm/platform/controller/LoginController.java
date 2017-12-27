@@ -100,31 +100,15 @@ public class LoginController implements EnvironmentAware{
 		}
         return "login";
     }
-//    @RequestMapping(value = "/auth")
-//    public String auth(HttpServletResponse response,String uid) {
-//        User u = (User) cache.get(uid);
-//        if (u == null){
-//            return "login";
-//        }
-//        String key = "ctdn:fx:"+uid;
-//        String user = cache.getValue(key);
-//        if(user!=null) {
-//            return "redirect:" + ctdn_index;
-//        }
-//        setCacheSessionId("fx", u, uid,false);
-//        setCookie(response,uid,"fx",false);
-//        return "redirect:"+ctdn_index;
-//    }
-
 
     @RequestMapping(value = "/auth")
     public String auth(HttpServletResponse response,String uid) {
-		User u = (User) cache.get(uid);
+		com.galaxyinternet.model.user.User u =  (com.galaxyinternet.model.user.User)cache.get(uid);
 		if (u == null) {
 			return "login";
 		}
 		String key = "ctdn:internal:" + uid;
-		String user = cache.getValue(key);
+		String user = stringRedisTemplate.opsForValue().get(key);
 		String res_uir = ctdn_normal_index;
 		if (user != null) {
 			JSONObject jsonObject = null;
@@ -144,13 +128,29 @@ public class LoginController implements EnvironmentAware{
 
 		}
 		//如果创投大脑未登录,设置redis,设置cookie 跳转首页变为已登录状态
+		User ctdnUser = new User();
 		String userCode = PWDUtils.generateUserCode(u.getId(),"internal");
-		u.setUserCode(userCode);
-		setCacheSessionId("internal", u, uid,false);
+		Long roleCode = getRoleCode(u.getId());
+		ctdnUser.setUserCode(userCode);
+		ctdnUser.setRoleCode(roleCode);
+		ctdnUser.setRealName(u.getEmail());
+		ctdnUser.setDepartmentId(u.getDepartmentId());
+		setCacheSessionId("internal", ctdnUser, uid,false);
 		setCookie(response,userCode,uid,"internal",false);
 		return "redirect:" + res_uir;
     }
 
+    private Long getRoleCode(Long userId){
+		//内部用户查询roleCode 用roleId字段存值
+		List<Long> roleCodes = authReq.selectRoleCodeByUserId(userId);
+		if(roleCodes.indexOf(GG_ROLECODE)>-1){
+			return GG_ROLECODE;
+		}else if(roleCodes.indexOf(TZJL_ROLECODE)>-1){
+			return TZJL_ROLECODE;
+		}else{
+			return VISITOR_ROLECODE;
+		}
+	}
     /**
      *
      * @param response
@@ -189,6 +189,7 @@ public class LoginController implements EnvironmentAware{
 				}else{
 					jsonObject.put("isEmptyPassword","0"); //不为空
 				}
+				jsonObject.put("ancientPWD", user.getPassword());
 				userJson = URLEncoder.encode(jsonObject.toJSONString(),"UTF-8");
 			}
 		} catch (UnsupportedEncodingException e) {
@@ -230,14 +231,8 @@ public class LoginController implements EnvironmentAware{
         }
         user = rtn.getValue();
 		//内部用户查询roleCode 用roleId字段存值
-		List<Long> roleCodes = authReq.selectRoleCodeByUserId(user.getId());
-		if(roleCodes.indexOf(GG_ROLECODE)>-1){
-			user.setRoleCode(GG_ROLECODE);
-		}else if(roleCodes.indexOf(TZJL_ROLECODE)>-1){
-			user.setRoleCode(TZJL_ROLECODE);
-		}else{
-			user.setRoleCode(VISITOR_ROLECODE);
-		}
+		Long roleCode = getRoleCode(user.getId());
+		user.setRoleCode(roleCode);
 		//生成usercode
 		user.setUserCode(PWDUtils.generateUserCode(user.getId(),"internal"));
 		String key = "ctdn-firstLogin:internal:"+user.getId();         //判断用户是否第一次登录创投大脑

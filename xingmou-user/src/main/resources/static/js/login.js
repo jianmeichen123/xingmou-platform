@@ -118,6 +118,11 @@ function checkform(){
 			 location.href = htmlPlatformUrl.index_senior
 			 return
 		 }
+		 if(entity.roleCode == 30000){ //高管
+			 location.href = htmlPlatformUrl.index_external
+			 return
+		 }
+		 
 	 }else{
 		 var errorcode = data.result.errorCode
 		 if(errorcode ==1){

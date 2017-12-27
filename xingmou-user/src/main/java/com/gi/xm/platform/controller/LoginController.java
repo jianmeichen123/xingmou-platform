@@ -178,6 +178,22 @@ public class LoginController implements EnvironmentAware{
     @ResponseBody
     public String  me(HttpServletResponse response, @CookieValue(name = "_uid_")String uid,@CookieValue(name = "s_")String s) {
 		String userJson = (String) stringRedisTemplate.opsForValue().get("ctdn:"+s+":"+uid);
+		try {
+			//判断外部用户密码是否为空
+			JSONObject jsonObject = (JSONObject) JSONObject.parse(URLDecoder.decode(userJson,"UTF-8"));
+			if(jsonObject != null && jsonObject.containsKey("mobile")){
+				String mobile = jsonObject.getString("mobile");
+				ExternalUser user = userBiz.getUser(mobile);
+				if(StringUtils.isEmpty(user.getPassword())){
+					jsonObject.put("isEmptyPassword","1"); //密码为空
+				}else{
+					jsonObject.put("isEmptyPassword","0"); //不为空
+				}
+				userJson = URLEncoder.encode(jsonObject.toJSONString(),"UTF-8");
+			}
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
         System.out.println(userJson);
         return userJson;
     }
@@ -472,7 +488,7 @@ public class LoginController implements EnvironmentAware{
 		 	externalUser.setStatus(status);
 		 	externalUser.setMobile(user.getMobile());
 		 	externalUser.setUserCode(user.getUserCode());
-		 	externalUser.setPassword(user.getPassword());
+//		 	externalUser.setPassword(user.getPassword());
 		 	externalUser.setRolecode(user.getRolecode());
 	        try {
 	            json = URLEncoder.encode(JSON.toJSONString(externalUser),"UTF-8");

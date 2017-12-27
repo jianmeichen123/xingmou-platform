@@ -90,4 +90,14 @@ public class ExternalUser extends BaseEntity{
 	public void setRolecode(Long rolecode) {
 		this.rolecode = rolecode;
 	}
+	
+	public boolean isEmptyPassword() {
+		return isEmptyPassword;
+	}
+	public void setEmptyPassword(boolean isEmptyPassword) {
+		this.isEmptyPassword = isEmptyPassword;
+	}
+
+	private boolean isEmptyPassword; //密码是否为空
+	
 }

@@ -189,6 +189,7 @@ public class LoginController implements EnvironmentAware{
 				}else{
 					jsonObject.put("isEmptyPassword","0"); //不为空
 				}
+				jsonObject.put("ancientPWD", user.getPassword());
 				userJson = URLEncoder.encode(jsonObject.toJSONString(),"UTF-8");
 			}
 		} catch (UnsupportedEncodingException e) {

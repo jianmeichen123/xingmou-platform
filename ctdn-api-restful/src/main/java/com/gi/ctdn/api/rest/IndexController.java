@@ -131,6 +131,8 @@ public class IndexController implements EnvironmentAware{
 					if(userIndustryBiz.selectUserIndustry(userCode) != null && ListUtil.isNotEmpty(userIndustryBiz.selectUserIndustry(userCode))){
 						userIndustryBiz.deleteUserIndustry(userCode);
 					}
+					//更改为重置状态
+					businessLineMappingIndustryBiz.updateIsEmptyStatus(departmentId,"0");
 					messageInfo.setData(idList);
 				}
 			} catch (UnsupportedEncodingException e) {
@@ -149,10 +151,12 @@ public class IndexController implements EnvironmentAware{
      */
     @RequestMapping("saveUserIndustry")
     @ResponseBody
-    public MessageInfo<UserIndustry> updateUserIndustry (@RequestBody UserIndustry userIndustry){
-        MessageInfo messageInfo = userIndustryBiz.saveOrUpdateUerIndustry(userIndustry);
-        return messageInfo;
-    }
+    public MessageInfo<UserIndustry> updateUserIndustry ( @CookieValue(name = "_uid_")String uid, @CookieValue(name = "s_")String s,@RequestBody UserIndustry userIndustry){
+    	String key = "ctdn:"+s+":"+uid;
+    	String userJson = stringRedisTemplate.opsForValue().get(key);
+        MessageInfo messageInfo = userIndustryBiz.saveOrUpdateUerIndustry(userJson,userIndustry);
+		return messageInfo;
+	}
 
     @RequestMapping("queryIndexHeaderStat")
     @ResponseBody
@@ -276,10 +280,12 @@ public class IndexController implements EnvironmentAware{
      */
     @RequestMapping("saveOrUpdateUerIndustry")
     @ResponseBody
-    public MessageInfo<UserIndustry> saveOrUpdateUerIndustry(@RequestBody UserIndustry userIndustry){
+    public MessageInfo<UserIndustry> saveOrUpdateUerIndustry(@CookieValue(name = "_uid_")String uid, @CookieValue(name = "s_")String s,@RequestBody UserIndustry userIndustry){
 		MessageInfo<UserIndustry>  messageInfo = new MessageInfo<UserIndustry>();
 		try {
-		    userIndustryBiz.saveOrUpdateUerIndustry(userIndustry);
+		  	String key = "ctdn:"+s+":"+uid;
+	    	String userJson = stringRedisTemplate.opsForValue().get(key);
+		    userIndustryBiz.saveOrUpdateUerIndustry(userJson,userIndustry);
 		} catch (Exception e) {
 			loger.error("保存或更新用户关注行业,error:" + e.getMessage());
 			messageInfo.setStatus(0);

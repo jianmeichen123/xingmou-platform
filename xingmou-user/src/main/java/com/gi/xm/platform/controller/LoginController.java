@@ -116,40 +116,40 @@ public class LoginController implements EnvironmentAware{
 //        return "redirect:"+ctdn_index;
 //    }
 
-//
-//    @RequestMapping(value = "/auth")
-//    public String auth(HttpServletResponse response,String uid) {
-//		User u = (User) cache.get(uid);
-//		if (u == null) {
-//			return "login";
-//		}
-//		String key = "ctdn:internal:" + uid;
-//		String user = cache.getValue(key);
-//		String res_uir = ctdn_normal_index;
-//		if (user != null) {
-//			JSONObject jsonObject = null;
-//			try {
-//				jsonObject = (JSONObject) JSONObject.parse(URLDecoder.decode(user, "UTF-8"));
-//				long roleCode = jsonObject.getLongValue("roleCode");
-//				if (roleCode == TZJL_ROLECODE) {
-//					res_uir = ctdn_manager_index;
-//				} else if (roleCode == GG_ROLECODE) {
-//					res_uir = ctdn_senior_index;
-//				} else  {
-//					res_uir = ctdn_external_index;
-//				}
-//			}catch (UnsupportedEncodingException e) {
-//				e.printStackTrace();
-//			}
-//
-//		}
-//		//如果创投大脑未登录,设置redis,设置cookie 跳转首页变为已登录状态
-//		String userCode = PWDUtils.generateUserCode(u.getId(),"internal");
-//		u.setUserCode(userCode);
-//		setCacheSessionId("internal", u, uid,false);
-//		setCookie(response,userCode,uid,"internal",false);
-//		return "redirect:" + res_uir;
-//    }
+
+    @RequestMapping(value = "/auth")
+    public String auth(HttpServletResponse response,String uid) {
+		User u = (User) cache.get(uid);
+		if (u == null) {
+			return "login";
+		}
+		String key = "ctdn:internal:" + uid;
+		String user = cache.getValue(key);
+		String res_uir = ctdn_normal_index;
+		if (user != null) {
+			JSONObject jsonObject = null;
+			try {
+				jsonObject = (JSONObject) JSONObject.parse(URLDecoder.decode(user, "UTF-8"));
+				long roleCode = jsonObject.getLongValue("roleCode");
+				if (roleCode == TZJL_ROLECODE) {
+					res_uir = ctdn_manager_index;
+				} else if (roleCode == GG_ROLECODE) {
+					res_uir = ctdn_senior_index;
+				} else  {
+					res_uir = ctdn_external_index;
+				}
+			}catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+
+		}
+		//如果创投大脑未登录,设置redis,设置cookie 跳转首页变为已登录状态
+		String userCode = PWDUtils.generateUserCode(u.getId(),"internal");
+		u.setUserCode(userCode);
+		setCacheSessionId("internal", u, uid,false);
+		setCookie(response,userCode,uid,"internal",false);
+		return "redirect:" + res_uir;
+    }
 
     /**
      *
@@ -178,6 +178,22 @@ public class LoginController implements EnvironmentAware{
     @ResponseBody
     public String  me(HttpServletResponse response, @CookieValue(name = "_uid_")String uid,@CookieValue(name = "s_")String s) {
 		String userJson = (String) stringRedisTemplate.opsForValue().get("ctdn:"+s+":"+uid);
+		try {
+			//判断外部用户密码是否为空
+			JSONObject jsonObject = (JSONObject) JSONObject.parse(URLDecoder.decode(userJson,"UTF-8"));
+			if(jsonObject != null && jsonObject.containsKey("mobile")){
+				String mobile = jsonObject.getString("mobile");
+				ExternalUser user = userBiz.getUser(mobile);
+				if(StringUtils.isEmpty(user.getPassword())){
+					jsonObject.put("isEmptyPassword","1"); //密码为空
+				}else{
+					jsonObject.put("isEmptyPassword","0"); //不为空
+				}
+				userJson = URLEncoder.encode(jsonObject.toJSONString(),"UTF-8");
+			}
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
         System.out.println(userJson);
         return userJson;
     }
@@ -256,7 +272,7 @@ public class LoginController implements EnvironmentAware{
         }
         if (json!=null){
 			stringRedisTemplate.boundValueOps("ctdn:"+from+":"+sessionId+":code").set(user.getUserCode());
-			stringRedisTemplate.boundValueOps("ctdn:"+from+":"+sessionId).set(json);
+			stringRedisTemplate.boundValueOps("ctdn:"+from+":"+sessionId).set(json,notAutoLogin(notAuto),TimeUnit.SECONDS);
             logger.info(sessionId+" "+json);
         }
     }
@@ -398,7 +414,7 @@ public class LoginController implements EnvironmentAware{
 		}
 		//生成usercode
 		query.setUserCode(PWDUtils.generateUserCode(query.getId(),"external"));
-		query.setRolecode(VISITOR_ROLECODE);
+		query.setRoleCode(VISITOR_ROLECODE);
 		String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
 		setCacheSessionId(query,"external", sessionId,notAuto);
 		messageInfo.setEntity(query);
@@ -449,7 +465,7 @@ public class LoginController implements EnvironmentAware{
 				stringRedisTemplate.opsForValue().set(firstLoginKey, "false");
 			}
 			rtn.setUserCode(PWDUtils.generateUserCode(rtn.getId(),"external"));
-			rtn.setRolecode(VISITOR_ROLECODE);
+			rtn.setRoleCode(VISITOR_ROLECODE);
 			String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
 			setCacheSessionId(rtn,"external", sessionId,isAuto);
 			responsebody.setEntity(rtn);
@@ -472,8 +488,8 @@ public class LoginController implements EnvironmentAware{
 		 	externalUser.setStatus(status);
 		 	externalUser.setMobile(user.getMobile());
 		 	externalUser.setUserCode(user.getUserCode());
-		 	externalUser.setPassword(user.getPassword());
-		 	externalUser.setRolecode(user.getRolecode());
+//		 	externalUser.setPassword(user.getPassword());
+		 	externalUser.setRoleCode(user.getRoleCode());
 	        try {
 	            json = URLEncoder.encode(JSON.toJSONString(externalUser),"UTF-8");
 	        } catch (UnsupportedEncodingException e) {
@@ -482,7 +498,7 @@ public class LoginController implements EnvironmentAware{
 	        if (json!=null){
 	            //cache.setByRedis("ctdn:"+from+":"+sessionId, json,notAutoLogin(notAuto)); // 将sessionId存入cache
 				stringRedisTemplate.opsForValue().set("ctdn:"+from+":"+sessionId+":code", externalUser.getUserCode()); // 将sessionId存入cache
-				stringRedisTemplate.opsForValue().set("ctdn:"+from+":"+sessionId, json); // 将sessionId存入cache
+				stringRedisTemplate.opsForValue().set("ctdn:"+from+":"+sessionId, json,notAutoLogin(notAuto),TimeUnit.SECONDS); // 将sessionId存入cache
 	            logger.info(sessionId+" "+json);
 	        }
 	    }
@@ -722,25 +738,25 @@ public class LoginController implements EnvironmentAware{
 		//setCacheSessionId( rtn,"external", sessionId,false);
 		return res;
 	}
-	    @ResponseBody
-	  	@SuppressWarnings("unchecked")
-	    @RequestMapping(value = "/checkInternalUserExists", produces = MediaType.APPLICATION_JSON_VALUE)
-	    public ResponseData<User> checkInternalUserExists( @RequestBody User user) {
-	        ResponseData<User> responsebody = new ResponseData<User>();
-	        try {
-				if (user == null || StringUtils.isBlank(user.getNickName())) {
-				    responsebody.setResult(new Result(Status.ERROR, Constants.IS_UP_EMPTY, "用户名不能为空！"));
-				    return responsebody;
-				}
-				HashMap<String,Object> rtn = (HashMap<String, Object>) authReq.checkUserExists(user.getNickName());
-				int value =  (int) rtn.get("value");
-				user.setStatus(value +"");
-				responsebody.setEntity(user);
-				responsebody.setResult(new Result(Status.OK,"您输入的账号"));
-			} catch (Exception e) {
-				e.printStackTrace();
-				responsebody.setResult(new Result(Status.ERROR,"系统繁忙"));
+    @ResponseBody
+  	@SuppressWarnings("unchecked")
+    @RequestMapping(value = "/checkInternalUserExists", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseData<User> checkInternalUserExists( @RequestBody User user) {
+        ResponseData<User> responsebody = new ResponseData<User>();
+        try {
+			if (user == null || StringUtils.isBlank(user.getNickName())) {
+			    responsebody.setResult(new Result(Status.ERROR, Constants.IS_UP_EMPTY, "用户名不能为空！"));
+			    return responsebody;
 			}
-	        return responsebody;
-	    }
+			HashMap<String,Object> rtn = (HashMap<String, Object>) authReq.checkUserExists(user.getNickName());
+			int value =  (int) rtn.get("value");
+			user.setStatus(value +"");
+			responsebody.setEntity(user);
+			responsebody.setResult(new Result(Status.OK,""));
+		} catch (Exception e) {
+			e.printStackTrace();
+			responsebody.setResult(new Result(Status.ERROR,"系统繁忙"));
+		}
+        return responsebody;
+    }
 }

@@ -16,7 +16,7 @@ public class ExternalUser extends BaseEntity{
 
 	private boolean exists;
 
-	private Long rolecode;
+	private Long roleCode;
 
 	private String userCode;//id+from encodeBase64
 	
@@ -83,11 +83,21 @@ public class ExternalUser extends BaseEntity{
 		return userCode;
 	}
 
-	public Long getRolecode() {
-		return rolecode;
+	public Long getRoleCode() {
+		return roleCode;
 	}
 
-	public void setRolecode(Long rolecode) {
-		this.rolecode = rolecode;
+	public void setRoleCode(Long roleCode) {
+		this.roleCode = roleCode;
 	}
+
+	public boolean isEmptyPassword() {
+		return isEmptyPassword;
+	}
+	public void setEmptyPassword(boolean isEmptyPassword) {
+		this.isEmptyPassword = isEmptyPassword;
+	}
+
+	private boolean isEmptyPassword; //密码是否为空
+	
 }

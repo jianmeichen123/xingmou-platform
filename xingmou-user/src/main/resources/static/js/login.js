@@ -118,6 +118,11 @@ function checkform(){
 			 location.href = htmlPlatformUrl.index_senior
 			 return
 		 }
+		 if(entity.roleCode == 30000){ //高管
+			 location.href = htmlPlatformUrl.index_external
+			 return
+		 }
+		 
 	 }else{
 		 var errorcode = data.result.errorCode
 		 if(errorcode ==1){
@@ -299,6 +304,7 @@ function login_password(){
 	var count=60;
 	var $btn;
 	function send_code(e,type){
+		
 		$("input").removeClass('inputDanger');
 		$("input").removeClass('invalid');
 		$('.login-tips').css('display','none')
@@ -329,7 +335,8 @@ function login_password(){
 			var success=function(data){
 				if(data.result.status=="OK"){
 					count=60
-					e.removeAttribute('onclick','')
+					e.removeAttribute('onclick','');
+					
 					timer = setInterval("countDown()",1000);
 				}else{
 					layer.msg(data.result.message)
@@ -342,15 +349,18 @@ function login_password(){
 	{
 		count--;
 		console.log(count);
-		$btn.html("验证码"+count+"s");
+		$btn.html("验证码已发送"+"<p>"+count+'s'+"</p>");
+		$btn.addClass('send-code');
 		if(count<=0)
 		{
+			$btn.removeClass('send-code');
 			count=60
 			$btn.attr('onclick','send_code(this,1)')
 			$btn.text("发送验证码");
 	        clearInterval(timer);
 		}
 	}
+	
 	$("#mobile").change(function(){
 		var $this = $(this);
 		var val = $(this).val();

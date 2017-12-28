@@ -8,12 +8,14 @@ var $btn;
 function countDown()
 {
 	count--;
-	$btn.html("验证码"+count+"s");
+	$btn.html("验证码已发送"+"<p>"+count+'s'+"</p>");
+	$btn.addClass('send-code');
 //	$btn.addClass('disabled_btn')
 	if(count<=0)
 	{
 		$btn.attr('onclick','send_code(this,2)')
 		$btn.text("发送验证码");
+		$btn.removeClass('send-code');
         clearInterval(timer);
         count = 60
 	}

@@ -43,8 +43,7 @@ function checkform(){
 		}
 		$("#nickName_tip").css('display','block').html("请输入登录用户名/手机号")
         return false;
-    } 
-    
+    }
     if(/^1[0-9]{10}$/.test(nickName)){
     	  sendPostRequestByJsonObj(platformUrl.checkUserExists,{"mobile":nickName},function(data){
   	    	if(data.result.status == 'OK'){

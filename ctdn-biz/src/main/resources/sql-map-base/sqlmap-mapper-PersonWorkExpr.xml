@@ -9,11 +9,12 @@
         <result column="projCode"  property="projCode"   jdbcType="VARCHAR" />
         <result column="job"  property="job"   jdbcType="VARCHAR" />
         <result column="type"  property="type"   jdbcType="CHAR" />
+        <result column="desc"  property="desc"   jdbcType="VARCHAR" />
     	</resultMap>
 
 
 	<sql id="selectFields">
-        id,code,period,projTitle,projCode,job,type
+        id,code,period,projTitle,projCode,job,type,`desc`
     </sql>
 	
 			

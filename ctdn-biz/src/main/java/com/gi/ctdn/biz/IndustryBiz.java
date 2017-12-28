@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gi.ctdn.biz.me.UserIndustryBiz;
+import com.gi.ctdn.dao.BusinessLineMappingIndustryDao;
 import com.gi.ctdn.dao.IndustryDAO;
 import com.gi.ctdn.dao.me.UserIndustryDAO;
 import com.gi.ctdn.view.common.MessageInfo;
@@ -34,6 +35,9 @@ public class IndustryBiz  {
     
     @Autowired
     private UserIndustryBiz userIndustryBiz;
+    
+	@Autowired
+	private BusinessLineMappingIndustryDao  businessLineMappingIndustryDao;
 
 
 	
@@ -87,7 +91,10 @@ public class IndustryBiz  {
 			}
 		}else{
 			if(departmentId!=null){
-				industryIds = userIndustryBiz.getDefaultIndustry(departmentId);
+				String isEmpty = businessLineMappingIndustryDao.getByDepartmentId(departmentId);
+				if("0".equals(isEmpty)){ //重置状态
+					industryIds = userIndustryBiz.getDefaultIndustry(departmentId);
+				}
 			}
 		}
 		List<Industry>  industryList = industryDAO.selectParentindustrys();

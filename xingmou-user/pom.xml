@@ -93,7 +93,7 @@
         <dependency>
             <groupId>com.galaxyinternet</groupId>
             <artifactId>galaxy-cache</artifactId>
-            <version>1.0.5.20-xingmou-qa-SNAPSHOT</version>
+            <version>1.0.5.20-xingmou-dev2-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.galaxyinternet</groupId>
@@ -112,70 +112,6 @@
                     <groupId>org.mongodb</groupId>
                     <artifactId>mongo-java-driver</artifactId>
                 </exclusion>
-                <!--<exclusion>-->
-                    <!--<groupId>mysql</groupId>-->
-                    <!--<artifactId>mysql-connector-java</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>org.dao</groupId>-->
-                    <!--<artifactId>dao</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>org.dao</groupId>-->
-                    <!--<artifactId>dao-spring</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>org.dao</groupId>-->
-                    <!--<artifactId>dao-ehcache</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>javax.servlet</groupId>-->
-                    <!--<artifactId>javax.servlet-api</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>log4j</groupId>-->
-                    <!--<artifactId>log4j</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>com.google.code.gson</groupId>-->
-                    <!--<artifactId>gson</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>ch.qos.logback</groupId>-->
-                    <!--<artifactId>logback-access</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>com.aliyun.oss</groupId>-->
-                    <!--<artifactId>aliyun-sdk-oss</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>commons-dbcp</groupId>-->
-                    <!--<artifactId>commons-dbcp</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>commons-io</groupId>-->
-                    <!--<artifactId>commons-io</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>commons-fileupload</groupId>-->
-                    <!--<artifactId>commons-fileupload</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>org.apache.shiro</groupId>-->
-                    <!--<artifactId>shiro-core</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>org.springframework</groupId>-->
-                    <!--<artifactId>*</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>com.sun.mail</groupId>-->
-                    <!--<artifactId>*</artifactId>-->
-                <!--</exclusion>-->
-                <!--<exclusion>-->
-                    <!--<groupId>com.galaxyinternet</groupId>-->
-                    <!--<artifactId>galaxy-cache</artifactId>-->
-                <!--</exclusion>-->
             </exclusions>
         </dependency>
          <dependency>

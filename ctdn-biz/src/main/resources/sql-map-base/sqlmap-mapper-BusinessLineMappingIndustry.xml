@@ -6,11 +6,13 @@
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="industryIds" property="industryIds" jdbcType="VARCHAR"/>
         <result column="industryNames" property="industryNames" jdbcType="VARCHAR"/>
+        <result column="is_empty" property="isEmpty" jdbcType="VARCHAR"/>
+        <result column="departmentId" property="departmentId" jdbcType="INTEGER"/>
     </resultMap>
 
 
     <sql id="selectFields">
-        id,name,industryIds,industryNames
+        id,name,industryIds,industryNames,is_empty
     </sql>
 
 
@@ -19,6 +21,21 @@
         <include refid="selectFields"/>
         FROM
         app_business_line_mapping_industry
+    </select>
+    <!-- 更新内部用户行业是否是清空状态 -->
+    <update id="updateIsEmptyStatus" parameterType="com.gi.ctdn.pojo.BusinessLineMappingIndustry">
+     	update app_business_line_mapping_industry
+     	set is_empty = #{isEmpty}
+     	where departmentId=#{departmentId}
+    </update>
+    
+    
+    <select id="getByDepartmentId" parameterType="java.lang.Long" resultType="java.lang.String">
+    	SELECT
+    	is_empty
+        FROM
+        app_business_line_mapping_industry
+        where departmentId = #{departmentId}
     </select>
 
 </mapper>

@@ -2,6 +2,8 @@
 
 package com.gi.ctdn.biz.me;
 
+import com.alibaba.fastjson.JSONObject;
+import com.gi.ctdn.dao.BusinessLineMappingIndustryDao;
 import com.gi.ctdn.dao.IndustryDAO;
 import com.gi.ctdn.dao.me.UserIndustryDAO;
 import com.gi.ctdn.pojo.Industry;
@@ -16,6 +18,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.Transient;
+
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,6 +35,9 @@ public class UserIndustryBiz {
 
 	@Autowired
 	private IndustryDAO industryDAO;
+	
+	@Autowired
+	private BusinessLineMappingIndustryDao  businessLineMappingIndustryDao;
 
 	/**
 	 * 查询用户关注行业idlist
@@ -51,7 +58,10 @@ public class UserIndustryBiz {
 			}else{
 				//查默认关注
 				if(deparmentId != null){
-					industryIdList = getDefaultIndustry(deparmentId);
+					String isEmpty = businessLineMappingIndustryDao.getByDepartmentId(deparmentId);
+					if("0".equals(isEmpty)){ //重置状态
+						industryIdList = getDefaultIndustry(deparmentId);
+					}
 				}
 			}
 			messageInfo.setData(industryIdList);
@@ -68,7 +78,7 @@ public class UserIndustryBiz {
 	 * @return
 	 */
 	@Transient
-	public MessageInfo saveOrUpdateUerIndustry(UserIndustry userIndustry) {
+	public MessageInfo saveOrUpdateUerIndustry(String userJson,UserIndustry userIndustry) {
 		MessageInfo messageInfo = new MessageInfo();
 		try {
 			String userCode = userIndustry.getUserCode();
@@ -83,6 +93,16 @@ public class UserIndustryBiz {
 					temp.setIndustryId(id);
 					temp.setUserCode(userCode);
 					focusList.add(temp);
+				}
+			}else{
+				if(userJson!=null && userJson.trim().length() !=0){
+					JSONObject jsonObject = (JSONObject) JSONObject.parse(URLDecoder.decode(userJson,"UTF-8"));
+					Long  departmentId =null;
+					if(jsonObject.containsKey("departmentId")){
+						 departmentId = jsonObject.getLong("departmentId");
+						 //更改为清空状态
+						 businessLineMappingIndustryDao.updateIsEmptyStatus(departmentId,"1");
+					}
 				}
 			}
 			if(ListUtil.isNotEmpty(focusList)){

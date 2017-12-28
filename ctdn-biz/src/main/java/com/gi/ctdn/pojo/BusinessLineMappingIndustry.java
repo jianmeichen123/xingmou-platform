@@ -10,6 +10,8 @@ public class BusinessLineMappingIndustry extends PojoInfo{
 	private String name;
 	private String industryIds;
 	private String industryNames;
+	private String isEmpty;
+	private Long departmentId;
 	
 	
 	public Integer getId() {
@@ -35,6 +37,18 @@ public class BusinessLineMappingIndustry extends PojoInfo{
 	}
 	public void setIndustryNames(String industryNames) {
 		this.industryNames = industryNames;
+	}
+	public String getIsEmpty() {
+		return isEmpty;
+	}
+	public void setIsEmpty(String isEmpty) {
+		this.isEmpty = isEmpty;
+	}
+	public Long getDepartmentId() {
+		return departmentId;
+	}
+	public void setDepartmentId(Long departmentId) {
+		this.departmentId = departmentId;
 	}
 	
 	

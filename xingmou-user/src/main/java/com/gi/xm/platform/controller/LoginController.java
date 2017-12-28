@@ -217,16 +217,7 @@ public class LoginController implements EnvironmentAware{
         UserResult rtn = authReq.login(nickName, password);
         if(rtn == null || rtn.isSuccess() == false)
         {
-            String msg = "";
-            if(rtn.getMessage() != null)
-            {
-                msg = rtn.getMessage();
-            }
-            else
-            {
-                msg = "您的账号与密码不匹配~";
-            }
-            responsebody.setResult(new Result(Status.ERROR, Constants.IS_UP_WRONG, msg));
+            responsebody.setResult(new Result(Status.ERROR, Constants.IS_UP_WRONG, "您的账号与密码不匹配~"));
             return responsebody;
         }
         user = rtn.getValue();

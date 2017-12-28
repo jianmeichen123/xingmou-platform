@@ -92,6 +92,7 @@
 				#{item}
 			</foreach>
 		</if>
+		order by lastMonthInvestNum desc
 	</select>
 
 </mapper>

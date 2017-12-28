@@ -248,7 +248,7 @@ textarea.invalid::-ms-input-placeholder {
 .send-code-content .hihglight{background:#2393f7;}
 .send-code{padding:3px 15px;position:relative;top:9px;background:#e6e6e6;}
 .send-code p{margin:0px !important;}
-
+::-ms-clear, ::-ms-reveal{display: none;}
 
 
 

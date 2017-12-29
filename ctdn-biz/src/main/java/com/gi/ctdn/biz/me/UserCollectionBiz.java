@@ -52,8 +52,11 @@ public class UserCollectionBiz {
     public MessageInfo insertCollection(UserCollection userCollection){
         MessageInfo messageInfo = new MessageInfo();
         try{
-            int insertRet = userCollectionDAO.insertOne(userCollection);
-            messageInfo.setData(insertRet);
+            UserCollection one = userCollectionDAO.selectByCodeAndTypeAndUsercode(userCollection);
+            if(one ==null){
+                int insertRet = userCollectionDAO.insertOne(userCollection);
+                messageInfo.setData(insertRet);
+            }
         }catch (Exception e){
             LOGGER.info("收藏失败",e.getMessage());
             messageInfo.setStatus(MessageStatus.ERROR_CODE);

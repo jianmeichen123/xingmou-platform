@@ -122,6 +122,11 @@
                    #{item}
                 </foreach>
         </where>
+        order by  field(projCode,
+        <foreach collection="codes" index="index" item="item" separator=",">
+            #{item}
+        </foreach>
+        )
     </select>
     
     <!-- 首页获取最新项目 -->

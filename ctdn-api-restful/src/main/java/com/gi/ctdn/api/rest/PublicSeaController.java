@@ -99,7 +99,7 @@ public class PublicSeaController {
         if(resultJson != null && resultJson.containsKey("connectSuccess")) {
             if(resultJson.getJSONObject("result").getInteger("success") ==0){
                 messageInfo = new MessageInfo(MessageStatus.ERROR_CODE,MessageStatus.ERROR_MESSAGE);
-                logger.error("服务器返回正常,获取数据失败");
+                logger.error("insertProject:服务器返回正常,插入数据失败:"+result);
             }
         }
         return messageInfo;
@@ -119,7 +119,7 @@ public class PublicSeaController {
             Integer connectSuccess = resultJson.getInteger("connectSuccess");
             if(resultJson.getJSONObject("result").getInteger("success") ==0){
                 messageInfo = new MessageInfo(MessageStatus.ERROR_CODE,MessageStatus.ERROR_MESSAGE);
-                logger.error("服务器返回正常,获取数据失败");
+                logger.error("queryPubSeaById:服务器返回正常,获取数据失败:"+result);
             }else{
                 JSONObject  resultObj = resultJson.getJSONObject("result");
                 JSONArray array = resultObj.getJSONObject("value").getJSONArray("beanList");
@@ -137,17 +137,12 @@ public class PublicSeaController {
         if(!jsonObject.containsKey("userId") || jsonObject.get("userId") .equals("")){
             return new MessageInfo(MessageStatus.NO_LOGIN,MessageStatus.NO_LOGIN_MESSAGE);
         }
-//        if(!jsonObject.containsKey("isClaim") || jsonObject.get("isClaim") .equals("") ||
-//                !jsonObject.containsKey("pageNo") || jsonObject.get("pageNo").equals("")||
-//                !jsonObject.containsKey("pageSize") || jsonObject.get("pageSize").equals("")){
-//            return new MessageInfo(MessageStatus.MISS_PARAMETER_CODE,MessageStatus.MISS_PARAMETER_MESSAGE);
-//        }
         String result = publicSeaRequest.getProject(jsonObject);
         JSONObject resultJson = JSONObject.parseObject(result);
         if(resultJson != null && resultJson.containsKey("connectSuccess")) {
             Integer connectSuccess = resultJson.getInteger("connectSuccess");
             if(resultJson.getJSONObject("result").getInteger("success") ==0){
-                logger.error("服务器返回正常,获取数据失败");
+                logger.error("queryPubSeaList:服务器返回正常,获取数据失败:"+result);
                 return  new MessageInfo(MessageStatus.ERROR_CODE,MessageStatus.ERROR_MESSAGE);
             }else{
                 JSONObject  resultObj = resultJson.getJSONObject("result");
@@ -193,7 +188,7 @@ public class PublicSeaController {
             Integer connectSuccess = resultJson.getInteger("connectSuccess");
             if(resultJson.getJSONObject("result").getInteger("success") ==0){
                 messageInfo = new MessageInfo(MessageStatus.ERROR_CODE,MessageStatus.ERROR_MESSAGE);
-                logger.error("服务器返回正常,获取数据失败");
+                logger.error("editProject:服务器返回正常,获取数据失败:"+result);
             }
         }
         return messageInfo;

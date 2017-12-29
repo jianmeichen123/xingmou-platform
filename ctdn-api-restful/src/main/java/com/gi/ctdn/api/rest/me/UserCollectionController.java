@@ -68,6 +68,7 @@ public class UserCollectionController {
         if(StringUtils.isEmpty(userCollection.getCode()) || StringUtils.isEmpty(userCollection.getType())){
             return new MessageInfo<>(MessageStatus.MISS_PARAMETER_CODE,MessageStatus.MISS_PARAMETER_MESSAGE);
         }
+        userCollection.setCreateTime(System.currentTimeMillis());
         MessageInfo<List<String>> messageInfo = userCollectionBiz.insertCollection(userCollection);
         return messageInfo;
     }

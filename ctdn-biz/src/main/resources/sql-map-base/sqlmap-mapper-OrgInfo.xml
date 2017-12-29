@@ -95,4 +95,21 @@
 		order by lastMonthInvestNum desc
 	</select>
 
+    <select id="selectByOrderList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="selectFields" />
+        FROM
+        app_org_info
+        <if test="orgCodesList != null">
+            where orgCode  in
+            <foreach collection="orgCodesList" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        order by field ( orgCode,
+            <foreach collection="orgCodesList" item="item"  separator=",">
+                #{item}
+            </foreach>
+        )
+    </select>
 </mapper>

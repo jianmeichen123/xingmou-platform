@@ -1,11 +1,9 @@
 package com.gi.ctdn.dao;
 
-import java.util.Date;
-import java.math.BigDecimal;
-import java.util.List;
+import com.gi.ctdn.pojo.Industry;
 import org.apache.ibatis.annotations.Param;
 
-import com.gi.ctdn.pojo.Industry;
+import java.util.List;
 
 public interface IndustryDAO {
 	

@@ -22,7 +22,7 @@ import java.util.Map;
  */
 @Configuration
 public class PublicSeaRequest {
-    private static final Logger logger = LoggerFactory.getLogger(AuthRequest.class);
+    private static final Logger logger = LoggerFactory.getLogger(PublicSeaRequest.class);
 
     @Value("${publicseaUrl}")
     private String publicseaUrl;
@@ -40,7 +40,7 @@ public class PublicSeaRequest {
         JSONObject resultJson = JSONObject.parseObject(result);
         if(resultJson != null && resultJson.containsKey("connectSuccess")) {
             Integer connectSuccess = resultJson.getInteger("connectSuccess");
-            logger.error("服务器返回正常,获取数据失败");
+            logger.error("getDictByType:服务器返回正常,获取数据失败");
         }
         return resultJson;
     }

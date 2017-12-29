@@ -22,6 +22,8 @@ public class UserCollection extends Query {
 
     private Integer typeNum;
 
+    private Long createTime;
+
     public Integer getTypeNum() {
         return typeNum;
     }
@@ -60,5 +62,13 @@ public class UserCollection extends Query {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
     }
 }

@@ -19,4 +19,6 @@ public interface UserCollectionDAO {
 
     public List<String> selectCodesByUT (@Param("userCode") String userCode,@Param("type") Integer type);
 
+    public UserCollection selectByCodeAndTypeAndUsercode(UserCollection userCollection);
+
 }

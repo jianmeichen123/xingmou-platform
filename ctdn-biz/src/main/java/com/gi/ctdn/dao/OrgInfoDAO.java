@@ -18,4 +18,6 @@ public interface OrgInfoDAO {
 	
 	List<OrgInfo> selectByOrgCodeList(@Param("orgCodesList")  List<String> orgCodesList);
 
+	List<OrgInfo> selectByOrderList(@Param("orgCodesList")  List<String> orgCodesList);
+
 }

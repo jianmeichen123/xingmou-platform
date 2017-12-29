@@ -87,9 +87,9 @@ public class OrgInfoBiz  {
 
 		List<OrgInfo> orgInfoList = new ArrayList<OrgInfo>();
 		try {
-			orgInfoList = orgInfoDAO.selectByOrgCodeList(orgCodes);
+			orgInfoList = orgInfoDAO.selectByOrderList(orgCodes);
 		} catch (Exception e) {
-			LOGGER.error("getListByOrgCodes","查询全部OrgInfo失败", e);
+			LOGGER.error("selectByOrderList","查询全部OrgInfo失败", e);
 		}
 		return orgInfoList;
 	}

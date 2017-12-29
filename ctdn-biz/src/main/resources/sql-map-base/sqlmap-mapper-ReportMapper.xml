@@ -61,6 +61,11 @@
 				#{item}
 			</foreach>
 		</where>
+		order by field ( id,
+		<foreach collection="ids" item="item"  separator=",">
+			#{item}
+		</foreach>
+		)
 	</select>
 
 </mapper>

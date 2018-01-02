@@ -22,12 +22,12 @@
         app_industry
     </select>
 
-    <select id="selectindustrysByStatus" resultMap="BaseResultMap">
+    <select id="selectindustrysByStatus" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         SELECT
         <include refid="selectFields"/>
         FROM
         app_industry
-        WHERE status = #{status,jdbcType=BIGINT}
+        WHERE status = #{status,jdbcType=INTEGER}
     </select>
 
     <select id="selectOrgindustrystatus" resultMap="BaseResultMap">

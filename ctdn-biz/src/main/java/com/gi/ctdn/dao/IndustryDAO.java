@@ -10,7 +10,7 @@ public interface IndustryDAO {
 	
 	List<Industry> selectAll();
 
-	List<Industry> selectindustrysByStatus(@Param("status") int status);
+	List<Industry> selectindustrysByStatus(@Param("status") Integer status);
 
 	List<Industry> selectOrgindustrystatus();
 	

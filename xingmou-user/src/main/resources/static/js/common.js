@@ -8,7 +8,6 @@ function setName(data){
     	$('#logined_model').css('display','none')
     }else{
     	var obj = JSON.parse(data)
-    	console.log(obj)
         if(obj['rolecode'] == 30000){
         	var mobile = obj['mobile']
         	$("span[name='id_name']").html(mobile.substring(0,5)+'******')
@@ -20,10 +19,10 @@ function setName(data){
         }
         $('#login_model').css('display','none')
     	$('#logined_model').css('display','block')
-    	$("#seek").show()
     }
 }
 
+$("#seek").click()
 function me(){
 	$.ajax({
         url : platformUrl.me,
@@ -520,7 +519,7 @@ function evaluating(){
 	location.href= htmlPlatformUrl.evaluating
 }
 function search_head(){
-	window.open(htmlPlatformUrl.search_finance, "_blank"); 
+	window.open(htmlPlatformUrl.toLoginPage, "_blank");
 }
 function index_head(){
 	location.href=index_href

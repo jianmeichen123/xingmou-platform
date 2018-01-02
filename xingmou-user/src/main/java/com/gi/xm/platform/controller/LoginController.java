@@ -456,7 +456,7 @@ public class LoginController implements EnvironmentAware{
 			setCacheSessionId(rtn,"external", sessionId,isAuto);
 			responsebody.setEntity(rtn);
 			responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "登录成功！"));
-			setCookie(response,user.getUserCode(),sessionId,"external",isAuto);
+			setCookie(response,rtn.getUserCode(),sessionId,"external",isAuto);
 			//cache.remove(key);
 			stringRedisTemplate.delete(key);
 			logger.info(user.getMobile()+"external user login success ctdn");

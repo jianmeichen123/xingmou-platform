@@ -7,11 +7,12 @@
 			<result column="type" property="type" jdbcType="INTEGER" />
 			<result column="typeNum" property="typeNum" jdbcType="INTEGER" />
 			<result column="userCode" property="userCode" jdbcType="VARCHAR" />
+			<result column="createTime" property="createTime" jdbcType="BIGINT" />
 	</resultMap>
 
 
 	<sql id="selectFields">
-		id, code, type, userCode
+		id, code, type, userCode, createTime
 	</sql>
 
 	<select id="selectCodesByUT" resultType="java.lang.String">
@@ -22,6 +23,7 @@
 		<where>
 			userCode = #{userCode,jdbcType=VARCHAR} AND
 			type = #{type,jdbcType=INTEGER}
+			order by createTime desc
 		</where>
 	</select>
 
@@ -46,13 +48,27 @@
 		group by type
 	</select>
 
+	<select id="selectByCodeAndTypeAndUsercode" resultMap="BaseResultMap" parameterType="com.gi.ctdn.pojo.me.UserCollection">
+		SELECT
+		<include refid="selectFields"/>
+		FROM
+		app_user_collection
+		<where>
+			userCode = #{userCode,jdbcType=VARCHAR} and
+			type = #{type,jdbcType=INTEGER} and
+			code = #{code,jdbcType=VARCHAR}
+		</where>
+	</select>
+
+
 	<insert id="insertOne" parameterType="com.gi.ctdn.pojo.me.UserCollection">
 		INSERT
 			app_user_collection
 		SET
 			userCode = #{userCode,jdbcType=VARCHAR},
 			type = #{type,jdbcType=INTEGER},
-			code = #{code,jdbcType=VARCHAR}
+			code = #{code,jdbcType=VARCHAR},
+			createTime = #{createTime,jdbcType=BIGINT}
 	</insert>
 
 	<delete id="deleteOne" parameterType="com.gi.ctdn.pojo.me.UserCollection">

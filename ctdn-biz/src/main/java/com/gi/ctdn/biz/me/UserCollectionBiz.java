@@ -52,8 +52,11 @@ public class UserCollectionBiz {
     public MessageInfo insertCollection(UserCollection userCollection){
         MessageInfo messageInfo = new MessageInfo();
         try{
-            int insertRet = userCollectionDAO.insertOne(userCollection);
-            messageInfo.setData(insertRet);
+            UserCollection one = userCollectionDAO.selectByCodeAndTypeAndUsercode(userCollection);
+            if(one ==null){
+                int insertRet = userCollectionDAO.insertOne(userCollection);
+                messageInfo.setData(insertRet);
+            }
         }catch (Exception e){
             LOGGER.info("收藏失败",e.getMessage());
             messageInfo.setStatus(MessageStatus.ERROR_CODE);
@@ -102,12 +105,12 @@ public class UserCollectionBiz {
         List<String> codeList  = countCodeList(userCollection.getUserCode(),userCollection.getType());
         //查询分页数据
         List resultList = new ArrayList();
-        PageHelper.startPage(userCollection.getPageNo()+1, userCollection.getPageSize());
         try{
             switch (userCollection.getType()){
                 case 0:{
                     //查询项目
                     if(ListUtil.isNotEmpty(codeList)) {
+                        PageHelper.startPage(userCollection.getPageNo()+1, userCollection.getPageSize());
                         resultList = projectListBiz.getListByCodes(codeList);
                     }
                     break;
@@ -115,6 +118,7 @@ public class UserCollectionBiz {
                 case 1:{
                     //查询机构
                     if(ListUtil.isNotEmpty(codeList)) {
+                        PageHelper.startPage(userCollection.getPageNo()+1, userCollection.getPageSize());
                         resultList = orgInfoBiz.getListByCodes(codeList);
                     }
                     break;
@@ -122,6 +126,7 @@ public class UserCollectionBiz {
                 case 2:{
                     //查询创业者
                     if(ListUtil.isNotEmpty(codeList)) {
+                        PageHelper.startPage(userCollection.getPageNo()+1, userCollection.getPageSize());
                         resultList = personBiz.getStartUpListByCodes(codeList);
                     }
                     break;
@@ -129,6 +134,7 @@ public class UserCollectionBiz {
                 case 3:{
                     //查询投资人
                     if(ListUtil.isNotEmpty(codeList)){
+                        PageHelper.startPage(userCollection.getPageNo()+1, userCollection.getPageSize());
                         resultList = personBiz.getInvestorListByCodes(codeList);
                     }
                     break;
@@ -136,6 +142,7 @@ public class UserCollectionBiz {
                 case 4:{
                     //查询报告
                     if(ListUtil.isNotEmpty(codeList)) {
+                        PageHelper.startPage(userCollection.getPageNo()+1, userCollection.getPageSize());
                         resultList = reportBiz.selectByIds(codeList);
                     }
                     break;

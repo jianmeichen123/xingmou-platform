@@ -34,6 +34,9 @@ public class PersonWorkExpr extends PojoInfo {
 	 */
 	private String type;
 
+
+	private String desc;
+
 	public Long getId() {
 		return id;
 	}
@@ -88,5 +91,13 @@ public class PersonWorkExpr extends PojoInfo {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 }

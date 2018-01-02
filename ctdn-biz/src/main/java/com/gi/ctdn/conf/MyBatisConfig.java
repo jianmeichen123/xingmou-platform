@@ -37,7 +37,7 @@ public class MyBatisConfig implements TransactionManagementConfigurer {
     public SqlSessionFactory sqlSessionFactoryBean() {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
-        bean.setTypeAliasesPackage("com.gi.xm.ods.dao");
+        //bean.setTypeAliasesPackage("com.gi.xm.ods.dao");
         //分页插件
         PageHelper pageHelper = new PageHelper();
         Properties properties = new Properties();

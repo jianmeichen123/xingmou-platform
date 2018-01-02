@@ -56,7 +56,7 @@ public class IndustryBiz  {
 		return messageInfo;
 	}
 
-	public MessageInfo<List<Industry>> getIndustrysByStatus(int status){
+	public MessageInfo<List<Industry>> getIndustrysByStatus(Integer status){
 
 		MessageInfo<List<Industry>> messageInfo = new MessageInfo<List<Industry>>();
 		try {

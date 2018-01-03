@@ -8,7 +8,7 @@ function setName(data){
     	$('#logined_model').css('display','none')
     }else{
     	var obj = JSON.parse(data)
-        if(obj['rolecode'] == 30000){
+        if(obj['roleCode'] == 30000){
         	var mobile = obj['mobile']
         	$("span[name='id_name']").html(mobile.substring(0,5)+'******')
         	 setCookie("realName",mobile)
@@ -36,15 +36,15 @@ function me(){
         success : function(data) {
         	setName(decodeURIComponent(data))
         	var entity = JSON.parse(decodeURIComponent(data))
-        	if(entity['rolecode'] ==10000 ){
+        	if(entity['roleCode'] ==10000 ){
         		index_href = htmlPlatformUrl.index_manager
         		return
         	}
-        	if(entity['rolecode'] == 20000){
+        	if(entity['roleCode'] == 20000){
         		index_href = htmlPlatformUrl.index_senior
         		return
         	}
-        	if(entity['rolecode'] == 30000 ){
+        	if(entity['roleCode'] == 30000 ){
         		index_href = htmlPlatformUrl.index_external
         		return
         	}

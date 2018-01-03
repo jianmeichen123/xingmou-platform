@@ -167,10 +167,13 @@ public class UserIndustryBiz {
 			}
 		}else{
 			if(departmentId!=null){
-				List<Integer> ids = getDefaultIndustry(departmentId);
-				if(ids!= null && ids.size()>0){
-					industryIds = new ArrayList<Integer>();
-					industryIds.addAll(ids);
+					String isEmpty = businessLineMappingIndustryDao.getByDepartmentId(departmentId);
+					if("0".equals(isEmpty)){ //重置状态
+					List<Integer>	ids =  getDefaultIndustry(departmentId);
+					if(ids!= null && ids.size()>0){
+						industryIds = new ArrayList<Integer>();
+						industryIds.addAll(ids);
+					}
 				}
 			}
 		}

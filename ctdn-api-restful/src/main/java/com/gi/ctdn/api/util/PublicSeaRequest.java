@@ -47,17 +47,14 @@ public class PublicSeaRequest {
 
 
     public String saveProject(JSONObject jsonObject){
+        System.out.print(jsonObject);
         String url = publicseaUrl+"brain/saveProject";
-        Map<String,Object> qMap = new HashedMap();
-        JSONArray valueJson = null;
         String result = QHtmlClient.get().post(url,null,jsonObject);
         return result;
     }
 
     public String getProject(JSONObject jsonObject){
         String url = publicseaUrl+"brain/getProject";
-        Map<String,Object> qMap = new HashedMap();
-        JSONArray valueJson = null;
         String result = QHtmlClient.get().post(url,null,jsonObject);
         return result;
     }

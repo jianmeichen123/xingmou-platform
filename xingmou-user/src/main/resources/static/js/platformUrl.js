@@ -2,9 +2,15 @@ var Constants = {
 	//platformContentURL: "http://ctdn.dev.userinternet.com/"
 
 		//platformContentURL: "http://localhost:8080/user-xingmou-server/"
+<<<<<<< Updated upstream
 		platformContentURL: "http://ctdndev.gi.com/user/",
 
 		htmlContentUrl : "http://ctdndev.gi.com/"
+=======
+		platformContentURL: "http://ctdn.galaxyinternet.com/user/",
+
+		htmlContentUrl : "http://ctdn.galaxyinternet.com/"
+>>>>>>> Stashed changes
 
 		//platformContentURL: endpointObj["project.home.page.url"]
 }

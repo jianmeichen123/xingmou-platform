@@ -60,7 +60,7 @@ public class LoginController implements EnvironmentAware{
     private String ctdn_external_index = "";
     private String ctdn_senior_index = "";
     private String ctdn_manager_index = "";
-
+	private String ctdn_index = "";
     private String ctdn_domain ="";
 
 	private static final Long  TZJL_ROLECODE = 10000l;		//星河投内部用户 投资经理用户code
@@ -74,10 +74,40 @@ public class LoginController implements EnvironmentAware{
 	private StringRedisTemplate stringRedisTemplate;
 
 
+	/**
+	 * 跳转登录
+	 */
+	@RequestMapping(value = "/index")
+	public String index(HttpServletResponse response, @CookieValue(name = "_uid_",required = false)String uid,@CookieValue(name = "s_",required = false)String s) {
+		try {
+			if (uid ==null ||s==null){
+				return "redirect:"+ctdn_index;
+			}
+			String key = "ctdn:"+s+":"+uid;
+			String user = (String)stringRedisTemplate.opsForValue().get(key);
+			String res_uir = ctdn_normal_index;
+			if(user!=null){
+				JSONObject jsonObject = (JSONObject) JSONObject.parse(URLDecoder.decode(user,"UTF-8"));
+				long roleCode  = jsonObject.getLongValue("roleCode");
+				if(roleCode == TZJL_ROLECODE){
+					res_uir =ctdn_manager_index ;
+				}else if(roleCode == GG_ROLECODE){
+					res_uir = ctdn_senior_index;
+				}else{
+					res_uir = ctdn_external_index;
+				}
+				return "redirect:"+res_uir;
+			}
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return "login";
+	}
+
     /**
      * 跳转登录
      */
-    @RequestMapping(value = "/toLogin")	
+    @RequestMapping(value = "/toLogin")
     public String toLogin(HttpServletResponse response, @CookieValue(name = "_uid_",required = false)String uid,@CookieValue(name = "s_",required = false)String s) {
     	try {
     		String key = "ctdn:"+s+":"+uid;
@@ -643,6 +673,7 @@ public class LoginController implements EnvironmentAware{
 		ctdn_manager_index = environment.getProperty("ctdn_manager_index");
 		ctdn_external_index = environment.getProperty("ctdn_external_index");
 		ctdn_senior_index = environment.getProperty("ctdn_senior_index");
+		ctdn_index = environment.getProperty("ctdn_index");
 		System.out.println("ctdn_normal_index:" + ctdn_normal_index + "domain:"+ctdn_domain + ",ctdn_manager_index:"+ctdn_manager_index 
 				+",ctdn_external_index:" +ctdn_external_index +",ctdn_senior_index:"+ctdn_senior_index);
 	}

@@ -11,11 +11,12 @@
                 <result column="introduction" property="introduction" jdbcType="LONGVARCHAR" />
                 <result column="projectCode" property="projectCode" jdbcType="VARCHAR" />
 				<result column="personCode" property="personCode" jdbcType="VARCHAR" />
+				<result column="personImage" property="personImage" jdbcType="VARCHAR" />
 	</resultMap>
 
 
 	<sql id="selectFields">
-		projectCode,projTitle,name,job,state,college,edu,introduction,personCode
+		projectCode,projTitle,name,job,state,college,edu,introduction,personCode,personImage
 	</sql>
 	
 			

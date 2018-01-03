@@ -60,6 +60,12 @@ public class ProjectTeam  {
     @ApiModelProperty(value = "人员简介")
     private String introduction;
 
+    /**
+     * @Fields personImage : 人员图片
+     */
+    @ApiModelProperty(value = "人员图片")
+    private String personImage;
+
     public void setProjectCode(String projectCode) {
         this.projectCode = projectCode;
     }
@@ -130,5 +136,13 @@ public class ProjectTeam  {
 
     public void setIntroduction(String introduction) {
         this.introduction = introduction;
+    }
+
+    public String getPersonImage() {
+        return personImage;
+    }
+
+    public void setPersonImage(String personImage) {
+        this.personImage = personImage;
     }
 }

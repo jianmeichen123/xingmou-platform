@@ -22,7 +22,7 @@ function setName(data){
     }
 }
 
-$("#seek").click()
+//$("#seek").click()
 function me(){
 	$.ajax({
         url : platformUrl.me,
@@ -519,7 +519,11 @@ function evaluating(){
 	location.href= htmlPlatformUrl.evaluating
 }
 function search_head(){
-	window.open(htmlPlatformUrl.toLoginPage, "_blank");
+	if(getCookie("_uid_")){
+		window.open(htmlPlatformUrl.search_finance, "_blank");
+	}else{
+		location.href=platformUrl.toLoginPage
+	}
 }
 function index_head(){
 	location.href=index_href

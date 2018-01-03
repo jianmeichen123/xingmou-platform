@@ -8,7 +8,7 @@ function setName(data){
     	$('#logined_model').css('display','none')
     }else{
     	var obj = JSON.parse(data)
-        if(obj['rolecode'] == 30000){
+        if(obj['roleCode'] == 30000){
         	var mobile = obj['mobile']
         	$("span[name='id_name']").html(mobile.substring(0,5)+'******')
         	 setCookie("realName",mobile)
@@ -22,7 +22,7 @@ function setName(data){
     }
 }
 
-$("#seek").click()
+//$("#seek").click()
 function me(){
 	$.ajax({
         url : platformUrl.me,
@@ -36,15 +36,15 @@ function me(){
         success : function(data) {
         	setName(decodeURIComponent(data))
         	var entity = JSON.parse(decodeURIComponent(data))
-        	if(entity['rolecode'] ==10000 ){
+        	if(entity['roleCode'] ==10000 ){
         		index_href = htmlPlatformUrl.index_manager
         		return
         	}
-        	if(entity['rolecode'] == 20000){
+        	if(entity['roleCode'] == 20000){
         		index_href = htmlPlatformUrl.index_senior
         		return
         	}
-        	if(entity['rolecode'] == 30000 ){
+        	if(entity['roleCode'] == 30000 ){
         		index_href = htmlPlatformUrl.index_external
         		return
         	}
@@ -519,7 +519,11 @@ function evaluating(){
 	location.href= htmlPlatformUrl.evaluating
 }
 function search_head(){
-	window.open(htmlPlatformUrl.toLoginPage, "_blank");
+	if(getCookie("_uid_")){
+		window.open(htmlPlatformUrl.search_finance, "_blank");
+	}else{
+		location.href=platformUrl.toLoginPage
+	}
 }
 function index_head(){
 	location.href=index_href

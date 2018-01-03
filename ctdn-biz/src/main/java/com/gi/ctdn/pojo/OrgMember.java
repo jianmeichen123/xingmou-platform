@@ -48,6 +48,7 @@ public class OrgMember extends Query {
 	 */
 	private String email;
 
+	private String personImage;
 
 	public String getInvstCode() {
 		return invstCode;
@@ -104,4 +105,12 @@ public class OrgMember extends Query {
 	public void setEmail(String email){
 		this.email = email;
 	}
-    }
+
+	public String getPersonImage() {
+		return personImage;
+	}
+
+	public void setPersonImage(String personImage) {
+		this.personImage = personImage;
+	}
+}

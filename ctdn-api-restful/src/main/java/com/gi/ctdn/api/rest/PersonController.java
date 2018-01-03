@@ -4,8 +4,13 @@ import com.gi.ctdn.biz.*;
 import com.gi.ctdn.pojo.*;
 import com.gi.ctdn.view.common.MessageInfo;
 import com.gi.ctdn.view.common.MessageStatus;
+import com.gi.ctdn.view.common.Pagination;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -23,6 +28,7 @@ public class PersonController {
 
 	private static MessageInfo errorRet = new MessageInfo(MessageStatus.MISS_PARAMETER_CODE,MessageStatus.MISS_PARAMETER_MESSAGE);
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(PersonController.class);
 	/**
 	 * 根据code查询创业者
 	 */
@@ -79,19 +85,37 @@ public class PersonController {
 	@RequestMapping(value = "queryPersonComExpr",method = RequestMethod.POST)
 	@ResponseBody
 	public MessageInfo<List<PersonComExpr>> queryPersonComExpr(@RequestBody PersonComExpr personComExpr){
+		MessageInfo<List<PersonComExpr>> messageInfo = new MessageInfo<>();
+		List<PersonComExpr> personComExprs=null;
 		try {
 			String code=personComExpr.getCode();
 			String type=personComExpr.getType();
 			if(StringUtils.isEmpty(code)){
-                return errorRet;
-            }
-			List<PersonComExpr> personComExprs = biz.queryPersonComExpr(code, type);
-			MessageInfo<List<PersonComExpr>> messageInfo = new MessageInfo<>();
-			messageInfo.setData(personComExprs);
-			return messageInfo;
+				return errorRet;
+			}
+
+			PageHelper.startPage(personComExpr.getPageNo()+1, personComExpr.getPageSize());
+
+			personComExprs = biz.queryPersonComExpr(code,type);
+
+
+			if(personComExpr.getPersonType().equals("I")) {
+				PageInfo<PersonComExpr> pageInfo = new PageInfo<PersonComExpr>(personComExprs);
+				Pagination page = new Pagination();
+				if (personComExprs != null && !personComExprs.isEmpty()) {
+					page.setTotal(pageInfo.getTotal());
+					page.setRecords(personComExprs);
+					messageInfo = new MessageInfo(MessageStatus.OK_CODE, MessageStatus.OK_MESSAGE, page);
+					return messageInfo;
+				}
+			}else{
+				messageInfo.setData(personComExprs);
+			}
 		} catch (Exception e) {
-			return errorRet;
+			LOGGER.error("queryPersonComExpr","查询queryPersonComExpr失败", e);
+			messageInfo = new MessageInfo(MessageStatus.ERROR_CODE,e.getMessage());
 		}
+			return messageInfo;
 	}
 
 	/**

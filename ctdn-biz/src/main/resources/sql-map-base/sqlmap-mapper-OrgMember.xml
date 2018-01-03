@@ -3,17 +3,18 @@
 <mapper namespace="com.gi.ctdn.dao.OrgMemberDAO">
 	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.OrgMember">
             <id column="invstCode" property="invstCode" jdbcType="VARCHAR" />
-                <result column="personCode" property="perId" jdbcType="VARCHAR" />
+                <result column="personCode" property="personCode" jdbcType="VARCHAR" />
                 <result column="name" property="name" jdbcType="VARCHAR" />
                 <result column="positions" property="positions" jdbcType="VARCHAR" />
                 <result column="status" property="status" jdbcType="VARCHAR" />
                 <result column="phoneNum" property="phoneNum" jdbcType="VARCHAR" />
                 <result column="email" property="email" jdbcType="VARCHAR" />
+				<result column="personImage" property="personImage" jdbcType="VARCHAR" />
     	</resultMap>
 
 
 	<sql id="selectFields">
-		invstCode,invstCode,name,positions,status,phoneNum,email
+		invstCode,name,positions,status,phoneNum,email,personImage,personCode
 	</sql>
 
 	<select id="selectOrgMemberById" resultMap="BaseResultMap">

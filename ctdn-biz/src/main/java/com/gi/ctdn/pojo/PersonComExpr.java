@@ -2,12 +2,12 @@ package com.gi.ctdn.pojo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.gi.ctdn.view.common.PojoInfo;
-
+import com.gi.ctdn.view.common.Query;
 
 /**
  * 创业经历
  */
-public class PersonComExpr extends PojoInfo {
+public class PersonComExpr   extends Query {
 	private Long id;
 	/**
 	 * 创业者/投资人code
@@ -73,6 +73,11 @@ public class PersonComExpr extends PojoInfo {
 	 * 创业者/投资人（S/I）
 	 */
 	private String type;
+
+	/**
+	 * 创业者/投资人（S/I）
+	 */
+	private String personType;
 
 	public Long getId() {
 		return id;
@@ -208,5 +213,13 @@ public class PersonComExpr extends PojoInfo {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getPersonType() {
+		return personType;
+	}
+
+	public void setPersonType(String personType) {
+		this.personType = personType;
 	}
 }

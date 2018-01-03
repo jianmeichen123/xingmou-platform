@@ -22,7 +22,7 @@ function setName(data){
     }
 }
 
-$("#seek").click()
+
 function me(){
 	$.ajax({
         url : platformUrl.me,
@@ -36,15 +36,15 @@ function me(){
         success : function(data) {
         	setName(decodeURIComponent(data))
         	var entity = JSON.parse(decodeURIComponent(data))
-        	if(entity['rolecode'] ==10000 ){
+        	if(entity['rolecode'] ==10000 ){  //投资经理
         		index_href = htmlPlatformUrl.index_manager
         		return
         	}
-        	if(entity['rolecode'] == 20000){
+        	if(entity['rolecode'] == 20000){  //高管
         		index_href = htmlPlatformUrl.index_senior
         		return
         	}
-        	if(entity['rolecode'] == 30000 ){
+        	if(entity['rolecode'] == 30000 ){ //创业者
         		index_href = htmlPlatformUrl.index_external
         		return
         	}

@@ -194,7 +194,7 @@ public class IndexController implements EnvironmentAware{
 		}
 		return resultMessageInfo;
     }
-    
+
     /**
      * 获取最新获投项目
      * @return
@@ -273,7 +273,7 @@ public class IndexController implements EnvironmentAware{
 		}
 		return messageInfo;
 	}
-    
+
     /**
      * 保存或更新用户关注行业
      * @return

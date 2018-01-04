@@ -47,7 +47,6 @@ public class PublicSeaRequest {
 
 
     public String saveProject(JSONObject jsonObject){
-        System.out.print(jsonObject);
         String url = publicseaUrl+"brain/saveProject";
         String result = QHtmlClient.get().post(url,null,jsonObject);
         return result;

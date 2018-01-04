@@ -152,15 +152,24 @@ public class LoginController implements EnvironmentAware{
 				} else  {
 					res_uir = ctdn_external_index;
 				}
+				logger.info("***user is not null**********"+roleCode+":"+res_uir);
+				return "redirect:" + res_uir;
 			}catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
-
 		}
 		//如果创投大脑未登录,设置redis,设置cookie 跳转首页变为已登录状态
 		User ctdnUser = new User();
 		String userCode = PWDUtils.generateUserCode(u.getId(),"internal");
 		Long roleCode = getRoleCode(u.getId());
+		if (roleCode == TZJL_ROLECODE) {
+			res_uir = ctdn_manager_index;
+		} else if (roleCode == GG_ROLECODE) {
+			res_uir = ctdn_senior_index;
+		} else  {
+			res_uir = ctdn_external_index;
+		}
+		logger.info("***user is  null**********"+roleCode+":"+res_uir);
 		ctdnUser.setUserCode(userCode);
 		ctdnUser.setRoleCode(roleCode);
 		ctdnUser.setRealName(u.getEmail());
@@ -674,7 +683,7 @@ public class LoginController implements EnvironmentAware{
 		ctdn_external_index = environment.getProperty("ctdn_external_index");
 		ctdn_senior_index = environment.getProperty("ctdn_senior_index");
 		ctdn_index = environment.getProperty("ctdn_index");
-		System.out.println("ctdn_normal_index:" + ctdn_normal_index + "domain:"+ctdn_domain + ",ctdn_manager_index:"+ctdn_manager_index 
+		System.out.println("ctdn_normal_index:" + ctdn_normal_index + "domain:"+ctdn_domain + ",ctdn_manager_index:"+ctdn_manager_index
 				+",ctdn_external_index:" +ctdn_external_index +",ctdn_senior_index:"+ctdn_senior_index);
 	}
 	

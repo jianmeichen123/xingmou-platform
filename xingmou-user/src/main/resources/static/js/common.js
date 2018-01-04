@@ -22,7 +22,7 @@ function setName(data){
     }
 }
 
-//$("#seek").click()
+
 function me(){
 	$.ajax({
         url : platformUrl.me,

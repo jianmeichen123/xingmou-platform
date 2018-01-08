@@ -1,6 +1,8 @@
 package com.gi.ctdn.conf;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -95,12 +97,15 @@ public class BaseDBConf {
     private volatile boolean testWhileIdle = DEFAULT_WHILE_IDLE;
     private boolean clearFiltersEnable = true;
 
-
+    private static final Logger logger = LoggerFactory.getLogger(BaseDBConf.class);
 
 
 
     @Bean(name = "dataSourceBase")
     public DataSource dataSource() throws SQLException {
+        logger.info("##########jdbcUrl:"+jdbcUrl);
+        logger.info("##########username:"+username);
+        logger.info("##########password:"+password);
         DruidDataSource dataSource = new DruidDataSource();
         dataSource.setDriverClassName(driverClass);
         dataSource.setUrl(jdbcUrl);

@@ -63,18 +63,6 @@
 		WHERE  projCode = #{code,jdbcType=VARCHAR}
 	</select>
 
-    <select id="selectCompetationlist" resultMap="BaseResultMap">
-        SELECT
-            <include refid="selectFields" />
-        FROM
-            app_project_list
-        <where> projCode in (
-            SELECT app_competitive_product.sim_prod_code FROM app_competitive_product WHERE app_competitive_product.base_prod_code =
-           #{sourceCode,jdbcType=VARCHAR} and is_same = #{isSame,jdbcType=BIGINT}
-            )
-        </where>
-    </select>
-
     <select id="selectCompetitiveSimilar" resultMap="BaseResultMap" >
         SELECT
             sim_prod_code as projCode, app_competitive_product.similarity as similarity ,is_same as isSame

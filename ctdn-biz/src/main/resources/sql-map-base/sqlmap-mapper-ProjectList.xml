@@ -46,6 +46,7 @@
                 <result column="invstAmount" property="invstAmount" jdbcType="VARCHAR" />
                 <result column="compScale" property="compScale" jdbcType="VARCHAR" />
                 <result column="valuation" property="valuation" jdbcType="VARCHAR" />
+                <result column="isSame" property="isSame" jdbcType="INTEGER" />
     	</resultMap>
 
 
@@ -73,13 +74,14 @@
             )
         </where>
     </select>
+
     <select id="selectCompetitiveSimilar" resultMap="BaseResultMap" >
         SELECT
-            sim_prod_code as projCode, app_competitive_product.similarity as similarity
+            sim_prod_code as projCode, app_competitive_product.similarity as similarity ,is_same as isSame
         FROM
             app_competitive_product
         <where>
-            base_prod_code =  #{sourceCode,jdbcType=BIGINT} and is_same = #{isSame,jdbcType=BIGINT}
+            base_prod_code =  #{sourceCode,jdbcType=BIGINT}
         </where>
     </select>
 

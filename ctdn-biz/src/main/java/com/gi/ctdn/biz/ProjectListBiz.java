@@ -7,6 +7,7 @@ import com.gi.ctdn.dao.*;
 import com.gi.ctdn.dao.me.UserIndustryDAO;
 import com.gi.ctdn.pojo.*;
 import com.gi.ctdn.pojo.me.UserIndustry;
+import com.gi.ctdn.view.common.ListUtil;
 import com.gi.ctdn.view.common.MessageInfo;
 import com.gi.ctdn.view.common.MessageStatus;
 import com.gi.ctdn.view.common.Pagination;
@@ -17,9 +18,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.lang.reflect.Array;
+import java.util.*;
 
 @Service("projectListBiz")
 public class ProjectListBiz {
@@ -46,8 +46,28 @@ public class ProjectListBiz {
 			ProjectList projectList = getOneByCode(sourceCode);
 			if(projectList != null){
 				ProjectListInfo projectListInfo = new ProjectListInfo();
-				List<ProjectList> directCompetationlist = getNewList(sourceCode,0);
-				List<ProjectList> indirectCompetationlist = getNewList(sourceCode,1);
+				List<ProjectList> directCompetationlist = new ArrayList<>();
+				List<ProjectList> indirectCompetationlist = new ArrayList<>();
+				List<ProjectList> cList = projectListDAO.selectCompetitiveSimilar(sourceCode);
+				List<String> codeList = new ArrayList<>();
+				Map<String,ProjectList> map = new HashMap<>();
+				if(ListUtil.isNotEmpty(cList)){
+					for(ProjectList c :cList){
+						codeList.add(c.getProjCode());
+						map.put(c.getProjCode(),c);
+					}
+					List<ProjectList> pList = projectListDAO.selectListByCodes(codeList);
+					for(ProjectList p : pList){
+						Integer same = map.get(p.getProjCode()).getIsSame();
+						Double similar = map.get(p.getProjCode()).getSimilarity();
+						p.setSimilarity(similar);
+						if(same == 0){
+							directCompetationlist.add(p);
+						}else if(same == 1){
+							indirectCompetationlist.add(p);
+						}
+					}
+				}
 				projectListInfo.setDirectCompetationlist(directCompetationlist);
 				projectListInfo.setIndirectCompetationlist(indirectCompetationlist);
 				message.setData(projectListInfo);
@@ -57,26 +77,6 @@ public class ProjectListBiz {
 			message.setStatus(MessageStatus.ERROR_CODE);
 		}
 		return message;
-	}
-
-	private List<ProjectList> getNewList(String sourceCode, Integer isSame) {
-		List<ProjectList> newList = new ArrayList<>();
-		//查询竞品列表
-		List<ProjectList> pList = projectListDAO.selectCompetationlist(sourceCode, isSame);
-		if (pList != null && !pList.isEmpty()) {
-			List<ProjectList> cList = projectListDAO.selectCompetitiveSimilar(sourceCode, isSame);
-			for (ProjectList s : cList) {
-				String code = s.getProjCode();
-				Double similar = s.getSimilarity();
-				for (ProjectList p : pList) {
-					if (code.equals(p.getProjCode())) {
-						p.setSimilarity(similar);
-						newList.add(p);
-					}
-				}
-			}
-		}
-		return newList;
 	}
 
 	public ProjectList getOneByCode(String code){

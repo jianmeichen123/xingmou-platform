@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.ChartProjectOrgPartnerDao">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.ChartProjectOrgPartner">
+          <result column="industryId" property="industryId" jdbcType="BIGINT" />
+          <result column="industryName" property="industryName" jdbcType="VARCHAR" />
+          <result column="industrySubId" property="industrySubId" jdbcType="BIGINT" />
+          <result column="industrySubName" property="industrySubName" jdbcType="VARCHAR" />
+          <result column="orgCode" property="orgCode" jdbcType="VARCHAR" />
+          <result column="orgName" property="orgName" jdbcType="VARCHAR" />
+          <result column="partnerOrgCode" property="partnerOrgCode" jdbcType="VARCHAR" />
+          <result column="partnerOrgName" property="partnerOrgName" jdbcType="VARCHAR" />
+          <result column="eventNum" property="eventNum" jdbcType="BIGINT" />
+          <result column="eventNumAll" property="eventNumAll" jdbcType="BIGINT" />
+          <result column="industryType" property="industryType" jdbcType="INTEGER" />
+          <result column="timeType" property="timeType" jdbcType="INTEGER" />
+	</resultMap>
+
+
+	<sql id="selectFields">
+		industryId,industryName,industrySubId,industrySubName,orgCode,orgName,partnerOrgCode,partnerOrgName,eventNum,eventNumAll,industryType,timeType
+	</sql>
+	
+	<select id="selectChartProjectOrgPartner" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		app_chart_project_org_partner
+		<where>
+			<trim prefixOverrides="and">
+				<if test="industryType">
+					and industryType = #{industryType}
+				</if>
+				<if test="timeType">
+					and timeType = #{timeType}
+				</if>
+			</trim>
+		</where>
+	</select>
+	
+	<select id="getPartnerCount" resultType="java.lang.Long">
+	SELECT
+		COUNT(*)
+	FROM
+	app_chart_project_org_partner
+	<where>
+		<trim prefixOverrides="and">
+			<if test="industryType">
+				and industryType = #{industryType}
+			</if>
+			<if test="timeType">
+				and timeType = #{timeType}
+			</if>
+			<if test="orgCode">
+				and orgCode = #{orgCode}
+			</if>
+		</trim>
+	</where>
+	</select>
+	<resultMap id="PartnerListResultMap" type="com.gi.ctdn.pojo.ChartProjectOrgPartner">
+          <result column="partnerOrgName" property="partnerOrgName" jdbcType="VARCHAR" />
+          <result column="eventNumAll" property="eventNumAll" jdbcType="BIGINT" />
+          <result column="orgJson" property="orgJson" jdbcType="VARCHAR" />
+     </resultMap>
+	<select id="getParentPartnerList" resultMap="PartnerListResultMap">
+		select partnerOrgName,eventNumAll,
+		CONCAT('[',GROUP_CONCAT(concat('{"name":"',name,'",','"num":"',eventNum,'"}') order by id asc) ,']') as orgJson from (
+		select id,name, d.partnerOrgName,if(eventNum is null,0,eventNum) as eventNum,d.eventNumAll from (
+		select * from(
+		select id,name from app_industry where parentId = #{industryId} ) as a
+		join
+		(select partnerOrgName,eventNumAll from app_chart_project_org_partner where industryType = #{industryType} and timeType = #{timeType} 
+		and orgCode= #{orgCode}
+		GROUP BY partnerOrgName,eventNumAll ) as b) as d
+		LEFT JOIN (SELECT * from app_chart_project_org_partner where industryType = #{industryType} and timeType = #{timeType}  and orgCode= #{orgCode}) AS c
+		on d.id = c.industryId and d.partnerOrgName=c.partnerOrgName ORDER BY id
+		) as ff GROUP BY partnerOrgName,eventNumAll 
+		ORDER BY  eventNumAll desc 
+	</select>
+	<select id="getChildPartnerList" resultMap="PartnerListResultMap">
+		select partnerOrgName,eventNumAll,
+		CONCAT('[',GROUP_CONCAT(concat('{"name":"',name,'",','"num":"',eventNum,'"}') order by id asc) ,']') as orgJson from (
+		select id,name, d.partnerOrgName,if(eventNum is null,0,eventNum) as eventNum,d.eventNumAll from (
+		select * from(
+		select id,name from app_industry where parentId = #{industryId} ) as a
+		join
+		(select partnerOrgName,eventNumAll from app_chart_project_org_partner where industryType = #{industryType} and timeType = #{timeType} 
+		and orgCode= #{orgCode}
+		GROUP BY partnerOrgName,eventNumAll ) as b) as d
+		LEFT JOIN (SELECT * from app_chart_project_org_partner where industryType = #{industryType} and timeType = #{timeType}  and orgCode= #{orgCode}) AS c
+		on d.id = c.industrySubId and d.partnerOrgName=c.partnerOrgName ORDER BY id
+		) as ff GROUP BY partnerOrgName,eventNumAll 
+		ORDER BY  eventNumAll desc 
+	</select>
+
+</mapper>

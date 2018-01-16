@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.ChartProjectOrgDao">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.ChartProjectOrg">
+          <result column="eventId" property="eventId" jdbcType="BIGINT" />
+          <result column="projCode" property="projCode" jdbcType="VARCHAR" />
+          <result column="projName" property="projName" jdbcType="VARCHAR" />
+          <result column="orgCode" property="orgCode" jdbcType="VARCHAR" />
+          <result column="orgName" property="orgName" jdbcType="VARCHAR" />
+          <result column="industryType" property="industryType" jdbcType="INTEGER" />
+          <result column="timeType" property="timeType" jdbcType="INTEGER" />
+	</resultMap>
+
+
+	<sql id="selectFields">
+		eventId,projCode,projName,orgCode,orgName,industryType,timeType
+	</sql>
+	
+	<select id="selectChartProjectOrg1" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		app_chart_project_org
+		<where>
+			<trim prefixOverrides="and">
+				<if test="industryType">
+					and industryType = #{industryType}
+				</if>
+				<if test="timeType">
+					and timeType = #{timeType}
+				</if>
+			</trim>
+		</where>
+	</select>
+
+	<select id="getDistrictProjectNameList" resultMap="BaseResultMap">
+		SELECT 
+		 <include refid="selectFields" />
+		FROM 
+		app_chart_project_org
+	   <where>
+			<trim prefixOverrides="and">
+				<if test="industryType">
+					and industryType = #{industryType}
+				</if>
+				<if test="timeType">
+					and timeType = #{timeType}
+				</if>
+			</trim>
+		</where>
+		GROUP BY projName
+	</select>
+	<select id="getDistrictOrgNameList" resultMap="BaseResultMap">
+		SELECT 
+		 <include refid="selectFields" />
+		FROM 
+		app_chart_project_org
+	   <where>
+			<trim prefixOverrides="and">
+				<if test="industryType">
+					and industryType = #{industryType}
+				</if>
+				<if test="timeType">
+					and timeType = #{timeType}
+				</if>
+			</trim>
+		</where>
+		GROUP BY orgName
+	</select>
+	
+	<resultMap id="BaseProjectOrgResultMap" type="com.gi.ctdn.pojo.ChartProjectOrg">
+          <result column="source" property="source" jdbcType="VARCHAR" />
+          <result column="target" property="target" jdbcType="VARCHAR" />
+          <result column="orgCode" property="orgCode" jdbcType="VARCHAR" />
+	</resultMap>
+		<select id="selectChartProjectOrg" resultMap="BaseProjectOrgResultMap">
+		SELECT
+		orgName as source,
+		projName as target,
+		orgCode as orgCode
+		FROM
+		app_chart_project_org
+		<where>
+			<trim prefixOverrides="and">
+				<if test="industryType">
+					and industryType = #{industryType}
+				</if>
+				<if test="timeType">
+					and timeType = #{timeType}
+				</if>
+			</trim>
+		</where>
+	</select>
+</mapper>

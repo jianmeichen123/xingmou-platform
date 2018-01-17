@@ -25,7 +25,18 @@ public class DistrictBiz  {
 	DistrictDAO districtDAO;
 
 
+	public MessageInfo<List<District>> getHotDistrict(){
 
+		MessageInfo<List<District>> messageInfo = new MessageInfo<List<District>>();
+		try {
+			List<District> districtList = districtDAO.selectHotDistrict();
+			messageInfo.setData( districtList);
+		} catch (Exception e) {
+			LOGGER.error("getHotDistrict","查询热门地区失败", e);
+			messageInfo.setStatus(10001);
+		}
+		return messageInfo;
+	}
 
 
     public MessageInfo<List<District>> getAllDistrict(){

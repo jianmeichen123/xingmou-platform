@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.gi.ctdn.dao.IndustryGroupDistrictDao;
+import com.gi.ctdn.pojo.IndustryEcharsQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -29,13 +31,11 @@ public class EchartsBiz {
 	
 	@Autowired
 	private IndustryRoundMergerDao industryRoundMergerDao;
-	
-	
+	@Autowired
+	private IndustryGroupDistrictDao industryGroupDistrictDao;
 	@Autowired
 	private StringRedisTemplate redisTemplate;
-	
-	
-	
+
 	/**
 	 * 高管首页----行业融资趋势
 	 * @return
@@ -92,5 +92,60 @@ public class EchartsBiz {
 		return messageInfo;
 	}
 
+	/**
+	 * 商业洞察-行业融资趋势
+	 */
+	public MessageInfo<EchartsData<IndustryMonth>> getIndustryByTimeRoundDistrict( IndustryEcharsQuery industryEcharsQuery) {
+		MessageInfo<EchartsData<IndustryMonth>> messageInfo = new MessageInfo<EchartsData<IndustryMonth>>();
+		List<IndustryMonth> industryMonthList  = new ArrayList<IndustryMonth>();
+		industryMonthList = industryGroupDistrictDao.getIndustryByTimeRoundDistrict(industryEcharsQuery);
+		EchartsData<IndustryMonth> echartsData = new EchartsData<IndustryMonth>();
+		List<String> xAxis = new ArrayList<String>();
+		List<String> legend = new ArrayList<String>();
+		int count = 0;
+		for(IndustryMonth industryMonth : industryMonthList){
+			if(count == 0){
+				xAxis.addAll(Arrays.asList(industryMonth.getDateStr().split(",")));
+				echartsData.setxAxis(xAxis);
+			}
+			legend.add(industryMonth.getIndustryName());
+			industryMonth.setInvestedNumStrList(Arrays.asList(industryMonth.getInvestedNumStr().split(",")));
+			industryMonth.setInvestedAmountStrList(Arrays.asList(industryMonth.getInvestedAmountStr().split(",")));
+			count ++;
+		}
+		echartsData.setLegend(legend);
+		echartsData.setSeries(industryMonthList);
+		messageInfo.setData(echartsData);
+		return messageInfo;
+	}
+
+
+	/**
+	 * 商业洞察--融资对比
+	 * @return
+	 */
+	public MessageInfo<EchartsData<IndustryRoundMerger>> getIndustryRoundForEcharts(IndustryEcharsQuery industryEcharsQuery) {
+		MessageInfo<EchartsData<IndustryRoundMerger>>  messageInfo = new MessageInfo<EchartsData<IndustryRoundMerger>>();
+		List<IndustryRoundMerger> industryRoundMergerList = new ArrayList<IndustryRoundMerger>();
+		industryRoundMergerList = industryGroupDistrictDao.getRoundByTimeDistrict(industryEcharsQuery);
+		EchartsData<IndustryRoundMerger> echartsData = new EchartsData<IndustryRoundMerger>();
+		List<String> xAxis = new ArrayList<String>();
+		List<String> legend = new ArrayList<String>();
+		int count = 0;
+		for(IndustryRoundMerger roundMerger : industryRoundMergerList){
+			if(count == 0){
+				xAxis.addAll(Arrays.asList(roundMerger.getIndustryNameStr().split(",")));
+				echartsData.setxAxis(xAxis);
+			}
+			legend.add(roundMerger.getRoundName());
+			roundMerger.setInvestedAmountList(Arrays.asList(roundMerger.getInvestedAmountStr().split(",")));
+			roundMerger.setInvestedNumList(Arrays.asList(roundMerger.getInvestedNumStr().split(",")));
+			count ++;
+		}
+		echartsData.setLegend(legend);
+		echartsData.setSeries(industryRoundMergerList);
+		messageInfo.setData(echartsData);
+		return messageInfo;
+	}
 }
  

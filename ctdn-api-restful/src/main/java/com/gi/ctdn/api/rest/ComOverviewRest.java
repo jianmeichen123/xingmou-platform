@@ -6,13 +6,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Controller
 @RequestMapping("comOverview")
@@ -23,22 +23,47 @@ public class ComOverviewRest {
     @Autowired
     private ComOverviewBiz comOverviewBiz;
 
-    @RequestMapping(value = "area",method = RequestMethod.GET)
+    private Integer lastyear(Integer recent){
+        if(recent==1||recent==3||recent==5){
+            SimpleDateFormat aSimpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+            GregorianCalendar aGregorianCalendar = new GregorianCalendar();
+            aGregorianCalendar.set(Calendar.YEAR, aGregorianCalendar.get(Calendar.YEAR) - recent);
+            Integer year = Integer.valueOf(aSimpleDateFormat.format(aGregorianCalendar.getTime()));
+            return year;
+        }
+        return null;
+    }
+    @RequestMapping(value = "area/{recent}",method = RequestMethod.GET)
     @ResponseBody
-    @Cacheable(value = "area",keyGenerator = "baseKG")
-    public List<Map<String, Object>> area(){
-        return comOverviewBiz.area(2017);
+    //@Cacheable(value = "area",keyGenerator = "baseKG")
+    public List<Map<String, Object>> area(@PathVariable int recent){
+        Integer year = lastyear(recent);
+        if (year != null){
+           return comOverviewBiz.area(year);
+        }
+        return null;
     }
 
-    @RequestMapping(value = "industry",method = RequestMethod.GET)
+    @RequestMapping(value = "industry/{recent}",method = RequestMethod.GET)
     @ResponseBody
-    public List<Map<String, Object>> industry(){
-        return comOverviewBiz.industry(2017);
+    public List<Map<String, Object>> industry(@PathVariable int recent){
+        Integer year = lastyear(recent);
+        if (year != null){
+            return comOverviewBiz.industry(2017);
+        }
+        return null;
     }
 
     @RequestMapping(value = "quarterOfIndustry",method = RequestMethod.GET)
     @ResponseBody
     public Map<String,Object> quarterOfIndustry(){
         return comOverviewBiz.quarterOfIndustry("");
+    }
+
+
+    @RequestMapping(value = "investedRate",method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> investedRate(){
+        return comOverviewBiz.investedRate();
     }
 }

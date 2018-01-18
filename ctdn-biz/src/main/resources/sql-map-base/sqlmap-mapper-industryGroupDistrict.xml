@@ -16,6 +16,21 @@
         <result column="investedNumStr" property="investedNumStr" jdbcType="VARCHAR"/>
     </resultMap>
 
+    <resultMap type="com.gi.ctdn.pojo.echars.IndustryGroupDistrictRZBK" id="IndustryGroupDistrictRZBK">
+        <result column="industryId" property="industryId" jdbcType="INTEGER"/>
+        <result column="industryName" property="name" jdbcType="VARCHAR"/>
+        <result column="districtSubName" property="districtSubName" jdbcType="VARCHAR"/>
+        <result column="eventNum" property="value" jdbcType="INTEGER"/>
+        <result column="parentId" property="parentId" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <resultMap type="com.gi.ctdn.pojo.echars.IndustryGroupDistrictCXHTFX" id="IndustryGroupDistrictCXHTFX">
+        <result column="industryId" property="industryId" jdbcType="INTEGER"/>
+        <result column="industryName" property="industryName" jdbcType="VARCHAR"/>
+        <result column="districtSubName" property="districtSubName" jdbcType="VARCHAR"/>
+        <result column="total" property="total" jdbcType="INTEGER"/>
+    </resultMap>
+
     <select id = "getIndustryByTimeRoundDistrict" resultMap="echartIndustryMonthMap" parameterType="com.gi.ctdn.pojo.IndustryEcharsQuery">
         select
             name, GROUP_CONCAT(vv.data ORDER BY vv.data asc ) as time,
@@ -55,7 +70,7 @@
                          and timeType ='Y' and timDim > DATE_FORMAT((CURDATE() - INTERVAL  #{time} YEAR), '%Y')
                      </when>
                  </choose>
-                  <if test="districtSubId != null">
+                  <if test="districtSubId != null and districtSubId != -1">
                        and districtSubId=#{districtSubId}
                   </if>
                   <if test="industryRoundId != null">
@@ -111,7 +126,7 @@
                     and timeType ='Y' and timDim > DATE_FORMAT((CURDATE() - INTERVAL  #{time} YEAR), '%Y')
                 </when>
             </choose>
-            <if test="districtSubId != null">
+            <if test="districtSubId != null and districtSubId != -1">
                 and districtSubId=#{districtSubId}
             </if>
         </trim>
@@ -134,5 +149,110 @@
         </choose>
         group by b.roundId
         ORDER BY b.roundId asc
+    </select>
+
+    <!--行业分析-融资板块-->
+    <select id="getIndustryGroupDistrictRZBK"  resultMap="IndustryGroupDistrictRZBK" parameterType="com.gi.ctdn.pojo.IndustryEcharsQuery">
+        select industryId,industryName,districtSubName,sum(eventNum) as eventNum , 0 as parentId
+        from app_industry_groupround_district
+        <trim prefix="where" prefixOverrides="and">
+            <choose>
+                <when test=' timeType != null and timeType == "D" '>
+                    and timeType= 'D' and timDim>DATE_FORMAT(date_sub(curdate(), interval #{time} day),'%Y-%m')
+                </when>
+                <when test=' timeType != null and timeType == "M" '>
+                    and timeType= 'M' and timDim>DATE_FORMAT(date_sub(curdate(), interval #{time} month),'%Y-%m')
+                </when>
+                <when test=' timeType != null and timeType == "Y" '>
+                    and timeType ='Y' and timDim > DATE_FORMAT((CURDATE() - INTERVAL  #{time} YEAR), '%Y')
+                </when>
+            </choose>
+            <if test="districtSubId != null and districtSubId != -1">
+                and districtSubId=#{districtSubId}
+            </if>
+            <if test="industryId != null and industryId !=0 ">
+                and industryId=#{industryId}
+            </if>
+            and industryType =1
+        </trim>
+        group by industryId
+        union all
+        select industrySubId as industryId, industrySubName as industryName,districtSubName,sum(eventNum) as eventNum ,industryId as parentId
+        from app_industry_groupround_district
+        <trim prefix="where" prefixOverrides="and">
+            <choose>
+                <when test=' timeType != null and timeType == "D" '>
+                    and timeType= 'D' and timDim>DATE_FORMAT(date_sub(curdate(), interval #{time} day),'%Y-%m')
+                </when>
+                <when test=' timeType != null and timeType == "M" '>
+                    and timeType= 'M' and timDim>DATE_FORMAT(date_sub(curdate(), interval #{time} month),'%Y-%m')
+                </when>
+                <when test=' timeType != null and timeType == "Y" '>
+                    and timeType ='Y' and timDim > DATE_FORMAT((CURDATE() - INTERVAL  #{time} YEAR), '%Y')
+                </when>
+            </choose>
+            <if test="districtSubId != null and districtSubId != -1">
+                and districtSubId=#{districtSubId}
+            </if>
+            <if test="industryId != null and industryId !=0">
+                and industryId=#{industryId}
+            </if>
+            and industryType =2
+        </trim>
+        group by industrySubId
+    </select>
+
+    <!--持续获投分析-->
+    <select id="getIndustryGroupDistrictCXHTFX" resultMap="IndustryGroupDistrictCXHTFX" parameterType="com.gi.ctdn.pojo.IndustryEcharsQuery" >
+        select aa.industryId,aa.industryName,bb.total  from (
+            SELECT id as industryId ,name  as industryName FROM app_industry where parentId= #{industryId}
+        )
+        as aa
+        left join
+        (
+        select industrySubId,industryId,
+        sum(eventId) as total
+        from app_chart_industry_district_continue
+        <trim prefix="where" prefixOverrides="and">
+            <choose>
+                <when test=' timeType != null and timeType == "D" '>
+                    and investDate>DATE_FORMAT(date_sub(curdate(), interval #{time} day),'%Y-%m')
+                </when>
+                <when test=' timeType != null and timeType == "M" '>
+                    and investDate>DATE_FORMAT(date_sub(curdate(), interval #{time} month),'%Y-%m')
+                </when>
+                <when test=' timeType != null and timeType == "Y" '>
+                    and investDate > DATE_FORMAT((CURDATE() - INTERVAL  #{time} YEAR), '%Y')
+                </when>
+            </choose>
+            <if test="districtSubId !=-1">
+                and districtSubId=#{districtSubId}
+            </if>
+            <if test="industryId != null and industryId !=0">
+                and industryId=#{industryId}
+            </if>
+            <if test="isHasNextEvent != null and isHasNextEvent !=0">
+                and isHasNextEvent=#{isHasNextEvent}
+            </if>
+        </trim>
+        <choose>
+            <when test=" industryId != 0 ">
+                group by industrySubId
+            </when>
+            <when test=" industryId == 0 ">
+                group by industryId
+            </when>
+        </choose>
+        )
+        as bb
+        <choose>
+            <when test=" industryId != 0 ">
+                on aa.industryId = bb.industrySubId
+            </when>
+            <when test=" industryId == 0 ">
+                on aa.industryId = bb.industryId
+            </when>
+        </choose>
+        order by aa.industryId
     </select>
 </mapper>

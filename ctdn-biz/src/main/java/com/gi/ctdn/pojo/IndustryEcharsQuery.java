@@ -24,6 +24,9 @@ public class IndustryEcharsQuery {
     @ApiModelProperty("天/月/年数")
     private Integer time;
 
+    @ApiModelProperty("是否进入下一轮:持续获投分析查询使用")
+    private Integer isHasNextEvent;
+
     public Integer getIndustryId() {
         return industryId;
     }
@@ -62,5 +65,13 @@ public class IndustryEcharsQuery {
 
     public void setTime(Integer time) {
         this.time = time;
+    }
+
+    public Integer getIsHasNextEvent() {
+        return isHasNextEvent;
+    }
+
+    public void setIsHasNextEvent(Integer isHasNextEvent) {
+        this.isHasNextEvent = isHasNextEvent;
     }
 }

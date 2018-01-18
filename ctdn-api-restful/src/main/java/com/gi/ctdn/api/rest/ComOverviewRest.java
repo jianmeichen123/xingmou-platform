@@ -23,12 +23,12 @@ public class ComOverviewRest {
     @Autowired
     private ComOverviewBiz comOverviewBiz;
 
-    private Integer lastyear(Integer recent){
+    private String lastyear(Integer recent){
         if(recent==1||recent==3||recent==5){
-            SimpleDateFormat aSimpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+            SimpleDateFormat aSimpleDateFormat = new SimpleDateFormat("yyyy-MM");
             GregorianCalendar aGregorianCalendar = new GregorianCalendar();
             aGregorianCalendar.set(Calendar.YEAR, aGregorianCalendar.get(Calendar.YEAR) - recent);
-            Integer year = Integer.valueOf(aSimpleDateFormat.format(aGregorianCalendar.getTime()));
+            String year = aSimpleDateFormat.format(aGregorianCalendar.getTime());
             return year;
         }
         return null;
@@ -37,7 +37,7 @@ public class ComOverviewRest {
     @ResponseBody
     //@Cacheable(value = "area",keyGenerator = "baseKG")
     public List<Map<String, Object>> area(@PathVariable int recent){
-        Integer year = lastyear(recent);
+        String year = lastyear(recent);
         if (year != null){
            return comOverviewBiz.area(year);
         }
@@ -47,9 +47,9 @@ public class ComOverviewRest {
     @RequestMapping(value = "industry/{recent}",method = RequestMethod.GET)
     @ResponseBody
     public List<Map<String, Object>> industry(@PathVariable int recent){
-        Integer year = lastyear(recent);
+        String year = lastyear(recent);
         if (year != null){
-            return comOverviewBiz.industry(2017);
+            return comOverviewBiz.industry(year);
         }
         return null;
     }

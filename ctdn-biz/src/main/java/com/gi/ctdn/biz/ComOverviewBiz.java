@@ -22,12 +22,12 @@ public class ComOverviewBiz {
     @Autowired
     private IndustryDAO industryDAO;
 
-    public  List<Map<String, Object>> area(Integer year) {
-        return comOverviewDao.area(year);
+    public  List<Map<String, Object>> area(String date) {
+        return comOverviewDao.area(date);
     }
 
-    public  List<Map<String, Object>> industry(Integer year) {
-        return comOverviewDao.industry(year);
+    public  List<Map<String, Object>> industry(String date) {
+        return comOverviewDao.industry(date);
     }
 
     public  Map<String,Object> quarterOfIndustry(String date) {

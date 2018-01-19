@@ -33,4 +33,19 @@ public class EventDistrictBiz {
         }
         return messageInfo;
     }
+
+    public MessageInfo<List<EventDistrict>> getListByTimeAndDistrict(Integer timeType,String districtSubName){
+
+        MessageInfo<List<EventDistrict>> messageInfo = new MessageInfo<List<EventDistrict>>();
+        try {
+            List<EventDistrict> eventDistrictList = eventDistrictDAO.selectByTimeAndDistrict(timeType,districtSubName);
+            messageInfo.setData(eventDistrictList);
+            messageInfo.setStatus(MessageStatus.OK_CODE);
+            messageInfo.setMessage(MessageStatus.OK_MESSAGE);
+        } catch (Exception e) {
+            LOGGER.error("getListByTimeAndDistrict","查询EventDistrict失败", e);
+            messageInfo.setStatus(MessageStatus.ERROR_CODE);
+        }
+        return messageInfo;
+    }
 }

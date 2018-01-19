@@ -23,4 +23,10 @@ public class EventDistrictController {
     public MessageInfo<List<EventDistrict>> getEventDistricts(@PathVariable Integer timeType){
         return eventDistrictBiz.getListByTimeType(timeType);
     }
+
+    @ResponseBody
+    @RequestMapping("getEventDistrictList/{timeType}/{districtSubName}")
+    public MessageInfo<List<EventDistrict>> getEventDistrictList(@PathVariable Integer timeType,@PathVariable String districtSubName ){
+        return eventDistrictBiz.getListByTimeAndDistrict(timeType,districtSubName);
+    }
 }

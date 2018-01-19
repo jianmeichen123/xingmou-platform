@@ -42,4 +42,10 @@ public class EventMergerInfoController {
         MessageInfo<EventMergerInfoSon> messageInfo = eventMergerInfoBiz.getListByEventId(eventId);
         return messageInfo;
     }
+
+    @RequestMapping("getMergerCount")
+    @ResponseBody
+    public MessageInfo<Integer> getMergerCount(){
+        return eventMergerInfoBiz.getMergerCount();
+    }
 }

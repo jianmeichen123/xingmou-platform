@@ -23,8 +23,19 @@
         FROM
         app_chart_event_district
         WHERE
-        timeType =  #{timeType}
+        timeType =  #{timeType} and districtId = 45057
         order by invstAmount desc
+    </select>
+
+    <select id="selectByTimeAndDistrict" resultMap="BaseResultMap">
+        SELECT
+        <include refid="selectFields"/>
+        FROM
+        app_chart_event_district
+        WHERE
+        timeType =  #{timeType}
+        <if test="districtSubName!='所有地区' "> and districtSubName = #{districtSubName}</if>
+        <if test='districtSubName=="所有地区" '> and districtName = "国内"</if>
     </select>
 
 </mapper>

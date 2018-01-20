@@ -21,4 +21,11 @@ public interface ComOverviewDao {
     @Select("select  * from app_chart_project_invested_rate")
     List<Map<String, String>> investedRate();
 
+
+    @Select("select industryName , projNum ,investQuarter from app_chart_project_setup where investQuarter in (select t.investQuarter from (select investQuarter from app_chart_project_setup group by investQuarter  order by investQuarter desc limit 8) as t)")
+    List<Map<String, Object>> projectSetup();
+
+    @Select("select investQuarter from app_chart_project_setup group by investQuarter  order by investQuarter desc limit 8")
+    List<Map<String,String>> projectSetupQuarter();
+
 }

@@ -24,7 +24,7 @@ public class ComOverviewRest {
     private ComOverviewBiz comOverviewBiz;
 
     private String lastyear(Integer recent){
-        if(recent==1||recent==3||recent==5){
+        if(recent==1||recent==3||recent==6){
             SimpleDateFormat aSimpleDateFormat = new SimpleDateFormat("yyyy-MM");
             GregorianCalendar aGregorianCalendar = new GregorianCalendar();
             aGregorianCalendar.set(Calendar.YEAR, aGregorianCalendar.get(Calendar.YEAR) - recent);
@@ -66,4 +66,11 @@ public class ComOverviewRest {
     public Map<String, Object> investedRate(){
         return comOverviewBiz.investedRate();
     }
+
+    @RequestMapping(value = "projectSetup",method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> projectSetup(){
+        return comOverviewBiz.projectSetup();
+    }
+
 }

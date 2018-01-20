@@ -57,5 +57,41 @@ public class ComOverviewBiz {
         return result;
 
     }
+
+    public Map<String, Object> projectSetup(){
+        Map<String,Object> result = new HashMap<>();
+        List<Map<String,String>> res = comOverviewDao.projectSetupQuarter();
+        List<Industry> industries = industryDAO.selectParentindustrys();
+        List<String> industryNames = new ArrayList<>();
+        Map<String,Integer> nameIndex= new HashMap<>();
+        int i = 0;
+        for(Industry industry:industries){
+            industryNames.add(industry.getName());
+            nameIndex.put(industry.getName(),i);
+            i++;
+        }
+        Map<String,int[]> data = new TreeMap<>();
+        List<String> quarters = new ArrayList<>();
+        Map<String,Integer> quartersCoumt = new TreeMap<>();
+        for (Map<String,String> m :res){
+            quarters.add(m.get("investQuarter"));
+            data.put(m.get("investQuarter"),new int[industryNames.size()]);
+            quartersCoumt.put(m.get("investQuarter"),0);
+        }
+        List<Map<String, Object>> projectSetupDate = comOverviewDao.projectSetup();
+        for(Map<String, Object> map:projectSetupDate){
+            int[] arr = data.get(map.get("investQuarter"));
+            String name = (String) map.get("industryName");
+            Integer index = nameIndex.get(name);
+            arr[index] = (int) map.get("projNum");
+            quartersCoumt.put((String) map.get("investQuarter"),quartersCoumt.get(map.get("investQuarter"))+(int) map.get("projNum"));
+            //data.get(map.get("investQuarter"))[nameIndex.get("industryName")] =Integer.parseInt(map.get("projNum"));
+        }
+        result.put("names",industryNames);
+        result.put("data:bar",data);
+        result.put("quarters",quarters);
+        result.put("quartersCoumt",quartersCoumt);
+        return result;
+    }
 }
 

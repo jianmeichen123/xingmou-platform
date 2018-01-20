@@ -1,7 +1,6 @@
 package com.gi.ctdn.api.rest.echars;
 
-import com.gi.ctdn.api.rest.IndexController;
-import com.gi.ctdn.biz.EchartsBiz;
+import com.gi.ctdn.biz.IndustryAnalizeEcharsBiz;
 import com.gi.ctdn.pojo.EchartsData;
 import com.gi.ctdn.pojo.IndustryEcharsQuery;
 import com.gi.ctdn.pojo.IndustryMonth;
@@ -9,7 +8,6 @@ import com.gi.ctdn.pojo.IndustryRoundMerger;
 import com.gi.ctdn.pojo.echars.IndustryGroupDistrictRZBK;
 import com.gi.ctdn.view.common.MessageInfo;
 import com.gi.ctdn.view.common.MessageStatus;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +29,7 @@ public class EcharsIndustryController {
     private Logger loger = LoggerFactory.getLogger(EcharsIndustryController.class);
 
     @Autowired
-    private EchartsBiz echartsBiz;
+    private IndustryAnalizeEcharsBiz  industryAnalizeEcharsBiz ;
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
@@ -47,7 +45,7 @@ public class EcharsIndustryController {
             if(StringUtils.isEmpty(industryEcharsQuery.getTimeType())){
                 return errorRet;
             }
-            messageInfo = echartsBiz.getIndustryByTimeRoundDistrict(industryEcharsQuery);
+            messageInfo = industryAnalizeEcharsBiz.getIndustryByTimeRoundDistrict(industryEcharsQuery);
         } catch (Exception e) {
             e.printStackTrace();
             loger.error("商业洞察-行业分析-行业融资对比接口失败,error:" + e.getMessage());
@@ -65,7 +63,7 @@ public class EcharsIndustryController {
             if(StringUtils.isEmpty(industryEcharsQuery.getTimeType())){
                 return errorRet;
             }
-            messageInfo = echartsBiz.getIndustryRoundForEcharts(industryEcharsQuery);
+            messageInfo = industryAnalizeEcharsBiz.getIndustryRoundForEcharts(industryEcharsQuery);
         } catch (Exception e) {
             e.printStackTrace();
             loger.error("获取高管行业融资对比,error:" + e.getMessage());
@@ -83,7 +81,7 @@ public class EcharsIndustryController {
             if(StringUtils.isEmpty(industryEcharsQuery.getTimeType())){
                 return errorRet;
             }
-            messageInfo = echartsBiz.getRZBK(industryEcharsQuery);
+            messageInfo = industryAnalizeEcharsBiz.getRZBK(industryEcharsQuery);
         } catch (Exception e) {
             e.printStackTrace();
             loger.error("商业洞察-行业分析-融资板块,error:" + e.getMessage());
@@ -101,10 +99,28 @@ public class EcharsIndustryController {
             if(industryEcharsQuery.getIndustryId() ==null || StringUtils.isEmpty(industryEcharsQuery.getTime())){
                 return errorRet;
             }
-            messageInfo = echartsBiz.getCXHTFX(industryEcharsQuery);
+            messageInfo = industryAnalizeEcharsBiz.getCXHTFX(industryEcharsQuery);
         } catch (Exception e) {
             e.printStackTrace();
             loger.error("商业洞察-行业分析-持续获投分析,error:" + e.getMessage());
+            messageInfo = new MessageInfo<>(MessageStatus.ERROR_CODE,MessageStatus.ERROR_MESSAGE);
+        }
+        return messageInfo;
+    }
+
+    @ApiOperation("商业洞察-行业分析-各轮次融资规模分布")
+    @RequestMapping("getRXGMFB")
+    @ResponseBody
+    public MessageInfo<EchartsData> getRXGMFB (@RequestBody IndustryEcharsQuery industryEcharsQuery){
+        MessageInfo<EchartsData> messageInfo = new MessageInfo<EchartsData>();
+        try {
+            if(industryEcharsQuery.getIndustryId() ==null || StringUtils.isEmpty(industryEcharsQuery.getTimeType())){
+                return errorRet;
+            }
+            messageInfo = industryAnalizeEcharsBiz.getRXGMFB(industryEcharsQuery);
+        } catch (Exception e) {
+            e.printStackTrace();
+            loger.error("商业洞察-行业分析-各轮次融资规模分布,error:" + e.getMessage());
             messageInfo = new MessageInfo<>(MessageStatus.ERROR_CODE,MessageStatus.ERROR_MESSAGE);
         }
         return messageInfo;

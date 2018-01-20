@@ -69,7 +69,7 @@
         FROM
             app_competitive_product
         <where>
-            base_prod_code =  #{sourceCode,jdbcType=BIGINT}
+            base_prod_code =  #{sourceCode,jdbcType=VARCHAR}
         </where>
     </select>
 

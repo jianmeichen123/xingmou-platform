@@ -62,6 +62,7 @@ public class LoginController implements EnvironmentAware{
     private String ctdn_manager_index = "";
 	private String ctdn_index = "";
     private String ctdn_domain ="";
+    private String ctdn_login="";
 
 	private static final Long  TZJL_ROLECODE = 10000l;		//星河投内部用户 投资经理用户code
 
@@ -101,7 +102,7 @@ public class LoginController implements EnvironmentAware{
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-		return "login";
+		return "redirect:"+ctdn_login;
 	}
 
     /**
@@ -128,14 +129,14 @@ public class LoginController implements EnvironmentAware{
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-        return "login";
+        return "redirect:"+ctdn_login;
     }
 
     @RequestMapping(value = "/auth")
     public String auth(HttpServletResponse response,String uid) {
 		com.galaxyinternet.model.user.User u =  (com.galaxyinternet.model.user.User)cache.get(uid);
 		if (u == null) {
-			return "login";
+			return "redirect:"+ctdn_login;
 		}
 		String key = "ctdn:internal:" + uid;
 		String user = stringRedisTemplate.opsForValue().get(key);
@@ -333,7 +334,7 @@ public class LoginController implements EnvironmentAware{
 		cookie.setPath("/");
 		response.addCookie(cookie);
         responsebody.setResult(new Result(Status.OK, Constants.OPTION_SUCCESS, "退出登录"));
-        return "login";
+        return "redirect:"+ctdn_login;
     }
 
     /**
@@ -528,15 +529,15 @@ public class LoginController implements EnvironmentAware{
 	        }
 	    }
 	 
-	 @RequestMapping("/toRegister")
-	 public String toRegister(){
-		 return "register";
-	 }
-	 
-	 @RequestMapping("/forgetPassword")
-	 public String forgetPassword(){
-		 return "forget_password";
-	 }
+//	 @RequestMapping("/toRegister")
+//	 public String toRegister(){
+//		 return "redirect:"+ctdn_register;
+//	 }
+//
+//	 @RequestMapping("/forgetPassword")
+//	 public String forgetPassword(){
+//		 return "redirect:"+ctdn_forgetpass;
+//	 }
 	 
 	/**
 	 * 检测手机号是否已经注册
@@ -683,6 +684,7 @@ public class LoginController implements EnvironmentAware{
 		ctdn_external_index = environment.getProperty("ctdn_external_index");
 		ctdn_senior_index = environment.getProperty("ctdn_senior_index");
 		ctdn_index = environment.getProperty("ctdn_index");
+		ctdn_login = environment.getProperty("ctdn_login");
 		System.out.println("ctdn_normal_index:" + ctdn_normal_index + "domain:"+ctdn_domain + ",ctdn_manager_index:"+ctdn_manager_index
 				+",ctdn_external_index:" +ctdn_external_index +",ctdn_senior_index:"+ctdn_senior_index);
 	}

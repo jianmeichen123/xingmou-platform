@@ -82,6 +82,9 @@ public class ComOverviewBiz {
         for(Map<String, Object> map:projectSetupDate){
             int[] arr = data.get(map.get("investQuarter"));
             String name = (String) map.get("industryName");
+            if (name ==null){
+                name = "其他";
+            }
             Integer index = nameIndex.get(name);
             arr[index] = (int) map.get("projNum");
             quartersCoumt.put((String) map.get("investQuarter"),quartersCoumt.get(map.get("investQuarter"))+(int) map.get("projNum"));

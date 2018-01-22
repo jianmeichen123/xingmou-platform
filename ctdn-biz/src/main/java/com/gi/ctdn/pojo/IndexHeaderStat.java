@@ -8,6 +8,18 @@ public class IndexHeaderStat extends PojoInfo {
 	public static final String PROJECTNUM = "projectNum";
 	public static final String ORGNUM = "orgNum";
 	public static final String EVENTNUM = "eventNum";
+	public static final String INVSTEDNUM = "invstedNum";
+	public static final String MERGERNUM = "mergerNum";
+	public static final String LISTEDNUM = "listedNum";
+	public static final String INVESTEDPROJNUM = "investedProjNum";
+	public static final String AMOUNT = "amount";
+	public static final String STARTUPNUM = "startUpNum";
+	public static final String INVESTORNUM = "investorNum";
+	public static final String INVSTEVENTNUM = "invstEventNum";
+	public static final String INVSTAMOUNT = "invstAmount";
+	public static final String YEAR = "year";
+	public static final String MONTH =  "month";
+	public static final String TYPE = "type";
 
 
 	/**
@@ -30,7 +42,14 @@ public class IndexHeaderStat extends PojoInfo {
 	 */
 	private Integer eventNum;
 
+	private  Integer invstedNum;
+
+	private Integer mergerNum;
+
+	private  Integer listedNum;
+
 	private Integer investedProjNum;
+
 	public Integer getInvestedProjNum() {
 		return investedProjNum;
 	}
@@ -127,5 +146,29 @@ public class IndexHeaderStat extends PojoInfo {
 
 	public void setEventNum(Integer eventNum){
 		this.eventNum = eventNum;
+	}
+
+	public Integer getInvstedNum() {
+		return invstedNum;
+	}
+
+	public void setInvstedNum(Integer invstedNum) {
+		this.invstedNum = invstedNum;
+	}
+
+	public Integer getMergerNum() {
+		return mergerNum;
+	}
+
+	public void setMergerNum(Integer mergerNum) {
+		this.mergerNum = mergerNum;
+	}
+
+	public Integer getListedNum() {
+		return listedNum;
+	}
+
+	public void setListedNum(Integer listedNum) {
+		this.listedNum = listedNum;
 	}
 }

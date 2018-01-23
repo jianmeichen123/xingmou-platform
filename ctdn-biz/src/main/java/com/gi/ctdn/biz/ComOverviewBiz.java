@@ -73,11 +73,13 @@ public class ComOverviewBiz {
         Map<String,int[]> data = new TreeMap<>();
         List<String> quarters = new ArrayList<>();
         Map<String,Integer> quartersCoumt = new TreeMap<>();
-        for (Map<String,String> m :res){
+        for (int j=res.size();j>0;j--){
+            Map<String,String> m = res.get(j-1);
             quarters.add(m.get("investQuarter"));
             data.put(m.get("investQuarter"),new int[industryNames.size()]);
             quartersCoumt.put(m.get("investQuarter"),0);
         }
+
         List<Map<String, Object>> projectSetupDate = comOverviewDao.projectSetup();
         for(Map<String, Object> map:projectSetupDate){
             int[] arr = data.get(map.get("investQuarter"));

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.MergerEquityDAO">
+    <resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.MergerEquity">
+        <id column="equityRateTypeId" property="equityRateTypeId" jdbcType="INTEGER"/>
+        <result column="equityRateTypeName" property="equityRateTypeName" jdbcType="VARCHAR"/>
+        <result column="mergerNum" property="mergerNum" jdbcType="INTEGER"/>
+        <result column="timeType" property="timeType" jdbcType="INTEGER"/>
+    </resultMap>
+
+
+    <sql id="selectFields">
+        equityRateTypeId,equityRateTypeName,mergerNum,timeType
+    </sql>
+
+
+    <select id="selectMergerEquityList" resultMap="BaseResultMap">
+        SELECT
+            <include refid="selectFields"/>
+        FROM
+        app_chart_merger_equity
+        WHERE
+        timeType =  #{timeType}
+    </select>
+
+</mapper>

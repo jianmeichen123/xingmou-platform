@@ -24,10 +24,6 @@ public class InvestRoundBiz  {
     @Autowired
 	InvestRoundDAO investRoundDAO;
 
-
-	
-
-
     public MessageInfo<List<InvestRound>> getAllInvestRound(){
 
 		MessageInfo<List<InvestRound>> messageInfo = new MessageInfo<List<InvestRound>>();
@@ -53,4 +49,5 @@ public class InvestRoundBiz  {
 		}
 		return messageInfo;
 	}
+
 }

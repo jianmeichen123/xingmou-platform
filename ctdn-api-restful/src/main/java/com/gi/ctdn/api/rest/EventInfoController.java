@@ -71,4 +71,9 @@ public class EventInfoController {
 		return messageInfo;
 
 	}
+	@ResponseBody
+	@RequestMapping(value = "getEventCount",method=RequestMethod.GET)
+	public MessageInfo<Integer> getEventCount(){
+		return eventInfoBiz.getEventCount();
+	}
 }

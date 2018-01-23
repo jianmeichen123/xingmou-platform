@@ -1,9 +1,16 @@
 package com.gi.ctdn.biz;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.gi.ctdn.dao.IndustryGroupDistrictDao;
+import com.gi.ctdn.pojo.IndustryEcharsQuery;
+import com.gi.ctdn.pojo.echars.IndustryGroupDistrictCXHTFX;
+import com.gi.ctdn.pojo.echars.IndustryGroupDistrictRZBK;
+import com.gi.ctdn.view.common.ListUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
@@ -18,6 +25,7 @@ import com.gi.ctdn.pojo.IndustryRoundMerger;
 import com.gi.ctdn.utils.Constants;
 import com.gi.ctdn.view.common.MessageInfo;
 
+import org.springframework.util.StringUtils;
 import redis.clients.jedis.ShardedJedis;
 import redis.clients.jedis.ShardedJedisPool;
 
@@ -29,27 +37,17 @@ public class EchartsBiz {
 	
 	@Autowired
 	private IndustryRoundMergerDao industryRoundMergerDao;
-	
-	
+
 	@Autowired
 	private StringRedisTemplate redisTemplate;
-	
-	
-	
+
 	/**
 	 * 高管首页----行业融资趋势
 	 * @return
 	 */
 	public MessageInfo<EchartsData<IndustryMonth>> getIndustryMonthForEchart() {
 		MessageInfo<EchartsData<IndustryMonth>> messageInfo = new MessageInfo<EchartsData<IndustryMonth>>();
-		String json = redisTemplate.opsForValue().get(Constants.INDUSTRY_INVESTED_TREND);
-		List<IndustryMonth> industryMonthList  = new ArrayList<IndustryMonth>();
-		if(json == null || json.trim().length() ==0){
-			industryMonthList = industryMonthDao.getIndustryMonthForEcharts();
-			redisTemplate.opsForValue().set(Constants.INDUSTRY_INVESTED_TREND, JSONObject.toJSONString(industryMonthList));
-		}else{
-			industryMonthList = (List<IndustryMonth>) JSONObject.parseArray(json, IndustryMonth.class);
-		}
+		List<IndustryMonth> industryMonthList  = industryMonthDao.getIndustryMonthForEcharts();
 		EchartsData<IndustryMonth> echartsData = new EchartsData<IndustryMonth>();
 		List<String> xAxis = new ArrayList<String>();
 		List<String> legend = new ArrayList<String>();
@@ -78,14 +76,7 @@ public class EchartsBiz {
      */
 	public MessageInfo<EchartsData<IndustryRoundMerger>> getIndustryRoundMergerForEcharts() {
 		MessageInfo<EchartsData<IndustryRoundMerger>>  messageInfo = new MessageInfo<EchartsData<IndustryRoundMerger>>();
-		String json = redisTemplate.opsForValue().get(Constants.INDUSTRY_INVESTED_COMPARE);
-		List<IndustryRoundMerger> industryRoundMergerList = new ArrayList<IndustryRoundMerger>();
-		if(json == null || json.trim().length() == 0){
-			industryRoundMergerList = industryRoundMergerDao.getIndustryRoundMergerForEcharts();
-			redisTemplate.opsForValue().set(Constants.INDUSTRY_INVESTED_COMPARE, JSONObject.toJSONString(industryRoundMergerList));
-		}else{
-			industryRoundMergerList = (List<IndustryRoundMerger>) JSONObject.parseArray(json, IndustryRoundMerger.class);
-		}
+		List<IndustryRoundMerger> industryRoundMergerList = industryRoundMergerDao.getIndustryRoundMergerForEcharts();
 		EchartsData<IndustryRoundMerger> echartsData = new EchartsData<IndustryRoundMerger>();
 		List<String> xAxis = new ArrayList<String>();
 		List<String> legend = new ArrayList<String>();
@@ -105,6 +96,7 @@ public class EchartsBiz {
 		messageInfo.setData(echartsData);
 		return messageInfo;
 	}
+
 
 }
  

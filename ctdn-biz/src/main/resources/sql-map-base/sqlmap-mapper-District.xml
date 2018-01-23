@@ -26,5 +26,16 @@
         order by districtType,sort asc
 
     </select>
+    <select id="selectHotDistrict" resultMap="BaseResultMap">
+        SELECT
+        <include refid="selectFields"/>
+        FROM
+        app_district
+        WHERE
+        districtLevel =1 and val = 1
+        order by districtType,sort asc
+
+    </select>
+
 
 </mapper>

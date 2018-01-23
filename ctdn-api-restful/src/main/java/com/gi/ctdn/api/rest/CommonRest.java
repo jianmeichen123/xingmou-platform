@@ -124,6 +124,20 @@ public class CommonRest {
         return districtMessageInfo;
     }
 
+    /**
+     *热门地区查询
+     * @return messageInfo
+     */
+    @ApiOperation("热门地区查询")
+    @RequestMapping(value="hotDistrict",method = RequestMethod.GET)
+    @ResponseBody
+    @Cacheable(value = "hotDistrict",keyGenerator = "baseKG")
+    public MessageInfo<List<District>> hotDistrict() {
+        MessageInfo<List<District>> districtMessageInfo = districtBiz.getHotDistrict();
+        List<District> districts = districtMessageInfo.getData();
+        districtMessageInfo.setData(districts);
+        return districtMessageInfo;
+    }
 
     /**
      *行业查询

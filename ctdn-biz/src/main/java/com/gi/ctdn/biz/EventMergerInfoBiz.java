@@ -65,4 +65,19 @@ public class EventMergerInfoBiz  {
 		}
 		return messageInfo;
 	}
+
+	public MessageInfo<Integer> getMergerCount(){
+		MessageInfo<Integer> messageInfo = new MessageInfo<>();
+		try{
+			Integer count = eventMergerInfoDAO.selectMergerCount();
+			messageInfo.setData(count);
+			messageInfo.setStatus(MessageStatus.OK_CODE);
+			messageInfo.setMessage(MessageStatus.OK_MESSAGE);
+		}catch (Exception e){
+			LOGGER.error(e.getMessage());
+			messageInfo.setStatus(MessageStatus.ERROR_CODE);
+			messageInfo.setMessage(MessageStatus.ERROR_MESSAGE);
+		}
+		return messageInfo;
+	}
 }

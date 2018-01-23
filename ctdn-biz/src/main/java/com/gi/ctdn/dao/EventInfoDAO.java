@@ -22,4 +22,6 @@ public interface EventInfoDAO {
 
 	List<EventInfo> selectFromCtdn(EventInfo info);
 
+	Integer selectEventCount();
+
 }

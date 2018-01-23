@@ -59,4 +59,10 @@
 		    app_event_merger_info
 	</select>
 
+    <select id="selectMergerCount" resultType="java.lang.Integer">
+        select count(*)
+        from
+        app_event_merger_info
+    </select>
+
 </mapper>

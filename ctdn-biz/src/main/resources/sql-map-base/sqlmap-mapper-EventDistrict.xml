@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.EventDistrictDAO">
+    <resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.EventDistrict">
+        <id column="districtId" property="districtId" jdbcType="INTEGER"/>
+        <result column="districtName" property="districtName" jdbcType="VARCHAR"/>
+        <result column="districtSubId" property="districtSubId" jdbcType="INTEGER"/>
+        <result column="districtSubName" property="districtSubName" jdbcType="VARCHAR"/>
+        <result column="eventNum" property="eventNum" jdbcType="INTEGER"/>
+        <result column="invstAmount" property="invstAmount" jdbcType="BIGINT"/>
+        <result column="timeType" property="timeType" jdbcType="INTEGER"/>
+    </resultMap>
+
+
+    <sql id="selectFields">
+        districtId,districtName,districtSubId,districtSubName,eventNum,invstAmount,timeType
+    </sql>
+
+
+    <select id="selectByTimeType" resultMap="BaseResultMap">
+        SELECT
+            <include refid="selectFields"/>
+        FROM
+        app_chart_event_district
+        WHERE
+        timeType =  #{timeType} and districtId = 45057
+        order by invstAmount desc
+    </select>
+
+    <select id="selectByTimeAndDistrict" resultMap="BaseResultMap">
+        SELECT
+        <include refid="selectFields"/>
+        FROM
+        app_chart_event_district
+        WHERE
+        timeType =  #{timeType}
+        <if test="districtSubName!='所有地区' "> and districtSubName = #{districtSubName}</if>
+        <if test='districtSubName=="所有地区" '> and districtName = "国内"</if>
+    </select>
+
+</mapper>

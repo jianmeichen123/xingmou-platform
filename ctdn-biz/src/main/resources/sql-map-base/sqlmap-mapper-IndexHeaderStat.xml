@@ -6,10 +6,15 @@
 		<result column="projectNum" property="projectNum" jdbcType="INTEGER" />
 		<result column="orgNum" property="orgNum" jdbcType="INTEGER" />
 		<result column="eventNum" property="eventNum" jdbcType="INTEGER" />
+		<result column="invstedNum" property="invstedNum" jdbcType="INTEGER" />
+		<result column="mergerNum" property="mergerNum" jdbcType="INTEGER" />
+		<result column="listedNum" property="listedNum" jdbcType="INTEGER" />
 		<result column="investedProjNum" property="investedProjNum" jdbcType="INTEGER" />
 		<result column="amount" property="amount" jdbcType="INTEGER" />
 		<result column="startUpNum" property="startUpNum" jdbcType="INTEGER" />
 		<result column="investorNum" property="investorNum" jdbcType="INTEGER" />
+		<result column="invstEventNum" property="invstEventNum" jdbcType="INTEGER" />
+		<result column="invstAmount" property="invstAmount" jdbcType="INTEGER" />
 		<result column="year" property="year" jdbcType="INTEGER" />
 		<result column="month" property="month" jdbcType="INTEGER" />
 		<result column="type" property="type" jdbcType="INTEGER" />
@@ -17,7 +22,7 @@
 
 
 	<sql id="selectFields">
-		id,projectNum,orgNum,eventNum,investedProjNum,amount,startUpNum,investorNum,year,month,type
+		id,projectNum,orgNum,eventNum,investedProjNum,amount,startUpNum,investorNum,year,month,type,invstedNum,mergerNum,listedNum,invstAmount,invstEventNum
 	</sql>
 
 
@@ -48,6 +53,15 @@
 					and year = #{year}
 				</if>
 			</trim>
+		</where>
+	</select>
+	<select id="selectAdd" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM
+		app_index_header_stat
+		<where>
+			type=2
 		</where>
 	</select>
 </mapper>

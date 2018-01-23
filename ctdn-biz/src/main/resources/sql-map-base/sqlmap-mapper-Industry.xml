@@ -58,4 +58,13 @@
 			</foreach>
 		</if>
     </select>
+    
+        <!-- 获取二级行业 -->
+    <select id="selectIndustryByParentId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="selectFields"/>
+        FROM
+        app_industry
+        WHERE parentId = #{parentId,jdbcType=INTEGER}
+    </select>
 </mapper>

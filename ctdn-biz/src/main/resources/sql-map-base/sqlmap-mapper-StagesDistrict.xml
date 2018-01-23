@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.StagesDistrictDAO">
+    <resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.StagesDistrict">
+        <id column="industryId" property="industryId" jdbcType="INTEGER"/>
+        <result column="industryName" property="industryName" jdbcType="VARCHAR"/>
+        <result column="industrySubId" property="industrySubId" jdbcType="INTEGER"/>
+        <result column="industrySubName" property="industrySubName" jdbcType="VARCHAR"/>
+        <result column="stagesId" property="stagesId" jdbcType="INTEGER"/>
+        <result column="stagesName" property="stagesName" jdbcType="VARCHAR"/>
+        <result column="districtId" property="districtId" jdbcType="INTEGER"/>
+        <result column="districtSubId" property="districtSubId" jdbcType="INTEGER"/>
+        <result column="districtSubName" property="districtSubName" jdbcType="VARCHAR"/>
+        <result column="eventNum" property="eventNum" jdbcType="INTEGER"/>
+        <result column="timDim" property="timDim" jdbcType="VARCHAR"/>
+        <result column="industryType" property="industryType" jdbcType="INTEGER"/>
+        <result column="invstAmount" property="invstAmount" jdbcType="BIGINT"/>
+        <result column="timeType" property="timeType" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <sql id="selectFields">
+        industryId,industryName,industrySubId,industrySubName,stagesId,stagesName,districtId,districtName,districtSubId,districtSubName,eventNum,invstAmount,timeType,timDim,industryType
+    </sql>
+
+    <select id="selectStagesDistricts" resultMap="BaseResultMap">
+        SELECT
+        timDim,sum(eventNum) as eventNum,sum(invstAmount) as invstAmount,districtSubName
+        FROM
+        app_industry_stages_district
+        WHERE
+        timeType =  #{timeType}
+        <if test="districtSubName!='所有地区' "> and districtSubName = #{districtSubName}</if>
+        <if test='districtSubName=="所有地区" '> and districtName = "国内"</if>
+        group by timDim desc limit 12
+    </select>
+
+    <select id="selectStages" resultMap="BaseResultMap">
+        SELECT
+        timDim,sum(eventNum) as eventNum,districtSubName
+        FROM
+        app_industry_stages_district
+        WHERE
+        timeType =  #{timeType} and stagesName=#{stagesName}
+        <if test="districtSubName!='所有地区' "> and districtSubName = #{districtSubName}</if>
+        <if test='districtSubName=="所有地区" '> and districtName = "国内"</if>
+        group by timDim desc limit 12
+    </select>
+</mapper>

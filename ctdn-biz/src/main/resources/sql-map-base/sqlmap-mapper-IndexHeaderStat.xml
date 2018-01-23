@@ -13,6 +13,8 @@
 		<result column="amount" property="amount" jdbcType="INTEGER" />
 		<result column="startUpNum" property="startUpNum" jdbcType="INTEGER" />
 		<result column="investorNum" property="investorNum" jdbcType="INTEGER" />
+		<result column="invstEventNum" property="invstEventNum" jdbcType="INTEGER" />
+		<result column="invstAmount" property="invstAmount" jdbcType="INTEGER" />
 		<result column="year" property="year" jdbcType="INTEGER" />
 		<result column="month" property="month" jdbcType="INTEGER" />
 		<result column="type" property="type" jdbcType="INTEGER" />
@@ -20,7 +22,7 @@
 
 
 	<sql id="selectFields">
-		id,projectNum,orgNum,eventNum,investedProjNum,amount,startUpNum,investorNum,year,month,type,invstedNum,mergerNum,listedNum
+		id,projectNum,orgNum,eventNum,investedProjNum,amount,startUpNum,investorNum,year,month,type,invstedNum,mergerNum,listedNum,invstAmount,invstEventNum
 	</sql>
 
 

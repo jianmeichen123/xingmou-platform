@@ -50,6 +50,10 @@ public class IndexHeaderStat extends PojoInfo {
 
 	private Integer investedProjNum;
 
+	private Integer invstEventNum;
+
+	private Integer invstAmount;
+
 	public Integer getInvestedProjNum() {
 		return investedProjNum;
 	}
@@ -170,5 +174,21 @@ public class IndexHeaderStat extends PojoInfo {
 
 	public void setListedNum(Integer listedNum) {
 		this.listedNum = listedNum;
+	}
+
+	public Integer getInvstEventNum() {
+		return invstEventNum;
+	}
+
+	public void setInvstEventNum(Integer invstEventNum) {
+		this.invstEventNum = invstEventNum;
+	}
+
+	public Integer getInvstAmount() {
+		return invstAmount;
+	}
+
+	public void setInvstAmount(Integer invstAmount) {
+		this.invstAmount = invstAmount;
 	}
 }

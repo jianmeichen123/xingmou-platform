@@ -53,4 +53,13 @@
 			</trim>
 		</where>
 	</select>
+	<select id="selectAdd" resultMap="BaseResultMap">
+		SELECT
+		<include refid="selectFields" />
+		FROM
+		app_index_header_stat
+		<where>
+			type=2
+		</where>
+	</select>
 </mapper>

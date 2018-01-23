@@ -4,6 +4,7 @@ package com.gi.ctdn.biz;
 
 import java.util.Calendar;
 
+import com.gi.ctdn.view.common.MessageStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -66,6 +67,21 @@ public class IndexHeaderStatBiz  {
 			messageInfo.setData( indexHeaderStat);
 		} catch (Exception e) {
 			LOGGER.error("getAllIndexHeaderStat","查询GGIndexHeaderStat失败", e);
+			messageInfo.setStatus(10001);
+		}
+		return messageInfo;
+	}
+
+	public MessageInfo<IndexHeaderStat> getStatAdd(){
+
+		MessageInfo<IndexHeaderStat> messageInfo = new MessageInfo<IndexHeaderStat>();
+		try {
+			IndexHeaderStat indexHeaderStat = indexHeaderStatDAO.selectAdd();
+			messageInfo.setData( indexHeaderStat);
+			messageInfo.setStatus(MessageStatus.OK_CODE);
+			messageInfo.setMessage(MessageStatus.OK_MESSAGE);
+		} catch (Exception e) {
+			LOGGER.error("getStatAdd","查询StatAdd失败", e);
 			messageInfo.setStatus(10001);
 		}
 		return messageInfo;

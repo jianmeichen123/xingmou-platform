@@ -12,4 +12,6 @@ public interface IndexHeaderStatDAO {
 	IndexHeaderStat select();
 
 	IndexHeaderStat selectByTypeOrDate(IndexHeaderStat query);
+
+	IndexHeaderStat selectAdd();
 }

@@ -329,6 +329,13 @@ public class IndexController implements EnvironmentAware{
         MessageInfo<IndexHeaderStat> messageInfo = indexHeaderStatBiz.getGGCurMonthHeaderStat();
         return messageInfo;
     }
+
+	@RequestMapping("queryHeaderStatAdd")
+	@ResponseBody
+	public MessageInfo<IndexHeaderStat> queryHeaderStatAdd (){
+		MessageInfo<IndexHeaderStat> messageInfo = indexHeaderStatBiz.getStatAdd();
+		return messageInfo;
+	}
     
     @RequestMapping("queryIndustryMonthForEchart")
     @ResponseBody

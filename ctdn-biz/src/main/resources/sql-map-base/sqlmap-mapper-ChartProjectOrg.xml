@@ -9,11 +9,15 @@
           <result column="orgName" property="orgName" jdbcType="VARCHAR" />
           <result column="industryType" property="industryType" jdbcType="INTEGER" />
           <result column="timeType" property="timeType" jdbcType="INTEGER" />
+          <result column="industryId" property="industryId" jdbcType="BIGINT" />
+          <result column="industryName" property="industryName" jdbcType="VARCHAR" />
+          <result column="industrySubId" property="industrySubId" jdbcType="BIGINT" />
+          <result column="industrySubName" property="industrySubName" jdbcType="VARCHAR" />
 	</resultMap>
 
 
 	<sql id="selectFields">
-		eventId,projCode,projName,orgCode,orgName,industryType,timeType
+		industryId,industryName,industrySubId,industrySubName,eventId,projCode,projName,orgCode,orgName,industryType,timeType
 	</sql>
 	
 	<select id="selectChartProjectOrg1" resultMap="BaseResultMap">
@@ -46,6 +50,9 @@
 				<if test="timeType">
 					and timeType = #{timeType}
 				</if>
+					<if test="industryId!=null">
+					and industryId = #{industryId}
+				</if>
 			</trim>
 		</where>
 		GROUP BY projName
@@ -62,6 +69,9 @@
 				</if>
 				<if test="timeType">
 					and timeType = #{timeType}
+				</if>
+				<if test="industryId!=null">
+					and industryId = #{industryId}
 				</if>
 			</trim>
 		</where>
@@ -88,7 +98,11 @@
 				<if test="timeType">
 					and timeType = #{timeType}
 				</if>
+				<if test="industryId!=null">
+					and industryId = #{industryId}
+				</if>
 			</trim>
 		</where>
+		
 	</select>
 </mapper>

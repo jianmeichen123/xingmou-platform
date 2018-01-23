@@ -11,4 +11,8 @@ public interface ChartProjectOrgCompeteDao {
 
 	Long getCompeteCount(ChartProjectOrgPartner chartProjectOrgPartner);
 
+	List<ChartProjectOrgCompete> getParentCompeteList(ChartProjectOrgCompete chartProjectOrgCompete);
+
+	List<ChartProjectOrgCompete> getChildCompeteList(ChartProjectOrgCompete chartProjectOrgCompete);
+
 }

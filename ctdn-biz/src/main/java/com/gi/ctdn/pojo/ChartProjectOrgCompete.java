@@ -1,5 +1,7 @@
 package com.gi.ctdn.pojo;
 
+import java.util.List;
+
 import com.gi.ctdn.view.common.PojoInfo;
 
 public class ChartProjectOrgCompete extends PojoInfo{
@@ -19,6 +21,23 @@ public class ChartProjectOrgCompete extends PojoInfo{
 	private Long eventNumAll;
 	private int industryType;
 	private int timeType;
+	
+	private List<Industry> industryList;
+	private String orgJson;
+	private List<ChartProjectOrgCompete> competeList;
+	
+	public String getOrgJson() {
+		return orgJson;
+	}
+	public void setOrgJson(String orgJson) {
+		this.orgJson = orgJson;
+	}
+	public List<ChartProjectOrgCompete> getCompeteList() {
+		return competeList;
+	}
+	public void setCompeteList(List<ChartProjectOrgCompete> competeList) {
+		this.competeList = competeList;
+	}
 	public Long getIndustryId() {
 		return industryId;
 	}
@@ -96,6 +115,12 @@ public class ChartProjectOrgCompete extends PojoInfo{
 	}
 	public void setTimeType(int timeType) {
 		this.timeType = timeType;
+	}
+	public List<Industry> getIndustryList() {
+		return industryList;
+	}
+	public void setIndustryList(List<Industry> industryList) {
+		this.industryList = industryList;
 	}
 	
 	

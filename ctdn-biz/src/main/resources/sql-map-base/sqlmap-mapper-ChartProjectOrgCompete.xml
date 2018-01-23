@@ -9,7 +9,7 @@
           <result column="orgCode" property="orgCode" jdbcType="VARCHAR" />
           <result column="orgName" property="orgName" jdbcType="VARCHAR" />
           <result column="competeOrgCode" property="competeOrgCode" jdbcType="VARCHAR" />
-          <result column="competeOrgName" property="partnerOrgName" jdbcType="VARCHAR" />
+          <result column="competeOrgName" property="competeOrgName" jdbcType="VARCHAR" />
           <result column="orgEventNum" property="orgEventNum" jdbcType="BIGINT" />
           <result column="competeOrgEventNum" property="competeOrgEventNum" jdbcType="BIGINT" />
           <result column="eventNumAll" property="eventNumAll" jdbcType="BIGINT" />
@@ -54,8 +54,45 @@
 			<if test="orgCode">
 				and orgCode = #{orgCode}
 			</if>
+			<if test="industryId">
+				and industryId = #{industryId}
+			</if>
 		</trim>
 	</where>
+	</select>
+	
+		<resultMap id="CompeteListResultMap" type="com.gi.ctdn.pojo.ChartProjectOrgCompete">
+          <result column="competeOrgName" property="competeOrgName" jdbcType="VARCHAR" />
+          <result column="eventNumAll" property="eventNumAll" jdbcType="BIGINT" />
+          <result column="orgJson" property="orgJson" jdbcType="VARCHAR" />
+     </resultMap>
+	<select id="getParentCompeteList" resultMap="CompeteListResultMap">
+ select competeOrgName,eventNumAll, CONCAT(GROUP_CONCAT(concat(name,':',orgEventNum,':',competeOrgEventNum) order by id asc) ) as orgJson  from (
+		select id,name, d.competeOrgName,if(orgEventNum is null,0,orgEventNum) as orgEventNum,if(competeOrgEventNum is null,0,competeOrgEventNum) as competeOrgEventNum ,d.eventNumAll from (
+		select * from(
+		select id,name from app_industry where parentId = #{industryId} ) as a
+		join
+		(select competeOrgName,eventNumAll from app_chart_project_org_compete where industryType = #{industryType} and timeType = #{timeType} 
+		and orgCode= #{orgCode}
+		GROUP BY competeOrgName,eventNumAll ) as b) as d
+		LEFT JOIN (SELECT * from app_chart_project_org_compete where industryType = #{industryType} and timeType = #{timeType}  and orgCode= #{orgCode} ) AS c
+		on d.id = c.industryId and d.competeOrgName=c.competeOrgName ORDER BY id
+		) as ff GROUP BY competeOrgName,eventNumAll 
+		ORDER BY  eventNumAll desc limit 10
+	</select>
+	<select id="getChildCompeteList" resultMap="CompeteListResultMap">
+ select competeOrgName,eventNumAll, CONCAT(GROUP_CONCAT(concat(name,':',orgEventNum,':',competeOrgEventNum) order by id asc) ) as orgJson  from (
+		select id,name, d.competeOrgName,if(orgEventNum is null,0,orgEventNum) as orgEventNum,if(competeOrgEventNum is null,0,competeOrgEventNum) as competeOrgEventNum ,d.eventNumAll from (
+		select * from(
+		select id,name from app_industry where parentId = #{industryId} ) as a
+		join
+		(select competeOrgName,eventNumAll from app_chart_project_org_compete where industryType = #{industryType} and timeType = #{timeType}  and industryId=#{industryId}
+		and orgCode= #{orgCode}
+		GROUP BY competeOrgName,eventNumAll ) as b) as d
+		LEFT JOIN (SELECT * from app_chart_project_org_compete where industryType = #{industryType} and timeType = #{timeType}  and orgCode= #{orgCode} and industryId=#{industryId}) AS c
+		on d.id = c.industrySubId and d.competeOrgName=c.competeOrgName ORDER BY id
+		) as ff GROUP BY competeOrgName,eventNumAll 
+		ORDER BY  eventNumAll desc limit 10
 	</select>
 
 </mapper>

@@ -5,7 +5,34 @@ import com.gi.ctdn.view.common.PojoInfo;
 public class ChartProjectOrg extends PojoInfo{
 
 	private static final long serialVersionUID = 1L;
-	
+	private Long industryId;
+	private String industryName;
+	private Long industrySubId;
+	private String industrySubName;
+	public Long getIndustryId() {
+		return industryId;
+	}
+	public void setIndustryId(Long industryId) {
+		this.industryId = industryId;
+	}
+	public String getIndustryName() {
+		return industryName;
+	}
+	public void setIndustryName(String industryName) {
+		this.industryName = industryName;
+	}
+	public Long getIndustrySubId() {
+		return industrySubId;
+	}
+	public void setIndustrySubId(Long industrySubId) {
+		this.industrySubId = industrySubId;
+	}
+	public String getIndustrySubName() {
+		return industrySubName;
+	}
+	public void setIndustrySubName(String industrySubName) {
+		this.industrySubName = industrySubName;
+	}
 	private Long eventId;
 	private String projCode;
 	private String projName;

@@ -111,10 +111,10 @@ public class OrgChartController {
 	//机构分析-热门机构投资关系[竞争]
 	@RequestMapping("/orgCompete")
 	@ResponseBody
-	public MessageInfo<List<ChartProjectOrgCompete>> getAppChartOrgCompete(@RequestBody ChartProjectOrgCompete chartProjectOrgCompete){
-		MessageInfo<List<ChartProjectOrgCompete>> info = new MessageInfo<List<ChartProjectOrgCompete>> ();
+	public MessageInfo<ChartProjectOrgCompete> getAppChartOrgCompete(@RequestBody ChartProjectOrgCompete chartProjectOrgCompete){
+		MessageInfo<ChartProjectOrgCompete> info = new MessageInfo<ChartProjectOrgCompete> ();
 		try {
-			List<ChartProjectOrgCompete> orgIndustriyList = orgChartBiz.getChartOrgCompete(chartProjectOrgCompete);
+			ChartProjectOrgCompete orgIndustriyList = orgChartBiz.getChartOrgCompete(chartProjectOrgCompete);
 			info.setData(orgIndustriyList);
 		} catch (Exception e) {
 			e.printStackTrace();

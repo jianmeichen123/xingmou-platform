@@ -54,6 +54,9 @@
 			<if test="orgCode">
 				and orgCode = #{orgCode}
 			</if>
+			<if test="industryId">
+				and industryId = #{industryId}
+			</if>
 		</trim>
 	</where>
 	</select>
@@ -70,12 +73,12 @@
 		select id,name from app_industry where parentId = #{industryId} ) as a
 		join
 		(select partnerOrgName,eventNumAll from app_chart_project_org_partner where industryType = #{industryType} and timeType = #{timeType} 
-		and orgCode= #{orgCode}
+		and orgCode= #{orgCode} 
 		GROUP BY partnerOrgName,eventNumAll ) as b) as d
 		LEFT JOIN (SELECT * from app_chart_project_org_partner where industryType = #{industryType} and timeType = #{timeType}  and orgCode= #{orgCode}) AS c
 		on d.id = c.industryId and d.partnerOrgName=c.partnerOrgName ORDER BY id
 		) as ff GROUP BY partnerOrgName,eventNumAll 
-		ORDER BY  eventNumAll desc 
+		ORDER BY  eventNumAll desc limit 10
 	</select>
 	<select id="getChildPartnerList" resultMap="PartnerListResultMap">
 		select partnerOrgName,eventNumAll,
@@ -84,13 +87,13 @@
 		select * from(
 		select id,name from app_industry where parentId = #{industryId} ) as a
 		join
-		(select partnerOrgName,eventNumAll from app_chart_project_org_partner where industryType = #{industryType} and timeType = #{timeType} 
+		(select partnerOrgName,eventNumAll from app_chart_project_org_partner where industryType = #{industryType} and timeType = #{timeType}  and industryId=#{industryId}
 		and orgCode= #{orgCode}
 		GROUP BY partnerOrgName,eventNumAll ) as b) as d
-		LEFT JOIN (SELECT * from app_chart_project_org_partner where industryType = #{industryType} and timeType = #{timeType}  and orgCode= #{orgCode}) AS c
+		LEFT JOIN (SELECT * from app_chart_project_org_partner where industryType = #{industryType} and timeType = #{timeType}  and orgCode= #{orgCode} and industryId=#{industryId}) AS c
 		on d.id = c.industrySubId and d.partnerOrgName=c.partnerOrgName ORDER BY id
 		) as ff GROUP BY partnerOrgName,eventNumAll 
-		ORDER BY  eventNumAll desc 
+		ORDER BY  eventNumAll desc limit 10
 	</select>
 
 </mapper>

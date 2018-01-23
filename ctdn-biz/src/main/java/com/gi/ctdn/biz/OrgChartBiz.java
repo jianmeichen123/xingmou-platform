@@ -79,8 +79,19 @@ public class OrgChartBiz {
 		return orgPartner;
 	}
 
-	public List<ChartProjectOrgCompete> getChartOrgCompete(ChartProjectOrgCompete chartProjectOrgCompete) {
-		return chartProjectOrgCompeteDao.selectChartProjectOrgCompete(chartProjectOrgCompete);
+	public ChartProjectOrgCompete getChartOrgCompete(ChartProjectOrgCompete chartProjectOrgCompete) {
+		ChartProjectOrgCompete orgCompete = new ChartProjectOrgCompete();
+		Long parentId  = chartProjectOrgCompete.getIndustryId();
+		List<Industry> industryList = industryDAO.selectIndustryByParentId(Integer.valueOf(parentId.intValue()));
+		orgCompete.setIndustryList(industryList);
+		List<ChartProjectOrgCompete> partnerList = new ArrayList<ChartProjectOrgCompete>();
+		if(parentId == 0){ //一级行业
+			partnerList = chartProjectOrgCompeteDao.getParentCompeteList(chartProjectOrgCompete);
+		}else{ //二级行业
+			partnerList = chartProjectOrgCompeteDao.getChildCompeteList(chartProjectOrgCompete);
+		}
+		orgCompete.setCompeteList(partnerList);
+		return orgCompete;
 	}
 
 	public ChartProjectOrgPartner getOrgPartnerAndCompeteCount(ChartProjectOrgPartner chartProjectOrgPartner) {

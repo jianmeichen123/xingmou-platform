@@ -39,6 +39,7 @@
 				</if>
 			</trim>
 		</where>
+		order by rank asc limit 8
 	</select>
 
 </mapper>

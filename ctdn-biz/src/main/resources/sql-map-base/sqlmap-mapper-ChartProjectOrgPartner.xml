@@ -66,8 +66,7 @@
           <result column="orgJson" property="orgJson" jdbcType="VARCHAR" />
      </resultMap>
 	<select id="getParentPartnerList" resultMap="PartnerListResultMap">
-		select partnerOrgName,eventNumAll,
-		CONCAT('[',GROUP_CONCAT(concat('{"name":"',name,'",','"num":"',eventNum,'"}') order by id asc) ,']') as orgJson from (
+ select partnerOrgName,eventNumAll, CONCAT(GROUP_CONCAT(concat(name,':',eventNum) order by id asc)) as orgJson  from (
 		select id,name, d.partnerOrgName,if(eventNum is null,0,eventNum) as eventNum,d.eventNumAll from (
 		select * from(
 		select id,name from app_industry where parentId = #{industryId} ) as a
@@ -81,8 +80,7 @@
 		ORDER BY  eventNumAll desc limit 10
 	</select>
 	<select id="getChildPartnerList" resultMap="PartnerListResultMap">
-		select partnerOrgName,eventNumAll,
-		CONCAT('[',GROUP_CONCAT(concat('{"name":"',name,'",','"num":"',eventNum,'"}') order by id asc) ,']') as orgJson from (
+		 select partnerOrgName,eventNumAll, CONCAT(GROUP_CONCAT(concat(name,':',eventNum) order by id asc)) as orgJson  from (
 		select id,name, d.partnerOrgName,if(eventNum is null,0,eventNum) as eventNum,d.eventNumAll from (
 		select * from(
 		select id,name from app_industry where parentId = #{industryId} ) as a

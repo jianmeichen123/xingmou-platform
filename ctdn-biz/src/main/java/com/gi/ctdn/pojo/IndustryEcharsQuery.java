@@ -27,6 +27,9 @@ public class IndustryEcharsQuery {
     @ApiModelProperty("是否进入下一轮:持续获投分析查询使用")
     private Integer isHasNextEvent;
 
+    @ApiModelProperty("季度筛选")
+    private String investQuarter;
+
     public Integer getIndustryId() {
         return industryId;
     }
@@ -73,5 +76,13 @@ public class IndustryEcharsQuery {
 
     public void setIsHasNextEvent(Integer isHasNextEvent) {
         this.isHasNextEvent = isHasNextEvent;
+    }
+
+    public String getInvestQuarter() {
+        return investQuarter;
+    }
+
+    public void setInvestQuarter(String investQuarter) {
+        this.investQuarter = investQuarter;
     }
 }

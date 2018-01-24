@@ -42,7 +42,7 @@
             (select data from app_dim_date where
                 <choose>
                     <when test=' timeType != null and timeType == "M" '>
-                        type ='M' and DATE_FORMAT(date_sub(curdate(), interval  #{time} month),'%Y-%m') &lt; data and data &lt;= date_format(curdate(),'%Y-%m')
+                        type ='M' and DATE_FORMAT(date_sub(curdate(), INTERVAL  #{time} month),'%Y-%m') &lt; data and data &lt;= date_format(curdate(),'%Y-%m')
                     </when>
                     <when test=' timeType != null and timeType == "Q" '>
                         type ='Q' and substring_index(data,'Q',1) > DATE_FORMAT((CURDATE() - INTERVAL  #{time} YEAR), '%Y') and data &lt;= date_format(curdate(),'%Y-%m')
@@ -216,18 +216,10 @@
         sum(eventId) as total
         from app_chart_industry_district_continue
         <trim prefix="where" prefixOverrides="and">
-            <choose>
-                <when test=' timeType != null and timeType == "D" '>
-                    and investDate>DATE_FORMAT(date_sub(curdate(), interval #{time} day),'%Y-%m')
-                </when>
-                <when test=' timeType != null and timeType == "M" '>
-                    and investDate>DATE_FORMAT(date_sub(curdate(), interval #{time} month),'%Y-%m')
-                </when>
-                <when test=' timeType != null and timeType == "Y" '>
-                    and investDate > DATE_FORMAT((CURDATE() - INTERVAL  #{time} YEAR), '%Y')
-                </when>
-            </choose>
-            <if test="districtSubId !=-1">
+            <if test='investQuarter != null '>
+                and investQuarter = #{investQuarter}
+            </if>
+            <if test="districtSubId != null and districtSubId !=-1">
                 and districtSubId=#{districtSubId}
             </if>
             <if test="industryId != null and industryId !=0">

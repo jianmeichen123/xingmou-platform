@@ -35,7 +35,7 @@ public class ComOverviewRest {
     }
     @RequestMapping(value = "area/{recent}",method = RequestMethod.GET)
     @ResponseBody
-    //@Cacheable(value = "area",keyGenerator = "baseKG")
+    @Cacheable(value = "area",keyGenerator = "baseKG")
     public List<Map<String, Object>> area(@PathVariable int recent){
         String year = lastyear(recent);
         if (year != null){
@@ -46,6 +46,7 @@ public class ComOverviewRest {
 
     @RequestMapping(value = "industry/{recent}",method = RequestMethod.GET)
     @ResponseBody
+    @Cacheable(value = "industry",keyGenerator = "baseKG")
     public List<Map<String, Object>> industry(@PathVariable int recent){
         String year = lastyear(recent);
         if (year != null){
@@ -63,12 +64,14 @@ public class ComOverviewRest {
 
     @RequestMapping(value = "investedRate",method = RequestMethod.GET)
     @ResponseBody
+    @Cacheable(value = "investedRate",keyGenerator = "baseKG")
     public Map<String, Object> investedRate(){
         return comOverviewBiz.investedRate();
     }
 
     @RequestMapping(value = "projectSetup",method = RequestMethod.GET)
     @ResponseBody
+    @Cacheable(value = "projectSetup",keyGenerator = "baseKG")
     public Map<String, Object> projectSetup(){
         return comOverviewBiz.projectSetup();
     }

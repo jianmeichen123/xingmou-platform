@@ -85,9 +85,7 @@
 	</resultMap>
 		<select id="selectChartProjectOrg" resultMap="BaseProjectOrgResultMap">
 		SELECT
-		orgName as source,
-		projName as target,
-		orgCode as orgCode
+		 <include refid="selectFields" />
 		FROM
 		app_chart_project_org
 		<where>

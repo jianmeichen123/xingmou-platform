@@ -9,7 +9,7 @@ import java.util.Map;
 
 public interface ComOverviewDao {
 
-    @Select("select districtSubName name,count(districtSubId) as value from app_project_list where districtSubName is not null and setupDT >= #{date} group by districtSubId order by value desc limit 20")
+    @Select("select districtSubName name,count(districtSubId) as value from app_project_list where districtId = 45057 and districtSubName is not null and setupDT >= #{date} group by districtSubId order by value desc limit 20")
     List<Map<String, Object>> area(String date);
 
     @Select("select industryName name,count(districtSubId) value from app_project_list where setupDT >= #{date} group by industryName order by value desc")

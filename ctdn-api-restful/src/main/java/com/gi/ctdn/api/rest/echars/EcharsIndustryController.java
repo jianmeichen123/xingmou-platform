@@ -96,7 +96,7 @@ public class EcharsIndustryController {
     public MessageInfo<EchartsData> getCXHTFX (@RequestBody IndustryEcharsQuery industryEcharsQuery){
         MessageInfo<EchartsData> messageInfo = new MessageInfo<EchartsData>();
         try {
-            if(industryEcharsQuery.getIndustryId() ==null || StringUtils.isEmpty(industryEcharsQuery.getTime())){
+            if(industryEcharsQuery.getIndustryId() ==null || StringUtils.isEmpty(industryEcharsQuery.getInvestQuarter())){
                 return errorRet;
             }
             messageInfo = industryAnalizeEcharsBiz.getCXHTFX(industryEcharsQuery);

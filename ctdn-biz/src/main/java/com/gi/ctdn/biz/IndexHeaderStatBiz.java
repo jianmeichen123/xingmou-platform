@@ -41,23 +41,6 @@ public class IndexHeaderStatBiz  {
 		return messageInfo;
 	}
 
-
-//    public MessageInfo<IndexHeaderStat> getGGTotalHeaderStat(){
-//
-//		MessageInfo<IndexHeaderStat> messageInfo = new MessageInfo<IndexHeaderStat>();
-//		try {
-//			IndexHeaderStat query = new IndexHeaderStat();
-//			query.setType(1);
-//			IndexHeaderStat indexHeaderStat = indexHeaderStatDAO.selectByTypeOrDate(query);
-//			messageInfo.setData( indexHeaderStat);
-//		} catch (Exception e) {
-//			LOGGER.error("getAllIndexHeaderStat","查询GGIndexHeaderStat失败", e);
-//			messageInfo.setStatus(10001);
-//		}
-//		return messageInfo;
-//	}
-
-
 	public MessageInfo<IndexHeaderStat> getGGCurMonthHeaderStat() {
 		MessageInfo<IndexHeaderStat> messageInfo = new MessageInfo<IndexHeaderStat>();
 		try {
@@ -75,25 +58,14 @@ public class IndexHeaderStatBiz  {
 		return messageInfo;
 	}
 
-//	public MessageInfo<IndexHeaderStat> getStatAdd(){
-//		MessageInfo<IndexHeaderStat> messageInfo = new MessageInfo<IndexHeaderStat>();
-//		try {
-//			IndexHeaderStat query = new IndexHeaderStat();
-//			query.setType(2);
-//			IndexHeaderStat indexHeaderStat = indexHeaderStatDAO.selectByTypeOrDate(query);
-//			messageInfo.setData( indexHeaderStat);
-//			messageInfo.setStatus(MessageStatus.OK_CODE);
-//			messageInfo.setMessage(MessageStatus.OK_MESSAGE);
-//		} catch (Exception e) {
-//			LOGGER.error("getStatAdd","查询StatAdd失败", e);
-//			messageInfo.setStatus(10001);
-//		}
-//		return messageInfo;
-//	}
-
 	public MessageInfo<IndexHeaderStat> queryHeaderStatCommon(IndexHeaderStat query){
 		MessageInfo<IndexHeaderStat> messageInfo = new MessageInfo<IndexHeaderStat>();
 		try {
+			//如果industryId传0 查累计 不分行业
+			if(query.getIndustryId() != null && query.getIndustryId() == 0 ){
+				query = new IndexHeaderStat();
+				query.setType(1);
+			}
 			IndexHeaderStat indexHeaderStat = indexHeaderStatDAO.selectByTypeOrDate(query);
 			messageInfo.setData( indexHeaderStat);
 			messageInfo.setStatus(MessageStatus.OK_CODE);

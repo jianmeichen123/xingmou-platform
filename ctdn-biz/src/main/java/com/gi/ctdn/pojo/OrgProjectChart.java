@@ -37,6 +37,27 @@ public class OrgProjectChart extends PojoInfo{
 	public void setProjectNameList(List<ChartProjectOrg> projectNameList) {
 		this.projectNameList = projectNameList;
 	}
+	
+	private List<String> orgNames;
+	private List<String> projNames;
+
+	public List<String> getOrgNames() {
+		return orgNames;
+	}
+
+	public void setOrgNames(List<String> orgNames) {
+		this.orgNames = orgNames;
+	}
+
+	public List<String> getProjNames() {
+		return projNames;
+	}
+
+	public void setProjNames(List<String> projNames) {
+		this.projNames = projNames;
+	}
+	
+	
 
 	
 	

@@ -29,20 +29,6 @@ public class IndexHeaderStatBiz  {
 
 		MessageInfo<IndexHeaderStat> messageInfo = new MessageInfo<IndexHeaderStat>();
 		try {
-			IndexHeaderStat indexHeaderStat = indexHeaderStatDAO.select();
-			messageInfo.setData( indexHeaderStat);
-		} catch (Exception e) {
-			LOGGER.error("getAllIndexHeaderStat","查询全部IndexHeaderStat失败", e);
-			messageInfo.setStatus(10001);
-		}
-		return messageInfo;
-	}
-    
-    
-    public MessageInfo<IndexHeaderStat> getGGTotalHeaderStat(){
-
-		MessageInfo<IndexHeaderStat> messageInfo = new MessageInfo<IndexHeaderStat>();
-		try {
 			IndexHeaderStat query = new IndexHeaderStat();
 			query.setType(1);
 			IndexHeaderStat indexHeaderStat = indexHeaderStatDAO.selectByTypeOrDate(query);
@@ -54,7 +40,6 @@ public class IndexHeaderStatBiz  {
 		}
 		return messageInfo;
 	}
-
 
 	public MessageInfo<IndexHeaderStat> getGGCurMonthHeaderStat() {
 		MessageInfo<IndexHeaderStat> messageInfo = new MessageInfo<IndexHeaderStat>();

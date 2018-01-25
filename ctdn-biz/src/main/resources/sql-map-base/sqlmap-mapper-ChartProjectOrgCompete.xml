@@ -43,8 +43,7 @@
 		COUNT(*)
 	FROM
 	app_chart_project_org_compete
-	<where>
-		<trim prefixOverrides="and">
+	where (eventNumAll is not null or eventNumAll != 0)
 			<if test="industryType">
 				and industryType = #{industryType}
 			</if>
@@ -57,8 +56,6 @@
 			<if test="industryId">
 				and industryId = #{industryId}
 			</if>
-		</trim>
-	</where>
 	</select>
 	
 		<resultMap id="CompeteListResultMap" type="com.gi.ctdn.pojo.ChartProjectOrgCompete">

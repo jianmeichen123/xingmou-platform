@@ -29,30 +29,33 @@ public class IndexHeaderStatBiz  {
 
 		MessageInfo<IndexHeaderStat> messageInfo = new MessageInfo<IndexHeaderStat>();
 		try {
-			IndexHeaderStat indexHeaderStat = indexHeaderStatDAO.select();
-			messageInfo.setData( indexHeaderStat);
-		} catch (Exception e) {
-			LOGGER.error("getAllIndexHeaderStat","查询全部IndexHeaderStat失败", e);
-			messageInfo.setStatus(10001);
-		}
-		return messageInfo;
-	}
-    
-    
-    public MessageInfo<IndexHeaderStat> getGGTotalHeaderStat(){
-
-		MessageInfo<IndexHeaderStat> messageInfo = new MessageInfo<IndexHeaderStat>();
-		try {
 			IndexHeaderStat query = new IndexHeaderStat();
 			query.setType(1);
 			IndexHeaderStat indexHeaderStat = indexHeaderStatDAO.selectByTypeOrDate(query);
 			messageInfo.setData( indexHeaderStat);
 		} catch (Exception e) {
-			LOGGER.error("getAllIndexHeaderStat","查询GGIndexHeaderStat失败", e);
-			messageInfo.setStatus(10001);
+			e.printStackTrace();
+			LOGGER.error("getAllIndexHeaderStat","查询全部IndexHeaderStat失败", e);
+			messageInfo = new MessageInfo<>(MessageStatus.ERROR_CODE,MessageStatus.ERROR_MESSAGE);
 		}
 		return messageInfo;
 	}
+    
+    
+//    public MessageInfo<IndexHeaderStat> getGGTotalHeaderStat(){
+//
+//		MessageInfo<IndexHeaderStat> messageInfo = new MessageInfo<IndexHeaderStat>();
+//		try {
+//			IndexHeaderStat query = new IndexHeaderStat();
+//			query.setType(1);
+//			IndexHeaderStat indexHeaderStat = indexHeaderStatDAO.selectByTypeOrDate(query);
+//			messageInfo.setData( indexHeaderStat);
+//		} catch (Exception e) {
+//			LOGGER.error("getAllIndexHeaderStat","查询GGIndexHeaderStat失败", e);
+//			messageInfo.setStatus(10001);
+//		}
+//		return messageInfo;
+//	}
 
 
 	public MessageInfo<IndexHeaderStat> getGGCurMonthHeaderStat() {
@@ -66,23 +69,39 @@ public class IndexHeaderStatBiz  {
 			IndexHeaderStat indexHeaderStat = indexHeaderStatDAO.selectByTypeOrDate(query);
 			messageInfo.setData( indexHeaderStat);
 		} catch (Exception e) {
-			LOGGER.error("getAllIndexHeaderStat","查询GGIndexHeaderStat失败", e);
+			LOGGER.error("getGGCurMonthHeaderStat","查询GGIndexHeaderStat失败", e);
 			messageInfo.setStatus(10001);
 		}
 		return messageInfo;
 	}
 
-	public MessageInfo<IndexHeaderStat> getStatAdd(){
+//	public MessageInfo<IndexHeaderStat> getStatAdd(){
+//		MessageInfo<IndexHeaderStat> messageInfo = new MessageInfo<IndexHeaderStat>();
+//		try {
+//			IndexHeaderStat query = new IndexHeaderStat();
+//			query.setType(2);
+//			IndexHeaderStat indexHeaderStat = indexHeaderStatDAO.selectByTypeOrDate(query);
+//			messageInfo.setData( indexHeaderStat);
+//			messageInfo.setStatus(MessageStatus.OK_CODE);
+//			messageInfo.setMessage(MessageStatus.OK_MESSAGE);
+//		} catch (Exception e) {
+//			LOGGER.error("getStatAdd","查询StatAdd失败", e);
+//			messageInfo.setStatus(10001);
+//		}
+//		return messageInfo;
+//	}
 
+	public MessageInfo<IndexHeaderStat> queryHeaderStatCommon(IndexHeaderStat query){
 		MessageInfo<IndexHeaderStat> messageInfo = new MessageInfo<IndexHeaderStat>();
 		try {
-			IndexHeaderStat indexHeaderStat = indexHeaderStatDAO.selectAdd();
+			IndexHeaderStat indexHeaderStat = indexHeaderStatDAO.selectByTypeOrDate(query);
 			messageInfo.setData( indexHeaderStat);
 			messageInfo.setStatus(MessageStatus.OK_CODE);
 			messageInfo.setMessage(MessageStatus.OK_MESSAGE);
 		} catch (Exception e) {
-			LOGGER.error("getStatAdd","查询StatAdd失败", e);
-			messageInfo.setStatus(10001);
+			e.printStackTrace();
+			LOGGER.error("queryHeaderStatCommon","查询HeaderStatCommon失败", e);
+			messageInfo = new MessageInfo<>(MessageStatus.ERROR_CODE,MessageStatus.ERROR_MESSAGE);
 		}
 		return messageInfo;
 	}

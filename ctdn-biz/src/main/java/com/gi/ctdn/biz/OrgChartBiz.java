@@ -13,6 +13,7 @@ import javax.websocket.server.ServerEndpoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.gi.ctdn.dao.ChartOrgIndustryDao;
 import com.gi.ctdn.dao.ChartOrgRoundDao;
@@ -62,50 +63,33 @@ public class OrgChartBiz {
 		OrgProjectChart orgProjectChart = new OrgProjectChart();
 		List<ChartProjectOrg> chartProjectOrgList = chartProjectOrgDao.selectChartProjectOrg(chartProjectOrg);
 		
-		List<String> orgNames = new ArrayList<>(new HashSet<String>());
-		HashSet<String> orgNameSet = new HashSet<String>();
-		HashMap<String,HashSet<String>> orgToProjMap = new HashMap<String,HashSet<String>>();
-		
-		for(ChartProjectOrg po: chartProjectOrgList){
-			String key = po.getOrgName() + ":" + po.getOrgCode();
-			orgNameSet.add(key);
-			if(orgToProjMap.containsKey(key)){
-				HashSet<String> projSet = (HashSet<String>) orgToProjMap.get(key);
-				if(projSet.size() >=2){
-					continue;
-				}
-				projSet.add(po.getProjName());
-			}else{
-				HashSet<String> projSet  = new HashSet<String>();
-				projSet.add(po.getProjName());
-				orgToProjMap.put(key, projSet);
-			}
-		}
-		orgNames.addAll(orgNameSet);
-		
-		List<String> projNames = new ArrayList<>(new HashSet<String>());
+		List<String> orgNames = new ArrayList<String>();
+		List<String> projNameList = new ArrayList<>(new HashSet<String>());
 		HashSet<String> projNameSet = new HashSet<String>();
 		List<ChartProjectOrg> resultList = new ArrayList<ChartProjectOrg>();
-		for(Entry<String, HashSet<String>>  entry: orgToProjMap.entrySet()){
-			String[] nameAndCodes = entry.getKey().split(":");
-			String orgName = nameAndCodes[0];
-			String orgCode = nameAndCodes[1];
-			HashSet<String> val = entry.getValue();
-			Iterator<String> projIterator = val.iterator();
-			while(projIterator.hasNext()){
-				ChartProjectOrg result = new ChartProjectOrg();
-				result.setOrgName(orgName);
-				result.setOrgCode(orgCode);
-				String projName = projIterator.next();
-				result.setProjName(projName);
-				projNameSet.add(projName);
-				resultList.add(result);
+		for(ChartProjectOrg po: chartProjectOrgList){
+			String orgName = po.getOrgName();
+			orgNames.add(orgName+":"+po.getOrgCode());
+			String orgCode = po.getOrgCode();
+			String projNames = po.getProjName();
+			if(!StringUtils.isEmpty(projNames)){
+				String[] projNameArr = projNames.split(",");
+				for(String projName : projNameArr){
+					projNameSet.add(projName);
+					ChartProjectOrg result = new ChartProjectOrg();
+					result.setOrgName(orgName);
+					result.setOrgCode(orgCode);
+					result.setProjName(projName);
+					projNameSet.add(projName);
+					resultList.add(result);
+				}
 			}
 		}
-		projNames.addAll(projNameSet);
+		projNameList.addAll(projNameSet);
+		
 		orgProjectChart.setChartProjectOrgList(resultList);
 		orgProjectChart.setOrgNames(orgNames);
-		orgProjectChart.setProjNames(projNames);
+		orgProjectChart.setProjNames(projNameList);
 		return orgProjectChart;
 	}
 

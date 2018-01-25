@@ -314,28 +314,13 @@ public class IndexController implements EnvironmentAware{
 		}
 		return messageInfo;
 	}
-    
-//
-//    @RequestMapping("queryGGTotalHeaderStat")
-//    @ResponseBody
-//    public MessageInfo<IndexHeaderStat> queryGGTotalHeaderStat (){
-//        MessageInfo<IndexHeaderStat> messageInfo = indexHeaderStatBiz.getGGTotalHeaderStat();
-//        return messageInfo;
-//    }
-    
+
     @RequestMapping("queryGGCurMonthHeaderStat")
     @ResponseBody
     public MessageInfo<IndexHeaderStat> queryGGHeaderStat (){
         MessageInfo<IndexHeaderStat> messageInfo = indexHeaderStatBiz.getGGCurMonthHeaderStat();
         return messageInfo;
     }
-
-//	@RequestMapping("queryHeaderStatAdd")
-//	@ResponseBody
-//	public MessageInfo<IndexHeaderStat> queryHeaderStatAdd (){
-//		MessageInfo<IndexHeaderStat> messageInfo = indexHeaderStatBiz.getStatAdd();
-//		return messageInfo;
-//	}
 
 	/**
 	 * 传值可通用

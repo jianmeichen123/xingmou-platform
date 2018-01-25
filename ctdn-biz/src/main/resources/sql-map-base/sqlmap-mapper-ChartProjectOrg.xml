@@ -79,13 +79,13 @@
 	</select>
 	
 	<resultMap id="BaseProjectOrgResultMap" type="com.gi.ctdn.pojo.ChartProjectOrg">
-          <result column="source" property="source" jdbcType="VARCHAR" />
-          <result column="target" property="target" jdbcType="VARCHAR" />
+          <result column="orgName" property="orgName" jdbcType="VARCHAR" />
+          <result column="projName" property="projName" jdbcType="VARCHAR" />
           <result column="orgCode" property="orgCode" jdbcType="VARCHAR" />
 	</resultMap>
 		<select id="selectChartProjectOrg" resultMap="BaseProjectOrgResultMap">
 		SELECT
-		 <include refid="selectFields" />
+		orgCode,orgName ,SUBSTRING_INDEX(GROUP_CONCAT(DISTINCT projName ORDER BY investDate desc),',',5 ) as projName
 		FROM
 		app_chart_project_org
 		<where>
@@ -101,6 +101,7 @@
 				</if>
 			</trim>
 		</where>
+		GROUP BY orgCode,orgName
 		
 	</select>
 </mapper>

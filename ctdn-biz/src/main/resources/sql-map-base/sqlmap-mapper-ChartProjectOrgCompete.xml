@@ -77,7 +77,7 @@
 		GROUP BY competeOrgName,eventNumAll ) as b) as d
 		LEFT JOIN (SELECT * from app_chart_project_org_compete where industryType = #{industryType} and timeType = #{timeType}  and orgCode= #{orgCode} ) AS c
 		on d.id = c.industryId and d.competeOrgName=c.competeOrgName ORDER BY id
-		) as ff GROUP BY competeOrgName,eventNumAll 
+		) as ff where eventNumAll != 0 GROUP BY competeOrgName,eventNumAll 
 		ORDER BY  eventNumAll desc limit 10
 	</select>
 	<select id="getChildCompeteList" resultMap="CompeteListResultMap">
@@ -91,7 +91,7 @@
 		GROUP BY competeOrgName,eventNumAll ) as b) as d
 		LEFT JOIN (SELECT * from app_chart_project_org_compete where industryType = #{industryType} and timeType = #{timeType}  and orgCode= #{orgCode} and industryId=#{industryId}) AS c
 		on d.id = c.industrySubId and d.competeOrgName=c.competeOrgName ORDER BY id
-		) as ff GROUP BY competeOrgName,eventNumAll 
+		) as ff where eventNumAll != 0 GROUP BY competeOrgName,eventNumAll 
 		ORDER BY  eventNumAll desc limit 10
 	</select>
 

@@ -69,14 +69,21 @@
                      <when test=' timeType != null and timeType == "Y" '>
                          and timeType ='Y' and timDim > DATE_FORMAT((CURDATE() - INTERVAL  #{time} YEAR), '%Y')
                      </when>
-                     <when test="districtSubId != null and districtSubId != -1">
-                         and districtSubId=#{districtSubId}
-                     </when>
-                     <when test="industryRoundId != null">
-                         and industryRoundId=#{industryRoundId}
-                     </when>
                  </choose>
-                and industryType=#{industryId} + 1
+                <if test="districtSubId != null and districtSubId != -1">
+                    and districtSubId=#{districtSubId}
+                </if>
+                <if test="industryRoundId != null">
+                    and industryRoundId=#{industryRoundId}
+                </if>
+                <choose>
+                <when test=" industryId == 0 ">
+                    and industryType =  1
+                </when>
+                <when test=" industryId != 0 ">
+                    and industryType = 2
+                </when>
+                </choose>
             </trim>
         <choose>
             <when test=" industryId == 0 ">
@@ -130,7 +137,14 @@
             <if test="districtSubId != null and districtSubId != -1">
                 and districtSubId=#{districtSubId}
             </if>
-            and industryType=#{industryId} + 1
+            <choose>
+                <when test=" industryId == 0 ">
+                    and industryType =  1
+                </when>
+                <when test=" industryId != 0 ">
+                    and industryType = 2
+                </when>
+            </choose>
         </trim>
         <choose>
             <when test=" industryId == 0 ">

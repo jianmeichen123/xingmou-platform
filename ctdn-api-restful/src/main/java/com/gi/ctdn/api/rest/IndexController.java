@@ -315,13 +315,13 @@ public class IndexController implements EnvironmentAware{
 		return messageInfo;
 	}
     
-    
-    @RequestMapping("queryGGTotalHeaderStat")
-    @ResponseBody
-    public MessageInfo<IndexHeaderStat> queryGGTotalHeaderStat (){
-        MessageInfo<IndexHeaderStat> messageInfo = indexHeaderStatBiz.getGGTotalHeaderStat();
-        return messageInfo;
-    }
+//
+//    @RequestMapping("queryGGTotalHeaderStat")
+//    @ResponseBody
+//    public MessageInfo<IndexHeaderStat> queryGGTotalHeaderStat (){
+//        MessageInfo<IndexHeaderStat> messageInfo = indexHeaderStatBiz.getGGTotalHeaderStat();
+//        return messageInfo;
+//    }
     
     @RequestMapping("queryGGCurMonthHeaderStat")
     @ResponseBody
@@ -330,10 +330,25 @@ public class IndexController implements EnvironmentAware{
         return messageInfo;
     }
 
-	@RequestMapping("queryHeaderStatAdd")
+//	@RequestMapping("queryHeaderStatAdd")
+//	@ResponseBody
+//	public MessageInfo<IndexHeaderStat> queryHeaderStatAdd (){
+//		MessageInfo<IndexHeaderStat> messageInfo = indexHeaderStatBiz.getStatAdd();
+//		return messageInfo;
+//	}
+
+	/**
+	 * 传值可通用
+	 * @param indexHeaderStat
+	 * @return
+	 */
+	@RequestMapping("queryHeaderStatCommon")
 	@ResponseBody
-	public MessageInfo<IndexHeaderStat> queryHeaderStatAdd (){
-		MessageInfo<IndexHeaderStat> messageInfo = indexHeaderStatBiz.getStatAdd();
+	public MessageInfo<IndexHeaderStat> queryHeaderStatCommon (@RequestBody IndexHeaderStat indexHeaderStat){
+		if(indexHeaderStat.getType()== null){
+			return new MessageInfo<>(MessageStatus.MISS_PARAMETER_CODE,MessageStatus.MISS_PARAMETER_MESSAGE);
+		}
+		MessageInfo<IndexHeaderStat> messageInfo = indexHeaderStatBiz.queryHeaderStatCommon(indexHeaderStat);
 		return messageInfo;
 	}
     

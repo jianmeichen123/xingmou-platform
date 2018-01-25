@@ -54,6 +54,8 @@ public class IndexHeaderStat extends PojoInfo {
 
 	private Integer invstAmount;
 
+	private Integer industryId;
+
 	public Integer getInvestedProjNum() {
 		return investedProjNum;
 	}
@@ -190,5 +192,13 @@ public class IndexHeaderStat extends PojoInfo {
 
 	public void setInvstAmount(Integer invstAmount) {
 		this.invstAmount = invstAmount;
+	}
+
+	public Integer getIndustryId() {
+		return industryId;
+	}
+
+	public void setIndustryId(Integer industryId) {
+		this.industryId = industryId;
 	}
 }

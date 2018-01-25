@@ -18,11 +18,12 @@
 		<result column="year" property="year" jdbcType="INTEGER" />
 		<result column="month" property="month" jdbcType="INTEGER" />
 		<result column="type" property="type" jdbcType="INTEGER" />
+		<result column="industryId" property="industryId" jdbcType="INTEGER" />
 	</resultMap>
 
 
 	<sql id="selectFields">
-		id,projectNum,orgNum,eventNum,investedProjNum,amount,startUpNum,investorNum,year,month,type,invstedNum,mergerNum,listedNum,invstAmount,invstEventNum
+		id,projectNum,orgNum,eventNum,investedProjNum,amount,startUpNum,investorNum,year,month,type,invstedNum,mergerNum,listedNum,invstAmount,invstEventNum,industryId
 	</sql>
 
 
@@ -52,16 +53,19 @@
 				<if test="year !=null">
 					and year = #{year}
 				</if>
+				<if test="industryId !=null and industryId !=0">
+					and industryId = #{industryId}
+				</if>
 			</trim>
 		</where>
 	</select>
-	<select id="selectAdd" resultMap="BaseResultMap">
-		SELECT
-		<include refid="selectFields" />
-		FROM
-		app_index_header_stat
-		<where>
-			type=2
-		</where>
-	</select>
+	<!--<select id="selectAdd" resultMap="BaseResultMap">-->
+		<!--SELECT-->
+		<!--<include refid="selectFields" />-->
+		<!--FROM-->
+		<!--app_index_header_stat-->
+		<!--<where>-->
+			<!--type=2-->
+		<!--</where>-->
+	<!--</select>-->
 </mapper>

@@ -43,7 +43,7 @@
 		COUNT(*)
 	FROM
 	app_chart_project_org_compete
-	where (eventNumAll is not null or eventNumAll != 0)
+	where (eventNumAll is not null and eventNumAll != 0)
 			<if test="industryType">
 				and industryType = #{industryType}
 			</if>

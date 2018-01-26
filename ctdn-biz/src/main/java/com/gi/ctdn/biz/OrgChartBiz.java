@@ -62,33 +62,47 @@ public class OrgChartBiz {
 	public OrgProjectChart getOrgProjectChart(ChartProjectOrg chartProjectOrg) {
 		OrgProjectChart orgProjectChart = new OrgProjectChart();
 		List<ChartProjectOrg> chartProjectOrgList = chartProjectOrgDao.selectChartProjectOrg(chartProjectOrg);
-		
-		List<String> orgNames = new ArrayList<String>();
-		List<String> projNameList = new ArrayList<>(new HashSet<String>());
-		HashSet<String> projNameSet = new HashSet<String>();
-		List<ChartProjectOrg> resultList = new ArrayList<ChartProjectOrg>();
+		List<String> resultOrgNameList = new ArrayList<String>();
+		HashSet<String> orgNameAndCodeSet = new HashSet<String>();
+		Map<String,HashSet<String>> orgNameAndCodeToProjNameMap = new HashMap<String,HashSet<String>>();
 		for(ChartProjectOrg po: chartProjectOrgList){
-			String orgName = po.getOrgName();
-			orgNames.add(orgName+":"+po.getOrgCode());
-			String orgCode = po.getOrgCode();
-			String projNames = po.getProjName();
-			if(!StringUtils.isEmpty(projNames)){
-				String[] projNameArr = projNames.split(",");
-				for(String projName : projNameArr){
+			String projName = po.getProjName();
+			String orgNameAndCodes = po.getOrgNameAndCodes();
+			String[] orgNameAndCodeArr = orgNameAndCodes.split(",");
+			for(String orgNameAndCode : orgNameAndCodeArr){
+				if(orgNameAndCodeToProjNameMap.containsKey(orgNameAndCode)){
+					HashSet<String> projNameSet = orgNameAndCodeToProjNameMap.get(orgNameAndCode);
+					if(projNameSet.size()>=5){
+						continue;
+					}
+					orgNameAndCodeToProjNameMap.get(orgNameAndCode).add(projName);
+				}else{
+					HashSet<String> projNameSet = new HashSet<String>();
 					projNameSet.add(projName);
-					ChartProjectOrg result = new ChartProjectOrg();
-					result.setOrgName(orgName);
-					result.setOrgCode(orgCode);
-					result.setProjName(projName);
-					projNameSet.add(projName);
-					resultList.add(result);
+					orgNameAndCodeToProjNameMap.put(orgNameAndCode, projNameSet);
 				}
+				orgNameAndCodeSet.add(orgNameAndCode);
 			}
 		}
-		projNameList.addAll(projNameSet);
-		
+		List<ChartProjectOrg> resultList = new ArrayList<ChartProjectOrg>();
+		List<String> projNameList = new ArrayList<>(new HashSet<String>());
+		HashSet<String> resultProjNameSet = new HashSet<String>();
+		for(Entry<String, HashSet<String>> entry:orgNameAndCodeToProjNameMap.entrySet()){
+			String orgAndCode = entry.getKey();
+			String orgName = orgAndCode.split(":")[0];
+			HashSet<String> projNameSet = entry.getValue();
+			for(String projName :projNameSet){
+				ChartProjectOrg result = new ChartProjectOrg();
+				result.setProjName(projName);
+				result.setOrgName(orgName);
+				resultList.add(result);
+				resultProjNameSet.add(projName);
+			}
+		}
 		orgProjectChart.setChartProjectOrgList(resultList);
-		orgProjectChart.setOrgNames(orgNames);
+		resultOrgNameList.addAll(orgNameAndCodeSet);
+		orgProjectChart.setOrgNames(resultOrgNameList);
+		projNameList.addAll(resultProjNameSet);
 		orgProjectChart.setProjNames(projNameList);
 		return orgProjectChart;
 	}

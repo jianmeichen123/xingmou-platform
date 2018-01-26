@@ -13,6 +13,7 @@
           <result column="industryName" property="industryName" jdbcType="VARCHAR" />
           <result column="industrySubId" property="industrySubId" jdbcType="BIGINT" />
           <result column="industrySubName" property="industrySubName" jdbcType="VARCHAR" />
+          <result column="investDate" property="investDate" jdbcType="VARCHAR" />
 	</resultMap>
 
 
@@ -79,15 +80,13 @@
 	</select>
 	
 	<resultMap id="BaseProjectOrgResultMap" type="com.gi.ctdn.pojo.ChartProjectOrg">
-          <result column="orgName" property="orgName" jdbcType="VARCHAR" />
+          <result column="investDate" property="investDate" jdbcType="VARCHAR" />
           <result column="projName" property="projName" jdbcType="VARCHAR" />
-          <result column="orgCode" property="orgCode" jdbcType="VARCHAR" />
+          <result column="orgNameAndCodes" property="orgNameAndCodes" jdbcType="VARCHAR" />
 	</resultMap>
-		<select id="selectChartProjectOrg" resultMap="BaseProjectOrgResultMap">
-		SELECT
-		orgCode,orgName ,SUBSTRING_INDEX(GROUP_CONCAT(DISTINCT projName ORDER BY investDate desc),',',5 ) as projName
-		FROM
-		app_chart_project_org
+	<select id="selectChartProjectOrg" resultMap="BaseProjectOrgResultMap">
+	select investDate,projName,orgNameAndCodes from (
+		select investDate,projName,count(1) as num,GROUP_CONCAT(orgName,':',orgCode)  as orgNameAndCodes from app_chart_project_org
 		<where>
 			<trim prefixOverrides="and">
 				<if test="industryType">
@@ -101,7 +100,7 @@
 				</if>
 			</trim>
 		</where>
-		GROUP BY orgCode,orgName
+		GROUP BY eventId,projName order by investDate desc ) as aa where num >1
 		
 	</select>
 </mapper>

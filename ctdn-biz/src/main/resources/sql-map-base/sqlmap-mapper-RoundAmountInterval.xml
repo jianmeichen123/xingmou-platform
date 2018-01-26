@@ -25,9 +25,15 @@
             from app_round_amount_interval
             where
                 timeType = #{timeType}
-            <if test="industryId != 0">
+            <choose>
+                <when test="industryId != null and industryId != 0">
                     and industryId=#{industryId}
-            </if>
+                    and industryType =2
+                </when>
+                <when test="industryId == 0">
+                    and industryType =1
+                </when>
+            </choose>
             group by intervalId,roundId
             )as cc
         on aa.id = cc.roundId and bb.id= cc.intervalId

@@ -29,7 +29,7 @@
         FROM
         app_industry_stages_district
         WHERE
-        timeType =  #{timeType}
+        timeType =  #{timeType} and industryType = 1
         <if test="districtSubName!='所有地区' "> and districtSubName = #{districtSubName}</if>
         <if test='districtSubName=="所有地区" '> and districtName = "国内"</if>
         group by timDim desc limit 12
@@ -41,7 +41,7 @@
         FROM
         app_industry_stages_district
         WHERE
-        timeType =  #{timeType} and stagesName=#{stagesName}
+        timeType =  #{timeType} and stagesName=#{stagesName} and industryType = 1
         <if test="districtSubName!='所有地区' "> and districtSubName = #{districtSubName}</if>
         <if test='districtSubName=="所有地区" '> and districtName = "国内"</if>
         group by timDim desc limit 12

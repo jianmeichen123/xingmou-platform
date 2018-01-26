@@ -1,6 +1,7 @@
 package com.gi.ctdn.dao;
 
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.Date;
@@ -17,15 +18,17 @@ public interface ComOverviewDao {
 
     @Select("select industryName ,setupDT from app_project_list where setupDT >= #{date} ")
     List<Map<String, Object>> quarterOfIndustry(String date);
-
     @Select("select  * from app_chart_project_invested_rate")
     List<Map<String, String>> investedRate();
 
 
-    @Select("select industryName , projNum ,investQuarter from app_chart_project_setup where investQuarter in (select t.investQuarter from (select investQuarter from app_chart_project_setup group by investQuarter  order by investQuarter desc limit 8) as t)")
-    List<Map<String, Object>> projectSetup();
+    @Select("<script>"
+            + "SELECT industryName , projNum ,investQuarter from app_chart_project_setup where investQuarter IN"
+            + "<foreach item='item' index='index' collection='quarters' open='(' separator=',' close=')'>"
+            + "#{item}"
+            + "</foreach>"
+            + "</script>")
+    List<Map<String, Object>> projectSetup(@Param("quarters") String[] quarters);
 
-    @Select("select investQuarter from app_chart_project_setup group by investQuarter  order by investQuarter desc limit 8")
-    List<Map<String,String>> projectSetupQuarter();
 
 }

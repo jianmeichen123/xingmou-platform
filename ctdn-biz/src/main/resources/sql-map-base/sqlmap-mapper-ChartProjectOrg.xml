@@ -97,10 +97,34 @@
 				</if>
 				<if test="industryId!=null">
 					and industryId = #{industryId}
+				</if> 
+				 <if test="eventIds != null">
+				and eventId  in
+					<foreach collection="eventIds" item="item" open="(" separator="," close=")">
+						#{item}
+					</foreach>
 				</if>
 			</trim>
 		</where>
-		GROUP BY eventId,projName order by investDate desc ) as aa where num >1
-		
+		GROUP BY eventId,projName order by investDate desc ) as aa group by projName 
+	</select>
+	<select id="getTopOrgEventId" resultType="java.lang.String">
+	select ids from (
+	select count(1) as num,SUBSTRING_INDEX(GROUP_CONCAT(DISTINCT eventId ORDER BY investDate desc),',',5) as ids from app_chart_project_org 
+	<where>
+			<trim prefixOverrides="and">
+				<if test="industryType">
+					and industryType = #{industryType}
+				</if>
+				<if test="timeType">
+					and timeType = #{timeType}
+				</if>
+				<if test="industryId!=null">
+					and industryId = #{industryId}
+				</if> 
+			</trim>
+		</where>
+	GROUP BY orgName
+	ORDER BY num desc limit 20) as cc
 	</select>
 </mapper>

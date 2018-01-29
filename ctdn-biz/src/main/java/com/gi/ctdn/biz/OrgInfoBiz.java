@@ -49,13 +49,11 @@ public class OrgInfoBiz  {
     	try{
     		OrgListInfo orgListInfo = orgInfoDAO.selectById(orgCode);
     		if (orgListInfo != null){
-    			List<News> orgNewsList = newsDao.selectNewsByOrgCode(orgCode);
 				List<OrgMediaInfo> orgHistoryInfoList = orgMediaInfoDAO.selectByOrgIdForHistroy(orgCode);
 				List<OrgMember> orgMemberList = orgMemberDAO.selectOrgMemberById(orgCode);
 				List<EventInfoExt> eventInfoExtList = eventInfoExtDAO.selectByInvstoridType(orgCode);
 				eventInfoExtList = sortList(eventInfoExtList,orgListInfo.getInvestOrg());
 				List<ProjectContact> projectContactList = projectContactDAO.selectByOrgId(orgCode);
-				orgListInfo.setOrgNewsList(orgNewsList);
 				orgListInfo.setOrgHistoryInfoList(orgHistoryInfoList);
 				orgListInfo.setOrgMemberList(orgMemberList);
 				orgListInfo.setEventInfoExtList(eventInfoExtList);

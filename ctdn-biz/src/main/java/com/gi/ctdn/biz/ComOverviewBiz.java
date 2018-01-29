@@ -42,11 +42,14 @@ public class ComOverviewBiz {
         List<String> investedRate = new ArrayList<>();
         List<String> investedRateLastYear = new ArrayList<>();
         for(Map<String,String> map:data){
-            industryName.add(map.get("industryName"));
-            unInvestedNum.add(map.get("unInvestedNum"));
-            investedNum.add(map.get("investedNum"));
-            investedRate.add(map.get("investedRate"));
-            investedRateLastYear.add(map.get("investedRateLastYear"));
+            String name = map.get("industryName");
+            if(name !=null){
+                industryName.add(map.get("industryName"));
+                unInvestedNum.add(map.get("unInvestedNum"));
+                investedNum.add(map.get("investedNum"));
+                investedRate.add(map.get("investedRate"));
+                investedRateLastYear.add(map.get("investedRateLastYear"));
+            }
         }
         Map<String,Object> result = new HashMap<>();
         result.put("industryName",industryName);
@@ -60,31 +63,44 @@ public class ComOverviewBiz {
 
     public Map<String, Object> projectSetup(){
         Map<String,Object> result = new HashMap<>();
-        List<Map<String,String>> res = comOverviewDao.projectSetupQuarter();
+        Calendar c =Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH);
+        int quarter = month/4+1;
+        String[] quarters = new String[8];
+        for(int i=0;i<8;i++){
+            quarters[i] = year+"Q"+quarter;
+            quarter--;
+            if (quarter==0){
+                quarter = 4;
+                year--;
+            }
+        }
         List<Industry> industries = industryDAO.selectParentindustrys();
         List<String> industryNames = new ArrayList<>();
         Map<String,Integer> nameIndex= new HashMap<>();
         int i = 0;
         for(Industry industry:industries){
-            industryNames.add(industry.getName());
-            nameIndex.put(industry.getName(),i);
-            i++;
+            if (industry.getName()!=null){
+                industryNames.add(industry.getName());
+                nameIndex.put(industry.getName(),i);
+                i++;
+            }
+
         }
         Map<String,int[]> data = new TreeMap<>();
-        List<String> quarters = new ArrayList<>();
+
         Map<String,Integer> quartersCoumt = new TreeMap<>();
-        for (int j=res.size();j>0;j--){
-            Map<String,String> m = res.get(j-1);
-            quarters.add(m.get("investQuarter"));
-            data.put(m.get("investQuarter"),new int[industryNames.size()]);
-            quartersCoumt.put(m.get("investQuarter"),0);
+        for(String s:quarters){
+            data.put(s,new int[industryNames.size()]);
+            quartersCoumt.put(s,0);
         }
 
-        List<Map<String, Object>> projectSetupDate = comOverviewDao.projectSetup();
+        List<Map<String, Object>> projectSetupDate = comOverviewDao.projectSetup(quarters);
         for(Map<String, Object> map:projectSetupDate){
             int[] arr = data.get(map.get("investQuarter"));
             String name = (String) map.get("industryName");
-            if (name ==null){
+            if (name ==null||name.equals("null")){
                 name = "其他";
             }
             Integer index = nameIndex.get(name);

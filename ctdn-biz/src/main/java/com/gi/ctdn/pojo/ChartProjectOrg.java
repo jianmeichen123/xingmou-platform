@@ -99,6 +99,19 @@ public class ChartProjectOrg extends PojoInfo{
 		this.timeType = timeType;
 	}
 	
-	
+	public String getInvestDate() {
+		return investDate;
+	}
+	public void setInvestDate(String investDate) {
+		this.investDate = investDate;
+	}
+	public String getOrgNameAndCodes() {
+		return orgNameAndCodes;
+	}
+	public void setOrgNameAndCodes(String orgNameAndCodes) {
+		this.orgNameAndCodes = orgNameAndCodes;
+	}
+	private String investDate;
+	private String orgNameAndCodes; // orgName:orgCode,orgName1:orgCode2
 
 }

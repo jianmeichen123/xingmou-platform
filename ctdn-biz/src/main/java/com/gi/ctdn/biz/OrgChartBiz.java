@@ -61,6 +61,15 @@ public class OrgChartBiz {
 
 	public OrgProjectChart getOrgProjectChart(ChartProjectOrg chartProjectOrg) {
 		OrgProjectChart orgProjectChart = new OrgProjectChart();
+		List<String> ids = chartProjectOrgDao.getTopOrgEventId(chartProjectOrg);
+		List<String> eventIds = new ArrayList<String>();
+		for(String s:ids){
+			String[] ss = s.split(",");
+			for(String id:ss){
+				eventIds.add(id);
+			}
+		}
+		chartProjectOrg.setEventIds(eventIds);
 		List<ChartProjectOrg> chartProjectOrgList = chartProjectOrgDao.selectChartProjectOrg(chartProjectOrg);
 		List<String> resultOrgNameList = new ArrayList<String>();
 		HashSet<String> orgNameAndCodeSet = new HashSet<String>();
@@ -72,9 +81,9 @@ public class OrgChartBiz {
 			for(String orgNameAndCode : orgNameAndCodeArr){
 				if(orgNameAndCodeToProjNameMap.containsKey(orgNameAndCode)){
 					HashSet<String> projNameSet = orgNameAndCodeToProjNameMap.get(orgNameAndCode);
-					if(projNameSet.size()>=5){
-						continue;
-					}
+//					if(projNameSet.size()>=5){
+//						continue;
+//					}
 					orgNameAndCodeToProjNameMap.get(orgNameAndCode).add(projName);
 				}else{
 					HashSet<String> projNameSet = new HashSet<String>();

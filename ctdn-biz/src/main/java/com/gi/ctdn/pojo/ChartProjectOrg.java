@@ -1,5 +1,7 @@
 package com.gi.ctdn.pojo;
 
+import java.util.List;
+
 import com.gi.ctdn.view.common.PojoInfo;
 
 public class ChartProjectOrg extends PojoInfo{
@@ -9,6 +11,7 @@ public class ChartProjectOrg extends PojoInfo{
 	private String industryName;
 	private Long industrySubId;
 	private String industrySubName;
+	private List<String> eventIds;
 	public Long getIndustryId() {
 		return industryId;
 	}
@@ -110,6 +113,12 @@ public class ChartProjectOrg extends PojoInfo{
 	}
 	public void setOrgNameAndCodes(String orgNameAndCodes) {
 		this.orgNameAndCodes = orgNameAndCodes;
+	}
+	public List<String> getEventIds() {
+		return eventIds;
+	}
+	public void setEventIds(List<String> eventIds) {
+		this.eventIds = eventIds;
 	}
 	private String investDate;
 	private String orgNameAndCodes; // orgName:orgCode,orgName1:orgCode2

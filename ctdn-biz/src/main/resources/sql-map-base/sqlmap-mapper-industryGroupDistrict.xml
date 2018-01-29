@@ -198,7 +198,7 @@
         <trim prefix="where" prefixOverrides="and">
             <choose>
                 <when test=' timeType != null and timeType == "D" '>
-                    and timeType= 'D' and timDim>DATE_FORMAT(date_sub(curdate(), interval #{time} day),'%Y-%m')
+                    and timeType= 'D' and timDim>DATE_FORMAT(date_sub(curdate(), interval #{time} day),'%Y-%m-%d')
                 </when>
                 <when test=' timeType != null and timeType == "M" '>
                     and timeType= 'M' and timDim>DATE_FORMAT(date_sub(curdate(), interval #{time} month),'%Y-%m')

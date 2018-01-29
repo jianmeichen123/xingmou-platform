@@ -106,7 +106,7 @@
 				</if>
 			</trim>
 		</where>
-		GROUP BY eventId,projName order by investDate desc ) as aa group by projName 
+		GROUP BY eventId,projName order by investDate desc ) as aa group by projName  order by investDate desc
 	</select>
 	<select id="getTopOrgEventId" resultType="java.lang.String">
 	select ids from (

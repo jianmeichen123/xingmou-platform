@@ -2,7 +2,7 @@ package com.gi.ctdn.pojo;
 
 import com.gi.ctdn.view.common.PojoInfo;
 
-public class InvestorRound {
+public class InvestorRound  extends PojoInfo{
 
 
 	private Integer id;

@@ -42,6 +42,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -75,9 +76,9 @@ public class IndexController implements EnvironmentAware{
 	@Autowired
 	private EchartsBiz echartsBiz;
 
-	@Autowired
+	@Resource(name="stringRedisTemplate")
 	private StringRedisTemplate stringRedisTemplate;
-	
+
 	@Autowired
 	private BusinessLineMappingIndustryBiz businessLineMappingIndustryBiz;
 
@@ -91,7 +92,6 @@ public class IndexController implements EnvironmentAware{
 		MessageInfo<List<Integer>> messageInfo = new MessageInfo<>();
 		//查询redis中的用户
 		String key = "ctdn:"+s+":"+uid;
-		
 		String userJson = (String)stringRedisTemplate.opsForValue().get(key);
 		if(userJson != null){
 			try {

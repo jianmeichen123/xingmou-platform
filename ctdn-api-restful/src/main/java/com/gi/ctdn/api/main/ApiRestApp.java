@@ -1,10 +1,8 @@
 package com.gi.ctdn.api.main;
 
-import com.gi.ctdn.api.conf.InitListener;
 import com.gi.ctdn.api.conf.LoginFilter;
 import com.gi.ctdn.config.SwaggerConfiguration;
 import com.gi.ctdn.utils.BeanContextUtils;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -27,7 +25,6 @@ public class ApiRestApp {
 
     public static void main(String[] args) {
     	SpringApplication springApplication = new SpringApplication(ApiRestApp.class);
-//    	springApplication.addListeners(new InitListener());
     	springApplication.run(args);
     }
     @Bean

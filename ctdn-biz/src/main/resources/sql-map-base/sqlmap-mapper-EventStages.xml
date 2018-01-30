@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.EventStagesDAO">
+    <resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.EventStages">
+        <id column="districtId" property="districtId" jdbcType="INTEGER"/>
+        <result column="districtName" property="districtName" jdbcType="VARCHAR"/>
+        <result column="districtSubId" property="districtSubId" jdbcType="INTEGER"/>
+        <result column="districtSubName" property="districtSubName" jdbcType="VARCHAR"/>
+        <result column="stagesId" property="stagesId" jdbcType="INTEGER"/>
+        <result column="stagesName" property="stagesName" jdbcType="VARCHAR"/>
+        <result column="eventNum" property="eventNum" jdbcType="INTEGER"/>
+        <result column="invstAmount" property="invstAmount" jdbcType="BIGINT"/>
+        <result column="timeType" property="timeType" jdbcType="INTEGER"/>
+    </resultMap>
+
+
+    <sql id="selectFields">
+        districtId,districtName,districtSubId,districtSubName,stagesId,stagesName,eventNum,invstAmount,timeType
+    </sql>
+
+
+    <select id="selectByDistrictAndTimeType" resultMap="BaseResultMap">
+        SELECT
+            <include refid="selectFields"/>
+        FROM
+        app_chart_event_stages
+        WHERE
+        <if test="districtSubId != null"> districtSubId=#{districtSubId} </if>
+        <if test="timeType != null">and timeType =  #{timeType}</if>
+        <if test="districtSubId == null">districtId==45057</if>
+    </select>
+
+</mapper>

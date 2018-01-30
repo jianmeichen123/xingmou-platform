@@ -11,4 +11,5 @@ public interface DistrictDAO {
 	
 	
 	List<District> selectAll();
+	List<District> selectHotDistrict();
 }

@@ -108,5 +108,9 @@ public class IndustryBiz  {
 		return  industryList;
 	}
 
+	public List<Industry> selectIndustryByParentId(Integer parentId) {
+		return industryDAO.selectIndustryByParentId(parentId);
+	}
+
 
 }

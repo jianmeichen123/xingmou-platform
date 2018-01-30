@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.RoundAmountIntervalDao">
+
+    <resultMap type="com.gi.ctdn.pojo.echars.RoundAmountInterval" id="RoundAmountInterval">
+        <result column="moneyRange" property="moneyRange" jdbcType="VARCHAR"/>
+        <result column="roundName" property="roundName" jdbcType="VARCHAR"/>
+        <result column="eventNum" property="eventNum" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--融资规模分布图表-->
+    <select id = "getRXGMFB" resultMap="RoundAmountInterval" parameterType="com.gi.ctdn.pojo.IndustryEcharsQuery">
+        select
+            bb.name as moneyRange,
+            GROUP_CONCAT((case when cc.eventNum is null then 0 ELSE  eventNum  end) ORDER BY aa.id asc  ) as eventNum,
+            GROUP_CONCAT(aa.name ORDER by  aa.id asc  ) as roundName
+        from
+            (select id , name  from app_invest_round where status=2 and  id not in (50,51)) as aa
+        join
+            (select id,name from app_invest_interval) as bb
+        left join
+            (
+            select
+                roundId,intervalId ,sum(eventNum) as eventNum
+            from app_round_amount_interval
+            where
+                timeType = #{timeType}
+            <choose>
+                <when test="industryId != null and industryId != 0">
+                    and industryId=#{industryId}
+                    and industryType =2
+                </when>
+                <when test="industryId == 0">
+                    and industryType =1
+                </when>
+            </choose>
+            group by intervalId,roundId
+            )as cc
+        on aa.id = cc.roundId and bb.id= cc.intervalId
+        group by bb.id
+        order by bb.id
+    </select>
+</mapper>

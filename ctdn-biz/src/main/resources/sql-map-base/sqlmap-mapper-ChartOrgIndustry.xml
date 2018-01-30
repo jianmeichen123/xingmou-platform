@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.ChartOrgIndustryDao">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.ChartOrgIndustry">
+          <result column="industryId" property="industryId" jdbcType="BIGINT" />
+          <result column="industryName" property="industryName" jdbcType="VARCHAR" />
+          <result column="industrySubId" property="industrySubId" jdbcType="BIGINT" />
+          <result column="industrySubName" property="industrySubName" jdbcType="VARCHAR" />
+          <result column="orgNum" property="orgNum" jdbcType="BIGINT" />
+          <result column="orgJson" property="orgJson" jdbcType="VARCHAR" />
+           <result column="rank" property="rank" jdbcType="BIGINT" />
+          <result column="industryType" property="industryType" jdbcType="INTEGER" />
+          <result column="timeType" property="timeType" jdbcType="VARCHAR" />
+	</resultMap>
+
+
+	<sql id="selectFields">
+		industryId,industryName,industrySubId,industrySubName,orgNum,orgJson,rank,industryType,timeType
+	</sql>
+	
+	<select id="selectChartOrgIndustry" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		app_chart_org_industry
+		<where>
+			<trim prefixOverrides="and">
+				<if test="industryType!=null">
+					and industryType = #{industryType}
+				</if>
+				<if test="timeType!=null">
+					and timeType = #{timeType}
+				</if>
+				<if test="industrySubId!=null">
+					and industrySubId = #{industrySubId}
+				</if>
+				<if test="industryId!=null">
+					and industryId = #{industryId}
+				</if>
+			</trim>
+		</where>
+		order by rank asc limit 8
+	</select>
+
+</mapper>

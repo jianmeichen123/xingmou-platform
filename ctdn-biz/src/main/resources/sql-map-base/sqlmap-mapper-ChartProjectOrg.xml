@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gi.ctdn.dao.ChartProjectOrgDao">
+	<resultMap id="BaseResultMap" type="com.gi.ctdn.pojo.ChartProjectOrg">
+          <result column="eventId" property="eventId" jdbcType="BIGINT" />
+          <result column="projCode" property="projCode" jdbcType="VARCHAR" />
+          <result column="projName" property="projName" jdbcType="VARCHAR" />
+          <result column="orgCode" property="orgCode" jdbcType="VARCHAR" />
+          <result column="orgName" property="orgName" jdbcType="VARCHAR" />
+          <result column="industryType" property="industryType" jdbcType="INTEGER" />
+          <result column="timeType" property="timeType" jdbcType="INTEGER" />
+          <result column="industryId" property="industryId" jdbcType="BIGINT" />
+          <result column="industryName" property="industryName" jdbcType="VARCHAR" />
+          <result column="industrySubId" property="industrySubId" jdbcType="BIGINT" />
+          <result column="industrySubName" property="industrySubName" jdbcType="VARCHAR" />
+          <result column="investDate" property="investDate" jdbcType="VARCHAR" />
+	</resultMap>
+
+
+	<sql id="selectFields">
+		industryId,industryName,industrySubId,industrySubName,eventId,projCode,projName,orgCode,orgName,industryType,timeType
+	</sql>
+	
+	<select id="selectChartProjectOrg1" resultMap="BaseResultMap">
+		SELECT
+            <include refid="selectFields" />
+		FROM
+		app_chart_project_org
+		<where>
+			<trim prefixOverrides="and">
+				<if test="industryType">
+					and industryType = #{industryType}
+				</if>
+				<if test="timeType">
+					and timeType = #{timeType}
+				</if>
+			</trim>
+		</where>
+	</select>
+
+	<select id="getDistrictProjectNameList" resultMap="BaseResultMap">
+		SELECT 
+		 <include refid="selectFields" />
+		FROM 
+		app_chart_project_org
+	   <where>
+			<trim prefixOverrides="and">
+				<if test="industryType">
+					and industryType = #{industryType}
+				</if>
+				<if test="timeType">
+					and timeType = #{timeType}
+				</if>
+					<if test="industryId!=null">
+					and industryId = #{industryId}
+				</if>
+			</trim>
+		</where>
+		GROUP BY projName
+	</select>
+	<select id="getDistrictOrgNameList" resultMap="BaseResultMap">
+		SELECT 
+		 <include refid="selectFields" />
+		FROM 
+		app_chart_project_org
+	   <where>
+			<trim prefixOverrides="and">
+				<if test="industryType">
+					and industryType = #{industryType}
+				</if>
+				<if test="timeType">
+					and timeType = #{timeType}
+				</if>
+				<if test="industryId!=null">
+					and industryId = #{industryId}
+				</if>
+			</trim>
+		</where>
+		GROUP BY orgName
+	</select>
+	
+	<resultMap id="BaseProjectOrgResultMap" type="com.gi.ctdn.pojo.ChartProjectOrg">
+          <result column="investDate" property="investDate" jdbcType="VARCHAR" />
+          <result column="projName" property="projName" jdbcType="VARCHAR" />
+          <result column="orgNameAndCodes" property="orgNameAndCodes" jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="selectChartProjectOrg" resultMap="BaseProjectOrgResultMap">
+	select investDate,projName,orgNameAndCodes from (
+		select investDate,projName,count(1) as num,GROUP_CONCAT(orgName,':',orgCode)  as orgNameAndCodes from app_chart_project_org
+		<where>
+			<trim prefixOverrides="and">
+				<if test="industryType">
+					and industryType = #{industryType}
+				</if>
+				<if test="timeType">
+					and timeType = #{timeType}
+				</if>
+				<if test="industryId!=null">
+					and industryId = #{industryId}
+				</if> 
+				 <if test="eventIds != null and eventIds.size() > 0">
+				and eventId  in
+					<foreach collection="eventIds" item="item" open="(" separator="," close=")">
+						#{item}
+					</foreach>
+				</if>
+			</trim>
+		</where>
+		GROUP BY eventId,projName order by investDate desc ) as aa group by projName  order by investDate desc
+	</select>
+	<select id="getTopOrgEventId" resultType="java.lang.String">
+	select ids from (
+	select count(1) as num,SUBSTRING_INDEX(GROUP_CONCAT(DISTINCT eventId ORDER BY investDate desc),',',5) as ids from app_chart_project_org 
+	<where>
+			<trim prefixOverrides="and">
+				<if test="industryType">
+					and industryType = #{industryType}
+				</if>
+				<if test="timeType">
+					and timeType = #{timeType}
+				</if>
+				<if test="industryId!=null">
+					and industryId = #{industryId}
+				</if> 
+			</trim>
+		</where>
+	GROUP BY orgName
+	ORDER BY num desc limit 20) as cc
+	</select>
+</mapper>

@@ -15,5 +15,5 @@ public interface EventMergerInfoDAO {
 
 	EventMergerInfoSon selectByEventId(@Param("eventId") Integer eventId);
 
-
+	Integer selectMergerCount();
 }

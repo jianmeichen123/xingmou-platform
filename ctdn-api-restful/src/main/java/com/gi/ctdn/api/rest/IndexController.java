@@ -42,6 +42,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -75,9 +76,9 @@ public class IndexController implements EnvironmentAware{
 	@Autowired
 	private EchartsBiz echartsBiz;
 
-	@Autowired
+	@Resource(name="stringRedisTemplate")
 	private StringRedisTemplate stringRedisTemplate;
-	
+
 	@Autowired
 	private BusinessLineMappingIndustryBiz businessLineMappingIndustryBiz;
 
@@ -91,7 +92,6 @@ public class IndexController implements EnvironmentAware{
 		MessageInfo<List<Integer>> messageInfo = new MessageInfo<>();
 		//查询redis中的用户
 		String key = "ctdn:"+s+":"+uid;
-		
 		String userJson = (String)stringRedisTemplate.opsForValue().get(key);
 		if(userJson != null){
 			try {
@@ -314,21 +314,28 @@ public class IndexController implements EnvironmentAware{
 		}
 		return messageInfo;
 	}
-    
-    
-    @RequestMapping("queryGGTotalHeaderStat")
-    @ResponseBody
-    public MessageInfo<IndexHeaderStat> queryGGTotalHeaderStat (){
-        MessageInfo<IndexHeaderStat> messageInfo = indexHeaderStatBiz.getGGTotalHeaderStat();
-        return messageInfo;
-    }
-    
+
     @RequestMapping("queryGGCurMonthHeaderStat")
     @ResponseBody
     public MessageInfo<IndexHeaderStat> queryGGHeaderStat (){
         MessageInfo<IndexHeaderStat> messageInfo = indexHeaderStatBiz.getGGCurMonthHeaderStat();
         return messageInfo;
     }
+
+	/**
+	 * 传值可通用
+	 * @param indexHeaderStat
+	 * @return
+	 */
+	@RequestMapping("queryHeaderStatCommon")
+	@ResponseBody
+	public MessageInfo<IndexHeaderStat> queryHeaderStatCommon (@RequestBody IndexHeaderStat indexHeaderStat){
+		if(indexHeaderStat.getType()== null){
+			return new MessageInfo<>(MessageStatus.MISS_PARAMETER_CODE,MessageStatus.MISS_PARAMETER_MESSAGE);
+		}
+		MessageInfo<IndexHeaderStat> messageInfo = indexHeaderStatBiz.queryHeaderStatCommon(indexHeaderStat);
+		return messageInfo;
+	}
     
     @RequestMapping("queryIndustryMonthForEchart")
     @ResponseBody

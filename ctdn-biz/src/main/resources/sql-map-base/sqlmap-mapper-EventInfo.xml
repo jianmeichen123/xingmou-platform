@@ -99,6 +99,14 @@
     		where MONTH(investDate) = currentMonth
     	</if>
     </select>
+
+    <!--获取事件总数-->
+    <select id="selectEventCount"  resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM
+        app_event_info
+    </select>
+
     <!--获取融资金额  -->
     <select id="getCurrentMonthEventMoney" parameterType="integer">
     	SELECT SUM(latestFinanceAmountNum)

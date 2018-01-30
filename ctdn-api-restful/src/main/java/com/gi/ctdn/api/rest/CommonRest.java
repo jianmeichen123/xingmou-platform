@@ -124,6 +124,20 @@ public class CommonRest {
         return districtMessageInfo;
     }
 
+    /**
+     *热门地区查询
+     * @return messageInfo
+     */
+    @ApiOperation("热门地区查询")
+    @RequestMapping(value="hotDistrict",method = RequestMethod.GET)
+    @ResponseBody
+    @Cacheable(value = "hotDistrict",keyGenerator = "baseKG")
+    public MessageInfo<List<District>> hotDistrict() {
+        MessageInfo<List<District>> districtMessageInfo = districtBiz.getHotDistrict();
+        List<District> districts = districtMessageInfo.getData();
+        districtMessageInfo.setData(districts);
+        return districtMessageInfo;
+    }
 
     /**
      *行业查询
@@ -571,7 +585,7 @@ public class CommonRest {
     @ApiOperation("所有综合查询")
     @RequestMapping(value = "allQuery",method = RequestMethod.GET)
     @ResponseBody
-    //@Cacheable(value = "allQuery",keyGenerator = "baseKG")
+    @Cacheable(value = "allQuery",keyGenerator = "baseKG")
     public MessageInfo<Map> allQuery(){
         //企业
         MessageInfo<Map> messageInfo = new MessageInfo<>();

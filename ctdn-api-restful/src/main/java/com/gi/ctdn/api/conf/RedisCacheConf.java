@@ -29,15 +29,15 @@ import java.util.List;
 /**
  * Created by vincent on 16-9-7.
  */
-//@Configuration
-//@EnableCaching
+@Configuration
+@EnableCaching
 public class RedisCacheConf {
-	
+
 	private static final int maxTotal = 2000;
 	private static final int maxIdle = 50;
 	private static final int maxWaitMillis = 1000;
 	private static final boolean testOnBorrow = true;
-	
+
 	@Value("${spring.redis.host}")
 	private volatile String host;
 	@Value("${spring.redis.port}")
@@ -90,7 +90,7 @@ public class RedisCacheConf {
         return redisCacheManager;
     }
 
-    @Bean
+    @Bean(name="stringRedisTemplate")
     public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory factory) {
         StringRedisTemplate template = new StringRedisTemplate(factory);
         Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
@@ -102,7 +102,7 @@ public class RedisCacheConf {
         template.afterPropertiesSet();
         return template;
     }
-    
+
     @Bean
 	public JedisPoolConfig jedisPoolConfig(){
 		JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
@@ -112,14 +112,14 @@ public class RedisCacheConf {
 		jedisPoolConfig.setTestOnBorrow(testOnBorrow);
 		return jedisPoolConfig;
 	}
-	
+
 	@Bean
 	public  JedisShardInfo jedisShardInfo(){
 		JedisShardInfo jedisShardInfo = new JedisShardInfo(host,port);
 		//jedisShardInfo.setPassword(password);
 		return jedisShardInfo;
 	}
-	
+
 	@Bean
 	@SuppressWarnings("resource")
 	public ShardedJedis ShardedJedis(){

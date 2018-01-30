@@ -3,7 +3,7 @@ package com.gi.ctdn.pojo;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.gi.ctdn.view.common.PojoInfo;
 
-public class InvestorIndustry  {
+public class InvestorIndustry  extends PojoInfo {
 
 
 	private Integer id;

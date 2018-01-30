@@ -98,7 +98,7 @@
 				<if test="industryId!=null">
 					and industryId = #{industryId}
 				</if> 
-				 <if test="eventIds != null">
+				 <if test="eventIds != null and eventIds.size() > 0">
 				and eventId  in
 					<foreach collection="eventIds" item="item" open="(" separator="," close=")">
 						#{item}

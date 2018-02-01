@@ -14,6 +14,7 @@ import com.gi.ctdn.view.common.ListUtil;
 import com.gi.ctdn.view.common.MessageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -38,6 +39,9 @@ public class IndustryAnalizeEcharsBiz {
     public MessageInfo<EchartsData<IndustryMonth>> getIndustryByTimeRoundDistrict(IndustryEcharsQuery industryEcharsQuery) {
         MessageInfo<EchartsData<IndustryMonth>> messageInfo = new MessageInfo<EchartsData<IndustryMonth>>();
         List<IndustryMonth> industryMonthList  = new ArrayList<IndustryMonth>();
+        if(!StringUtils.isEmpty(industryEcharsQuery.getTime()) && !StringUtils.isEmpty(industryEcharsQuery.getTimeType()) && industryEcharsQuery.getTimeType().equals("Q")){
+            industryEcharsQuery.setTime(industryEcharsQuery.getTime()*4);
+        }
         industryMonthList = industryGroupDistrictDao.getIndustryByTimeRoundDistrict(industryEcharsQuery);
         EchartsData<IndustryMonth> echartsData = new EchartsData<IndustryMonth>();
         List<String> xAxis = new ArrayList<String>();

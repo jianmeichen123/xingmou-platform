@@ -93,7 +93,7 @@
         <dependency>
             <groupId>com.galaxyinternet</groupId>
             <artifactId>galaxy-cache</artifactId>
-            <version>1.0.5.20-xingmou-rc</version>
+            <version>xm_1.0.5.20</version>
         </dependency>
         <dependency>
             <groupId>com.galaxyinternet</groupId>

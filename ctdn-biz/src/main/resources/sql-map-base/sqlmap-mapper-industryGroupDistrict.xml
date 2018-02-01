@@ -39,19 +39,25 @@
         from
             (select id,name FROM app_industry where parentId = #{industryId,jdbcType=INTEGER} )as aa
         join
-            (select data from app_dim_date where
+            (
                 <choose>
                     <when test=' timeType != null and timeType == "M" '>
+                        select data from app_dim_date where
                         type ='M' and DATE_FORMAT(date_sub(curdate(), INTERVAL  #{time} month),'%Y-%m') &lt; data and data &lt;= date_format(curdate(),'%Y-%m')
+                        order by data
                     </when>
                     <when test=' timeType != null and timeType == "Q" '>
-                        type ='Q' and substring_index(data,'Q',1) > DATE_FORMAT((CURDATE() - INTERVAL  #{time} YEAR), '%Y') and data &lt;= date_format(curdate(),'%Y-%m')
+                        select data from
+                        (select data from app_dim_date where type ='Q' and data &lt;= CONCAT(year(curdate()),'Q',quarter(curdate())) order by data desc  limit 0,#{time} )
+                        as aa order by aa.data
                     </when>
                     <when test=' timeType != null and timeType == "Y" '>
+                         select data from app_dim_date where
                          type ='Y' and data > DATE_FORMAT((CURDATE() - INTERVAL  #{time} YEAR), '%Y') and data &lt;= date_format(curdate(),'%Y-%m')
+                         order by data
                     </when>
                 </choose>
-            order by data) as vv
+            ) as vv
         left join
             (
             select timDim,industryId,industrySubId,
@@ -64,7 +70,10 @@
                         and timeType ='M' and timDim>DATE_FORMAT(date_sub(curdate(), interval  #{time} month),'%Y-%m')
                     </when>
                      <when test=' timeType != null and timeType == "Q" '>
-                         and  timeType ='Q' and substring_index(timDim,'Q',1) > DATE_FORMAT((CURDATE() - INTERVAL  #{time} YEAR), '%Y')
+                         and  timeType ='Q' and
+                         timDim >=
+                         (select data from (select data from app_dim_date where type ='Q' and data &lt;= CONCAT(year(curdate()),'Q',quarter(curdate())) order by data desc  limit 0,12)
+                         as aa limit 11,12)
                      </when>
                      <when test=' timeType != null and timeType == "Y" '>
                          and timeType ='Y' and timDim > DATE_FORMAT((CURDATE() - INTERVAL  #{time} YEAR), '%Y')

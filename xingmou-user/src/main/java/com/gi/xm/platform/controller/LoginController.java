@@ -268,9 +268,9 @@ public class LoginController implements EnvironmentAware{
 		user.setUserCode(PWDUtils.generateUserCode(user.getId(),"internal"));
 		String key = "ctdn-firstLogin:internal:"+user.getId();         //判断用户是否第一次登录创投大脑
 		if(stringRedisTemplate.opsForValue().get(key) == null){
-			stringRedisTemplate.opsForValue().set(key,"true");
+			stringRedisTemplate.opsForValue().set(key,"true",50*365*24,TimeUnit.HOURS);
 		}else{
-			stringRedisTemplate.opsForValue().set(key,"false");
+			stringRedisTemplate.opsForValue().set(key,"false",50*365*24,TimeUnit.HOURS);
 		}
 		String sessionId = SessionUtils.createWebSessionId(); // 生成sessionId
         setCacheSessionId("internal", user, sessionId,notAuto);
@@ -434,9 +434,9 @@ public class LoginController implements EnvironmentAware{
 		String key = "ctdn-firstLogin:external:"+query.getId();
 
 		if(stringRedisTemplate.opsForValue().get(key) == null){
-			stringRedisTemplate.opsForValue().set(key, "true");
+			stringRedisTemplate.opsForValue().set(key, "true",50*365*24,TimeUnit.HOURS);
 		}else{
-			stringRedisTemplate.opsForValue().set(key, "false");
+			stringRedisTemplate.opsForValue().set(key, "false",50*365*24,TimeUnit.HOURS);
 		}
 		//生成usercode
 		query.setUserCode(PWDUtils.generateUserCode(query.getId(),"external"));

@@ -26,7 +26,7 @@ public class LoginFilter implements  Filter{
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 	}
-	
+
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException{
@@ -37,7 +37,7 @@ public class LoginFilter implements  Filter{
 		HttpServletResponse res = (HttpServletResponse) response;
 		String urlPatterns = BeanContextUtils.getUrlPatterns();
 		String reqUrl = req.getRequestURI();
-		System.out.println("filter = " + stringRedisTemplate + " ,reqUrl = " +  reqUrl + " ,urlPatterns = " + urlPatterns);
+		//System.out.println("filter = " + stringRedisTemplate + " ,reqUrl = " +  reqUrl + " ,urlPatterns = " + urlPatterns);
 		if(urlPatterns !=null && urlPatterns.trim().length() !=0){
 			String[] includeUrls = urlPatterns.split(",");
 			for(String url : includeUrls){

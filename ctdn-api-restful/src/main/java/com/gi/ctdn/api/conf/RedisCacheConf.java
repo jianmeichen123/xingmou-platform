@@ -44,8 +44,8 @@ public class RedisCacheConf {
 	private volatile String host;
 	@Value("${spring.redis.port}")
 	private volatile int port;
-//	@Value("${spring.redis.password}")
-//	private volatile String password;
+	@Value("${spring.redis.password}")
+	private volatile String password;
 
     @Bean
     public KeyGenerator baseKG(){
@@ -129,7 +129,7 @@ public class RedisCacheConf {
 	@Bean
 	public  JedisShardInfo jedisShardInfo(){
 		JedisShardInfo jedisShardInfo = new JedisShardInfo(host,port);
-		//jedisShardInfo.setPassword(password);
+		jedisShardInfo.setPassword(password);
 		return jedisShardInfo;
 	}
 

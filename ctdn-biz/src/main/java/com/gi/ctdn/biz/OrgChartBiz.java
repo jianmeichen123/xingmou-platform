@@ -131,15 +131,18 @@ public class OrgChartBiz {
 		return orgPartner;
 	}
 
-	public ChartProjectOrgCompete getChartOrgCompete(ChartProjectOrgCompete chartProjectOrgCompete) {
+	public synchronized ChartProjectOrgCompete getChartOrgCompete(ChartProjectOrgCompete chartProjectOrgCompete) {
 		ChartProjectOrgCompete orgCompete = new ChartProjectOrgCompete();
 		Long parentId  = chartProjectOrgCompete.getIndustryId();
 		List<Industry> industryList = industryDAO.selectIndustryByParentId(Integer.valueOf(parentId.intValue()));
 		orgCompete.setIndustryList(industryList);
 		List<ChartProjectOrgCompete> partnerList = new ArrayList<ChartProjectOrgCompete>();
+		chartProjectOrgCompeteDao.deleteAll();
 		if(parentId == 0){ //一级行业
+			chartProjectOrgCompeteDao.insertParentCompete(chartProjectOrgCompete);
 			partnerList = chartProjectOrgCompeteDao.getParentCompeteList(chartProjectOrgCompete);
 		}else{ //二级行业
+			chartProjectOrgCompeteDao.insertChiltCompete(chartProjectOrgCompete);
 			partnerList = chartProjectOrgCompeteDao.getChildCompeteList(chartProjectOrgCompete);
 		}
 		orgCompete.setCompeteList(partnerList);
@@ -150,7 +153,12 @@ public class OrgChartBiz {
 		ChartProjectOrgPartner orgPartner = new ChartProjectOrgPartner();
 		Long partnerCount = chartProjectOrgPartnerDao.getPartnerCount(chartProjectOrgPartner);
 		orgPartner.setPartnerCount(partnerCount);
-		Long competeCount = chartProjectOrgCompeteDao.getCompeteCount(chartProjectOrgPartner);
+		Long competeCount = 0l;
+		if(chartProjectOrgPartner.getIndustryId() == null){
+			 competeCount = chartProjectOrgCompeteDao.getParentCompeteCount(chartProjectOrgPartner);
+		}else{
+			 competeCount = chartProjectOrgCompeteDao.getChildCompeteCount(chartProjectOrgPartner);
+		}
 		orgPartner.setCompeteCount(competeCount);
 		orgPartner.setOrgCode(chartProjectOrgPartner.getOrgCode());
 		return orgPartner;

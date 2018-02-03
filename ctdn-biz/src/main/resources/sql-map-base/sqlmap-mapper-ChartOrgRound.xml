@@ -36,7 +36,7 @@
 				</if>
 			</trim>
 		</where>
-		order by orgNum desc limit 8
+		order by rank asc limit 8
 	</select>
 
 </mapper>

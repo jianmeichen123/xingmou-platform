@@ -9,10 +9,19 @@ public interface ChartProjectOrgCompeteDao {
 	
 	List<ChartProjectOrgCompete> selectChartProjectOrgCompete(ChartProjectOrgCompete chartProjectOrgCompete);
 
-	Long getCompeteCount(ChartProjectOrgPartner chartProjectOrgPartner);
+	Long getParentCompeteCount(ChartProjectOrgPartner chartProjectOrgPartner);
 
 	List<ChartProjectOrgCompete> getParentCompeteList(ChartProjectOrgCompete chartProjectOrgCompete);
 
 	List<ChartProjectOrgCompete> getChildCompeteList(ChartProjectOrgCompete chartProjectOrgCompete);
+	
+	int insertChiltCompete(ChartProjectOrgCompete chartProjectOrgCompete);
+	
+	int insertParentCompete(ChartProjectOrgCompete chartProjectOrgCompete);
+	int deleteAll();
+	
+	Long getChildCompeteCount(ChartProjectOrgPartner chartProjectOrgPartner);
+	
+	
 
 }

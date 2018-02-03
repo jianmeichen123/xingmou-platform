@@ -82,10 +82,21 @@ FROM
             b.`industryIds`,
             LOCATE(',', b.`industryIds`) - 1
           ) is not null 
-        AND a.investDate >= date_sub(
-            CURRENT_DATE (),
-            INTERVAL 6 MONTH
-          )
+          	<if test="timeType!=null and timeType == '1'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 30 day)
+			</if>
+				<if test="timeType !=null and timeType == '2'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 3 month)
+			</if>
+				<if test="timeType !=null and timeType == '3'.toString()">
+								and a.investDate >=  date_sub(CURRENT_DATE(),interval 6 month)
+			</if>
+				<if test="timeType !=null and timeType == '4'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 1 year)
+			</if>
+			<if test="timeType !=null and timeType == '5'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 3 year)
+			</if>
         AND a.`eventId` NOT IN (
           SELECT
             `eventId`
@@ -165,12 +176,22 @@ LEFT JOIN (
           FROM
             `app_event_info_ext` a
           LEFT JOIN `app_event_info` b ON a.`eventId` = b.`eventId`
-          WHERE
-            a.investDate >= date_sub(
-              CURRENT_DATE (),
-              INTERVAL 6 MONTH
-            )
-          AND a.type = 'invst'
+          WHERE a.type = 'invst'
+             	<if test="timeType!=null and timeType == '1'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 30 day)
+			</if>
+				<if test="timeType !=null and timeType == '2'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 3 month)
+			</if>
+				<if test="timeType !=null and timeType == '3'.toString()">
+								and a.investDate >=  date_sub(CURRENT_DATE(),interval 6 month)
+			</if>
+				<if test="timeType !=null and timeType == '4'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 1 year)
+			</if>
+			<if test="timeType !=null and timeType == '5'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 3 year)
+			</if>
           and a.`industryName` is not null and 
         LEFT (
             b.`industryIds`,
@@ -630,10 +651,21 @@ FROM
             b.`industryIds`,
             LOCATE(',', b.`industryIds`) - 1
           ) is not null 
-        AND a.investDate >= date_sub(
-            CURRENT_DATE (),
-            INTERVAL 6 MONTH
-          )
+       	<if test="timeType!=null and timeType == '1'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 30 day)
+			</if>
+				<if test="timeType !=null and timeType == '2'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 3 month)
+			</if>
+			<if test="timeType !=null and timeType == '3'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 6 month)
+			</if>
+				<if test="timeType !=null and timeType == '4'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 1 year)
+			</if>
+			<if test="timeType !=null and timeType == '5'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 3 year)
+			</if>
         AND a.`eventId` NOT IN (
           SELECT
             `eventId`
@@ -713,12 +745,22 @@ LEFT JOIN (
           FROM
             `app_event_info_ext` a
           LEFT JOIN `app_event_info` b ON a.`eventId` = b.`eventId`
-          WHERE
-            a.investDate >= date_sub(
-              CURRENT_DATE (),
-              INTERVAL 6 MONTH
-            )
-          AND a.type = 'invst'
+          WHERE a.type = 'invst'
+             	<if test="timeType!=null and timeType == '1'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 30 day)
+			</if>
+				<if test="timeType !=null and timeType == '2'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 3 month)
+			</if>
+				<if test="timeType !=null and timeType == '3'.toString()">
+								and a.investDate >=  date_sub(CURRENT_DATE(),interval 6 month)
+			</if>
+				<if test="timeType !=null and timeType == '4'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 1 year)
+			</if>
+			<if test="timeType !=null and timeType == '5'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 3 year)
+			</if>
           and a.`industryName` is not null and 
         LEFT (
             b.`industryIds`,

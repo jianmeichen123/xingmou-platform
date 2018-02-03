@@ -38,58 +38,1065 @@
 			</trim>
 		</where>
 	</select>
-	<select id="getCompeteCount" resultType="java.lang.Long">
+	<select id="getParentCompeteCount" resultType="java.lang.Long">
 	SELECT
 		COUNT(*)
-	FROM
-	app_chart_project_org_compete
-	where (eventNumAll is not null and eventNumAll != 0)
-			<if test="industryType">
-				and industryType = #{industryType}
+	FROM(
+	SELECT
+  a.industryId,
+  a.industryName,
+  b.eventNumAll,
+  a.invstorCode as orgCode,
+  a.invstorname as competeOrgName,
+  a.eventNum as competeOrgEventNum,
+  c.eventNum as orgEventNum
+FROM
+  (
+    SELECT
+      invstorCode,
+      invstorname,
+      industryId,
+      industryname,
+      count(DISTINCT `eventId`) AS eventNum
+    FROM
+      (
+        SELECT
+          a.eventid,
+          a.`invstorCode`,
+          a.`invstorname`,
+          a.`investDate`,
+          a.`company`,
+          a.type,
+          LEFT (
+            b.`industryIds`,
+            LOCATE(',', b.`industryIds`) - 1
+          ) AS industryId,
+          a.`industryname`
+        FROM
+          `app_event_info_ext` a
+        LEFT JOIN `app_event_info` b ON a.`eventId` = b.`eventId`
+        WHERE
+          a.type = 'invst'
+        and a.`industryName` is not null and 
+        LEFT (
+            b.`industryIds`,
+            LOCATE(',', b.`industryIds`) - 1
+          ) is not null 
+        AND a.investDate >= date_sub(
+            CURRENT_DATE (),
+            INTERVAL 6 MONTH
+          )
+        AND a.`eventId` NOT IN (
+          SELECT
+            `eventId`
+          FROM
+            `app_event_info_ext`
+          WHERE
+            `invstorCode` = #{orgCode}
+            	<if test="timeType!=null and timeType == '1'.toString()">
+				and investDate >= date_sub(CURRENT_DATE(),interval 30 day)
 			</if>
-			<if test="timeType">
-				and timeType = #{timeType}
+				<if test="timeType !=null and timeType == '2'.toString()">
+				and investDate >=  date_sub(CURRENT_DATE(),interval 3 month)
 			</if>
-			<if test="orgCode">
-				and orgCode = #{orgCode}
+				<if test="timeType !=null and timeType == '3'.toString()">
+								and investDate >=  date_sub(CURRENT_DATE(),interval 6 month)
 			</if>
-			<if test="industryId">
-				and industryId = #{industryId}
+				<if test="timeType !=null and timeType == '4'.toString()">
+				and investDate >=  date_sub(CURRENT_DATE(),interval 1 year)
 			</if>
+			<if test="timeType !=null and timeType == '5'.toString()">
+				and investDate >= date_sub(CURRENT_DATE(),interval 3 year)
+			</if>
+          )
+        and a.`industryName`  in 
+        (
+          SELECT
+    distinct a.industryname
+  FROM
+    `app_event_info_ext` a
+  LEFT JOIN `app_event_info` b ON a.`eventId` = b.`eventId`
+  WHERE
+    a.`invstorCode` = #{orgCode}
+   	<if test="timeType!=null and timeType == '1'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 30 day)
+			</if>
+				<if test="timeType !=null and timeType == '2'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 3 month)
+			</if>
+				<if test="timeType !=null and timeType == '3'.toString()">
+								and a.investDate >=  date_sub(CURRENT_DATE(),interval 6 month)
+			</if>
+				<if test="timeType !=null and timeType == '4'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 1 year)
+			</if>
+			<if test="timeType !=null and timeType == '5'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 3 year)
+			</if>
+        )
+     
+      ) a
+    GROUP BY
+      invstorCode,
+      invstorname,
+      industryId,
+      industryname
+  ) a
+LEFT JOIN (
+  
+      SELECT
+        invstorCode,
+        invstorname,
+        count(DISTINCT `eventId`) AS eventNumAll
+      FROM
+        (
+          SELECT
+            a.eventid,
+            a.`invstorCode`,
+            a.`invstorname`,
+            a.`investDate`,
+            a.`company`,
+            a.type,
+            LEFT (
+              b.`industryIds`,
+              LOCATE(',', b.`industryIds`) - 1
+            ) AS industryId,
+            a.`industryname`
+          FROM
+            `app_event_info_ext` a
+          LEFT JOIN `app_event_info` b ON a.`eventId` = b.`eventId`
+          WHERE
+            a.investDate >= date_sub(
+              CURRENT_DATE (),
+              INTERVAL 6 MONTH
+            )
+          AND a.type = 'invst'
+          and a.`industryName` is not null and 
+        LEFT (
+            b.`industryIds`,
+            LOCATE(',', b.`industryIds`) - 1
+          ) is not null 
+          AND a.`eventId` NOT IN (
+            SELECT
+              `eventId`
+            FROM
+              `app_event_info_ext`
+            WHERE
+              `invstorCode` = #{orgCode}
+              	<if test="timeType!=null and timeType == '1'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 30 day)
+			</if>
+				<if test="timeType !=null and timeType == '2'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 3 month)
+			</if>
+				<if test="timeType !=null and timeType == '3'.toString()">
+								and a.investDate >=  date_sub(CURRENT_DATE(),interval 6 month)
+			</if>
+				<if test="timeType !=null and timeType == '4'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 1 year)
+			</if>
+			<if test="timeType !=null and timeType == '5'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 3 year)
+			</if>
+            )
+            and a.`industryName`  in 
+        (
+          SELECT
+            distinct a.industryname
+          FROM
+            `app_event_info_ext` a
+          LEFT JOIN `app_event_info` b ON a.`eventId` = b.`eventId`
+          WHERE
+            a.`invstorCode` = #{orgCode}
+           	<if test="timeType!=null and timeType == '1'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 30 day)
+			</if>
+				<if test="timeType !=null and timeType == '2'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 3 month)
+			</if>
+				<if test="timeType !=null and timeType == '3'.toString()">
+								and a.investDate >=  date_sub(CURRENT_DATE(),interval 6 month)
+			</if>
+				<if test="timeType !=null and timeType == '4'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 1 year)
+			</if>
+			<if test="timeType !=null and timeType == '5'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 3 year)
+			</if>
+        )
+          
+        ) a
+      GROUP BY
+        invstorCode,
+        invstorname
+
+) b ON a.invstorname = b.invstorname
+LEFT JOIN (
+  SELECT
+    a.invstorname,
+    a.industryname,
+    count(DISTINCT a.`eventId`) AS eventNum
+  FROM
+    `app_event_info_ext` a
+  LEFT JOIN `app_event_info` b ON a.`eventId` = b.`eventId`
+  WHERE
+    a.`invstorCode` = #{orgCode}
+    	<if test="timeType!=null and timeType == '1'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 30 day)
+			</if>
+				<if test="timeType !=null and timeType == '2'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 3 month)
+			</if>
+				<if test="timeType !=null and timeType == '3'.toString()">
+								and a.investDate >=  date_sub(CURRENT_DATE(),interval 6 month)
+			</if>
+				<if test="timeType !=null and timeType == '4'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 1 year)
+			</if>
+			<if test="timeType !=null and timeType == '5'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 3 year)
+			</if>
+  GROUP BY
+    a.invstorname,
+    a.industryname
+) c ON a.`industryName` = c.`industryName`
+where 
+  c.eventNum IS NOT NULL
+ORDER BY
+  eventNumAll DESC
+	) as pp;
 	</select>
-	
+	<select id="getChildCompeteCount" resultType="java.lang.Long">
+	select count(*) from (
+	SELECT
+  a.industryId,
+  a.industryName,
+  a.industrySubId,
+  a.industrySubName,
+  b.eventNumAll,
+  a.invstorCode AS orgCode,
+  a.invstorname AS competeOrgName,
+  a.eventNum AS competeOrgEventNum,
+  c.eventNum AS orgEventNum
+FROM
+  (
+    SELECT
+      invstorCode,
+      invstorname,
+      industryId,
+      industryname,
+      industrySubId,
+      industrySubName,
+      count(DISTINCT `eventId`) AS eventNum
+    FROM
+      (
+        SELECT
+          a.eventid,
+          a.`invstorCode`,
+          a.`invstorname`,
+          a.`investDate`,
+          a.`company`,
+          a.type,
+          LEFT (
+            b.`industryIds`,
+            LOCATE(',', b.`industryIds`) - 1
+          ) AS industryId,
+          RIGHT (
+            b.`industryIds`,
+            length(b.`industryIds`) - LOCATE(',', b.`industryIds`)
+          ) AS industrySubId,
+          a.`industryname`,
+          b.`industrySubName`
+        FROM
+          `app_event_info_ext` a
+        LEFT JOIN `app_event_info` b ON a.`eventId` = b.`eventId`
+        WHERE
+          a.type = 'invst'
+    <if test="timeType!=null and timeType == '1'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 30 day)
+			</if>
+				<if test="timeType !=null and timeType == '2'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 3 month)
+			</if>
+				<if test="timeType !=null and timeType == '3'.toString()">
+								and a.investDate >=  date_sub(CURRENT_DATE(),interval 6 month)
+			</if>
+				<if test="timeType !=null and timeType == '4'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 1 year)
+			</if>
+			<if test="timeType !=null and timeType == '5'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 3 year)
+			</if>
+	       		<if test="industryName !=null">
+				and a.industryName=#{industryName}
+				</if>
+        AND a.`eventId` NOT IN (
+          SELECT
+            `eventId`
+          FROM
+            `app_event_info_ext`
+          WHERE
+            invstorCode =#{orgCode}
+ <if test="timeType!=null and timeType == '1'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 30 day)
+			</if>
+				<if test="timeType !=null and timeType == '2'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 3 month)
+			</if>
+				<if test="timeType !=null and timeType == '3'.toString()">
+								and a.investDate >=  date_sub(CURRENT_DATE(),interval 6 month)
+			</if>
+				<if test="timeType !=null and timeType == '4'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 1 year)
+			</if>
+			<if test="timeType !=null and timeType == '5'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 3 year)
+			</if>
+				<if test="industryName !=null">
+				and a.industryName=#{industryName}
+			</if>
+        )
+        and b.industrySubName in 
+        (
+          SELECT
+            b.industrySubName
+          FROM
+            `app_event_info_ext` a
+          LEFT JOIN `app_event_info` b ON a.`eventId` = b.`eventId`
+          WHERE
+            a.invstorCode =#{orgCode}
+   <if test="timeType!=null and timeType == '1'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 30 day)
+			</if>
+				<if test="timeType !=null and timeType == '2'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 3 month)
+			</if>
+				<if test="timeType !=null and timeType == '3'.toString()">
+								and a.investDate >=  date_sub(CURRENT_DATE(),interval 6 month)
+			</if>
+				<if test="timeType !=null and timeType == '4'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 1 year)
+			</if>
+			<if test="timeType !=null and timeType == '5'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 3 year)
+			</if>
+				<if test="industryName !=null">
+				and a.industryName=#{industryName}
+			</if>
+          GROUP BY
+            a.invstorname,
+            a.industryname,
+            b.industrySubName
+        )
+      ) a
+    GROUP BY
+      invstorCode,
+      invstorname,
+      industryId,
+      industryname,
+      industrySubId,
+      industrySubName
+  ) a
+LEFT JOIN (
+
+      SELECT
+        invstorCode,
+        invstorname,
+        industryId,
+        industryname,
+        count(DISTINCT `eventId`) AS eventNumAll
+      FROM
+        (
+          SELECT
+            a.eventid,
+            a.`invstorCode`,
+            a.`invstorname`,
+            a.`investDate`,
+            a.`company`,
+            a.type,
+            LEFT (
+              b.`industryIds`,
+              LOCATE(',', b.`industryIds`) - 1
+            ) AS industryId,
+            RIGHT (
+              b.`industryIds`,
+              length(b.`industryIds`) - LOCATE(',', b.`industryIds`)
+            ) AS industrySubId,
+            a.`industryname`,
+            b.`industrySubName`
+          FROM
+            `app_event_info_ext` a
+          LEFT JOIN `app_event_info` b ON a.`eventId` = b.`eventId`
+          WHERE
+            a.type = 'invst'
+      <if test="timeType!=null and timeType == '1'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 30 day)
+			</if>
+				<if test="timeType !=null and timeType == '2'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 3 month)
+			</if>
+				<if test="timeType !=null and timeType == '3'.toString()">
+								and a.investDate >=  date_sub(CURRENT_DATE(),interval 6 month)
+			</if>
+				<if test="timeType !=null and timeType == '4'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 1 year)
+			</if>
+			<if test="timeType !=null and timeType == '5'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 3 year)
+			</if>
+				<if test="industryName !=null">
+				and a.industryName=#{industryName}
+			</if>
+          AND a.`eventId` NOT IN (
+            SELECT
+              `eventId`
+            FROM
+              `app_event_info_ext`
+            WHERE
+              invstorCode =#{orgCode}
+  <if test="timeType!=null and timeType == '1'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 30 day)
+			</if>
+				<if test="timeType !=null and timeType == '2'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 3 month)
+			</if>
+				<if test="timeType !=null and timeType == '3'.toString()">
+								and a.investDate >=  date_sub(CURRENT_DATE(),interval 6 month)
+			</if>
+				<if test="timeType !=null and timeType == '4'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 1 year)
+			</if>
+			<if test="timeType !=null and timeType == '5'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 3 year)
+			</if>
+				<if test="industryName !=null">
+				and a.industryName=#{industryName}
+			</if>
+          )
+          and b.industrySubName in 
+          (
+            SELECT
+              b.industrySubName
+            FROM
+              `app_event_info_ext` a
+            LEFT JOIN `app_event_info` b ON a.`eventId` = b.`eventId`
+            WHERE
+              a.invstorCode =#{orgCode}
+     <if test="timeType!=null and timeType == '1'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 30 day)
+			</if>
+				<if test="timeType !=null and timeType == '2'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 3 month)
+			</if>
+				<if test="timeType !=null and timeType == '3'.toString()">
+								and a.investDate >=  date_sub(CURRENT_DATE(),interval 6 month)
+			</if>
+				<if test="timeType !=null and timeType == '4'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 1 year)
+			</if>
+			<if test="timeType !=null and timeType == '5'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 3 year)
+			</if>
+				<if test="industryName !=null">
+				and a.industryName=#{industryName}
+			</if>
+            GROUP BY
+              a.invstorname,
+              a.industryname,
+              b.industrySubName
+          )
+        ) a
+      GROUP BY
+        invstorCode,
+        invstorname,
+        industryId,
+        industryname
+    
+) b ON a.invstorCode = b.invstorCode
+AND a.`industryName` = b.`industryName`
+LEFT JOIN (
+  SELECT
+    a.invstorname,
+    a.industryname,
+    b.industrySubName,
+    count(DISTINCT a.`eventId`) AS eventNum
+  FROM
+    `app_event_info_ext` a
+  LEFT JOIN `app_event_info` b ON a.`eventId` = b.`eventId`
+  WHERE
+    a.invstorCode =#{orgCode}
+  <if test="timeType!=null and timeType == '1'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 30 day)
+			</if>
+				<if test="timeType !=null and timeType == '2'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 3 month)
+			</if>
+				<if test="timeType !=null and timeType == '3'.toString()">
+								and a.investDate >=  date_sub(CURRENT_DATE(),interval 6 month)
+			</if>
+				<if test="timeType !=null and timeType == '4'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 1 year)
+			</if>
+			<if test="timeType !=null and timeType == '5'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 3 year)
+			</if>
+				<if test="industryName !=null">
+				and a.industryName=#{industryName}
+			</if>
+  GROUP BY
+    a.invstorname,
+    a.industryname,
+    b.industrySubName
+) c ON a.`industryName` = c.`industryName`
+AND a.industrysubname = c.industrySubName
+ORDER BY
+  eventNumAll DESC
+	) as dd;
+ 	</select>
 		<resultMap id="CompeteListResultMap" type="com.gi.ctdn.pojo.ChartProjectOrgCompete">
           <result column="competeOrgName" property="competeOrgName" jdbcType="VARCHAR" />
           <result column="eventNumAll" property="eventNumAll" jdbcType="BIGINT" />
           <result column="orgJson" property="orgJson" jdbcType="VARCHAR" />
      </resultMap>
 	<select id="getParentCompeteList" resultMap="CompeteListResultMap">
- select competeOrgName,eventNumAll, CONCAT(GROUP_CONCAT(concat(name,':',orgEventNum,':',competeOrgEventNum) order by id asc) ) as orgJson  from (
+		 select competeOrgName,eventNumAll, CONCAT(GROUP_CONCAT(concat(name,':',orgEventNum,':',competeOrgEventNum) order by id asc) ) as orgJson  from (
 		select id,name, d.competeOrgName,if(orgEventNum is null,0,orgEventNum) as orgEventNum,if(competeOrgEventNum is null,0,competeOrgEventNum) as competeOrgEventNum ,d.eventNumAll from (
 		select * from(
 		select id,name from app_industry where parentId = #{industryId} ) as a
 		join
-		(select competeOrgName,eventNumAll from app_chart_project_org_compete where industryType = #{industryType} and timeType = #{timeType} 
-		and orgCode= #{orgCode}
+		(select competeOrgName,eventNumAll from app_chart_project_org_compete 
 		GROUP BY competeOrgName,eventNumAll ) as b) as d
-		LEFT JOIN (SELECT * from app_chart_project_org_compete where industryType = #{industryType} and timeType = #{timeType}  and orgCode= #{orgCode} ) AS c
+		LEFT JOIN (SELECT * from app_chart_project_org_compete ) AS c
 		on d.id = c.industryId and d.competeOrgName=c.competeOrgName ORDER BY id
 		) as ff where eventNumAll != 0 GROUP BY competeOrgName,eventNumAll 
 		ORDER BY  eventNumAll desc limit 10
 	</select>
 	<select id="getChildCompeteList" resultMap="CompeteListResultMap">
- select competeOrgName,eventNumAll, CONCAT(GROUP_CONCAT(concat(name,':',orgEventNum,':',competeOrgEventNum) order by id asc) ) as orgJson  from (
+	  select competeOrgName,eventNumAll, CONCAT(GROUP_CONCAT(concat(name,':',orgEventNum,':',competeOrgEventNum) order by id asc) ) as orgJson  from (
 		select id,name, d.competeOrgName,if(orgEventNum is null,0,orgEventNum) as orgEventNum,if(competeOrgEventNum is null,0,competeOrgEventNum) as competeOrgEventNum ,d.eventNumAll from (
 		select * from(
 		select id,name from app_industry where parentId = #{industryId} ) as a
 		join
-		(select competeOrgName,eventNumAll from app_chart_project_org_compete where industryType = #{industryType} and timeType = #{timeType}  and industryId=#{industryId}
-		and orgCode= #{orgCode}
+		(select competeOrgName,eventNumAll from app_chart_project_org_compete
 		GROUP BY competeOrgName,eventNumAll ) as b) as d
-		LEFT JOIN (SELECT * from app_chart_project_org_compete where industryType = #{industryType} and timeType = #{timeType}  and orgCode= #{orgCode} and industryId=#{industryId}) AS c
+		LEFT JOIN (SELECT * from app_chart_project_org_compete ) AS c
 		on d.id = c.industrySubId and d.competeOrgName=c.competeOrgName ORDER BY id
 		) as ff where eventNumAll != 0 GROUP BY competeOrgName,eventNumAll 
 		ORDER BY  eventNumAll desc limit 10
+		
 	</select>
+ 	<delete id="deleteAll">
+ 		delete from app_chart_project_org_compete
+ 	</delete>
+ 	<insert id="insertParentCompete">
+ 	insert into app_chart_project_org_compete (industryId,industryName,eventNumAll,orgCode,competeOrgName,competeOrgEventNum,orgEventNum)  
+ 	SELECT
+  a.industryId,
+  a.industryName,
+  b.eventNumAll,
+  a.invstorCode as orgCode,
+  a.invstorname as competeOrgName,
+  a.eventNum as competeOrgEventNum,
+  c.eventNum as orgEventNum
+FROM
+  (
+    SELECT
+      invstorCode,
+      invstorname,
+      industryId,
+      industryname,
+      count(DISTINCT `eventId`) AS eventNum
+    FROM
+      (
+        SELECT
+          a.eventid,
+          a.`invstorCode`,
+          a.`invstorname`,
+          a.`investDate`,
+          a.`company`,
+          a.type,
+          LEFT (
+            b.`industryIds`,
+            LOCATE(',', b.`industryIds`) - 1
+          ) AS industryId,
+          a.`industryname`
+        FROM
+          `app_event_info_ext` a
+        LEFT JOIN `app_event_info` b ON a.`eventId` = b.`eventId`
+        WHERE
+          a.type = 'invst'
+        and a.`industryName` is not null and 
+        LEFT (
+            b.`industryIds`,
+            LOCATE(',', b.`industryIds`) - 1
+          ) is not null 
+        AND a.investDate >= date_sub(
+            CURRENT_DATE (),
+            INTERVAL 6 MONTH
+          )
+        AND a.`eventId` NOT IN (
+          SELECT
+            `eventId`
+          FROM
+            `app_event_info_ext`
+          WHERE
+            `invstorCode` = #{orgCode}
+            	<if test="timeType!=null and timeType == '1'.toString()">
+				and investDate >= date_sub(CURRENT_DATE(),interval 30 day)
+			</if>
+				<if test="timeType !=null and timeType == '2'.toString()">
+				and investDate >=  date_sub(CURRENT_DATE(),interval 3 month)
+			</if>
+				<if test="timeType !=null and timeType == '3'.toString()">
+								and investDate >=  date_sub(CURRENT_DATE(),interval 6 month)
+			</if>
+				<if test="timeType !=null and timeType == '4'.toString()">
+				and investDate >=  date_sub(CURRENT_DATE(),interval 1 year)
+			</if>
+			<if test="timeType !=null and timeType == '5'.toString()">
+				and investDate >= date_sub(CURRENT_DATE(),interval 3 year)
+			</if>
+          )
+        and a.`industryName`  in 
+        (
+          SELECT
+    distinct a.industryname
+  FROM
+    `app_event_info_ext` a
+  LEFT JOIN `app_event_info` b ON a.`eventId` = b.`eventId`
+  WHERE
+    a.`invstorCode` = #{orgCode}
+   	<if test="timeType!=null and timeType == '1'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 30 day)
+			</if>
+				<if test="timeType !=null and timeType == '2'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 3 month)
+			</if>
+				<if test="timeType !=null and timeType == '3'.toString()">
+								and a.investDate >=  date_sub(CURRENT_DATE(),interval 6 month)
+			</if>
+				<if test="timeType !=null and timeType == '4'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 1 year)
+			</if>
+			<if test="timeType !=null and timeType == '5'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 3 year)
+			</if>
+        )
+     
+      ) a
+    GROUP BY
+      invstorCode,
+      invstorname,
+      industryId,
+      industryname
+  ) a
+LEFT JOIN (
+  
+      SELECT
+        invstorCode,
+        invstorname,
+        count(DISTINCT `eventId`) AS eventNumAll
+      FROM
+        (
+          SELECT
+            a.eventid,
+            a.`invstorCode`,
+            a.`invstorname`,
+            a.`investDate`,
+            a.`company`,
+            a.type,
+            LEFT (
+              b.`industryIds`,
+              LOCATE(',', b.`industryIds`) - 1
+            ) AS industryId,
+            a.`industryname`
+          FROM
+            `app_event_info_ext` a
+          LEFT JOIN `app_event_info` b ON a.`eventId` = b.`eventId`
+          WHERE
+            a.investDate >= date_sub(
+              CURRENT_DATE (),
+              INTERVAL 6 MONTH
+            )
+          AND a.type = 'invst'
+          and a.`industryName` is not null and 
+        LEFT (
+            b.`industryIds`,
+            LOCATE(',', b.`industryIds`) - 1
+          ) is not null 
+          AND a.`eventId` NOT IN (
+            SELECT
+              `eventId`
+            FROM
+              `app_event_info_ext`
+            WHERE
+              `invstorCode` = #{orgCode}
+              	<if test="timeType!=null and timeType == '1'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 30 day)
+			</if>
+				<if test="timeType !=null and timeType == '2'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 3 month)
+			</if>
+				<if test="timeType !=null and timeType == '3'.toString()">
+								and a.investDate >=  date_sub(CURRENT_DATE(),interval 6 month)
+			</if>
+				<if test="timeType !=null and timeType == '4'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 1 year)
+			</if>
+			<if test="timeType !=null and timeType == '5'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 3 year)
+			</if>
+            )
+            and a.`industryName`  in 
+        (
+          SELECT
+            distinct a.industryname
+          FROM
+            `app_event_info_ext` a
+          LEFT JOIN `app_event_info` b ON a.`eventId` = b.`eventId`
+          WHERE
+            a.`invstorCode` = #{orgCode}
+           	<if test="timeType!=null and timeType == '1'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 30 day)
+			</if>
+				<if test="timeType !=null and timeType == '2'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 3 month)
+			</if>
+				<if test="timeType !=null and timeType == '3'.toString()">
+								and a.investDate >=  date_sub(CURRENT_DATE(),interval 6 month)
+			</if>
+				<if test="timeType !=null and timeType == '4'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 1 year)
+			</if>
+			<if test="timeType !=null and timeType == '5'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 3 year)
+			</if>
+        )
+          
+        ) a
+      GROUP BY
+        invstorCode,
+        invstorname
 
+) b ON a.invstorname = b.invstorname
+LEFT JOIN (
+  SELECT
+    a.invstorname,
+    a.industryname,
+    count(DISTINCT a.`eventId`) AS eventNum
+  FROM
+    `app_event_info_ext` a
+  LEFT JOIN `app_event_info` b ON a.`eventId` = b.`eventId`
+  WHERE
+    a.`invstorCode` = #{orgCode}
+    	<if test="timeType!=null and timeType == '1'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 30 day)
+			</if>
+				<if test="timeType !=null and timeType == '2'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 3 month)
+			</if>
+				<if test="timeType !=null and timeType == '3'.toString()">
+								and a.investDate >=  date_sub(CURRENT_DATE(),interval 6 month)
+			</if>
+				<if test="timeType !=null and timeType == '4'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 1 year)
+			</if>
+			<if test="timeType !=null and timeType == '5'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 3 year)
+			</if>
+  GROUP BY
+    a.invstorname,
+    a.industryname
+) c ON a.`industryName` = c.`industryName`
+where 
+  c.eventNum IS NOT NULL
+ORDER BY
+  eventNumAll DESC
+ 	</insert>
+ 	<insert id="insertChiltCompete">
+insert into app_chart_project_org_compete (industryId,industryName,industrySubId,industrySubName,eventNumAll,orgCode,competeOrgName,competeOrgEventNum,orgEventNum)  
+SELECT
+  a.industryId,
+  a.industryName,
+  a.industrySubId,
+  a.industrySubName,
+  b.eventNumAll,
+  a.invstorCode AS orgCode,
+  a.invstorname AS competeOrgName,
+  a.eventNum AS competeOrgEventNum,
+  c.eventNum AS orgEventNum
+FROM
+  (
+    SELECT
+      invstorCode,
+      invstorname,
+      industryId,
+      industryname,
+      industrySubId,
+      industrySubName,
+      count(DISTINCT `eventId`) AS eventNum
+    FROM
+      (
+        SELECT
+          a.eventid,
+          a.`invstorCode`,
+          a.`invstorname`,
+          a.`investDate`,
+          a.`company`,
+          a.type,
+          LEFT (
+            b.`industryIds`,
+            LOCATE(',', b.`industryIds`) - 1
+          ) AS industryId,
+          RIGHT (
+            b.`industryIds`,
+            length(b.`industryIds`) - LOCATE(',', b.`industryIds`)
+          ) AS industrySubId,
+          a.`industryname`,
+          b.`industrySubName`
+        FROM
+          `app_event_info_ext` a
+        LEFT JOIN `app_event_info` b ON a.`eventId` = b.`eventId`
+        WHERE
+          a.type = 'invst'
+    <if test="timeType!=null and timeType == '1'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 30 day)
+			</if>
+				<if test="timeType !=null and timeType == '2'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 3 month)
+			</if>
+				<if test="timeType !=null and timeType == '3'.toString()">
+								and a.investDate >=  date_sub(CURRENT_DATE(),interval 6 month)
+			</if>
+				<if test="timeType !=null and timeType == '4'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 1 year)
+			</if>
+			<if test="timeType !=null and timeType == '5'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 3 year)
+			</if>
+	       		<if test="industryName !=null">
+				and a.industryName=#{industryName}
+				</if>
+        AND a.`eventId` NOT IN (
+          SELECT
+            `eventId`
+          FROM
+            `app_event_info_ext`
+          WHERE
+            invstorCode =#{orgCode}
+ <if test="timeType!=null and timeType == '1'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 30 day)
+			</if>
+				<if test="timeType !=null and timeType == '2'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 3 month)
+			</if>
+				<if test="timeType !=null and timeType == '3'.toString()">
+								and a.investDate >=  date_sub(CURRENT_DATE(),interval 6 month)
+			</if>
+				<if test="timeType !=null and timeType == '4'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 1 year)
+			</if>
+			<if test="timeType !=null and timeType == '5'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 3 year)
+			</if>
+				<if test="industryName !=null">
+				and a.industryName=#{industryName}
+			</if>
+        )
+        and b.industrySubName in 
+        (
+          SELECT
+            b.industrySubName
+          FROM
+            `app_event_info_ext` a
+          LEFT JOIN `app_event_info` b ON a.`eventId` = b.`eventId`
+          WHERE
+            a.invstorCode =#{orgCode}
+   <if test="timeType!=null and timeType == '1'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 30 day)
+			</if>
+				<if test="timeType !=null and timeType == '2'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 3 month)
+			</if>
+				<if test="timeType !=null and timeType == '3'.toString()">
+								and a.investDate >=  date_sub(CURRENT_DATE(),interval 6 month)
+			</if>
+				<if test="timeType !=null and timeType == '4'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 1 year)
+			</if>
+			<if test="timeType !=null and timeType == '5'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 3 year)
+			</if>
+				<if test="industryName !=null">
+				and a.industryName=#{industryName}
+			</if>
+          GROUP BY
+            a.invstorname,
+            a.industryname,
+            b.industrySubName
+        )
+      ) a
+    GROUP BY
+      invstorCode,
+      invstorname,
+      industryId,
+      industryname,
+      industrySubId,
+      industrySubName
+  ) a
+LEFT JOIN (
+
+      SELECT
+        invstorCode,
+        invstorname,
+        industryId,
+        industryname,
+        count(DISTINCT `eventId`) AS eventNumAll
+      FROM
+        (
+          SELECT
+            a.eventid,
+            a.`invstorCode`,
+            a.`invstorname`,
+            a.`investDate`,
+            a.`company`,
+            a.type,
+            LEFT (
+              b.`industryIds`,
+              LOCATE(',', b.`industryIds`) - 1
+            ) AS industryId,
+            RIGHT (
+              b.`industryIds`,
+              length(b.`industryIds`) - LOCATE(',', b.`industryIds`)
+            ) AS industrySubId,
+            a.`industryname`,
+            b.`industrySubName`
+          FROM
+            `app_event_info_ext` a
+          LEFT JOIN `app_event_info` b ON a.`eventId` = b.`eventId`
+          WHERE
+            a.type = 'invst'
+      <if test="timeType!=null and timeType == '1'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 30 day)
+			</if>
+				<if test="timeType !=null and timeType == '2'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 3 month)
+			</if>
+				<if test="timeType !=null and timeType == '3'.toString()">
+								and a.investDate >=  date_sub(CURRENT_DATE(),interval 6 month)
+			</if>
+				<if test="timeType !=null and timeType == '4'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 1 year)
+			</if>
+			<if test="timeType !=null and timeType == '5'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 3 year)
+			</if>
+				<if test="industryName !=null">
+				and a.industryName=#{industryName}
+			</if>
+          AND a.`eventId` NOT IN (
+            SELECT
+              `eventId`
+            FROM
+              `app_event_info_ext`
+            WHERE
+              invstorCode =#{orgCode}
+  <if test="timeType!=null and timeType == '1'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 30 day)
+			</if>
+				<if test="timeType !=null and timeType == '2'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 3 month)
+			</if>
+				<if test="timeType !=null and timeType == '3'.toString()">
+								and a.investDate >=  date_sub(CURRENT_DATE(),interval 6 month)
+			</if>
+				<if test="timeType !=null and timeType == '4'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 1 year)
+			</if>
+			<if test="timeType !=null and timeType == '5'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 3 year)
+			</if>
+				<if test="industryName !=null">
+				and a.industryName=#{industryName}
+			</if>
+          )
+          and b.industrySubName in 
+          (
+            SELECT
+              b.industrySubName
+            FROM
+              `app_event_info_ext` a
+            LEFT JOIN `app_event_info` b ON a.`eventId` = b.`eventId`
+            WHERE
+              a.invstorCode =#{orgCode}
+     <if test="timeType!=null and timeType == '1'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 30 day)
+			</if>
+				<if test="timeType !=null and timeType == '2'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 3 month)
+			</if>
+				<if test="timeType !=null and timeType == '3'.toString()">
+								and a.investDate >=  date_sub(CURRENT_DATE(),interval 6 month)
+			</if>
+				<if test="timeType !=null and timeType == '4'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 1 year)
+			</if>
+			<if test="timeType !=null and timeType == '5'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 3 year)
+			</if>
+				<if test="industryName !=null">
+				and a.industryName=#{industryName}
+			</if>
+            GROUP BY
+              a.invstorname,
+              a.industryname,
+              b.industrySubName
+          )
+        ) a
+      GROUP BY
+        invstorCode,
+        invstorname,
+        industryId,
+        industryname
+    
+) b ON a.invstorCode = b.invstorCode
+AND a.`industryName` = b.`industryName`
+LEFT JOIN (
+  SELECT
+    a.invstorname,
+    a.industryname,
+    b.industrySubName,
+    count(DISTINCT a.`eventId`) AS eventNum
+  FROM
+    `app_event_info_ext` a
+  LEFT JOIN `app_event_info` b ON a.`eventId` = b.`eventId`
+  WHERE
+    a.invstorCode =#{orgCode}
+  <if test="timeType!=null and timeType == '1'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 30 day)
+			</if>
+				<if test="timeType !=null and timeType == '2'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 3 month)
+			</if>
+				<if test="timeType !=null and timeType == '3'.toString()">
+								and a.investDate >=  date_sub(CURRENT_DATE(),interval 6 month)
+			</if>
+				<if test="timeType !=null and timeType == '4'.toString()">
+				and a.investDate >=  date_sub(CURRENT_DATE(),interval 1 year)
+			</if>
+			<if test="timeType !=null and timeType == '5'.toString()">
+				and a.investDate >= date_sub(CURRENT_DATE(),interval 3 year)
+			</if>
+				<if test="industryName !=null">
+				and a.industryName=#{industryName}
+			</if>
+  GROUP BY
+    a.invstorname,
+    a.industryname,
+    b.industrySubName
+) c ON a.`industryName` = c.`industryName`
+AND a.industrysubname = c.industrySubName
+ORDER BY
+  eventNumAll DESC
+ 	</insert>
 </mapper>

@@ -254,11 +254,11 @@
         </plugins>
     </build>
 
-    <distributionManagement>
+    <!-- <distributionManagement>
         <snapshotRepository>
             <id>Snapshots</id>
             <url>http://nexus.gi.com/content/repositories/snapshots/</url>
         </snapshotRepository>
-    </distributionManagement>
+    </distributionManagement> -->
 
 </project>

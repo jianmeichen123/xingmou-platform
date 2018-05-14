@@ -97,7 +97,7 @@
         </dependency>
         <dependency>
             <groupId>com.galaxyinternet</groupId>
-            <artifactId>galaxy-platform</artifactId>
+            <artifactId>galaxy-platform-api</artifactId>
             <version>${fx.version}</version>
             <exclusions>
                 <exclusion>
